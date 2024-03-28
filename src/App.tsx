@@ -6,7 +6,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>메인테스트입니다.</>
+    <Router />
   )
 }
 
