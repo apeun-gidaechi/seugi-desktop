@@ -1,6 +1,5 @@
 import Login from './auth/Login/login';
-import Signup from './auth/Signup/signup';
-
+import Selectingjob from './auth/Signup/selectingjob';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const Router = () => {
@@ -8,7 +7,7 @@ const Router = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/login" element={<Login/>}/>
-                <Route path='/signup' element={<Signup/>}/>
+                <Route path='selectjob' element={<Selectingjob/>}/>
             </Routes>
         </BrowserRouter>
     )
