@@ -39,9 +39,9 @@ const login = () => {
             <S.Title2> 반가워요! </S.Title2>
           </S.Header>
         </S.Fheader>
-        <S.Frame318>
-          <S.Frame300>
-            <S.Frame121>
+        <S.Inputarea>
+          <S.Inputpart>
+            <S.Enterinfo>
               <S.Subtitle2>이메일 <S.Redstar>*</S.Redstar></S.Subtitle2>
               <S.txtField 
                 onChange={(e) => setEmail(e.target.value)}
@@ -49,8 +49,8 @@ const login = () => {
                 placeholder="이메일을 입력해주세요" 
                 type="email"
               />
-            </S.Frame121>
-            <S.Frame121>
+            </S.Enterinfo>
+            <S.Enterinfo>
               <S.Subtitle2>비밀번호 <S.Redstar>*</S.Redstar></S.Subtitle2>
               <S.txtField
                 onChange={(e) => setPassword(e.target.value)}
@@ -58,22 +58,24 @@ const login = () => {
                 placeholder="비밀번호를 입력해주세요"
                 type="password"
               />
-            </S.Frame121>
-          </S.Frame300>
-          <S.Frame299>
+            </S.Enterinfo>
+          </S.Inputpart>
+          <S.Buttonpart>
             <S.Loginbtn className="loginbtn" onClick={handleLogin}>로그인</S.Loginbtn>
               <S.Body1>계정이 없으시다면? <S.Gosignup href="http://localhost:5173/selectjob">가입하기</S.Gosignup> </S.Body1>
-          </S.Frame299>
-          <S.Caption1>또는</S.Caption1>
-            <S.Frame124>
-              <S.Authlogin>
-                applelogin
-              </S.Authlogin>
-              <S.Authlogin>
-                googlelogin
-              </S.Authlogin>
-            </S.Frame124>
-        </S.Frame318>
+          </S.Buttonpart>
+          <S.Orpart>
+            <S.Caption1>또는</S.Caption1>
+              <S.Oauthpart>
+                <S.Authlogin>
+                  applelogin
+                </S.Authlogin>
+                <S.Authlogin>
+                  googlelogin
+                </S.Authlogin>
+              </S.Oauthpart>
+            </S.Orpart>
+        </S.Inputarea>
       </S.FirstWrap>
   );
 };

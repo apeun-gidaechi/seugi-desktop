@@ -57,7 +57,8 @@ export const Title2 = styled.div`
     line-height: 130%; /* 31.2px */
 `;
 
-export const Frame318 = styled.div`
+
+export const Inputarea = styled.div`
     display: flex;
     padding: 36px 32px;
     flex-direction: column;
@@ -67,7 +68,7 @@ export const Frame318 = styled.div`
     align-self: stretch;
 `;
 
-export const Frame300 = styled.div`
+export const Inputpart = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -76,7 +77,7 @@ export const Frame300 = styled.div`
     align-self: stretch;
 `;
 
-export const Frame121 = styled.div`
+export const Enterinfo = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -138,7 +139,7 @@ export const Loginbtn = styled.button`
     line-height: 130%;
 `;
 
-export const Frame299 = styled.div`
+export const Buttonpart = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -179,7 +180,15 @@ export const Caption1 = styled.div`
     line-height: 130%;
 `;
 
-export const Frame124 = styled.div`
+export const Orpart = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    align-self: stretch;
+`;
+
+export const Oauthpart = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
