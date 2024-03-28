@@ -1,5 +1,5 @@
-import Login from '../pages/Login/login';
-import Selectingjob from '../pages/Signup/selectingjob';
+import Login from './auth/Login/login';
+import Selectingjob from './auth/Signup/selectingjob';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const Router = () => {
