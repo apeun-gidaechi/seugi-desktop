@@ -88,6 +88,14 @@ export const Txtfield = styled.input`
     border-radius: var(--Large, 12px);
     border: 1px solid var(--Gray-Gray300, #E6E6E6);
     background: var(--Sub-White, #FFF);
+
+    color: var(--Gray-Gray500, #AAA);
+
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%; /* 20.8px */
 `;
 
 export const Frame299 = styled.div`
