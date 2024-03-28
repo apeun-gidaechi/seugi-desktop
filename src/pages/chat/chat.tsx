@@ -1,8 +1,13 @@
 import React from 'react'
+import * as S from "../chat/chat.style";
+import SideBar from "../../components/sidebar/sidebar"
 
 const chat = () => {
   return (
-    <div>chat</div>
+    <>
+        <SideBar/>
+        {/* <S.ssssss>chat</S.ssssss> */}
+    </>
   )
 }
 
