@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FirstWrap = styled.div`
+export const LoginFirstWrap = styled.div`
     display: flex;
     width: 485px;
     flex-direction: column;
@@ -107,15 +107,22 @@ export const Redstar = styled.a`
 `;
 
 export const txtField = styled.input`
-    display: flex;
-    height: 52px;
-    padding: 17px 262px 14px 16px;
-    align-items: center;
-    align-self: stretch;
+    flex-grow: 1;
+    padding: 17px 16px; 
+    border: none;
 
-    border-radius: var(--Large, 12px);
-    border: 1px solid var(--Gray-Gray300, #E6E6E6);
-    background: var(--Sub-White, #FFF);
+    &:focus {
+        outline: none; 
+    }
+
+    box-sizing: border-box;
+
+    width: 421px;
+    height: 52px;
+
+    background: #FFFFFF;
+    border-radius: 12px;
+
 `;
 
 export const Loginbtn = styled.button`
@@ -197,17 +204,39 @@ export const Oauthpart = styled.div`
 `;
 
 export const Authlogin = styled.button`
-display: flex;
-width: 56px;
-height: 56px;
-padding: 12px 125px;
-justify-content: center;
-align-items: center;
-gap: 10px;
+    display: flex;
+    width: 56px;
+    height: 56px;
+    padding: 12px 125px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 
-border-radius: 99px;
-background: var(--Sub-White, #FFF);
+    border-radius: 99px;
+    background: var(--Sub-White, #FFF);
 
-/* ev2 */
-box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
+    /* ev2 */
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
+`;
+
+export const Btnview = styled.button`
+    margin-right: 16px; 
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:focus {
+        outline: none; 
+    }
+`;
+
+export const InputContainer = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; 
+    border-radius: var(--Large, 12px);
+    border: 1px solid var(--Gray-Gray300, #E6E6E6);
+    background: var(--Sub-White, #FFF);
 `;
