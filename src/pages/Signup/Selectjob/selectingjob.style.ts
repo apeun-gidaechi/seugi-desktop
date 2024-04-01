@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Frame335 = styled.div`
+export const SelectFirstWrap = styled.div`
     display: inline-flex;
     padding: 36px 32px;
     flex-direction: column;
@@ -10,7 +10,6 @@ export const Frame335 = styled.div`
     border-radius: 36px;
     background: #FFF;
 
-    /* ev2 */
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
 `;
 
@@ -33,16 +32,19 @@ export const Frame334 = styled.div`
 export const Frame232 = styled.button`
     display: flex;
     width: 187px;
+    height: 187px;
     padding: 16px 0px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 16px;
-
+    border-radius: 20px;
     color: var(--Primary900, #020202);
+    cursor: pointer;
 `;
 
 export const Stdimg = styled.img`
+    margin-top:20px;
     width: 214px;
     height: 120px;
 `;
@@ -58,12 +60,13 @@ export const Txtstudent = styled.p`
 `;
 
 export const Teacherimg = styled.img`
+    margin-top:20px;
     width: 174px;
     height: 120px;
 `;
 
 export const TxtTeacher = styled.p`
-    color: var(--Gray500, #AAA);
+    color: var(--Gray500, #020202);
 
     font-family: Pretendard;
     font-size: 16px;
@@ -90,6 +93,7 @@ export const Continuebtn = styled.button`
     gap: 10px;
     align-self: stretch;
 
+    border:none;
     border-radius: var(--Large, 12px);
     background: var(--Primary-Primary500, #1D93F3);
 
@@ -100,6 +104,8 @@ export const Continuebtn = styled.button`
     font-style: normal;
     font-weight: 600;
     line-height: 130%;
+
+    cursor: pointer;
 `;
 
 export const Haveemail = styled.a`

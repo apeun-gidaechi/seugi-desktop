@@ -1,7 +1,7 @@
 import React from 'react'
 import * as S from './oauthsignup.style';
 
-const oauthsignup = () => {
+const oauthsignup:React.FC = () => {
   return (
     <S.Frame297>
         <S.Frame298>
