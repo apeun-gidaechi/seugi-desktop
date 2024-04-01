@@ -5,18 +5,19 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import seugiImg from "../../assets/image/seugilogo.svg";
+import showPasswordimg from '../../assets/image/show_fill.svg';
+import hidePasswordimg from '../../assets/image/hide_fill.svg';
 
-
-
-const login = () => {
+const login:React.FC = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const handleLogin = async() => {
+  const handleLogin = async () => {
     try {
-            const response = await axios.post("http://localhost:5176-", {
+            const response = await axios.post("http://localhost:5176", {
                 email: email,
                 password: password,
             });
@@ -30,7 +31,7 @@ const login = () => {
   }
 
   return (
-      <S.FirstWrap> 
+      <S.LoginFirstWrap> 
         <S.Fheader>
           <S.Header>
             <S.SeugiImg
@@ -41,23 +42,30 @@ const login = () => {
         </S.Fheader>
         <S.Inputarea>
           <S.Inputpart>
-            <S.Enterinfo>
-              <S.Subtitle2>이메일 <S.Redstar>*</S.Redstar></S.Subtitle2>
-              <S.txtField 
-                onChange={(e) => setEmail(e.target.value)}
-                className="txtField"
-                placeholder="이메일을 입력해주세요" 
-                type="email"
-              />
-            </S.Enterinfo>
+              <S.Enterinfo>
+                <S.Subtitle2>이메일 <S.Redstar>*</S.Redstar></S.Subtitle2>
+                <S.InputContainer>
+                  <S.txtField 
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="txtField"
+                    placeholder="이메일을 입력해주세요" 
+                    type="email"
+                  />
+                </S.InputContainer>
+              </S.Enterinfo>
             <S.Enterinfo>
               <S.Subtitle2>비밀번호 <S.Redstar>*</S.Redstar></S.Subtitle2>
+              <S.InputContainer>
               <S.txtField
+                type={showPassword ? "text" : "password"}
                 onChange={(e) => setPassword(e.target.value)}
                 className="txtField"
                 placeholder="비밀번호를 입력해주세요"
-                type="password"
               />
+              <S.Btnview onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />} 
+              </S.Btnview>
+              </S.InputContainer>
             </S.Enterinfo>
           </S.Inputpart>
           <S.Buttonpart>
@@ -68,15 +76,15 @@ const login = () => {
             <S.Caption1>또는</S.Caption1>
               <S.Oauthpart>
                 <S.Authlogin>
-                  applelogin
+                  appleLogin
                 </S.Authlogin>
                 <S.Authlogin>
-                  googlelogin
+                  googleLogin
                 </S.Authlogin>
               </S.Oauthpart>
             </S.Orpart>
         </S.Inputarea>
-      </S.FirstWrap>
+      </S.LoginFirstWrap>
   );
 };
 
