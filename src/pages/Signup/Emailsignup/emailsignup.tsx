@@ -1,8 +1,7 @@
 import React from 'react';
 import * as S from './emailsignup.style';
 
-
-const emailsignup = () => {
+const emailsignup:React.FC = () => {
   return (
     <S.Frame297>
         <S.Frame298>
