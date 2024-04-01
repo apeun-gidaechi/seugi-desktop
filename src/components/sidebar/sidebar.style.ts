@@ -1,4 +1,14 @@
 import styled from "styled-components";
+import { createGlobalStyle } from 'styled-components'; 
+
+export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+  }
+`;
 
 export const SideBarMenu = styled.div`
     position: absolute;
@@ -68,7 +78,7 @@ export const SideBarImage4 = styled.img`
     position: absolute;
 `
 
-export const SideFinder = styled.input`
+export const SideFinder = styled.div`
     display: flex;
     height: 44px;
     width: 264px;
@@ -78,6 +88,28 @@ export const SideFinder = styled.input`
     border-radius: 12px;
     border: 1px solid #E6E6E6;
     background: #FFF;
+`
+
+export const FindChatingRoom = styled.input`
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 208px;
+    margin-left: 16px;
+    outline: none;
+    color: var(--Gray-Gray500, #AAA);
+   
+    font-family: 'Pretendard-Regular', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+
+    &:focus {
+        color: black; 
+    }
 `
 
 export const PlusButtonImg = styled.img`

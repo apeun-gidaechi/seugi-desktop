@@ -19,7 +19,8 @@ const sidebar = () => {
                 <S.SideBarImage4 src={Bell}></S.SideBarImage4>
             </S.SideBarMenu>
             <S.SideBarChat>
-                <S.SideFinder type="text"> 
+                <S.SideFinder>
+                    <S.FindChatingRoom type="text" placeholder="채팅방 검색"/>
                     <S.SearchIcon src={SearchIcon}/>
                 </S.SideFinder>
                 <S.PlusButton>
