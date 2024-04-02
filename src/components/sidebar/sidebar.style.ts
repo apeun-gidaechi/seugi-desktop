@@ -45,7 +45,7 @@ export const SideBarChat = styled.div`
 `
 
 export const ChatingPage = styled.div`
-    background: var(--Primary-Primary050, #F8FCFF);
+    
 `
 
 export const SideBarImage = styled.img`
@@ -76,6 +76,10 @@ export const SideBarImage4 = styled.img`
     margin-top: 244px;
 
     position: absolute;
+`
+
+export const SideAvatarImg = styled.img`
+    margin-bottom: 20px;
 `
 
 export const SideFinder = styled.div`
@@ -129,5 +133,5 @@ export const PlusButton = styled.button`
 
     position: absolute;
     margin-left: 282px;
-    margin-top: 10px;
+    margin-top: 10px; 
 `
