@@ -10,31 +10,24 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
  
-export const AllWrap = styled.div`
-    width: 100vw;
-`
 
 export const SendMessageWrap = styled.div`
     height: 44px;
     display: flex;
-    height: 64px;
     padding: 10px 16px;
     gap: 10px;
     justify-content: space-between;
     align-items: center;
-    flex: 1 0 0;
 
-    position: absolute;
-    top: 0;
-
-    margin-left: 420px;
+    
 
     border-radius: 12px;
     background: var(--Sub-White, #FFF);
     /* ev1 */
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 
-    position: absolute;
-    width: 70%;
+    width: 70vw;
+    max-width: 1016px;
+
 `
 

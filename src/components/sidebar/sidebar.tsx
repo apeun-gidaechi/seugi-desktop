@@ -8,6 +8,7 @@ import Bell from "../../assets/image/bell.svg"
 import PlusButton from "../../assets/image/plusButton.svg"
 import SearchIcon from "../../assets/image/Search.svg" 
 import AvatarImg from "../../assets/image/Avatar.svg"
+import SendMessage from "../sendMessage/sendMessage";
 
 const sidebar = () => {
   return (
@@ -29,6 +30,7 @@ const sidebar = () => {
                     <S.PlusButtonImg src={PlusButton}/>
                 </S.PlusButton>
             </S.SideBarChat>
+        <SendMessage/>
         </S.ChatingPage>
       </>
   )
