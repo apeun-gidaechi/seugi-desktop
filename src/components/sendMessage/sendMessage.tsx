@@ -4,9 +4,7 @@ import React from 'react'
 const sendMessage = () => {
   return (
     <>
-        <S.AllWrap>
-            <S.SendMessageWrap/>
-        </S.AllWrap>
+        <S.SendMessageWrap/>
     </>
   )
 }
