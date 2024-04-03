@@ -19,7 +19,9 @@ const sidebar = () => {
                 <S.SideBarImage2 src={Chat}/>
                 <S.SideBarImage3 src={Chats}/>
                 <S.SideBarImage4 src={Bell}/>
-                <S.SideAvatarImg src={AvatarImg}/>
+                <S.SideAvatarImgWrap>
+                    <S.SideAvatarImg src={AvatarImg}/>
+                </S.SideAvatarImgWrap>
             </S.SideBarMenu>
             <S.SideBarChat>
                 <S.SideFinder>
