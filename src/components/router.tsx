@@ -1,7 +1,7 @@
-import Login from '../pages/Login/login';
-import Selectingjob from '../pages/Signup/Selectjob/selectingjob';
-import Oauthsignup from '../pages/Signup/OAuthsignup/oauthsignup';
-import Emailsignup from '../pages/Signup/Emailsignup/emailsignup';
+import Login from './Login/login';
+import Selectingjob from '../pages/Selectjob/index';
+import Oauthsignup from './Signup/OAuthsignup/oauthsignup';
+import Emailsignup from './Signup/Emailsignup/emailsignup';
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 

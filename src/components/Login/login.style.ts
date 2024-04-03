@@ -1,15 +1,23 @@
 import styled from "styled-components";
 
+export const LoginMain = styled.div`
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const LoginFirstWrap = styled.div`
     display: flex;
     width: 485px;
+    height: 574px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 36px;
     background: #FFF;
 
-    /* ev2 */
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
 `;
 
@@ -106,7 +114,7 @@ export const Redstar = styled.a`
     line-height: 130%;
 `;
 
-export const txtField = styled.input`
+export const TxtField = styled.input`
     flex-grow: 1;
     padding: 17px 16px; 
     border: none;
@@ -211,11 +219,9 @@ export const Authlogin = styled.button`
     justify-content: center;
     align-items: center;
     gap: 10px;
-
     border-radius: 99px;
     background: var(--Sub-White, #FFF);
 
-    /* ev2 */
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
 `;
 

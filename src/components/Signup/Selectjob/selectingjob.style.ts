@@ -1,21 +1,32 @@
 import styled from "styled-components";
 
-export const SelectFirstWrap = styled.div`
-    display: inline-flex;
-    padding: 36px 32px;
-    flex-direction: column;
+export const SelectMain = styled.div`
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
     align-items: center;
-    gap: 36px;
+`
 
+export const SelectFirstWrap = styled.div`
+    width: 443px;
+    height: 447px;
+    display: flex;
+    flex-direction: column;
+    padding: 36px 32px;
+    gap: 36px;
     border-radius: 36px;
     background: #FFF;
-
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
 `;
 
+export const OutButton = styled.div`
+width: 100%;
+height: 50px;
+display: flex;
+`
 export const Selectjob = styled.p`
     color: var(--Black, #000);
-
     font-family: Pretendard;
     font-size: 28px;
     font-style: normal;
@@ -23,13 +34,13 @@ export const Selectjob = styled.p`
     line-height: 130%;
 `;
 
-export const Frame334 = styled.div`
+export const PickContainer = styled.div`
     display: flex;
     align-items: flex-start;
     gap: 5px;
 `;
 
-export const Frame232 = styled.button`
+export const PickJob = styled.button`
     display: flex;
     width: 187px;
     height: 187px;
@@ -75,7 +86,7 @@ export const TxtTeacher = styled.p`
     line-height: normal;
 `;
 
-export const Frame300 = styled.div`
+export const ButtonContainer = styled.div`
 display: flex;
 width: 379px;
 flex-direction: column;
@@ -84,8 +95,29 @@ align-items: flex-start;
 gap: 8px;
 `;
 
-export const Continuebtn = styled.button`
+
+
+export const Haveemail = styled.a`
     display: flex;
+    padding-left: 4px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+
+    color: var(--Primary-Primary500, #1D93F3);
+
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%; 
+
+    text-decoration:none;
+`;
+
+export const button = styled.button`
+ display: flex;
+    width: 100%;
     height: 54px;
     padding: 12px 125px;
     justify-content: center;
@@ -106,22 +138,4 @@ export const Continuebtn = styled.button`
     line-height: 130%;
 
     cursor: pointer;
-`;
-
-export const Haveemail = styled.a`
-    display: flex;
-    padding-left: 4px;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 10px;
-
-    color: var(--Primary-Primary500, #1D93F3);
-
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; 
-
-    text-decoration:none;
-`;
+    `
