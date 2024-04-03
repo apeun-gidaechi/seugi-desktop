@@ -16,9 +16,6 @@ const emailsignup = () => {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
 
-    const ButtonCilck = () => {
-        navigate("/oauthsignup");
-    }
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
