@@ -8,7 +8,7 @@ import seugiImg from "../../assets/image/seugilogo.svg";
 import showPasswordimg from '../../assets/image/show_fill.svg';
 import hidePasswordimg from '../../assets/image/hide_fill.svg';
 
-const login:React.FC = () => {
+const login = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>('');
@@ -31,6 +31,7 @@ const login:React.FC = () => {
   }
 
   return (
+    <S.LoginMain>
       <S.LoginFirstWrap> 
         <S.Fheader>
           <S.Header>
@@ -45,7 +46,7 @@ const login:React.FC = () => {
               <S.Enterinfo>
                 <S.Subtitle2>이메일 <S.Redstar>*</S.Redstar></S.Subtitle2>
                 <S.InputContainer>
-                  <S.txtField 
+                  <S.TxtField 
                     onChange={(e) => setEmail(e.target.value)}
                     className="txtField"
                     placeholder="이메일을 입력해주세요" 
@@ -56,7 +57,7 @@ const login:React.FC = () => {
             <S.Enterinfo>
               <S.Subtitle2>비밀번호 <S.Redstar>*</S.Redstar></S.Subtitle2>
               <S.InputContainer>
-              <S.txtField
+              <S.TxtField
                 type={showPassword ? "text" : "password"}
                 onChange={(e) => setPassword(e.target.value)}
                 className="txtField"
@@ -76,15 +77,16 @@ const login:React.FC = () => {
             <S.Caption1>또는</S.Caption1>
               <S.Oauthpart>
                 <S.Authlogin>
-                  appleLogin
+                  apple
                 </S.Authlogin>
                 <S.Authlogin>
-                  googleLogin
+                  google
                 </S.Authlogin>
               </S.Oauthpart>
             </S.Orpart>
         </S.Inputarea>
       </S.LoginFirstWrap>
+    </S.LoginMain>
   );
 };
 

@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
-export const Frame297 = styled.div`
+export const OauthMain = styled.div`
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+`
+export const OauthFirstWrap = styled.div`
     display: flex;
     width: 485px;
     padding: 36px 32px;
@@ -15,7 +22,7 @@ export const Frame297 = styled.div`
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
 `;
 
-export const Frame298 = styled.div`
+export const Header = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,7 +40,7 @@ font-weight: 700;
 line-height: 130%;
 `;
 
-export const Frame300 = styled.div`
+export const TxtContainer = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -42,7 +49,7 @@ gap: 16px;
 align-self: stretch;
 `;
 
-export const Frame121 = styled.div`
+export const EneterInfo = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -51,14 +58,14 @@ gap: 4px;
 align-self: stretch;
 `;
 
-export const Frame121_1 = styled.div`
+export const Subtitle = styled.div`
 display: flex;
 padding-left: 4px;
 justify-content: center;
 align-items: flex-start;
 gap: 10px;
 `;
-export const Subtitlename = styled.p`
+export const SubtitleName = styled.p`
     color: var(--Black, #000);
 
     font-family: Pretendard;
@@ -79,26 +86,24 @@ line-height: 130%;
 `;
 
 export const Txtfield = styled.input`
-    display: flex;
+    flex-grow: 1;
+    padding: 17px 16px; 
+    border: none;
+
+    &:focus {
+        outline: none; 
+    }
+
+    box-sizing: border-box;
+
+    width: 421px;
     height: 52px;
-    padding: 17px 276px 14px 16px;
-    align-items: center;
-    align-self: stretch;  
 
-    border-radius: var(--Large, 12px);
-    border: 1px solid var(--Gray-Gray300, #E6E6E6);
-    background: var(--Sub-White, #FFF);
-
-    color: var(--Gray-Gray500, #AAA);
-
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    background: #FFFFFF;
+    border-radius: 12px;
 `;
 
-export const Frame299 = styled.div`
+export const ButtonContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -118,9 +123,11 @@ export const Continuebtn = styled.button`
 
     border-radius: var(--Large, 12px);
     background: var(--Primary-Primary500, #1D93F3);
+
+    cursor: pointer;
 `;
 
-export const Frame125 = styled.div`
+export const EmailCheck = styled.div`
     display: flex;
     padding-left: 4px;
     justify-content: center;
@@ -128,7 +135,7 @@ export const Frame125 = styled.div`
     gap: 10px;
 `;
 
-export const Haveemail = styled.a`
+export const HaveEmail = styled.a`
     color: var(--Primary-Primary500, #1D93F3);
 
     /* Body1 */
@@ -139,3 +146,14 @@ export const Haveemail = styled.a`
     line-height: 130%; /* 18.2px */ 
     text-decoration:none;
 `;
+
+export const InputContainer = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; 
+    border-radius: var(--Large, 12px);
+    border: 1px solid var(--Gray-Gray300, #E6E6E6);
+    background: var(--Sub-White, #FFF);
+`
