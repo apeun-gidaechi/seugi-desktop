@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
  
 
 export const SendMessageWrap = styled.div`
-    height: 44px;
+    height: 64px;
     display: flex;
     padding: 10px 16px;
     gap: 10px;
@@ -29,5 +29,46 @@ export const SendMessageWrap = styled.div`
     width: 70vw;
     max-width: 1016px;
 
+    margin-left: 12px;
+    margin-top: 871px;
+`
+export const PlustFileButton = styled.button`
+    border: none;
+    background: none;
 `
 
+export const PlusMessageFile = styled.img`
+    width: 27px;
+    height: 27px;
+    padding: 0;
+    display: block;
+`
+
+export const SendMessage = styled.input`
+    flex: 1;
+
+    font-family: 'Pretendard-Regular', sans-serif;
+    color: var(--Gray-Gray500, #AAA);
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%; /* 26px */
+
+    border: none;
+    background: none;
+    outline: none;
+    
+    &:focus {
+        color: black; 
+    }
+`
+
+export const SendArrow = styled.img`
+    width: 25.75px;
+    height: 25.75px;
+`
+
+export const SendArrowWrap = styled.div`
+
+`

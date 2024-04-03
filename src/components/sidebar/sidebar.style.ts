@@ -79,8 +79,13 @@ export const SideBarImage4 = styled.img`
     position: absolute;
 `
 
+export const SideAvatarImgWrap = styled.div`
+
+`
+
 export const SideAvatarImg = styled.img`
-    margin-bottom: 20px;
+    position: relative; 
+    margin-bottom: 50px;
 `
 
 export const SideFinder = styled.div`
