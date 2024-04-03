@@ -7,6 +7,7 @@ const button = () => {
     const handleContinue = () => {
         navigate('./selectjob');
     }
+    
     return (
       <>
           <S.Continuebtn onClick={handleContinue}>계속하기</S.Continuebtn>

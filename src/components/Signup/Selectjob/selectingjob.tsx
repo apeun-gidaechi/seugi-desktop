@@ -44,7 +44,7 @@ const SelectingJob = () => {
                 </S.PickContainer>
                 <S.ButtonContainer>
                     <S.OutButton>
-                    <S.button></S.button>
+                    <S.Button>계속하기</S.Button>
                     </S.OutButton>
                     <S.Haveemail href='http://localhost:5173/login'>이미 계정이 있으신가요?</S.Haveemail>
                 </S.ButtonContainer>

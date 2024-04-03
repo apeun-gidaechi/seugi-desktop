@@ -30,6 +30,7 @@ export const Fheader = styled.div`
 `;
 
 
+
 export const Header = styled.div`
     display: flex;
     padding: 24px 24px 20px 24px;
@@ -37,16 +38,14 @@ export const Header = styled.div`
     align-items: center;
     gap: 16px;
     flex: 1 0 0;
+    /* justify-content: center; */
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
     align-self: stretch;
     background: var(--Primary-Primary300, #7EC4FC);
 `;
 
 export const SeugiImg = styled.img`
+
     width: 32px;
     height: 32px;
     flex-shrink: 0;
@@ -54,10 +53,10 @@ export const SeugiImg = styled.img`
     fill: var(--Gradient-Primary, linear-gradient(180deg, #1C8DF4 0%, #21B6E5 100%));
 `;
 
-export const Title2 = styled.div`
+export const Title2 = styled.span`
     color: #FFF;
-
-    /* Title2 */
+    
+    /* display:flex; */
     font-family: Pretendard;
     font-size: 24px;
     font-style: normal;
@@ -144,7 +143,7 @@ export const Loginbtn = styled.button`
 
     border-radius: var(--Large, 12px);
     background: var(--Primary-Primary500, #1D93F3);
-
+    border:none;
     color: var(--Sub-White, #FFF);
 
     font-family: Pretendard;
@@ -187,21 +186,27 @@ export const Gosignup = styled.a`
 
 export const Caption1 = styled.div`
     color: var(--Gray-Gray500, #AAA);
-    
+
     font-family: Pretendard;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
-    line-height: 130%;
+    line-height: 130%; 
+
+    top:70vh;
+    position:fixed;
 `;
 
 export const Orpart = styled.div`
     display: flex;
+    padding: 16px 16px 0px 16px; 
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
     align-self: stretch;
+    margin-top: 20px; 
 `;
+
 
 export const Oauthpart = styled.div`
     display: flex;

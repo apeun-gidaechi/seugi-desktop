@@ -9,22 +9,24 @@ export const SelectMain = styled.div`
 `
 
 export const SelectFirstWrap = styled.div`
-    width: 443px;
+    /* width: 443px; */
+    text-align: center;
     height: 447px;
     display: flex;
     flex-direction: column;
     padding: 36px 32px;
-    gap: 36px;
+    gap: 30px;
     border-radius: 36px;
     background: #FFF;
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
 `;
 
 export const OutButton = styled.div`
-width: 100%;
-height: 50px;
-display: flex;
+    width: 100%;
+    height: 50px;
+    display: flex;
 `
+
 export const Selectjob = styled.p`
     color: var(--Black, #000);
     font-family: Pretendard;
@@ -87,12 +89,12 @@ export const TxtTeacher = styled.p`
 `;
 
 export const ButtonContainer = styled.div`
-display: flex;
-width: 379px;
-flex-direction: column;
-justify-content: center;
-align-items: flex-start;
-gap: 8px;
+    display: flex;
+    width: 379px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
 `;
 
 
@@ -115,8 +117,8 @@ export const Haveemail = styled.a`
     text-decoration:none;
 `;
 
-export const button = styled.button`
- display: flex;
+export const Button = styled.button`
+    display: flex;
     width: 100%;
     height: 54px;
     padding: 12px 125px;
@@ -138,4 +140,4 @@ export const button = styled.button`
     line-height: 130%;
 
     cursor: pointer;
-    `
+`
