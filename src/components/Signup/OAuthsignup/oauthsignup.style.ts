@@ -7,6 +7,7 @@ export const OauthMain = styled.div`
     justify-content: center;
     align-items: center;
 `
+
 export const OauthFirstWrap = styled.div`
     display: flex;
     width: 485px;
