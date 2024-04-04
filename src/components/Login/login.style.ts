@@ -1,15 +1,23 @@
 import styled from "styled-components";
 
-export const FirstWrap = styled.div`
+export const LoginMain = styled.div`
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const LoginFirstWrap = styled.div`
     display: flex;
     width: 485px;
+    height: 574px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 36px;
     background: #FFF;
 
-    /* ev2 */
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
 `;
 
@@ -22,6 +30,7 @@ export const Fheader = styled.div`
 `;
 
 
+
 export const Header = styled.div`
     display: flex;
     padding: 24px 24px 20px 24px;
@@ -29,16 +38,14 @@ export const Header = styled.div`
     align-items: center;
     gap: 16px;
     flex: 1 0 0;
+    /* justify-content: center; */
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
     align-self: stretch;
     background: var(--Primary-Primary300, #7EC4FC);
 `;
 
 export const SeugiImg = styled.img`
+
     width: 32px;
     height: 32px;
     flex-shrink: 0;
@@ -46,10 +53,10 @@ export const SeugiImg = styled.img`
     fill: var(--Gradient-Primary, linear-gradient(180deg, #1C8DF4 0%, #21B6E5 100%));
 `;
 
-export const Title2 = styled.div`
+export const Title2 = styled.span`
     color: #FFF;
-
-    /* Title2 */
+    
+    /* display:flex; */
     font-family: Pretendard;
     font-size: 24px;
     font-style: normal;
@@ -57,7 +64,8 @@ export const Title2 = styled.div`
     line-height: 130%; /* 31.2px */
 `;
 
-export const Frame318 = styled.div`
+
+export const Inputarea = styled.div`
     display: flex;
     padding: 36px 32px;
     flex-direction: column;
@@ -67,7 +75,7 @@ export const Frame318 = styled.div`
     align-self: stretch;
 `;
 
-export const Frame300 = styled.div`
+export const Inputpart = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -76,7 +84,7 @@ export const Frame300 = styled.div`
     align-self: stretch;
 `;
 
-export const Frame121 = styled.div`
+export const Enterinfo = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -105,16 +113,23 @@ export const Redstar = styled.a`
     line-height: 130%;
 `;
 
-export const txtField = styled.input`
-    display: flex;
-    height: 52px;
-    padding: 17px 262px 14px 16px;
-    align-items: center;
-    align-self: stretch;
+export const TxtField = styled.input`
+    flex-grow: 1;
+    padding: 17px 16px; 
+    border: none;
 
-    border-radius: var(--Large, 12px);
-    border: 1px solid var(--Gray-Gray300, #E6E6E6);
-    background: var(--Sub-White, #FFF);
+    &:focus {
+        outline: none; 
+    }
+
+    box-sizing: border-box;
+
+    width: 421px;
+    height: 52px;
+
+    background: #FFFFFF;
+    border-radius: 12px;
+
 `;
 
 export const Loginbtn = styled.button`
@@ -128,7 +143,7 @@ export const Loginbtn = styled.button`
 
     border-radius: var(--Large, 12px);
     background: var(--Primary-Primary500, #1D93F3);
-
+    border:none;
     color: var(--Sub-White, #FFF);
 
     font-family: Pretendard;
@@ -138,7 +153,7 @@ export const Loginbtn = styled.button`
     line-height: 130%;
 `;
 
-export const Frame299 = styled.div`
+export const Buttonpart = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -171,15 +186,29 @@ export const Gosignup = styled.a`
 
 export const Caption1 = styled.div`
     color: var(--Gray-Gray500, #AAA);
-    
+
     font-family: Pretendard;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
-    line-height: 130%;
+    line-height: 130%; 
+
+    top:70vh;
+    position:fixed;
 `;
 
-export const Frame124 = styled.div`
+export const Orpart = styled.div`
+    display: flex;
+    padding: 16px 16px 0px 16px; 
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+    margin-top: 20px; 
+`;
+
+
+export const Oauthpart = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -188,17 +217,37 @@ export const Frame124 = styled.div`
 `;
 
 export const Authlogin = styled.button`
-display: flex;
-width: 56px;
-height: 56px;
-padding: 12px 125px;
-justify-content: center;
-align-items: center;
-gap: 10px;
+    display: flex;
+    width: 56px;
+    height: 56px;
+    padding: 12px 125px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 99px;
+    background: var(--Sub-White, #FFF);
 
-border-radius: 99px;
-background: var(--Sub-White, #FFF);
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
+`;
 
-/* ev2 */
-box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
+export const Btnview = styled.button`
+    margin-right: 16px; 
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:focus {
+        outline: none; 
+    }
+`;
+
+export const InputContainer = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; 
+    border-radius: var(--Large, 12px);
+    border: 1px solid var(--Gray-Gray300, #E6E6E6);
+    background: var(--Sub-White, #FFF);
 `;
