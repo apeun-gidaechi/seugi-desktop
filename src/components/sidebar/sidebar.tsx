@@ -12,6 +12,7 @@ import SendMessage from "../sendMessage/sendMessage";
 import ChatForm from "../../components/ChatForm/chatForm"
 import CreateRoomName from "../CreateRoomName/createRoomName"
 import CreateRoomPlus from "../CreateRoomPlus/createRoomPlus"
+import MainRoomMemberManger from "../../components/mainRoomMemberManger/mainRoomMemberManger"
 
 const sidebar = () => {
   return (
@@ -36,6 +37,7 @@ const sidebar = () => {
                 </S.PlusButton>
                 <SendMessage/>
             </S.SideBarChat>
+        <MainRoomMemberManger/>
         <CreateRoomPlus/>
         <CreateRoomName/>
         <ChatForm/>
