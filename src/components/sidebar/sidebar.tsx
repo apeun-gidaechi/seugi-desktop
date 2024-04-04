@@ -10,7 +10,7 @@ import SearchIcon from "../../assets/image/Search.svg"
 import AvatarImg from "../../assets/image/Avatar.svg"
 import SendMessage from "../sendMessage/sendMessage";
 import ChatForm from "../../components/ChatForm/chatForm"
-import CreateRoom from "../../components/CreateRoom/createRoom"
+import CreateRoom from "../CreateRoomName/createRoomName"
 
 const sidebar = () => {
   return (
