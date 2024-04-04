@@ -1,8 +1,7 @@
 
-import Login from '../pages/Login/login';
-import Selectingjob from '../pages/Signup/selectingjob';
-import ChatMain from '../pages/chat/chat' 
+import Login from '../pages/Login/index';
 import Selectingjob from '../pages/Selectjob/index';
+import ChatMain from '../pages/chat/chat' 
 import Oauthsignup from './Signup/OAuthsignup/oauthsignup';
 import Emailsignup from './Signup/Emailsignup/emailsignup';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
