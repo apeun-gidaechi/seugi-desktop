@@ -10,7 +10,8 @@ import SearchIcon from "../../assets/image/Search.svg"
 import AvatarImg from "../../assets/image/Avatar.svg"
 import SendMessage from "../sendMessage/sendMessage";
 import ChatForm from "../../components/ChatForm/chatForm"
-import CreateRoom from "../CreateRoomName/createRoomName"
+import CreateRoomName from "../CreateRoomName/createRoomName"
+import CreateRoomPlus from "../CreateRoomPlus/createRoomPlus"
 
 const sidebar = () => {
   return (
@@ -35,7 +36,8 @@ const sidebar = () => {
                 </S.PlusButton>
                 <SendMessage/>
             </S.SideBarChat>
-        <CreateRoom/>
+        <CreateRoomPlus/>
+        <CreateRoomName/>
         <ChatForm/>
         </S.ChatingPage>
       </>
