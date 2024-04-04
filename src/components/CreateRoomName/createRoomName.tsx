@@ -1,9 +1,9 @@
-import * as S from "../CreateRoom/createRoom.style"; 
+import * as S from "./createRoomName.style"; 
 import React from 'react'
 
 import CreateRoomCancle from "../../assets/image/createroomcancle.svg"
 
-const createRoom = () => {
+const createRoomName = () => {
   return (
     <div>
         <S.chatFormWrap>
@@ -22,4 +22,4 @@ const createRoom = () => {
   )
 }
 
-export default createRoom
+export default createRoomName
