@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { createGlobalStyle } from 'styled-components'; 
 
 export const SelectMain = styled.div`
     display: flex;
@@ -29,7 +30,7 @@ export const OutButton = styled.div`
 
 export const Selectjob = styled.p`
     color: var(--Black, #000);
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
@@ -65,7 +66,7 @@ export const Stdimg = styled.img`
 export const Txtstudent = styled.p`
     color: var(--Primary900, #020202);
 
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -81,7 +82,7 @@ export const Teacherimg = styled.img`
 export const TxtTeacher = styled.p`
     color: var(--Gray500, #020202);
 
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -108,7 +109,7 @@ export const Haveemail = styled.a`
 
     color: var(--Primary-Primary500, #1D93F3);
 
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -133,7 +134,7 @@ export const Button = styled.button`
 
     color: var(--Sub-White, #FFF);
 
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { createGlobalStyle } from 'styled-components'; 
 
 export const LoginMain = styled.div`
     display: flex;
@@ -57,7 +58,7 @@ export const Title2 = styled.span`
     color: #FFF;
     
     /* display:flex; */
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -96,7 +97,7 @@ export const Enterinfo = styled.div`
 export const Subtitle2 = styled.div`
     color: var(--Black, #000);
     
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -106,14 +107,23 @@ export const Subtitle2 = styled.div`
 export const Redstar = styled.a`
     color: var(--Red-Red500, #F90707);
     
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: 130%;
 `;
 
-export const TxtField = styled.input`
+export const TxtField = styled.input`    
+    &::placeholder{
+        color: var(--Gray-Gray500, #AAA);
+
+        font-family: 'Pretendard-Regular', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%; /* 20.8px */
+    }
     flex-grow: 1;
     padding: 17px 16px; 
     border: none;
@@ -146,7 +156,7 @@ export const Loginbtn = styled.button`
     border:none;
     color: var(--Sub-White, #FFF);
 
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -165,7 +175,7 @@ export const Buttonpart = styled.div`
 export const Body1 = styled.div`
     color: var(--Gray-Gray600, #787878);
 
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -175,7 +185,7 @@ export const Body1 = styled.div`
 export const Gosignup = styled.a`
     color: var(--Primary-Primary500, #1D93F3);
     
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -187,7 +197,7 @@ export const Gosignup = styled.a`
 export const Caption1 = styled.div`
     color: var(--Gray-Gray500, #AAA);
 
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
