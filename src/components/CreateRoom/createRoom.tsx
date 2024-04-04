@@ -1,6 +1,8 @@
 import * as S from "../CreateRoom/createRoom.style"; 
 import React from 'react'
 
+import CreateRoomCancle from "../../assets/image/createroomcancle.svg"
+
 const createRoom = () => {
   return (
     <div>
@@ -9,9 +11,12 @@ const createRoom = () => {
                 <S.ChatRoomName>채팅방 이름</S.ChatRoomName>
                 <S.ChatRoomButton>만들기</S.ChatRoomButton>
             </div>
-            <S.InputRoomName>
-                <div>zi존CNs</div>
-            </S.InputRoomName>
+            <S.InputRoomNameWrap>
+                <S.InputRoomName>zi존CNs</S.InputRoomName>
+                <S.CreateRoomCancleWrap>
+                    <S.CreateRoomCancle src={CreateRoomCancle}/>
+                </S.CreateRoomCancleWrap>
+            </S.InputRoomNameWrap>
         </S.chatFormWrap>
     </div>     
   )
