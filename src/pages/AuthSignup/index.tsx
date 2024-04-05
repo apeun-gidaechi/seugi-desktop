@@ -1,8 +1,8 @@
 import  OauthSignUp  from "../../components/Signup/OAuthsignup/oauthsignup";
 
-const SelectPage = ()=>{
+const OauthSignupPage = ()=>{
     return(
         <OauthSignUp/>
     )
 }
-export default SelectPage;
+export default OauthSignupPage;
