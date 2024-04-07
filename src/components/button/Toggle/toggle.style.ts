@@ -12,7 +12,9 @@ export const CheckBox = styled.input`
 
 export const ButtonLabel = styled.label<{ latestSort: boolean }>`
     z-index: 10;
+
     width: 51px; 
+
     height: 31px;
     position: relative;
     cursor: pointer;
