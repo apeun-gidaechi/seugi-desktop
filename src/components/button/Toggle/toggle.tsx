@@ -6,7 +6,9 @@ const Toggle = () => {
 
     const toggleHandler = () => {
         setLatestSort((prev) => !prev);
+
     } 
+
 
     return (
         <S.BtnWrapper>
