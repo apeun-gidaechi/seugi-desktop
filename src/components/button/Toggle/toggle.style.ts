@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const BtnWrapper = styled.div`
     display: flex;
     z-index: 0;
-    padding: 20px;
+    /* padding: 20px; */
 `;
 
 export const CheckBox = styled.input`
