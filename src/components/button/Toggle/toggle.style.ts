@@ -23,7 +23,7 @@ export const ButtonLabel = styled.label<{ latestSort: boolean }>`
 `;
 
 export const ToggleIndicator = styled.div<{ latestSort: boolean }>`
-    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06); 
     
     position: absolute;
     top: 50%;
