@@ -7,8 +7,10 @@ const MainRoomInfo = () => {
   return (
     <>
         <S.MainRoomInfoBox>
-            <S.NotificationSet>알람 설정</S.NotificationSet>
-            <ToggleButton/>
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <S.NotificationSet>알람 설정</S.NotificationSet>
+                <ToggleButton/>
+            </div>
             <S.OutChatRoom>채팅방 나가기</S.OutChatRoom>
         </S.MainRoomInfoBox>
     </>
