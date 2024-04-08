@@ -8,7 +8,7 @@ export const MainRoomInfoBox = styled.div`
     display: flex;
     padding: 16px;
     flex-direction: column;
-    gap: 8px;
+    gap: 3px;
 
     border-radius: 16px;
     background: #FFF;
