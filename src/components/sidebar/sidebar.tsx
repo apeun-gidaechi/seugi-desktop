@@ -16,6 +16,7 @@ import CreateRoomPlus from "../CreateRoomPlus/createRoomPlus"
 import MainRoomMemberManger from "../../components/mainRoomMemberManger/mainRoomMemberManger"
 import MainRoomSearch from "../MainRoomSearch/mainRoomSearch";
 import MainRoomInfo from "../MainRoomInfo/MainRoomInfo"
+import MainRoomInfoManger from "../MainRoomInfoManager/mainRoomInfomanager"
 
 const sidebar = () => {
   return (
@@ -41,6 +42,7 @@ const sidebar = () => {
                 <SendMessage/>
             </S.SideBarChat>
         <MainRoomInfo/>
+        <MainRoomInfoManger/>
         {/* <MainRoomSearch/> */}
         <MainRoomMemberManger/>
         {/* <CreateRoomPlus/>
