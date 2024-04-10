@@ -17,6 +17,7 @@ import MainRoomMemberManger from "../../components/mainRoomMemberManger/mainRoom
 import MainRoomSearch from "../MainRoomSearch/mainRoomSearch";
 import MainRoomInfo from "../MainRoomInfo/MainRoomInfo"
 import MainRoomInfoManger from "../MainRoomInfoManager/mainRoomInfomanager"
+import BadgeNormal from "../BadgeNormal/badgenormal"
 
 const sidebar = () => {
   return (
@@ -42,6 +43,7 @@ const sidebar = () => {
                 <SendMessage/>
             </S.SideBarChat>
         <MainRoomInfo/>
+        <BadgeNormal/>
         <MainRoomInfoManger/>
         {/* <MainRoomSearch/> */}
         <MainRoomMemberManger/>
