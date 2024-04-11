@@ -12,7 +12,7 @@ export const RedNumDotTxt = styled.div`
     color: #FFF;
 
     /* Caption1 */
-    font-family:'Pretendard-Regular', sans-serif;
+    font-family:'Pretendard-Regular', sans-serif;   
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
