@@ -6,7 +6,7 @@ const badgeNumber = () => {
     <S.RedNumDot>
         <S.RedNumDotTxt>11</S.RedNumDotTxt>
     </S.RedNumDot>
-  )
+  ) 
 }
 
 export default badgeNumber
