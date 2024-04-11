@@ -17,6 +17,8 @@ import MainRoomMemberManger from "@/components/mainRoomMemberManger/mainRoomMemb
 import MainRoomSearch from "@/components/MainRoomSearch/mainRoomSearch"
 import MainRoomInfo from "@/components/MainRoomInfo/MainRoomInfo";
 import MainRoomInfoManger from "@/components/MainRoomInfoManager/mainRoomInfomanager"
+import BadgeNormal from "@/components/BadgeNormal/badgenormal";
+import BadgeNumber from "@/components/BadgeNumber/badgeNumber";
 
 const sidebar = () => {
   return (
@@ -55,4 +57,4 @@ const sidebar = () => {
   )
 }
 
-export default sidebar
+export default sidebar 

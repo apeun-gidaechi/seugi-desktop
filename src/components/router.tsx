@@ -1,8 +1,6 @@
 import SelectSchool from '@/pages/Selectschool/index';
 import SchoolCode from '@/components/SchoolCode/SchoolCode';
 import JoinSuccess from '@/components/JoinSuccess/JoinSuccess';
-import SelectSchool from '@/pages/Selectschool/index';
-import SchoolCode from '@/components/SchoolCode/SchoolCode';
 import Login from '@/pages/Login/index';
 import Selectingjob from '@/pages/Selectjob/index';
 import ChatMain from '@/pages/chat/chat' 
@@ -30,4 +28,4 @@ const Router = () => {
     )
 }
 
-export default Router;
+export default Router; 
