@@ -1,12 +1,12 @@
-import SelectSchool from '@/pages/Selectschool/index';
-import SchoolCode from '@/components/SchoolCode/SchoolCode';
-import JoinSuccess from '@/components/JoinSuccess/JoinSuccess';
-import Login from '@/pages/Login/index';
-import Selectingjob from '@/pages/Selectjob/index';
+import SelectSchool from '@/pages/Selectschool/SelectSchoolPage';
+import SchoolCode from '@/pages/SchoolcodePage/SchoolCodePage';
+import JoinSuccess from '@/pages/JoinSuccessPage/JoinSuccessPage';
+import Login from '@/pages/Login/LoginPage';
+import Selectingjob from '@/pages/Selectjob/SelectJobPage';
 import ChatMain from '@/pages/chat/chat' 
-import Oauthsignup from '@/components/Signup/OAuthsignup/oauthsignup';
-import Emailsignup from '@/components/Signup/Emailsignup/emailsignup';
-import CreateSchool from '@/components/CreateSchool/CreateSchool';
+import Oauthsignup from '@/pages/AuthSignup/AuthSignupPage';
+import Emailsignup from '@/pages/EmailSignUp/EmailSignUpPage';
+import CreateSchool from '@/pages/CreateSchoolPage/CreateSchoolPage';
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
