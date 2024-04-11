@@ -42,6 +42,8 @@ const sidebar = () => {
                 <SendMessage/>
             </S.SideBarChat>
         <MainRoomInfo/>
+        <BadgeNormal/>
+        <BadgeNumber/>
         <MainRoomInfoManger/>
         {/* <MainRoomSearch/> */}
         <MainRoomMemberManger/>

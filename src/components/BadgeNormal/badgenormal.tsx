@@ -1,0 +1,10 @@
+import React from 'react'
+import * as S from "../BadgeNormal/badgenormal.style"
+
+const badgenormal = () => {
+  return (
+    <S.Reddot></S.Reddot>
+  )
+}
+
+export default badgenormal
