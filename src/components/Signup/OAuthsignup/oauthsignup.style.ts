@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components'; 
+
 
 export const OauthMain = styled.div`
     display: flex;
@@ -34,7 +36,7 @@ export const Header = styled.div`
 export const Title1 = styled.p`
 color: var(--Black, #000);
 
-font-family: Pretendard;
+font-family: 'Pretendard-Regular', sans-serif;
 font-size: 28px;
 font-style: normal;
 font-weight: 700;
@@ -69,7 +71,7 @@ gap: 10px;
 export const SubtitleName = styled.p`
     color: var(--Black, #000);
 
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -79,7 +81,7 @@ export const SubtitleName = styled.p`
 export const Redstar = styled.a`
 color: var(--Red-Red500, #F90707);
 
-font-family: Pretendard;
+font-family: 'Pretendard-Regular', sans-serif;
 font-size: 14px;
 font-style: normal;
 font-weight: 600;
@@ -87,6 +89,15 @@ line-height: 130%;
 `;
 
 export const Txtfield = styled.input`
+    &::placeholder{
+        color: var(--Gray-Gray500, #AAA);
+
+        font-family: 'Pretendard-Regular', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%; /* 20.8px */
+    }
     flex-grow: 1;
     padding: 17px 16px; 
     border: none;
@@ -139,8 +150,7 @@ export const EmailCheck = styled.div`
 export const HaveEmail = styled.a`
     color: var(--Primary-Primary500, #1D93F3);
 
-    /* Body1 */
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
