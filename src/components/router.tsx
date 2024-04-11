@@ -1,11 +1,13 @@
+import SelectSchool from '@/pages/Selectschool/index';
+import SchoolCode from '@/components/SchoolCode/SchoolCode';
+import JoinSuccess from '@/components/JoinSuccess/JoinSuccess';
+import SelectSchool from '@/pages/Selectschool/index';
+import SchoolCode from '@/components/SchoolCode/SchoolCode';
 import Login from '@/pages/Login/index';
 import Selectingjob from '@/pages/Selectjob/index';
 import ChatMain from '@/pages/chat/chat' 
 import Oauthsignup from '@/components/Signup/OAuthsignup/oauthsignup';
 import Emailsignup from '@/components/Signup/Emailsignup/emailsignup';
-import SelectSchool from '@/components/SelectingSchool/SelectSchool';
-import SchoolCode from '@/components/SchoolCode/SchoolCode';
-import JoinSuccess from '@/components/JoinSuccess/JoinSuccess';
 import CreateSchool from '@/components/CreateSchool/CreateSchool';
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -15,7 +17,6 @@ const Router = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/login" element={<Login/>}/>
-
                 <Route path='selectjob' element={<Selectingjob/>}/>
                 <Route path='/chat' element={<ChatMain/>}/> 
                 <Route path='/oauthsignup' element={<Oauthsignup/>}/>
