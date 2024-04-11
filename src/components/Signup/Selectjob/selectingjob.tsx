@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import * as S from './selectingjob.style';
-import nselectstudent from "../../../assets/image/nstudent.svg";
-import nselectteacher from "../../../assets/image/nteacher.svg";
-import selectstudent from "../../../assets/image/selectstudent.svg";
-import selectteacher from "../../../assets/image/selectteacher.svg";
+import nselectstudent from "@/assets/image/nstudent.svg";
+import nselectteacher from "@/assets/image/nteacher.svg";
+import selectstudent from "@/assets/image/student.svg";
+import selectteacher from "@/assets/image/teacher.svg";
 
 type Role = 'none' | 'student' | 'teacher';
 
