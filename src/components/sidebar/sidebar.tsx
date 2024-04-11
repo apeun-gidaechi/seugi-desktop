@@ -9,10 +9,16 @@ import PlusButton from "../../assets/image/plusButton.svg"
 import SearchIcon from "../../assets/image/Search.svg" 
 import AvatarImg from "../../assets/image/Avatar.svg"
 import SendMessage from "../sendMessage/sendMessage";
+
 import ChatForm from "../../components/ChatForm/chatForm"
 import CreateRoomName from "../CreateRoomName/createRoomName"
 import CreateRoomPlus from "../CreateRoomPlus/createRoomPlus"
 import MainRoomMemberManger from "../../components/mainRoomMemberManger/mainRoomMemberManger"
+import MainRoomSearch from "../MainRoomSearch/mainRoomSearch";
+import MainRoomInfo from "../MainRoomInfo/MainRoomInfo"
+import MainRoomInfoManger from "../MainRoomInfoManager/mainRoomInfomanager"
+import BadgeNormal from "../BadgeNormal/badgenormal"
+import BadgeNumber from "../BadgeNumber/badgeNumber"
 
 const sidebar = () => {
   return (
@@ -37,10 +43,15 @@ const sidebar = () => {
                 </S.PlusButton>
                 <SendMessage/>
             </S.SideBarChat>
+        <MainRoomInfo/>
+        <BadgeNormal/>
+        <BadgeNumber/>
+        <MainRoomInfoManger/>
+        {/* <MainRoomSearch/> */}
         <MainRoomMemberManger/>
-        <CreateRoomPlus/>
+        {/* <CreateRoomPlus/>
         <CreateRoomName/>
-        <ChatForm/>
+        <ChatForm/> */}
         </S.ChatingPage>
       </>
   )
