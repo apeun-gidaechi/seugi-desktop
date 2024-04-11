@@ -6,4 +6,4 @@ export const Reddot = styled.div`
 
     background: #F76E33;
     border-radius: 100%;
-`
+` 
