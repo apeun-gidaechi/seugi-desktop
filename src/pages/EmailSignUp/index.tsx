@@ -1,4 +1,4 @@
-import  EmailSignup  from "../../components/Signup/Emailsignup/emailsignup";
+import  EmailSignup  from "@/components/Signup/Emailsignup/emailsignup";
 
 const SelectPage = ()=>{
     return(

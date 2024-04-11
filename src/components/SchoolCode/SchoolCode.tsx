@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './SchoolCode.style';
-import Button from '../button/continuebutton';
+import Button from '@/components/button/continuebutton';
 
 
 const SchoolCode = () => {

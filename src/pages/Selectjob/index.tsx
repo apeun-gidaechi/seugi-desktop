@@ -1,4 +1,4 @@
-import  SelectingJob  from "../../components/Signup/Selectjob/selectingjob";
+import  SelectingJob  from "@/components/Signup/Selectjob/selectingjob";
 
 const SelectPage = ()=>{
     return(

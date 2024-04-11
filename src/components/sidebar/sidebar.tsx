@@ -1,22 +1,22 @@
 import * as S from "../sidebar/sidebar.style"; 
 import React from 'react' 
 
-import Home from "../../assets/image/home.svg"
-import Chat from "../../assets/image/chat.svg"
-import Chats from "../../assets/image/chats.svg"
-import Bell from "../../assets/image/bell.svg"
-import PlusButton from "../../assets/image/plusButton.svg"
-import SearchIcon from "../../assets/image/Search.svg" 
-import AvatarImg from "../../assets/image/Avatar.svg"
-import SendMessage from "../sendMessage/sendMessage";
+import Home from "@/assets/image/home.svg"
+import Chat from "@/assets/image/chat.svg"
+import Chats from "@/assets/image/chats.svg"
+import Bell from "@/assets/image/bell.svg"
+import PlusButton from "@/assets/image/plusButton.svg"
+import SearchIcon from "@/assets/image/Search.svg" 
+import AvatarImg from "@/assets/image/Avatar.svg"
+import SendMessage from "@/components/sendMessage/sendMessage";
 
-import ChatForm from "../../components/ChatForm/chatForm"
-import CreateRoomName from "../CreateRoomName/createRoomName"
-import CreateRoomPlus from "../CreateRoomPlus/createRoomPlus"
-import MainRoomMemberManger from "../../components/mainRoomMemberManger/mainRoomMemberManger"
-import MainRoomSearch from "../MainRoomSearch/mainRoomSearch";
-import MainRoomInfo from "../MainRoomInfo/MainRoomInfo"
-import MainRoomInfoManger from "../MainRoomInfoManager/mainRoomInfomanager"
+import ChatForm from "@/components/ChatForm/chatForm"
+import CreateRoomName from "@/components/CreateRoomName/createRoomName"
+import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus"
+import MainRoomMemberManger from "@/components/mainRoomMemberManger/mainRoomMemberManger"
+import MainRoomSearch from "@/components/MainRoomSearch/mainRoomSearch"
+import MainRoomInfo from "@/components/MainRoomInfo/MainRoomInfo";
+import MainRoomInfoManger from "@/components/MainRoomInfoManager/mainRoomInfomanager"
 
 const sidebar = () => {
   return (

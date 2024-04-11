@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../components/button/continuebutton';
+import Button from '@/components/button/continuebutton';
 import * as S from './JoinSuccess.style';
 
 const JoinSuccess = () => {

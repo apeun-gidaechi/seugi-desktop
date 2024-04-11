@@ -1,7 +1,7 @@
 import * as S from "./createRoomName.style"; 
 import React from 'react'
 
-import CreateRoomCancle from "../../assets/image/createroomcancle.svg"
+import CreateRoomCancle from "@/assets/image/createroomcancle.svg"
 
 const createRoomName = () => {
   return (
