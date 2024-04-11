@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import seugiImg from "../../assets/image/seugilogo.svg";
-import showPasswordimg from '../../assets/image/show_fill.svg';
-import hidePasswordimg from '../../assets/image/hide_fill.svg';
+import seugiImg from "@/assets/image/seugilogo.svg";
+import showPasswordimg from '@/assets/image/show_fill.svg';
+import hidePasswordimg from '@/assets/image/hide_fill.svg';
 
 const Login = () => {
   const navigate = useNavigate();

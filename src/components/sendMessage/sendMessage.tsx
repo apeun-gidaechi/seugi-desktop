@@ -1,8 +1,8 @@
 import * as S from "../sendMessage/sendMessage.style"; 
 import React from 'react' 
 
-import PlusMessageFile from "../../assets/image/MessageFile.svg"
-import SendArrow from "../../assets/image/SendArrow.svg"
+import PlusMessageFile from "@/assets/image/MessageFile.svg"
+import SendArrow from "@/assets/image/SendArrow.svg"
 
 const sendMessage = () => {
   return (
