@@ -1,4 +1,4 @@
-import  OauthSignUp  from "../../components/Signup/OAuthsignup/oauthsignup";
+import  OauthSignUp  from "@/components/Signup/OAuthsignup/oauthsignup";
 
 const OauthSignupPage = ()=>{
     return(

@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from '@/components/CreateSchool/CreateSchool.style';
-import Button from '../button/continuebutton';
+import Button from '@/components/button/continuebutton';
 
 const CreateSchool = () => {
   return (

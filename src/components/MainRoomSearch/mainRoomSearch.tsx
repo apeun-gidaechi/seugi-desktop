@@ -1,8 +1,8 @@
 import React from 'react'
 import * as S from "../MainRoomSearch/mainRoomSearch.style"
 
-import AvatarImg from '../../assets/image/Avatar.svg'
-import FindIcon from "../../assets/image/Findicon.svg"
+import AvatarImg from '@/assets/image/Avatar.svg'
+import FindIcon from "@/assets/image/Findicon.svg"
 
 const mainRoomSearch = () => {
   return (

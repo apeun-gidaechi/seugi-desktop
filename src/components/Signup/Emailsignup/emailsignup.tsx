@@ -1,9 +1,9 @@
 import React,{ useState } from 'react';
 import axios from 'axios';
 import * as S from './emailsignup.style';
-import hidePasswordimg from '../../../assets/image/hide_fill.svg';
-import showPasswordimg from '../../../assets/image/show_fill.svg';
-import Button from '../../button/continuebutton';
+import hidePasswordimg from '@/assets/image/hide_fill.svg';
+import showPasswordimg from '@/assets/image/show_fill.svg';
+import Button from '@/components/button/continuebutton';
 import { useNavigate } from 'react-router';
 
 const emailsignup = () => {
