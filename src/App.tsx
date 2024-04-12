@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import Router from "../src/components/router"
-import reactLogo from './assets/react.svg'
+import Router from "@/components/router"
 import './App.css'
 
 function App() {
