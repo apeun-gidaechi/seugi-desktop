@@ -1,4 +1,4 @@
-import * as S from "../ChatForm/chatForm.style"; 
+import * as S from "@/components/ChatForm/chatForm.style"; 
 import React from 'react'
 
 const chatForm = () => {

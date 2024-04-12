@@ -1,4 +1,4 @@
-import * as S from "../sidebar/sidebar.style"; 
+import * as S from "@/components/sidebar/sidebar.style"; 
 import React from 'react' 
 
 import Home from "@/assets/image/home.svg"

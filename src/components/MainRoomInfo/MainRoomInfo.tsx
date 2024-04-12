@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from '../MainRoomInfo/MainRoomInfo.style'
+import * as S from '@/components/MainRoomInfo/MainRoomInfo.style'
 
 import ToggleButton from "@/components/button/Toggle/toggle"
 

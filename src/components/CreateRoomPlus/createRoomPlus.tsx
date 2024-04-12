@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as S from "../CreateRoomPlus/createRoomPlus.style"; 
+import * as S from "@/components/CreateRoomPlus/createRoomPlus.style"; 
 
 import AvatarImg from "@/assets/image/Avatar.svg";
 import NonClicked from '@/assets/image/nonClick.svg';

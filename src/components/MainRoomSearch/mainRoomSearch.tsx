@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from "../MainRoomSearch/mainRoomSearch.style"
+import * as S from "@/components/MainRoomSearch/mainRoomSearch.style"
 
 import AvatarImg from '@/assets/image/Avatar.svg'
 import FindIcon from "@/assets/image/Findicon.svg"
