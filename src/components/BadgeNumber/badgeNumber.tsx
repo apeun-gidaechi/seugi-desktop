@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from "../BadgeNumber/badgeNumber.style"
+import * as S from "@/components/BadgeNumber/badgeNumber.style"
 
 const badgeNumber = () => {
   return (
