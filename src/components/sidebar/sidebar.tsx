@@ -1,13 +1,13 @@
-import * as S from "../sidebar/sidebar.style"; 
+import * as S from "@/components/sidebar/sidebar.style"; 
 import React from 'react' 
 
-import Home from "@/assets/image/home.svg"
-import Chat from "@/assets/image/chat.svg"
-import Chats from "@/assets/image/chats.svg"
-import Bell from "@/assets/image/bell.svg"
-import PlusButton from "@/assets/image/plusButton.svg"
-import SearchIcon from "@/assets/image/Search.svg" 
-import AvatarImg from "@/assets/image/Avatar.svg"
+import Home from "@/assets/image/sidebar/home.svg"
+import Chat from "@/assets/image/sidebar/chat.svg"
+import Chats from "@/assets/image/sidebar/chats.svg"
+import Bell from "@/assets/image/sidebar/bell.svg"
+import PlusButton from "@/assets/image/sidebar/plusButton.svg"
+import SearchIcon from "@/assets/image/chat-components/Search.svg" 
+import AvatarImg from "@/assets/image/chat-components/Avatar.svg"
 import SendMessage from "@/components/sendMessage/sendMessage";
 
 import ChatForm from "@/components/ChatForm/chatForm"
