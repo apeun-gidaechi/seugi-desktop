@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from "../BadgeNormal/badgenormal.style"
+import * as S from "@/components/BadgeNormal/badgenormal.style"
 
 const badgenormal = () => {
   return (

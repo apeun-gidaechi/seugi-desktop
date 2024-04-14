@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from "../MainRoomInfoManager/mainRoomInfoManager.style"
+import * as S from "@/components/MainRoomInfoManager/mainRoomInfoManager.style"
 
 const mainRoomInfomanager = () => {
   return (
