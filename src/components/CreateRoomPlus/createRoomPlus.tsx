@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import * as S from "@/components/CreateRoomPlus/createRoomPlus.style"; 
 
-import AvatarImg from "@/assets/image/Avatar.svg";
-import NonClicked from '@/assets/image/nonClick.svg';
-import Clicked from "@/assets/image/clicked.svg";
+import AvatarImg from "@/assets/image/chat-components/Avatar.svg";
+import NonClicked from '@/assets/image/chat-components/nonClick.svg';
+import Clicked from "@/assets/image/chat-components/clicked.svg";
 
 const CreateRoomPlus = () => {
   const [isClicked, setIsClicked] = useState(false); 
