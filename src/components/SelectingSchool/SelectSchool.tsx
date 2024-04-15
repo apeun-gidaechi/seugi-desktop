@@ -1,8 +1,8 @@
 import * as S from './SelectSchool.style';
 import React from 'react'
 
-import JoinSchoolimg from '@/assets/image/JoinSchool.svg';
-import CreateSchoolimg from '@/assets/image/CreateSchool.svg';
+import JoinSchoolimg from '@/assets/image/join-school/JoinSchool.svg';
+import CreateSchoolimg from '@/assets/image/join-school/CreateSchool.svg';
 
 const SelectSchool = () => {
   return (

@@ -1,8 +1,8 @@
 import React,{ useState } from 'react';
 import axios from 'axios';
 import * as S from './emailsignup.style';
-import hidePasswordimg from '@/assets/image/hide_fill.svg';
-import showPasswordimg from '@/assets/image/show_fill.svg';
+import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg';
+import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
 import Button from '@/components/button/continuebutton';
 import { useNavigate } from 'react-router';
 
@@ -15,7 +15,6 @@ const emailsignup = () => {
     const [passwordError, setPasswordError] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
-
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
