@@ -7,6 +7,12 @@ import axios from "axios";
 import seugiImg from "@/assets/image/seugilogo.svg";
 import showPasswordimg from '@/assets/image/show_fill.svg';
 import hidePasswordimg from '@/assets/image/hide_fill.svg';
+import AppleLogo from '@/assets/image/applelogo.svg';
+import GoogleLogo from '@/assets/image/googlelogo.svg';
+import Cloud1 from '@/assets/image/LoginCloud1.svg';
+import Cloud2 from '@/assets/image/LoginCloud2.svg'
+import Sun from '@/assets/image/LoginSun.svg';
+import Divider from '@/assets/image/Divider.svg';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,6 +38,9 @@ const Login = () => {
 
   return (
     <S.LoginMain>
+      <S.Cloud1 src={Cloud1} />
+      <S.Cloud2 src={Cloud2} />
+      <S.Sun src={Sun}/>
       <S.LoginFirstWrap>
         <S.Fheader>
           <S.Header>
@@ -71,22 +80,24 @@ const Login = () => {
           </S.Inputpart>
           <S.Buttonpart>
             <S.Loginbtn className="loginbtn" onClick={handleLogin}>로그인</S.Loginbtn>
-            <S.Body1>계정이 없으시다면? <S.Gosignup href="http://localhost:5173/selectjob">가입하기</S.Gosignup> </S.Body1>
+            <S.Body1>계정이 없으시다면? <S.Gosignup href="http://localhost:5173/emailsignup">가입하기</S.Gosignup> </S.Body1>
           </S.Buttonpart>
           <S.Orpart>
-            <S.Caption1>또는</S.Caption1>
-            <S.Oauthpart>
-              <S.Authlogin>
-                apple
-              </S.Authlogin>
-              <S.Authlogin>
-                google
-              </S.Authlogin>
-            </S.Oauthpart>
+            <S.Dividerimg src={Divider}/>
+              <S.Caption1>또는</S.Caption1>
+            <S.Dividerimg src={Divider}/>
           </S.Orpart>
+          <S.Oauthpart>
+            <S.Authlogin>
+              <S.LogoImg src={AppleLogo}/>
+            </S.Authlogin>
+            <S.Authlogin>
+              <S.LogoImg src={GoogleLogo}/>
+            </S.Authlogin>
+          </S.Oauthpart>
         </S.Inputarea>
       </S.LoginFirstWrap>
-    </S.LoginMain>
+     </S.LoginMain>
   );
 };
 

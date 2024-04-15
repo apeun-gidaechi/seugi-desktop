@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components'; 
 
 export const SelectMain = styled.div`
+    background: linear-gradient(#1C8DF4 0%, #21B6E5 58.35%);
+
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -58,8 +60,7 @@ export const PickJob = styled.button`
 `;
 
 export const Stdimg = styled.img`
-    margin-top:20px;
-    width: 214px;
+    width: 174;
     height: 120px;
 `;
 
@@ -74,7 +75,6 @@ export const Txtstudent = styled.p`
 `;
 
 export const Teacherimg = styled.img`
-    margin-top:20px;
     width: 174px;
     height: 120px;
 `;
@@ -101,6 +101,7 @@ export const ButtonContainer = styled.div`
 
 
 export const Haveemail = styled.a`
+    margin-left:4px;
     display: flex;
     padding-left: 4px;
     justify-content: center;
