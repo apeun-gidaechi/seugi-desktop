@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components'; 
 
 export const EmailMain = styled.div`
+    background: linear-gradient(#1C8DF4 0%, #21B6E5 58.35%);
+
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -62,11 +64,12 @@ export const EneterInfo = styled.div`
 `;
 
 export const Subtitle = styled.div`
-display: flex;
-padding-left: 4px;
-justify-content: center;
-align-items: flex-start;
-gap: 10px;
+    margin-left:4px;
+    display: flex;
+    padding-left: 4px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
 `;
 
 export const Body1 = styled.p`
@@ -101,6 +104,11 @@ export const Txtfield = styled.input`
         font-weight: 600;
         line-height: 130%; /* 20.8px */
     }
+    font-family: 'Pretendard-Regular', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+
     flex-grow: 1;
     padding: 17px 16px; 
     border: none;
@@ -151,6 +159,7 @@ export const EmailCheck = styled.div`
 `;
 
 export const Haveemail = styled.a`
+    margin-left: 4px;
     color: var(--Primary-Primary500, #1D93F3);
 
     font-family: 'Pretendard-Regular', sans-serif;

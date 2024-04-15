@@ -3,6 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 
 
 export const OauthMain = styled.div`
+    background: linear-gradient( #1C8DF4 0%, #21B6E5 58.35%);
+
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -69,6 +71,7 @@ align-items: flex-start;
 gap: 10px;
 `;
 export const SubtitleName = styled.p`
+    margin-left:4px;
     color: var(--Black, #000);
 
     font-family: 'Pretendard-Regular', sans-serif;
@@ -98,6 +101,11 @@ export const Txtfield = styled.input`
         font-weight: 600;
         line-height: 130%; /* 20.8px */
     }
+    font-family: 'Pretendard-Regular', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+
     flex-grow: 1;
     padding: 17px 16px; 
     border: none;
@@ -150,6 +158,7 @@ export const EmailCheck = styled.div`
 export const HaveEmail = styled.a`
     color: var(--Primary-Primary500, #1D93F3);
 
+    margin-left:4px;
     font-family: 'Pretendard-Regular', sans-serif;
     font-size: 14px;
     font-style: normal;
