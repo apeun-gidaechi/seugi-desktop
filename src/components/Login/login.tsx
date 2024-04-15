@@ -4,15 +4,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import seugiImg from "@/assets/image/seugilogo.svg";
-import showPasswordimg from '@/assets/image/show_fill.svg';
-import hidePasswordimg from '@/assets/image/hide_fill.svg';
-import AppleLogo from '@/assets/image/applelogo.svg';
-import GoogleLogo from '@/assets/image/googlelogo.svg';
-import Cloud1 from '@/assets/image/LoginCloud1.svg';
-import Cloud2 from '@/assets/image/LoginCloud2.svg'
-import Sun from '@/assets/image/LoginSun.svg';
-import Divider from '@/assets/image/Divider.svg';
+import seugiImg from "@/assets/image/onbording/seugilogo.svg";
+import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
+import hidePasswordimg from '@/assets/image//onbording/hide_fill.svg';
+import AppleLogo from '@/assets/image//onbording/applelogo.svg';
+import GoogleLogo from '@/assets/image/onbording/googlelogo.svg';
+import Cloud1 from '@/assets/image/onbording/LoginCloud1.svg';
+import Cloud2 from '@/assets/image/onbording/LoginCloud2.svg'
+import Sun from '@/assets/image/onbording/LoginSun.svg';
+import Divider from '@/assets/image/onbording/Divider.svg';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:5176", {
+      const response = await axios.post("/login", {
         email: email,
         password: password,
       });
