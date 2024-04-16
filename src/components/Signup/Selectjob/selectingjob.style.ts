@@ -9,9 +9,12 @@ export const SelectMain = styled.div`
     height: 100vh;
     justify-content: center;
     align-items: center;
+
+
 `
 
 export const SelectFirstWrap = styled.div`
+    z-index:5;
     /* width: 443px; */
     text-align: center;
     height: 447px;
@@ -142,4 +145,39 @@ export const Button = styled.button`
     line-height: 130%;
 
     cursor: pointer;
+`
+
+export const Cloud1 = styled.img`
+    z-index:2;
+    position:absolute;
+    width: 100vw;
+    height: 659px;
+    flex-shrink: 0;
+    fill: #F2F7FF;
+    z-index:2;
+    top:39vh;
+`
+
+export const Cloud2 = styled.img`
+    z-index :3;
+    position:absolute;
+    z-index:1;
+    width: 100vw;
+    height: 633px;
+    flex-shrink: 0;
+    top:33vh;
+
+    fill: linear-gradient( rgba(255, 255, 255, 0.20) 3.48%, rgba(0, 194, 255, 0.20) 101.42%), #DAE8FF;
+`
+
+export const Sun = styled.img`
+    position: absolute;
+    z-index:4;
+    width: 342px;
+    height: 342px;
+    flex-shrink: 0;
+    top: 2%;
+    left: 58%;
+    border-radius: 342px;
+    background: linear-gradient( rgba(255, 255, 255, 0.50) 0%, rgba(255, 199, 0, 0.50) 100%), #FFC700;
 `

@@ -10,9 +10,12 @@ export const OauthMain = styled.div`
     height: 100vh;
     justify-content: center;
     align-items: center;
+
+    /* z-index: 10; */
 `
 
 export const OauthFirstWrap = styled.div`
+    z-index:5;
     display: flex;
     width: 485px;
     padding: 36px 32px;
@@ -176,4 +179,47 @@ export const InputContainer = styled.div`
     border-radius: var(--Large, 12px);
     border: 1px solid var(--Gray-Gray300, #E6E6E6);
     background: var(--Sub-White, #FFF);
+`
+
+export const Cloud1 = styled.img`
+    position: absolute;
+    width: 100vw;
+    height: 687px;
+    flex-shrink: 0;
+    fill: #F2F7FF;
+    top: 49vh;
+    z-index:3;
+`
+
+export const Cloud2 = styled.img`
+   position: absolute;
+   width: 100vw;
+    height: 625px;
+    flex-shrink: 0;
+    top: 39vh;
+    fill: linear-gradient(rgba(255, 255, 255, 0.20) -10.24%, rgba(0, 194, 255, 0.20) 88.96%, rgba(235, 248, 255, 0.20) 88.96%), #F3F8FF;
+    z-index:2;
+`
+
+export const Cloud3 = styled.img`
+    position: absolute;
+    width: 100vw;
+    height: 759px;
+    flex-shrink: 0;
+    top: 19vh;
+    fill: linear-gradient(rgba(255, 251, 251, 0.20) 5.93%, rgba(29, 185, 255, 0.20) 100%), #CAE4FF;
+    z-index:1;
+`
+
+export const Sun = styled.img`
+    position:absolute;
+
+    width: 342px;
+    height: 342px;
+    flex-shrink: 0;
+    top:2%;
+    left:25%;
+    border-radius: 342px;
+    background: linear-gradient( rgba(255, 255, 255, 0.50) 0%, rgba(255, 199, 0, 0.50) 100%), #FFC700;
+    z-index:4;
 `
