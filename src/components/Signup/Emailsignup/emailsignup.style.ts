@@ -12,19 +12,19 @@ export const EmailMain = styled.div`
 `;
 
 export const EmailFirstWrap = styled.div`
-display: flex;
-width: 485px;
-padding: 36px 32px;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 32px;
+    z-index:5;
+    display: flex;
+    width: 485px;
+    padding: 36px 32px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
 
-border-radius: 36px;
-background: #FFF;
+    border-radius: 36px;
+    background: #FFF;
 
-/* ev2 */
-box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
 `;
 
 export const Header = styled.div`
@@ -201,3 +201,47 @@ export const InputContainer = styled.div`
 export const ErrorText = styled.p`
     color: red;
 `;
+
+
+export const Cloud1 = styled.img`
+    position: absolute;
+    width: 100vw;
+    height: 687px;
+    flex-shrink: 0;
+    fill: #F2F7FF;
+    top: 49vh;
+    z-index:3;
+`
+
+export const Cloud2 = styled.img`
+   position: absolute;
+   width: 100vw;
+    height: 625px;
+    flex-shrink: 0;
+    top: 39vh;
+    fill: linear-gradient(rgba(255, 255, 255, 0.20) -10.24%, rgba(0, 194, 255, 0.20) 88.96%, rgba(235, 248, 255, 0.20) 88.96%), #F3F8FF;
+    z-index:2;
+`
+
+export const Cloud3 = styled.img`
+    position: absolute;
+    width: 100vw;
+    height: 759px;
+    flex-shrink: 0;
+    top: 19vh;
+    fill: linear-gradient(rgba(255, 251, 251, 0.20) 5.93%, rgba(29, 185, 255, 0.20) 100%), #CAE4FF;
+    z-index:1;
+`
+
+export const Sun = styled.img`
+    position:absolute;
+
+    width: 342px;
+    height: 342px;
+    flex-shrink: 0;
+    top:2%;
+    left:25%;
+    border-radius: 342px;
+    background: linear-gradient( rgba(255, 255, 255, 0.50) 0%, rgba(255, 199, 0, 0.50) 100%), #FFC700;
+    z-index:4;
+`

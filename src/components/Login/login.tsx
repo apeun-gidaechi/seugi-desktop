@@ -4,15 +4,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import seugiImg from "@/assets/image/onbording/seugilogo.svg";
+import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
 import hidePasswordimg from '@/assets/image//onbording/hide_fill.svg';
-import AppleLogo from '@/assets/image//onbording/applelogo.svg';
-import GoogleLogo from '@/assets/image/onbording/googlelogo.svg';
-import Cloud1 from '@/assets/image/onbording/LoginCloud1.svg';
-import Cloud2 from '@/assets/image/onbording/LoginCloud2.svg'
-import Sun from '@/assets/image/onbording/LoginSun.svg';
-import Divider from '@/assets/image/onbording/Divider.svg';
+import AppleLogo from '@/assets/image//onbording/Start/applelogo.svg';
+import GoogleLogo from '@/assets/image/onbording/Start/googlelogo.svg';
+import Cloud1 from '@/assets/image/onbording/Start/LoginCloud1.svg';
+import Cloud2 from '@/assets/image/onbording/Start/LoginCloud2.svg'
+import Sun from '@/assets/image/onbording/Start/LoginSun.svg';
+import Divider from '@/assets/image/onbording/Start/Divider.svg';
 
 const Login = () => {
   const navigate = useNavigate();

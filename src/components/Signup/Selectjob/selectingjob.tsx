@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import * as S from './selectingjob.style';
-import nselectstudent from "@/assets/image/onbording/singup/nstudent.svg";
-import nselectteacher from "@/assets/image/onbording/singup/nteacher.svg";
-import selectstudent from "@/assets/image/onbording/singup/selectstudent.svg";
-import selectteacher from "@/assets/image/onbording/singup/selectteacher.svg";
+import nselectstudent from "@/assets/image/onbording/selectjob/nstudent.svg";
+import nselectteacher from "@/assets/image/onbording/selectjob/nteacher.svg";
+import selectstudent from "@/assets/image/onbording/selectjob/selectstudent.svg";
+import selectteacher from "@/assets/image/onbording/selectjob/selectteacher.svg";
+import Cloud1 from '@/assets/image/onbording/selectjob/Cloud1.svg';
+import Cloud2 from '@/assets/image/onbording/selectjob/Cloud2.svg';
+import Sun from '@/assets/image/onbording/selectjob/Sun.svg';
 
 type Role = 'none' | 'student' | 'teacher';
 
@@ -30,6 +33,9 @@ const SelectingJob = () => {
 
     return (
         <S.SelectMain>
+            <S.Cloud1 src={Cloud1}/>
+            <S.Cloud2 src={Cloud2} />
+            <S.Sun src={Sun}/>
             <S.SelectFirstWrap>
                 <S.Selectjob>학생인가요 선생님인가요?</S.Selectjob>
                 <S.PickContainer>
