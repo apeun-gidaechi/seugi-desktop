@@ -3,6 +3,11 @@ import axios from 'axios';
 import * as S from './emailsignup.style';
 import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg';
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
+import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
+import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
+import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
+import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
+
 import Button from '@/components/button/continuebutton';
 import { useNavigate } from 'react-router';
 
@@ -74,6 +79,10 @@ const emailsignup = () => {
     
     return (
         <S.EmailMain>
+            <S.Cloud1 src={Cloud1} />
+            <S.Cloud2 src={Cloud2} />
+            <S.Cloud3 src={Cloud3} />
+            <S.Sun src={Sun} />
             <S.EmailFirstWrap>
                 <S.Header>
                     <S.Title1> 새 계정 만들기 </S.Title1>
