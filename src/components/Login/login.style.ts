@@ -8,7 +8,6 @@ export const LoginMain = styled.div`
     height: 100vh;
     justify-content: center;
     align-items: center;
-    z-index: 5;
 `;
 
 export const LoginFirstWrap = styled.div`
@@ -276,7 +275,7 @@ export const Cloud1 = styled.img`
     height: 620px;
     flex-shrink: 0;
     top: 39vh;
-    fill: linear-gradient(180deg, rgba(255, 255, 255, 0.20) 0%, rgba(0, 194, 255, 0.20) 100%), #DAE8FF;
+    fill: linear-gradient( rgba(255, 255, 255, 0.20) 0%, rgba(0, 194, 255, 0.20) 100%), #DAE8FF;
 `
 
 export const Cloud2 = styled.img`
@@ -292,11 +291,11 @@ export const Sun = styled.img`
 position: absolute;
     width: 342px;
     height: 342px;
-    top: 5%;
-    left: 20%;
+    top: 10%;
+    left: 18%;
     flex-shrink: 0;
     border-radius: 342px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.50) 0%, rgba(255, 199, 0, 0.50) 100%), #FFC700;
+    background: linear-gradient( rgba(255, 255, 255, 0.50) 0%, rgba(255, 199, 0, 0.50) 100%), #FFC700;
 `
 
 export const Dividerimg = styled.img`
