@@ -55,6 +55,20 @@ export const InputContainer = styled.div`
 `;
 
 export const TextField = styled.input`
+    &::placeholder{
+        color: var(--Gray-Gray500, #AAA);
+
+        font-family: 'Pretendard-Regular', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%; /* 20.8px */
+    }
+    font-family: 'Pretendard-Regular', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%; /* 20.8px */
     display: flex;
     height: 52px;
     padding: 15px 245px 16px 16px;
@@ -65,7 +79,6 @@ export const TextField = styled.input`
     border: 1px solid var(--Gray-Gray300, #E6E6E6);
     background: var(--Sub-White, #FFF);
 `;
-
 
 export const InputBox = styled.div`
     display: flex;
@@ -85,6 +98,7 @@ export const SubtitleContainer = styled.div`
 `;
 
 export const Subtitle = styled.span`
+    margin-left:4px;
     color: var(--Black, #000);
 
     font-family: 'Pretendard-Regular', sans-serif;
