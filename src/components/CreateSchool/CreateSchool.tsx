@@ -15,7 +15,7 @@ const CreateSchool = () => {
                     <S.SubtitleContainer>
                         <S.Subtitle>학교 이름 <S.RedStar>*</S.RedStar></S.Subtitle>
                     </S.SubtitleContainer>
-                    <S.TextField></S.TextField>
+                    <S.TextField placeholder='학교 이름을 입력해주세요'></S.TextField>
                 </S.InputBox>
             </S.InputContainer>
             <S.ButtonContainer>
