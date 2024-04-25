@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from './oauthsignup.style';
+import * as S from '@/components/Signup/OAuthsignup/oauthsignup.style';
 import Button from '@/components/button/continuebutton';
 import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';

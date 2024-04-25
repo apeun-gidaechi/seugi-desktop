@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from "./continuebutton.style"
+import * as S from "@/components/button/continuebutton.style"
 import { useNavigate } from 'react-router';
 
 const button = () => {
