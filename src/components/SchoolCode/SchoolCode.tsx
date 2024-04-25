@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from './SchoolCode.style';
+import * as S from '@/components/SchoolCode/SchoolCode.style';
 import Button from '@/components/button/continuebutton';
 
 
