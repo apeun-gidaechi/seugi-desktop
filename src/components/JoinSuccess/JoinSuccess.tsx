@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@/components/button/continuebutton';
-import * as S from './JoinSuccess.style';
+import * as S from '@/components/JoinSuccess/JoinSuccess.style';
 
 const JoinSuccess = () => {
   return (

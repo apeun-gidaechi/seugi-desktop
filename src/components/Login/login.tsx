@@ -1,4 +1,4 @@
-import * as S from './login.style';
+import * as S from '@/components/Login/login.style';
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";

@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 import axios from 'axios';
-import * as S from './emailsignup.style';
+import * as S from '@/components/Signup/Emailsignup/emailsignup.style';
 import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg';
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
 import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
