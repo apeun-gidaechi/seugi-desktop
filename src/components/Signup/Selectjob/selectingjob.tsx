@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import * as S from './selectingjob.style';
+import * as S from '@/components/Signup/Selectjob/selectingjob.style';
 import nselectstudent from "@/assets/image/onbording/selectjob/nstudent.svg";
 import nselectteacher from "@/assets/image/onbording/selectjob/nteacher.svg";
 import selectstudent from "@/assets/image/onbording/selectjob/selectstudent.svg";

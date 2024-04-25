@@ -288,7 +288,7 @@ export const Cloud2 = styled.img`
 `
 
 export const Sun = styled.img`
-position: absolute;
+    position: absolute;
     width: 342px;
     height: 342px;
     top: 10%;

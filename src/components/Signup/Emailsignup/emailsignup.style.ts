@@ -75,7 +75,6 @@ export const Subtitle = styled.div`
 export const Body1 = styled.p`
     color: var(--Black, #000);
 
-    /* Body1 */
     font-family: 'Pretendard-Regular', sans-serif;
     font-size: 14px;
     font-style: normal;
@@ -86,7 +85,6 @@ export const Body1 = styled.p`
 export const Redstar = styled.a`
     color: var(--Red-Red500, #F90707);
 
-    /* Body1 */
     font-family: 'Pretendard-Regular', sans-serif;
     font-size: 14px;
     font-style: normal;
