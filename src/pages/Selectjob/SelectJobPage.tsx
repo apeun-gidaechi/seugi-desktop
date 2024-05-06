@@ -1,8 +1,8 @@
-import  SelectingJob  from "@/components/Signup/Selectjob/selectingjob";
+import SelectingJob from "@/components/Selectjob/selectingjob";
 
-const SelectPage = ()=>{
-    return(
-        <SelectingJob/>
+const SelectPage = () => {
+    return (
+        <SelectingJob />
     )
 }
 export default SelectPage; 
