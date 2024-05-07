@@ -10,7 +10,7 @@ import hidePasswordimg from '@/assets/image//onbording/hide_fill.svg';
 import AppleLogo from '@/assets/image//onbording/Start/applelogo.svg';
 import GoogleLogo from '@/assets/image/onbording/Start/googlelogo.svg';
 import Cloud1 from '@/assets/image/onbording/Start/LoginCloud1.svg';
-import Cloud2 from '@/assets/image/onbording/Start/LoginCloud2.svg'
+import Cloud2 from '@/assets/image/onbording/Start/LoginCloud2.svg';
 import Sun from '@/assets/image/onbording/Start/LoginSun.svg';
 import Divider from '@/assets/image/onbording/Start/Divider.svg';
 
