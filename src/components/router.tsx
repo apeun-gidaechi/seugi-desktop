@@ -8,14 +8,14 @@ import Oauthsignup from '@/pages/AuthSignup/AuthSignupPage';
 import Emailsignup from '@/pages/EmailSignUp/EmailSignUpPage';
 import CreateSchool from '@/pages/CreateSchoolPage/CreateSchoolPage';
 import Authentication from '@/pages/EmailAuthentication/EmailAuthenticationPage';
-import WaitingAcceptance from './WaitingAcceptance/WaitingAcceptance';
+import WaitingAcceptance from '@/pages/WaitingAcceptance/WaitingAcceptancePage';
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                {/* <Route path="/" element={<Login/>}/> */}
+                <Route path="/" element={<Login/>}/>
                 <Route path="/login" element={<Login />} />
                 <Route path='/selectjob' element={<Selectingjob />} />
                 <Route path='/chat' element={<ChatMain />} />
