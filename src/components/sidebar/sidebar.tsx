@@ -49,8 +49,8 @@ const sidebar = () => {
         <MainRoomInfoManger/>
         {/* <MainRoomSearch/> */}
         <MainRoomMemberManger/>
-        {/* <CreateRoomPlus/>
-        <CreateRoomName/>
+        <CreateRoomPlus/>
+        {/*<CreateRoomName/>
         <ChatForm/> */}
         </S.ChatingPage>
       </>
