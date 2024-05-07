@@ -28,5 +28,5 @@ const SendMessage = () => {
     </S.SendMessageWrap>
   );
 }
-export default sendMessage 
+export default SendMessage 
 //
