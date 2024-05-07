@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components'; 
-
 
 export const SendMessageWrap = styled.div`
     height: 64px;
@@ -9,20 +7,15 @@ export const SendMessageWrap = styled.div`
     gap: 10px;
     justify-content: space-between;
     align-items: center;
-
-    
-
     border-radius: 12px;
     background: var(--Sub-White, #FFF);
-    /* ev1 */
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-
     width: 70vw;
     max-width: 1016px;
-
     margin-left: 12px;
     margin-top: 871px;
 `
+
 export const PlustFileButton = styled.button`
     border: none;
     background: none;
@@ -35,17 +28,14 @@ export const PlusMessageFile = styled.img`
     display: block;
 `
 
-export const SendMessage = styled.input`
+export const SendMessageInput = styled.input`
     flex: 1;
-
     font-family: 'Pretendard-Regular', sans-serif;
     color: var(--Gray-Gray500, #AAA);
-
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
     line-height: 130%; /* 26px */
-
     border: none;
     background: none;
     outline: none;
@@ -55,11 +45,12 @@ export const SendMessage = styled.input`
     }
 `
 
+export const SendArrowButton = styled.button`
+    border: none;
+    background: none;
+`
+
 export const SendArrow = styled.img`
     width: 25.75px;
     height: 25.75px;
-`
-
-export const SendArrowWrap = styled.div`
-
 `

@@ -1,24 +1,32 @@
+import React, { useState } from 'react';
 import * as S from "../sendMessage/sendMessage.style"; 
-import React from 'react' 
 
-import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg"
-import SendArrow from "@/assets/image/chat-components/SendArrow.svg"
+import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
+import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
+import SendArrowBlue from "@/assets/image/chat-components/SendArrowBlue.svg";
 
-const sendMessage = () => {
+const SendMessage = () => {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    setIsClicked(prevState => !prevState);
+  };
+
   return (
-    <>
-        <S.SendMessageWrap>
-            <S.PlustFileButton>
-                <S.PlusMessageFile src={PlusMessageFile}/>
-            </S.PlustFileButton>
-            <S.SendMessage type="text" placeholder="메세지 보내기"></S.SendMessage>
-            <S.SendArrowWrap>
-                <S.SendArrow src={SendArrow}/>
-            </S.SendArrowWrap>
-        </S.SendMessageWrap>
-    </>
-  )
+    <S.SendMessageWrap>
+        <S.PlustFileButton>
+            <S.PlusMessageFile src={PlusMessageFile}/>
+        </S.PlustFileButton>
+        <S.SendMessageInput type="text" placeholder="메세지 보내기"/>
+        <S.SendArrowButton onClick={handleClick}>
+          {isClicked ? (
+            <img src={SendArrowBlue} alt="error" /> 
+          ) : (
+            <img src={SendArrow} alt="error" /> 
+          )}
+        </S.SendArrowButton>
+    </S.SendMessageWrap>
+  );
 }
-
 export default sendMessage 
-//test
+//
