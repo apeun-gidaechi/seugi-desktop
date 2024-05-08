@@ -1,16 +1,12 @@
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components'; 
+import { createGlobalStyle } from 'styled-components';
 
 export const SelectMain = styled.div`
-    background: linear-gradient(#1C8DF4 0%, #21B6E5 58.35%);
-
     display: flex;
     width: 100vw;
     height: 100vh;
     justify-content: center;
     align-items: center;
-
-
 `
 
 export const SelectFirstWrap = styled.div`
@@ -24,7 +20,7 @@ export const SelectFirstWrap = styled.div`
     gap: 30px;
     border-radius: 36px;
     background: #FFF;
-    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
+    /* box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06); */
 `;
 
 export const OutButton = styled.div`
@@ -60,6 +56,7 @@ export const PickJob = styled.button`
     border-radius: 20px;
     color: var(--Primary900, #020202);
     cursor: pointer;
+    position: relative; 
 `;
 
 export const Stdimg = styled.img`
@@ -73,8 +70,10 @@ export const Txtstudent = styled.p`
     font-family: 'Pretendard-Regular', sans-serif;
     font-size: 16px;
     font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    font-weight: 600;
+    line-height: 130%; /* 20.8px */
+    position: relative; 
+    z-index: 1; 
 `;
 
 export const Teacherimg = styled.img`
@@ -83,13 +82,15 @@ export const Teacherimg = styled.img`
 `;
 
 export const TxtTeacher = styled.p`
-    color: var(--Gray500, #020202);
+    color: var(--Primary900, #020202);
 
     font-family: 'Pretendard-Regular', sans-serif;
     font-size: 16px;
     font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    font-weight: 600;
+    line-height: 130%; /* 20.8px */
+    position: relative; 
+    z-index: 1; 
 `;
 
 export const ButtonContainer = styled.div`
@@ -100,8 +101,6 @@ export const ButtonContainer = styled.div`
     align-items: flex-start;
     gap: 8px;
 `;
-
-
 
 export const Haveemail = styled.a`
     margin-left:4px;
@@ -180,4 +179,31 @@ export const Sun = styled.img`
     left: 58%;
     border-radius: 342px;
     background: linear-gradient( rgba(255, 255, 255, 0.50) 0%, rgba(255, 199, 0, 0.50) 100%), #FFC700;
+`
+
+export const StdCheckLine = styled.img`
+    width: 24px;
+    height: 24px;
+    display:flex;
+    position: absolute; 
+    top: 45%; 
+    right: -12px; 
+    transform: translateY(-50%); 
+    margin-left:4px;
+`
+
+export const TchCheckLine = styled.img`
+    width: 24px;
+    height: 24px;
+    display:flex;
+    position: absolute; 
+    top: 45%; 
+    right: -18px; 
+    transform: translateY(-50%); 
+    margin-left:4px;
+`
+
+export const SubtitleContainer = styled.div`
+    width: 56px;
+    height: 24px;
 `

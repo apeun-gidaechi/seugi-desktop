@@ -1,9 +1,9 @@
 import React from 'react'
-import EmailAuthentication from '@/components/EmailAuthentication/EmailAuthentication';
+import EmailAuthentication from '@/components/Signup/EmailAuthentication/EmailAuthentication';
 
 const EmailAuthenticationPage = () => {
   return (
-    <EmailAuthentication/>
+    <EmailAuthentication />
   )
 }
 
