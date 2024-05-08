@@ -15,7 +15,9 @@ const SendMessage: React.FC = () => {
 
   const handleClick = () => {
     console.log(message); 
+
     setIsClicked(prevState => !prevState);
+
   };
 
   return (
@@ -27,13 +29,17 @@ const SendMessage: React.FC = () => {
           type="text" 
           placeholder="메세지 보내기"
           value={message}
+
           onChange={handleChange} 
+
         />
         <S.SendArrowButton onClick={handleClick}>
           {isClicked ? (
             <img src={SendArrowBlue} alt="Send Message" /> 
           ) : (
+
             <img src={SendArrow} alt="Send Message" />
+
           )}
         </S.SendArrowButton>
     </S.SendMessageWrap>
