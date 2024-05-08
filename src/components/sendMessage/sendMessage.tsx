@@ -16,7 +16,7 @@ const SendMessage = () => {
     <S.SendMessageWrap>
         <S.PlustFileButton>
             <S.PlusMessageFile src={PlusMessageFile}/>
-        </S.PlustFileButton>
+        </S.PlustFileButton> 
         <S.SendMessageInput type="text" placeholder="메세지 보내기"/>
         <S.SendArrowButton onClick={handleClick}>
           {isClicked ? (

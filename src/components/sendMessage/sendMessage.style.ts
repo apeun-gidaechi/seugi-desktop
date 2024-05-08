@@ -26,7 +26,7 @@ export const PlusMessageFile = styled.img`
     height: 27px;
     padding: 0;
     display: block;
-`
+` 
 
 export const SendMessageInput = styled.input`
     flex: 1;
