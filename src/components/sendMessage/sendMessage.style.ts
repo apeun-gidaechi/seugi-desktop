@@ -54,5 +54,5 @@ export const SendArrowButton = styled.button`
 export const SendArrow = styled.img`
     width: 32px;
     height: 32px;
-`
+` 
 
