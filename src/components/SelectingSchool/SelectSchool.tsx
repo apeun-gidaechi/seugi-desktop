@@ -19,7 +19,7 @@ const SelectSchool = () => {
                     </S.ButtonContainer>
                     <S.ButtonContainer>
                         <S.Button><S.ButtonImg src={CreateSchoolimg}></S.ButtonImg></S.Button>
-                        <S.Subtitle> 새 학교 생성 </S.Subtitle>
+                        <S.Subtitle> 새 학교 등록 </S.Subtitle>
                     </S.ButtonContainer>
                 </S.ButtonContainer1>
             </S.ContainerBox>
