@@ -20,7 +20,14 @@ const SendMessage: React.FC = () => {
 
     setTimeout(() => {
       setIsClicked(false);
-    }, 1000); 
+      setMessage(""); 
+    }, 1000);
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleClick(); // Enter 키를 눌렀을 때 handleClick 함수 호출
+    }
   };
 
   return (
@@ -32,7 +39,8 @@ const SendMessage: React.FC = () => {
           type="text" 
           placeholder="메세지 보내기"
           value={message}
-          onChange={handleChange} 
+          onChange={handleChange}
+          onKeyPress={handleKeyPress} 
         />
         <S.SendArrowButton onClick={handleClick}>
           {isClicked ? (
