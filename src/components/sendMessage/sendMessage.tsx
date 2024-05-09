@@ -5,15 +5,20 @@ import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
 import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
 import SendArrowBlue from "@/assets/image/chat-components/SendBlueArrow.svg";
 
-const SendMessage = () => {
+const SendMessage: React.FC = () => {
+  const [message, setMessage] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(event.target.value);
+  };
 
   const handleClick = () => {
     console.log(message); 
 
     setIsClicked(prevState => !prevState);
 
-    setTimeout(() => {
+    setTimeout(() => { 
       setIsClicked(false);
       setMessage(""); 
     }, 1000);
@@ -42,11 +47,9 @@ const SendMessage = () => {
             <S.SendArrow src={SendArrowBlue} alt="Send Message"/> 
           ) : (
             <S.SendArrow src={SendArrow} alt="Send Message" />
-
           )}
         </S.SendArrowButton>
     </S.SendMessageWrap>
   );
 }
-export default SendMessage 
-//
+export default SendMessage;
