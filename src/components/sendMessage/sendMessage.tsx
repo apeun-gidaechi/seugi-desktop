@@ -13,7 +13,7 @@ const SendMessage = () => {
 
     setIsClicked(prevState => !prevState);
 
-    setTimeout(() => {
+    setTimeout(() => { 
       setIsClicked(false);
       setMessage(""); 
     }, 1000);
