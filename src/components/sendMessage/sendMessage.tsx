@@ -35,10 +35,10 @@ const SendMessage: React.FC = () => {
         />
         <S.SendArrowButton onClick={handleClick}>
           {isClicked ? (
-            <img src={SendArrowBlue} alt="Send Message" /> 
+            <img src={SendArrowBlue} alt="Send Message" style={{width: '22.89px', height: "22.89px"}}/> 
           ) : (
 
-            <img src={SendArrow} alt="Send Message" />
+            <S.SendArrow src={SendArrow} alt="Send Message" />
 
           )}
         </S.SendArrowButton>
@@ -46,3 +46,5 @@ const SendMessage: React.FC = () => {
   );
 }
 export default SendMessage;
+
+
