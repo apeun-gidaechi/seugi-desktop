@@ -48,9 +48,12 @@ export const SendMessageInput = styled.input`
 export const SendArrowButton = styled.button`
     border: none;
     background: none;
+    position: relative; 
 `
 
 export const SendArrow = styled.img`
-    width: 25.75px;
-    height: 25.75px;
+    width: 32px;
+    height: 32px;
 `
+
+

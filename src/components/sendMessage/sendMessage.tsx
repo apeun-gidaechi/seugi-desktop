@@ -9,7 +9,20 @@ const SendMessage = () => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
+    console.log(message); 
+
     setIsClicked(prevState => !prevState);
+
+    setTimeout(() => {
+      setIsClicked(false);
+      setMessage(""); 
+    }, 1000);
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleClick(); // Enter 키를 눌렀을 때 handleClick 함수 호출
+    }
   };
 
   return (
@@ -17,12 +30,19 @@ const SendMessage = () => {
         <S.PlustFileButton>
             <S.PlusMessageFile src={PlusMessageFile}/>
         </S.PlustFileButton> 
-        <S.SendMessageInput type="text" placeholder="메세지 보내기"/>
+        <S.SendMessageInput 
+          type="text" 
+          placeholder="메세지 보내기"
+          value={message}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress} 
+        />
         <S.SendArrowButton onClick={handleClick}>
           {isClicked ? (
-            <img src={SendArrowBlue} alt="error" /> 
+            <S.SendArrow src={SendArrowBlue} alt="Send Message" style={{width: '22.89px', height: "22.89px"}}/> 
           ) : (
-            <img src={SendArrow} alt="error" /> 
+            <S.SendArrow src={SendArrow} alt="Send Message" />
+
           )}
         </S.SendArrowButton>
     </S.SendMessageWrap>
