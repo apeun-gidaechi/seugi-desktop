@@ -56,4 +56,3 @@ export const SendArrow = styled.img`
     height: 32px;
 `
 
-

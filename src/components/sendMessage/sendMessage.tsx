@@ -3,7 +3,7 @@ import * as S from "../sendMessage/sendMessage.style";
 
 import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
 import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
-import SendArrowBlue from "@/assets/image/chat-components/SendArrowBlue.svg";
+import SendArrowBlue from "@/assets/image/chat-components/SendBlueArrow.svg";
 
 const SendMessage = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -21,7 +21,7 @@ const SendMessage = () => {
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      handleClick(); // Enter 키를 눌렀을 때 handleClick 함수 호출
+      handleClick(); 
     }
   };
 
@@ -39,7 +39,7 @@ const SendMessage = () => {
         />
         <S.SendArrowButton onClick={handleClick}>
           {isClicked ? (
-            <S.SendArrow src={SendArrowBlue} alt="Send Message" style={{width: '22.89px', height: "22.89px"}}/> 
+            <S.SendArrow src={SendArrowBlue} alt="Send Message"/> 
           ) : (
             <S.SendArrow src={SendArrow} alt="Send Message" />
 
