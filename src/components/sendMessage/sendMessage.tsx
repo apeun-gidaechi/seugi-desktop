@@ -18,7 +18,7 @@ const SendMessage: React.FC = () => {
 
     setIsClicked(prevState => !prevState);
 
-    setTimeout(() => {
+    setTimeout(() => { 
       setIsClicked(false);
       setMessage(""); 
     }, 1000);
