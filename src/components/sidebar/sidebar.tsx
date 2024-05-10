@@ -41,8 +41,8 @@ const sidebar = () => {
                 <S.PlusButton>
                     <S.PlusButtonImg src={PlusButton}/>
                 </S.PlusButton>
-                <SendMessage/>
             </S.SideBarChat>
+            <SendMessage/>
         </S.ChatingPage>
       </>
   )

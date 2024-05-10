@@ -8,21 +8,26 @@ import SendArrowBlue from "@/assets/image/chat-components/SendBlueArrow.svg";
 const SendMessage: React.FC = () => {
   const [message, setMessage] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+  const [hasText, setHasText] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setMessage(event.target.value);
+    const text = event.target.value;
+    setMessage(text);
+    setHasText(!!text);
   };
 
   const handleClick = () => {
-    console.log(message); 
-
-    setIsClicked(prevState => !prevState);
-
-    setTimeout(() => { 
+    console.log(message);
+  
+    setIsClicked((prevState) => !prevState);
+  
+    setTimeout(() => {
       setIsClicked(false);
-      setMessage(""); 
+      setMessage("");
+      setHasText(false);
     }, 1000);
   };
+  
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
@@ -43,7 +48,7 @@ const SendMessage: React.FC = () => {
           onKeyPress={handleKeyPress} 
         />
         <S.SendArrowButton onClick={handleClick}>
-          {isClicked ? (
+          {hasText ? (
             <S.SendArrow src={SendArrowBlue} alt="Send Message"/> 
           ) : (
             <S.SendArrow src={SendArrow} alt="Send Message" />
