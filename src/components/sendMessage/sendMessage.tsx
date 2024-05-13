@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import * as S from "../sendMessage/sendMessage.style"; 
+import * as S from "../sendMessage/sendMessage.style";
+import { socketService } from '../sendMessage/socketService'; 
 
 import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
 import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
@@ -7,7 +8,6 @@ import SendArrowBlue from "@/assets/image/chat-components/SendBlueArrow.svg";
 
 const SendMessage: React.FC = () => {
   const [message, setMessage] = useState("");
-  const [isClicked, setIsClicked] = useState(false);
   const [hasText, setHasText] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,21 +17,16 @@ const SendMessage: React.FC = () => {
   };
 
   const handleClick = () => {
-    console.log(message);
-  
-    setIsClicked((prevState) => !prevState);
-  
-    setTimeout(() => {
-      setIsClicked(false);
-      setMessage("");
+    if (message.trim() !== '') {
+      socketService.sendMessage(message);
+      setMessage('');
       setHasText(false);
-    }, 1000);
+    }
   };
-  
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      handleClick(); 
+      handleClick();
     }
   };
 
