@@ -26,7 +26,8 @@ const SendMessage: React.FC = () => {
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      handleClick();
+      socketService.connect("eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE1Njg0OTI1LCJleHAiOjE3MTU2OTA5MjV9.N918hrR8Q9sc39QNVX2A-CfeIpG2GolpHQ32dASTpkA")
+      // handleClick();
     }
   };
 
@@ -52,4 +53,5 @@ const SendMessage: React.FC = () => {
     </S.SendMessageWrap>
   );
 }
-export default SendMessage;
+
+export default SendMessage; 
