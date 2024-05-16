@@ -24,35 +24,37 @@ const Login = () => {
   const handleLogin = async () => {
     // TODO MAKE A CUSTOM AXIOS 
     try {
-      await axios.post(`${config.severurl}/member/login`, {
+      const res = await axios.post(`${config.severurl}/member/login`, {
         email: email,
         password: password,
       }, {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then((res) => { 
-        console.log(res);
-        if (res.status !== 200) {
-          return;
-        }
-        console.log(res.data.data.accessToken);
-        try {
-          window.localStorage.setItem('accessToken', res.data.data.accessToken);
-          window.localStorage.setItem('refreshToken', res.data.data.refreshToken);
-        } catch (err) {
-          console.error(err);
-        }
-        // 만약 학교 가입이 되어있다면 chat으로 아니라면 join school 로 보내야 할듯
-        navigate("/chat")
-      })
+      });
 
-      // 로그아웃할 때
-      // window.localStorage.removeItem('accessToken');
-      // window.localStorage.removeItem('refreshToken');
-      
+      if (res.status !== 200) {
+        return;
+      }
+
+      const accessToken = res.data.data.accessToken;
+      const refreshToken = res.data.data.refreshToken;
+
+      const isRegisteredToSchool = res.data.data.isRegisteredToSchool; // ???
+
+      //localStorage에 토큰 저장
+      window.localStorage.setItem('accessToken', accessToken);
+      window.localStorage.setItem('refreshToken', refreshToken);
+
+      // 학교 등록에 따른 리디렉션 ????
+      if (isRegisteredToSchool) {
+        navigate("/chat");
+      } else {
+        navigate("/selectschool");
+      }
+
     } catch (error) {
-      // alert("아이디 혹은 비밀번호를 다시한번 확인해주세요!");
+      alert("등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다"); // 일단 alert 사용 -> 도담도담처럼..?
       console.log(error);
     }
   }
