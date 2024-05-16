@@ -40,18 +40,20 @@ const Login = () => {
       const accessToken = res.data.data.accessToken;
       const refreshToken = res.data.data.refreshToken;
 
-      const isRegisteredToSchool = res.data.data.isRegisteredToSchool; // ???
+      // const isRegisteredToSchool = res.data.data.isRegisteredToSchool;
 
       //localStorage에 토큰 저장
       window.localStorage.setItem('accessToken', accessToken);
       window.localStorage.setItem('refreshToken', refreshToken);
 
-      // 학교 등록에 따른 리디렉션 ????
-      if (isRegisteredToSchool) {
-        navigate("/chat");
-      } else {
-        navigate("/selectschool");
-      }
+      // 만약 학교 가입이 되어있다면 chat으로 아니라면 join school 로 보내야 할듯 
+      // 일단 chat으로 보내기
+      // 학교 등록에 따른 리디렉션
+      // if (isRegisteredToSchool) {
+      navigate("/chat");
+      // } else {
+      //   navigate("/selectschool");
+      // }
 
     } catch (error) {
       alert("등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다"); // 일단 alert 사용 -> 도담도담처럼..?
