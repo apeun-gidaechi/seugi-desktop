@@ -4,7 +4,7 @@ import { socketService } from '../sendMessage/socketService';
 
 import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
 import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
-import SendArrowBlue from "@/assets/image/chat-components/SendBlueArrow.svg";
+import SendArrowBlue from "@/assets/image/chat-components/sendBlueArrow.svg";
 
 const SendMessage: React.FC = () => {
   const [message, setMessage] = useState("");
