@@ -23,13 +23,29 @@ const SendMessage: React.FC = () => {
       setHasText(false);
     }
   };
-
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      socketService.connect("eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE1Njg0OTI1LCJleHAiOjE3MTU2OTA5MjV9.N918hrR8Q9sc39QNVX2A-CfeIpG2GolpHQ32dASTpkA")
-      // handleClick();
+      if (message.trim() !== '') {
+        socketService.sendMessage(message);
+        
+        sendToken();
+        
+        setMessage('');
+        setHasText(false);
+      }
     }
   };
+  
+  const sendToken = () => {
+    socketService.connect("eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE1ODQ1NzMyLCJleHAiOjE3MTU4NTE3MzJ9.OWWaLnqq8P-t5wOUv3rgWP60fbPZvhmjCSKWXc8XUlI");
+  };
+
+  // const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (event.key === "Enter") {
+  //     socketService.connect("eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE1ODQ1NzMyLCJleHAiOjE3MTU4NTE3MzJ9.OWWaLnqq8P-t5wOUv3rgWP60fbPZvhmjCSKWXc8XUlI")
+  //     // handleClick();
+  //   }
+  // };
 
   return (
     <S.SendMessageWrap>
