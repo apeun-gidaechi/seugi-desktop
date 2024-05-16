@@ -1,4 +1,4 @@
-FROM node:latest as builder
+FROM arm64v8/node:latest as builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
