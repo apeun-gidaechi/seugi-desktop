@@ -8,7 +8,7 @@ import Oauthsignup from '@/pages/AuthSignup/AuthSignupPage';
 import Emailsignup from '@/pages/EmailSignUp/EmailSignUpPage';
 import CreateSchool from '@/pages/CreateSchoolPage/CreateSchoolPage';
 import Authentication from '@/pages/EmailAuthentication/EmailAuthenticationPage';
-import WaitingAcceptance from '@/pages/WaitingAcceptance/WaitingAcceptancePage';
+import WaitingAcceptance from '@/pages/WaitingJoin/WaitingJoinPage';
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 const Router = () => {
