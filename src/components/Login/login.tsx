@@ -1,8 +1,8 @@
 import * as S from '@/components/Login/login.style';
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import config from "@/config/config.json"
 
 import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
@@ -22,17 +22,45 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleLogin = async () => {
+    // TODO MAKE A CUSTOM AXIOS 
     try {
-      const response = await axios.post("/login", {
+      await axios.post(`${config.severurl}/member/login`, {
         email: email,
         password: password,
-      });
-      console.log(response);
-      if (response.status === 200) {
-        navigate("/")
-      }
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          // 저장할 때
+          window.localStorage.setItem('accessToken', res.data.accessToken);
+          window.localStorage.setItem('refreshToken', res.data.refreshToken);
+          // 만약 학교 가입이 되어있다면 chat으로 아니라면 join school 로 보내야 할듯
+          navigate("/chat")
+        }
+      })
+      // 불러올 때 (나중에 요청할 때)
+      const accessToken = window.localStorage.getItem('accessToken');
+      axios.post('/', {}, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      })
+
+      // 로그아웃할 때
+      window.localStorage.removeItem('accessToken');
+      window.localStorage.removeItem('refreshToken');
+
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleLogin();
     }
   }
 
@@ -40,7 +68,7 @@ const Login = () => {
     <S.LoginMain>
       <S.Cloud1 src={Cloud1} />
       <S.Cloud2 src={Cloud2} />
-      <S.Sun src={Sun}/>
+      <S.Sun src={Sun} />
       <S.LoginFirstWrap>
         <S.Fheader>
           <S.Header>
@@ -56,10 +84,11 @@ const Login = () => {
               <S.Subtitle2>이메일 <S.Redstar>*</S.Redstar></S.Subtitle2>
               <S.InputContainer>
                 <S.TxtField
+                  type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   className="txtField"
                   placeholder="이메일을 입력해주세요"
-                  type="email"
+                  onKeyDown={handleKeyDown}
                 />
               </S.InputContainer>
             </S.Enterinfo>
@@ -71,6 +100,7 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   className="txtField"
                   placeholder="비밀번호를 입력해주세요"
+                  onKeyDown={handleKeyDown}
                 />
                 <S.Btnview onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />}
@@ -79,25 +109,25 @@ const Login = () => {
             </S.Enterinfo>
           </S.Inputpart>
           <S.Buttonpart>
-            <S.Loginbtn className="loginbtn" onClick={handleLogin}>로그인</S.Loginbtn>
+            <S.Loginbtn className="loginbtn" onClick={handleLogin} >로그인</S.Loginbtn>
             <S.Body1>계정이 없으시다면? <S.Gosignup href="http://localhost:5173/emailsignup">가입하기</S.Gosignup> </S.Body1>
           </S.Buttonpart>
           <S.Orpart>
-            <S.Dividerimg src={Divider}/>
-              <S.Caption1>또는</S.Caption1>
-            <S.Dividerimg src={Divider}/>
+            <S.Dividerimg src={Divider} />
+            <S.Caption1>또는</S.Caption1>
+            <S.Dividerimg src={Divider} />
           </S.Orpart>
           <S.Oauthpart>
             <S.Authlogin>
-              <S.LogoImg src={AppleLogo}/>
+              <S.LogoImg src={AppleLogo} />
             </S.Authlogin>
             <S.Authlogin>
-              <S.LogoImg src={GoogleLogo}/>
+              <S.LogoImg src={GoogleLogo} />
             </S.Authlogin>
           </S.Oauthpart>
         </S.Inputarea>
       </S.LoginFirstWrap>
-     </S.LoginMain>
+    </S.LoginMain>
   );
 };
 
