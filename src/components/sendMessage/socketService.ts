@@ -5,11 +5,11 @@ let socket: Stomp.Client | undefined;
 export const socketService = {
     connect: (token: string) => { 
         socket = Stomp.client('wss://hoolc.me/stomp/chat'); 
-        
+
         const headers = {
             'Authorization': `Bearer ${token}`
         };
-        
+
         socket.connect(headers, function (frame) {
             console.log('소켓 연결됨');
             socket?.subscribe("/exchange/chat.exchange/room.2", (message: Stomp.Message) => {
@@ -20,7 +20,7 @@ export const socketService = {
     },
     disconnect: () => {
         if (!socket) return;
-        
+
         socket.disconnect(() => {
             console.log('소켓 연결 해제됨');
         });
@@ -43,5 +43,5 @@ export const socketService = {
             callback(message.body);
         });
     },
-    
+
 };
