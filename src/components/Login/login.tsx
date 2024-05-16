@@ -31,29 +31,28 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then((res) => {
+      }).then((res) => { 
         console.log(res);
-        if (res.status === 200) {
-          // 저장할 때
-          window.localStorage.setItem('accessToken', res.data.accessToken);
-          window.localStorage.setItem('refreshToken', res.data.refreshToken);
-          // 만약 학교 가입이 되어있다면 chat으로 아니라면 join school 로 보내야 할듯
-          navigate("/chat")
+        if (res.status !== 200) {
+          return;
         }
-      })
-      // 불러올 때 (나중에 요청할 때)
-      const accessToken = window.localStorage.getItem('accessToken');
-      axios.post('/', {}, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
+        console.log(res.data.data.accessToken);
+        try {
+          window.localStorage.setItem('accessToken', res.data.data.accessToken);
+          window.localStorage.setItem('refreshToken', res.data.data.refreshToken);
+        } catch (err) {
+          console.error(err);
         }
+        // 만약 학교 가입이 되어있다면 chat으로 아니라면 join school 로 보내야 할듯
+        navigate("/chat")
       })
 
       // 로그아웃할 때
-      window.localStorage.removeItem('accessToken');
-      window.localStorage.removeItem('refreshToken');
-
+      // window.localStorage.removeItem('accessToken');
+      // window.localStorage.removeItem('refreshToken');
+      
     } catch (error) {
+      // alert("아이디 혹은 비밀번호를 다시한번 확인해주세요!");
       console.log(error);
     }
   }
