@@ -8,5 +8,5 @@ const badgeNumber = () => {
     </S.RedNumDot>
   ) 
 }
-
+   
 export default badgeNumber
