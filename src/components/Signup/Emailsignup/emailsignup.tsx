@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import * as S from '@/components/Signup/Emailsignup/emailsignup.style';
 import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg';
@@ -8,7 +8,7 @@ import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
 import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
 
-import Button from '@/components/button/continuebutton';
+import Button from '@/components/button/Button';
 import { useNavigate } from 'react-router';
 
 const emailsignup = () => {
@@ -37,7 +37,7 @@ const emailsignup = () => {
         setShowConfirmPassword(!showConfirmPassword);
     };
 
-     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
     };
 
@@ -76,7 +76,7 @@ const emailsignup = () => {
     };
 
 
-    
+
     return (
         <S.EmailMain>
             <S.Cloud1 src={Cloud1} />
@@ -93,10 +93,10 @@ const emailsignup = () => {
                             <S.Body1> 이름 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
                         <S.InputContainer>
-                            <S.Txtfield 
-                            value={name}
-                            placeholder='이름을 입력해주세요'
-                            onChange={handleNameChange}/>
+                            <S.Txtfield
+                                value={name}
+                                placeholder='이름을 입력해주세요'
+                                onChange={handleNameChange} />
                         </S.InputContainer>
                     </S.EneterInfo>
                     <S.EneterInfo>
@@ -104,10 +104,10 @@ const emailsignup = () => {
                             <S.Body1> 이메일 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
                         <S.InputContainer>
-                            <S.Txtfield 
-                            value={email}
-                            placeholder='이메일을 입력해주세요'
-                            onChange={handleEmailChange}/>
+                            <S.Txtfield
+                                value={email}
+                                placeholder='이메일을 입력해주세요'
+                                onChange={handleEmailChange} />
                         </S.InputContainer>
                     </S.EneterInfo>
                     <S.EneterInfo>
@@ -115,14 +115,14 @@ const emailsignup = () => {
                             <S.Body1> 비밀번호 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
                         <S.InputContainer>
-                            <S.Txtfield 
-                            type={showPassword ? 'text' : 'password'}
-                            placeholder='비밀번호를 입력해주세요'
-                            value={password}
-                            onChange={handlePasswordChange}
-                            /> 
+                            <S.Txtfield
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder='비밀번호를 입력해주세요'
+                                value={password}
+                                onChange={handlePasswordChange}
+                            />
                             <S.Btnview onClick={togglePasswordVisibility}>
-                                {showPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />} 
+                                {showPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />}
                             </S.Btnview>
                         </S.InputContainer>
                     </S.EneterInfo>
@@ -131,14 +131,14 @@ const emailsignup = () => {
                             <S.Body1> 비밀번호 확인 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
                         <S.InputContainer>
-                            <S.Txtfield 
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            placeholder='비밀번호를 다시 입력해주세요'
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
+                            <S.Txtfield
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                placeholder='비밀번호를 다시 입력해주세요'
+                                value={confirmPassword}
+                                onChange={handleConfirmPasswordChange}
                             />
                             <S.Btnview onClick={toggleConfirmPasswordVisibility}>
-                                {showConfirmPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />} 
+                                {showConfirmPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />}
                             </S.Btnview>
                         </S.InputContainer>
                         {passwordError && <S.ErrorText>{passwordError}</S.ErrorText>}

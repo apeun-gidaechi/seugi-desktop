@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from "@/config/config.json"
-
+import LoginButton from "@/components/button/Button";
 import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
 import hidePasswordimg from '@/assets/image//onbording/hide_fill.svg';
@@ -48,7 +48,6 @@ const Login = () => {
 
       // 만약 학교 가입이 되어있다면 chat으로 아니라면 join school 로 보내야 할듯 
       // 일단 chat으로 보내기
-      // 학교 등록에 따른 리디렉션
       // if (isRegisteredToSchool) {
       navigate("/chat");
       // } else {
@@ -112,7 +111,8 @@ const Login = () => {
             </S.Enterinfo>
           </S.Inputpart>
           <S.Buttonpart>
-            <S.Loginbtn className="loginbtn" onClick={handleLogin} >로그인</S.Loginbtn>
+            <LoginButton text='이메일로 계속하기'/>
+            {/* <S.Loginbtn className="loginbtn" onClick={handleLogin} >로그인</S.Loginbtn> */}
             <S.Body1>계정이 없으시다면? <S.Gosignup href="http://localhost:5173/emailsignup">가입하기</S.Gosignup> </S.Body1>
           </S.Buttonpart>
           <S.Orpart>
