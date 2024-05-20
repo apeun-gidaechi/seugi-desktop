@@ -8,7 +8,7 @@ import Oauthsignup from '@/pages/AuthSignup/AuthSignupPage';
 import Emailsignup from '@/pages/EmailSignUp/EmailSignUpPage';
 import CreateSchool from '@/pages/CreateSchoolPage/CreateSchoolPage';
 import Authentication from '@/pages/EmailAuthentication/EmailAuthenticationPage';
-import WaitingAcceptance from '@/pages/WaitingAcceptance/WaitingAcceptancePage';
+import WaitingJoin from '@/pages/WaitingJoin/WaitingJoinPage';
 import ComponentsStoryBook from '@/pages/Storybook'
 
 
@@ -28,7 +28,7 @@ const Router = () => {
                 <Route path='/joinsuccess' element={<JoinSuccess />} />
                 <Route path='/createschool' element={<CreateSchool />} />
                 <Route path='/emailauthentication' element={<Authentication />} />
-                <Route path='/waitingacceptance' element={<WaitingAcceptance/>}/>
+                <Route path='/waitingacceptance' element={<WaitingJoin/>}/>
                 <Route path='/storybook' element={<ComponentsStoryBook/>}/>
             </Routes>
         </BrowserRouter>
