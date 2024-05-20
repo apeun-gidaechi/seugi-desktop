@@ -4,8 +4,8 @@ import CreateRoomName from "@/components/CreateRoomName/createRoomName"
 import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus"
 import MainRoomMemberManger from "@/components/mainRoomMemberManger/mainRoomMemberManger"
 import MainRoomSearch from "@/components/MainRoomSearch/mainRoomSearch"
+// import MemberManagement from "@/components/MemberManagement/memberManagement"
 import MainRoomInfo from "@/components/MainRoomInfo/MainRoomInfo";
-import MainRoomInfoManger from "@/components/MainRoomInfoManager/mainRoomInfomanager"
 import BadgeNormal from "@/components/BadgeNormal/badgenormal";
 import BadgeNumber from "@/components/BadgeNumber/badgeNumber";
 
@@ -15,7 +15,7 @@ const Storybook = () => {
         <MainRoomInfo/>
         <BadgeNormal/>
         <BadgeNumber/>
-        <MainRoomInfoManger/>
+        {/* <MemberManagement/> */}
         <MainRoomSearch/>
         <MainRoomMemberManger/>
         <CreateRoomPlus/>

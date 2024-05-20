@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as S from "../MemberManagement/memberManagement";
+import * as S from "./memberManagement";
 
 const MemberManagement = () => {
     const [isPressed1, setIsPressed1] = useState(false);
