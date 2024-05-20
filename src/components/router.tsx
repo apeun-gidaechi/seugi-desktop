@@ -8,7 +8,9 @@ import Oauthsignup from '@/pages/AuthSignup/AuthSignupPage';
 import Emailsignup from '@/pages/EmailSignUp/EmailSignUpPage';
 import CreateSchool from '@/pages/CreateSchoolPage/CreateSchoolPage';
 import Authentication from '@/pages/EmailAuthentication/EmailAuthenticationPage';
-import WaitingAcceptance from '@/pages/WaitingJoin/WaitingJoinPage';
+import WaitingAcceptance from '@/pages/WaitingAcceptance/WaitingAcceptancePage';
+import ComponentsStoryBook from '@/pages/Storybook'
+
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 const Router = () => {
@@ -27,6 +29,7 @@ const Router = () => {
                 <Route path='/createschool' element={<CreateSchool />} />
                 <Route path='/emailauthentication' element={<Authentication />} />
                 <Route path='/waitingacceptance' element={<WaitingAcceptance/>}/>
+                <Route path='/storybook' element={<ComponentsStoryBook/>}/>
             </Routes>
         </BrowserRouter>
     )

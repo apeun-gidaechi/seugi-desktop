@@ -41,17 +41,8 @@ const sidebar = () => {
                 <S.PlusButton>
                     <S.PlusButtonImg src={PlusButton}/>
                 </S.PlusButton>
-                <SendMessage/>
             </S.SideBarChat>
-        <MainRoomInfo/>
-        <BadgeNormal/>
-        <BadgeNumber/>
-        <MainRoomInfoManger/>
-        {/* <MainRoomSearch/> */}
-        <MainRoomMemberManger/>
-        <CreateRoomPlus/>
-        {/*<CreateRoomName/>
-        <ChatForm/> */}
+            <SendMessage/>
         </S.ChatingPage>
       </>
   )
