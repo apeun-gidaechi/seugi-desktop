@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components'; 
+import { createGlobalStyle } from 'styled-components';
 
 export const LoginMain = styled.div`
     background: linear-gradient( #1C8DF4 0%, #21B6E5 58.35%);
@@ -133,7 +133,7 @@ export const TxtField = styled.input`
     font-style: normal;
     font-weight: 500;
     &:focus {
-        outline: none; 
+        outline: none;
     }
 
     box-sizing: border-box;

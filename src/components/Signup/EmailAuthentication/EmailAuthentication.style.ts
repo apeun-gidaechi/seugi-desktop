@@ -8,7 +8,7 @@ export const AuthenticationMain = styled.div`
     height: 100vh;
     justify-content: center;
     align-items: center;
-`;
+`
 
 export const AuthenticationContainer = styled.div`
     display: flex;
@@ -29,6 +29,7 @@ export const AuthenticationContainer = styled.div`
     border-radius: 36px;
     z-index:10;
 `
+
 export const TitleContainer = styled.div`
     display: flex;
     flex-direction: column;
