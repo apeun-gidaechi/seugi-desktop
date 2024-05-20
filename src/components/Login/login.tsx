@@ -24,7 +24,7 @@ const Login = () => {
   const handleLogin = async () => {
     // TODO MAKE A CUSTOM AXIOS 
     try {
-      const res = await axios.post(`${config.severurl}/member/login`, {
+      const res = await axios.post(`${config.serverurl}/member/login`, {
         email: email,
         password: password,
       }, {
