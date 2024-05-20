@@ -11,6 +11,7 @@ import Authentication from '@/pages/EmailAuthentication/EmailAuthenticationPage'
 import WaitingAcceptance from '@/pages/WaitingAcceptance/WaitingAcceptancePage';
 import ComponentsStoryBook from '@/pages/Storybook'
 
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 const Router = () => {
     return (

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components'; 
+import { createGlobalStyle } from 'styled-components';
 
 export const SuccessMain = styled.div`
     display: flex;
