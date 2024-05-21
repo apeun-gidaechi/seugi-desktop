@@ -3,6 +3,9 @@ import Button from '@/components/button/Button';
 import * as S from '@/components/JoinSuccess/JoinSuccess.style';
 
 const JoinSuccess = () => {
+  const handleJoinSuccess = () => {
+    
+  }
   return (
     <S.SuccessMain>
       <S.Container>
@@ -12,7 +15,7 @@ const JoinSuccess = () => {
           <S.SchoolInfo>학생 213명 선생님 32명</S.SchoolInfo>
         </S.SchoolInfoContainer>
         <S.ButtonContainer>
-          <Button />
+          <Button onClick={handleJoinSuccess}/>
         </S.ButtonContainer>
       </S.Container>
     </S.SuccessMain>

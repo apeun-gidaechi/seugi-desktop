@@ -54,31 +54,6 @@ export const InputContainer = styled.div`
     align-self: stretch;
 `;
 
-export const TextField = styled.input`
-    &::placeholder{
-        color: var(--Gray-Gray500, #AAA);
-
-        font-family: 'Pretendard-Regular', sans-serif;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 130%; /* 20.8px */
-    }
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
-    display: flex;
-    height: 52px;
-    padding: 15px 245px 16px 16px;
-    align-items: center;
-    align-self: stretch;
-
-    border-radius: var(--Large, 12px);
-    border: 1px solid var(--Gray-Gray300, #E6E6E6);
-    background: var(--Sub-White, #FFF);
-`;
 
 export const InputBox = styled.div`
     display: flex;
