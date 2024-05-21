@@ -18,7 +18,9 @@ export const TxtField = styled.input`
     font-family: 'Pretendard-Regular', sans-serif;
     font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
+    line-height: 130%; /*  20.8px */
+
     &:focus {
         outline: none;
     }
@@ -30,5 +32,5 @@ export const TxtField = styled.input`
 
     background: #FFFFFF;
     border-radius: 12px;
-    
+
 `;
