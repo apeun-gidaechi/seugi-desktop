@@ -110,8 +110,7 @@ const Login = () => {
             </S.Enterinfo>
           </S.Inputpart>
           <S.Buttonpart>
-            <LoginButton text='이메일로 계속하기' onClick={handleLogin}/>
-            {/* <S.Loginbtn className="loginbtn" onClick={handleLogin} >로그인</S.Loginbtn> */}
+            <LoginButton text='로그인' onClick={handleLogin}/>
             <S.Body1>계정이 없으시다면? <S.Gosignup href="http://localhost:5173/emailsignup">가입하기</S.Gosignup> </S.Body1>
           </S.Buttonpart>
           <S.Orpart>

@@ -30,4 +30,5 @@ export const TxtField = styled.input`
 
     background: #FFFFFF;
     border-radius: 12px;
+    
 `;
