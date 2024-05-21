@@ -10,6 +10,7 @@ import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
 
 import Button from '@/components/button/Button';
 import { useNavigate } from 'react-router';
+import TextField from '@/components/TextField/TextField';
 
 const emailsignup = () => {
     const navigate = useNavigate();
@@ -93,8 +94,7 @@ const emailsignup = () => {
                             <S.Body1> 이름 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
                         <S.InputContainer>
-                            <S.Txtfield
-                                value={name}
+                            <TextField
                                 placeholder='이름을 입력해주세요'
                                 onChange={handleNameChange} />
                         </S.InputContainer>
@@ -104,8 +104,7 @@ const emailsignup = () => {
                             <S.Body1> 이메일 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
                         <S.InputContainer>
-                            <S.Txtfield
-                                value={email}
+                            <TextField
                                 placeholder='이메일을 입력해주세요'
                                 onChange={handleEmailChange} />
                         </S.InputContainer>
@@ -115,10 +114,9 @@ const emailsignup = () => {
                             <S.Body1> 비밀번호 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
                         <S.InputContainer>
-                            <S.Txtfield
+                            <TextField
                                 type={showPassword ? 'text' : 'password'}
                                 placeholder='비밀번호를 입력해주세요'
-                                value={password}
                                 onChange={handlePasswordChange}
                             />
                             <S.Btnview onClick={togglePasswordVisibility}>
@@ -131,10 +129,9 @@ const emailsignup = () => {
                             <S.Body1> 비밀번호 확인 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
                         <S.InputContainer>
-                            <S.Txtfield
+                            <TextField
                                 type={showConfirmPassword ? 'text' : 'password'}
                                 placeholder='비밀번호를 다시 입력해주세요'
-                                value={confirmPassword}
                                 onChange={handleConfirmPasswordChange}
                             />
                             <S.Btnview onClick={toggleConfirmPasswordVisibility}>
@@ -145,7 +142,7 @@ const emailsignup = () => {
                     </S.EneterInfo>
                 </S.TxtContainer>
                 <S.ButtonContainer>
-                    <Button />
+                    <Button onClick={handleContinue}/>
                     <S.EmailCheck>
                         <S.Haveemail href='http://localhost:5173/login'>이미 계정이 있으신가요?</S.Haveemail>
                     </S.EmailCheck>

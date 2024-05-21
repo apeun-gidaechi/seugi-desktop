@@ -2,7 +2,9 @@ import React from 'react';
 import * as S from '@/components/SchoolCode/SchoolCode.style';
 import Button from '@/components/button/Button';
 
+const handleContinue = () => {
 
+}
 const SchoolCode = () => {
     return (
         <S.SchoolCodeMain>
@@ -20,7 +22,7 @@ const SchoolCode = () => {
                         <S.InputCode></S.InputCode>
                     </S.InputCodeContainer>
                     <S.ButtonContainer>
-                        <Button />
+                        <Button onClick={handleContinue}/>
                     </S.ButtonContainer>
                 </S.F297>
             </S.F300>
