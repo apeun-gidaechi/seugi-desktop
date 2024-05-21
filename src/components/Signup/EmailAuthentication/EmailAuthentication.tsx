@@ -6,6 +6,10 @@ import Cloud1 from '@/assets/image/onbording/EmailAuthentication/cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/EmailAuthentication/cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
 
+
+const handleAuthentication = () => {
+
+}
 const EmailAuthentication = () => {
     return (
         <S.AuthenticationMain>
@@ -34,7 +38,7 @@ const EmailAuthentication = () => {
                     <S.CodeSpan>인증 코드 전송</S.CodeSpan>
                 </S.CodeContainer>
                 <S.ContinueContainer>
-                    <Button text='확인'/>
+                    <Button text='확인' onClick={handleAuthentication}/>
                 </S.ContinueContainer>
             </S.AuthenticationContainer>
         </S.AuthenticationMain>
