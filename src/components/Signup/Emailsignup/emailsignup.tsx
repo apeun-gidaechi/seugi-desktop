@@ -51,7 +51,7 @@ const emailsignup = () => {
         return re.test(String(email).toLowerCase());
     }
 
-    const handleContinue = () => {
+    const handleSignup = () => {
         if (!name.trim()) {
             alert('이름을 입력해주세요');
             return;
@@ -76,7 +76,11 @@ const emailsignup = () => {
         }
     };
 
-
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleSignup();
+        }
+    }
 
     return (
         <S.EmailMain>
@@ -98,6 +102,7 @@ const emailsignup = () => {
                                 placeholder='이름을 입력해주세요'
                                 onChange={handleNameChange}
                                 style={{ border: "none" }}
+                                onKeyDown={handleKeyDown}
                                 />
                         </S.InputContainer>
                     </S.EneterInfo>
@@ -109,7 +114,9 @@ const emailsignup = () => {
                             <TextField
                                 style={{ border: "none" }}
                                 placeholder='이메일을 입력해주세요'
-                                onChange={handleEmailChange} />
+                                onChange={handleEmailChange}
+                                onKeyDown={handleKeyDown}
+                                />
                         </S.InputContainer>
                     </S.EneterInfo>
                     <S.EneterInfo>
@@ -122,6 +129,7 @@ const emailsignup = () => {
                                 type={showPassword ? 'text' : 'password'}
                                 placeholder='비밀번호를 입력해주세요'
                                 onChange={handlePasswordChange}
+                                onKeyDown={handleKeyDown}
                             />
                             <S.Btnview onClick={togglePasswordVisibility}>
                                 {showPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />}
@@ -138,6 +146,7 @@ const emailsignup = () => {
                                 type={showConfirmPassword ? 'text' : 'password'}
                                 placeholder='비밀번호를 다시 입력해주세요'
                                 onChange={handleConfirmPasswordChange}
+                                onKeyDown={handleKeyDown}
                             />
                             <S.Btnview onClick={toggleConfirmPasswordVisibility}>
                                 {showConfirmPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />}
@@ -147,7 +156,7 @@ const emailsignup = () => {
                     </S.EneterInfo>
                 </S.TxtContainer>
                 <S.ButtonContainer>
-                    <Button onClick={handleContinue}/>
+                    <Button onClick={handleSignup}/>
                     <S.EmailCheck>
                         <S.Haveemail href='http://localhost:5173/login'>이미 계정이 있으신가요?</S.Haveemail>
                     </S.EmailCheck>
