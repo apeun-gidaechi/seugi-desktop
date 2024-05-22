@@ -5,7 +5,11 @@ import Sun from '@/assets/image/onbording/EmailAuthentication/sun.svg';
 import Cloud1 from '@/assets/image/onbording/EmailAuthentication/cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/EmailAuthentication/cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
+import CodeTextFeild from '@/components/CodeTextField/CodeTextFeild';
 
+const handleAuthentication = () => {
+
+}
 const EmailAuthentication = () => {
     return (
         <S.AuthenticationMain>
@@ -24,17 +28,17 @@ const EmailAuthentication = () => {
                         </S.SubtitleContainer>
                     </S.CodeInputContainer>
                     <S.InputBox>
-                        <S.CodeTextInput />
-                        <S.CodeTextInput />
-                        <S.CodeTextInput />
-                        <S.CodeTextInput />
-                        <S.CodeTextInput />
-                        <S.CodeTextInput />
+                        <CodeTextFeild />
+                        <CodeTextFeild />
+                        <CodeTextFeild />
+                        <CodeTextFeild />
+                        <CodeTextFeild />
+                        <CodeTextFeild />
                     </S.InputBox>
                     <S.CodeSpan>인증 코드 전송</S.CodeSpan>
                 </S.CodeContainer>
                 <S.ContinueContainer>
-                    <Button text='확인'/>
+                    <Button text='확인' onClick={handleAuthentication}/>
                 </S.ContinueContainer>
             </S.AuthenticationContainer>
         </S.AuthenticationMain>

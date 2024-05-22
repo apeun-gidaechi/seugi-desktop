@@ -41,7 +41,6 @@ export const TitleContainer = styled.div`
 export const Title = styled.span`
     color: var(--Black, #000);
 
-
     font-family: 'Pretendard-Regular', sans-serif;
     font-size: 28px;
     font-style: normal;

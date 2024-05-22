@@ -13,6 +13,7 @@ import Cloud1 from '@/assets/image/onbording/Start/LoginCloud1.svg';
 import Cloud2 from '@/assets/image/onbording/Start/LoginCloud2.svg';
 import Sun from '@/assets/image/onbording/Start/LoginSun.svg';
 import Divider from '@/assets/image/onbording/Start/Divider.svg';
+import TextField from '@/components/TextField/TextField';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -85,24 +86,24 @@ const Login = () => {
             <S.Enterinfo>
               <S.Subtitle2>이메일 <S.Redstar>*</S.Redstar></S.Subtitle2>
               <S.InputContainer>
-                <S.TxtField
+                <TextField
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
-                  className="txtField"
                   placeholder="이메일을 입력해주세요"
                   onKeyDown={handleKeyDown}
+                  style={{ border: "none" }}
                 />
               </S.InputContainer>
             </S.Enterinfo>
             <S.Enterinfo>
               <S.Subtitle2>비밀번호 <S.Redstar>*</S.Redstar></S.Subtitle2>
               <S.InputContainer>
-                <S.TxtField
+                <TextField
                   type={showPassword ? "text" : "password"}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="txtField"
                   placeholder="비밀번호를 입력해주세요"
                   onKeyDown={handleKeyDown}
+                  style={{ border: "none" }}
                 />
                 <S.Btnview onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />}
@@ -111,8 +112,7 @@ const Login = () => {
             </S.Enterinfo>
           </S.Inputpart>
           <S.Buttonpart>
-            <LoginButton text='이메일로 계속하기'/>
-            {/* <S.Loginbtn className="loginbtn" onClick={handleLogin} >로그인</S.Loginbtn> */}
+            <LoginButton text='로그인' onClick={handleLogin}/>
             <S.Body1>계정이 없으시다면? <S.Gosignup href="http://localhost:5173/emailsignup">가입하기</S.Gosignup> </S.Body1>
           </S.Buttonpart>
           <S.Orpart>
