@@ -114,37 +114,6 @@ export const Redstar = styled.a`
     line-height: 130%;
 `;
 
-export const TxtField = styled.input`    
-    &::placeholder{
-        color: var(--Gray-Gray500, #AAA);
-
-        font-family: 'Pretendard-Regular', sans-serif;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 130%; /* 20.8px */
-    }
-    flex-grow: 1;
-    padding: 17px 16px; 
-    border: none;
-
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    &:focus {
-        outline: none;
-    }
-
-    box-sizing: border-box;
-
-    width: 421px;
-    height: 52px;
-
-    background: #FFFFFF;
-    border-radius: 12px;
-
-`;
 
 export const Loginbtn = styled.button`
     display: flex;

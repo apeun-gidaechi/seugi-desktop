@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { EventHandler } from 'react';
 import * as S from "@/components/button/Button.style"
 
 interface SeugiButtonProps {
   text?: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const button = ({ text = '계속하기' }: SeugiButtonProps) => {
+
+const Button: React.FC<SeugiButtonProps> = ({ text = '계속하기', onClick }) => {
   return (
-    <>
-      <S.Continuebtn>{text}</S.Continuebtn>
-    </>
-  )
-}
+    <S.Continuebtn onClick={onClick}>
+      {text}
+    </S.Continuebtn>
+  );
+};
 
-export default button;
+export default Button;
