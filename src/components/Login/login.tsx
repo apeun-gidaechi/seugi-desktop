@@ -91,6 +91,7 @@ const Login = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="이메일을 입력해주세요"
                   onKeyDown={handleKeyDown}
+                  style={{ border: "none" }}
                 />
               </S.InputContainer>
             </S.Enterinfo>
@@ -102,6 +103,7 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="비밀번호를 입력해주세요"
                   onKeyDown={handleKeyDown}
+                  style={{ border: "none" }}
                 />
                 <S.Btnview onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />}

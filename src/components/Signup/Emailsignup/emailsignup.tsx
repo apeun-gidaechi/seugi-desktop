@@ -96,7 +96,9 @@ const emailsignup = () => {
                         <S.InputContainer>
                             <TextField
                                 placeholder='이름을 입력해주세요'
-                                onChange={handleNameChange} />
+                                onChange={handleNameChange}
+                                style={{ border: "none" }}
+                                />
                         </S.InputContainer>
                     </S.EneterInfo>
                     <S.EneterInfo>
@@ -105,6 +107,7 @@ const emailsignup = () => {
                         </S.Subtitle>
                         <S.InputContainer>
                             <TextField
+                                style={{ border: "none" }}
                                 placeholder='이메일을 입력해주세요'
                                 onChange={handleEmailChange} />
                         </S.InputContainer>
@@ -115,6 +118,7 @@ const emailsignup = () => {
                         </S.Subtitle>
                         <S.InputContainer>
                             <TextField
+                                style={{ border: "none" }}
                                 type={showPassword ? 'text' : 'password'}
                                 placeholder='비밀번호를 입력해주세요'
                                 onChange={handlePasswordChange}
@@ -130,6 +134,7 @@ const emailsignup = () => {
                         </S.Subtitle>
                         <S.InputContainer>
                             <TextField
+                                style={{ border: "none" }}
                                 type={showConfirmPassword ? 'text' : 'password'}
                                 placeholder='비밀번호를 다시 입력해주세요'
                                 onChange={handleConfirmPasswordChange}

@@ -38,6 +38,7 @@ const oauthsignup = () => {
                             <TextField
                                 placeholder='이름을 입력해주세요'
                                 onChange={handleNameChange}
+                                style={{ border: "none" }}
                             />
                         </S.InputContainer>
                     </S.EneterInfo>
