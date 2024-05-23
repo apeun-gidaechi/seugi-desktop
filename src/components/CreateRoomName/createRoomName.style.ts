@@ -61,7 +61,7 @@ export const InputRoomNameWrap = styled.div`
 
 `
 
-export const InputRoomName = styled.div`
+export const InputRoomName = styled.input`
     color: var(--Sub-Black, #000);
     /* Subtitle2 */
     font-family:  'Pretendard-Regular', sans-serif;
@@ -74,6 +74,9 @@ export const InputRoomName = styled.div`
     margin-left: 2px;
     
     flex: 1;
+
+    border: none;
+    background: none;
 `
 
 export const CreateRoomCancleWrap = styled.button`
