@@ -7,7 +7,7 @@ import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
 import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
-
+import config from '@/config/config.json';
 import Button from '@/components/button/Button';
 import { useNavigate } from 'react-router';
 import TextField from '@/components/TextField/TextField';
@@ -18,7 +18,7 @@ const emailsignup = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [passwordError, setPasswordError] = useState<string>('');
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
 
@@ -51,28 +51,60 @@ const emailsignup = () => {
         return re.test(String(email).toLowerCase());
     }
 
-    const handleSignup = () => {
+    const validatePassword = (password: string) => {
+        const re = /^(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return re.test(password);
+    };
+
+    
+    const clearErrorMessage = () => {
+        setErrorMessage('');
+    }
+    const handleSignup = async () => {
         if (!name.trim()) {
-            alert('이름을 입력해주세요');
+            setErrorMessage('이름을 입력해주세요');
+            setTimeout(clearErrorMessage, 3000);
             return;
         }
         if (!email.trim()) {
-            alert('이메일을 입력해주세요.');
+            setErrorMessage('이메일을 입력해주세요.');
+            setTimeout(clearErrorMessage, 3000);
             return;
         }
         if (!validateEmail(email)) {
-            alert('유효한 이메일 형식을 입력해주세요.');
+            setErrorMessage('유효한 이메일 형식을 입력해주세요.');
+            setTimeout(clearErrorMessage, 3000);
             return;
         }
         if (!password.trim()) {
-            alert('비밀번호를 입력해주세요.');
+            setErrorMessage('비밀번호를 입력해주세요.');
+            setTimeout(clearErrorMessage, 3000);
             return;
         }
         if (password !== confirmPassword) {
-            setPasswordError('비밀번호가 일치하지 않습니다.');
+            setErrorMessage('비밀번호가 일치하지 않습니다.');
+            setTimeout(clearErrorMessage, 3000);
+        } 
+        if(!validatePassword(password)) {
+            setErrorMessage('비밀번호는 8자리 이상, 특수문자 포함이어야 합니다.'); 
+            setTimeout(clearErrorMessage, 3000);
         } else {
-            setPasswordError('');
-            // 비밀번호 일치 시 회원가입 처리 로직
+            try {
+                const response = await axios.post(`${config.serverurl}/member/register`, {
+                    name,
+                    email,
+                    password,
+                    // 토큰 추가
+                });
+                if (response.status === 200) {
+                    navigate('/emailathentance');
+                } else {
+                    alert('회원가입 중 문제가 발생했습니다. 다시 시도해주세요.');
+                }
+            } catch (error) {
+                console.error('error:', error);
+                alert('회원가입 중 문제가 발생했습니다. 다시 시도해주세요.');
+            }
         }
     };
 
@@ -81,7 +113,7 @@ const emailsignup = () => {
             handleSignup();
         }
     }
-
+    
     return (
         <S.EmailMain>
             <S.Cloud1 src={Cloud1} />
@@ -115,7 +147,7 @@ const emailsignup = () => {
                                 style={{ border: "none" }}
                                 placeholder='이메일을 입력해주세요'
                                 onChange={handleEmailChange}
-                                onKeyDown={handleKeyDown}
+                                onKeyDown={handleKeyDown} 
                                 />
                         </S.InputContainer>
                     </S.EneterInfo>
@@ -152,7 +184,7 @@ const emailsignup = () => {
                                 {showConfirmPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />}
                             </S.Btnview>
                         </S.InputContainer>
-                        {passwordError && <S.ErrorText>{passwordError}</S.ErrorText>}
+                        {errorMessage && <S.ErrorText>{errorMessage}</S.ErrorText>}
                     </S.EneterInfo>
                 </S.TxtContainer>
                 <S.ButtonContainer>
