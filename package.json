@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-oauth/google": "^0.12.1",
+    "@stomp/stompjs": "^7.0.0",
     "@types/stompjs": "^2.3.9",
     "axios": "^1.6.8",
     "express": "^4.19.2",
