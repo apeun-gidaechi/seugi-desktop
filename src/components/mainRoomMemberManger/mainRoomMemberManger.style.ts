@@ -1,5 +1,9 @@
 import styled from "styled-components"; 
 
+interface FileUploadProps {
+    hovered: boolean;
+}
+
 export const ChatRoomForm = styled.div`
     width: 272px;
     height: 72px;
@@ -13,8 +17,9 @@ export const ChatRoomForm = styled.div`
     gap: 8px;
 `
 
-export const FileUpload = styled.div`
-    color: var(--Red-Red500, #F90707);
+export const FileUpload = styled.button<FileUploadProps>`
+     color: ${(props) =>
+        props.hovered ? "var(--Red-Red500, #C20000)" : "var(--Red-Red500, #F90707)"};
 
     font-family: 'Pretendard-Regular', sans-serif;
     font-size: 16px;
@@ -26,4 +31,7 @@ export const FileUpload = styled.div`
     justify-content: center;
 
     padding: 8px;
+
+    border: none;
+    background: none;
 `
