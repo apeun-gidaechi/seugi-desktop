@@ -55,6 +55,7 @@ export const InviteMemberWrap = styled.div`
     background: var(--Sub-White, #FFF);
 
     display: flex;
+    justify-content: center;
 
 `
 export const InviteMemberFlex = styled.div`
@@ -79,8 +80,6 @@ export const InviteMember = styled.input`
 
     border: none;
     outline: none;
-    
-    height: 20px;
 
     &:focus{
         color: black; 
@@ -93,6 +92,9 @@ export const PlusMemberClick = styled.div`
 
 export const AvatarProfileWrap = styled.div`
     padding-right: 16px;
+
+    display: flex;
+    justify-content: center;
 `
 
 export const AvatarProfile = styled.img`
