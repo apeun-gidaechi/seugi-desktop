@@ -113,7 +113,7 @@ const emailsignup = () => {
             handleSignup();
         }
     }
-    
+
     return (
         <S.EmailMain>
             <S.Cloud1 src={Cloud1} />
