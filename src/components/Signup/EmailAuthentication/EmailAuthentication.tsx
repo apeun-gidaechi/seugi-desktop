@@ -9,18 +9,24 @@ import CodeTextFeild from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
 import config from '@/config/config.json';
 import { useNavigate } from 'react-router-dom';
+import CustomAlert from '@/components/Alert/Alert';
 
 const EmailAuthentication = () => {
     const [timer, setTimer] = useState(0);
+    const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
+
+    const handleCloseAlert = () => {
+        console.log("custom Alert");
+        setShowAlert(false);
+    };
 
     // 인증코드 보내기 함수
     const sendCode = async () => {
         try {
             const res = await axios.get(`${config.serverurl}/email/send`);
             console.log('Code sent successfully:', res.data);
-            // 타이머 시작
-            setTimer(300); 
+            setTimer(300);
         } catch (error) {
             console.error('Error sending code:', error);
         }
@@ -35,7 +41,6 @@ const EmailAuthentication = () => {
                 navigate('/chat');
             } else {
                 console.log('Authentication failed:', res.data);
-                alert('인증 코드를 다시 확인해주세요.');
             }
         } catch (error) {
             console.error('Error verifying code:', error);
@@ -86,8 +91,16 @@ const EmailAuthentication = () => {
                     {timer > 0 ? (
                         <S.TimerSpan>{formatTime(timer)}</S.TimerSpan>
                     ) : (
-                        <S.CodeSpan onClick={sendCode}>인증 코드 전송</S.CodeSpan>
+                        <S.CodeSpan onClick={sendCode} >인증 코드 전송</S.CodeSpan>
                     )}
+                    {showAlert &&
+                        <CustomAlert
+                            position=''
+                            titletext="인증코드를 전송했어요"
+                            subtext="이메일 함을 확인해 보세요"
+                            onClose={handleCloseAlert} 
+                        />
+                    }
                 </S.CodeContainer>
                 <S.ContinueContainer>
                     <Button text='확인' onClick={handleAuthentication} />
