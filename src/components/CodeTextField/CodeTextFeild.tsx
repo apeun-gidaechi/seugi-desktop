@@ -1,7 +1,7 @@
 import * as S from '@/components/CodeTextField/CodeTextField.style';
 import React, { useState } from 'react';
 
-const CodeTextFeild: React.FC = () => {
+const CodeTextFeild = () => {
     const [inputText, setInputText] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
