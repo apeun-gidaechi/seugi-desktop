@@ -80,19 +80,8 @@ const useSignup = () => {
             setErrorMessage('비밀번호는 8자리 이상, 특수문자 포함이어야 합니다.');
             setTimeout(clearErrorMessage, 3000);
         } else {
-            try {
-                const res = await axios.post(`${config.serverurl}/member/register`, {
-                    email,
-                });
-                if (res.status === 200) {
-                    navigate('/emailathentance');
-                } else {
-                    alert('회원가입 중 문제가 발생했습니다. 다시 시도해주세요.');
-                }
-            } catch (error) {
-                console.error('error:', error);
-                alert('회원가입 중 문제가 발생했습니다. 다시 시도해주세요.');
-            }
+            navigate('/emailauthentication', { state: { name, email, password } });
+            console.log(email, name, password);
         }
     };
 
@@ -101,6 +90,7 @@ const useSignup = () => {
             handleSignup();
         }
     }
+    
     return {
         name,
         email,

@@ -1,7 +1,12 @@
 import * as S from '@/components/CodeTextField/CodeTextField.style';
 import React, { useState } from 'react';
 
-const CodeTextFeild = () => {
+type CodeTextFeildProps = {
+    onChange: (value: string) => void;
+};
+
+
+const CodeTextFeild: React.FC<CodeTextFeildProps> = ({onChange}) => {
     const [inputText, setInputText] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,6 +16,7 @@ const CodeTextFeild = () => {
         } else {
             setInputText(inputValue);
         }
+        onChange(inputValue); 
     };
 
     return (
