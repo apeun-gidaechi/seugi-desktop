@@ -8,15 +8,15 @@ import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
 import CodeTextFeild from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
 import config from '@/config/config.json';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import CustomAlert from '@/components/Alert/Alert';
-import useSignup from '@/hooks/Signuphook/Signup';
 
 const EmailAuthentication = () => {
-    const { name, email, password } = useSignup();
+    const location = useLocation();
+    const { name, email, password } = location.state || {};
     const [timer, setTimer] = useState(0);
     const [showAlert, setShowAlert] = useState(false);
-    const [code, setCode] = useState([]);
+    const [code, setCode] = useState<string>('');
     const navigate = useNavigate();
 
     const handleCloseAlert = () => {
@@ -25,33 +25,39 @@ const EmailAuthentication = () => {
     };
 
     // 인증코드 보내기 함수
+    const handleSendCode = async () => {
+        console.log(email);
+        await axios.get(`${config.serverurl}/email/send`, {
+            params: { email: email }
+        }).then((res) => {
+            console.log('Code sent successfully:', res.data);
+            setTimer(300);
+        }).catch((error) => {
+            console.error(error)
+        })
+    };
+
+    // CodeTextFeild 컴포넌트에서 입력값을 받아서 코드 문자열로 만드는 함수
+    const handleCodeChange = (index: number, value: string) => {
+        const updatedCode = code.split('');
+        updatedCode[index] = value;
+        setCode(updatedCode.join(''));
+    };
+    
+    // 회원가입 정보 보내기
     const sendCode = async () => {
+        console.log(name, email, password, code);
         try {
-            const res = await axios.post(`${config.serverurl}/email/send`, {
+            const res = await axios.post(`${config.serverurl}/member/register`, {
                 name,
                 email,
                 password,
                 code,
             });
-            console.log('Code sent successfully:', res.data);
-            setTimer(300);
+            console.log(res);
+            navigate('/selectschool');
         } catch (error) {
             console.error('Error sending code:', error);
-        }
-    };
-
-    // 인증코드 확인 함수
-    const handleAuthentication = async () => {
-        try {
-            const res = await axios.get(`${config.serverurl}/email/verify`);
-            if (res.data.success) {
-                console.log('Authentication successful:', res.data);
-                navigate('/chat');
-            } else {
-                console.log('Authentication failed:', res.data);
-            }
-        } catch (error) {
-            console.error('Error verifying code:', error);
         }
     };
 
@@ -69,7 +75,7 @@ const EmailAuthentication = () => {
     const formatTime = (time: number) => {
         const minutes = String(Math.floor(time / 60)).padStart(2, '0');
         const seconds = String(time % 60).padStart(2, '0');
-        return `${minutes}:${seconds}`;
+        return `${minutes}분 ${seconds}초`;
     };
 
     return (
@@ -89,17 +95,17 @@ const EmailAuthentication = () => {
                         </S.SubtitleContainer>
                     </S.CodeInputContainer>
                     <S.InputBox>
-                        <CodeTextFeild />
-                        <CodeTextFeild />
-                        <CodeTextFeild />
-                        <CodeTextFeild />
-                        <CodeTextFeild />
-                        <CodeTextFeild />
+                        {[...Array(6)].map((_, index) => (
+                            <CodeTextFeild
+                                key={index}
+                                onChange={(value) => handleCodeChange(index, value)}
+                            />
+                        ))}
                     </S.InputBox>
                     {timer > 0 ? (
-                        <S.TimerSpan>{formatTime(timer)}</S.TimerSpan>
+                        <S.TimerSpan>{formatTime(timer)} 남음</S.TimerSpan>
                     ) : (
-                        <S.CodeSpan onClick={sendCode} >인증 코드 전송</S.CodeSpan>
+                        <S.CodeSpan onClick={handleSendCode} >인증 코드 전송</S.CodeSpan>
                     )}
                     {showAlert &&
                         <CustomAlert
@@ -111,7 +117,7 @@ const EmailAuthentication = () => {
                     }
                 </S.CodeContainer>
                 <S.ContinueContainer>
-                    <Button text='확인' onClick={handleAuthentication} />
+                    <Button text='확인' onClick={sendCode} />
                 </S.ContinueContainer>
             </S.AuthenticationContainer>
         </S.AuthenticationMain>
