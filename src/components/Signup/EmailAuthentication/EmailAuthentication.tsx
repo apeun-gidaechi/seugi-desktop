@@ -78,6 +78,12 @@ const EmailAuthentication = () => {
         return `${minutes}분 ${seconds}초`;
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            sendCode();
+        }
+    }
+
     return (
         <S.AuthenticationMain>
             <S.Cloud1 src={Cloud1} />
@@ -99,6 +105,7 @@ const EmailAuthentication = () => {
                             <CodeTextFeild
                                 key={index}
                                 onChange={(value) => handleCodeChange(index, value)}
+                                onKeyDown={handleKeyDown}
                             />
                         ))}
                     </S.InputBox>
@@ -109,7 +116,7 @@ const EmailAuthentication = () => {
                     )}
                     {showAlert &&
                         <CustomAlert
-                            position=''
+                            position='top-right'
                             titletext="인증코드를 전송했어요"
                             subtext="이메일 함을 확인해 보세요"
                             onClose={handleCloseAlert}
