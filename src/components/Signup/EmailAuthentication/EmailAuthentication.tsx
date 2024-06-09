@@ -73,7 +73,7 @@ const EmailAuthentication = () => {
 
     // 타이머 형식을 분:초로 변환
     const formatTime = (time: number) => {
-        const minutes = String(Math.floor(time / 60)).padStart(2, '0');
+        const minutes = String(Math.floor(time / 60));
         const seconds = String(time % 60).padStart(2, '0');
         return `${minutes}분 ${seconds}초`;
     };
