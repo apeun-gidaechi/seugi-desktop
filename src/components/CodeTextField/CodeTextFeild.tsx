@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 type CodeTextFeildProps = {
     onChange: (value: string) => void;
+    onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 };
 
 
