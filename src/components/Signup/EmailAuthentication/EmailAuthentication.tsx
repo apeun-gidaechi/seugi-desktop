@@ -10,10 +10,13 @@ import axios from 'axios';
 import config from '@/config/config.json';
 import { useNavigate } from 'react-router-dom';
 import CustomAlert from '@/components/Alert/Alert';
+import useSignup from '@/hooks/Signuphook/Signup';
 
 const EmailAuthentication = () => {
+    const { name, email, password } = useSignup();
     const [timer, setTimer] = useState(0);
     const [showAlert, setShowAlert] = useState(false);
+    const [code, setCode] = useState([]);
     const navigate = useNavigate();
 
     const handleCloseAlert = () => {
@@ -24,7 +27,12 @@ const EmailAuthentication = () => {
     // 인증코드 보내기 함수
     const sendCode = async () => {
         try {
-            const res = await axios.get(`${config.serverurl}/email/send`);
+            const res = await axios.post(`${config.serverurl}/email/send`, {
+                name,
+                email,
+                password,
+                code,
+            });
             console.log('Code sent successfully:', res.data);
             setTimer(300);
         } catch (error) {
@@ -98,7 +106,7 @@ const EmailAuthentication = () => {
                             position=''
                             titletext="인증코드를 전송했어요"
                             subtext="이메일 함을 확인해 보세요"
-                            onClose={handleCloseAlert} 
+                            onClose={handleCloseAlert}
                         />
                     }
                 </S.CodeContainer>
