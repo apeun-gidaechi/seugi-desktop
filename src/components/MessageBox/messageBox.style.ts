@@ -4,7 +4,7 @@ export const messageContainer = styled.div`
     display: flex;
     clear: both;
     float: right;
-    align-items: flex-end; /* Align items to the bottom */
+    align-items: flex-end; 
 `;
 
 export const messageBox = styled.div`
