@@ -1,25 +1,36 @@
-import styled from "styled-components"; 
-
+import styled from "styled-components";
 
 export const messageContainer = styled.div`
-    display: block;
+    display: flex;
+    clear: both;
     float: right;
-    clear: both; 
-`
+    align-items: flex-end; /* Align items to the bottom */
+`;
 
 export const messageBox = styled.div`
-    color: white; 
-    border-radius: 5px; 
-    margin: 5px 0; 
-   
-    width: fit-content; 
-
+    color: white;
+    border-radius: 5px;
+    margin: 5px 0;
+    width: fit-content;
     padding: 12px;
     align-items: flex-start;
     gap: 10px;
-
     border-radius: 8px 0px 8px 8px;
     background: var(--Primary-Primary500, #1D93F3);
-
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-`
+`;
+
+export const messageTime = styled.div`
+    text-align: right;
+    margin-top: auto;
+
+    padding: 2px 8px;
+
+    color: var(--Gray-Gray600, #787878);
+    /* Caption2 */
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 15.6px */
+`;

@@ -1,12 +1,15 @@
 import React from 'react';
-import * as S from "@/components/MessageBox/messageBox.style"
+import * as S from "@/components/MessageBox/messageBox.style";
+
 interface MessageBoxProps {
     message: string;
+    time: string;
 }
 
-const MessageBox: React.FC<MessageBoxProps> = ({ message }) => {
+const MessageBox: React.FC<MessageBoxProps> = ({ message, time }) => {
     return (
         <S.messageContainer>
+            <S.messageTime>{time}</S.messageTime>
             <S.messageBox className="message-box">
                 {message}
             </S.messageBox>

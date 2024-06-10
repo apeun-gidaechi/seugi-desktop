@@ -12,7 +12,8 @@ const socket = io('http://localhost:3000');
 const SendMessage: React.FC = () => {
   const [message, setMessage] = useState("");
   const [hasText, setHasText] = useState(false);
-  const [receivedMessages, setReceivedMessages] = useState<string[]>([]); 
+  const [receivedMessages, setReceivedMessages] = useState<{message: string, time: string}[]>([]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
     setMessage(text);
@@ -21,8 +22,10 @@ const SendMessage: React.FC = () => {
 
   const handleClick = () => {
     if (message.trim() !== '') {
-      socket.emit('message', message); 
-      setReceivedMessages(prevMessages => [...prevMessages, message]); 
+      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const newMessage = { message, time };
+      socket.emit('message', newMessage); 
+      setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
       setMessage('');
       setHasText(false);
     }
@@ -31,9 +34,11 @@ const SendMessage: React.FC = () => {
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       if (message.trim() !== '') {
-        socket.emit('message', message); 
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const newMessage = { message, time };
+        socket.emit('message', newMessage); 
         sendToken();
-        setReceivedMessages(prevMessages => [...prevMessages, message]); 
+        setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
         setMessage('');
         setHasText(false);
       }
@@ -45,7 +50,7 @@ const SendMessage: React.FC = () => {
   };
 
   useEffect(() => {
-    socket.on('message', (newMessage: string) => {
+    socket.on('message', (newMessage: { message: string, time: string }) => {
       setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
     });
 
@@ -56,6 +61,11 @@ const SendMessage: React.FC = () => {
 
   return (
     <div>
+      <div>
+        {receivedMessages.map((msg, index) => (
+          <MessageBox key={index} message={msg.message} time={msg.time} />
+        ))}
+      </div>
       <S.SendMessageWrap>
         <S.PlustFileButton>
           <S.PlusMessageFile src={PlusMessageFile} />
@@ -67,6 +77,7 @@ const SendMessage: React.FC = () => {
           onChange={handleChange}
           onKeyPress={handleKeyPress} 
         />
+        
         <S.SendArrowButton onClick={handleClick}>
           {hasText ? (
             <S.SendArrow src={SendArrowBlue} alt="Send Message"/> 
@@ -75,11 +86,6 @@ const SendMessage: React.FC = () => {
           )}
         </S.SendArrowButton>
       </S.SendMessageWrap>
-      <div>
-        {receivedMessages.map((msg, index) => (
-          <MessageBox key={index} message={msg} />
-        ))}
-      </div>
     </div>
   );
 };
