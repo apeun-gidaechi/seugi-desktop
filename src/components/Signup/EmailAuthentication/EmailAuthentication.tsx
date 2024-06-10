@@ -33,6 +33,7 @@ const EmailAuthentication = () => {
             console.log('Code sent successfully:', res.data);
             setTimer(300);
             setShowAlert(true);
+            setIsCodeSent(true);
         }).catch((error) => {
             console.error(error);
         });
