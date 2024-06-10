@@ -1,35 +1,48 @@
 import * as S from '@/components/CodeTextField/CodeTextField.style';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
-type CodeTextFeildProps = {
-    onChange: (value: string) => void;
-    onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
-};
+interface CodeTextFieldProps {
+    onChange: (index: number, value: string) => void;
+    onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+}
 
+const CodeTextField: React.FC<CodeTextFieldProps> = () => {
+    const [inputValues, setInputValues] = useState<string[]>(Array(6).fill(''));
+    const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-const CodeTextFeild: React.FC<CodeTextFeildProps> = ({onChange}) => {
-    const [inputText, setInputText] = useState('');
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const inputValue = e.target.value;
-        if (inputValue.length > 1) {
-            setInputText(inputValue.charAt(0));
-        } else {
-            setInputText(inputValue);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+        const value = e.target.value;
+        const updatedValues = [...inputValues];
+        if (value.length <= 1) {
+            updatedValues[index] = value;
+            setInputValues(updatedValues);
+            if (value && index < 5 && inputRefs.current[index + 1]) {
+                inputRefs.current[index + 1]!.focus();
+            }
         }
-        onChange(inputValue); 
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+        if (e.key === 'Backspace' && !inputValues[index] && index > 0 && inputRefs.current[index - 1]) {
+            inputRefs.current[index - 1]!.focus();
+        }
     };
 
     return (
         <>
-            <S.InputCode
-                type="text"
-                value={inputText}
-                onChange={handleChange}
-                maxLength={1} 
-            />
+            {inputValues.map((value, index) => (
+                <S.InputCode
+                    key={index}
+                    type="text"
+                    value={value}
+                    onChange={(e) => handleChange(e, index)}
+                    onKeyDown={(e) => handleKeyDown(e, index)}
+                    ref={(el) => (inputRefs.current[index] = el)}
+                    maxLength={1}
+                />
+            ))}
         </>
     );
 };
 
-export default CodeTextFeild;
+export default CodeTextField;

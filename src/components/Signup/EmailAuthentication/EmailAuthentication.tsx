@@ -1,3 +1,5 @@
+// EmailAuthentication.tsx
+
 import React, { useState, useEffect } from 'react';
 import * as S from '@/components/Signup/EmailAuthentication/EmailAuthentication.style';
 import Button from '@/components/button/Button';
@@ -5,7 +7,7 @@ import Sun from '@/assets/image/onbording/EmailAuthentication/sun.svg';
 import Cloud1 from '@/assets/image/onbording/EmailAuthentication/cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/EmailAuthentication/cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
-import CodeTextFeild from '@/components/CodeTextField/CodeTextFeild';
+import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
 import config from '@/config/config.json';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -16,11 +18,10 @@ const EmailAuthentication = () => {
     const { name, email, password } = location.state || {};
     const [timer, setTimer] = useState(0);
     const [showAlert, setShowAlert] = useState(false);
-    const [code, setCode] = useState<string>('');
+    const [code, setCode] = useState<number[]>(Array(1).fill(null));
     const navigate = useNavigate();
 
     const handleCloseAlert = () => {
-        console.log("custom Alert");
         setShowAlert(false);
     };
 
@@ -37,22 +38,22 @@ const EmailAuthentication = () => {
         })
     };
 
-    // CodeTextFeild 컴포넌트에서 입력값을 받아서 코드 문자열로 만드는 함수
-    const handleCodeChange = (index: number, value: string) => {
-        const updatedCode = code.split('');
+    // CodeTextField 컴포넌트에서 입력값을 받아서 코드 문자열로 만드는 함수
+    const handleCodeChange = (index: number, value: number) => {
+        const updatedCode = [...code];
         updatedCode[index] = value;
-        setCode(updatedCode.join(''));
+        setCode(updatedCode);
     };
-    
+
     // 회원가입 정보 보내기
     const sendCode = async () => {
-        console.log(name, email, password, code);
+        console.log(name, email, password, code.join(''));
         try {
             const res = await axios.post(`${config.serverurl}/member/register`, {
                 name,
                 email,
                 password,
-                code,
+                code: code.join(''), // Join array into string
             });
             console.log(res);
             navigate('/selectschool');
@@ -101,10 +102,10 @@ const EmailAuthentication = () => {
                         </S.SubtitleContainer>
                     </S.CodeInputContainer>
                     <S.InputBox>
-                        {[...Array(6)].map((_, index) => (
-                            <CodeTextFeild
+                        {[...Array(1)].map((_, index) => (
+                            <CodeTextField
                                 key={index}
-                                onChange={(value) => handleCodeChange(index, value)}
+                                onChange={(value: number) => handleCodeChange(index, value)}
                                 onKeyDown={handleKeyDown}
                             />
                         ))}
