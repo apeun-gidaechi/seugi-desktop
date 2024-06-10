@@ -6,9 +6,11 @@ interface MessageBoxProps {
 
 const MessageBox: React.FC<MessageBoxProps> = ({ message }) => {
     return (
-        <S.messageBox className="message-box">
-            {message}
-        </S.messageBox>
+        <S.messageContainer>
+            <S.messageBox className="message-box">
+                {message}
+            </S.messageBox>
+        </S.messageContainer>
     );
 };
 
