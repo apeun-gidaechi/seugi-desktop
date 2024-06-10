@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import io from 'socket.io-client';
 import * as S from "../sendMessage/sendMessage.style";
-import { socketService } from '../sendMessage/socketService'; 
+import MessageBox from '@/components/MessageBox/messageBox'; 
 
 import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
 import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
 import SendArrowBlue from "@/assets/image/chat-components/sendBlueArrow.svg";
 
+const socket = io('http://localhost:3000'); 
+
 const SendMessage: React.FC = () => {
   const [message, setMessage] = useState("");
   const [hasText, setHasText] = useState(false);
-
+  const [receivedMessages, setReceivedMessages] = useState<string[]>([]); 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
     setMessage(text);
@@ -18,39 +21,44 @@ const SendMessage: React.FC = () => {
 
   const handleClick = () => {
     if (message.trim() !== '') {
-      socketService.sendMessage(message);
+      socket.emit('message', message); 
+      setReceivedMessages(prevMessages => [...prevMessages, message]); 
       setMessage('');
       setHasText(false);
     }
   };
+
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       if (message.trim() !== '') {
-        socketService.sendMessage(message);
-        
+        socket.emit('message', message); 
         sendToken();
-        
+        setReceivedMessages(prevMessages => [...prevMessages, message]); 
         setMessage('');
         setHasText(false);
       }
     }
   };
-  
+
   const sendToken = () => {
-    socketService.connect("eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE1ODQ2NDU5LCJleHAiOjE3MTY0NTEyNTl9.MqmdEJT1cRwgMDduNZKiw52Y5USKETstEgYDL0_LxNg");
+    socket.emit('token', "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE1ODQ2NDU5LCJleHAiOjE3MTY0NTEyNTl9.MqmdEJT1cRwgMDduNZKiw52Y5USKETstEgYDL0_LxNg");
   };
 
-  // const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-  //   if (event.key === "Enter") {
-  //     socketService.connect("eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE1ODQ1NzMyLCJleHAiOjE3MTU4NTE3MzJ9.OWWaLnqq8P-t5wOUv3rgWP60fbPZvhmjCSKWXc8XUlI")
-  //     // handleClick();
-  //   }
-  // };
+  useEffect(() => {
+    socket.on('message', (newMessage: string) => {
+      setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
+    });
+
+    return () => {
+      socket.off('message'); 
+    };
+  }, []);
 
   return (
-    <S.SendMessageWrap>
+    <div>
+      <S.SendMessageWrap>
         <S.PlustFileButton>
-            <S.PlusMessageFile src={PlusMessageFile}/>
+          <S.PlusMessageFile src={PlusMessageFile} />
         </S.PlustFileButton> 
         <S.SendMessageInput 
           type="text" 
@@ -66,8 +74,14 @@ const SendMessage: React.FC = () => {
             <S.SendArrow src={SendArrow} alt="Send Message" />
           )}
         </S.SendArrowButton>
-    </S.SendMessageWrap>
+      </S.SendMessageWrap>
+      <div>
+        {receivedMessages.map((msg, index) => (
+          <MessageBox key={index} message={msg} />
+        ))}
+      </div>
+    </div>
   );
-}
+};
 
-export default SendMessage; 
+export default SendMessage;
