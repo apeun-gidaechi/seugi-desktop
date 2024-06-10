@@ -1,10 +1,8 @@
-// CodeTextField.tsx
-
 import React, { useState, useRef, useEffect } from 'react';
 import * as S from '@/components/CodeTextField/CodeTextField.style';
 
 interface CodeTextFieldProps {
-    onChange: (index: number, value: string) => void;
+    onChange: (value: string[]) => void; // Change to receive entire array
     onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -12,16 +10,13 @@ const CodeTextField: React.FC<CodeTextFieldProps> = ({ onChange, onKeyDown }) =>
     const [inputValues, setInputValues] = useState<string[]>(Array(6).fill(''));
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-    // Update input values when initial code is pasted
     useEffect(() => {
         const handlePaste = (e: ClipboardEvent) => {
             const pasteText = e.clipboardData?.getData('text');
             if (pasteText) {
                 const newValues = pasteText.split('').slice(0, 6);
                 setInputValues(newValues);
-                newValues.forEach((value, index) => {
-                    onChange(index, value);
-                });
+                onChange(newValues); // Update parent with entire array
             }
         };
 
@@ -38,7 +33,7 @@ const CodeTextField: React.FC<CodeTextFieldProps> = ({ onChange, onKeyDown }) =>
         if (value.length <= 1) {
             updatedValues[index] = value;
             setInputValues(updatedValues);
-            onChange(index, value);
+            onChange(updatedValues); // Update parent with entire array
             if (value && index < 5 && inputRefs.current[index + 1]) {
                 inputRefs.current[index + 1]!.focus();
             }

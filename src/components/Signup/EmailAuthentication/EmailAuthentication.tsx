@@ -16,8 +16,7 @@ const EmailAuthentication = () => {
     const { name, email, password } = location.state || {};
     const [timer, setTimer] = useState(0);
     const [showAlert, setShowAlert] = useState(false);
-    const [code, setCode] = useState<number[]>(Array(6).fill(null)); // Changed to array of length 6
-    const [isCodeSent, setIsCodeSent] = useState(false); // New state to track if code is sent
+    const [code, setCode] = useState<string[]>(Array(6).fill(''));
     const navigate = useNavigate();
 
     const handleCloseAlert = () => {
@@ -32,28 +31,27 @@ const EmailAuthentication = () => {
         }).then((res) => {
             console.log('Code sent successfully:', res.data);
             setTimer(300);
-            setIsCodeSent(true); // Update state to indicate code has been sent
+            setShowAlert(true);
         }).catch((error) => {
             console.error(error);
         });
     };
 
     // CodeTextField 컴포넌트에서 입력값을 받아서 코드 문자열로 만드는 함수
-    const handleCodeChange = (index: number, value: number) => {
-        const updatedCode = [...code];
-        updatedCode[index] = value;
+    const handleCodeChange = (updatedCode: string[]) => {
         setCode(updatedCode);
     };
 
     // 회원가입 정보 보내기
     const sendCode = async () => {
-        console.log(name, email, password, code.join(''));
+        const verificationCode = code.join('');
+        console.log(name, email, password, verificationCode);
         try {
             const res = await axios.post(`${config.serverurl}/member/register`, {
                 name,
                 email,
                 password,
-                code: code.join(''), // Join array into string
+                code: verificationCode,
             });
             console.log(res);
             navigate('/selectschool');
@@ -102,20 +100,15 @@ const EmailAuthentication = () => {
                         </S.SubtitleContainer>
                     </S.CodeInputContainer>
                     <S.InputBox>
-                        {[...Array(1)].map((_, index) => (
-                            <CodeTextField
-                                key={index}
-                                onChange={(value: number) => handleCodeChange(index, value)}
-                                onKeyDown={handleKeyDown}
-                            />
-                        ))}
+                        <CodeTextField
+                            onChange={handleCodeChange}
+                            onKeyDown={handleKeyDown}
+                        />
                     </S.InputBox>
                     {timer > 0 ? (
                         <S.TimerSpan>{formatTime(timer)} 남음</S.TimerSpan>
                     ) : (
-                        <S.CodeSpan onClick={handleSendCode}>
-                            {isCodeSent ? '인증 코드 재전송' : '인증 코드 전송'}
-                        </S.CodeSpan>
+                        <S.CodeSpan onClick={handleSendCode}>인증 코드 전송</S.CodeSpan>
                     )}
                     {showAlert &&
                         <CustomAlert
