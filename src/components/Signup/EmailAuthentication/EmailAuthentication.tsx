@@ -17,6 +17,7 @@ const EmailAuthentication = () => {
     const [timer, setTimer] = useState(0);
     const [showAlert, setShowAlert] = useState(false);
     const [code, setCode] = useState<string[]>(Array(6).fill(''));
+    const [isCodeSent, setIsCodeSent] = useState(false);
     const navigate = useNavigate();
 
     const handleCloseAlert = () => {
@@ -108,7 +109,9 @@ const EmailAuthentication = () => {
                     {timer > 0 ? (
                         <S.TimerSpan>{formatTime(timer)} 남음</S.TimerSpan>
                     ) : (
-                        <S.CodeSpan onClick={handleSendCode}>인증 코드 전송</S.CodeSpan>
+                            <S.CodeSpan onClick={handleSendCode}>
+                                {isCodeSent ? '인증 코드 재전송' : '인증 코드 전송'}
+                            </S.CodeSpan>
                     )}
                     {showAlert &&
                         <CustomAlert
