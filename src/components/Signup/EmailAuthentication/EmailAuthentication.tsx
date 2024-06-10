@@ -1,5 +1,3 @@
-// EmailAuthentication.tsx
-
 import React, { useState, useEffect } from 'react';
 import * as S from '@/components/Signup/EmailAuthentication/EmailAuthentication.style';
 import Button from '@/components/button/Button';
@@ -18,7 +16,8 @@ const EmailAuthentication = () => {
     const { name, email, password } = location.state || {};
     const [timer, setTimer] = useState(0);
     const [showAlert, setShowAlert] = useState(false);
-    const [code, setCode] = useState<number[]>(Array(1).fill(null));
+    const [code, setCode] = useState<number[]>(Array(6).fill(null)); // Changed to array of length 6
+    const [isCodeSent, setIsCodeSent] = useState(false); // New state to track if code is sent
     const navigate = useNavigate();
 
     const handleCloseAlert = () => {
@@ -33,9 +32,10 @@ const EmailAuthentication = () => {
         }).then((res) => {
             console.log('Code sent successfully:', res.data);
             setTimer(300);
+            setIsCodeSent(true); // Update state to indicate code has been sent
         }).catch((error) => {
-            console.error(error)
-        })
+            console.error(error);
+        });
     };
 
     // CodeTextField 컴포넌트에서 입력값을 받아서 코드 문자열로 만드는 함수
@@ -83,7 +83,7 @@ const EmailAuthentication = () => {
         if (e.key === 'Enter') {
             sendCode();
         }
-    }
+    };
 
     return (
         <S.AuthenticationMain>
@@ -113,7 +113,9 @@ const EmailAuthentication = () => {
                     {timer > 0 ? (
                         <S.TimerSpan>{formatTime(timer)} 남음</S.TimerSpan>
                     ) : (
-                        <S.CodeSpan onClick={handleSendCode} >인증 코드 전송</S.CodeSpan>
+                        <S.CodeSpan onClick={handleSendCode}>
+                            {isCodeSent ? '인증 코드 재전송' : '인증 코드 전송'}
+                        </S.CodeSpan>
                     )}
                     {showAlert &&
                         <CustomAlert
