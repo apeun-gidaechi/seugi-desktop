@@ -11,7 +11,7 @@ const SchoolCode = () => {
     const handleContinue = async () => {
         const verificationCode = code.join('');
         console.log(verificationCode);
-        await axios.get(`${config.serverurl}/workspace/code/${verificationCode}`, {
+        await axios.get(`${config.serverurl}/workspace/${verificationCode}`, {
             params: { code: verificationCode },
         }).then((res) => {
             console.log('Code sent successfully:', res.data);
