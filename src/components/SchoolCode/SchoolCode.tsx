@@ -1,34 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from '@/components/SchoolCode/SchoolCode.style';
 import Button from '@/components/button/Button';
-import CodeTextFeild from '@/components/CodeTextField/CodeTextFeild';
+import CodeTextField from '../CodeTextField/CodeTextFeild';
+import axios from 'axios';
+import config from '@/config/config.json';
 
-const handleContinue = () => {
-
-}
 const SchoolCode = () => {
+    const [code, setCode] = useState<string[]>(Array(6).fill(''));
+
+    const handleContinue = async () => {
+        const verificationCode = code.join('');
+        console.log(verificationCode);
+        await axios.get(`${config.serverurl}/workspace/code/${verificationCode}`, {
+            params: { code: verificationCode },
+        }).then((res) => {
+            console.log('Code sent successfully:', res.data);
+        }).catch((error) => {
+            console.error('Error sending code:', error);
+        });
+    };
+
+    const handleCodeChange = (updatedCode: string[]) => {
+        setCode(updatedCode);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleContinue();
+        }
+    };
+
     return (
         <S.SchoolCodeMain>
-            <S.F300>
-                <S.F297>
+            <S.SchoolCode>
+                <S.SchoolCodeContainer>
                     <S.Header>
                         <S.Title>학교 코드를 입력해주세요</S.Title>
                     </S.Header>
                     <S.InputCodeContainer>
-                        <CodeTextFeild></CodeTextFeild>
-                        <CodeTextFeild></CodeTextFeild>
-                        <CodeTextFeild></CodeTextFeild>
-                        <CodeTextFeild></CodeTextFeild>
-                        <CodeTextFeild></CodeTextFeild>
-                        <CodeTextFeild></CodeTextFeild>
+                        <CodeTextField
+                            onKeyDown={handleKeyDown}
+                            onChange={handleCodeChange}
+                        />
                     </S.InputCodeContainer>
                     <S.ButtonContainer>
-                        <Button onClick={handleContinue}/>
+                        <Button text="계속하기" onClick={handleContinue} />
                     </S.ButtonContainer>
-                </S.F297>
-            </S.F300>
+                </S.SchoolCodeContainer>
+            </S.SchoolCode>
         </S.SchoolCodeMain>
-    )
-}
+    );
+};
 
 export default SchoolCode;
