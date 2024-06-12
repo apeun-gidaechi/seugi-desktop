@@ -49,14 +49,15 @@ const SendMessage: React.FC = () => {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE4MTYyMzE4LCJleHAiOjE3MTkwMjYzMTh9.FEbPDhGTCpVmiZTVfkkzG93PcYscXfDJ57Kx9lFSAHw`
       },
       debug: (str) => {
-        console.log(str);
-        if (str.includes('<<< CONNECTED')) {
-          const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          setReceivedMessages(prevMessages => [...prevMessages, { message: 'Connected to server', time }]);
+        if (str.includes('<<< PONG')) {
+          console.log('PONG received');
+        } else if (str.includes('<<< CONNECTED')) {
+          console.log('Connected to server');
+        } else if (str.includes('<<< DISCONNECTED')) {
+          console.log('Disconnected from server');
         }
       },
       onConnect: () => {
-        console.log('Connected');
         client.subscribe('/topic/messages', (message) => {
           const newMessage = JSON.parse(message.body);
           setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
