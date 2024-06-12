@@ -10,7 +10,7 @@ import SendArrowBlue from "@/assets/image/chat-components/sendBlueArrow.svg";
 const SendMessage: React.FC = () => {
   const [message, setMessage] = useState("");
   const [hasText, setHasText] = useState(false);
-  const [receivedMessages, setReceivedMessages] = useState<{message: string, time: string}[]>([]);
+  const [receivedMessages, setReceivedMessages] = useState<{ message: string, time: string }[]>([]);
   const [stompClient, setStompClient] = useState<Client | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +50,10 @@ const SendMessage: React.FC = () => {
       },
       debug: (str) => {
         console.log(str);
+        if (str.includes('<<< CONNECTED')) {
+          const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          setReceivedMessages(prevMessages => [...prevMessages, { message: 'Connected to server', time }]);
+        }
       },
       onConnect: () => {
         console.log('Connected');
