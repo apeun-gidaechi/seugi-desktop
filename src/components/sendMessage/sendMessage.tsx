@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import { Client } from '@stomp/stompjs';
 import * as S from "../sendMessage/sendMessage.style";
 import MessageBox from '@/components/MessageBox/messageBox'; 
 
@@ -7,12 +7,11 @@ import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
 import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
 import SendArrowBlue from "@/assets/image/chat-components/sendBlueArrow.svg";
 
-const socket = io('http://localhost:3000'); 
-
 const SendMessage: React.FC = () => {
   const [message, setMessage] = useState("");
   const [hasText, setHasText] = useState(false);
   const [receivedMessages, setReceivedMessages] = useState<{message: string, time: string}[]>([]);
+  const [stompClient, setStompClient] = useState<Client | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
@@ -20,42 +19,59 @@ const SendMessage: React.FC = () => {
     setHasText(!!text);
   };
 
-  const handleClick = () => {
-    if (message.trim() !== '') {
+  const sendMessage = (message: string) => {
+    if (stompClient && stompClient.connected) {
       const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       const newMessage = { message, time };
-      socket.emit('message', newMessage); 
+      stompClient.publish({ destination: '/app/chat', body: JSON.stringify(newMessage) });
       setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
       setMessage('');
       setHasText(false);
     }
   };
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      if (message.trim() !== '') {
-        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const newMessage = { message, time };
-        socket.emit('message', newMessage); 
-        sendToken();
-        setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
-        setMessage('');
-        setHasText(false);
-      }
+  const handleClick = () => {
+    if (message.trim() !== '') {
+      sendMessage(message);
     }
   };
 
-  const sendToken = () => {
-    socket.emit('token', "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE1ODQ2NDU5LCJleHAiOjE3MTY0NTEyNTl9.MqmdEJT1cRwgMDduNZKiw52Y5USKETstEgYDL0_LxNg");
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && message.trim() !== '') {
+      sendMessage(message);
+    }
   };
 
   useEffect(() => {
-    socket.on('message', (newMessage: { message: string, time: string }) => {
-      setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
+    const client = new Client({
+      brokerURL: 'wss://hoolc.me/stomp/chat',
+      connectHeaders: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE4MTYyMzE4LCJleHAiOjE3MTkwMjYzMTh9.FEbPDhGTCpVmiZTVfkkzG93PcYscXfDJ57Kx9lFSAHw`
+      },
+      debug: (str) => {
+        console.log(str);
+      },
+      onConnect: () => {
+        console.log('Connected');
+        client.subscribe('/topic/messages', (message) => {
+          const newMessage = JSON.parse(message.body);
+          setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
+        });
+      },
+      onDisconnect: () => {
+        console.log('Disconnected');
+      },
+      onStompError: (frame) => {
+        console.error('Broker reported error: ' + frame.headers['message']);
+        console.error('Additional details: ' + frame.body);
+      }
     });
 
+    client.activate();
+    setStompClient(client);
+
     return () => {
-      socket.off('message'); 
+      client.deactivate();
     };
   }, []);
 
