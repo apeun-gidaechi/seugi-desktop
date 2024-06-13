@@ -9,7 +9,7 @@ export const SchoolCodeMain = styled.div`
     align-items: center;
 `;
 
-export const F300 = styled.div`
+export const SchoolCode = styled.div`
     display: flex;
     padding: 24px 0px;
     flex-direction: column;
@@ -20,7 +20,7 @@ export const F300 = styled.div`
     align-self: stretch;
 `;
 
-export const F297 =styled.div`
+export const SchoolCodeContainer =styled.div`
     display: flex;
     width: 485px;
     padding: 36px 32px;

@@ -5,7 +5,7 @@ import Sun from '@/assets/image/onbording/EmailAuthentication/sun.svg';
 import Cloud1 from '@/assets/image/onbording/EmailAuthentication/cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/EmailAuthentication/cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
-import CodeTextFeild from '@/components/CodeTextField/CodeTextFeild';
+import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
 import config from '@/config/config.json';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -16,43 +16,45 @@ const EmailAuthentication = () => {
     const { name, email, password } = location.state || {};
     const [timer, setTimer] = useState(0);
     const [showAlert, setShowAlert] = useState(false);
-    const [code, setCode] = useState<string>('');
+    const [code, setCode] = useState<string[]>(Array(6).fill(''));
+    const [isCodeSent, setIsCodeSent] = useState(false);
     const navigate = useNavigate();
 
     const handleCloseAlert = () => {
-        console.log("custom Alert");
         setShowAlert(false);
     };
 
     // 인증코드 보내기 함수
     const handleSendCode = async () => {
-        console.log(email);
-        await axios.get(`${config.serverurl}/email/send`, {
-            params: { email: email }
-        }).then((res) => {
+        try {
+            console.log(email);
+            const res = await axios.get(`${config.serverurl}/email/send`, {
+                params: { email: email }
+            });
             console.log('Code sent successfully:', res.data);
             setTimer(300);
-        }).catch((error) => {
-            console.error(error)
-        })
+            setShowAlert(true);
+            setIsCodeSent(true);
+        } catch (error) {
+            console.error('Error sending code:', error);
+        }
     };
 
-    // CodeTextFeild 컴포넌트에서 입력값을 받아서 코드 문자열로 만드는 함수
-    const handleCodeChange = (index: number, value: string) => {
-        const updatedCode = code.split('');
-        updatedCode[index] = value;
-        setCode(updatedCode.join(''));
+    // CodeTextField 컴포넌트에서 입력값을 받아서 코드 문자열로 만드는 함수
+    const handleCodeChange = (updatedCode: string[]) => {
+        setCode(updatedCode);
     };
-    
+
     // 회원가입 정보 보내기
     const sendCode = async () => {
-        console.log(name, email, password, code);
+        const verificationCode = code.join('');
+        console.log(name, email, password, verificationCode);
         try {
             const res = await axios.post(`${config.serverurl}/member/register`, {
                 name,
                 email,
                 password,
-                code,
+                code: verificationCode,
             });
             console.log(res);
             navigate('/selectschool');
@@ -82,7 +84,7 @@ const EmailAuthentication = () => {
         if (e.key === 'Enter') {
             sendCode();
         }
-    }
+    };
 
     return (
         <S.AuthenticationMain>
@@ -101,18 +103,17 @@ const EmailAuthentication = () => {
                         </S.SubtitleContainer>
                     </S.CodeInputContainer>
                     <S.InputBox>
-                        {[...Array(6)].map((_, index) => (
-                            <CodeTextFeild
-                                key={index}
-                                onChange={(value) => handleCodeChange(index, value)}
-                                onKeyDown={handleKeyDown}
-                            />
-                        ))}
+                        <CodeTextField
+                            onChange={handleCodeChange}
+                            onKeyDown={handleKeyDown}
+                        />
                     </S.InputBox>
                     {timer > 0 ? (
                         <S.TimerSpan>{formatTime(timer)} 남음</S.TimerSpan>
                     ) : (
-                        <S.CodeSpan onClick={handleSendCode} >인증 코드 전송</S.CodeSpan>
+                        <S.CodeSpan onClick={handleSendCode}>
+                            {isCodeSent ? '인증 코드 재전송' : '인증 코드 전송'}
+                        </S.CodeSpan>
                     )}
                     {showAlert &&
                         <CustomAlert
