@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import * as S from '@/components/CodeTextField/CodeTextField.style';
 
 interface CodeTextFieldProps {
-    onChange: (value: string[]) => void; // Change to receive entire array
+    onChange: (value: string[]) => void;
     onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -16,7 +16,7 @@ const CodeTextField: React.FC<CodeTextFieldProps> = ({ onChange, onKeyDown }) =>
             if (pasteText) {
                 const newValues = pasteText.split('').slice(0, 6);
                 setInputValues(newValues);
-                onChange(newValues); // Update parent with entire array
+                onChange(newValues); 
             }
         };
 
@@ -33,7 +33,7 @@ const CodeTextField: React.FC<CodeTextFieldProps> = ({ onChange, onKeyDown }) =>
         if (value.length <= 1) {
             updatedValues[index] = value;
             setInputValues(updatedValues);
-            onChange(updatedValues); // Update parent with entire array
+            onChange(updatedValues);
             if (value && index < 5 && inputRefs.current[index + 1]) {
                 inputRefs.current[index + 1]!.focus();
             }
