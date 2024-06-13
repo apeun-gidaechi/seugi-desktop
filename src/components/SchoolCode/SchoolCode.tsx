@@ -20,7 +20,7 @@ const SchoolCode = () => {
                 },
             });
             console.log('Code sent successfully:', res.data);
-            navigate('/joinsuccess');
+            navigate('/joinsuccess', { state: { verificationCode }});
         } catch (error) {
             console.error('Error sending code:', error);
         }
