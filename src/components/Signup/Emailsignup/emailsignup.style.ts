@@ -164,6 +164,13 @@ export const InputContainer = styled.div`
 
 export const ErrorText = styled.p`
     color: red;
+    padding:10px 0 0 0;
+    font-family: 'Pretendard-Regular', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+    margin-left:4px;
 `;
 
 

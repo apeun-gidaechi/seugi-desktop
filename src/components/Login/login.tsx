@@ -4,16 +4,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from "@/config/config.json"
 import LoginButton from "@/components/button/Button";
+import TextField from '@/components/TextField/TextField';
+import CustomAlert from '@/components/Alert/Alert';
 import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
-import hidePasswordimg from '@/assets/image//onbording/hide_fill.svg';
-import AppleLogo from '@/assets/image//onbording/Start/applelogo.svg';
+import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg';
+import AppleLogo from '@/assets/image/onbording/Start/applelogo.svg';
 import GoogleLogo from '@/assets/image/onbording/Start/googlelogo.svg';
 import Cloud1 from '@/assets/image/onbording/Start/LoginCloud1.svg';
 import Cloud2 from '@/assets/image/onbording/Start/LoginCloud2.svg';
 import Sun from '@/assets/image/onbording/Start/LoginSun.svg';
 import Divider from '@/assets/image/onbording/Start/Divider.svg';
-import TextField from '@/components/TextField/TextField';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,9 +22,10 @@ const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState<string>('');
 
   const handleLogin = async () => {
-    // TODO MAKE A CUSTOM AXIOS 
     try {
       const res = await axios.post(`${config.serverurl}/member/login`, {
         email: email,
@@ -41,22 +43,13 @@ const Login = () => {
       const accessToken = res.data.data.accessToken;
       const refreshToken = res.data.data.refreshToken;
 
-      // const isRegisteredToSchool = res.data.data.isRegisteredToSchool;
-
-      //localStorage에 토큰 저장
       window.localStorage.setItem('accessToken', accessToken);
       window.localStorage.setItem('refreshToken', refreshToken);
 
-      // 만약 학교 가입이 되어있다면 chat으로 아니라면 join school 로 보내야 할듯 
-      // 일단 chat으로 보내기
-      // if (isRegisteredToSchool) {
       navigate("/chat");
-      // } else {
-      //   navigate("/selectschool");
-      // }
-
     } catch (error) {
-      alert("등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다"); // 일단 alert 사용 -> 도담도담처럼..?
+      setAlertMessage("등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다");
+      setShowAlert(true);
       console.log(error);
     }
   }
@@ -67,6 +60,10 @@ const Login = () => {
     }
   }
 
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
   return (
     <S.LoginMain>
       <S.Cloud1 src={Cloud1} />
@@ -75,9 +72,7 @@ const Login = () => {
       <S.LoginFirstWrap>
         <S.Fheader>
           <S.Header>
-            <S.SeugiImg
-              src={seugiImg}
-            />
+            <S.SeugiImg src={seugiImg} />
             <S.Title2> 반가워요! </S.Title2>
           </S.Header>
         </S.Fheader>
@@ -112,7 +107,7 @@ const Login = () => {
             </S.Enterinfo>
           </S.Inputpart>
           <S.Buttonpart>
-            <LoginButton text='로그인' onClick={handleLogin}/>
+            <LoginButton text='로그인' onClick={handleLogin} />
             <S.Body1>계정이 없으시다면? <S.Gosignup href="http://localhost:5173/emailsignup">가입하기</S.Gosignup> </S.Body1>
           </S.Buttonpart>
           <S.Orpart>
@@ -130,6 +125,14 @@ const Login = () => {
           </S.Oauthpart>
         </S.Inputarea>
       </S.LoginFirstWrap>
+      {showAlert &&
+        <CustomAlert
+          position=''
+          titletext="로그인 에러"
+          subtext={alertMessage}
+          onClose={handleCloseAlert}
+        />
+      }
     </S.LoginMain>
   );
 };
