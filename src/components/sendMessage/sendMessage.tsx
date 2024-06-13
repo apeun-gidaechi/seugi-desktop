@@ -10,7 +10,7 @@ import SendArrowBlue from "@/assets/image/chat-components/sendBlueArrow.svg";
 const SendMessage: React.FC = () => {
   const [message, setMessage] = useState("");
   const [hasText, setHasText] = useState(false);
-  const [receivedMessages, setReceivedMessages] = useState<{ message: string, time: string }[]>([]);
+  const [receivedMessages, setReceivedMessages] = useState<{ message: string, time: string, sender: string }[]>([]);
   const [stompClient, setStompClient] = useState<Client | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,8 +21,8 @@ const SendMessage: React.FC = () => {
 
   const sendMessage = (message: string) => {
     if (stompClient && stompClient.connected) {
-      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      const newMessage = { message, time };
+      const time = new Date().toISOString();
+      const newMessage = { message, time, sender: '자신의 ID' };
       stompClient.publish({ destination: '/app/chat', body: JSON.stringify(newMessage) });
       setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
       setMessage('');
@@ -80,11 +80,31 @@ const SendMessage: React.FC = () => {
     };
   }, []);
 
+  const shouldShowTime = (index: number): boolean => {
+    if (index === receivedMessages.length - 1) {
+      return true;
+    }
+
+    const currentMessage = receivedMessages[index];
+    const nextMessage = receivedMessages[index + 1];
+
+    const currentTime = new Date(currentMessage.time);
+    const nextTime = new Date(nextMessage.time);
+
+    const timeDifference = (nextTime.getTime() - currentTime.getTime()) / (1000 * 60 * 60);
+
+    return nextMessage.sender !== '자신의 ID' || timeDifference >= 24;
+  };
+
   return (
     <div>
       <div>
         {receivedMessages.map((msg, index) => (
-          <MessageBox key={index} message={msg.message} time={msg.time} />
+          <MessageBox 
+            key={index} 
+            message={msg.message} 
+            time={shouldShowTime(index) ? msg.time : ''} 
+          />
         ))}
       </div>
       <S.SendMessageWrap>
