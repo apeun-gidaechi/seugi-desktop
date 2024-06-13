@@ -26,17 +26,18 @@ const EmailAuthentication = () => {
 
     // 인증코드 보내기 함수
     const handleSendCode = async () => {
-        console.log(email);
-        await axios.get(`${config.serverurl}/email/send`, {
-            params: { email: email }
-        }).then((res) => {
+        try {
+            console.log(email);
+            const res = await axios.get(`${config.serverurl}/email/send`, {
+                params: { email: email }
+            });
             console.log('Code sent successfully:', res.data);
             setTimer(300);
             setShowAlert(true);
             setIsCodeSent(true);
-        }).catch((error) => {
-            console.error(error);
-        });
+        } catch (error) {
+            console.error('Error sending code:', error);
+        }
     };
 
     // CodeTextField 컴포넌트에서 입력값을 받아서 코드 문자열로 만드는 함수
@@ -110,9 +111,9 @@ const EmailAuthentication = () => {
                     {timer > 0 ? (
                         <S.TimerSpan>{formatTime(timer)} 남음</S.TimerSpan>
                     ) : (
-                            <S.CodeSpan onClick={handleSendCode}>
-                                {isCodeSent ? '인증 코드 재전송' : '인증 코드 전송'}
-                            </S.CodeSpan>
+                        <S.CodeSpan onClick={handleSendCode}>
+                            {isCodeSent ? '인증 코드 재전송' : '인증 코드 전송'}
+                        </S.CodeSpan>
                     )}
                     {showAlert &&
                         <CustomAlert
