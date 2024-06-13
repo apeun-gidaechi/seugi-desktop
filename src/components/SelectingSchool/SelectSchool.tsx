@@ -1,10 +1,18 @@
 import * as S from '@/components/SelectingSchool/SelectSchool.style';
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import JoinSchoolimg from '@/assets/image/join-school/JoinSchool.svg';
 import CreateSchoolimg from '@/assets/image/join-school/CreateSchool.svg';
 
 const SelectSchool = () => {
+    const navigate = useNavigate();
+    const handleJoinSchool = () => {
+        navigate('/schoolcode')
+    }
+    const handleNewSchool = () => {
+        navigate('/createschool')
+    }
   return (
     <S.SelectschoolMain>
         <S.SelectschoolFirstWrap>
@@ -14,11 +22,15 @@ const SelectSchool = () => {
                 </S.TitleContainer>
                 <S.ButtonContainer1>
                     <S.ButtonContainer>
-                        <S.Button><S.ButtonImg src={JoinSchoolimg}></S.ButtonImg></S.Button>
+                          <S.Button onClick={handleJoinSchool}>
+                            <S.ButtonImg src={JoinSchoolimg} />
+                            </S.Button>
                         <S.Subtitle> 초대 코드로 가입 </S.Subtitle>
                     </S.ButtonContainer>
                     <S.ButtonContainer>
-                        <S.Button><S.ButtonImg src={CreateSchoolimg}></S.ButtonImg></S.Button>
+                        <S.Button onClick={handleNewSchool}>
+                            <S.ButtonImg src={CreateSchoolimg}/>
+                        </S.Button>
                         <S.Subtitle> 새 학교 등록 </S.Subtitle>
                     </S.ButtonContainer>
                 </S.ButtonContainer1>

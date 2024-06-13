@@ -6,18 +6,40 @@ import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
 import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
 import TextField from '@/components/TextField/TextField';
-
+import config from '@/config/config.json';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const oauthsignup = () => {
+    const navigate = useNavigate();
     const [Name, setName] = useState("");
     
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
     };
 
-    const handlesignup = () => {
+    const handlesignup = async () => {
+        try {
+            const response = await axios.post(`${config.serverurl}/member/register`, {
+                name,
+                // 토큰 추가
+            });
+            if (response.status === 200) {
+                navigate('/emailathentance');
+            } else {
+                alert('회원가입 중 문제가 발생했습니다. 다시 시도해주세요.');
+            }
+        } catch (error) {
+            console.error('error:', error);
+            alert('회원가입 중 문제가 발생했습니다. 다시 시도해주세요.');
+        }
+    }
 
+    const handleKeyDown = (e: { key: string; }) => {
+        if (e.key === 'Enter') {
+            handlesignup();
+        }
     }
     return (
         <S.OauthMain>
@@ -39,6 +61,7 @@ const oauthsignup = () => {
                                 placeholder='이름을 입력해주세요'
                                 onChange={handleNameChange}
                                 style={{ border: "none" }}
+                                onKeyDown={handleKeyDown}
                             />
                         </S.InputContainer>
                     </S.EneterInfo>

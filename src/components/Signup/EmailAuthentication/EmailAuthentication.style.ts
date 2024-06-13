@@ -225,3 +225,13 @@ export const Cloud3 = styled.img`
     top: 49vh;
     z-index:3;
 `
+
+export const TimerSpan = styled.span`
+    color: var(--Gray-Gray600, #787878);
+
+    font-family: 'Pretendard-Regular', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 18.2px */
+`
