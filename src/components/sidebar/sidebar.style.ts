@@ -37,8 +37,8 @@ export const SideBarChat = styled.div`
 `
 
 export const ChatingPage = styled.div`
-    background: var(--Primary-Primary050, #F8FCFF);
-    display:flex;
+    /* background: var(--Primary-Primary050, #F8FCFF);
+    display:flex; */
 `
 
 export const SideBarImage = styled.img`
