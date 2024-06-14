@@ -44,7 +44,7 @@ const sidebar = () => {
                 </S.PlusButton>
             </S.SideBarChat>
             {/* <MessageBox/> */}
-            <SendMessage/>
+            
         </S.ChatingPage>
       </>
   )
