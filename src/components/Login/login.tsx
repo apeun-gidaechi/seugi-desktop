@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from "@/config/config.json"
-import LoginButton from "@/components/button/Button";
+import LoginButton from "@/components/Button/Button";
 import TextField from '@/components/TextField/TextField';
 import CustomAlert from '@/components/Alert/Alert';
 import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
