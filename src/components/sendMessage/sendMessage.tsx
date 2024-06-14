@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Client } from '@stomp/stompjs';
-import * as S from "../sendMessage/sendMessage.style";
+import * as S from "./sendMessage.style";
 import MessageBox from '@/components/MessageBox/messageBox'; 
 
 import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";

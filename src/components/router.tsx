@@ -3,7 +3,7 @@ import SchoolCode from '@/pages/SchoolcodePage/SchoolCodePage';
 import JoinSuccess from '@/pages/JoinSuccessPage/JoinSuccessPage';
 import Login from '@/pages/Login/LoginPage';
 import Selectingjob from '@/pages/Selectjob/SelectJobPage';
-import ChatMain from '@/pages/chat/chat'
+import ChatMain from '@/pages/Chat/chat'
 import Oauthsignup from '@/pages/AuthSignup/AuthSignupPage';
 import Emailsignup from '@/pages/EmailSignUp/EmailSignUpPage';
 import CreateSchool from '@/pages/CreateSchoolPage/CreateSchoolPage';

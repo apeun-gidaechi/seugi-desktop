@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from '@/components/CreateSchool/CreateSchool.style';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import TextField from '@/components/TextField/TextField';
 
 const handleCreateSchool = () => {

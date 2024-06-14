@@ -1,7 +1,7 @@
 import React from 'react'
-import * as S from "../chat/chat.style";
-import SideBar from "@/components/sidebar/sidebar"
-import SendMessage from "@/components/sendMessage/sendMessage"
+import * as S from "@/pages/Chat/chat.style";
+import SideBar from "@/components/SideBar/sidebar"
+import SendMessage from "@/components/SendMessage/sendMessage"
 // import SendMessage from "../../components/sendMessage/sendMessage"
 // import ChatForm from "../../components/ChatForm/chatForm"
 

@@ -1,4 +1,4 @@
-import * as S from "@/components/sidebar/sidebar.style"; 
+import * as S from "@/components/SideBar/sidebar.style"; 
 import React from 'react' 
 
 import Home from "@/assets/image/sidebar/home.svg"
@@ -8,13 +8,13 @@ import Bell from "@/assets/image/sidebar/bell.svg"
 import PlusButton from "@/assets/image/sidebar/plusButton.svg"
 import SearchIcon from "@/assets/image/chat-components/Search.svg" 
 import AvatarImg from "@/assets/image/chat-components/Avatar.svg"
-import SendMessage from "@/components/sendMessage/sendMessage";
+import SendMessage from "@/components/SendMessage/sendMessage";
 import MessageBox from "@/components/MessageBox/messageBox";
 
 import ChatForm from "@/components/ChatForm/chatForm"
 import CreateRoomName from "@/components/CreateRoomName/createRoomName"
 import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus"
-import MainRoomMemberManger from "@/components/mainRoomMemberManger/mainRoomMemberManger"
+import MainRoomMemberManger from "@/components/MainRoomMemberManger/mainRoomMemberManger"
 import MainRoomSearch from "@/components/MainRoomSearch/mainRoomSearch"
 // import MainRoomInfo from "@/components/MainRoomInfo/MainRoomInfo";
 import MainRoomInfoManger from "@/components/MainRoomInfoManager/mainRoomInfomanager"
