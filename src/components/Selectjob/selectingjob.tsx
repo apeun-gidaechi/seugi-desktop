@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import * as S from '@/components/Selectjob/selectingjob.style';
 import Student from '@/assets/image/join-school/selectjob/student.svg';
 import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
+import axios from 'axios';
+import config from '@/config/config.json';
 
-type Role = 'none' | 'student' | 'teacher';
+type Role = 'NONE' | 'STUDNET' | 'TEACHER';
 
-const SelectingJob = () => {
+const SelectingJob: React.FC = () => {
     const navigate = useNavigate();
-    const [selectedRole, setSelectedRole] = useState<Role>('none');
+    const token = window.localStorage.getItem("accessToken");
+    const [selectedRole, setSelectedRole] = useState<Role>('NONE');
 
     const handleStudentClick = () => {
-        setSelectedRole('student');
+        setSelectedRole('STUDNET');
     };
 
     const handleTeacherClick = () => {
-        setSelectedRole('teacher');
+        setSelectedRole('TEACHER');
     };
 
     const getTextColor = (role: Role) => {
@@ -27,42 +30,72 @@ const SelectingJob = () => {
         return selectedRole === role ? '#1D93F3' : '#E0E0E0';
     };
 
+    const location = useLocation();
+    const { verificationCode, workspaceId } = location.state || {};
+
+    const handleSelectedJob = async () => {
+        if (selectedRole === 'NONE') {
+            alert("학생/선생님 선택해주세요");
+            return;
+        }
+        console.log(workspaceId);
+        try {
+            const res = await axios.post(`${config.serverurl}/workspace/join`, {
+                workspaceId,
+                workspaceCode: verificationCode,
+                role: selectedRole,
+            }, {
+                headers: {
+                    'Authorization': `${token}`,
+                }
+            });
+
+            if (res.status === 200) {
+                navigate('/waitingacceptance'); 
+            } else {
+                console.error("워크스페이스 가입 실패:", res.data);
+            }
+        } catch (error) {
+            console.error("error", error);
+        }
+    };
+
     return (
         <S.SelectMain>
             <S.SelectFirstWrap>
                 <S.Selectjob>학생인가요 선생님인가요?</S.Selectjob>
                 <S.PickContainer>
-                    <S.PickJob onClick={handleStudentClick} style={{ borderColor: getBorderColor('student') }}>
+                    <S.PickJob onClick={handleStudentClick} style={{ borderColor: getBorderColor('STUDNET') }}>
                         <S.SubtitleContainer>
                             <S.Txtstudent
                                 style={{
-                                    color: getTextColor('student'),
-                                    transform: selectedRole === 'student' ? 'translateX(-8px)' : 'translateX(0)',
+                                    color: getTextColor('STUDNET'),
+                                    transform: selectedRole === 'STUDNET' ? 'translateX(-8px)' : 'translateX(0)',
                                     transition: 'transform 0.5s ease-in-out',
                                 }}
                             >
                                 학생
                                 <S.StdCheckLine
                                     src={Checkline}
-                                    style={{ display: selectedRole === 'student' ? 'block' : 'none', marginLeft: '8px' }}
+                                    style={{ display: selectedRole === 'STUDNET' ? 'block' : 'none', marginLeft: '8px' }}
                                 />
                             </S.Txtstudent>
                         </S.SubtitleContainer>
                         <S.Stdimg src={Student} />
                     </S.PickJob>
-                    <S.PickJob onClick={handleTeacherClick} style={{ borderColor: getBorderColor('teacher') }}>
+                    <S.PickJob onClick={handleTeacherClick} style={{ borderColor: getBorderColor('TEACHER') }}>
                         <S.SubtitleContainer>
                             <S.TxtTeacher
                                 style={{
-                                    color: getTextColor('teacher'),
-                                    transform: selectedRole === 'teacher' ? 'translateX(-8px)' : 'translateX(0)',
+                                    color: getTextColor('TEACHER'),
+                                    transform: selectedRole === 'TEACHER' ? 'translateX(-8px)' : 'translateX(0)',
                                     transition: 'transform 0.5s ease-in-out',
                                 }}
                             >
                                 선생님
                                 <S.TchCheckLine
                                     src={Checkline}
-                                    style={{ display: selectedRole === 'teacher' ? 'block' : 'none', marginLeft: '8px' }}
+                                    style={{ display: selectedRole === 'TEACHER' ? 'block' : 'none', marginLeft: '8px' }}
                                 />
                             </S.TxtTeacher>
                         </S.SubtitleContainer>
@@ -70,13 +103,13 @@ const SelectingJob = () => {
                     </S.PickJob>
                 </S.PickContainer>
                 <S.ButtonContainer>
-                    <S.OutButton>
+                    <S.OutButton onClick={handleSelectedJob}>
                         <S.Button>계속하기</S.Button>
                     </S.OutButton>
                 </S.ButtonContainer>
             </S.SelectFirstWrap>
         </S.SelectMain>
-    )
-}
+    );
+};
 
 export default SelectingJob;
