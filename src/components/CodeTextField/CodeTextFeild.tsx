@@ -14,9 +14,9 @@ const CodeTextField: React.FC<CodeTextFieldProps> = ({ onChange, onKeyDown }) =>
         const handlePaste = (e: ClipboardEvent) => {
             const pasteText = e.clipboardData?.getData('text');
             if (pasteText) {
-                const newValues = pasteText.split('').slice(0, 6);
+                const newValues = pasteText.split('').slice(0, 6).filter(char => char !== ' ');
                 setInputValues(newValues);
-                onChange(newValues); 
+                onChange(newValues);
             }
         };
 
@@ -29,6 +29,8 @@ const CodeTextField: React.FC<CodeTextFieldProps> = ({ onChange, onKeyDown }) =>
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const value = e.target.value;
+        if (value === ' ') return; // Prevent space character
+
         const updatedValues = [...inputValues];
         if (value.length <= 1) {
             updatedValues[index] = value;
