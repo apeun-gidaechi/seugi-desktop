@@ -51,7 +51,7 @@ const SelectingJob: React.FC = () => {
             });
 
             if (res.status === 200) {
-                navigate('/waitingacceptance'); 
+                navigate('/waitingjoin', {state : {token, }}); 
             } else {
                 console.error("워크스페이스 가입 실패:", res.data);
             }
