@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components'; 
-
+import { createGlobalStyle } from 'styled-components';
 
 export const SideBarMenu = styled.div`
     position: absolute;
@@ -10,7 +9,7 @@ export const SideBarMenu = styled.div`
     height: 971px;
     padding: 8px 0px;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 
     background: #FFF;
@@ -32,7 +31,6 @@ export const SideBarChat = styled.div`
 
     margin-left: 80px;
 
-
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
 
@@ -41,38 +39,34 @@ export const ChatingPage = styled.div`
     display:flex; */
 `
 
+export const SideBarButton = styled.button`
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    margin-bottom: 50px;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+`
+
 export const SideBarImage = styled.img`
     width: 36px;
     height: 36px;
-
-    position: absolute;
-    margin: 0;
-`
-
-export const SideBarImage1 = styled.img`
-    margin-top: 24%;
-`
-
-export const SideBarImage2 = styled.img`
-    margin-top: 100px;
-
-    position: absolute;
-`
-
-export const SideBarImage3 = styled.img`
-    margin-top: 172px;
-
-    position: absolute;
-`
-
-export const SideBarImage4 = styled.img`
-    margin-top: 244px;
-
-    position: absolute;
 `
 
 export const SideAvatarImgWrap = styled.div`
-
+    margin-top: auto;
 `
 
 export const SideAvatarImg = styled.img`
@@ -102,7 +96,7 @@ export const FindChatingRoom = styled.input`
     margin-left: 16px;
     outline: none;
     color: var(--Gray-Gray500, #AAA);
-   
+
     font-family: 'Pretendard-Regular', sans-serif;
     font-size: 16px;
     font-style: normal;

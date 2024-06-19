@@ -1,12 +1,12 @@
-import * as S from "@/components/SideBar/sidebar.style"; 
-import React from 'react' 
+import * as S from "@/components/SideBar/sidebar.style";
+import React from 'react'
 
 import Home from "@/assets/image/sidebar/home.svg"
 import Chat from "@/assets/image/sidebar/chat.svg"
 import Chats from "@/assets/image/sidebar/chats.svg"
 import Bell from "@/assets/image/sidebar/bell.svg"
 import PlusButton from "@/assets/image/sidebar/plusButton.svg"
-import SearchIcon from "@/assets/image/chat-components/Search.svg" 
+import SearchIcon from "@/assets/image/chat-components/Search.svg"
 import AvatarImg from "@/assets/image/chat-components/Avatar.svg"
 import SendMessage from "@/components/SendMessage/sendMessage";
 import MessageBox from "@/components/MessageBox/messageBox";
@@ -26,10 +26,18 @@ const sidebar = () => {
       <>
         <S.ChatingPage>
             <S.SideBarMenu>
-                <S.SideBarImage1 src={Home}/>
-                <S.SideBarImage2 src={Chat}/>
-                <S.SideBarImage3 src={Chats}/>
-                <S.SideBarImage4 src={Bell}/>
+                <S.SideBarButton>
+                    <S.SideBarImage src={Home}/>
+                </S.SideBarButton>
+                <S.SideBarButton>
+                    <S.SideBarImage src={Chat}/>
+                </S.SideBarButton>
+                <S.SideBarButton>
+                    <S.SideBarImage src={Chats}/>
+                </S.SideBarButton>
+                <S.SideBarButton>
+                    <S.SideBarImage src={Bell}/>
+                </S.SideBarButton>
                 <S.SideAvatarImgWrap>
                     <S.SideAvatarImg src={AvatarImg}/>
                 </S.SideAvatarImgWrap>
