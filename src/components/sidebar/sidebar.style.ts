@@ -38,25 +38,24 @@ export const SideBarButton = styled.button<{ isSelected: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 36px;
-    height: 36px;
-    margin-bottom: 50px;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 10px;
     position: relative;
-
+    outline: none;
     &:focus {
         outline: none;
     }
-
     &:last-child {
         margin-bottom: 0;
     }
-
-    &::after {
-        content: ${props => props.isSelected ? `url(${SelectBar})` : ''};
+    &::before {
+        content: '';
         position: absolute;
-        right: -50px;
-        width: 10px;
-        height: 36px;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: ${props => props.isSelected ? `url(${SelectBar}) no-repeat center` : 'none'};
     }
 `
 
@@ -102,7 +101,6 @@ export const FindChatingRoom = styled.input`
     font-style: normal;
     font-weight: 600;
     line-height: 130%;
-
     &:focus {
         color: black; 
     }
