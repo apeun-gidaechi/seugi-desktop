@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import * as S from '@/components/JoinSuccess/JoinSuccess.style';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import config from '@/config/config.json';
 
 const JoinSuccess = () => {
@@ -10,24 +10,34 @@ const JoinSuccess = () => {
   const [schoolName, setSchoolName] = useState('');
   const [schoolInfo, setSchoolInfo] = useState('');
   const [schoolImgUrl, setSchoolImgUrl] = useState('');
+  const [workspaceId, setWorkspaceId] = useState('');
+  const token = window.localStorage.getItem("accessToken");
+  const location = useLocation();
+  const { verificationCode } = location.state || {};
 
   const handleJoinSuccess = () => {
-    navigate('/selectjob');
+    navigate('/selectjob', { state: { verificationCode, workspaceId } });
   };
 
   useEffect(() => {
     const handleSchoolInfo = async () => {
       try {
-        const res = await axios.get(`${config.serverurl}/workspace/`);
-        setSchoolName(res.data.workspaceName);
-        setSchoolInfo(`학생 ${res.data.studentCount}명 선생님 ${res.data.teacherCount}명`);
-        setSchoolImgUrl(res.data.workspaceImageUrl);
+        const res = await axios.get(`${config.serverurl}/workspace/${verificationCode}`, {
+          headers: {
+            Authorization: `${token}`
+          },
+        });
+        const data = res.data.data;
+        setSchoolName(data.workspaceName);
+        setSchoolInfo(`학생 ${data.studentCount}명 선생님 ${data.teacherCount}명`);
+        setSchoolImgUrl(data.workspaceImageUrl);
+        setWorkspaceId(data.workspaceId);  
       } catch (error) {
         console.error('Failed to fetch school information:', error);
       }
     };
     handleSchoolInfo();
-  }, []);
+  }, [verificationCode, token]);
 
   return (
     <S.SuccessMain>
@@ -38,7 +48,7 @@ const JoinSuccess = () => {
           <S.SchoolInfo>{schoolInfo}</S.SchoolInfo>
         </S.SchoolInfoContainer>
         <S.ButtonContainer>
-          <Button onClick={handleJoinSuccess} />
+          <Button onClick={handleJoinSuccess} text="계속하기" />
         </S.ButtonContainer>
       </S.Container>
     </S.SuccessMain>
@@ -46,4 +56,3 @@ const JoinSuccess = () => {
 };
 
 export default JoinSuccess;
-

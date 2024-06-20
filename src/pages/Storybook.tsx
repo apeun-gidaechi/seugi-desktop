@@ -2,7 +2,7 @@ import React from 'react'
 import ChatForm from "@/components/ChatForm/chatForm"
 import CreateRoomName from "@/components/CreateRoomName/createRoomName"
 import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus"
-import MainRoomMemberManger from "@/components/mainRoomMemberManger/mainRoomMemberManger"
+import MainRoomMemberManger from "@/components/MainRoomMemberManger/mainRoomMemberManger"
 import MainRoomSearch from "@/components/MainRoomSearch/mainRoomSearch"
 import MainRoomInfoManger from "@/components/MainRoomInfoManager/mainRoomInfomanager"
 import BadgeNormal from "@/components/BadgeNormal/badgenormal";
