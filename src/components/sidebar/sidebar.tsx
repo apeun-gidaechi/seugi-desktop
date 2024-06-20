@@ -1,44 +1,47 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from "@/components/SideBar/sidebar.style";
 
-import Home from "@/assets/image/sidebar/home.svg"
-import Chat from "@/assets/image/sidebar/chat.svg"
-import Chats from "@/assets/image/sidebar/chats.svg"
-import Bell from "@/assets/image/sidebar/bell.svg"
-import PlusButton from "@/assets/image/sidebar/plusButton.svg"
-import SearchIcon from "@/assets/image/chat-components/Search.svg"
-import AvatarImg from "@/assets/image/chat-components/Avatar.svg"
+import Home from "@/assets/image/sidebar/home.svg";
+import Chat from "@/assets/image/sidebar/chat.svg";
+import Chats from "@/assets/image/sidebar/chats.svg";
+import Bell from "@/assets/image/sidebar/bell.svg";
+import PlusButton from "@/assets/image/sidebar/plusButton.svg";
+import SearchIcon from "@/assets/image/chat-components/Search.svg";
+import AvatarImg from "@/assets/image/chat-components/Avatar.svg";
 
-import SelectHome from "@/assets/image/sidebar/slecthome.svg"
-import SelectChat from "@/assets/image/sidebar/selectchat.svg"
-import SelectChats from "@/assets/image/sidebar/selectgroup.svg"
-import SelectBell from "@/assets/image/sidebar/selectbell.svg"
+import SelectHome from "@/assets/image/sidebar/slecthome.svg";
+import SelectChat from "@/assets/image/sidebar/selectchat.svg";
+import SelectChats from "@/assets/image/sidebar/selectgroup.svg";
+import SelectBell from "@/assets/image/sidebar/selectbell.svg";
 
-import SelectBar from "@/assets/image/sidebar/selectsidebar.svg"
+import SelectBar from "@/assets/image/sidebar/selectsidebar.svg";
 
 type SelectedButton = 'home' | 'chat' | 'chats' | 'bell' | null;
 
 const Sidebar: React.FC = () => {
   const [selected, setSelected] = useState<SelectedButton>(null);
+  const navigate = useNavigate();
 
-  const handleButtonClick = (button: SelectedButton) => {
+  const handleButtonClick = (button: SelectedButton, path: string) => {
     setSelected(button);
+    navigate(path);
   };
 
   return (
     <>
       <S.ChatingPage>
         <S.SideBarMenu>
-          <S.SideBarButton onClick={() => handleButtonClick('home')} isSelected={selected === 'home'}>
+          <S.SideBarButton onClick={() => handleButtonClick('home', '/home')} isSelected={selected === 'home'}>
             <S.SideBarImage src={selected === 'home' ? SelectHome : Home} />
           </S.SideBarButton>
-          <S.SideBarButton onClick={() => handleButtonClick('chat')} isSelected={selected === 'chat'}>
+          <S.SideBarButton onClick={() => handleButtonClick('chat', '/chat')} isSelected={selected === 'chat'}>
             <S.SideBarImage src={selected === 'chat' ? SelectChat : Chat} />
           </S.SideBarButton>
-          <S.SideBarButton onClick={() => handleButtonClick('chats')} isSelected={selected === 'chats'}>
+          <S.SideBarButton onClick={() => handleButtonClick('chats', '/chats')} isSelected={selected === 'chats'}>
             <S.SideBarImage src={selected === 'chats' ? SelectChats : Chats} />
           </S.SideBarButton>
-          <S.SideBarButton onClick={() => handleButtonClick('bell')} isSelected={selected === 'bell'}>
+          <S.SideBarButton onClick={() => handleButtonClick('bell', '/bell')} isSelected={selected === 'bell'}>
             <S.SideBarImage src={selected === 'bell' ? SelectBell : Bell} />
           </S.SideBarButton>
           <S.SideAvatarImgWrap>

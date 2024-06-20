@@ -3,13 +3,17 @@ import SchoolCode from '@/pages/SchoolcodePage/SchoolCodePage';
 import JoinSuccess from '@/pages/JoinSuccessPage/JoinSuccessPage';
 import Login from '@/pages/Login/LoginPage';
 import Selectingjob from '@/pages/Selectjob/SelectJobPage';
-import ChatMain from '@/pages/chat/chat'
+import ChatMain from '@/pages/Chat/chat'
 import Oauthsignup from '@/pages/AuthSignup/AuthSignupPage';
 import Emailsignup from '@/pages/EmailSignUp/EmailSignUpPage';
 import CreateSchool from '@/pages/CreateSchoolPage/CreateSchoolPage';
 import Authentication from '@/pages/EmailAuthentication/EmailAuthenticationPage';
 import WaitingJoin from '@/pages/WaitingJoin/WaitingJoinPage';
 import ComponentsStoryBook from '@/pages/Storybook'
+import Home from '@/pages/Home/home'
+import Chat from '@/pages/Chat/chat'
+import GroupChat from '@/pages/GroupChat/index'
+import Notification from '@/pages/Notification/index'
 
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -30,6 +34,10 @@ const Router = () => {
                 <Route path='/emailauthentication' element={<Authentication />} />
                 <Route path='/waitingacceptance' element={<WaitingJoin/>}/>
                 <Route path='/storybook' element={<ComponentsStoryBook/>}/>
+                <Route path='/home' element={<Home/>}/>
+                <Route path='/Chat' element={<Chat/>}/>
+                <Route path='/GroupChat' element={<GroupChat/>}/>
+                <Route path='/Notification' element={<Notification/>}/>
             </Routes>
         </BrowserRouter>
     )
