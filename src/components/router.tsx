@@ -32,7 +32,7 @@ const Router = () => {
                 <Route path='/joinsuccess' element={<JoinSuccess />} />
                 <Route path='/createschool' element={<CreateSchool />} />
                 <Route path='/emailauthentication' element={<Authentication />} />
-                <Route path='/waitingacceptance' element={<WaitingJoin/>}/>
+                <Route path='/waitingjoin' element={<WaitingJoin/>}/>
                 <Route path='/storybook' element={<ComponentsStoryBook/>}/>
                 <Route path='/home' element={<Home/>}/>
                 <Route path='/Chat' element={<Chat/>}/>

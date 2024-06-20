@@ -7,7 +7,7 @@ import config from '@/config/config.json';
 
 const JoinSuccess = () => {
   const navigate = useNavigate();
-  const [schoolName, setSchoolName] = useState('');
+  const [workspaceName, setWorkspaceName] = useState('');
   const [schoolInfo, setSchoolInfo] = useState('');
   const [schoolImgUrl, setSchoolImgUrl] = useState('');
   const [workspaceId, setWorkspaceId] = useState('');
@@ -28,7 +28,7 @@ const JoinSuccess = () => {
           },
         });
         const data = res.data.data;
-        setSchoolName(data.workspaceName);
+        setWorkspaceName(data.workspaceName);
         setSchoolInfo(`학생 ${data.studentCount}명 선생님 ${data.teacherCount}명`);
         setSchoolImgUrl(data.workspaceImageUrl);
         setWorkspaceId(data.workspaceId);  
@@ -44,7 +44,7 @@ const JoinSuccess = () => {
       <S.Container>
         <S.SchoolImg src={schoolImgUrl} alt="error" />
         <S.SchoolInfoContainer>
-          <S.SchoolName>{schoolName}</S.SchoolName>
+          <S.SchoolName>{workspaceName}</S.SchoolName>
           <S.SchoolInfo>{schoolInfo}</S.SchoolInfo>
         </S.SchoolInfoContainer>
         <S.ButtonContainer>
