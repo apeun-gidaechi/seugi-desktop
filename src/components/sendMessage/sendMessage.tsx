@@ -22,7 +22,7 @@ const SendMessage: React.FC = () => {
   const sendMessage = (message: string) => {
     if (stompClient && stompClient.connected) {
       const time = new Date().toISOString();
-      const newMessage = { message, time, sender: '자신의 ID' };
+      const newMessage = { message, time, sender: 'own ID' };
       stompClient.publish({ destination: '/app/chat', body: JSON.stringify(newMessage) });
       setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
       setMessage('');
@@ -93,7 +93,18 @@ const SendMessage: React.FC = () => {
 
     const timeDifference = (nextTime.getTime() - currentTime.getTime()) / (1000 * 60 * 60);
 
-    return nextMessage.sender !== '자신의 ID' || timeDifference >= 24;
+    return nextMessage.sender !== 'own ID' || timeDifference >= 24;
+  };
+
+  const formatTime = (time: string) => {
+    const date = new Date(time);
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const period = hours >= 12 ? '오후' : '오전';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // 0 시간을 12로 변경
+  
+    return `${period} ${hours}:${minutes.toString().padStart(2, '0')}`;
   };
 
   return (
@@ -103,7 +114,7 @@ const SendMessage: React.FC = () => {
           <MessageBox 
             key={index} 
             message={msg.message} 
-            time={shouldShowTime(index) ? msg.time : ''} 
+            time={shouldShowTime(index) ? formatTime(msg.time) : ''} 
           />
         ))}
       </div>
