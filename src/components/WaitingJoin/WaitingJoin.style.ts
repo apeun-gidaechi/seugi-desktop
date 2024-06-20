@@ -85,6 +85,3 @@ export const CheckButton = styled.button`
 
     cursor: pointer;
 `;
-
-
-
