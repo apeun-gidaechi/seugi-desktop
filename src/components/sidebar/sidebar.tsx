@@ -38,10 +38,10 @@ const Sidebar: React.FC = () => {
           <S.SideBarButton onClick={() => handleButtonClick('chat', '/chat')} isSelected={selected === 'chat'}>
             <S.SideBarImage src={selected === 'chat' ? SelectChat : Chat} />
           </S.SideBarButton>
-          <S.SideBarButton onClick={() => handleButtonClick('chats', '/chats')} isSelected={selected === 'chats'}>
+          <S.SideBarButton onClick={() => handleButtonClick('chats', '/groupchat')} isSelected={selected === 'chats'}>
             <S.SideBarImage src={selected === 'chats' ? SelectChats : Chats} />
           </S.SideBarButton>
-          <S.SideBarButton onClick={() => handleButtonClick('bell', '/bell')} isSelected={selected === 'bell'}>
+          <S.SideBarButton onClick={() => handleButtonClick('bell', '/notification')} isSelected={selected === 'bell'}>
             <S.SideBarImage src={selected === 'bell' ? SelectBell : Bell} />
           </S.SideBarButton>
           <S.SideAvatarImgWrap>
