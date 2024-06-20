@@ -27,7 +27,7 @@ const Sidebar: React.FC = () => {
     setSelected(button);
     navigate(path);
   };
-
+  
   return (
     <>
       <S.ChatingPage>

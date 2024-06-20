@@ -52,10 +52,12 @@ export const PickJob = styled.button`
     justify-content: center;
     align-items: center;
     gap: 16px;
-    border-radius: 20px;
     color: var(--Primary900, #020202);
     cursor: pointer;
     position: relative; 
+    border-radius: var(--Large, 12px);
+    border: 1px solid var(--Gray300, #E6E6E6);
+    background: var(--Primary-Primary050, #F8FCFF);
 `;
 
 export const Stdimg = styled.img`
