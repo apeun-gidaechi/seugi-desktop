@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components'; 
+import { createGlobalStyle } from 'styled-components';
 
 export const CreateSchoolMain = styled.div`
     display: flex;
@@ -100,4 +100,42 @@ export const ButtonContainer = styled.div`
     align-items: center;
     gap: 8px;
     align-self: stretch;
+`;
+
+export const Button = styled.input.attrs({ type: 'file' })`
+    width: 180px;
+    height: 180px;
+    background-color: transparent;
+    border: none;
+    position: relative;
+    display: inline-block;
+    z-index: 5;
+
+    &::file-selector-button {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        /* display:none;  */
+    }
+`;
+
+export const ButtonImg = styled.img`
+    width: 180px;
+    height: 180px;
+    flex-shrink: 0;
+    position: absolute;
+    display: inline-block;
+    z-index:4;
+`
+
+export const PlusButton = styled.img`
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    right: 43.5vw;
+    top: auto;
+    z-index:4;
+    display: inline-block;
 `;

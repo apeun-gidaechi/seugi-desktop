@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as S from '@/components/SchoolCode/SchoolCode.style';
-import Button from '@/components/Button/Button';
+import Button from '@/components/button/Button';
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
 import config from '@/config/config.json';
