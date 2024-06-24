@@ -59,9 +59,9 @@ const CreateSchool: React.FC = () => {
                     <S.Title>새 학교 등록</S.Title>
                 </S.TitleContainer>
                 <S.ButtonContainer>
-                    <S.Button type="file" onChange={handleChangeImage}>
-                    </S.Button>
-                    <S.ButtonImg src={isworkspaceImg } />
+                    <S.Input type="file" onChange={handleChangeImage}>
+                    </S.Input>
+                    <S.ButtonImg src={isworkspaceImg} />
                     <S.PlusButton src={PlusButtonimg} />
                 </S.ButtonContainer>
                 <S.InputContainer>
