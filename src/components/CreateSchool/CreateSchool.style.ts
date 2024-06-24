@@ -102,7 +102,7 @@ export const ButtonContainer = styled.div`
     align-self: stretch;
 `;
 
-export const Button = styled.input.attrs({ type: 'file' })`
+export const Input = styled.input.attrs({ type: 'file' })`
     width: 180px;
     height: 180px;
     background-color: transparent;
@@ -117,7 +117,7 @@ export const Button = styled.input.attrs({ type: 'file' })`
         cursor: pointer;
         background-color: transparent;
         border: none;
-        /* display:none;  */
+        display:none; 
     }
 `;
 
