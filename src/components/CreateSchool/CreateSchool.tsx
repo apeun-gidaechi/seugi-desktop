@@ -59,10 +59,11 @@ const CreateSchool: React.FC = () => {
                     <S.Title>새 학교 등록</S.Title>
                 </S.TitleContainer>
                 <S.ButtonContainer>
-                    <S.Input type="file" onChange={handleChangeImage}>
-                    </S.Input>
-                    <S.ButtonImg src={isworkspaceImg} />
-                    <S.PlusButton src={PlusButtonimg} />
+                    <label htmlFor="upload-button">
+                        <S.ButtonImg src={isworkspaceImg} style={{ zIndex: workspaceImageUrl ? 2 : 1, cursor: 'pointer' }} />
+                        <S.PlusButton src={PlusButtonimg} style={{ zIndex: workspaceImageUrl ? 1 : 2, cursor: 'pointer' }} />
+                    </label>
+                    <S.Input id="upload-button" type="file" onChange={handleChangeImage} accept='image/png, img/jpeg, img/jpg' />
                 </S.ButtonContainer>
                 <S.InputContainer>
                     <S.InputBox>
