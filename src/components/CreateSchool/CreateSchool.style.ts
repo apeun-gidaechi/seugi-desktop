@@ -110,14 +110,14 @@ export const Input = styled.input.attrs({ type: 'file' })`
     position: relative;
     display: inline-block;
     z-index: 5;
-
+    display:none;
     &::file-selector-button {
         width: 100%;
         height: 100%;
         cursor: pointer;
         background-color: transparent;
         border: none;
-        display:none; 
+        overflow: hidden;
     }
 `;
 
@@ -125,7 +125,6 @@ export const ButtonImg = styled.img`
     width: 180px;
     height: 180px;
     flex-shrink: 0;
-    position: absolute;
     display: inline-block;
     z-index:4;
 `
@@ -135,7 +134,10 @@ export const PlusButton = styled.img`
     height: 60px;
     position: absolute;
     right: 43.5vw;
-    top: auto;
+    top: 48vh;
     z-index:4;
-    display: inline-block;
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
 `;
