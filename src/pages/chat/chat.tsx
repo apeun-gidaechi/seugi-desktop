@@ -9,7 +9,6 @@ const chat = () => {
   return (
     <S.ChatingBackground>
         <SideBar/> 
-        <SendMessage/>
     </S.ChatingBackground>
   )
 }
