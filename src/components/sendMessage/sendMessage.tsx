@@ -7,7 +7,11 @@ import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
 import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
 import SendArrowBlue from "@/assets/image/chat-components/sendBlueArrow.svg";
 
-const SendMessage: React.FC = () => {
+interface SendMessageProps {
+  chatRoom: string;
+}
+
+const SendMessage: React.FC<SendMessageProps> = ({ chatRoom }) => {
   const [message, setMessage] = useState("");
   const [hasText, setHasText] = useState(false);
   const [receivedMessages, setReceivedMessages] = useState<{ message: string, time: string, sender: string }[]>([]);
@@ -23,7 +27,7 @@ const SendMessage: React.FC = () => {
     if (stompClient && stompClient.connected) {
       const time = new Date().toISOString();
       const newMessage = { message, time, sender: 'own ID' };
-      stompClient.publish({ destination: '/app/chat', body: JSON.stringify(newMessage) });
+      stompClient.publish({ destination: `/app/chat/${chatRoom}`, body: JSON.stringify(newMessage) });
       setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
       setMessage('');
       setHasText(false);
@@ -46,7 +50,7 @@ const SendMessage: React.FC = () => {
     const client = new Client({
       brokerURL: 'wss://hoolc.me/stomp/chat',
       connectHeaders: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE4MTYyMzE4LCJleHAiOjE3MTkwMjYzMTh9.FEbPDhGTCpVmiZTVfkkzG93PcYscXfDJ57Kx9lFSAHw`
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJyaGVlc2V1bGFAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcxNDA4NzQ0NCwiZXhwIjoxNzIxODYzNDQ0fQ.oqILzCb3asfWiF8SQKsUQzMS941Yo8gqOyclLe38ShY`
       },
       debug: (str) => {
         if (str.includes('<<< PONG')) {
@@ -58,7 +62,7 @@ const SendMessage: React.FC = () => {
         }
       },
       onConnect: () => {
-        client.subscribe('/topic/messages', (message) => {
+        client.subscribe(`/topic/messages/${chatRoom}`, (message) => {
           const newMessage = JSON.parse(message.body);
           setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
         });
@@ -78,7 +82,7 @@ const SendMessage: React.FC = () => {
     return () => {
       client.deactivate();
     };
-  }, []);
+  }, [chatRoom]);
 
   const shouldShowTime = (index: number): boolean => {
     if (index === receivedMessages.length - 1) {
@@ -128,9 +132,10 @@ const SendMessage: React.FC = () => {
           value={message}
           onChange={handleChange}
           onKeyPress={handleKeyPress} 
+          disabled={!chatRoom}  
         />
         
-        <S.SendArrowButton onClick={handleClick}>
+        <S.SendArrowButton onClick={handleClick} disabled={!chatRoom || !hasText}>
           {hasText ? (
             <S.SendArrow src={SendArrowBlue} alt="Send Message"/> 
           ) : (

@@ -16,9 +16,8 @@ import SelectChat from "@/assets/image/sidebar/selectchat.svg";
 import SelectChats from "@/assets/image/sidebar/selectgroup.svg";
 import SelectBell from "@/assets/image/sidebar/selectbell.svg";
 
-import SelectBar from "@/assets/image/sidebar/selectsidebar.svg";
-
 import config from "@/constants/ChatMember/config.json"; 
+import SendMessage from "@/components/SendMessage/sendMessage"; 
 
 type SelectedButton = 'home' | 'chat' | 'chats' | 'bell' | null;
 
@@ -26,11 +25,13 @@ const Sidebar: React.FC = () => {
   const [selected, setSelected] = useState<SelectedButton>(null);
   const [searchText, setSearchText] = useState('');
   const [chatRooms, setChatRooms] = useState<string[]>([]); 
+  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleButtonClick = (button: SelectedButton, path: string) => {
     setSelected(button);
     navigate(path);
+    setSelectedChatRoom(null);  
   };
 
   useEffect(() => {
@@ -50,6 +51,10 @@ const Sidebar: React.FC = () => {
       }
       return prevRooms;
     });
+  };
+
+  const handleChatRoomClick = (room: string) => {
+    setSelectedChatRoom(room);
   };
 
   return (
@@ -87,16 +92,16 @@ const Sidebar: React.FC = () => {
           </S.PlusButton>
           <S.ChatRoomList>
             {chatRooms.map((room, index) => (
-              <S.ChatRoom key={index}>
+              <S.ChatRoom key={index} onClick={() => handleChatRoomClick(room)}>
                 <S.ChatRoomAvatarWrap>
-                    <S.ChatRoomAvatar src={AvatarProfile} />
+                  <S.ChatRoomAvatar src={AvatarProfile} />
                 </S.ChatRoomAvatarWrap>
                 {room}
               </S.ChatRoom>
             ))}
           </S.ChatRoomList>
         </S.SideBarChat>
-        {/* <MessageBox/> */}
+        {selectedChatRoom && <SendMessage chatRoom={selectedChatRoom} />}
       </S.ChatingPage>
     </>
   );
