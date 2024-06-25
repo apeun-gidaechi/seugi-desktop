@@ -123,3 +123,40 @@ export const PlusButton = styled.button`
     margin-left: 282px;
     margin-top: 10px; 
 `
+
+export const ChatRoomList = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ChatRoom = styled.div`
+  display: flex;
+  height: 72px;
+  padding: 4px 16px;
+  justify-content: flex-start;
+  align-items: center;
+  flex-shrink: 0;
+  align-self: stretch;
+  cursor: pointer;
+
+  color: var(--Black, #000);
+
+  /* Subtitle2 */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 20.8px */
+  
+`;
+
+export const ChatRoomAvatar = styled.img`
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+`;
+
+export const ChatRoomAvatarWrap = styled.div`
+    padding-right: 16px;
+`
