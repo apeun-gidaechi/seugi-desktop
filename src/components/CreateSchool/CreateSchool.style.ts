@@ -117,7 +117,6 @@ export const Input = styled.input.attrs({ type: 'file' })`
         cursor: pointer;
         background-color: transparent;
         border: none;
-        overflow: hidden;
     }
 `;
 
@@ -127,6 +126,7 @@ export const ButtonImg = styled.img`
     flex-shrink: 0;
     display: inline-block;
     z-index:4;
+    cursor: pointer;
 `
 
 export const PlusButton = styled.img`
@@ -135,9 +135,5 @@ export const PlusButton = styled.img`
     position: absolute;
     right: 43.5vw;
     top: 48vh;
-    z-index:4;
-    display: flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items:center;
+    cursor: pointer;
 `;
