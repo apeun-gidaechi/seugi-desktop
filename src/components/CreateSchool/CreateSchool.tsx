@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent } from 'react';
 import * as S from '@/components/CreateSchool/CreateSchool.style';
 import Button from '@/components/button/Button';
 import TextField from '@/components/TextField/TextField';
+import  SeugiCustomAxios from '@/api/SeugiCutomAxios';
 import axios from 'axios';
 import config from '@/config/config.json';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
@@ -60,10 +61,10 @@ const CreateSchool: React.FC = () => {
                 </S.TitleContainer>
                 <S.ButtonContainer>
                     <label htmlFor="upload-button">
-                        <S.ButtonImg src={isworkspaceImg} style={{ zIndex: workspaceImageUrl ? 2 : 1, cursor: 'pointer' }} />
-                        <S.PlusButton src={PlusButtonimg} style={{ zIndex: workspaceImageUrl ? 1 : 2, cursor: 'pointer' }} />
+                        <S.ButtonImg src={isworkspaceImg} style={{ zIndex: workspaceImageUrl ? 2 : 1 }} />
+                        <S.PlusButton src={PlusButtonimg} style={{ zIndex: workspaceImageUrl ? 1 : 2 }} />
                     </label>
-                    <S.Input id="upload-button" type="file" onChange={handleChangeImage} accept='image/png, img/jpeg, img/jpg' />
+                    <S.Input id="upload-button" type="file" onChange={handleChangeImage} accept='image/png, image/jpeg, image/jpg' />
                 </S.ButtonContainer>
                 <S.InputContainer>
                     <S.InputBox>
