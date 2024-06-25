@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import SeugiAxios from '@/api/SeugiCutomAxios';
 import Button from '@/components/button/Button';
 import * as S from '@/components/JoinSuccess/JoinSuccess.style';
 import { useNavigate, useLocation } from 'react-router-dom';
-import config from '@/config/config.json';
 
 const JoinSuccess = () => {
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ const JoinSuccess = () => {
   useEffect(() => {
     const handleSchoolInfo = async () => {
       try {
-        const res = await axios.get(`${config.serverurl}/workspace/${verificationCode}`, {
+        const res = await SeugiAxios.get(`/workspace/${verificationCode}`, {
           headers: {
             Authorization: `${token}`
           },
