@@ -1,15 +1,17 @@
 import axios from 'axios';
 import config from '@/config/config.json';
 
+const token = window.localStorage.getItem("accessToken");
+
 const SeugiAxios = axios.create({
     baseURL: config.serverurl,
     headers: {
         'Content-Type': 'application/json',
+        Authorization: `${token}`
     },
 });
 
 SeugiAxios.interceptors.request.use((request) => {
-    const token = window.localStorage.getItem("accessToken");
     if (token) {
         request.headers.Authorization = `${token}`;
     }
@@ -18,8 +20,8 @@ SeugiAxios.interceptors.request.use((request) => {
     return Promise.reject(error);
 });
 
-SeugiAxios.interceptors.response.use((response) => {
-    return response;
+SeugiAxios.interceptors.response.use((res) => {
+    return res;
 }, (error) => {
     console.error('Error: ', error);
     return Promise.reject(error);

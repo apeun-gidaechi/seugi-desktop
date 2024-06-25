@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import JoinSchoolimg from '@/assets/image/join-school/JoinSchool.svg';
-import CreateSchoolimg from '@/assets/image/join-school/CreateSchool.svg';
+import CreateSchoolimg from '@/assets/image/join-school/JoinSchool/RoundedCircleImage.svg';
 
 const SelectSchool = () => {
     const navigate = useNavigate();

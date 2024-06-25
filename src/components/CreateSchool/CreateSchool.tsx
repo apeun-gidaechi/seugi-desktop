@@ -3,8 +3,6 @@ import * as S from '@/components/CreateSchool/CreateSchool.style';
 import Button from '@/components/button/Button';
 import TextField from '@/components/TextField/TextField';
 import  SeugiCustomAxios from '@/api/SeugiCutomAxios';
-import axios from 'axios';
-import config from '@/config/config.json';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
 import PlusButtonimg from '@/assets/image/join-school/plus.svg';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +17,7 @@ const CreateSchool: React.FC = () => {
 
     const handleCreateSchool = async () => {
         try {
-            const res = await axios.post(`${config.serverurl}/workspace`, {
+            const res = await SeugiCustomAxios.post(`/workspace`, {
                 workspaceName,
                 workspaceImageUrl,
             }, {
@@ -40,7 +38,7 @@ const CreateSchool: React.FC = () => {
         formData.append('file', e.target.files[0]);
 
         try {
-            const res = await axios.post(`${config.serverurl}/file/upload/IMG`, formData, {
+            const res = await SeugiCustomAxios.post(`/file/upload/IMG`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `${token}`
