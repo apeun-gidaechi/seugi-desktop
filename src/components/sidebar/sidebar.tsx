@@ -9,6 +9,7 @@ import Bell from "@/assets/image/sidebar/bell.svg";
 import PlusButton from "@/assets/image/sidebar/plusButton.svg";
 import SearchIcon from "@/assets/image/chat-components/Search.svg";
 import AvatarImg from "@/assets/image/chat-components/Avatar.svg";
+import AvatarProfile from "@/assets/image/chat-components/Avatar.svg"; 
 
 import SelectHome from "@/assets/image/sidebar/slecthome.svg";
 import SelectChat from "@/assets/image/sidebar/selectchat.svg";
@@ -17,13 +18,14 @@ import SelectBell from "@/assets/image/sidebar/selectbell.svg";
 
 import SelectBar from "@/assets/image/sidebar/selectsidebar.svg";
 
-import config from "@/constants/ChatMember/config.json"; // Importing the JSON file
+import config from "@/constants/ChatMember/config.json"; 
 
 type SelectedButton = 'home' | 'chat' | 'chats' | 'bell' | null;
 
 const Sidebar: React.FC = () => {
   const [selected, setSelected] = useState<SelectedButton>(null);
   const [searchText, setSearchText] = useState('');
+  const [chatRooms, setChatRooms] = useState<string[]>([]); 
   const navigate = useNavigate();
 
   const handleButtonClick = (button: SelectedButton, path: string) => {
@@ -35,10 +37,20 @@ const Sidebar: React.FC = () => {
     if (searchText) {
       const isRoomFound = config.name.includes(searchText);
       if (isRoomFound) {
-        alert(`Room found: ${searchText}`);
+        alert(`name found: ${searchText}`);
+        addChatRoom(searchText); 
       }
     }
   }, [searchText]);
+
+  const addChatRoom = (roomName: string) => {
+    setChatRooms((prevRooms) => {
+      if (!prevRooms.includes(roomName)) {
+        return [...prevRooms, roomName];
+      }
+      return prevRooms;
+    });
+  };
 
   return (
     <>
@@ -73,6 +85,16 @@ const Sidebar: React.FC = () => {
           <S.PlusButton>
             <S.PlusButtonImg src={PlusButton} />
           </S.PlusButton>
+          <S.ChatRoomList>
+            {chatRooms.map((room, index) => (
+              <S.ChatRoom key={index}>
+                <S.ChatRoomAvatarWrap>
+                    <S.ChatRoomAvatar src={AvatarProfile} />
+                </S.ChatRoomAvatarWrap>
+                {room}
+              </S.ChatRoom>
+            ))}
+          </S.ChatRoomList>
         </S.SideBarChat>
         {/* <MessageBox/> */}
       </S.ChatingPage>
