@@ -102,7 +102,7 @@ const SendMessage: React.FC = () => {
     const minutes = date.getMinutes();
     const period = hours >= 12 ? '오후' : '오전';
     hours = hours % 12;
-    hours = hours ? hours : 12; // 0 시간을 12로 변경
+    hours = hours ? hours : 12; 
   
     return `${period} ${hours}:${minutes.toString().padStart(2, '0')}`;
   };
