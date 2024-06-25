@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from "@/components/SideBar/sidebar.style";
 
@@ -17,17 +17,29 @@ import SelectBell from "@/assets/image/sidebar/selectbell.svg";
 
 import SelectBar from "@/assets/image/sidebar/selectsidebar.svg";
 
+import config from "@/constants/ChatMember/config.json"; // Importing the JSON file
+
 type SelectedButton = 'home' | 'chat' | 'chats' | 'bell' | null;
 
 const Sidebar: React.FC = () => {
   const [selected, setSelected] = useState<SelectedButton>(null);
+  const [searchText, setSearchText] = useState('');
   const navigate = useNavigate();
 
   const handleButtonClick = (button: SelectedButton, path: string) => {
     setSelected(button);
     navigate(path);
   };
-  
+
+  useEffect(() => {
+    if (searchText) {
+      const isRoomFound = config.name.includes(searchText);
+      if (isRoomFound) {
+        alert(`Room found: ${searchText}`);
+      }
+    }
+  }, [searchText]);
+
   return (
     <>
       <S.ChatingPage>
@@ -50,7 +62,12 @@ const Sidebar: React.FC = () => {
         </S.SideBarMenu>
         <S.SideBarChat>
           <S.SideFinder>
-            <S.FindChatingRoom type="text" placeholder="채팅방 검색" />
+            <S.FindChatingRoom 
+              type="text" 
+              placeholder="채팅방 검색" 
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
             <S.SearchIcon src={SearchIcon} />
           </S.SideFinder>
           <S.PlusButton>
