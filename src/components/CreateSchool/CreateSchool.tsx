@@ -2,7 +2,8 @@ import React, { useState, ChangeEvent } from 'react';
 import * as S from '@/components/CreateSchool/CreateSchool.style';
 import Button from '@/components/Button/Button';
 import TextField from '@/components/TextField/TextField';
-import SeugiAxios from '@/api/SeugiCutomAxios';
+// import SeugiAxios from '@/api/SeugiCutomAxios';
+import axios from 'axios';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
 import PlusButtonimg from '@/assets/image/join-school/plus.svg';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +24,7 @@ const CreateSchool = () => {
         }
 
         try {
-            const res = await SeugiAxios.post(`/workspace`, {
+            const res = await axios.post(`/workspace`, {
                 workspaceName,
                 workspaceImageUrl,
             }, {
@@ -44,7 +45,7 @@ const CreateSchool = () => {
         formData.append('file', e.target.files[0]);
 
         try {
-            const res = await SeugiAxios.post(`/file/upload/IMG`, formData, {
+            const res = await axios.post(`/file/upload/IMG`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `${token}`
