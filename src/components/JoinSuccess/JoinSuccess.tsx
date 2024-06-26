@@ -30,7 +30,7 @@ const JoinSuccess = () => {
         setWorkspaceName(data.workspaceName);
         setSchoolInfo(`학생 ${data.studentCount}명 선생님 ${data.teacherCount}명`);
         setSchoolImgUrl(data.workspaceImageUrl);
-        setWorkspaceId(data.workspaceId);  
+        setWorkspaceId(data.workspaceId);
       } catch (error) {
         console.error('Failed to fetch school information:', error);
       }

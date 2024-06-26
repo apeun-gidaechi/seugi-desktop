@@ -1,5 +1,4 @@
 import * as S from '@/components/SelectingSchool/SelectSchool.style';
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import JoinSchoolimg from '@/assets/image/join-school/JoinSchool.svg';
