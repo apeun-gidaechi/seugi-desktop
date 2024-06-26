@@ -3,7 +3,7 @@ import axios from 'axios';
 import Button from '@/components/Button/Button';
 import * as S from '@/components/JoinSuccess/JoinSuccess.style';
 import { useNavigate, useLocation } from 'react-router-dom';
-import config from '@/config/config.json';
+import config from '@/constants/config/config.json';
 
 const JoinSuccess = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const JoinSuccess = () => {
         setWorkspaceName(data.workspaceName);
         setSchoolInfo(`학생 ${data.studentCount}명 선생님 ${data.teacherCount}명`);
         setSchoolImgUrl(data.workspaceImageUrl);
-        setWorkspaceId(data.workspaceId);  
+        setWorkspaceId(data.workspaceId);
       } catch (error) {
         console.error('Failed to fetch school information:', error);
       }
