@@ -3,7 +3,7 @@ import axios from 'axios';
 import Button from '@/components/Button/Button';
 import * as S from '@/components/JoinSuccess/JoinSuccess.style';
 import { useNavigate, useLocation } from 'react-router-dom';
-import config from '@/constant/config/config.json';
+import config from '@/constants/config/config.json';
 
 const JoinSuccess = () => {
   const navigate = useNavigate();

@@ -7,7 +7,7 @@ import Cloud2 from '@/assets/image/onbording/EmailAuthentication/cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
-import config from '@/constant/config/config.json';
+import config from '@/constants/config/config.json';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CustomAlert from '@/components/Alert/Alert';
 
