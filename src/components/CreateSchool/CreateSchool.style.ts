@@ -10,7 +10,7 @@ export const CreateSchoolMain = styled.div`
     flex: 1 0 0;
     align-self: stretch;
     margin-top:20vh;
-`;
+`
 
 export const CreateSchoolContainer = styled.div`
     display: flex;
@@ -20,7 +20,7 @@ export const CreateSchoolContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 32px;
-`;
+`
 
 export const TitleContainer = styled.div`
     display: flex;
@@ -28,7 +28,7 @@ export const TitleContainer = styled.div`
     justify-content: center;
     align-items: center;
     align-self: stretch;
-`;
+`
 
 export const Title = styled.span`
     color: var(--Black, #000);
@@ -38,12 +38,12 @@ export const Title = styled.span`
     font-style: normal;
     font-weight: 700;
     line-height: 130%; /* 36.4px */
-`;
+`
 
 export const InputImg = styled.img`
     width: 128px;
     height: 128px;
-`;
+`
 
 export const InputContainer = styled.div`
     display: flex;
@@ -52,7 +52,7 @@ export const InputContainer = styled.div`
     align-items: center;
     gap: 16px;
     align-self: stretch;
-`;
+`
 
 
 export const InputBox = styled.div`
@@ -62,7 +62,7 @@ export const InputBox = styled.div`
     align-items: flex-start;
     gap: 4px;
     align-self: stretch;
-`;
+`
 
 export const SubtitleContainer = styled.div`
     display: flex;
@@ -70,7 +70,7 @@ export const SubtitleContainer = styled.div`
     justify-content: center;
     align-items: flex-start;
     gap: 10px;
-`;
+`
 
 export const Subtitle = styled.span`
     margin-left:4px;
@@ -81,7 +81,7 @@ export const Subtitle = styled.span`
     font-style: normal;
     font-weight: 600;
     line-height: 130%; /* 18.2px */
-`;
+`
 
 export const RedStar = styled.a`
     color: var(--Red-Red500, #F90707);
@@ -91,7 +91,7 @@ export const RedStar = styled.a`
     font-style: normal;
     font-weight: 600;
     line-height: 130%;
-`;
+`
 
 export const ButtonContainer = styled.div`
     display: flex;
@@ -100,7 +100,7 @@ export const ButtonContainer = styled.div`
     align-items: center;
     gap: 8px;
     align-self: stretch;
-`;
+`
 
 export const Input = styled.input.attrs({ type: 'file' })`
     width: 180px;
@@ -118,7 +118,7 @@ export const Input = styled.input.attrs({ type: 'file' })`
         background-color: transparent;
         border: none;
     }
-`;
+`
 
 export const ButtonImg = styled.img`
     width: 180px;
@@ -136,4 +136,9 @@ export const PlusButton = styled.img`
     right: 43.5vw;
     top: 48vh;
     cursor: pointer;
-`;
+    z-index:4;
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+`

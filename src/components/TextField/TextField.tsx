@@ -9,7 +9,7 @@ interface SeugiTextFieldProps {
     type?: React.HTMLInputTypeAttribute;
     onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
     style: React.CSSProperties;
-    // value:string;
+    value:string;
 }
 
 const TextField: React.FC<SeugiTextFieldProps> = ({ onChange, placeholder, type = 'text', onKeyDown, style }) => {
