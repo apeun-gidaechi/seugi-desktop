@@ -2,7 +2,7 @@ import * as S from '@/components/Login/login.style';
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import config from "@/config/config.json"
+import config from '@/constants/config/config.json';
 import LoginButton from "@/components/Button/Button";
 import TextField from '@/components/TextField/TextField';
 import CustomAlert from '@/components/Alert/Alert';
@@ -82,6 +82,7 @@ const Login = () => {
               <S.Subtitle2>이메일 <S.Redstar>*</S.Redstar></S.Subtitle2>
               <S.InputContainer>
                 <TextField
+                  value='email'
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="이메일을 입력해주세요"
@@ -94,6 +95,7 @@ const Login = () => {
               <S.Subtitle2>비밀번호 <S.Redstar>*</S.Redstar></S.Subtitle2>
               <S.InputContainer>
                 <TextField
+                  value='password'
                   type={showPassword ? "text" : "password"}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="비밀번호를 입력해주세요"
