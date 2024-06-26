@@ -1,15 +1,16 @@
 import React, { useState, ChangeEvent } from 'react';
 import * as S from '@/components/CreateSchool/CreateSchool.style';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import TextField from '@/components/TextField/TextField';
 import axios from 'axios';
-import config from '@/config/config.json';
+import config from '@/constant/config/config.json';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
 import PlusButtonimg from '@/assets/image/join-school/plus.svg';
 import { useNavigate } from 'react-router-dom';
 
-const CreateSchool: React.FC = () => {
+const CreateSchool = () => {
     const navigate = useNavigate();
+
     const [workspaceName, setWorkspaceName] = useState<string>('');
     const [workspaceImageUrl, setWorkspaceImageUrl] = useState<string | null>(null);
     const token = window.localStorage.getItem("accessToken");
@@ -18,6 +19,11 @@ const CreateSchool: React.FC = () => {
 
     const handleCreateSchool = async () => {
         try {
+            if (!workspaceName.trim()) {
+                alert('학교 이름을 입력해주세요.');
+                return;
+            }
+
             const res = await axios.post(`${config.serverurl}/workspace`, {
                 workspaceName,
                 workspaceImageUrl,
@@ -27,7 +33,7 @@ const CreateSchool: React.FC = () => {
                 },
             });
             console.log('Code', res.data);
-            navigate('/')
+            navigate('/');
         } catch (error) {
             console.error('Error sending code:', error);
         }
@@ -73,6 +79,7 @@ const CreateSchool: React.FC = () => {
                         <TextField
                             style={{ border: "1px solid var(--Gray-Gray300, #E6E6E6)" }}
                             placeholder='학교 이름을 입력해주세요'
+                            value="SchoolName"
                             onChange={(e) => setWorkspaceName(e.target.value)}
                         />
                     </S.InputBox>

@@ -6,7 +6,7 @@ import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
 import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import TextField from '@/components/TextField/TextField';
 import useSignup from '@/hooks/Signuphook/useSignup';
 
@@ -30,11 +30,12 @@ const emailsignup = () => {
                         </S.Subtitle>
                         <S.InputContainer>
                             <TextField
+                                value="name"
                                 placeholder='이름을 입력해주세요'
                                 onChange={signUp.handleNameChange}
                                 style={{ border: "none" }}
                                 onKeyDown={signUp.handleKeyDown}
-                                />
+                            />
                         </S.InputContainer>
                     </S.EneterInfo>
                     <S.EneterInfo>
@@ -43,11 +44,12 @@ const emailsignup = () => {
                         </S.Subtitle>
                         <S.InputContainer>
                             <TextField
+                                value='email'
                                 style={{ border: "none" }}
                                 placeholder='이메일을 입력해주세요'
                                 onChange={signUp.handleEmailChange}
-                                onKeyDown={signUp.handleKeyDown} 
-                                />
+                                onKeyDown={signUp.handleKeyDown}
+                            />
                         </S.InputContainer>
                     </S.EneterInfo>
                     <S.EneterInfo>
@@ -56,6 +58,7 @@ const emailsignup = () => {
                         </S.Subtitle>
                         <S.InputContainer>
                             <TextField
+                                value='password'
                                 style={{ border: "none" }}
                                 type={signUp.showPassword ? 'text' : 'password'}
                                 placeholder='비밀번호를 입력해주세요'
@@ -73,6 +76,7 @@ const emailsignup = () => {
                         </S.Subtitle>
                         <S.InputContainer>
                             <TextField
+                                value="confirmPassword"
                                 style={{ border: "none" }}
                                 type={signUp.showConfirmPassword ? 'text' : 'password'}
                                 placeholder='비밀번호를 다시 입력해주세요'
@@ -87,7 +91,7 @@ const emailsignup = () => {
                     </S.EneterInfo>
                 </S.TxtContainer>
                 <S.ButtonContainer>
-                    <Button onClick={signUp.handleSignup}/>
+                    <Button onClick={signUp.handleSignup} />
                     <S.EmailCheck>
                         <S.Haveemail href='http://localhost:5173/login'>이미 계정이 있으신가요?</S.Haveemail>
                     </S.EmailCheck>

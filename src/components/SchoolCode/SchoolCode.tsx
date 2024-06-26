@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import * as S from '@/components/SchoolCode/SchoolCode.style';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
-import config from '@/config/config.json';
+import config from '@/constant/config/config.json';
 import { useNavigate } from 'react-router-dom';
 
 const SchoolCode = () => {
     const navigate = useNavigate();
     const [code, setCode] = useState<string[]>(Array(6).fill(''));
     const token = window.localStorage.getItem("accessToken");
-    
+
     const handleContinue = async () => {
         const verificationCode = code.join('');
         try {
@@ -20,7 +20,7 @@ const SchoolCode = () => {
                 },
             });
             console.log('Code sent successfully:', res.data);
-            navigate('/joinsuccess', { state: { verificationCode }});
+            navigate('/joinsuccess', { state: { verificationCode } });
         } catch (error) {
             console.error('Error sending code:', error);
         }
@@ -32,7 +32,7 @@ const SchoolCode = () => {
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            handleContinue(); 
+            handleContinue();
         }
     };
 

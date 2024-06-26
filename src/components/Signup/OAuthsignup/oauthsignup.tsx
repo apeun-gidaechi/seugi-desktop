@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import * as S from '@/components/Signup/OAuthsignup/oauthsignup.style';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
 import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
 import TextField from '@/components/TextField/TextField';
-import config from '@/config/config.json';
+import config from '@/constant/config/config.json';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 const oauthsignup = () => {
     const navigate = useNavigate();
     const [Name, setName] = useState("");
-    
+
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
     };
@@ -62,12 +62,13 @@ const oauthsignup = () => {
                                 onChange={handleNameChange}
                                 style={{ border: "none" }}
                                 onKeyDown={handleKeyDown}
+                                value={Name}
                             />
                         </S.InputContainer>
                     </S.EneterInfo>
                 </S.TxtContainer>
                 <S.ButtonContainer>
-                    <Button onClick={handlesignup}/>
+                    <Button onClick={handlesignup} />
                     <S.EmailCheck>
                         <S.HaveEmail href='http://localhost:5173/login'>이미 계정이 있으신가요?</S.HaveEmail>
                     </S.EmailCheck>

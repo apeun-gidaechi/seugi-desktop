@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import * as S from '@/components/Signup/EmailAuthentication/EmailAuthentication.style';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import Sun from '@/assets/image/onbording/EmailAuthentication/sun.svg';
 import Cloud1 from '@/assets/image/onbording/EmailAuthentication/cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/EmailAuthentication/cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
-import config from '@/config/config.json';
+import config from '@/constant/config/config.json';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CustomAlert from '@/components/Alert/Alert';
 

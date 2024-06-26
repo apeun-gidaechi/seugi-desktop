@@ -5,7 +5,7 @@ import Student from '@/assets/image/join-school/selectjob/student.svg';
 import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
 import axios from 'axios';
-import config from '@/config/config.json';
+import config from '@/constant/config/config.json';
 
 type Role = 'NONE' | 'STUDNET' | 'TEACHER';
 
