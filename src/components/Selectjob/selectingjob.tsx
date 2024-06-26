@@ -4,7 +4,8 @@ import * as S from '@/components/Selectjob/selectingjob.style';
 import Student from '@/assets/image/join-school/selectjob/student.svg';
 import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
-import SeugiAxios from '@/api/SeugiCutomAxios';
+// import SeugiAxios from '@/api/SeugiCutomAxios';
+import axios from 'axios';
 
 type Role = 'NONE' | 'STUDENT' | 'TEACHER';
 
@@ -39,7 +40,7 @@ const SelectingJob: React.FC = () => {
         }
         console.log(workspaceId);
         try {
-            const res = await SeugiAxios.post(`/workspace/join`, {
+            const res = await axios.post(`/workspace/join`, {
                 workspaceId,
                 workspaceCode: verificationCode,
                 role: selectedRole,
