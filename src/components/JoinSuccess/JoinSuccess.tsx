@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import SeugiAxios from '@/api/SeugiCutomAxios';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import * as S from '@/components/JoinSuccess/JoinSuccess.style';
 import { useNavigate, useLocation } from 'react-router-dom';
 
