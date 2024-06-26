@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import * as S from '@/components/SchoolCode/SchoolCode.style';
 import Button from '@/components/Button/Button';
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
-import axios from 'axios';
-import config from '@/constants/config/config.json';
+import SeugiAxios from '@/api/SeugiCutomAxios';
+
 import { useNavigate } from 'react-router-dom';
 
 const SchoolCode = () => {
@@ -14,7 +14,7 @@ const SchoolCode = () => {
     const handleContinue = async () => {
         const verificationCode = code.join('');
         try {
-            const res = await axios.get(`${config.serverurl}/workspace/${verificationCode}`, {
+            const res = await SeugiAxios.get(`/workspace/${verificationCode}`, {
                 headers: {
                     Authorization: `${token}`
                 },

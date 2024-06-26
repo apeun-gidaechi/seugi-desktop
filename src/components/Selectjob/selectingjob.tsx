@@ -4,10 +4,9 @@ import * as S from '@/components/Selectjob/selectingjob.style';
 import Student from '@/assets/image/join-school/selectjob/student.svg';
 import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
-import axios from 'axios';
-import config from '@/constants/config/config.json';
+import SeugiAxios from '@/api/SeugiCutomAxios';
 
-type Role = 'NONE' | 'STUDNET' | 'TEACHER';
+type Role = 'NONE' | 'STUDENT' | 'TEACHER';
 
 const SelectingJob: React.FC = () => {
     const navigate = useNavigate();
@@ -15,11 +14,11 @@ const SelectingJob: React.FC = () => {
     const [selectedRole, setSelectedRole] = useState<Role>('NONE');
 
     const handleStudentClick = () => {
-        setSelectedRole('STUDNET');
+        setSelectedRole('STUDENT');
     };
 
     const handleTeacherClick = () => {
-        setSelectedRole('TEACHER');
+        setSelectedRole('STUDENT');
     };
 
     const getTextColor = (role: Role) => {
@@ -40,7 +39,7 @@ const SelectingJob: React.FC = () => {
         }
         console.log(workspaceId);
         try {
-            const res = await axios.post(`${config.serverurl}/workspace/join`, {
+            const res = await SeugiAxios.post(`/workspace/join`, {
                 workspaceId,
                 workspaceCode: verificationCode,
                 role: selectedRole,
@@ -65,19 +64,19 @@ const SelectingJob: React.FC = () => {
             <S.SelectFirstWrap>
                 <S.Selectjob>학생인가요 선생님인가요?</S.Selectjob>
                 <S.PickContainer>
-                    <S.PickJob onClick={handleStudentClick} style={{ borderColor: getBorderColor('STUDNET') }}>
+                    <S.PickJob onClick={handleStudentClick} style={{ borderColor: getBorderColor('STUDENT') }}>
                         <S.SubtitleContainer>
                             <S.Txtstudent
                                 style={{
-                                    color: getTextColor('STUDNET'),
-                                    transform: selectedRole === 'STUDNET' ? 'translateX(-8px)' : 'translateX(0)',
+                                    color: getTextColor('STUDENT'),
+                                    transform: selectedRole === 'STUDENT' ? 'translateX(-8px)' : 'translateX(0)',
                                     transition: 'transform 0.5s ease-in-out',
                                 }}
                             >
                                 학생
                                 <S.StdCheckLine
                                     src={Checkline}
-                                    style={{ display: selectedRole === 'STUDNET' ? 'block' : 'none', marginLeft: '8px' }}
+                                    style={{ display: selectedRole === 'STUDENT' ? 'block' : 'none', marginLeft: '8px' }}
                                 />
                             </S.Txtstudent>
                         </S.SubtitleContainer>
