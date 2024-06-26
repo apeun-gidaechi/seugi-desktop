@@ -3,7 +3,7 @@ import * as S from '@/components/SchoolCode/SchoolCode.style';
 import Button from '@/components/Button/Button';
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
-import config from '@/constant/config/config.json';
+import config from '@/constants/config/config.json';
 import { useNavigate } from 'react-router-dom';
 
 const SchoolCode = () => {

@@ -6,7 +6,7 @@ import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
 import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
 import TextField from '@/components/TextField/TextField';
-import config from '@/constant/config/config.json';
+import config from '@/constants/config/config.json';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 

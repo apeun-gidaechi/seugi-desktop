@@ -3,7 +3,7 @@ import * as S from '@/components/CreateSchool/CreateSchool.style';
 import Button from '@/components/Button/Button';
 import TextField from '@/components/TextField/TextField';
 import axios from 'axios';
-import config from '@/constant/config/config.json';
+import config from '@/constants/config/config.json';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
 import PlusButtonimg from '@/assets/image/join-school/plus.svg';
 import { useNavigate } from 'react-router-dom';
