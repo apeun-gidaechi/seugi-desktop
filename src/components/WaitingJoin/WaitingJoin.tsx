@@ -8,8 +8,9 @@ const WaitingJoin = () => {
     const navigate = useNavigate();
 
     const handleWaitingJoin = () => {
-        navigate('/');
+        navigate('/home');
     }
+    
     return (
         <S.WaitingAcceptanceFrame>
             <S.WaitingAcceptanceContainer>
