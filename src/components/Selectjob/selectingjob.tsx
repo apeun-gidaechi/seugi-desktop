@@ -19,7 +19,7 @@ const SelectingJob: React.FC = () => {
     };
 
     const handleTeacherClick = () => {
-        setSelectedRole('STUDENT');
+        setSelectedRole('TEACHER');
     };
 
     const getTextColor = (role: Role) => {
@@ -51,7 +51,7 @@ const SelectingJob: React.FC = () => {
             });
 
             if (res.status === 200) {
-                navigate('/waitingjoin', {state : {token, }}); 
+                navigate('/waitingjoin', { state: { token, } });
             } else {
                 console.error("워크스페이스 가입 실패:", res.data);
             }
