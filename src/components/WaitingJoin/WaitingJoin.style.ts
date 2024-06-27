@@ -59,9 +59,7 @@ export const MentContainer = styled.div`
 `
 
 export const MentImg = styled.img`
-    margin-left: 7.5vw;
-    margin-top:-50.19px;
-    margin-bottom:36px;
+    margin-left:17vw;
 `;
 
 export const CheckButton = styled.button`
