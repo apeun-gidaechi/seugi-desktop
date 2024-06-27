@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Client } from '@stomp/stompjs';
-import * as S from "./sendMessage.style";
-import MessageBox from '@/components/MessageBox/messageBox'; 
+import axios from 'axios'; // Import Axios for making HTTP requests
+import * as S from './sendMessage.style';
+import MessageBox from '@/components/MessageBox/messageBox';
 
-import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
-import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
-import SendArrowBlue from "@/assets/image/chat-components/sendBlueArrow.svg";
+import PlusMessageFile from '@/assets/image/chat-components/MessageFile.svg';
+import SendArrow from '@/assets/image/chat-components/SendArrow.svg';
+import SendArrowBlue from '@/assets/image/chat-components/sendBlueArrow.svg';
 
 interface SendMessageProps {
   chatRoom: string;
+  currentUser: string; // currentUser prop 추가
 }
 
-const SendMessage: React.FC<SendMessageProps> = ({ chatRoom }) => {
-  const [message, setMessage] = useState("");
+const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
+  const [message, setMessage] = useState('');
   const [hasText, setHasText] = useState(false);
-  const [receivedMessages, setReceivedMessages] = useState<{ message: string, time: string, sender: string }[]>([]);
+  const [receivedMessages, setReceivedMessages] = useState<{
+    message: string;
+    time: string;
+    sender: string;
+  }[]>([]);
   const [stompClient, setStompClient] = useState<Client | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +32,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom }) => {
   const sendMessage = (message: string) => {
     if (stompClient && stompClient.connected) {
       const time = new Date().toISOString();
-      const newMessage = { message, time, sender: 'own ID' };
+      const newMessage = { message, time, sender: currentUser };
       stompClient.publish({ destination: `/app/chat/${chatRoom}`, body: JSON.stringify(newMessage) });
       setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
       setMessage('');
@@ -41,7 +47,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom }) => {
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && message.trim() !== '') {
+    if (event.key === 'Enter' && message.trim() !== '') {
       sendMessage(message);
     }
   };
@@ -50,7 +56,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom }) => {
     const client = new Client({
       brokerURL: 'wss://hoolc.me/stomp/chat',
       connectHeaders: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJyaGVlc2V1bGFAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcxNDA4NzQ0NCwiZXhwIjoxNzIxODYzNDQ0fQ.oqILzCb3asfWiF8SQKsUQzMS941Yo8gqOyclLe38ShY`
+        Authorization: `Bearer YOUR_JWT_TOKEN_HERE`, // Replace with your JWT token
       },
       debug: (str) => {
         if (str.includes('<<< PONG')) {
@@ -73,7 +79,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom }) => {
       onStompError: (frame) => {
         console.error('Broker reported error: ' + frame.headers['message']);
         console.error('Additional details: ' + frame.body);
-      }
+      },
     });
 
     client.activate();
@@ -84,7 +90,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom }) => {
     };
   }, [chatRoom]);
 
-  const shouldShowTime = (index: number): boolean => {
+    const shouldShowTime = (index: number): boolean => {
     if (index === receivedMessages.length - 1) {
       return true;
     }
@@ -97,7 +103,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom }) => {
 
     const timeDifference = (nextTime.getTime() - currentTime.getTime()) / (1000 * 60 * 60);
 
-    return nextMessage.sender !== 'own ID' || timeDifference >= 24;
+    return nextMessage.sender !== currentUser || timeDifference >= 24;
   };
 
   const formatTime = (time: string) => {
@@ -106,8 +112,8 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom }) => {
     const minutes = date.getMinutes();
     const period = hours >= 12 ? '오후' : '오전';
     hours = hours % 12;
-    hours = hours ? hours : 12; 
-  
+    hours = hours ? hours : 12;
+
     return `${period} ${hours}:${minutes.toString().padStart(2, '0')}`;
   };
 
@@ -115,29 +121,29 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom }) => {
     <div>
       <div>
         {receivedMessages.map((msg, index) => (
-          <MessageBox 
-            key={index} 
-            message={msg.message} 
-            time={shouldShowTime(index) ? formatTime(msg.time) : ''} 
+          <MessageBox
+            key={index}
+            message={msg.message}
+            time={shouldShowTime(index) ? formatTime(msg.time) : ''}
           />
         ))}
       </div>
       <S.SendMessageWrap>
         <S.PlustFileButton>
           <S.PlusMessageFile src={PlusMessageFile} />
-        </S.PlustFileButton> 
-        <S.SendMessageInput 
-          type="text" 
+        </S.PlustFileButton>
+        <S.SendMessageInput
+          type="text"
           placeholder="메세지 보내기"
           value={message}
           onChange={handleChange}
-          onKeyPress={handleKeyPress} 
-          disabled={!chatRoom}  
+          onKeyPress={handleKeyPress}
+          disabled={!chatRoom}
         />
-        
+
         <S.SendArrowButton onClick={handleClick} disabled={!chatRoom || !hasText}>
           {hasText ? (
-            <S.SendArrow src={SendArrowBlue} alt="Send Message"/> 
+            <S.SendArrow src={SendArrowBlue} alt="Send Message" />
           ) : (
             <S.SendArrow src={SendArrow} alt="Send Message" />
           )}
