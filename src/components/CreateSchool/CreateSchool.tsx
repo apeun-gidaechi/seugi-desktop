@@ -65,10 +65,10 @@ const CreateSchool = () => {
                     <S.Title>새 학교 등록</S.Title>
                 </S.TitleContainer>
                 <S.ButtonContainer>
-                    <label htmlFor="upload-button">
+                    <S.UpLoadButtonLabel htmlFor="upload-button">
                         <S.ButtonImg src={isworkspaceImg} style={{ zIndex: workspaceImageUrl ? 2 : 1 }} />
                         <S.PlusButton src={PlusButtonimg} style={{ zIndex: workspaceImageUrl ? 1 : 2 }} />
-                    </label>
+                    </S.UpLoadButtonLabel>
                     <S.Input id="upload-button" type="file" onChange={handleChangeImage} accept='image/png, image/jpeg, image/jpg' />
                 </S.ButtonContainer>
                 <S.InputContainer>

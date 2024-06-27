@@ -142,3 +142,6 @@ export const PlusButton = styled.img`
     justify-content:center;
     align-items:center;
 `
+
+export const UpLoadButtonLabel = styled.label`
+`
