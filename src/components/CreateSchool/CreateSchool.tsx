@@ -1,15 +1,24 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import * as S from '@/components/CreateSchool/CreateSchool.style';
 import Button from '@/components/Button/Button';
 import TextField from '@/components/TextField/TextField';
-// import SeugiAxios from '@/api/SeugiCutomAxios';
 import axios from 'axios';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
 import PlusButtonimg from '@/assets/image/join-school/plus.svg';
 import { useNavigate } from 'react-router-dom';
+import { isTokenExpired } from '@/util/tokenUtils';
 
 const CreateSchool = () => {
     const navigate = useNavigate();
+
+    // 스크롤 막기
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = 'auto';
+        }
+    }, []);
+
 
     const [workspaceName, setWorkspaceName] = useState<string>('');
     const [workspaceImageUrl, setWorkspaceImageUrl] = useState<string | null>(null);
@@ -17,9 +26,28 @@ const CreateSchool = () => {
 
     const isworkspaceImg = workspaceImageUrl ? workspaceImageUrl : createSchoolImg;
 
+    useEffect(() => {
+        if (isTokenExpired(token)) {
+            alert('세션이 만료되었습니다. 다시 로그인 해주세요.');
+            window.localStorage.removeItem('accessToken');
+            navigate('/login');
+        }
+    }, [token, navigate]);
+
+    const handleTokenExpiration = () => {
+        alert('토큰이 만료되었습니다. 다시 로그인 해주세요.');
+        window.localStorage.removeItem('accessToken');
+        navigate('/login');
+    };
+
     const handleCreateSchool = async () => {
         if (!workspaceName.trim()) {
             alert('학교 이름을 입력해주세요.');
+            return;
+        }
+
+        if (isTokenExpired(token)) {
+            handleTokenExpiration();
             return;
         }
 
@@ -35,7 +63,15 @@ const CreateSchool = () => {
             console.log('Code', res.data);
             navigate('/');
         } catch (error) {
-            console.error('Error sending code:', error);
+            if (axios.isAxiosError(error)) {
+                if (error.response && error.response.status === 401) {
+                    handleTokenExpiration();
+                } else {
+                    console.error('Error sending code:', error.response?.data);
+                }
+            } else {
+                console.error('Error:', error);
+            }
         }
     };
 
@@ -43,6 +79,11 @@ const CreateSchool = () => {
         const formData = new FormData();
         formData.append('type', 'IMG');
         formData.append('file', e.target.files[0]);
+
+        if (isTokenExpired(token)) {
+            handleTokenExpiration();
+            return;
+        }
 
         try {
             const res = await axios.post(`/file/upload/IMG`, formData, {
@@ -54,7 +95,15 @@ const CreateSchool = () => {
             console.log('Image uploaded', res.data);
             setWorkspaceImageUrl(res.data.message);
         } catch (error) {
-            console.error('Error uploading image:', error);
+            if (axios.isAxiosError(error)) {
+                if (error.response && error.response.status === 401) {
+                    handleTokenExpiration();
+                } else {
+                    console.error('Error uploading image:', error.response?.data);
+                }
+            } else {
+                console.error('Error:', error);
+            }
         }
     };
 
