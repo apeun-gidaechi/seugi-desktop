@@ -24,6 +24,13 @@ const EmailAuthentication = () => {
         setShowAlert(false);
     };
 
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = 'auto';
+        }
+    }, []);
+    
     // 인증코드 보내기 함수
     const handleSendCode = async () => {
         try {
