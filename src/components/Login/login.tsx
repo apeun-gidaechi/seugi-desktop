@@ -1,5 +1,5 @@
 import * as S from '@/components/Login/login.style';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from '@/constants/config/config.json';
@@ -18,6 +18,13 @@ import Divider from '@/assets/image/onbording/Start/Divider.svg';
 
 const Login = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    }
+  }, []);
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -72,7 +79,7 @@ const Login = () => {
       <S.LoginFirstWrap>
         <S.Fheader>
           <S.Header>
-            <S.SeugiImg src={seugiImg} />
+            <S.SeugiImg data={seugiImg} />
             <S.Title2> 반가워요! </S.Title2>
           </S.Header>
         </S.Fheader>
