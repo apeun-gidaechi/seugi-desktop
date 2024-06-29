@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import * as S from '@/components/CreateSchool/CreateSchool.style';
-import Button from '@/components/Button/Button';
+import Button from '@/components/button/Button';
 import TextField from '@/components/TextField/TextField';
 import axios from 'axios';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
@@ -76,6 +76,11 @@ const CreateSchool = () => {
     };
 
     const handleChangeImage = async (e: ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            console.warn('No files selected');
+            return;
+        }
+
         const formData = new FormData();
         formData.append('type', 'IMG');
         formData.append('file', e.target.files[0]);

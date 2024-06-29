@@ -1,5 +1,5 @@
 import React, { EventHandler } from 'react';
-import * as S from "@/components/Button/Button.style"
+import * as S from "@/components/button/Button.style"
 
 interface SeugiButtonProps {
   text?: string;
