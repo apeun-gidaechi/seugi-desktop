@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from "@/components/SideBar/sidebar.style";
+import * as S from "@/components/sidebar/sidebar.style";
 
 import Home from "@/assets/image/sidebar/home.svg";
 import Chat from "@/assets/image/sidebar/chat.svg";

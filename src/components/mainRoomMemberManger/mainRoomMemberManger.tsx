@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as S from "@/components/MainRoomMemberManger/mainRoomMemberManger.style"; 
+import * as S from "@/components/mainRoomMemberManger/mainRoomMemberManger.style";
 
 const MainRoomMemberManager = () => {
   const [isHovered, setIsHovered] = useState(false);

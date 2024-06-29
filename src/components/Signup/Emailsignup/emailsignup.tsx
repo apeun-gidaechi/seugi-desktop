@@ -6,7 +6,7 @@ import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
 import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
-import Button from '@/components/Button/Button';
+import Button from '@/components/button/Button';
 import TextField from '@/components/TextField/TextField';
 import useSignup from '@/hooks/Signuphook/useSignup';
 

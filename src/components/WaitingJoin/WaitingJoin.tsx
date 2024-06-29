@@ -3,7 +3,7 @@ import * as S from '@/components/WaitingJoin/WaitingJoin.style';
 import schoolimg from '@/assets/image/join-school/schoolimg.svg';
 import ment from '@/assets/image/join-school/ment.svg';
 import { useNavigate } from 'react-router-dom';
-import Button from '@/components/Button/Button';
+import Button from '@/components/button/Button';
 import { isTokenExpired } from '@/util/tokenUtils';
 
 const WaitingJoin = () => {
