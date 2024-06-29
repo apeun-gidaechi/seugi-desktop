@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import * as S from '@/components/Signup/OAuthsignup/oauthsignup.style';
 import Button from '@/components/Button/Button';
 import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
@@ -14,6 +14,13 @@ import { useNavigate } from 'react-router-dom';
 const oauthsignup = () => {
     const navigate = useNavigate();
     const [Name, setName] = useState("");
+
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = 'auto';
+        }
+    }, []);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);

@@ -33,7 +33,7 @@ export const Fheader = styled.div`
 
 export const Header = styled.div`
     display: flex;
-    padding: 24px;
+    padding: 25px;
     border-radius: 20px 20px 0px 0px;
     align-items: center;
     gap: 16px;
@@ -44,9 +44,10 @@ export const Header = styled.div`
     background: var(--Primary-Primary300, #7EC4FC);
 `;
 
-export const SeugiImg = styled.img`
+export const SeugiImg = styled.object`
 
     width: 32px;
+    min-width: 32px;
     height: 32px;
     flex-shrink: 0;
 
@@ -56,7 +57,7 @@ export const SeugiImg = styled.img`
 export const Title2 = styled.span`
     color: #FFF;
     
-    /* display:flex; */
+    display:flex;
     font-family: 'Pretendard-Regular', sans-serif;
     font-size: 24px;
     font-style: normal;

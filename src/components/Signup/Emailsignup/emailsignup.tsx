@@ -1,4 +1,4 @@
-import React from 'react'
+import {useEffect} from 'react'
 import * as S from '@/components/Signup/Emailsignup/emailsignup.style';
 import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg';
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
@@ -12,6 +12,13 @@ import useSignup from '@/hooks/Signuphook/useSignup';
 
 const emailsignup = () => {
     const { ...signUp } = useSignup();
+
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = 'auto';
+        }
+    }, []);
 
     return (
         <S.EmailMain>

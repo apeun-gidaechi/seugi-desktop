@@ -28,7 +28,7 @@
 </g>
 </g>
 <defs>
-<filter id="filter0_bd_350_304" x="-14.6875" y="-10.6875" width="61.4375" height="61.4375" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter0_bd_350_304" x="-14px" y="-10px" width="61px" height="61px" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feGaussianBlur in="BackgroundImageFix" stdDeviation="2"/>
 <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_350_304"/>

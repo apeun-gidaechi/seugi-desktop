@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import * as S from '@/components/Selectjob/selectingjob.style';
 import Student from '@/assets/image/join-school/selectjob/student.svg';
 import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
-// import SeugiAxios from '@/api/SeugiCutomAxios';
 import axios from 'axios';
+import { isTokenExpired } from '@/util/tokenUtils';
 
 type Role = 'NONE' | 'STUDENT' | 'TEACHER';
 
@@ -13,6 +13,23 @@ const SelectingJob: React.FC = () => {
     const navigate = useNavigate();
     const token = window.localStorage.getItem("accessToken");
     const [selectedRole, setSelectedRole] = useState<Role>('NONE');
+    const location = useLocation();
+    const { verificationCode, workspaceId } = location.state || {};
+
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = 'auto';
+        }
+    }, []);
+    
+    useEffect(() => {
+        if (isTokenExpired(token)) {
+            alert('세션이 만료되었습니다. 다시 로그인 해주세요.');
+            window.localStorage.removeItem('accessToken');
+            navigate('/');
+        }
+    }, [token, navigate]);
 
     const handleStudentClick = () => {
         setSelectedRole('STUDENT');
@@ -30,15 +47,19 @@ const SelectingJob: React.FC = () => {
         return selectedRole === role ? '#1D93F3' : '#E0E0E0';
     };
 
-    const location = useLocation();
-    const { verificationCode, workspaceId } = location.state || {};
-
     const handleSelectedJob = async () => {
         if (selectedRole === 'NONE') {
             alert("학생/선생님 선택해주세요");
             return;
         }
-        console.log(workspaceId);
+
+        if (isTokenExpired(token)) {
+            alert('세션이 만료되었습니다. 다시 로그인 해주세요.');
+            window.localStorage.removeItem('accessToken');
+            navigate('/');
+            return;
+        }
+
         try {
             const res = await axios.post(`/workspace/join`, {
                 workspaceId,
