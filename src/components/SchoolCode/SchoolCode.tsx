@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '@/components/SchoolCode/SchoolCode.style';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from '@/util/tokenUtils'; 
+import config from '@/constants/config/config.json';
 
 const SchoolCode = () => {
     const navigate = useNavigate();
@@ -37,7 +38,7 @@ const SchoolCode = () => {
         }
 
         try {
-            const res = await axios.get(`/workspace/${verificationCode}`, {
+            const res = await axios.get(`${config.serverurl}/workspace/${verificationCode}`, {
                 headers: {
                     Authorization: `${token}`
                 },

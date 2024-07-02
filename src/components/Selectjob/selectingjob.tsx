@@ -6,6 +6,7 @@ import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
 import axios from 'axios';
 import { isTokenExpired } from '@/util/tokenUtils';
+import config from '@/constants/config/config.json';
 
 type Role = 'NONE' | 'STUDENT' | 'TEACHER';
 
@@ -61,7 +62,7 @@ const SelectingJob: React.FC = () => {
         }
 
         try {
-            const res = await axios.post(`/workspace/join`, {
+            const res = await axios.post(`${config.serverurl}/workspace/join`, {
                 workspaceId,
                 workspaceCode: verificationCode,
                 role: selectedRole,

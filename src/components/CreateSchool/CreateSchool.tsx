@@ -1,12 +1,13 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import * as S from '@/components/CreateSchool/CreateSchool.style';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import TextField from '@/components/TextField/TextField';
 import axios from 'axios';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
 import PlusButtonimg from '@/assets/image/join-school/plus.svg';
 import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from '@/util/tokenUtils';
+import config from '@/constants/config/config.json';
 
 const CreateSchool = () => {
     const navigate = useNavigate();
@@ -52,7 +53,7 @@ const CreateSchool = () => {
         }
 
         try {
-            const res = await axios.post(`/workspace`, {
+            const res = await axios.post(`${config.serverurl}/workspace`, {
                 workspaceName,
                 workspaceImageUrl,
             }, {
@@ -91,7 +92,7 @@ const CreateSchool = () => {
         }
 
         try {
-            const res = await axios.post(`/file/upload/IMG`, formData, {
+            const res = await axios.post(`${config.serverurl}/file/upload/IMG`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `${token}`
