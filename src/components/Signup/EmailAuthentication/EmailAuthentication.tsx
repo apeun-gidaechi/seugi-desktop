@@ -5,6 +5,7 @@ import Sun from '@/assets/image/onbording/EmailAuthentication/sun.svg';
 import Cloud1 from '@/assets/image/onbording/EmailAuthentication/cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/EmailAuthentication/cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
+import Backimg from '@/assets/image/Backimg.svg'
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
 import config from '@/constants/config/config.json';
@@ -30,7 +31,7 @@ const EmailAuthentication = () => {
             document.body.style.overflow = 'auto';
         }
     }, []);
-    
+
     // 인증코드 보내기 함수
     const handleSendCode = async () => {
         try {
@@ -64,7 +65,7 @@ const EmailAuthentication = () => {
                 code: verificationCode,
             });
             console.log(res);
-            navigate('/selectschool');
+            navigate('/home');
         } catch (error) {
             console.error('Error sending code:', error);
         }
@@ -93,6 +94,11 @@ const EmailAuthentication = () => {
         }
     };
 
+    const Backclick = () => {
+        navigate('/emailsignup')
+    }
+
+
     return (
         <S.AuthenticationMain>
             <S.Cloud1 src={Cloud1} />
@@ -101,6 +107,9 @@ const EmailAuthentication = () => {
             <S.Sun src={Sun} />
             <S.AuthenticationContainer>
                 <S.TitleContainer>
+                    <S.BackButton onClick={Backclick}>
+                        <S.BackImg src={Backimg} />
+                    </S.BackButton>
                     <S.Title>이메일 인증</S.Title>
                 </S.TitleContainer>
                 <S.CodeContainer>
@@ -132,7 +141,7 @@ const EmailAuthentication = () => {
                     }
                 </S.CodeContainer>
                 <S.ContinueContainer>
-                    <Button text='확인' onClick={sendCode} />
+                    <Button text='계속하기' onClick={sendCode} />
                 </S.ContinueContainer>
             </S.AuthenticationContainer>
         </S.AuthenticationMain>

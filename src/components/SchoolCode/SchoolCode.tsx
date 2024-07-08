@@ -5,6 +5,7 @@ import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from '@/util/tokenUtils'; 
+import Backimg from '@/assets/image/Backimg.svg';
 import config from '@/constants/config/config.json';
 
 const SchoolCode = () => {
@@ -60,11 +61,18 @@ const SchoolCode = () => {
         }
     };
 
+    const Backclick = () => {
+        navigate('/selectschool');
+    }
+
     return (
         <S.SchoolCodeMain>
             <S.SchoolCode>
                 <S.SchoolCodeContainer>
                     <S.Header>
+                        <S.BackButton onClick={Backclick}>
+                            <S.BackImg src={Backimg} />
+                        </S.BackButton>
                         <S.Title>학교 코드를 입력해주세요</S.Title>
                     </S.Header>
                     <S.InputCodeContainer>

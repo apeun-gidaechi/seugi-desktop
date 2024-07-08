@@ -8,6 +8,7 @@ import PlusButtonimg from '@/assets/image/join-school/plus.svg';
 import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from '@/util/tokenUtils';
 import config from '@/constants/config/config.json';
+import Backimg from '@/assets/image/Backimg.svg';
 
 const CreateSchool = () => {
     const navigate = useNavigate();
@@ -113,10 +114,17 @@ const CreateSchool = () => {
         }
     };
 
+    const Backclick = () => {
+        navigate('/selectschool')
+    }
+
     return (
         <S.CreateSchoolMain>
             <S.CreateSchoolContainer>
                 <S.TitleContainer>
+                    <S.BackButton onClick={Backclick}>
+                        <S.BackImg src={Backimg} />
+                    </S.BackButton>
                     <S.Title>새 학교 등록</S.Title>
                 </S.TitleContainer>
                 <S.ButtonContainer>

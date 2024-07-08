@@ -223,3 +223,20 @@ export const Sun = styled.img`
     background: linear-gradient( rgba(255, 255, 255, 0.50) 0%, rgba(255, 199, 0, 0.50) 100%), #FFC700;
     z-index:4;
 `
+
+export const BackButton = styled.button`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    position:absolute;
+    border:none;
+    background:none;
+
+    cursor: pointer;
+    margin-right:27vw;
+
+`
+
+export const BackImg = styled.img`
+`

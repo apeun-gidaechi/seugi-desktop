@@ -7,6 +7,7 @@ import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
 import axios from 'axios';
 import { isTokenExpired } from '@/util/tokenUtils';
 import config from '@/constants/config/config.json';
+import Backimg from '@/assets/image/Backimg.svg';
 
 type Role = 'NONE' | 'STUDENT' | 'TEACHER';
 
@@ -82,9 +83,16 @@ const SelectingJob: React.FC = () => {
         }
     };
 
+    const Backclick = () => {
+        navigate('/joinsuccess')
+    }
+
     return (
         <S.SelectMain>
             <S.SelectFirstWrap>
+                <S.BackButton onClick={Backclick}>
+                    <S.BackImg src={Backimg} />
+                </S.BackButton>
                 <S.Selectjob>학생인가요 선생님인가요?</S.Selectjob>
                 <S.PickContainer>
                     <S.PickJob onClick={handleStudentClick} style={{ borderColor: getBorderColor('STUDENT') }}>
