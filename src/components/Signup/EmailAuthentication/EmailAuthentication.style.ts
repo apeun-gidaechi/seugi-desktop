@@ -93,7 +93,7 @@ export const CodeInputContainer = styled.div`
 export const SubtitleContainer = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    margin-left:4px;
     align-items: flex-start;
     /* padding: 0px 0px 0px 4px; */
     gap: 10px;
@@ -107,20 +107,19 @@ export const SubtitleContainer = styled.div`
 
 export const Subtitle = styled.p`    
     color: var(--Black, #000);
-    
+
     font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    line-height: 130%;
-    margin-left: 4px;
+    line-height: 130%; 
 `
 
 export const Redstar = styled.a`
     color: var(--Red-Red500, #F90707);
-    
+
     font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 600;
     line-height: 130%;
@@ -132,6 +131,7 @@ export const InputBox = styled.div`
     align-items: center;
     gap: 8px;
     align-self: stretch;
+
 `
 
 export const CodeTextInput = styled.input`
@@ -234,4 +234,21 @@ export const TimerSpan = styled.span`
     font-style: normal;
     font-weight: 400;
     line-height: 130%; /* 18.2px */
+`
+
+export const BackButton = styled.button`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    position:absolute;
+    border:none;
+    background:none;
+
+    cursor: pointer;
+    margin-right:27vw;
+
+`
+
+export const BackImg = styled.img`
 `

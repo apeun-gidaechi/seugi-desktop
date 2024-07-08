@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from '@/constants/config/config.json';
-import LoginButton from "@/components/button/Button";
+import LoginButton from "@/components/Button/Button";
 import TextField from '@/components/TextField/TextField';
 import CustomAlert from '@/components/Alert/Alert';
 import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
@@ -53,7 +53,7 @@ const Login = () => {
       window.localStorage.setItem('accessToken', accessToken);
       window.localStorage.setItem('refreshToken', refreshToken);
 
-      navigate("/chat");
+      navigate("/home");
     } catch (error) {
       setAlertMessage("등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다");
       setShowAlert(true);

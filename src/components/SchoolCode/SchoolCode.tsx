@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '@/components/SchoolCode/SchoolCode.style';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from '@/util/tokenUtils'; 
+import Backimg from '@/assets/image/Backimg.svg';
 
 const SchoolCode = () => {
     const navigate = useNavigate();
@@ -59,11 +60,18 @@ const SchoolCode = () => {
         }
     };
 
+    const Backclick = () => {
+        navigate('/selectschool');
+    }
+
     return (
         <S.SchoolCodeMain>
             <S.SchoolCode>
                 <S.SchoolCodeContainer>
                     <S.Header>
+                        <S.BackButton onClick={Backclick}>
+                            <S.BackImg src={Backimg} />
+                        </S.BackButton>
                         <S.Title>학교 코드를 입력해주세요</S.Title>
                     </S.Header>
                     <S.InputCodeContainer>
