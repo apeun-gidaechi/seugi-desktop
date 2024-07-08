@@ -54,10 +54,28 @@ export const SchoolInfo = styled.span`
     font-weight: 600;
     line-height: 130%; /* 26px */
 `
+
 export const ButtonContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
     gap: 8px;
+`
+
+export const BackButton = styled.button`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    position:absolute;
+    border:none;
+    background:none;
+
+    cursor: pointer;
+    margin-right:27vw;
+
+`
+
+export const BackImg = styled.img`
 `
