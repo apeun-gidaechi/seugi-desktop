@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import JoinSchoolimg from '@/assets/image/join-school/JoinSchool.svg';
 import CreateSchoolimg from '@/assets/image/join-school/JoinSchool/RoundedCircleImage.svg';
+import Backimg from '@/assets/image/Backimg.svg'
 
 const SelectSchool = () => {
     const navigate = useNavigate();
@@ -12,11 +13,17 @@ const SelectSchool = () => {
     const handleNewSchool = () => {
         navigate('/createschool')
     }
+    const Backclick = () => {
+        navigate('/home')
+    }
   return (
     <S.SelectschoolMain>
         <S.SelectschoolFirstWrap>
             <S.ContainerBox>
                 <S.TitleContainer>
+                      <S.BackButton onClick={Backclick}>
+                          <S.BackImg src={Backimg} />
+                      </S.BackButton>
                     <S.Title>학교 가입 또는 생성</S.Title>
                 </S.TitleContainer>
                 <S.ButtonContainer1>
