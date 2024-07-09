@@ -208,3 +208,19 @@ export const SubtitleContainer = styled.div`
     width: 56px;
     height: 24px;
 `
+
+export const BackButton = styled.button`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    position:absolute;
+    border:none;
+    background:none;
+
+    cursor: pointer;
+    margin-right:27vw;
+`
+
+export const BackImg = styled.img`
+`

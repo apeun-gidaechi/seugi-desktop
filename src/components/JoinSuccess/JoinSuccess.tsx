@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 // import SeugiAxios from '@/api/SeugiCutomAxios';
 import axios from 'axios';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import * as S from '@/components/JoinSuccess/JoinSuccess.style';
 import { useNavigate, useLocation } from 'react-router-dom';
+import Backimg from '@/assets/image/Backimg.svg';
 
 const JoinSuccess = () => {
   const navigate = useNavigate();
@@ -39,9 +40,16 @@ const JoinSuccess = () => {
     handleSchoolInfo();
   }, [verificationCode, token]);
 
+  const Backclick = () => {
+    navigate('/schoolcode')
+  }
+  
   return (
     <S.SuccessMain>
       <S.Container>
+        <S.BackButton onClick={Backclick}>
+          <S.BackImg src={Backimg} />
+        </S.BackButton>
         <S.SchoolImg src={schoolImgUrl} alt="error" />
         <S.SchoolInfoContainer>
           <S.SchoolName>{workspaceName}</S.SchoolName>
