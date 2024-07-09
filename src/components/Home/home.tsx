@@ -17,6 +17,16 @@ import CafeteriaImg from "@/assets/image/home/cafeteria.svg";
 import Emoji from "@/assets/image/home/emoji.svg";
 import Heart from "@/assets/image/home/heart.png";
 import Fire from "@/assets/image/home/fire.png";
+import BookImg from "@/assets/image/home/book.svg";
+import NotificationImg from "@/assets/image/home/notification.svg";
+import ArrowImg from "@/assets/image/home/arrow.svg";
+import CalendarImg from "@/assets/image/home/calendar.svg";
+import SeugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
+import SchoolImg from "@/assets/image/home/school.svg";
+import CafeteriaImg from "@/assets/image/home/cafeteria.svg";
+import SearchImg from "@/assets/image/home/search.svg";
+
+import { useNavigate } from "react-router-dom";
 
 const numberLoop = () => {
   const numbers = [];
@@ -55,6 +65,12 @@ const itemLoop = () => {
 };
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleOnclicked = () => {
+    navigate("/");
+  };
+
   return (
     <S.HomeContainer>
       <Navbar />
@@ -139,6 +155,23 @@ const Home: React.FC = () => {
                 <S.CArrowLogo src={ArrowImg} />
               </S.ArrowLButton>
             </div>
+            <S.CatSeugi>
+              <S.CatSeugiInput placeholder="2학년 4반에서 아무나 한 명 뽑아줘..." />
+              <S.SearchImg src={SearchImg} />
+            </S.CatSeugi>
+            <S.LastQuestionBox>
+              <S.Lastweek>지난주</S.Lastweek>
+            </S.LastQuestionBox>
+            <S.LastQuestion>
+              <S.QuestionText>급식에 복어가 나오는 날이 언제...</S.QuestionText>
+              <S.QuestionDay>6월 21일</S.QuestionDay>
+            </S.LastQuestion>
+            <S.LastQuestion>
+              <S.QuestionText>
+                우리 학교 대회 담당하는 분이 누구...
+              </S.QuestionText>
+              <S.QuestionDay>6월 21일</S.QuestionDay>
+            </S.LastQuestion>
           </S.CatSeugiBox>
 
           <S.MySchoolBox>
@@ -151,6 +184,10 @@ const Home: React.FC = () => {
                 <S.CArrowLogo src={ArrowImg} />
               </S.ArrowLButton>
             </div>
+            <S.SchoolBox>
+              <S.SchoolName>대구 소프트웨어 마이스터 고등학교</S.SchoolName>
+              <S.ChangeSchool onClick={handleOnclicked}>전환</S.ChangeSchool>
+            </S.SchoolBox>
           </S.MySchoolBox>
 
           <S.CafeteriaBox>
@@ -163,6 +200,24 @@ const Home: React.FC = () => {
                 <S.CArrowLogo src={ArrowImg} />
               </S.ArrowLButton>
             </div>
+            <S.CafeteriaDiv>
+              <S.TimeButton>
+                <S.Breakfast>아침</S.Breakfast>
+              </S.TimeButton>
+              <S.TimeButton>
+                <S.Lunch>점심</S.Lunch>
+              </S.TimeButton>
+              <S.TimeButton>
+                <S.Dinner>저녁</S.Dinner>
+              </S.TimeButton>
+            </S.CafeteriaDiv>
+            <S.MenuList>
+              <S.Menu> 오리훈제볶음밥 </S.Menu>
+              <S.Menu> 간장두부조립 </S.Menu>
+              <S.Menu> 배추김치 </S.Menu>
+              <S.Menu> 초코첵스시리얼+우유 </S.Menu>
+              <S.Menu> 오렌지 </S.Menu>
+            </S.MenuList>
           </S.CafeteriaBox>
         </S.HomeWrapper>
       </S.HomeMain>
