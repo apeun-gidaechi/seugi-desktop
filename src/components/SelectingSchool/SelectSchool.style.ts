@@ -89,3 +89,20 @@ export const Subtitle = styled.span`
     font-weight: 600;
     line-height: 130%; /* 26px */
 `
+
+export const BackButton = styled.button`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    position:absolute;
+    border:none;
+    background:none;
+
+    cursor: pointer;
+    margin-right:25vw;
+
+`
+
+export const BackImg = styled.img`
+`

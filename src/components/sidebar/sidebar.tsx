@@ -25,11 +25,52 @@ const Sidebar: React.FC = () => {
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const saveToLocalStorage = (key: string, value: any) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  const loadFromLocalStorage = (key: string) => {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  };
+
+  const saveToSessionStorage = (key: string, value: any) => {
+    sessionStorage.setItem(key, JSON.stringify(value));
+  };
+
+  const loadFromSessionStorage = (key: string) => {
+    const value = sessionStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  };
+
+  const saveToCookies = (key: string, value: any, days: number) => {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = key + "=" + JSON.stringify(value) + ";" + expires + ";path=/";
+  };
+
+  const loadFromCookies = (key: string) => {
+    const name = key + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return JSON.parse(c.substring(name.length, c.length));
+      }
+    }
+    return null;
+  };
+
   useEffect(() => {
     // Load chat rooms from localStorage on component mount
     const storedChatRooms = localStorage.getItem("chatRooms");
     if (storedChatRooms) {
-      setChatRooms(JSON.parse(storedChatRooms));
+      setChatRooms(storedChatRooms);
     }
   }, []);
 
