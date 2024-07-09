@@ -14,6 +14,9 @@ import CalendarImg from "@/assets/image/home/calendar.svg";
 import SeugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import SchoolImg from "@/assets/image/home/school.svg";
 import CafeteriaImg from "@/assets/image/home/cafeteria.svg";
+import Emoji from "@/assets/image/home/emoji.svg";
+import Heart from "@/assets/image/home/heart.png";
+import Fire from "@/assets/image/home/fire.png";
 
 const numberLoop = () => {
   const numbers = [];
@@ -85,9 +88,30 @@ const Home: React.FC = () => {
             <S.NotificationContainer>
               {config.notification.map((item, index) => (
                 <S.NotificationWrapper key={index}>
-                  <S.NotificationAuthor>
+                  <S.NotificationContentAuthor>
                     {item.author} · {item.date}
-                  </S.NotificationAuthor>
+                  </S.NotificationContentAuthor>
+                  <S.NotificationContentTitle>
+                    {item.title}
+                  </S.NotificationContentTitle>
+                  <S.NotificationContentDescription>
+                    {item.content}
+                  </S.NotificationContentDescription>
+                  <S.NotificationEmojiBox>
+                    <S.NotificationAddEmoji src={Emoji} />
+                    {item.emoji.map((emoji, index) => (
+                      <S.NotificationEmojiWrapper key={index}>
+                        {index === 0 ? (
+                          <S.NotificationEmoji src={Heart} />
+                        ) : (
+                          <S.NotificationEmoji src={Fire} />
+                        )}
+                        <S.NotificationEmojiCount>
+                          {emoji}
+                        </S.NotificationEmojiCount>
+                      </S.NotificationEmojiWrapper>
+                    ))}
+                  </S.NotificationEmojiBox>
                 </S.NotificationWrapper>
               ))}
             </S.NotificationContainer>
