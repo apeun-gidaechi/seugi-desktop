@@ -508,12 +508,10 @@ export const SearchImg = styled.img`
 `
 
 export const LastQuestionBox = styled.div`
-  padding:16px 0 0 12px;
+  padding: 16px 0 0 8px;
 `
 
 export const Lastweek = styled.span`
-  
-
   color: var(--Sub-Black, #000);
 
   font-family: 'Pretendard-Regular', sans-serif;
