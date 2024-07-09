@@ -336,7 +336,7 @@ export const CafeteriaBox = styled.div`
   border-radius: 12px;
 
   width: 422px;
-  height: 265px;
+  height: 310px;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -555,4 +555,81 @@ export const QuestionDay = styled.span`
   font-style: normal;
   font-weight: 400;
   line-height: 130%; 
+`
+
+export const CafeteriaDiv = styled.div`
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  
+  padding: 10px 0 0 12px;
+`
+
+export const TimeButton = styled.button`
+  border:none;
+  background:none;
+
+  cursor: pointer;
+
+  padding:10px 16px 0 0;
+`
+
+export const Breakfast = styled.span`
+  color: var(--Sub-Black, #000);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; 
+`
+
+export const Lunch = styled.span`
+  color: var(--Gray-Gray600, #787878);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+`
+
+export const Dinner = styled.span`
+  color: var(--Gray-Gray600, #787878);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+`
+
+
+export const MenuList = styled.div`
+  width:100%;
+  height:201px;
+
+  margin-top:4px;
+
+  display: flex;
+  padding: 12px;
+  flex-direction: column;
+
+  gap: 8px;
+  align-self: stretch;
+
+  border-radius: 8px;
+  background: var(--Gray-Gray100, #F4F5F9);
+`
+
+export const Menu = styled.span`
+  color: var(--Gray-Gray700, #333);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 20.8px */
+
+  padding:4px 0 0 4px;
 `

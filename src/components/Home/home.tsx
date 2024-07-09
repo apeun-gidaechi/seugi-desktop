@@ -136,9 +136,9 @@ const Home: React.FC = () => {
               </S.ArrowLButton>
             </div>
             <S.CatSeugi>
-              <S.CatSeugiInput 
-              placeholder='2학년 4반에서 아무나 한 명 뽑아줘...'/>
-              <S.SearchImg src={SearchImg}/>
+              <S.CatSeugiInput
+                placeholder='2학년 4반에서 아무나 한 명 뽑아줘...' />
+              <S.SearchImg src={SearchImg} />
             </S.CatSeugi>
             <S.LastQuestionBox>
               <S.Lastweek>지난주</S.Lastweek>
@@ -171,11 +171,29 @@ const Home: React.FC = () => {
                 <S.CArrowLogo src={ArrowImg} />
               </S.ArrowLButton>
             </div>
+            <S.CafeteriaDiv>
+              <S.TimeButton>
+                <S.Breakfast>아침</S.Breakfast>
+              </S.TimeButton>
+              <S.TimeButton>
+                <S.Lunch>점심</S.Lunch>
+              </S.TimeButton>
+              <S.TimeButton>
+                <S.Dinner>저녁</S.Dinner>
+              </S.TimeButton>
+            </S.CafeteriaDiv>
+            <S.MenuList>
+              <S.Menu> 오리훈제볶음밥 </S.Menu>
+              <S.Menu> 간장두부조립 </S.Menu>
+              <S.Menu> 배추김치 </S.Menu>
+              <S.Menu> 초코첵스시리얼+우유 </S.Menu>
+              <S.Menu> 오렌지 </S.Menu>
+            </S.MenuList>
           </S.CafeteriaBox>
 
         </S.HomeWrapper>
       </S.HomeMain>
-    </S.HomeContainer>
+    </S.HomeContainer >
   );
 };
 
