@@ -17,7 +17,7 @@ import SelectChats from '@/assets/image/sidebar/selectgroup.svg';
 import SelectBell from '@/assets/image/sidebar/selectbell.svg';
 
 import config from '@/constants/ChatMember/config.json';
-import SendMessage from '@/components/SendMessage/sendMessage';
+import SendMessage from '@/components/sendMessage/sendMessage';
 
 interface SendMessageProps {
   chatRoom: string;
