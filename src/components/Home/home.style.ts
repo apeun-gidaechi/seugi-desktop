@@ -283,3 +283,78 @@ export const CArrowLogo = styled.img`
 export const HomeMain = styled.div`
   margin-left:5%;
 `
+
+export const MySchoolBox = styled.div`
+  position: absolute;
+
+  background-color: #fff;
+
+  padding: 12px;
+
+  top: 0%;
+  left:63.5%;
+
+  border-radius: 12px;
+
+  width: 422px;
+  height: 120px;
+
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+`
+
+export const SchoolImg = styled.img`
+  width: 28px;
+  height: 28px;
+
+  margin-right:8px;
+`
+
+export const MySchooliTitle = styled.span`
+  color: var(--Sub-Black, #000);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+
+  margin-right:73%;
+`
+
+export const CafeteriaBox = styled.div`
+   position: absolute;
+
+  background-color: #fff;
+
+  padding: 12px;
+
+  top: 17%;
+  left:63.5%;
+
+  border-radius: 12px;
+
+  width: 422px;
+  height: 300px;
+
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+`
+
+export const CafeteriaImg = styled.img`
+  width:28px;
+  height:28px;
+
+  margin-right:8px;
+`
+
+export const CafeteriaTitle = styled.span`
+  color: var(--Black, #000);
+
+  /* Subtitle2 */
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 20.8px */
+
+  margin-right:65%;
+`
