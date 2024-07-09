@@ -161,6 +161,10 @@ const Home: React.FC = () => {
                 <S.CArrowLogo src={ArrowImg} />
               </S.ArrowLButton>
             </div>
+            <S.SchoolBox>
+              <S.SchoolName>대구 소프트웨어 마이스터 고등학교</S.SchoolName>
+              <S.ChangeSchool>전환</S.ChangeSchool>
+            </S.SchoolBox>
           </S.MySchoolBox>
 
           <S.CafeteriaBox>
