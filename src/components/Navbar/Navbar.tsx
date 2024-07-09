@@ -25,7 +25,6 @@ type SelectedButton = "home" | "chat" | "chats" | "bell" | null;
 
 const Navbar = () => {
     const [selected, setSelected] = useState<SelectedButton>(null);
-    const [searchText, setSearchText] = useState("");
     const [chatRooms, setChatRooms] = useState<string[]>([]);
     const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
     const navigate = useNavigate();
@@ -48,22 +47,6 @@ const Navbar = () => {
         // Save chat rooms to localStorage whenever chatRooms state changes
         localStorage.setItem("chatRooms", JSON.stringify(chatRooms));
     }, [chatRooms]);
-
-
-
-    const handleChatRoomClick = (room: string) => {
-        setSelectedChatRoom(room);
-    };
-
-    const addChatRoom = (roomName: string) => {
-        setChatRooms((prevRooms) => {
-            if (!prevRooms.includes(roomName)) {
-                return [...prevRooms, roomName];
-            }
-            return prevRooms;
-        });
-    };
-
 
   return (
     <div>

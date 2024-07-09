@@ -14,6 +14,10 @@ import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 import config from "@/constants/ChatMember/config.json";
 import SendMessage from "@/components/sendMessage/sendMessage"; // SendMessage 컴포넌트 추가
 
+interface SendMessageProps {
+  chatRoom: string;
+  currentUser: string;
+}
 
 const Sidebar: React.FC = () => {
   const [searchText, setSearchText] = useState("");
