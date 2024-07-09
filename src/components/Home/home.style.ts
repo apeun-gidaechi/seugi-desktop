@@ -192,6 +192,9 @@ export const ArrowLogo = styled.img`
 `;
 
 export const ScheduleBox = styled.div`
+  display:flex;
+  flex-direction:column;
+
   position: absolute;
 
   background-color: #fff;
@@ -204,7 +207,7 @@ export const ScheduleBox = styled.div`
   border-radius: 12px;
 
   width: 422px;
-  height: 200px;
+  height: 270px;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -219,12 +222,11 @@ export const CalendarLogo = styled.img`
 export const ScheduleTitle = styled.span`
   color: var(--Black, #000);
 
-  /* Subtitle2 */
   font-family: 'Pretendard-Regular', sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  line-height: 130%;
   margin-right:60%;
 `
 
@@ -246,13 +248,13 @@ export const CatSeugiBox = styled.div`
 
   padding: 12px;
 
-  top: 48%;
+  top: 56%;
   left:32%;
 
   border-radius: 12px;
 
   width: 422px;
-  height: 200px;
+  height: 270px;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -334,7 +336,7 @@ export const CafeteriaBox = styled.div`
   border-radius: 12px;
 
   width: 422px;
-  height: 300px;
+  height: 265px;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -346,10 +348,9 @@ export const CafeteriaImg = styled.img`
   margin-right:8px;
 `
 
-export const CafeteriaTitle = styled.span`
+export const CafeteriaTitle = styled.p`
   color: var(--Black, #000);
 
-  /* Subtitle2 */
   font-family: 'Pretendard-Regular', sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -357,4 +358,203 @@ export const CafeteriaTitle = styled.span`
   line-height: 130%; /* 20.8px */
 
   margin-right:65%;
+`
+
+export const Dummy = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+
+  margin-top:10px;
+`
+
+export const Dummy1 = styled.div`
+  width:100%;
+
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+
+  padding: 0 0 16px 0;
+
+`
+
+export const Dummy2 = styled.div`
+  width:100%;
+
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+
+  padding: 0 0 16px 0;
+`
+
+export const Dummy3 = styled.div`
+  width:100%;
+
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+
+  padding: 0 0 16px 0;
+`
+
+export const Dummy4 = styled.div`
+  width:100%;
+
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+
+  padding: 0 0 16px 0;
+
+  top:4px;
+`
+
+export const Dummy5 = styled.div`
+  width:100%;
+
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+`
+
+export const DummyDate = styled.span`
+  display:flex;
+
+  color: var(--Primary-Primary500, #1D93F3);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; 
+  
+  margin-right:4px;
+
+  padding:0 0 0 12px;
+`
+
+export const SubTitle = styled.span`
+  color: var(--Black, #000);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; 
+`
+
+export const D_Day = styled.span`
+  color: var(--Gray-Gray600, #787878);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 15.6px */
+
+  margin-left:auto;
+  margin-right:14px;
+  
+`
+
+export const CatSeugi = styled.div`
+  width:100%;
+
+  display: flex;
+  padding: 12px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+
+  border-radius: 99px;
+  border: 1.5px solid var(--Gradient-Primary, #1C8DF4);
+  background: var(--Sub-White, #FFF);
+
+  margin-top:16px;
+`
+
+export const CatSeugiInput = styled.input`
+  width:100%;
+  height:29px;
+  border:none;
+  &::placeholder{
+        color: var(--Gray-Gray500, #AAA);
+
+        font-family: 'Pretendard-Regular', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%; 
+    }
+
+    font-family: 'Pretendard-Regular', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%; 
+
+    &:focus {
+        outline: none;
+    }
+
+    padding:0 0 0 4px;
+`
+
+export const SearchImg = styled.img`
+  padding:0 4px 0 0;
+`
+
+export const LastQuestionBox = styled.div`
+  padding:16px 0 0 12px;
+`
+
+export const Lastweek = styled.span`
+  
+
+  color: var(--Sub-Black, #000);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; 
+`
+
+export const LastQuestion = styled.div`
+  display: flex;
+  padding: 12px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+
+  border-radius: 4px;
+  background: var(--Gray-Gray100, #F4F5F9);
+
+  width:100%;
+  height:40px;
+  margin-top:4px;
+  margin-bottom:4px;
+`
+
+export const QuestionText = styled.span`
+  color: var(--Black, #000);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; 
+`
+
+export const QuestionDay = styled.span`
+  color: var(--Gray-Gray600, #787878);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; 
 `
