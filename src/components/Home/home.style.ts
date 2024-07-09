@@ -11,8 +11,7 @@ export const HomeTitle = styled.h1`
 
   color: var(--Black, #000);
 
-  /* Title1 */
-  font-family: Pretendard;
+  font-family: 'Pretendard-Regular', sans-serif;
   font-size: 28px;
   font-style: normal;
   font-weight: 700;
@@ -22,10 +21,14 @@ export const HomeTitle = styled.h1`
 export const HomeContainer = styled.div`
   background-color: var(--Primary-Primary050, #f8fcff);
   display: flex;
+
 `;
 
 export const HomeWrapper = styled.div`
   display: flex;
+
+  width:100%;
+  height:100%;
 
   position: relative;
 
@@ -61,8 +64,7 @@ export const DailyScheduleTitle = styled.h2`
 
   color: var(--Black, #000);
 
-  /* Subtitle2 */
-  font-family: Pretendard;
+  font-family: 'Pretendard-Regular', sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -84,8 +86,8 @@ export const Number = styled.div`
   align-items: center;
 
   color: var(--Primary-Primary300, #7ec4fc);
-  /* Body1 */
-  font-family: Pretendard;
+
+  font-family: 'Pretendard-Regular', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -466,7 +468,7 @@ export const CafeteriaBox = styled.div`
   border-radius: 12px;
 
   width: 422px;
-  height: 265px;
+  height: 310px;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
@@ -636,8 +638,8 @@ export const SearchImg = styled.img`
 `;
 
 export const LastQuestionBox = styled.div`
-  padding: 16px 0 0 12px;
-`;
+  padding: 16px 0 0 8px;
+`
 
 export const Lastweek = styled.span`
   color: var(--Sub-Black, #000);
@@ -682,5 +684,126 @@ export const QuestionDay = styled.span`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
+  line-height: 130%; 
+`
+
+export const CafeteriaDiv = styled.div`
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  
+  padding: 10px 0 0 12px;
+`
+
+export const TimeButton = styled.button`
+  border:none;
+  background:none;
+
+  cursor: pointer;
+
+  padding:10px 16px 0 0;
+`
+
+export const Breakfast = styled.span`
+  color: var(--Sub-Black, #000);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; 
+`
+
+export const Lunch = styled.span`
+  color: var(--Gray-Gray600, #787878);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+`
+
+export const Dinner = styled.span`
+  color: var(--Gray-Gray600, #787878);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+`
+
+
+export const MenuList = styled.div`
+  width:100%;
+  height:201px;
+
+  margin-top:4px;
+
+  display: flex;
+  padding: 12px;
+  flex-direction: column;
+
+  gap: 8px;
+  align-self: stretch;
+
+  border-radius: 8px;
+  background: var(--Gray-Gray100, #F4F5F9);
+`
+
+export const Menu = styled.span`
+  color: var(--Gray-Gray700, #333);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 20.8px */
+
+  padding:4px 0 0 4px;
+`
+
+export const SchoolBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+
+  padding: 16px 0 0 4px;
+`
+
+export const SchoolName = styled.span`
+  color: var(--Gray-Gray600, #787878);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 20.8px */
+`
+
+export const ChangeSchool = styled.button`
+  display: flex;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  background: var(--Gray-Gray100, #F4F5F9);
+
+  color: var(--Gray-Gray600, #787878);
+
+  font-family: 'Pretendard-Regular', sans-serif;;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 18.2px */
+
+  border:none;
+
+  cursor: pointer;
+`
   line-height: 130%;
 `;
