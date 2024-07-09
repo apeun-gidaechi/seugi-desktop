@@ -34,3 +34,4 @@ export const TxtField = styled.input`
     border-radius: 12px;
 
 `;
+

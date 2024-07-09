@@ -14,6 +14,7 @@ import CalendarImg from '@/assets/image/home/calendar.svg';
 import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
 import SchoolImg from '@/assets/image/home/school.svg';
 import CafeteriaImg from '@/assets/image/home/cafeteria.svg'
+import SearchImg from '@/assets/image/home/search.svg';
 
 const numberLoop = () => {
   const numbers = [];
@@ -89,6 +90,41 @@ const Home: React.FC = () => {
                 <S.SArrowLogo src={ArrowImg} />
               </S.ArrowLButton>
             </div>
+            <S.Dummy>
+              <S.Dummy1>
+                <S.DummyDate>7/21</S.DummyDate>
+                <S.SubTitle>체육대회</S.SubTitle>
+                <S.D_Day>D-3</S.D_Day>
+              </S.Dummy1>
+            </S.Dummy>
+            <S.Dummy>
+              <S.Dummy2>
+                <S.DummyDate>7/25</S.DummyDate>
+                <S.SubTitle>기숙사 정기점호</S.SubTitle>
+                <S.D_Day>D-7</S.D_Day>
+              </S.Dummy2>
+            </S.Dummy>
+            <S.Dummy>
+              <S.Dummy3>
+                <S.DummyDate>8/15</S.DummyDate>
+                <S.SubTitle>KBS 촬영</S.SubTitle>
+                <S.D_Day>D-21</S.D_Day>
+              </S.Dummy3>
+            </S.Dummy>
+            <S.Dummy>
+              <S.Dummy4>
+                <S.DummyDate>8/15</S.DummyDate>
+                <S.SubTitle>KBS 촬영</S.SubTitle>
+                <S.D_Day>D-21</S.D_Day>
+              </S.Dummy4>
+            </S.Dummy>
+            <S.Dummy>
+              <S.Dummy5>
+                <S.DummyDate>8/15</S.DummyDate>
+                <S.SubTitle>KBS 촬영</S.SubTitle>
+                <S.D_Day>D-21</S.D_Day>
+              </S.Dummy5>
+            </S.Dummy>
           </S.ScheduleBox>
 
           <S.CatSeugiBox>
@@ -99,6 +135,22 @@ const Home: React.FC = () => {
                 <S.CArrowLogo src={ArrowImg} />
               </S.ArrowLButton>
             </div>
+            <S.CatSeugi>
+              <S.CatSeugiInput 
+              placeholder='2학년 4반에서 아무나 한 명 뽑아줘...'/>
+              <S.SearchImg src={SearchImg}/>
+            </S.CatSeugi>
+            <S.LastQuestionBox>
+              <S.Lastweek>지난주</S.Lastweek>
+            </S.LastQuestionBox>
+            <S.LastQuestion>
+              <S.QuestionText>급식에 복어가 나오는 날이 언제...</S.QuestionText>
+              <S.QuestionDay>6월 21일</S.QuestionDay>
+            </S.LastQuestion>
+            <S.LastQuestion>
+              <S.QuestionText>우리 학교 대회 담당하는 분이 누구...</S.QuestionText>
+              <S.QuestionDay>6월 21일</S.QuestionDay>
+            </S.LastQuestion>
           </S.CatSeugiBox>
 
           <S.MySchoolBox>
