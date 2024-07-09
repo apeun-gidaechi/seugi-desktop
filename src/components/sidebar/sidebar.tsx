@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Client } from '@stomp/stompjs';
-import axios from 'axios'; // Import Axios for making HTTP requests
 import * as S from './sidebar.style';
 
 import Home from '@/assets/image/sidebar/home.svg';
@@ -19,7 +17,7 @@ import SelectChats from '@/assets/image/sidebar/selectgroup.svg';
 import SelectBell from '@/assets/image/sidebar/selectbell.svg';
 
 import config from '@/constants/ChatMember/config.json';
-import SendMessage from '@/components/SendMessage/sendMessage'; // SendMessage 컴포넌트 추가
+import SendMessage from '@/components/SendMessage/sendMessage';
 
 interface SendMessageProps {
   chatRoom: string;
@@ -35,17 +33,57 @@ const Sidebar: React.FC = () => {
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const saveToLocalStorage = (key: string, value: any) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  const loadFromLocalStorage = (key: string) => {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  };
+
+  const saveToSessionStorage = (key: string, value: any) => {
+    sessionStorage.setItem(key, JSON.stringify(value));
+  };
+
+  const loadFromSessionStorage = (key: string) => {
+    const value = sessionStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  };
+
+  const saveToCookies = (key: string, value: any, days: number) => {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = key + "=" + JSON.stringify(value) + ";" + expires + ";path=/";
+  };
+
+  const loadFromCookies = (key: string) => {
+    const name = key + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return JSON.parse(c.substring(name.length, c.length));
+      }
+    }
+    return null;
+  };
+
   useEffect(() => {
-    // Load chat rooms from localStorage on component mount
-    const storedChatRooms = localStorage.getItem('chatRooms');
+    const storedChatRooms = loadFromLocalStorage('chatRooms') || loadFromSessionStorage('chatRooms') || loadFromCookies('chatRooms');
     if (storedChatRooms) {
-      setChatRooms(JSON.parse(storedChatRooms));
+      setChatRooms(storedChatRooms);
     }
   }, []);
 
   useEffect(() => {
-    // Save chat rooms to localStorage whenever chatRooms state changes
-    localStorage.setItem('chatRooms', JSON.stringify(chatRooms));
+    saveToSessionStorage('chatRooms', chatRooms);
+    saveToCookies('chatRooms', chatRooms, 7); 
   }, [chatRooms]);
 
   const handleButtonClick = (button: SelectedButton, path: string) => {
@@ -72,41 +110,16 @@ const Sidebar: React.FC = () => {
       const isRoomFound = config.name.includes(searchText);
       if (isRoomFound) {
         addChatRoom(searchText);
-        setSearchText(''); // Clear search text after adding room
+        setSearchText('');
       } else {
         alert(`Room '${searchText}' not found.`);
       }
     }
   };
 
-  const handleCreatePersonalChat = async () => {
-    try {
-      const response = await axios.post(
-        '/chat/personal/create',
-        {
-          workspaceId: '6623a537239b94389ef7b66e', // Replace with your actual workspaceId
-          roomName: '', // Room name will be automatically set by the server
-          chatRoomImg: '', // No need to specify chat room image
-          joinUsers: [2] // Replace with the actual user ID you want to chat with
-        },
-        {
-          headers: {
-            Authorization: `Bearer YOUR_JWT_TOKEN_HERE` // Replace with your JWT token
-          }
-        }
-      );
-
-      if (response.status === 200) {
-        // Room created successfully, handle the response as needed
-        const roomId = response.data.data; // Retrieve the chat room ID from response
-        // Optionally, you can update the UI or navigate to the newly created room
-      } else {
-        // Handle other status codes (e.g., 400 for validation errors, 404 for user not found)
-        console.error('Failed to create chat room:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Failed to create chat room:', error);
-    }
+  const handleCreatePersonalChat = () => {
+    const newRoomId = `room-${Date.now()}`;
+    addChatRoom(newRoomId);
   };
 
   return (
