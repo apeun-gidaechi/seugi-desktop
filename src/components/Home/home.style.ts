@@ -172,12 +172,18 @@ export const NotificationTitle = styled.h2`
 
   color: var(--Black, #000);
 
-  font-family: Pretendard;
+  font-family: 'Pretendard-Regular', sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 130%; /* 20.8px */
+
+  margin-right:78%;
 `;
+
+export const NArrowLogo = styled.img`
+position:relative;
+`
 
 export const ArrowLogo = styled.img`
   position: relative;
@@ -192,12 +198,13 @@ export const ScheduleBox = styled.div`
 
   padding: 12px;
 
-  top: 20px;
+  top: 20.5%;
+  left:17.5%;
 
   border-radius: 12px;
 
   width: 422px;
-  height: 329px;
+  height: 240px;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -205,15 +212,70 @@ export const ScheduleBox = styled.div`
 export const CalendarLogo = styled.img`
   width: 32px;
   height: 32px;
+
+  margin-right:8px;
 `
 
 export const ScheduleTitle = styled.span`
-color: var(--Black, #000);
+  color: var(--Black, #000);
 
-/* Subtitle2 */
-font-family: 'Pretendard-Regular', sans-serif;
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: 130%; /* 20.8px */
+  /* Subtitle2 */
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 20.8px */
+  margin-right:60%;
+`
+
+export const ArrowLButton = styled.button`
+  background:none;
+  border:none;
+
+  cursor: pointer;
+`
+
+export const SArrowLogo = styled.img`
+  position: relative;
+`
+
+export const CatSeugiBox = styled.div`
+  position: absolute;
+
+  background-color: #fff;
+
+  padding: 12px;
+
+  top: 53%;
+  left:17.5%;
+
+  border-radius: 12px;
+
+  width: 422px;
+  height: 240px;
+
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+`
+
+export const SeugiImg = styled.img`
+  width:28px;
+  height:28px;
+
+  margin-right:8px;
+`
+
+export const CatSeugiTitle = styled.span`
+  color: var(--Black, #000);
+
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+
+  margin-right:73%;
+`
+
+export const CArrowLogo = styled.img`
+  position: relative;
 `
