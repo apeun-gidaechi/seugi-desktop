@@ -57,7 +57,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   const handleOnclicked = () => {
-    navigate("/");
+    navigate("/"); // 컴퍼넌트 팝업창으로 띄우기
   }
 
   return (
