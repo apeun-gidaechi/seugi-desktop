@@ -4,32 +4,18 @@ import { Client } from "@stomp/stompjs";
 import axios from "axios"; // Import Axios for making HTTP requests
 import * as S from "./sidebar.style";
 
-import Home from "@/assets/image/sidebar/home.svg";
-import Chat from "@/assets/image/sidebar/chat.svg";
-import Chats from "@/assets/image/sidebar/chats.svg";
-import Bell from "@/assets/image/sidebar/bell.svg";
+import Navbar from "@/components/Navbar/Navbar";
+
 import PlusButton from "@/assets/image/sidebar/plusButton.svg";
 import SearchIcon from "@/assets/image/chat-components/Search.svg";
-import AvatarImg from "@/assets/image/chat-components/Avatar.svg";
+
 import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 
-import SelectHome from "@/assets/image/sidebar/slecthome.svg";
-import SelectChat from "@/assets/image/sidebar/selectchat.svg";
-import SelectChats from "@/assets/image/sidebar/selectgroup.svg";
-import SelectBell from "@/assets/image/sidebar/selectbell.svg";
-
 import config from "@/constants/ChatMember/config.json";
-import SendMessage from "@/components/SendMessage/sendMessage"; // SendMessage 컴포넌트 추가
+import SendMessage from "@/components/sendMessage/sendMessage"; // SendMessage 컴포넌트 추가
 
-interface SendMessageProps {
-  chatRoom: string;
-  currentUser: string;
-}
-
-type SelectedButton = "home" | "chat" | "chats" | "bell" | null;
 
 const Sidebar: React.FC = () => {
-  const [selected, setSelected] = useState<SelectedButton>(null);
   const [searchText, setSearchText] = useState("");
   const [chatRooms, setChatRooms] = useState<string[]>([]);
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
@@ -48,11 +34,7 @@ const Sidebar: React.FC = () => {
     localStorage.setItem("chatRooms", JSON.stringify(chatRooms));
   }, [chatRooms]);
 
-  const handleButtonClick = (button: SelectedButton, path: string) => {
-    setSelected(button);
-    navigate(path);
-    setSelectedChatRoom(null);
-  };
+
 
   const handleChatRoomClick = (room: string) => {
     setSelectedChatRoom(room);
@@ -111,36 +93,8 @@ const Sidebar: React.FC = () => {
 
   return (
     <>
+    <Navbar/>
       <S.ChatingPage>
-        <S.SideBarMenu>
-          <S.SideBarButton
-            onClick={() => handleButtonClick("home", "/home")}
-            isSelected={selected === "home"}
-          >
-            <S.SideBarImage src={selected === "home" ? SelectHome : Home} />
-          </S.SideBarButton>
-          <S.SideBarButton
-            onClick={() => handleButtonClick("chat", "/chat")}
-            isSelected={selected === "chat"}
-          >
-            <S.SideBarImage src={selected === "chat" ? SelectChat : Chat} />
-          </S.SideBarButton>
-          <S.SideBarButton
-            onClick={() => handleButtonClick("chats", "/groupchat")}
-            isSelected={selected === "chats"}
-          >
-            <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
-          </S.SideBarButton>
-          <S.SideBarButton
-            onClick={() => handleButtonClick("bell", "/notification")}
-            isSelected={selected === "bell"}
-          >
-            <S.SideBarImage src={selected === "bell" ? SelectBell : Bell} />
-          </S.SideBarButton>
-          <S.SideAvatarImgWrap>
-            <S.SideAvatarImg src={AvatarImg} />
-          </S.SideAvatarImgWrap>
-        </S.SideBarMenu>
         <S.SideBarChat>
           <S.SideFinder>
             <S.FindChatingRoom
