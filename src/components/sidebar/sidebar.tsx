@@ -153,7 +153,7 @@ const Sidebar: React.FC = () => {
       console.error("Failed to create chat room:", error);
     }
   };
-
+ 
   return (
     <>
     <Navbar/>
