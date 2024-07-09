@@ -8,6 +8,7 @@ import BookImg from "@/assets/image/home/book.svg";
 import config from "@/constants/Home/config.json";
 import NotificationImg from "@/assets/image/home/notification.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
+import CalendarImg from '@/assets/image/home/calendar.svg';
 
 const numberLoop = () => {
   const numbers = [];
@@ -69,6 +70,14 @@ const Home: React.FC = () => {
               <S.NotificationTitle>알림</S.NotificationTitle>
             </div>
           </S.NotificationBox>
+
+          <S.ScheduleBox>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <S.CalendarLogo src={CalendarImg} />
+              <S.DailyScheduleTitle>다가오는 일정</S.DailyScheduleTitle>
+              <S.ArrowLogo src={ArrowImg} />
+            </div>
+          </S.ScheduleBox>
         </S.HomeWrapper>
       </div>
     </S.HomeContainer>

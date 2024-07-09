@@ -46,28 +46,12 @@ export const SchoolName = styled.span`
 `;
 
 export const SchoolInfo = styled.span`
-  color: var(--Gray-Gray600, #787878);
-
-<<<<<<< Updated upstream
+    color: var(--Gray-Gray600, #787878);
     font-family: 'Pretendard-Regular', sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
     line-height: 130%; /* 26px */
-`
-export const ButtonContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 8px;
-`
-=======
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 26px */
 `;
 
 export const ButtonContainer = styled.div`
@@ -92,4 +76,3 @@ export const BackButton = styled.button`
 `;
 
 export const BackImg = styled.img``;
->>>>>>> Stashed changes
