@@ -10,7 +10,7 @@ import SendArrowBlue from '@/assets/image/chat-components/sendBlueArrow.svg';
 
 interface SendMessageProps {
   chatRoom: string;
-  currentUser: string; // currentUser prop 추가
+  currentUser: string;
 }
 
 const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
@@ -35,8 +35,11 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
       const newMessage = { message, time, sender: currentUser };
       stompClient.publish({ destination: `/app/chat/${chatRoom}`, body: JSON.stringify(newMessage) });
       setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
+      console.log(newMessage); 
       setMessage('');
       setHasText(false);
+    } else {
+      console.error('STOMP client is not connected');
     }
   };
 
@@ -56,9 +59,10 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
     const client = new Client({
       brokerURL: 'wss://hoolc.me/stomp/chat',
       connectHeaders: {
-        Authorization: `Bearer YOUR_JWT_TOKEN_HERE`, // Replace with your JWT token
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE5MzE5ODg3LCJleHAiOjE3MTkzMjU4ODd9._avJJI8yP6RZSYrkoupA1qhcjggjfhkZrqBf-zwde48`, 
       },
       debug: (str) => {
+        console.log(str);
         if (str.includes('<<< PONG')) {
           console.log('PONG received');
         } else if (str.includes('<<< CONNECTED')) {
@@ -68,13 +72,15 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
         }
       },
       onConnect: () => {
+        console.log('STOMP client connected');
         client.subscribe(`/topic/messages/${chatRoom}`, (message) => {
           const newMessage = JSON.parse(message.body);
           setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
+          console.log(newMessage); 
         });
       },
       onDisconnect: () => {
-        console.log('Disconnected');
+        console.log('STOMP client disconnected');
       },
       onStompError: (frame) => {
         console.error('Broker reported error: ' + frame.headers['message']);
@@ -90,7 +96,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
     };
   }, [chatRoom]);
 
-    const shouldShowTime = (index: number): boolean => {
+  const shouldShowTime = (index: number): boolean => {
     if (index === receivedMessages.length - 1) {
       return true;
     }
