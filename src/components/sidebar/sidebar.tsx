@@ -15,6 +15,8 @@ interface SendMessageProps {
   currentUser: string;
 }
 
+type SelectedButton = 'home' | 'chat' | 'chats' | 'bell' | null;
+
 const Sidebar: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [chatRooms, setChatRooms] = useState<string[]>([]);
@@ -116,7 +118,7 @@ const Sidebar: React.FC = () => {
     const newRoomId = `room-${Date.now()}`;
     addChatRoom(newRoomId);
   };
-
+ 
   return (
     <>
       <S.ChatingPage>
