@@ -35,59 +35,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   const handleOnclicked = () => {
-    navigate("/");
-  };
-
-  const numberLoop = () => {
-    const numbers = [];
-
-    for (let i = 1; i < config.subject.length + 1; i++) {
-      i === config.today
-        ? numbers.push(<S.Number className="Today">{i}</S.Number>)
-        : numbers.push(<S.Number>{i}</S.Number>);
-    }
-
-    return numbers;
-  };
-
-  const itemLoop = () => {
-    const items = [];
-
-    for (let i = 0; i < config.today; i++) {
-      if (config.today === 1)
-        items.push(
-          <S.Item className="First Today Last">{config.subject[i]}</S.Item>
-        );
-      else if (i === 0)
-        items.push(<S.Item className="First">{config.subject[i]}</S.Item>);
-      else if (i === config.today - 1)
-        items.push(<S.Item className="Today Last">{config.subject[i]}</S.Item>);
-      else items.push(<S.Item>{config.subject[i]}</S.Item>);
-    }
-
-    for (let i = config.today; i < config.subject.length; i++) {
-      if (i === config.subject.length - 1)
-        items.push(<S.Item className="After Last">{config.subject[i]}</S.Item>);
-      else items.push(<S.Item className="After">{config.subject[i]}</S.Item>);
-    }
-
-    return items;
-  };
-
-  const handleEmojiClick = (parentKey: number, childKey: number) => {
-    setConfig((prevConfig) => {
-      const newConfig = JSON.parse(JSON.stringify(prevConfig));
-
-      if (prevConfig.notification[parentKey].like[childKey] === true) {
-        newConfig.notification[parentKey].like[childKey] = false;
-        newConfig.notification[parentKey].emoji[childKey] -= 1;
-      } else {
-        newConfig.notification[parentKey].like[childKey] = true;
-        newConfig.notification[parentKey].emoji[childKey] += 1;
-      }
-
-      return newConfig;
-    });
+    navigate("/"); // 컴퍼넌트 팝업창으로 띄우기
   };
 
   return (
