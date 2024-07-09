@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Client } from "@stomp/stompjs";
-import axios from "axios"; // Import Axios for making HTTP requests
-import * as S from "./sidebar.style";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as S from './sidebar.style';
 
-import Navbar from "@/components/Navbar/Navbar";
+import Home from '@/assets/image/sidebar/home.svg';
+import Chat from '@/assets/image/sidebar/chat.svg';
+import Chats from '@/assets/image/sidebar/chats.svg';
+import Bell from '@/assets/image/sidebar/bell.svg';
+import PlusButton from '@/assets/image/sidebar/plusButton.svg';
+import SearchIcon from '@/assets/image/chat-components/Search.svg';
+import AvatarImg from '@/assets/image/chat-components/Avatar.svg';
+import AvatarProfile from '@/assets/image/chat-components/Avatar.svg';
 
-import PlusButton from "@/assets/image/sidebar/plusButton.svg";
-import SearchIcon from "@/assets/image/chat-components/Search.svg";
+import SelectHome from '@/assets/image/sidebar/slecthome.svg';
+import SelectChat from '@/assets/image/sidebar/selectchat.svg';
+import SelectChats from '@/assets/image/sidebar/selectgroup.svg';
+import SelectBell from '@/assets/image/sidebar/selectbell.svg';
 
-import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
-
-import config from "@/constants/ChatMember/config.json";
-import SendMessage from "@/components/sendMessage/sendMessage"; // SendMessage 컴포넌트 추가
+import config from '@/constants/ChatMember/config.json';
+import SendMessage from '@/components/sendMessage/sendMessage';
 
 interface SendMessageProps {
   chatRoom: string;
@@ -26,20 +31,24 @@ const Sidebar: React.FC = () => {
   const navigate = useNavigate();
 
   const saveToLocalStorage = (key: string, value: any) => {
+    console.log(`Saving to localStorage: ${key} = ${JSON.stringify(value)}`);
     localStorage.setItem(key, JSON.stringify(value));
   };
 
   const loadFromLocalStorage = (key: string) => {
     const value = localStorage.getItem(key);
+    console.log(`Loading from localStorage: ${key} = ${value}`);
     return value ? JSON.parse(value) : null;
   };
 
   const saveToSessionStorage = (key: string, value: any) => {
+    console.log(`Saving to sessionStorage: ${key} = ${JSON.stringify(value)}`);
     sessionStorage.setItem(key, JSON.stringify(value));
   };
 
   const loadFromSessionStorage = (key: string) => {
     const value = sessionStorage.getItem(key);
+    console.log(`Loading from sessionStorage: ${key} = ${value}`);
     return value ? JSON.parse(value) : null;
   };
 
@@ -47,6 +56,7 @@ const Sidebar: React.FC = () => {
     const date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     const expires = "expires=" + date.toUTCString();
+    console.log(`Saving to cookies: ${key} = ${JSON.stringify(value)}`);
     document.cookie = key + "=" + JSON.stringify(value) + ";" + expires + ";path=/";
   };
 
@@ -55,28 +65,36 @@ const Sidebar: React.FC = () => {
     const decodedCookie = decodeURIComponent(document.cookie);
     const ca = decodedCookie.split(';');
     for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) === ' ') {
-        c = c.substring(1);
-      }
+      let c = ca[i].trim();
       if (c.indexOf(name) === 0) {
+        console.log(`Loading from cookies: ${key} = ${c.substring(name.length, c.length)}`);
         return JSON.parse(c.substring(name.length, c.length));
       }
     }
     return null;
   };
 
+  const loadChatRooms = () => {
+    return (
+      loadFromLocalStorage('chatRooms') ||
+      loadFromSessionStorage('chatRooms') ||
+      loadFromCookies('chatRooms')
+    );
+  };
+
   useEffect(() => {
-    // Load chat rooms from localStorage on component mount
-    const storedChatRooms = localStorage.getItem("chatRooms");
+    const storedChatRooms = loadChatRooms();
     if (storedChatRooms) {
+      console.log('Loaded chatRooms:', storedChatRooms);
       setChatRooms(storedChatRooms);
     }
   }, []);
 
   useEffect(() => {
-    // Save chat rooms to localStorage whenever chatRooms state changes
-    localStorage.setItem("chatRooms", JSON.stringify(chatRooms));
+    console.log('Saving chatRooms:', chatRooms);
+    saveToLocalStorage('chatRooms', chatRooms);
+    saveToSessionStorage('chatRooms', chatRooms);
+    saveToCookies('chatRooms', chatRooms, 7);
   }, [chatRooms]);
 
 
@@ -140,6 +158,35 @@ const Sidebar: React.FC = () => {
     <>
     <Navbar/>
       <S.ChatingPage>
+        <S.SideBarMenu>
+          <S.SideBarButton 
+            onClick={() => handleButtonClick('home', '/home')} 
+            isSelected={selected === 'home'}
+          >
+            <S.SideBarImage src={selected === 'home' ? SelectHome : Home} />
+          </S.SideBarButton>
+          <S.SideBarButton 
+            onClick={() => handleButtonClick('chat', '/chat')} 
+            isSelected={selected === 'chat'}
+          >
+            <S.SideBarImage src={selected === 'chat' ? SelectChat : Chat} />
+          </S.SideBarButton>
+          <S.SideBarButton 
+            onClick={() => handleButtonClick('chats', '/groupchat')} 
+            isSelected={selected === 'chats'}
+          >
+            <S.SideBarImage src={selected === 'chats' ? SelectChats : Chats} />
+          </S.SideBarButton>
+          <S.SideBarButton 
+            onClick={() => handleButtonClick('bell', '/notification')} 
+            isSelected={selected === 'bell'}
+          >
+            <S.SideBarImage src={selected === 'bell' ? SelectBell : Bell} />
+          </S.SideBarButton>
+          <S.SideAvatarImgWrap>
+            <S.SideAvatarImg src={AvatarImg} />
+          </S.SideAvatarImgWrap>
+        </S.SideBarMenu>
         <S.SideBarChat>
           <S.SideFinder>
             <S.FindChatingRoom

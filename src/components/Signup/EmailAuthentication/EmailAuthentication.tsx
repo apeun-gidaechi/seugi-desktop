@@ -8,7 +8,7 @@ import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
 import Backimg from '@/assets/image/Backimg.svg'
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios from 'axios';
-import config from '@/constants/config/config.json';
+import config from '@/constants/login/config.json';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CustomAlert from '@/components/Alert/Alert';
 
