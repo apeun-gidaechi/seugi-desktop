@@ -68,6 +68,7 @@ const Home: React.FC = () => {
             <div style={{ display: "flex", alignItems: "center" }}>
               <S.NotificationLogo src={NotificationImg} />
               <S.NotificationTitle>알림</S.NotificationTitle>
+              <S.ArrowLogo src={ArrowImg} />
             </div>
           </S.NotificationBox>
 
