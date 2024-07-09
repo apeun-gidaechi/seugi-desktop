@@ -53,7 +53,7 @@ const Login = () => {
       window.localStorage.setItem('accessToken', accessToken);
       window.localStorage.setItem('refreshToken', refreshToken);
 
-      navigate("/chat");
+      navigate("/home");
     } catch (error) {
       setAlertMessage("등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다");
       setShowAlert(true);

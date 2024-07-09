@@ -184,3 +184,36 @@ export const ArrowLogo = styled.img`
 
   left: 695px;
 `;
+
+export const ScheduleBox = styled.div`
+  position: absolute;
+
+  background-color: #fff;
+
+  padding: 12px;
+
+  top: 20px;
+
+  border-radius: 12px;
+
+  width: 422px;
+  height: 329px;
+
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+`
+
+export const CalendarLogo = styled.img`
+  width: 32px;
+  height: 32px;
+`
+
+export const ScheduleTitle = styled.span`
+color: var(--Black, #000);
+
+/* Subtitle2 */
+font-family: 'Pretendard-Regular', sans-serif;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 130%; /* 20.8px */
+`
