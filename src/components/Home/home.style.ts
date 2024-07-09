@@ -199,12 +199,12 @@ export const ScheduleBox = styled.div`
   padding: 12px;
 
   top: 20.5%;
-  left:17.5%;
+  left:32%;
 
   border-radius: 12px;
 
   width: 422px;
-  height: 240px;
+  height: 200px;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -246,13 +246,13 @@ export const CatSeugiBox = styled.div`
 
   padding: 12px;
 
-  top: 53%;
-  left:17.5%;
+  top: 48%;
+  left:32%;
 
   border-radius: 12px;
 
   width: 422px;
-  height: 240px;
+  height: 200px;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -278,4 +278,8 @@ export const CatSeugiTitle = styled.span`
 
 export const CArrowLogo = styled.img`
   position: relative;
+`
+
+export const HomeMain = styled.div`
+  margin-left:5%;
 `

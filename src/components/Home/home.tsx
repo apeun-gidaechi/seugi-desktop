@@ -3,9 +3,11 @@
 // 히히 알아서 수정해봐 ~~
 
 import * as S from "@/components/Home/home.style";
-import SideBar from "../sidebar/sidebar";
-import BookImg from "@/assets/image/home/book.svg";
+import Navbar from "@/components/Navbar/Navbar";
+
 import config from "@/constants/Home/config.json";
+
+import BookImg from "@/assets/image/home/book.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
 import CalendarImg from '@/assets/image/home/calendar.svg';
@@ -48,9 +50,9 @@ const itemLoop = () => {
 const Home: React.FC = () => {
   return (
     <S.HomeContainer>
-      {/* <SideBar /> */}
+      <Navbar />
 
-      <div style={{ width: "100%", height: "100%" }}>
+      <S.HomeMain style={{ width: "100%", height: "100%"}}>
         <S.HomeTitle>홈</S.HomeTitle>
 
         <S.HomeWrapper>
@@ -98,7 +100,7 @@ const Home: React.FC = () => {
           </S.CatSeugiBox>
 
         </S.HomeWrapper>
-      </div>
+      </S.HomeMain>
     </S.HomeContainer>
   );
 };
