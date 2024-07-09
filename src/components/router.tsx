@@ -15,13 +15,12 @@ import Chat from '@/pages/chat/chat'
 import GroupChat from '@/pages/GroupChat/index'
 import Notification from '@/pages/Notification/index'
 
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Login/>}/>
+                <Route path="/" element={<Login />} />
                 <Route path="/login" element={<Login />} />
                 <Route path='/selectjob' element={<Selectingjob />} />
                 <Route path='/chat' element={<ChatMain />} />
@@ -32,12 +31,12 @@ const Router = () => {
                 <Route path='/joinsuccess' element={<JoinSuccess />} />
                 <Route path='/createschool' element={<CreateSchool />} />
                 <Route path='/emailauthentication' element={<Authentication />} />
-                <Route path='/waitingjoin' element={<WaitingJoin/>}/>
-                <Route path='/storybook' element={<ComponentsStoryBook/>}/>
-                <Route path='/home' element={<Home/>}/>
-                <Route path='/Chat' element={<Chat/>}/>
-                <Route path='/GroupChat' element={<GroupChat/>}/>
-                <Route path='/Notification' element={<Notification/>}/>
+                <Route path='/waitingjoin' element={<WaitingJoin />} />
+                <Route path='/storybook' element={<ComponentsStoryBook />} />
+                <Route path='/home' element={<Home />} />
+                <Route path='/Chat' element={<Chat />} />
+                <Route path='/GroupChat' element={<GroupChat />} />
+                <Route path='/Notification' element={<Notification />} />
             </Routes>
         </BrowserRouter>
     )
