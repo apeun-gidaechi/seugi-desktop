@@ -1,23 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 // import SeugiAxios from '@/api/SeugiCutomAxios';
-import axios from 'axios';
-import Button from '@/components/Button/Button';
-import * as S from '@/components/JoinSuccess/JoinSuccess.style';
-import { useNavigate, useLocation } from 'react-router-dom';
-import Backimg from '@/assets/image/Backimg.svg';
+import axios from "axios";
+import Button from "@/components/Button/Button";
+import * as S from "@/components/JoinSuccess/JoinSuccess.style";
+import { useNavigate, useLocation } from "react-router-dom";
+import Backimg from "@/assets/image/Backimg.svg";
 
 const JoinSuccess = () => {
   const navigate = useNavigate();
-  const [workspaceName, setWorkspaceName] = useState('');
-  const [schoolInfo, setSchoolInfo] = useState('');
-  const [schoolImgUrl, setSchoolImgUrl] = useState('');
-  const [workspaceId, setWorkspaceId] = useState('');
+  const [workspaceName, setWorkspaceName] = useState("");
+  const [schoolInfo, setSchoolInfo] = useState("");
+  const [schoolImgUrl, setSchoolImgUrl] = useState("");
+  const [workspaceId, setWorkspaceId] = useState("");
   const token = window.localStorage.getItem("accessToken");
   const location = useLocation();
   const { verificationCode } = location.state || {};
 
   const handleJoinSuccess = () => {
-    navigate('/selectjob', { state: { verificationCode, workspaceId } });
+    navigate("/selectjob", { state: { verificationCode, workspaceId } });
   };
 
   useEffect(() => {
@@ -25,25 +25,27 @@ const JoinSuccess = () => {
       try {
         const res = await axios.get(`/workspace/${verificationCode}`, {
           headers: {
-            Authorization: `${token}`
+            Authorization: `${token}`,
           },
         });
         const data = res.data.data;
         setWorkspaceName(data.workspaceName);
-        setSchoolInfo(`학생 ${data.studentCount}명 선생님 ${data.teacherCount}명`);
+        setSchoolInfo(
+          `학생 ${data.studentCount}명 선생님 ${data.teacherCount}명`
+        );
         setSchoolImgUrl(data.workspaceImageUrl);
         setWorkspaceId(data.workspaceId);
       } catch (error) {
-        console.error('Failed to fetch school information:', error);
+        console.error("Failed to fetch school information:", error);
       }
     };
     handleSchoolInfo();
   }, [verificationCode, token]);
 
   const Backclick = () => {
-    navigate('/schoolcode')
-  }
-  
+    navigate("/schoolcode");
+  };
+
   return (
     <S.SuccessMain>
       <S.Container>
