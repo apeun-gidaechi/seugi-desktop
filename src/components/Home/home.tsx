@@ -9,6 +9,7 @@ import config from "@/constants/Home/config.json";
 import NotificationImg from "@/assets/image/home/notification.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
 import CalendarImg from '@/assets/image/home/calendar.svg';
+import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
 
 const numberLoop = () => {
   const numbers = [];
@@ -47,7 +48,7 @@ const itemLoop = () => {
 const Home: React.FC = () => {
   return (
     <S.HomeContainer>
-      <SideBar />
+      {/* <SideBar /> */}
 
       <div style={{ width: "100%", height: "100%" }}>
         <S.HomeTitle>홈</S.HomeTitle>
@@ -57,7 +58,9 @@ const Home: React.FC = () => {
             <div style={{ display: "flex", alignItems: "center" }}>
               <S.BookLogo src={BookImg} />
               <S.DailyScheduleTitle>오늘의 시간표</S.DailyScheduleTitle>
-              <S.ArrowLogo src={ArrowImg} />
+              <S.ArrowLButton>
+                <S.ArrowLogo src={ArrowImg} />
+              </S.ArrowLButton>
             </div>
 
             <S.NumberTable>{numberLoop()}</S.NumberTable>
@@ -68,17 +71,32 @@ const Home: React.FC = () => {
             <div style={{ display: "flex", alignItems: "center" }}>
               <S.NotificationLogo src={NotificationImg} />
               <S.NotificationTitle>알림</S.NotificationTitle>
-              <S.ArrowLogo src={ArrowImg} />
+              <S.ArrowLButton>
+                <S.NArrowLogo src={ArrowImg} />
+              </S.ArrowLButton>
             </div>
           </S.NotificationBox>
 
           <S.ScheduleBox>
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: "flex", alignItems: "center", padding: "4px" }}>
               <S.CalendarLogo src={CalendarImg} />
-              <S.DailyScheduleTitle>다가오는 일정</S.DailyScheduleTitle>
-              <S.ArrowLogo src={ArrowImg} />
+              <S.ScheduleTitle>다가오는 일정</S.ScheduleTitle>
+              <S.ArrowLButton>
+                <S.SArrowLogo src={ArrowImg} />
+              </S.ArrowLButton>
             </div>
           </S.ScheduleBox>
+
+          <S.CatSeugiBox>
+            <div style={{ display: "flex", alignItems: "center", padding: "4px" }}>
+              <S.SeugiImg src={SeugiImg} />
+              <S.CatSeugiTitle>캣스기</S.CatSeugiTitle>
+              <S.ArrowLButton>
+                <S.CArrowLogo src={ArrowImg} />
+              </S.ArrowLButton>
+            </div>
+          </S.CatSeugiBox>
+
         </S.HomeWrapper>
       </div>
     </S.HomeContainer>
