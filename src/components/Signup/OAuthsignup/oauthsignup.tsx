@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import * as S from '@/components/Signup/OAuthsignup/oauthsignup.style';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
 import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
+import Backimg from '@/assets/image/Backimg.svg';
 import TextField from '@/components/TextField/TextField';
 import config from '@/constants/config/config.json';
 import axios from 'axios';
@@ -48,6 +49,11 @@ const oauthsignup = () => {
             handlesignup();
         }
     }
+
+    const Backclick = () => {
+        navigate('/')
+    }
+    
     return (
         <S.OauthMain>
             <S.Cloud1 src={Cloud1} />
@@ -56,6 +62,9 @@ const oauthsignup = () => {
             <S.Sun src={Sun} />
             <S.OauthFirstWrap>
                 <S.Header>
+                    <S.BackButton onClick={Backclick}>
+                        <S.BackImg src={Backimg} />
+                    </S.BackButton>
                     <S.Title1> 새 계정 만들기 </S.Title1>
                 </S.Header>
                 <S.TxtContainer>

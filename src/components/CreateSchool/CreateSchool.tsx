@@ -1,12 +1,13 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import * as S from '@/components/CreateSchool/CreateSchool.style';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import TextField from '@/components/TextField/TextField';
 import axios from 'axios';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
 import PlusButtonimg from '@/assets/image/join-school/plus.svg';
 import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from '@/util/tokenUtils';
+import Backimg from '@/assets/image/Backimg.svg';
 
 const CreateSchool = () => {
     const navigate = useNavigate();
@@ -112,10 +113,17 @@ const CreateSchool = () => {
         }
     };
 
+    const Backclick = () => {
+        navigate('/selectschool')
+    }
+
     return (
         <S.CreateSchoolMain>
             <S.CreateSchoolContainer>
                 <S.TitleContainer>
+                    <S.BackButton onClick={Backclick}>
+                        <S.BackImg src={Backimg} />
+                    </S.BackButton>
                     <S.Title>새 학교 등록</S.Title>
                 </S.TitleContainer>
                 <S.ButtonContainer>
