@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Client } from '@stomp/stompjs';
-import axios from 'axios'; // Import Axios for making HTTP requests
+import axios from 'axios'; 
 import * as S from '@/components/sendMessage/sendMessage.style';
 import MessageBox from '@/components/MessageBox/messageBox';
 
@@ -59,7 +59,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
     const client = new Client({
       brokerURL: 'wss://hoolc.me/stomp/chat',
       connectHeaders: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QHRlc3QiLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzE5MzE5ODg3LCJleHAiOjE3MTkzMjU4ODd9._avJJI8yP6RZSYrkoupA1qhcjggjfhkZrqBf-zwde48`, 
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzIwNTIwNjkzLCJleHAiOjE3MjA1MjY2OTN9.PJJVOpt8zTOBPNuJfZG07Hrzk9IxDy30f4bjJMtwBfk`, 
       },
       debug: (str) => {
         console.log(str);
