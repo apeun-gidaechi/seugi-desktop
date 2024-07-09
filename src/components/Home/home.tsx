@@ -16,7 +16,10 @@ import SchoolImg from '@/assets/image/home/school.svg';
 import CafeteriaImg from '@/assets/image/home/cafeteria.svg'
 import SearchImg from '@/assets/image/home/search.svg';
 
+import { useNavigate } from 'react-router-dom';
+
 const numberLoop = () => {
+  
   const numbers = [];
 
   for (let i = 1; i < config.subject.length + 1; i++) {
@@ -51,6 +54,12 @@ const itemLoop = () => {
 };
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleOnclicked = () => {
+    navigate("/");
+  }
+
   return (
     <S.HomeContainer>
       <Navbar />
@@ -163,7 +172,7 @@ const Home: React.FC = () => {
             </div>
             <S.SchoolBox>
               <S.SchoolName>대구 소프트웨어 마이스터 고등학교</S.SchoolName>
-              <S.ChangeSchool>전환</S.ChangeSchool>
+              <S.ChangeSchool onClick={handleOnclicked}>전환</S.ChangeSchool>
             </S.SchoolBox>
           </S.MySchoolBox>
 
