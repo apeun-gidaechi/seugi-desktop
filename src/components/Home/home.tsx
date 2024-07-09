@@ -2,16 +2,18 @@
 
 // 히히 알아서 수정해봐 ~~
 
-import * as S from "@/components/Home/home.style";
-import Navbar from "@/components/Navbar/Navbar";
+import * as S from '@/components/Home/home.style';
+import Navbar from '@/components/Navbar/Navbar';
 
-import config from "@/constants/Home/config.json";
+import config from '@/constants/Home/config.json';
 
-import BookImg from "@/assets/image/home/book.svg";
-import NotificationImg from "@/assets/image/home/notification.svg";
-import ArrowImg from "@/assets/image/home/arrow.svg";
+import BookImg from '@/assets/image/home/book.svg';
+import NotificationImg from '@/assets/image/home/notification.svg';
+import ArrowImg from '@/assets/image/home/arrow.svg';
 import CalendarImg from '@/assets/image/home/calendar.svg';
 import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
+import SchoolImg from '@/assets/image/home/school.svg';
+import CafeteriaImg from '@/assets/image/home/cafeteria.svg'
 
 const numberLoop = () => {
   const numbers = [];
@@ -52,7 +54,7 @@ const Home: React.FC = () => {
     <S.HomeContainer>
       <Navbar />
 
-      <S.HomeMain style={{ width: "100%", height: "100%"}}>
+      <S.HomeMain style={{ width: "100%", height: "100%" }}>
         <S.HomeTitle>홈</S.HomeTitle>
 
         <S.HomeWrapper>
@@ -98,6 +100,26 @@ const Home: React.FC = () => {
               </S.ArrowLButton>
             </div>
           </S.CatSeugiBox>
+
+          <S.MySchoolBox>
+            <div style={{ display: "flex", alignItems: "center", padding: "4px" }}>
+              <S.SchoolImg src={SchoolImg} />
+              <S.MySchooliTitle>내 학교</S.MySchooliTitle>
+              <S.ArrowLButton>
+                <S.CArrowLogo src={ArrowImg} />
+              </S.ArrowLButton>
+            </div>
+          </S.MySchoolBox>
+
+          <S.CafeteriaBox>
+            <div style={{ display: "flex", alignItems: "center", padding: "4px" }}>
+              <S.CafeteriaImg src={CafeteriaImg} />
+              <S.CafeteriaTitle>오늘의 급식</S.CafeteriaTitle>
+              <S.ArrowLButton>
+                <S.CArrowLogo src={ArrowImg} />
+              </S.ArrowLButton>
+            </div>
+          </S.CafeteriaBox>
 
         </S.HomeWrapper>
       </S.HomeMain>
