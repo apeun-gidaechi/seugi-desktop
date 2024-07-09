@@ -135,7 +135,7 @@ const Sidebar: React.FC = () => {
     const newRoomId = `room-${Date.now()}`;
     addChatRoom(newRoomId);
   };
-
+ 
   return (
     <>
       <S.ChatingPage>

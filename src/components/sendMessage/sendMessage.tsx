@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Client } from '@stomp/stompjs';
-import axios from 'axios'; // Import Axios for making HTTP requests
+import axios from 'axios'; 
 import * as S from '@/components/sendMessage/sendMessage.style';
 import MessageBox from '@/components/MessageBox/messageBox';
 
