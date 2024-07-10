@@ -35,7 +35,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
       const newMessage = { message, time, sender: currentUser };
       stompClient.publish({ destination: `/app/chat/${chatRoom}`, body: JSON.stringify(newMessage) });
       setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
-      console.log(newMessage); 
+      console.log('Message sent:', newMessage);
       setMessage('');
       setHasText(false);
     } else {
@@ -45,12 +45,14 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
 
   const handleClick = () => {
     if (message.trim() !== '') {
+      console.log('Sending message:', message);
       sendMessage(message);
     }
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && message.trim() !== '') {
+      console.log('Sending message:', message);
       sendMessage(message);
     }
   };
@@ -59,16 +61,16 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
     const client = new Client({
       brokerURL: 'wss://hoolc.me/stomp/chat',
       connectHeaders: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzIwNTIwNjkzLCJleHAiOjE3MjA1MjY2OTN9.PJJVOpt8zTOBPNuJfZG07Hrzk9IxDy30f4bjJMtwBfk`, 
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTcxNTg1ODkwMywiZXhwIjoxNzIxODU4OTAzfQ.F5_W4wAay4FbssM6XxJSCiUIvGCAcjAXqPxb-PXvUDo`, 
       },
       debug: (str) => {
         console.log(str);
-        if (str.includes('<<< PONG')) {
-          console.log('PONG received');
-        } else if (str.includes('<<< CONNECTED')) {
+        if (str.includes('<<< CONNECTED')) {
           console.log('Connected to server');
         } else if (str.includes('<<< DISCONNECTED')) {
           console.log('Disconnected from server');
+        } else if (str.includes('<<< PONG')) {
+          console.log('PONG received');
         }
       },
       onConnect: () => {
@@ -76,7 +78,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
         client.subscribe(`/topic/messages/${chatRoom}`, (message) => {
           const newMessage = JSON.parse(message.body);
           setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
-          console.log(newMessage); 
+          console.log('Message received:', newMessage);
         });
       },
       onDisconnect: () => {
