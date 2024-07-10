@@ -48,6 +48,24 @@ export const SettingButton = styled.button`
     margin-right:2px;
 `
 
+export const NoPendingSchools = styled.span`
+    color: #000;
+
+    font-family: 'Pretendard-Regular', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%; /* 20.8px */
+`
+
+export const PendingSchool = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    align-self: stretch;
+`
+
 export const SettingImg = styled.img`
     width: 28px;
     height: 28px;
