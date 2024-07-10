@@ -751,3 +751,10 @@ export const ChangeSchool = styled.button`
 
   cursor: pointer;
 `;
+
+export const SearchButton = styled.button`
+  border: none;
+  background: none;
+
+  cursor: pointer;
+`;
