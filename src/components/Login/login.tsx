@@ -23,7 +23,7 @@ const Login = () => {
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = 'auto';
-    }
+    };
   }, []);
 
   const [email, setEmail] = useState<string>('');
@@ -32,11 +32,31 @@ const Login = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState<string>('');
 
+  const importWorkspace = async () => {
+    try {
+      const token = window.localStorage.getItem("accessToken");
+      const res = await axios.get(`${config.serverurl}/workspace/`, {
+        headers: {
+            Authorization: `${token}`
+        },
+      });
+      if (res.data.data && res.data.data.length === 0) {
+        navigate("/unhome");
+      } else {
+        navigate("/home");
+      }
+    } catch (error) {
+      console.log("Error fetching workspace:", error);
+      setAlertMessage("워크스페이스 정보를 가져오는 중 오류가 발생했습니다.");
+      setShowAlert(true);
+    }
+  };
+
   const handleLogin = async () => {
     try {
       const res = await axios.post(`${config.serverurl}/member/login`, {
-        email: email,
-        password: password,
+        email,
+        password,
       }, {
         headers: {
           'Content-Type': 'application/json'
@@ -47,25 +67,27 @@ const Login = () => {
         return;
       }
 
-      const accessToken = res.data.data.accessToken;
-      const refreshToken = res.data.data.refreshToken;
+      const { accessToken, refreshToken } = res.data.data;
 
       window.localStorage.setItem('accessToken', accessToken);
       window.localStorage.setItem('refreshToken', refreshToken);
 
-      navigate("/home");
+      console.log(res);
+
+      importWorkspace();
+
     } catch (error) {
       setAlertMessage("등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다");
       setShowAlert(true);
       console.log(error);
     }
-  }
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleLogin();
     }
-  }
+  };
 
   const handleCloseAlert = () => {
     setShowAlert(false);
@@ -89,7 +111,7 @@ const Login = () => {
               <S.Subtitle2>이메일 <S.Redstar>*</S.Redstar></S.Subtitle2>
               <S.InputContainer>
                 <TextField
-                  value='email'
+                  value={email}
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="이메일을 입력해주세요"
@@ -102,7 +124,7 @@ const Login = () => {
               <S.Subtitle2>비밀번호 <S.Redstar>*</S.Redstar></S.Subtitle2>
               <S.InputContainer>
                 <TextField
-                  value='password'
+                  value={password}
                   type={showPassword ? "text" : "password"}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="비밀번호를 입력해주세요"
