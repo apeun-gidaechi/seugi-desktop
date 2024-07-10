@@ -7,6 +7,7 @@ import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
 import axios from 'axios';
 import { isTokenExpired } from '@/util/tokenUtils';
 import Backimg from '@/assets/image/Backimg.svg';
+import config from "@/constants/config/config.json";
 
 type Role = 'NONE' | 'STUDENT' | 'TEACHER';
 
@@ -23,7 +24,7 @@ const SelectingJob: React.FC = () => {
             document.body.style.overflow = 'auto';
         }
     }, []);
-    
+
     useEffect(() => {
         if (isTokenExpired(token)) {
             alert('세션이 만료되었습니다. 다시 로그인 해주세요.');
@@ -62,8 +63,8 @@ const SelectingJob: React.FC = () => {
         }
 
         try {
-            const res = await axios.post(`/workspace/join`, {
-                workspaceId,
+            const res = await axios.post(`${config.serverurl}/workspace/join`, {
+                workspaceId: workspaceId,
                 workspaceCode: verificationCode,
                 role: selectedRole,
             }, {
@@ -73,7 +74,7 @@ const SelectingJob: React.FC = () => {
             });
 
             if (res.status === 200) {
-                navigate('/waitingjoin', { state: { token, } });
+                navigate('/waitingjoin', { state: { token } });
             } else {
                 console.error("워크스페이스 가입 실패:", res.data);
             }

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import * as S from '@/components/SchoolCode/SchoolCode.style';
 import Button from '@/components/Button/Button';
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { isTokenExpired } from '@/util/tokenUtils'; 
+import { isTokenExpired } from '@/util/tokenUtils';
 import Backimg from '@/assets/image/Backimg.svg';
+import config from "@/constants/config/config.json";
 
 const SchoolCode = () => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const SchoolCode = () => {
             document.body.style.overflow = 'auto';
         }
     }, []);
-    
+
     useEffect(() => {
         if (isTokenExpired(token)) {
             alert('세션이 만료되었습니다. 다시 로그인 해주세요.');
@@ -38,7 +39,7 @@ const SchoolCode = () => {
         }
 
         try {
-            const res = await axios.get(`/workspace/${verificationCode}`, {
+            const res = await axios.get(`${config.serverurl}/workspace?code=${verificationCode}`, {
                 headers: {
                     Authorization: `${token}`
                 },
