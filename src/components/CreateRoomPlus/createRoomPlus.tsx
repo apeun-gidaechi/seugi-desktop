@@ -11,12 +11,12 @@ interface Member {
   department: string;
 }
 
-interface Props {
-  onClose: () => void; 
-  onCreateRoom: (roomName: string) => void; 
+interface CreateRoomPlusProps {
+  onClose: () => void;
+  onCreateRoom: (roomName: string) => void;
 }
 
-const CreateRoomPlus: React.FC<Props> = ({ onClose, onCreateRoom }) => {
+const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchResult, setSearchResult] = useState<Member[]>([]);
   const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
@@ -56,8 +56,10 @@ const CreateRoomPlus: React.FC<Props> = ({ onClose, onCreateRoom }) => {
       const selectedMemberNames = selectedMembers.map(
         (id) => dummyData.find((item) => item.id === id)?.name
       );
-      alert(`Selected members: ${selectedMemberNames}`);
-      onCreateRoom('New Room'); 
+      const roomName = selectedMemberNames.join(', '); 
+      onCreateRoom(roomName); 
+      onClose(); 
+    } else {
       alert('Please select at least one member.');
     }
   };
@@ -96,7 +98,6 @@ const CreateRoomPlus: React.FC<Props> = ({ onClose, onCreateRoom }) => {
           </S.PlusButtonCheck>
         </S.PlusMemberClick>
       ))}
-      <S.ChatRoomButton onClick={onClose}>닫기</S.ChatRoomButton> {/* Close button */}
     </S.CreateRoomPlusBox>
   );
 };
