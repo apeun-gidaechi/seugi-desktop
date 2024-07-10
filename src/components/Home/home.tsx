@@ -7,17 +7,7 @@ import Navbar from "@/components/Navbar/Navbar";
 
 import config from "@/constants/Home/config.json";
 
-import BookImg from "@/assets/image/home/book.svg";
-import NotificationImg from "@/assets/image/home/notification.svg";
-import ArrowImg from "@/assets/image/home/arrow.svg";
-import CalendarImg from "@/assets/image/home/calendar.svg";
-import SeugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
-import SchoolImg from "@/assets/image/home/school.svg";
-import CafeteriaImg from "@/assets/image/home/cafeteria.svg";
-import Emoji from "@/assets/image/home/emoji.svg";
-import Heart from "@/assets/image/home/heart.png";
-import Fire from "@/assets/image/home/fire.png";
-import BookImg from "@/assets/image/home/book.svg";
+import HomeBookImg from "@/assets/image/home/homebook.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
 import CalendarImg from "@/assets/image/home/calendar.svg";
@@ -25,6 +15,10 @@ import SeugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import SchoolImg from "@/assets/image/home/school.svg";
 import CafeteriaImg from "@/assets/image/home/cafeteria.svg";
 import SearchImg from "@/assets/image/home/search.svg";
+import Emoji from "@/assets/image/home/emoji.svg";
+import Heart from "@/assets/image/home/heart.png";
+import Fire from "@/assets/image/home/fire.png";
+
 
 import { useNavigate } from "react-router-dom";
 
@@ -81,7 +75,7 @@ const Home: React.FC = () => {
         <S.HomeWrapper>
           <S.DailyScheduleBox>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <S.BookLogo src={BookImg} />
+              <S.BookLogo src={HomeBookImg} />
               <S.DailyScheduleTitle>오늘의 시간표</S.DailyScheduleTitle>
               <S.ArrowLButton>
                 <S.ArrowLogo src={ArrowImg} />

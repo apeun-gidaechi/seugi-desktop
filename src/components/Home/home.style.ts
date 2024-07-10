@@ -237,7 +237,6 @@ export const NotificationContentTitle = styled.span`
 
   top: 8px;
 
-  /* Subtitle2 */
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
@@ -252,7 +251,6 @@ export const NotificationContentDescription = styled.span`
 
   top: 7.5px;
 
-  /* Body2 */
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
@@ -804,6 +802,6 @@ export const ChangeSchool = styled.button`
   border:none;
 
   cursor: pointer;
-`
+
   line-height: 130%;
-`;
+`
