@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import * as S from '@/components/Home/NotSubscribed/UnHome.style';
 
 import Navbar from '@/components/Navbar/Navbar';
-import Changeschool from '@/components/Changeshcool/Changeschool';
+import Changeschool from '@/components/ChangeSchool/ChangeSchool';
 
 import HomeBookImg from '@/assets/image/home/homebook.svg';
 import NotificationImg from '@/assets/image/home/notification.svg';
@@ -11,8 +11,6 @@ import CalendarImg from '@/assets/image/home/calendar.svg';
 import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
 import SchoolImg from '@/assets/image/home/school.svg';
 import CafeteriaImg from '@/assets/image/home/cafeteria.svg'
-import SearchImg from '@/assets/image/home/search.svg';
-import { CafeteriaDiv } from '../Subscribed/Home.style';
 
 const NHome = () => {
     const [showChangeschool, setShowChangeschool] = useState(false);
