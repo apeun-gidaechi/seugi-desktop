@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+
+export const Allwrap = styled.div`
+    
+`
+
 export const SendMessageWrap = styled.div`
     height: 64px;
     display: flex;
@@ -13,7 +18,7 @@ export const SendMessageWrap = styled.div`
     width: 70vw;
     max-width: 1016px;
     margin-left: 12px;
-    margin-top: 871px;
+    margin-top: 731px;
 `
 
 export const PlustFileButton = styled.button`
