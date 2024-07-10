@@ -84,6 +84,22 @@ export const ArrowImg = styled.img`
     height: 28px;
 `
 
+export const NoSubSchoolText = styled.span`
+    display:block;
+
+    color: var(--Black, #000);
+
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%; /* 20.8px */
+
+    padding:0 0 8px 0;
+
+    text-align:left;
+`
+
 export const SchoolBox = styled.div`
     width:280px;
     height: 40px;
@@ -97,6 +113,7 @@ export const SchoolBox = styled.div`
     border-radius: 8px;
     background: var(--Primary-Primary050, #F8FCFF);
 `
+
 export const WaitingJoin = styled.span`
     display:flex;
     flex-direction:row;
@@ -134,4 +151,7 @@ export const CreateSchool = styled.button`
     border:none;
 
     cursor: pointer;
+`
+
+export const NoSubscribedSchools = styled.div`
 `
