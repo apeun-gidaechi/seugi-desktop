@@ -37,9 +37,12 @@ const Login = () => {
       const token = window.localStorage.getItem("accessToken");
       const res = await axios.get(`${config.serverurl}/workspace/`, {
         headers: {
-            Authorization: `${token}`
+          Authorization: `${token}`
         },
       });
+
+      console.log(res.data.data.length)
+
       if (res.data.data && res.data.data.length === 0) {
         navigate("/unhome");
       } else {
