@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import * as S from "@/components/Home/Subscribed/Home.style";
 import Navbar from "@/components/Navbar/Navbar";
-import Changeschool from "@/components/Changeshcool/Changeschool";
+import Changeschool from "@/components/ChangeSchool/ChangeSchool";
 
 import initialConfig from "@/constants/Home/config.json";
 
