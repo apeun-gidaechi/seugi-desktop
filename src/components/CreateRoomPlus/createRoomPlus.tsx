@@ -83,21 +83,23 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
           onChange={handleSearchChange}
         />
       </S.InviteMemberWrap>
-      {combinedResults.map((item) => (
-        <S.PlusMemberClick key={item.id} onClick={() => handleMemberClick(item.id)}>
-          <S.AvatarProfileWrap>
-            <S.AvatarProfile src={AvatarImg} />
-          </S.AvatarProfileWrap>
-          <S.InviterName>{item.name}</S.InviterName>
-          <S.PlusButtonCheck>
-            {selectedMembers.includes(item.id) ? (
-              <img src={Clicked} alt="Clicked" />
-            ) : (
-              <img src={NonClicked} alt="NonClicked" />
-            )}
-          </S.PlusButtonCheck>
-        </S.PlusMemberClick>
-      ))}
+      <S.ScrollableMemberList>
+        {combinedResults.map((item) => (
+          <S.PlusMemberClick key={item.id} onClick={() => handleMemberClick(item.id)}>
+            <S.AvatarProfileWrap>
+              <S.AvatarProfile src={AvatarImg} />
+            </S.AvatarProfileWrap>
+            <S.InviterName>{item.name}</S.InviterName>
+            <S.PlusButtonCheck>
+              {selectedMembers.includes(item.id) ? (
+                <img src={Clicked} alt="Clicked" />
+              ) : (
+                <img src={NonClicked} alt="NonClicked" />
+              )}
+            </S.PlusButtonCheck>
+          </S.PlusMemberClick>
+        ))}
+      </S.ScrollableMemberList>
     </S.CreateRoomPlusBox>
   );
 };
