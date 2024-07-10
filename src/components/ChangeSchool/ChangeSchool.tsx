@@ -4,13 +4,23 @@ import axios from 'axios';
 
 import config from '@/constants/config/config.json';
 
-import * as S from '@/components/Changeshcool/Changeschool.style';
+import * as S from '@/components/ChangeSchool/ChangeSchool.style';
 
 import Arrow from '@/assets/image/home/arrow.svg';
 import Setting from '@/assets/image/home/setting_fill.svg';
 
+interface workspace {
+    data:[
+        workspaceId: string,
+        workspaceName: string,
+        workspaceImageUrl: string,
+        studentCount: number,
+        teacherCount: number
+    ]
+}
+
 const Changeschool = () => {
-    const [subscribedSchoolNames, setSubSchoolNames] = useState<string[]>([]);
+    const [subscribedSchoolNames, setSubSchoolNames] = useState<workspace[]>([]);
     const [pendingSchoolNames, setPendingSchoolNames] = useState<string[]>([]);
     const navigate = useNavigate();
 
@@ -23,18 +33,21 @@ const Changeschool = () => {
         const fetchSubSchoolNames = async () => {
             try {
                 const token = window.localStorage.getItem("accessToken");
-                const res = await axios.get(`${config.serverurl}/`, {
+                await axios.get<workspace>(`${config.serverurl}/workspace`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `${token}`
                     }
-                });
-                setSubSchoolNames(res.data.data.workspaceName);
+                }).then((res)=>{
+                    setSubSchoolNames(res.data.data);
+                })
+
+                console.log(subscribedSchoolNames)
             } catch (error) {
                 console.error('Error fetching subscribed schools:', error);
             }
         };
 
-        fetchSubSchoolNames();
+        fetchSubSchoolNames()
     }, []);
 
     // 가입 대기 중
@@ -42,18 +55,19 @@ const Changeschool = () => {
         const fetchPendingSchoolNames = async () => {
             try {
                 const token = window.localStorage.getItem("accessToken");
-                const res = await axios.get(`${config.serverurl}/my/wait-list`, {
+                const res = await axios.get(`${config.serverurl}/workspace/my/wait-list`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `${token}`
                     }
                 });
-                setPendingSchoolNames(res.data.data.workspaceName);
+
+                setPendingSchoolNames(pendingSchoolNames)
             } catch (error) {
                 console.error('Error fetching pending schools:', error);
             }
         };
 
-        fetchPendingSchoolNames();
+        fetchPendingSchoolNames()
     }, []);
 
     return (
@@ -61,7 +75,7 @@ const Changeschool = () => {
             {subscribedSchoolNames.map((schoolName, index) => (
                 <S.Subscribed key={index}>
                     <S.SchoolBox>
-                        <S.SchoolName>{schoolName}</S.SchoolName>
+                        <S.SchoolName>{}</S.SchoolName>
                         <S.SettingButton>
                             <S.SettingImg src={Setting} />
                         </S.SettingButton>
@@ -79,7 +93,7 @@ const Changeschool = () => {
                     pendingSchoolNames.map((schoolName, index) => (
                         <S.Subscribed key={index}>
                             <S.SchoolBox>
-                                <S.SchoolName>{schoolName}</S.SchoolName>
+                                {/* <S.SchoolName>{schoolName.workspaceName}</S.SchoolName> */}
                                 <S.ArrowButton>
                                     <S.ArrowImg src={Arrow} />
                                 </S.ArrowButton>
