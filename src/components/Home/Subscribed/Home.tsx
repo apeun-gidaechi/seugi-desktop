@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useState } from "react";
 
-import * as S from "@/components/Home/home.style";
+import * as S from "@/components/Home/Subscribed/Home.style";
 import Navbar from "@/components/Navbar/Navbar";
 import Changeschool from "@/components/Changeshcool/Changeschool";
 
@@ -75,7 +75,7 @@ const itemLoop = () => {
   return items;
 };
 
-const Home: React.FC = () => {
+const SHome: React.FC = () => {
   const [showChangeschool, setShowChangeschool] = useState(false);
 
   const handleOnClicked = () => {
@@ -224,4 +224,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default SHome;
