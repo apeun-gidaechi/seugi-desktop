@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const CreateSchoolMain = styled.div`
+    position:absolute;
     display: flex;
     width: 312px;
     height:312px;
@@ -14,6 +15,8 @@ export const CreateSchoolMain = styled.div`
     background: #FFF;
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+
+    z-index:999;
 `
 
 export const Subscribed = styled.div`
