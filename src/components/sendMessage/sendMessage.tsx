@@ -136,6 +136,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
           />
         ))}
       </div>
+      <S.Allwrap>
       <S.SendMessageWrap>
         <S.PlustFileButton>
           <S.PlusMessageFile src={PlusMessageFile} />
@@ -157,6 +158,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
           )}
         </S.SendArrowButton>
       </S.SendMessageWrap>
+      </S.Allwrap>
     </div>
   );
 };
