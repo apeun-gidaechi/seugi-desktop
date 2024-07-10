@@ -6,7 +6,7 @@ import Changeschool from "@/components/Changeshcool/Changeschool";
 
 import initialConfig from "@/constants/Home/config.json";
 
-import HomeBookImg from "@/assets/image/home/book.svg";
+import HomeBookImg from "@/assets/image/home/homebook.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
 import CalendarImg from "@/assets/image/home/calendar.svg";
@@ -96,166 +96,118 @@ const Home: React.FC = () => {
 
   return (
     <S.HomeContainer>
-      <Navbar />
-
+      <Navbar></Navbar>
       <S.HomeMain>
         <S.HomeTitle>홈</S.HomeTitle>
-
         {showChangeschool && <Changeschool />}
-        <S.HomeWrapper1>
-          <S.HomeWrapper1UpContainer>
-            <S.DailyScheduleBox>
-              <div style={{ display: "flex", alignItems: "center" }}>
+        <S.ComponentsBox>
+          <S.HomeWrapper1>
+            <S.HomeWrapper1UpContainer>
+              <S.ScheduleTitleBox>
                 <S.BookLogo src={HomeBookImg} />
                 <S.DailyScheduleTitle>오늘의 시간표</S.DailyScheduleTitle>
                 <S.ArrowLButton>
                   <S.ArrowLogo src={ArrowImg} />
                 </S.ArrowLButton>
-              </div>
-
+              </S.ScheduleTitleBox>
               <S.NumberTable>{numberLoop()}</S.NumberTable>
               <S.ItemTable>{itemLoop()}</S.ItemTable>
-            </S.DailyScheduleBox>
-          </S.HomeWrapper1UpContainer>
-          <S.HomeWrapper1DownContainer>
-            <S.LeftContainer>
-              <S.NotificationBox>
-                <div style={{ display: "flex", alignItems: "center" }}>
+            </S.HomeWrapper1UpContainer>
+            <S.HomeWrapper1DownContainer>
+              <S.LeftContainer>
+                <S.NotificationContainer>
                   <S.NotificationLogo src={NotificationImg} />
                   <S.NotificationTitle>알림</S.NotificationTitle>
                   <S.ArrowLButton>
                     <S.NArrowLogo src={ArrowImg} />
                   </S.ArrowLButton>
-                </div>
-              </S.NotificationBox>
-            </S.LeftContainer>
-            <S.RightContainer>
-              <S.RightUpContainer>
-                <S.ScheduleBox>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      padding: "4px",
-                    }}
-                  >
+                </S.NotificationContainer>
+              </S.LeftContainer>
+              <S.RightContainer>
+                <S.RightUpContainer>
+                  <S.SoonScheduleBox>
                     <S.CalendarLogo src={CalendarImg} />
                     <S.ScheduleTitle>다가오는 일정</S.ScheduleTitle>
                     <S.ArrowLButton>
                       <S.SArrowLogo src={ArrowImg} />
                     </S.ArrowLButton>
-                  </div>
-                  <S.Dummy>
-                    <S.Dummy1>
-                      <S.DummyDate>7/21</S.DummyDate>
+                  </S.SoonScheduleBox>
+                  <S.DummyBox>
+                    <S.DateDummy>
+                      <S.DateText>7/21</S.DateText>
+                      <S.DateText>7/25</S.DateText>
+                      <S.DateText>8/15</S.DateText>
+                      <S.DateText>8/15</S.DateText>
+                      <S.DateText>8/15</S.DateText>
+                    </S.DateDummy>
+                    <S.SubDummy>
                       <S.SubTitle>체육대회</S.SubTitle>
-                      <S.D_Day>D-3</S.D_Day>
-                    </S.Dummy1>
-                  </S.Dummy>
-                  <S.Dummy>
-                    <S.Dummy2>
-                      <S.DummyDate>7/25</S.DummyDate>
                       <S.SubTitle>기숙사 정기점호</S.SubTitle>
-                      <S.D_Day>D-7</S.D_Day>
-                    </S.Dummy2>
-                  </S.Dummy>
-                  <S.Dummy>
-                    <S.Dummy3>
-                      <S.DummyDate>8/15</S.DummyDate>
                       <S.SubTitle>KBS 촬영</S.SubTitle>
-                      <S.D_Day>D-21</S.D_Day>
-                    </S.Dummy3>
-                  </S.Dummy>
-                  <S.Dummy>
-                    <S.Dummy4>
-                      <S.DummyDate>8/15</S.DummyDate>
                       <S.SubTitle>KBS 촬영</S.SubTitle>
-                      <S.D_Day>D-21</S.D_Day>
-                    </S.Dummy4>
-                  </S.Dummy>
-                  <S.Dummy>
-                    <S.Dummy5>
-                      <S.DummyDate>8/15</S.DummyDate>
                       <S.SubTitle>KBS 촬영</S.SubTitle>
-                      <S.D_Day>D-21</S.D_Day>
-                    </S.Dummy5>
-                  </S.Dummy>
-                </S.ScheduleBox>
-              </S.RightUpContainer>
-              <S.RightDownContainer>
-                <S.CatSeugiBox>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      padding: "4px",
-                    }}
-                  >
+                    </S.SubDummy>
+                    <S.D_DayDummy>
+                      <S.D_DayText>D-3</S.D_DayText>
+                      <S.D_DayText>D-7</S.D_DayText>
+                      <S.D_DayText>D-21</S.D_DayText>
+                      <S.D_DayText>D-21</S.D_DayText>
+                      <S.D_DayText>D-21</S.D_DayText>
+                    </S.D_DayDummy>
+                  </S.DummyBox>
+                </S.RightUpContainer>
+                <S.RightDownContainer>
+                  <S.SeugiTitleContainer>
                     <S.SeugiImg src={SeugiImg} />
                     <S.CatSeugiTitle>캣스기</S.CatSeugiTitle>
-                  </div>
+                  </S.SeugiTitleContainer>
                   <S.CatSeugi>
                     <S.CatSeugiInput placeholder="2학년 4반에서 아무나 한 명 뽑아줘..." />
                     <S.SearchImg src={SearchImg} />
                   </S.CatSeugi>
-                  <S.LastQuestionBox>
-                    <S.Lastweek>지난주</S.Lastweek>
-                  </S.LastQuestionBox>
-                  <S.LastQuestion>
-                    <S.QuestionText>
-                      급식에 복어가 나오는 날이 언제...
-                    </S.QuestionText>
-                    <S.QuestionDay>6월 21일</S.QuestionDay>
-                  </S.LastQuestion>
-                  <S.LastQuestion>
-                    <S.QuestionText>
-                      우리 학교 대회 담당하는 분이 누구...
-                    </S.QuestionText>
-                    <S.QuestionDay>6월 21일</S.QuestionDay>
-                  </S.LastQuestion>
-                </S.CatSeugiBox>
-              </S.RightDownContainer>
-            </S.RightContainer>
-          </S.HomeWrapper1DownContainer>
-        </S.HomeWrapper1>
+                  <S.QuestionContainer>
+                    <S.LastQuestionBox>
+                      <S.LastText>
+                        <S.Lastweek>지난주</S.Lastweek>
+                      </S.LastText>
+                    </S.LastQuestionBox>
+                    <S.LastQuestion>
+                      <S.QuestionText>
+                        급식에 복어가 나오는 날이 언제...
+                      </S.QuestionText>
+                      <S.QuestionDay>6월 21일</S.QuestionDay>
+                    </S.LastQuestion>
+                    <S.LastQuestion>
+                      <S.QuestionText>
+                        우리 학교 대회 담당하는 분이 누구...
+                      </S.QuestionText>
+                      <S.QuestionDay>6월 21일</S.QuestionDay>
+                    </S.LastQuestion>
+                  </S.QuestionContainer>
+                </S.RightDownContainer>
+              </S.RightContainer>
+            </S.HomeWrapper1DownContainer>
+          </S.HomeWrapper1>
 
-        <S.HomeWrapper2>
-          <S.UpContainer>
-            <S.MySchoolBox>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "4px",
-                }}
-              >
+          <S.HomeWrapper2>
+            <S.UpContainer>
+              <S.SchoolTitleBox>
                 <S.SchoolImg src={SchoolImg} />
                 <S.MySchooliTitle>내 학교</S.MySchooliTitle>
-                <S.ArrowLButton>
-                  <S.CArrowLogo src={ArrowImg} />
-                </S.ArrowLButton>
-              </div>
+              </S.SchoolTitleBox>
               <S.SchoolBox>
                 <S.SchoolName>대구 소프트웨어 마이스터 고등학교</S.SchoolName>
                 <S.ChangeSchool onClick={handleOnClicked}>전환</S.ChangeSchool>
               </S.SchoolBox>
-            </S.MySchoolBox>
-          </S.UpContainer>
-          <S.DownContainer>
-            <S.CafeteriaBox>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "4px",
-                }}
-              >
+            </S.UpContainer>
+            <S.DownContainer>
+              <S.CafeteriaTitleBox>
                 <S.CafeteriaImg src={CafeteriaImg} />
                 <S.CafeteriaTitle>오늘의 급식</S.CafeteriaTitle>
                 <S.ArrowLButton>
                   <S.CArrowLogo src={ArrowImg} />
                 </S.ArrowLButton>
-              </div>
+              </S.CafeteriaTitleBox>
               <S.CafeteriaDiv>
                 <S.TimeButton>
                   <S.Breakfast>아침</S.Breakfast>
@@ -274,9 +226,9 @@ const Home: React.FC = () => {
                 <S.Menu> 초코첵스시리얼+우유 </S.Menu>
                 <S.Menu> 오렌지 </S.Menu>
               </S.MenuList>
-            </S.CafeteriaBox>
-          </S.DownContainer>
-        </S.HomeWrapper2>
+            </S.DownContainer>
+          </S.HomeWrapper2>
+        </S.ComponentsBox>
       </S.HomeMain>
     </S.HomeContainer>
   );
