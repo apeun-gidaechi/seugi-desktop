@@ -61,6 +61,7 @@ export const PlusButton = styled.button`
     position: absolute;
     margin-left: 282px;
     margin-top: 10px; 
+    z-index: 10; 
 `
 
 export const ChatRoomList = styled.div`

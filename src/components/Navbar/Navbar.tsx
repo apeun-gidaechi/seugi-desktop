@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as S from "@/components/Navbar/Navbar.style";
-import config from "@/constants/config/config.json";
+import config from "@/constants/login/config.json";
 
 import Home from "@/assets/image/sidebar/home.svg";
 import Chat from "@/assets/image/sidebar/chat.svg";
