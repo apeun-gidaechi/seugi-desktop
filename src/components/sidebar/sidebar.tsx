@@ -1,5 +1,3 @@
-// Sidebar.tsx
-
 import React, { useState } from 'react';
 import * as S from './sidebar.style';
 
