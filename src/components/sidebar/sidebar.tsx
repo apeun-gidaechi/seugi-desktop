@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+// Sidebar.tsx
+
+import React, { useState } from 'react';
 import * as S from './sidebar.style';
 
 import PlusButton from '@/assets/image/sidebar/plusButton.svg';
@@ -6,6 +8,7 @@ import SearchIcon from '@/assets/image/chat-components/Search.svg';
 import AvatarProfile from '@/assets/image/chat-components/Avatar.svg';
 
 import Navbar from '@/components/Navbar/Navbar';
+import CreateRoomPlus from '@/components/CreateRoomPlus/createRoomPlus'; // Import the correct path
 
 import config from '@/constants/ChatMember/config.json';
 import SendMessage from '@/components/sendMessage/sendMessage';
@@ -15,91 +18,15 @@ interface SendMessageProps {
   currentUser: string;
 }
 
-type SelectedButton = 'home' | 'chat' | 'chats' | 'bell' | null;
-
 const Sidebar: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [chatRooms, setChatRooms] = useState<string[]>([]);
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
+  const [showCreateRoom, setShowCreateRoom] = useState(false);
 
-  const saveToLocalStorage = (key: string, value: any) => {
-    console.log(`Saving to localStorage: ${key} = ${JSON.stringify(value)}`);
-    localStorage.setItem(key, JSON.stringify(value));
-  };
-
-  const loadFromLocalStorage = (key: string) => {
-    const value = localStorage.getItem(key);
-    console.log(`Loading from localStorage: ${key} = ${value}`);
-    return value ? JSON.parse(value) : null;
-  };
-
-  const saveToSessionStorage = (key: string, value: any) => {
-    console.log(`Saving to sessionStorage: ${key} = ${JSON.stringify(value)}`);
-    sessionStorage.setItem(key, JSON.stringify(value));
-  };
-
-  const loadFromSessionStorage = (key: string) => {
-    const value = sessionStorage.getItem(key);
-    console.log(`Loading from sessionStorage: ${key} = ${value}`);
-    return value ? JSON.parse(value) : null;
-  };
-
-  const saveToCookies = (key: string, value: any, days: number) => {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    const expires = "expires=" + date.toUTCString();
-    console.log(`Saving to cookies: ${key} = ${JSON.stringify(value)}`);
-    document.cookie = key + "=" + JSON.stringify(value) + ";" + expires + ";path=/";
-  };
-
-  const loadFromCookies = (key: string) => {
-    const name = key + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i].trim();
-      if (c.indexOf(name) === 0) {
-        console.log(`Loading from cookies: ${key} = ${c.substring(name.length, c.length)}`);
-        return JSON.parse(c.substring(name.length, c.length));
-      }
-    }
-    return null;
-  };
-
-  const loadChatRooms = () => {
-    return (
-      loadFromLocalStorage('chatRooms') ||
-      loadFromSessionStorage('chatRooms') ||
-      loadFromCookies('chatRooms')
-    );
-  };
-
-  useEffect(() => {
-    const storedChatRooms = loadChatRooms();
-    if (storedChatRooms) {
-      console.log('Loaded chatRooms:', storedChatRooms);
-      setChatRooms(storedChatRooms);
-    }
-  }, []);
-
-  useEffect(() => {
-    console.log('Saving chatRooms:', chatRooms);
-    saveToLocalStorage('chatRooms', chatRooms);
-    saveToSessionStorage('chatRooms', chatRooms);
-    saveToCookies('chatRooms', chatRooms, 7);
-  }, [chatRooms]);
-
-  const handleChatRoomClick = (room: string) => {
-    setSelectedChatRoom(room);
-  };
-
-  const addChatRoom = (roomName: string) => {
-    setChatRooms(prevRooms => {
-      if (!prevRooms.includes(roomName)) {
-        return [...prevRooms, roomName];
-      }
-      return prevRooms;
-    });
+  const handleCreatePersonalChat = () => {
+    const newRoomId = `room-${Date.now()}`;
+    addChatRoom(newRoomId);
   };
 
   const handleSearch = () => {
@@ -114,11 +41,32 @@ const Sidebar: React.FC = () => {
     }
   };
 
-  const handleCreatePersonalChat = () => {
-    const newRoomId = `room-${Date.now()}`;
-    addChatRoom(newRoomId);
+  const addChatRoom = (roomName: string) => {
+    setChatRooms((prevRooms) => {
+      if (!prevRooms.includes(roomName)) {
+        return [...prevRooms, roomName];
+      }
+      return prevRooms;
+    });
   };
- 
+
+  const handleChatRoomClick = (room: string) => {
+    setSelectedChatRoom(room);
+  };
+
+  const handleCreateRoomClick = () => {
+    setShowCreateRoom(true);
+  };
+
+  const handleCloseCreateRoom = () => {
+    setShowCreateRoom(false);
+  };
+
+  const handleRoomCreation = (roomName: string) => {
+    addChatRoom(roomName);
+    setShowCreateRoom(false); // Close the create room modal after creating room
+  };
+
   return (
     <>
       <S.ChatingPage>
@@ -139,7 +87,7 @@ const Sidebar: React.FC = () => {
             <S.SearchIcon src={SearchIcon} onClick={handleSearch} />
           </S.SideFinder>
           <S.PlusButton>
-            <S.PlusButtonImg src={PlusButton} onClick={handleCreatePersonalChat} />
+            <S.PlusButtonImg src={PlusButton} onClick={handleCreateRoomClick} />
           </S.PlusButton>
           <S.ChatRoomList>
             {chatRooms.map((room, index) => (
@@ -152,7 +100,12 @@ const Sidebar: React.FC = () => {
             ))}
           </S.ChatRoomList>
         </S.SideBarChat>
-        {selectedChatRoom && <SendMessage chatRoom={selectedChatRoom} currentUser="사용자 이름" />}
+        {selectedChatRoom && (
+          <SendMessage chatRoom={selectedChatRoom} currentUser="사용자 이름" />
+        )}
+        {showCreateRoom && (
+          <CreateRoomPlus onClose={handleCloseCreateRoom} onCreateRoom={handleRoomCreation} />
+        )}
       </S.ChatingPage>
     </>
   );
