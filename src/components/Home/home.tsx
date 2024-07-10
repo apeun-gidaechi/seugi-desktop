@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+import { useState } from 'react';
 
 import * as S from '@/components/Home/home.style';
 import Navbar from '@/components/Navbar/Navbar';
@@ -14,9 +15,6 @@ import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
 import SchoolImg from '@/assets/image/home/school.svg';
 import CafeteriaImg from '@/assets/image/home/cafeteria.svg'
 import SearchImg from '@/assets/image/home/search.svg';
-
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 const numberLoop = () => {
 
@@ -54,7 +52,6 @@ const itemLoop = () => {
 };
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
   const [showChangeschool, setShowChangeschool] = useState(false);
 
   const handleOnClicked = () => {
@@ -132,7 +129,9 @@ const Home: React.FC = () => {
                   <S.CatSeugi>
                     <S.CatSeugiInput
                       placeholder='2학년 4반에서 아무나 한 명 뽑아줘...' />
-                    <S.SearchImg src={SearchImg} />
+                    <S.SearchButton>
+                      <S.SearchImg src={SearchImg} />
+                    </S.SearchButton>
                   </S.CatSeugi>
                   <S.QuestionContainer>
                     <S.LastQuestionBox>
