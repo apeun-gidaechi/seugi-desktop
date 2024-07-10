@@ -4,7 +4,7 @@ import * as S from '@/components/Home/home.style';
 import Navbar from '@/components/Navbar/Navbar';
 import Changeschool from '@/components/Changeshcool/Changeschool';
 
-import config from '@/constants/Home/config.json';
+import config from "@/constants/Home/config.json";
 
 import HomeBookImg from '@/assets/image/home/book.svg';
 import NotificationImg from '@/assets/image/home/notification.svg';
@@ -218,7 +218,7 @@ const Home: React.FC = () => {
           </S.DownContainer>
         </S.HomeWrapper2>
       </S.HomeMain>
-    </S.HomeContainer >
+    </S.HomeContainer>
   );
 };
 
