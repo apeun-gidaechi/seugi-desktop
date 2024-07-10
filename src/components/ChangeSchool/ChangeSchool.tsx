@@ -3,24 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import config from '@/constants/config/config.json';
-
 import * as S from '@/components/ChangeSchool/ChangeSchool.style';
-
 import Arrow from '@/assets/image/home/arrow.svg';
 import Setting from '@/assets/image/home/setting_fill.svg';
 
-interface workspace {
-    data:[
-        workspaceId: string,
-        workspaceName: string,
-        workspaceImageUrl: string,
-        studentCount: number,
-        teacherCount: number
-    ]
+interface Workspace {
+    workspaceId: string;
+    workspaceName: string;
+    workspaceImageUrl: string;
+    studentCount: number;
+    teacherCount: number;
 }
 
 const Changeschool = () => {
-    const [subscribedSchoolNames, setSubSchoolNames] = useState<workspace[]>([]);
+    const [subscribedSchoolNames, setSubSchoolNames] = useState<Workspace[]>([]);
     const [pendingSchoolNames, setPendingSchoolNames] = useState<string[]>([]);
     const navigate = useNavigate();
 
@@ -33,21 +29,19 @@ const Changeschool = () => {
         const fetchSubSchoolNames = async () => {
             try {
                 const token = window.localStorage.getItem("accessToken");
-                await axios.get<workspace>(`${config.serverurl}/workspace`, {
+                const res = await axios.get<{ data: Workspace[] }>(`${config.serverurl}/workspace/`, {
                     headers: {
                         'Authorization': `${token}`
                     }
-                }).then((res)=>{
-                    setSubSchoolNames(res.data.data);
-                })
-
-                console.log(subscribedSchoolNames)
+                });
+                console.log('Subscribed schools:', res.data.data);
+                setSubSchoolNames(res.data.data);
             } catch (error) {
                 console.error('Error fetching subscribed schools:', error);
             }
         };
 
-        fetchSubSchoolNames()
+        fetchSubSchoolNames();
     }, []);
 
     // 가입 대기 중
@@ -55,27 +49,27 @@ const Changeschool = () => {
         const fetchPendingSchoolNames = async () => {
             try {
                 const token = window.localStorage.getItem("accessToken");
-                const res = await axios.get(`${config.serverurl}/workspace/my/wait-list`, {
+                const res = await axios.get<{ data: string[] }>(`${config.serverurl}/workspace/my/wait-list`, {
                     headers: {
                         'Authorization': `${token}`
                     }
                 });
 
-                setPendingSchoolNames(pendingSchoolNames)
+                setPendingSchoolNames(res.data.data);
             } catch (error) {
                 console.error('Error fetching pending schools:', error);
             }
         };
 
-        fetchPendingSchoolNames()
+        fetchPendingSchoolNames();
     }, []);
 
     return (
-        <S.CreateSchoolMain>
-            {subscribedSchoolNames.map((schoolName, index) => (
+        <S.ChangeSchoolMain>
+            {subscribedSchoolNames.map((school, index) => (
                 <S.Subscribed key={index}>
                     <S.SchoolBox>
-                        <S.SchoolName>{}</S.SchoolName>
+                        <S.SchoolName>{school.workspaceName}</S.SchoolName>
                         <S.SettingButton>
                             <S.SettingImg src={Setting} />
                         </S.SettingButton>
@@ -93,7 +87,7 @@ const Changeschool = () => {
                     pendingSchoolNames.map((schoolName, index) => (
                         <S.Subscribed key={index}>
                             <S.SchoolBox>
-                                {/* <S.SchoolName>{schoolName.workspaceName}</S.SchoolName> */}
+                                <S.SchoolName>{schoolName}</S.SchoolName>
                                 <S.ArrowButton>
                                     <S.ArrowImg src={Arrow} />
                                 </S.ArrowButton>
@@ -103,7 +97,7 @@ const Changeschool = () => {
                 )}
             </S.PendingSchool>
             <S.CreateSchool onClick={goCreateSchool}> 새 학교 가입 </S.CreateSchool>
-        </S.CreateSchoolMain>
+        </S.ChangeSchoolMain>
     );
 };
 

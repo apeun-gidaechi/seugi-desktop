@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CreateSchoolMain = styled.div`
+export const ChangeSchoolMain = styled.div`
     position:absolute;
     display: flex;
     width: 312px;
