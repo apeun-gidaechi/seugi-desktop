@@ -29,12 +29,12 @@ const Changeschool = () => {
         const fetchSubSchoolNames = async () => {
             try {
                 const token = window.localStorage.getItem("accessToken");
-                const res = await axios.get<{ data: Workspace[] }>(`${config.serverurl}/workspace/`, {
+                const res = await axios.get<{ data: Workspace[] }>(`${config.serverurl}/workspace`, {
                     headers: {
-                        'Authorization': `${token}`
+                        'Authorization': `Bearer ${token}`
                     }
                 });
-                console.log('Subscribed schools:', res.data.data);
+
                 setSubSchoolNames(res.data.data);
             } catch (error) {
                 console.error('Error fetching subscribed schools:', error);
@@ -51,7 +51,7 @@ const Changeschool = () => {
                 const token = window.localStorage.getItem("accessToken");
                 const res = await axios.get<{ data: string[] }>(`${config.serverurl}/workspace/my/wait-list`, {
                     headers: {
-                        'Authorization': `${token}`
+                        'Authorization': `Bearer ${token}`
                     }
                 });
 
@@ -66,19 +66,27 @@ const Changeschool = () => {
 
     return (
         <S.ChangeSchoolMain>
-            {subscribedSchoolNames.map((school, index) => (
-                <S.Subscribed key={index}>
-                    <S.SchoolBox>
-                        <S.SchoolName>{school.workspaceName}</S.SchoolName>
-                        <S.SettingButton>
-                            <S.SettingImg src={Setting} />
-                        </S.SettingButton>
-                        <S.ArrowButton>
-                            <S.ArrowImg src={Arrow} />
-                        </S.ArrowButton>
-                    </S.SchoolBox>
-                </S.Subscribed>
-            ))}
+            {subscribedSchoolNames.length === 0 ? (
+                <S.NoSubscribedSchools>
+                    <S.NoSubSchoolText> 가입된 학교가 없습니다. </S.NoSubSchoolText>
+                    <S.NoSubSchoolText> 새로운 학교를 가입하세요.</S.NoSubSchoolText>
+                    <S.CreateSchool onClick={goCreateSchool}>새 학교 가입</S.CreateSchool>
+                </S.NoSubscribedSchools>
+            ) : (
+                subscribedSchoolNames.map((school, index) => (
+                    <S.Subscribed key={school.workspaceId}>
+                        <S.SchoolBox>
+                            <S.SchoolName>{school.workspaceName}</S.SchoolName>
+                            <S.SettingButton>
+                                <S.SettingImg src={Setting} />
+                            </S.SettingButton>
+                            <S.ArrowButton>
+                                <S.ArrowImg src={Arrow} />
+                            </S.ArrowButton>
+                        </S.SchoolBox>
+                    </S.Subscribed>
+                ))
+            )}
             <S.PendingSchool>
                 <S.WaitingJoin>가입 대기 중</S.WaitingJoin>
                 {pendingSchoolNames.length === 0 ? (
@@ -96,7 +104,9 @@ const Changeschool = () => {
                     ))
                 )}
             </S.PendingSchool>
-            <S.CreateSchool onClick={goCreateSchool}> 새 학교 가입 </S.CreateSchool>
+            {subscribedSchoolNames.length > 0 && (
+                <S.CreateSchool onClick={goCreateSchool}>새 학교 가입</S.CreateSchool>
+            )}
         </S.ChangeSchoolMain>
     );
 };

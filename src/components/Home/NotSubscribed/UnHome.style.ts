@@ -408,8 +408,6 @@ export const NArrowLogo = styled.img`
 
 export const ArrowLogo = styled.img`
   position: relative;
-
-  left: 695px;
 `
 
 export const ScheduleBox = styled.div`
