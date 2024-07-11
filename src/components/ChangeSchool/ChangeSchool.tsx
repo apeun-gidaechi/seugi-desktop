@@ -13,7 +13,7 @@ interface Workspace {
     workspaceImageUrl: string;
     studentCount: number;
     teacherCount: number;
-}
+} 
 
 const Changeschool = () => {
     const [subscribedSchoolNames, setSubSchoolNames] = useState<Workspace[]>([]);
