@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { useState } from 'react';
 
 import * as S from '@/components/Home/Subscribed/Home.style';
@@ -51,17 +50,55 @@ const itemLoop = () => {
   return items;
 };
 
-const SHome: React.FC = () => {
+const Home: React.FC = () => {
   const [showChangeschool, setShowChangeschool] = useState(false);
+  const [selectedMeal, setSelectedMeal] = useState('아침');
 
   const handleOnClicked = () => {
     setShowChangeschool(!showChangeschool);
   }
 
+  const getMenu = () => {
+    switch (selectedMeal) {
+      case '아침':
+        return (
+          <>
+            <S.Menu> 쇠고기야채죽 </S.Menu>
+            <S.Menu> 연유프렌치토스트 </S.Menu>
+            <S.Menu> 배추김치 </S.Menu>
+            <S.Menu> 포도 </S.Menu>
+            <S.Menu> 허쉬초코크런치시리얼+우유 </S.Menu>
+          </>
+        );
+      case '점심':
+        return (
+          <>
+            <S.Menu> 추가밥 </S.Menu>
+            <S.Menu> 메콤로제해물파스타 </S.Menu>
+            <S.Menu> #브리오슈수제버거 </S.Menu>
+            <S.Menu> 모둠야채피클 </S.Menu>
+            <S.Menu> 맥케인 </S.Menu>
+            <S.Menu> 망고사고 </S.Menu>
+          </>
+        );
+      case '저녁':
+        return (
+          <>
+            <S.Menu> 현미밥 </S.Menu>
+            <S.Menu> 돼지국밥 </S.Menu>
+            <S.Menu> 삼색나물무침 </S.Menu>
+            <S.Menu> -오징어야채볶음 </S.Menu>
+            <S.Menu> 석박지 </S.Menu>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <S.HomeContainer>
-      <Navbar >
-      </Navbar>
+      <Navbar />
       <S.HomeMain>
         <S.HomeTitle>홈</S.HomeTitle>
         {showChangeschool && <Changeschool />}
@@ -173,22 +210,18 @@ const SHome: React.FC = () => {
                 </S.ArrowLButton>
               </S.CafeteriaTitleBox>
               <S.CafeteriaDiv>
-                <S.TimeButton>
-                  <S.Breakfast>아침</S.Breakfast>
+                <S.TimeButton onClick={() => setSelectedMeal('아침')}>
+                  <S.Breakfast className={selectedMeal === '아침' ? 'selected' : ''} style={{ color: selectedMeal === '아침' ? '#000' : '#787878' }}>아침</S.Breakfast>
                 </S.TimeButton>
-                <S.TimeButton>
-                  <S.Lunch>점심</S.Lunch>
+                <S.TimeButton onClick={() => setSelectedMeal('점심')}>
+                  <S.Breakfast className={selectedMeal === '점심' ? 'selected' : ''} style={{ color: selectedMeal === '점심' ? '#000' : '#787878' }}>점심</S.Breakfast>
                 </S.TimeButton>
-                <S.TimeButton>
-                  <S.Dinner>저녁</S.Dinner>
+                <S.TimeButton onClick={() => setSelectedMeal('저녁')}>
+                  <S.Breakfast className={selectedMeal === '저녁' ? 'selected' : ''} style={{ color: selectedMeal === '저녁' ? '#000' : '#787878' }}>저녁</S.Breakfast>
                 </S.TimeButton>
               </S.CafeteriaDiv>
               <S.MenuList>
-                <S.Menu> 오리훈제볶음밥 </S.Menu>
-                <S.Menu> 간장두부조립 </S.Menu>
-                <S.Menu> 배추김치 </S.Menu>
-                <S.Menu> 초코첵스시리얼+우유 </S.Menu>
-                <S.Menu> 오렌지 </S.Menu>
+                {getMenu()}
               </S.MenuList>
             </S.DownContainer>
           </S.HomeWrapper2>
@@ -198,4 +231,4 @@ const SHome: React.FC = () => {
   );
 };
 
-export default SHome;
+export default Home;
