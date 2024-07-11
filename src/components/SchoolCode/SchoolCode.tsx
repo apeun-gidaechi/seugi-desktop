@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '@/components/SchoolCode/SchoolCode.style';
-import Button from '@/components/Button/Button';
+import Button from '@/components/button/Button';
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
