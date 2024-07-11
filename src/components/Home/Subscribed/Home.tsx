@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import * as S from "@/components/Home/Subscribed/Home.style";
 import Navbar from "@/components/Navbar/Navbar";
@@ -14,69 +14,82 @@ import SeugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import SchoolImg from "@/assets/image/home/school.svg";
 import CafeteriaImg from "@/assets/image/home/cafeteria.svg";
 import SearchImg from "@/assets/image/home/search.svg";
+import Emoji from "@/assets/image/home/emoji.svg";
+import Heart from "@/assets/image/home/heart.png";
+import Fire from "@/assets/image/home/fire.png";
 
-const numberLoop = () => {
-  const numbers = [];
-
-  for (let i = 1; i < config.subject.length + 1; i++) {
-    i === config.today
-      ? numbers.push(
-          <S.Number className="Today" key={i}>
-            {i}
-          </S.Number>
-        )
-      : numbers.push(<S.Number key={i}>{i}</S.Number>);
-  }
-
-  return numbers;
-};
-
-const itemLoop = () => {
-  const items = [];
-
-  for (let i = 0; i < config.today; i++) {
-    if (config.today === 1)
-      items.push(
-        <S.Item className="First Today" key={i}>
-          {config.subject[i]}
-        </S.Item>
-      );
-    else if (i === 0)
-      items.push(
-        <S.Item className="First" key={i}>
-          {config.subject[i]}
-        </S.Item>
-      );
-    else if (i === config.today - 1)
-      items.push(
-        <S.Item className="Today Last" key={i}>
-          {config.subject[i]}
-        </S.Item>
-      );
-    else items.push(<S.Item key={i}>{config.subject[i]}</S.Item>);
-  }
-
-  for (let i = config.today; i < config.subject.length; i++) {
-    if (i === config.subject.length - 1)
-      items.push(
-        <S.Item className="After Last" key={i}>
-          {config.subject[i]}
-        </S.Item>
-      );
-    else
-      items.push(
-        <S.Item className="After" key={i}>
-          {config.subject[i]}
-        </S.Item>
-      );
-  }
-
-  return items;
-};
+import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
   const [showChangeschool, setShowChangeschool] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState("아침");
+
+  const [config, setConfig] = useState(() => {
+    const savedConfig = localStorage.getItem("config");
+    return savedConfig ? JSON.parse(savedConfig) : initialConfig;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("config", JSON.stringify(config));
+  }, [config]);
+
+  const navigate = useNavigate();
+
+  const handleOnclicked = () => {
+    navigate("/");
+  };
+
+  const numberLoop = () => {
+    const numbers = [];
+
+    for (let i = 1; i < config.subject.length + 1; i++) {
+      i === config.today
+        ? numbers.push(<S.Number className="Today">{i}</S.Number>)
+        : numbers.push(<S.Number>{i}</S.Number>);
+    }
+
+    return numbers;
+  };
+
+  const itemLoop = () => {
+    const items = [];
+
+    for (let i = 0; i < config.today; i++) {
+      if (config.today === 1)
+        items.push(
+          <S.Item className="First Today Last">{config.subject[i]}</S.Item>
+        );
+      else if (i === 0)
+        items.push(<S.Item className="First">{config.subject[i]}</S.Item>);
+      else if (i === config.today - 1)
+        items.push(<S.Item className="Today Last">{config.subject[i]}</S.Item>);
+      else items.push(<S.Item>{config.subject[i]}</S.Item>);
+    }
+
+    for (let i = config.today; i < config.subject.length; i++) {
+      if (i === config.subject.length - 1)
+        items.push(<S.Item className="After Last">{config.subject[i]}</S.Item>);
+      else items.push(<S.Item className="After">{config.subject[i]}</S.Item>);
+    }
+
+    return items;
+  };
+
+  const handleEmojiClick = (parentKey: number, childKey: number) => {
+    setConfig((prevConfig) => {
+      const newConfig = JSON.parse(JSON.stringify(prevConfig));
+
+      if (prevConfig.notification[parentKey].like[childKey] === true) {
+        newConfig.notification[parentKey].like[childKey] = false;
+        newConfig.notification[parentKey].emoji[childKey] -= 1;
+      } else {
+        newConfig.notification[parentKey].like[childKey] = true;
+        newConfig.notification[parentKey].emoji[childKey] += 1;
+      }
+
+      return newConfig;
+    });
+  };
 
   const handleOnClicked = () => {
     setShowChangeschool(!showChangeschool);
@@ -148,6 +161,48 @@ const Home: React.FC = () => {
                     <S.NArrowLogo src={ArrowImg} />
                   </S.ArrowLButton>
                 </S.NotificationContainer>
+                <S.NotificationBox>
+                  {config.notification.map((item, parentKey) => (
+                    <S.NotificationWrapper key={parentKey}>
+                      <S.NotificationContentAuthor>
+                        {item.author} · {item.date}
+                      </S.NotificationContentAuthor>
+                      <S.NotificationContentTitle>
+                        {item.title}
+                      </S.NotificationContentTitle>
+                      <S.NotificationContentDescription>
+                        {item.content}
+                      </S.NotificationContentDescription>
+                      <S.NotificationEmojiBox>
+                        <S.NotificationAddEmoji src={Emoji} />
+                        {item.emoji.map((emoji, childKey) => (
+                          <S.NotificationEmojiWrapper
+                            onClick={() =>
+                              handleEmojiClick(parentKey, childKey)
+                            }
+                            key={childKey}
+                            className={
+                              item.like[childKey] === true ? "Clicked" : ""
+                            }
+                          >
+                            {childKey === 0 ? (
+                              <S.NotificationEmoji src={Heart} />
+                            ) : (
+                              <S.NotificationEmoji src={Fire} />
+                            )}
+                            <S.NotificationEmojiCount
+                              className={
+                                item.like[childKey] === true ? "Clicked" : ""
+                              }
+                            >
+                              {emoji}
+                            </S.NotificationEmojiCount>
+                          </S.NotificationEmojiWrapper>
+                        ))}
+                      </S.NotificationEmojiBox>
+                    </S.NotificationWrapper>
+                  ))}
+                </S.NotificationBox>
               </S.LeftContainer>
               <S.RightContainer>
                 <S.RightUpContainer>
