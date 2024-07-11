@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as S from "@/components/Navbar/Navbar.style";
@@ -15,11 +15,6 @@ import SelectHome from "@/assets/image/sidebar/slecthome.svg";
 import SelectChat from "@/assets/image/sidebar/selectchat.svg";
 import SelectChats from "@/assets/image/sidebar/selectgroup.svg";
 import SelectBell from "@/assets/image/sidebar/selectbell.svg";
-
-interface SendMessageProps {
-    chatRoom: string;
-    currentUser: string;
-}
 
 type SelectedButton = "home" | "chat" | "chats" | "bell" | null;
 
@@ -48,31 +43,31 @@ const Navbar = () => {
         localStorage.setItem("chatRooms", JSON.stringify(chatRooms));
     }, [chatRooms]);
 
-  return (
-    <div>
-      <S.SideBarMenu>
-          <S.SideBarButton
-              onClick={() => handleButtonClick("home", "/home")}
-              $isSelected={selected === "home"}
-          >
-              <S.SideBarImage src={selected === "home" ? SelectHome : Home} />
-          </S.SideBarButton>
-          <S.SideBarButton
-              onClick={() => handleButtonClick("chat", "/chat")}
-              $isSelected={selected === "chat"}
-          >
-              <S.SideBarImage src={selected === "chat" ? SelectChat : Chat} />
-          </S.SideBarButton>
-          <S.SideBarButton
-              onClick={() => handleButtonClick("chats", "/groupchat")}
-              $isSelected={selected === "chats"}
-          >
-              <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
-          </S.SideBarButton>
-      </S.SideBarMenu>
-    </div>
-    
-  )
+    return (
+        <S.SideBarMenu>
+            <S.SideBarButton
+                onClick={() => handleButtonClick("home", "/home")}
+                $isSelected={selected === "home"}
+            >
+                <S.SideBarImage src={selected === "home" ? SelectHome : Home} />
+            </S.SideBarButton>
+            <S.SideBarButton
+                onClick={() => handleButtonClick("chat", "/chat")}
+                $isSelected={selected === "chat"}
+            >
+                <S.SideBarImage src={selected === "chat" ? SelectChat : Chat} />
+            </S.SideBarButton>
+            <S.SideBarButton
+                onClick={() => handleButtonClick("chats", "/groupchat")}
+                $isSelected={selected === "chats"}
+            >
+                <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
+            </S.SideBarButton>
+            <S.SideAvatarImgWrap>
+                <S.SideAvatarImg src={AvatarImg} />
+            </S.SideAvatarImgWrap>
+        </S.SideBarMenu>
+    );
 }
 
-export default Navbar
+export default Navbar;
