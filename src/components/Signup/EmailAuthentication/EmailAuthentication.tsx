@@ -65,7 +65,7 @@ const EmailAuthentication = () => {
                 code: verificationCode,
             });
             console.log(res);
-            navigate('/home');
+            navigate('/');
         } catch (error) {
             console.error('Error sending code:', error);
         }
