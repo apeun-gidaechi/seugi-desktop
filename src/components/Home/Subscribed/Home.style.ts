@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HomeContainer = styled.div`
   display: flex;
-  width: 1440px;
+  width: 100%;
   height: 1024px;
   align-items: flex-start;
 `;
@@ -12,7 +12,7 @@ export const HomeMain = styled.div`
   padding: 64px 32px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
+  gap: 1em;
   flex: 1 0 0;
   align-self: stretch;
 
@@ -20,13 +20,13 @@ export const HomeMain = styled.div`
 
   background: var(--Primary-Primary050, #f8fcff);
 
-  margin-left: 4%;
+  margin-left: 4rem;
 `;
 
 export const ComponentsBox = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 0.8em;
   align-self: stretch;
 
   margin-left: 1%;
@@ -53,25 +53,25 @@ export const HomeWrapper1 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
+  gap: 1em;
   flex: 1 0 0;
 `;
 
 export const HomeWrapper2 = styled.div`
   display: flex;
-  width: 420px;
-  height: 440px;
+  width: 100%;
+  height: 50%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
+  gap: 1em;
 `;
 
 export const HomeWrapper1UpContainer = styled.div`
   display: flex;
-  padding: 12px 12px 16px 12px;
+  padding: 0.6em 0.6em 0.8em 0.6em;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0.9em;
   align-self: stretch;
 
   border-radius: 12px;
@@ -82,7 +82,7 @@ export const HomeWrapper1UpContainer = styled.div`
 
 export const ScheduleTitleBox = styled.div`
   display: flex;
-  padding: 4px;
+  padding: 0.2em;
   justify-content: space-between;
   align-items: center;
 `;
@@ -90,16 +90,16 @@ export const ScheduleTitleBox = styled.div`
 export const HomeWrapper1DownContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 20px;
+  gap: 1em;
   align-self: stretch;
 `;
 
 export const LeftContainer = styled.div`
   display: flex;
-  padding: 12px 12px 16px 12px;
+  padding: 0.6em 0.6em 0.8em 0.6em;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0.9em;
   flex: 1 0 0;
 
   border-radius: 12px;
@@ -126,7 +126,7 @@ export const NotificationBox = styled.div`
 
   flex-direction: column;
 
-  top: 10px;
+  top: 0.8em;
 
   width: 398px;
   height: 580px;
@@ -137,17 +137,17 @@ export const NotificationWrapper = styled.div`
 
   flex-direction: column;
 
-  padding: 12px;
+  padding: 0.8em;
 
   width: 398px;
   height: 139px;
 
   border-radius: 8px;
 
-  margin-bottom: 8px;
+  margin-bottom: 0.4em;
 
   background: var(--Sub-White, #fff);
-  /* ev-black-1 */
+
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
 
@@ -167,7 +167,7 @@ export const NotificationContentTitle = styled.span`
 
   color: var(--Black, #000);
 
-  top: 8px;
+  top: 0.4em;
 
   font-family: Pretendard;
   font-size: 16px;
@@ -181,7 +181,7 @@ export const NotificationContentDescription = styled.span`
 
   color: var(--Black, #000);
 
-  top: 7.5px;
+  top: 0.35em;
 
   font-family: Pretendard;
   font-size: 14px;
@@ -193,12 +193,12 @@ export const NotificationContentDescription = styled.span`
 export const NotificationAddEmoji = styled.img`
   position: relative;
 
-  top: 15px;
+  top: 1.1em;
 
   width: 28px;
   height: 28px;
 
-  padding: 4px;
+  padding: 0.2em;
 `;
 
 export const NotificationEmojiBox = styled.div`
@@ -214,7 +214,7 @@ export const NotificationEmojiWrapper = styled.div`
 
   justify-content: center;
   align-items: center;
-  top: 15px;
+  top: 1.1em;
 
   margin-right: 4px;
 
@@ -246,10 +246,10 @@ export const NotificationEmoji = styled.img`
 `;
 
 export const NotificationEmojiCount = styled.span`
-  margin: 3px;
+  margin: 0.15em;
 
   color: var(--Gray-Gray600, #787878);
-  /* Body1 */
+
   font-family: Pretendard;
   font-size: 15px;
   font-style: normal;
@@ -258,7 +258,7 @@ export const NotificationEmojiCount = styled.span`
 
 export const TitleContainer = styled.div`
   display: flex;
-  padding: 4px;
+  padding: 0.2em;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
@@ -268,7 +268,7 @@ export const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
+  gap: 1em;
   flex: 1 0 0;
 `;
 
@@ -288,7 +288,7 @@ export const RightUpContainer = styled.div`
 
 export const RightDownContainer = styled.div`
   display: flex;
-  padding: 12px;
+  padding: 1em;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -311,7 +311,7 @@ export const SeugiTitleContainer = styled.div`
 
 export const UpContainer = styled.div`
   display: flex;
-  padding: 12px 12px 16px 12px;
+  padding: 0.6em 0.6em 0.8em 0.6em;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
@@ -325,10 +325,10 @@ export const UpContainer = styled.div`
 
 export const DownContainer = styled.div`
   display: flex;
-  padding: 12px 12px 16px 12px;
+  padding: 0.6em 0.6em 0.8em 0.6em;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0.9em;
   flex: 1 0 0;
   align-self: stretch;
 
@@ -340,7 +340,7 @@ export const DownContainer = styled.div`
 
 export const SoonScheduleBox = styled.div`
   display: flex;
-  padding: 4px;
+  padding: 0.2em;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
@@ -351,7 +351,7 @@ export const BookLogo = styled.img`
 `;
 
 export const DailyScheduleTitle = styled.h2`
-  margin-left: 8px;
+  margin-left: 0.75em;
 
   color: #000;
 
@@ -367,7 +367,7 @@ export const NumberTable = styled.div`
 
   position: relative;
 
-  top: 10px;
+  top: 0.9em;
 `;
 
 export const Number = styled.div`
@@ -401,7 +401,7 @@ export const ItemTable = styled.table`
 
   border-radius: 20px;
 
-  top: 10px;
+  top: 0.9em;
 `;
 
 export const Item = styled.div`
@@ -444,7 +444,7 @@ export const NotificationLogo = styled.img`
 export const NotificationTitle = styled.h2`
   position: relative;
 
-  left: 8px;
+  left: 0.75em;
 
   color: var(--Black, #000);
 
@@ -464,7 +464,7 @@ export const NArrowLogo = styled.img`
 export const ArrowLogo = styled.img`
   position: relative;
 
-  left: 695px;
+  left: 44vw;
 `;
 
 export const ScheduleBox = styled.div`
@@ -475,7 +475,7 @@ export const ScheduleBox = styled.div`
 
   background-color: #fff;
 
-  padding: 12px;
+  padding: 1.2em;
 
   border-radius: 12px;
 
@@ -489,7 +489,7 @@ export const CalendarLogo = styled.img`
   width: 32px;
   height: 32px;
 
-  margin-right: 8px;
+  margin-right: 0.7em;
 `;
 
 export const ScheduleTitle = styled.span`
@@ -500,7 +500,7 @@ export const ScheduleTitle = styled.span`
   font-style: normal;
   font-weight: 600;
   line-height: 130%;
-  margin-right: 60%;
+  margin-right: 5%;
 `;
 
 export const ArrowLButton = styled.button`
@@ -519,7 +519,7 @@ export const CatSeugiBox = styled.div`
 
   background-color: #fff;
 
-  padding: 12px;
+  padding: 1em;
 
   border-radius: 12px;
 
@@ -533,7 +533,7 @@ export const SeugiImg = styled.img`
   width: 28px;
   height: 28px;
 
-  margin-right: 8px;
+  margin-right: 0.75em;
 `;
 
 export const CatSeugiTitle = styled.span`
@@ -556,14 +556,14 @@ export const SchoolImg = styled.img`
   width: 28px;
   height: 28px;
 
-  margin-right: 8px;
+  margin-right: 0.75em;
 `;
 
 export const SchoolTitleBox = styled.div`
   display: flex;
-  padding: 4px;
+  padding: 0.2em;
   align-items: center;
-  gap: 8px;
+  gap: 0.75em;
   align-self: stretch;
 `;
 
@@ -576,9 +576,10 @@ export const MySchooliTitle = styled.span`
   font-weight: 600;
   line-height: 130%;
 `;
+
 export const CafeteriaTitleBox = styled.div`
   display: flex;
-  padding: 4px;
+  padding: 0.2em;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
@@ -588,7 +589,7 @@ export const CafeteriaImg = styled.img`
   width: 28px;
   height: 28px;
 
-  margin-right: 8px;
+  margin-right: 0.75em;
 `;
 
 export const CafeteriaTitle = styled.p`
@@ -606,7 +607,7 @@ export const CafeteriaTitle = styled.p`
 export const DummyBox = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 4px;
+  gap: 0.3m;
   align-self: stretch;
 `;
 
@@ -618,7 +619,7 @@ export const DateDummy = styled.div`
   gap: 16px;
   align-self: stretch;
 
-  border-radius: 8px;
+  border-radius: 0.75em;
 `;
 
 export const DateText = styled.span`
@@ -633,7 +634,7 @@ export const DateText = styled.span`
 
 export const SubDummy = styled.div`
   display: flex;
-  padding: 4px 0px;
+  padding: 0.2em 0px;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
