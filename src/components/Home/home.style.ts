@@ -11,7 +11,7 @@ export const HomeTitle = styled.h1`
 
   color: var(--Black, #000);
 
-  font-family: 'Pretendard-Regular', sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
   font-size: 28px;
   font-style: normal;
   font-weight: 700;
@@ -21,14 +21,13 @@ export const HomeTitle = styled.h1`
 export const HomeContainer = styled.div`
   background-color: var(--Primary-Primary050, #f8fcff);
   display: flex;
-
 `;
 
 export const HomeWrapper = styled.div`
   display: flex;
 
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
 
   position: relative;
 
@@ -64,7 +63,7 @@ export const DailyScheduleTitle = styled.h2`
 
   color: var(--Black, #000);
 
-  font-family: 'Pretendard-Regular', sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -87,7 +86,7 @@ export const Number = styled.div`
 
   color: var(--Primary-Primary300, #7ec4fc);
 
-  font-family: 'Pretendard-Regular', sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -275,7 +274,7 @@ export const NotificationEmojiBox = styled.div`
   flex-direction: row;
 `;
 
-export const NotificationEmojiWrapper = styled.div`
+export const NotificationEmojiWrapper = styled.button`
   position: relative;
 
   display: flex;
@@ -286,9 +285,15 @@ export const NotificationEmojiWrapper = styled.div`
 
   margin-right: 4px;
 
+  cursor: pointer;
+
   border-radius: 8px;
   border: 1px solid var(--Gray-Gray200, #f1f1f1);
   background: var(--Gray-Gray100, #f4f5f9);
+
+  &.Clicked {
+    background-color: var(--Primary-Primary500, #1d93f3);
+  }
 
   width: 51px;
   height: 29px;
@@ -298,7 +303,6 @@ export const NotificationEmojiWrapper = styled.div`
 
 export const NotificationEmoji = styled.img`
   position: relative;
-
   width: 15px;
   height: 16px;
 `;
@@ -312,6 +316,10 @@ export const NotificationEmojiCount = styled.span`
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
+
+  &.Clicked {
+    color: white;
+  }
 `;
 
 export const ArrowLogo = styled.img`
@@ -637,7 +645,7 @@ export const SearchImg = styled.img`
 
 export const LastQuestionBox = styled.div`
   padding: 16px 0 0 8px;
-`
+`;
 
 export const Lastweek = styled.span`
   color: var(--Sub-Black, #000);
@@ -682,62 +690,61 @@ export const QuestionDay = styled.span`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; 
-`
+  line-height: 130%;
+`;
 
 export const CafeteriaDiv = styled.div`
-  display:flex;
-  flex-direction:row;
-  align-items:center;
-  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   padding: 10px 0 0 12px;
-`
+`;
 
 export const TimeButton = styled.button`
-  border:none;
-  background:none;
+  border: none;
+  background: none;
 
   cursor: pointer;
 
-  padding:10px 16px 0 0;
-`
+  padding: 10px 16px 0 0;
+`;
 
 export const Breakfast = styled.span`
   color: var(--Sub-Black, #000);
 
-  font-family: 'Pretendard-Regular', sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: 130%; 
-`
+  line-height: 130%;
+`;
 
 export const Lunch = styled.span`
   color: var(--Gray-Gray600, #787878);
 
-  font-family: 'Pretendard-Regular', sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 130%;
-`
+`;
 
 export const Dinner = styled.span`
   color: var(--Gray-Gray600, #787878);
 
-  font-family: 'Pretendard-Regular', sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 130%;
-`
-
+`;
 
 export const MenuList = styled.div`
-  width:100%;
-  height:201px;
+  width: 100%;
+  height: 201px;
 
-  margin-top:4px;
+  margin-top: 4px;
 
   display: flex;
   padding: 12px;
@@ -747,20 +754,20 @@ export const MenuList = styled.div`
   align-self: stretch;
 
   border-radius: 8px;
-  background: var(--Gray-Gray100, #F4F5F9);
-`
+  background: var(--Gray-Gray100, #f4f5f9);
+`;
 
 export const Menu = styled.span`
   color: var(--Gray-Gray700, #333);
 
-  font-family: 'Pretendard-Regular', sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 130%; /* 20.8px */
 
-  padding:4px 0 0 4px;
-`
+  padding: 4px 0 0 4px;
+`;
 
 export const SchoolBox = styled.div`
   display: flex;
@@ -769,17 +776,17 @@ export const SchoolBox = styled.div`
   align-self: stretch;
 
   padding: 16px 0 0 4px;
-`
+`;
 
 export const SchoolName = styled.span`
   color: var(--Gray-Gray600, #787878);
 
-  font-family: 'Pretendard-Regular', sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 130%; /* 20.8px */
-`
+`;
 
 export const ChangeSchool = styled.button`
   display: flex;
@@ -789,19 +796,19 @@ export const ChangeSchool = styled.button`
   gap: 10px;
 
   border-radius: 8px;
-  background: var(--Gray-Gray100, #F4F5F9);
+  background: var(--Gray-Gray100, #f4f5f9);
 
   color: var(--Gray-Gray600, #787878);
 
-  font-family: 'Pretendard-Regular', sans-serif;;
+  font-family: "Pretendard-Regular", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 130%; /* 18.2px */
 
-  border:none;
+  border: none;
 
   cursor: pointer;
 
   line-height: 130%;
-`
+`;

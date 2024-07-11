@@ -5,7 +5,7 @@
 import * as S from "@/components/Home/home.style";
 import Navbar from "@/components/Navbar/Navbar";
 
-import config from "@/constants/Home/config.json";
+import initialConfig from "@/constants/Home/config.json";
 
 import HomeBookImg from "@/assets/image/home/homebook.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
@@ -19,50 +19,75 @@ import Emoji from "@/assets/image/home/emoji.svg";
 import Heart from "@/assets/image/home/heart.png";
 import Fire from "@/assets/image/home/fire.png";
 
-
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const numberLoop = () => {
-  const numbers = [];
-
-  for (let i = 1; i < config.subject.length + 1; i++) {
-    i === config.today
-      ? numbers.push(<S.Number className="Today">{i}</S.Number>)
-      : numbers.push(<S.Number>{i}</S.Number>);
-  }
-
-  return numbers;
-};
-
-const itemLoop = () => {
-  const items = [];
-
-  for (let i = 0; i < config.today; i++) {
-    if (config.today === 1)
-      items.push(
-        <S.Item className="First Today Last">{config.subject[i]}</S.Item>
-      );
-    else if (i === 0)
-      items.push(<S.Item className="First">{config.subject[i]}</S.Item>);
-    else if (i === config.today - 1)
-      items.push(<S.Item className="Today Last">{config.subject[i]}</S.Item>);
-    else items.push(<S.Item>{config.subject[i]}</S.Item>);
-  }
-
-  for (let i = config.today; i < config.subject.length; i++) {
-    if (i === config.subject.length - 1)
-      items.push(<S.Item className="After Last">{config.subject[i]}</S.Item>);
-    else items.push(<S.Item className="After">{config.subject[i]}</S.Item>);
-  }
-
-  return items;
-};
-
 const Home: React.FC = () => {
+  const [config, setConfig] = useState(() => {
+    const savedConfig = localStorage.getItem("config");
+    return savedConfig ? JSON.parse(savedConfig) : initialConfig;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("config", JSON.stringify(config));
+  }, [config]);
+
   const navigate = useNavigate();
 
   const handleOnclicked = () => {
     navigate("/");
+  };
+
+  const numberLoop = () => {
+    const numbers = [];
+
+    for (let i = 1; i < config.subject.length + 1; i++) {
+      i === config.today
+        ? numbers.push(<S.Number className="Today">{i}</S.Number>)
+        : numbers.push(<S.Number>{i}</S.Number>);
+    }
+
+    return numbers;
+  };
+
+  const itemLoop = () => {
+    const items = [];
+
+    for (let i = 0; i < config.today; i++) {
+      if (config.today === 1)
+        items.push(
+          <S.Item className="First Today Last">{config.subject[i]}</S.Item>
+        );
+      else if (i === 0)
+        items.push(<S.Item className="First">{config.subject[i]}</S.Item>);
+      else if (i === config.today - 1)
+        items.push(<S.Item className="Today Last">{config.subject[i]}</S.Item>);
+      else items.push(<S.Item>{config.subject[i]}</S.Item>);
+    }
+
+    for (let i = config.today; i < config.subject.length; i++) {
+      if (i === config.subject.length - 1)
+        items.push(<S.Item className="After Last">{config.subject[i]}</S.Item>);
+      else items.push(<S.Item className="After">{config.subject[i]}</S.Item>);
+    }
+
+    return items;
+  };
+
+  const handleEmojiClick = (parentKey: number, childKey: number) => {
+    setConfig((prevConfig) => {
+      const newConfig = JSON.parse(JSON.stringify(prevConfig));
+
+      if (prevConfig.notification[parentKey].like[childKey] === true) {
+        newConfig.notification[parentKey].like[childKey] = false;
+        newConfig.notification[parentKey].emoji[childKey] -= 1;
+      } else {
+        newConfig.notification[parentKey].like[childKey] = true;
+        newConfig.notification[parentKey].emoji[childKey] += 1;
+      }
+
+      return newConfig;
+    });
   };
 
   return (
@@ -96,8 +121,8 @@ const Home: React.FC = () => {
             </div>
 
             <S.NotificationContainer>
-              {config.notification.map((item, index) => (
-                <S.NotificationWrapper key={index}>
+              {config.notification.map((item, parentKey) => (
+                <S.NotificationWrapper key={parentKey}>
                   <S.NotificationContentAuthor>
                     {item.author} · {item.date}
                   </S.NotificationContentAuthor>
@@ -109,14 +134,24 @@ const Home: React.FC = () => {
                   </S.NotificationContentDescription>
                   <S.NotificationEmojiBox>
                     <S.NotificationAddEmoji src={Emoji} />
-                    {item.emoji.map((emoji, index) => (
-                      <S.NotificationEmojiWrapper key={index}>
-                        {index === 0 ? (
+                    {item.emoji.map((emoji, childKey) => (
+                      <S.NotificationEmojiWrapper
+                        onClick={() => handleEmojiClick(parentKey, childKey)}
+                        key={childKey}
+                        className={
+                          item.like[childKey] === true ? "Clicked" : ""
+                        }
+                      >
+                        {childKey === 0 ? (
                           <S.NotificationEmoji src={Heart} />
                         ) : (
                           <S.NotificationEmoji src={Fire} />
                         )}
-                        <S.NotificationEmojiCount>
+                        <S.NotificationEmojiCount
+                          className={
+                            item.like[childKey] === true ? "Clicked" : ""
+                          }
+                        >
                           {emoji}
                         </S.NotificationEmojiCount>
                       </S.NotificationEmojiWrapper>
