@@ -20,7 +20,7 @@ export const socketService = {
     disconnect: () => {
         if (!socket) return;
 
-        socket.disconnect(() => {
+        socket.disconnect(() => { 
             console.log('소켓 연결 해제됨');
         });
     },
