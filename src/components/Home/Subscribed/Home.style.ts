@@ -142,8 +142,6 @@ export const NotificationWrapper = styled.div`
   width: 398px;
   height: 139px;
 
-  cursor: pointer;
-
   border-radius: 8px;
 
   margin-bottom: 8px;
@@ -219,6 +217,8 @@ export const NotificationEmojiWrapper = styled.div`
   top: 15px;
 
   margin-right: 4px;
+
+  cursor: pointer;
 
   &.Clicked {
     background-color: var(--Primary-Primary500, #1d93f3);
