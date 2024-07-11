@@ -287,6 +287,8 @@ export const NotificationEmojiWrapper = styled.button`
 
   cursor: pointer;
 
+  transition: background-color 0.25s ease;
+
   border-radius: 8px;
   border: 1px solid var(--Gray-Gray200, #f1f1f1);
   background: var(--Gray-Gray100, #f4f5f9);
