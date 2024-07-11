@@ -76,7 +76,7 @@ const Home: React.FC = () => {
   };
 
   const handleEmojiClick = (parentKey: number, childKey: number) => {
-    setConfig((prevConfig) => {
+    setConfig((prevConfig: any) => {
       const newConfig = JSON.parse(JSON.stringify(prevConfig));
 
       if (prevConfig.notification[parentKey].like[childKey] === true) {
@@ -162,7 +162,7 @@ const Home: React.FC = () => {
                   </S.ArrowLButton>
                 </S.NotificationContainer>
                 <S.NotificationBox>
-                  {config.notification.map((item, parentKey) => (
+                  {config.notification.map((item: any, parentKey:any) => (
                     <S.NotificationWrapper key={parentKey}>
                       <S.NotificationContentAuthor>
                         {item.author} · {item.date}
@@ -175,7 +175,7 @@ const Home: React.FC = () => {
                       </S.NotificationContentDescription>
                       <S.NotificationEmojiBox>
                         <S.NotificationAddEmoji src={Emoji} />
-                        {item.emoji.map((emoji, childKey) => (
+                        {item.emoji.map((emoji:any, childKey:any) => (
                           <S.NotificationEmojiWrapper
                             onClick={() =>
                               handleEmojiClick(parentKey, childKey)
