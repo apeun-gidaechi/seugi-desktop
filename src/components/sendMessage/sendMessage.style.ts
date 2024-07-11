@@ -18,7 +18,7 @@ export const SendMessageWrap = styled.div`
     width: 70vw;
     max-width: 1016px;
     margin-left: 12px;
-    margin-top: 731px;
+    margin-top: 731px; 
 `
 
 export const PlustFileButton = styled.button`
