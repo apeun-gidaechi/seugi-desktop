@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import * as S from "@/components/Navbar/Navbar.style";
 import config from "@/constants/login/config.json";
 
@@ -19,55 +19,57 @@ import SelectBell from "@/assets/image/sidebar/selectbell.svg";
 type SelectedButton = "home" | "chat" | "chats" | "bell" | null;
 
 const Navbar = () => {
-    const [selected, setSelected] = useState<SelectedButton>(null);
-    const [chatRooms, setChatRooms] = useState<string[]>([]);
-    const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
-    const navigate = useNavigate();
+  const [selected, setSelected] = useState<SelectedButton>(null);
+  const [chatRooms, setChatRooms] = useState<string[]>([]);
+  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-    const handleButtonClick = (button: SelectedButton, path: string) => {
-        setSelected(button);
-        navigate(path);
-        setSelectedChatRoom(null);
-    };
+  const handleButtonClick = (button: SelectedButton, path: string) => {
+    setSelected(button);
+    navigate(path);
+    setSelectedChatRoom(null);
+  };
 
-    useEffect(() => {
-        // Load chat rooms from localStorage on component mount
-        const storedChatRooms = localStorage.getItem("chatRooms");
-        if (storedChatRooms) {
-            setChatRooms(JSON.parse(storedChatRooms));
-        }
-    }, []);
+  useEffect(() => {
+    // Load chat rooms from localStorage on component mount
+    const storedChatRooms = localStorage.getItem("chatRooms");
+    if (storedChatRooms) {
+      setChatRooms(JSON.parse(storedChatRooms));
+    }
+  }, []);
 
-    useEffect(() => {
-        // Save chat rooms to localStorage whenever chatRooms state changes
-        localStorage.setItem("chatRooms", JSON.stringify(chatRooms));
-    }, [chatRooms]);
+  useEffect(() => {
+    // Save chat rooms to localStorage whenever chatRooms state changes
+    localStorage.setItem("chatRooms", JSON.stringify(chatRooms));
+  }, [chatRooms]);
 
-    return (
-        <S.SideBarMenu>
-            <S.SideBarButton
-                onClick={() => handleButtonClick("home", "/home")}
-                $isSelected={selected === "home"}
-            >
-                <S.SideBarImage src={selected === "home" ? SelectHome : Home} />
-            </S.SideBarButton>
-            <S.SideBarButton
-                onClick={() => handleButtonClick("chat", "/chat")}
-                $isSelected={selected === "chat"}
-            >
-                <S.SideBarImage src={selected === "chat" ? SelectChat : Chat} />
-            </S.SideBarButton>
-            <S.SideBarButton
-                onClick={() => handleButtonClick("chats", "/groupchat")}
-                $isSelected={selected === "chats"}
-            >
-                <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
-            </S.SideBarButton>
-            <S.SideAvatarImgWrap>
-                <S.SideAvatarImg src={AvatarImg} />
-            </S.SideAvatarImgWrap>
-        </S.SideBarMenu>
-    );
-}
+  return (
+    <div>
+      <S.SideBarMenu>
+        <S.SideBarButton
+          onClick={() => handleButtonClick("home", "/home")}
+          $isSelected={selected === "home"}
+        >
+          <S.SideBarImage src={selected === "home" ? SelectHome : Home} />
+        </S.SideBarButton>
+        <S.SideBarButton
+          onClick={() => handleButtonClick("chat", "/chat")}
+          $isSelected={selected === "chat"}
+        >
+          <S.SideBarImage src={selected === "chat" ? SelectChat : Chat} />
+        </S.SideBarButton>
+        <S.SideBarButton
+          onClick={() => handleButtonClick("chats", "/groupchat")}
+          $isSelected={selected === "chats"}
+        >
+          <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
+        </S.SideBarButton>
+        <S.SideAvatarImgWrap>
+          <S.SideAvatarImg src={AvatarImg} />
+        </S.SideAvatarImgWrap>
+      </S.SideBarMenu>
+    </div>
+  );
+};
 
 export default Navbar;
