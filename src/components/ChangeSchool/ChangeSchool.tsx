@@ -24,57 +24,57 @@ const Changeschool = () => {
         navigate('/selectschool');
     };
 
-    // 가입 완료 된
-    useEffect(() => {
-        const fetchSubSchoolNames = async () => {
-            try {
-                const token = window.localStorage.getItem("accessToken");
-                if (!token) {
-                    console.error('No token found');
-                    return;
-                }
+    // // 가입 완료 된
+    // useEffect(() => {
+    //     const fetchSubSchoolNames = async () => {
+    //         try {
+    //             const token = window.localStorage.getItem("accessToken");
+    //             if (!token) {
+    //                 console.error('No token found');
+    //                 return;
+    //             }
 
-                const res = await axios.get<{ data: Workspace[] }>(`${config.serverurl}/workspace`, {
-                    headers: {
-                        'Authorization': `${token}`
-                    }
-                });
+    //             const res = await axios.get<{ data: Workspace[] }>(`${config.serverurl}/workspace`, {
+    //                 headers: {
+    //                     'Authorization': `${token}`
+    //                 }
+    //             });
 
-                console.log('Subscribed schools response:', res.data.data);
-                setSubSchoolNames(res.data.data);
-            } catch (error) {
-                console.error('Error fetching subscribed schools:', error);
-            }
-        };
+    //             console.log('Subscribed schools response:', res.data.data);
+    //             setSubSchoolNames(res.data.data);
+    //         } catch (error) {
+    //             console.error('Error fetching subscribed schools:', error);
+    //         }
+    //     };
 
-        fetchSubSchoolNames();
-    }, []);
+    //     fetchSubSchoolNames();
+    // }, []);
 
-    // 가입 대기 중
-    useEffect(() => {
-        const fetchPendingSchoolNames = async () => {
-            try {
-                const token = window.localStorage.getItem("accessToken");
-                if (!token) {
-                    console.error('No token found');
-                    return;
-                }
+    // // 가입 대기 중
+    // useEffect(() => {
+    //     const fetchPendingSchoolNames = async () => {
+    //         try {
+    //             const token = window.localStorage.getItem("accessToken");
+    //             if (!token) {
+    //                 console.error('No token found');
+    //                 return;
+    //             }
 
-                const res = await axios.get<{ data: string[] }>(`${config.serverurl}/workspace/my/wait-list`, {
-                    headers: {
-                        'Authorization': `${token}`
-                    }
-                });
+    //             const res = await axios.get<{ data: string[] }>(`${config.serverurl}/workspace/my/wait-list`, {
+    //                 headers: {
+    //                     'Authorization': `${token}`
+    //                 }
+    //             });
 
-                console.log('Pending schools response:', res.data.data);
-                setPendingSchoolNames(res.data.data);
-            } catch (error) {
-                console.error('Error fetching pending schools:', error);
-            }
-        };
+    //             console.log('Pending schools response:', res.data.data);
+    //             setPendingSchoolNames(res.data.data);
+    //         } catch (error) {
+    //             console.error('Error fetching pending schools:', error);
+    //         }
+    //     };
 
-        fetchPendingSchoolNames();
-    }, []);
+    //     fetchPendingSchoolNames();
+    // }, []);
 
     return (
         <S.ChangeSchoolMain>
