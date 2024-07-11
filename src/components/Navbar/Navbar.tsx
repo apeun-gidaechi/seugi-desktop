@@ -44,7 +44,8 @@ const Navbar = () => {
     }, [chatRooms]);
 
     return (
-        <S.SideBarMenu>
+        <div>
+            <S.SideBarMenu>
             <S.SideBarButton
                 onClick={() => handleButtonClick("home", "/home")}
                 $isSelected={selected === "home"}
@@ -67,7 +68,9 @@ const Navbar = () => {
                 <S.SideAvatarImg src={AvatarImg} />
             </S.SideAvatarImgWrap>
         </S.SideBarMenu>
-    );
+        </div>
+
+    )
 }
 
 export default Navbar;

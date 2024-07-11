@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import * as S from './sidebar.style';
+import React, { useState } from "react";
+import * as S from "./sidebar.style";
 
-import PlusButton from '@/assets/image/sidebar/plusButton.svg';
-import SearchIcon from '@/assets/image/chat-components/Search.svg';
-import AvatarProfile from '@/assets/image/chat-components/Avatar.svg';
+import PlusButton from "@/assets/image/sidebar/plusButton.svg";
+import SearchIcon from "@/assets/image/chat-components/Search.svg";
+import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 
-import Navbar from '@/components/Navbar/Navbar';
-import CreateRoomPlus from '@/components/CreateRoomPlus/createRoomPlus'; // Import the correct path
+import Navbar from "@/components/Navbar/Navbar";
+import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus"; // Import the correct path
 
-import config from '@/constants/ChatMember/config.json';
-import SendMessage from '@/components/sendMessage/sendMessage';
+import config from "@/constants/ChatMember/config.json";
+import SendMessage from "@/components/SendMessage/sendMessage";
 
 interface SendMessageProps {
   chatRoom: string;
@@ -17,7 +17,7 @@ interface SendMessageProps {
 }
 
 const Sidebar: React.FC = () => {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [chatRooms, setChatRooms] = useState<string[]>([]);
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
   const [showCreateRoom, setShowCreateRoom] = useState(false);
@@ -28,11 +28,11 @@ const Sidebar: React.FC = () => {
   };
 
   const handleSearch = () => {
-    if (searchText.trim() !== '') {
+    if (searchText.trim() !== "") {
       const isRoomFound = config.name.includes(searchText);
       if (isRoomFound) {
         addChatRoom(searchText);
-        setSearchText('');
+        setSearchText("");
       } else {
         alert(`Room '${searchText}' not found.`);
       }
@@ -77,7 +77,7 @@ const Sidebar: React.FC = () => {
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               onKeyPress={(e) => {
-                if (e.key === 'Enter') {
+                if (e.key === "Enter") {
                   handleSearch();
                 }
               }}
@@ -102,7 +102,10 @@ const Sidebar: React.FC = () => {
           <SendMessage chatRoom={selectedChatRoom} currentUser="사용자 이름" />
         )}
         {showCreateRoom && (
-          <CreateRoomPlus onClose={handleCloseCreateRoom} onCreateRoom={handleRoomCreation} />
+          <CreateRoomPlus
+            onClose={handleCloseCreateRoom}
+            onCreateRoom={handleRoomCreation}
+          />
         )}
       </S.ChatingPage>
     </>

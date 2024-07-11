@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
-import * as S from '@/components/Signup/Emailsignup/emailsignup.style';
-import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg';
+import * as S from '@/components/Signup/Emailsignup/Emailsignup.style';
+import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg'
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
 import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
 import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
 import Backimg from '@/assets/image/Backimg.svg';
-import Button from '@/components/Button/Button';
+import Button from '@/components/button/Button';
 import TextField from '@/components/TextField/TextField';
 import useSignup from '@/hooks/Signuphook/useSignup';
 import { useNavigate } from 'react-router-dom';
