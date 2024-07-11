@@ -221,7 +221,9 @@ export const NotificationEmojiWrapper = styled.div`
   cursor: pointer;
 
   &.Clicked {
-    background-color: var(--Primary-Primary500, #1d93f3);
+    border-radius: 8px;
+    border: 1px solid var(--Primary-Primary300, #7ec4fc);
+    background: var(--Primary-Primary100, #dcefff);
   }
 
   transition: background 0.25s;
@@ -252,10 +254,6 @@ export const NotificationEmojiCount = styled.span`
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
-
-  &.Clicked {
-    color: white;
-  }
 `;
 
 export const TitleContainer = styled.div`
