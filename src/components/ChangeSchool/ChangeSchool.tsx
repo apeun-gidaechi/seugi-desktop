@@ -29,12 +29,18 @@ const Changeschool = () => {
         const fetchSubSchoolNames = async () => {
             try {
                 const token = window.localStorage.getItem("accessToken");
+                if (!token) {
+                    console.error('No token found');
+                    return;
+                }
+
                 const res = await axios.get<{ data: Workspace[] }>(`${config.serverurl}/workspace`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `${token}`
                     }
                 });
 
+                console.log('Subscribed schools response:', res.data.data);
                 setSubSchoolNames(res.data.data);
             } catch (error) {
                 console.error('Error fetching subscribed schools:', error);
@@ -49,12 +55,18 @@ const Changeschool = () => {
         const fetchPendingSchoolNames = async () => {
             try {
                 const token = window.localStorage.getItem("accessToken");
+                if (!token) {
+                    console.error('No token found');
+                    return;
+                }
+
                 const res = await axios.get<{ data: string[] }>(`${config.serverurl}/workspace/my/wait-list`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `${token}`
                     }
                 });
 
+                console.log('Pending schools response:', res.data.data);
                 setPendingSchoolNames(res.data.data);
             } catch (error) {
                 console.error('Error fetching pending schools:', error);
@@ -68,8 +80,7 @@ const Changeschool = () => {
         <S.ChangeSchoolMain>
             {subscribedSchoolNames.length === 0 ? (
                 <S.NoSubscribedSchools>
-                    <S.NoSubSchoolText> 가입된 학교가 없습니다. </S.NoSubSchoolText>
-                    <S.NoSubSchoolText> 새로운 학교를 가입하세요.</S.NoSubSchoolText>
+                    <S.NoSubSchoolText>가입된 학교가 없습니다.</S.NoSubSchoolText>
                     <S.CreateSchool onClick={goCreateSchool}>새 학교 가입</S.CreateSchool>
                 </S.NoSubscribedSchools>
             ) : (
