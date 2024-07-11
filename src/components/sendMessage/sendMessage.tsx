@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Client } from '@stomp/stompjs';
-import axios from 'axios'; // Import Axios for making HTTP requests
-import * as S from './sendMessage.style';
+import axios from 'axios'; 
+import * as S from '@/components/sendMessage/sendMessage.style';
 import MessageBox from '@/components/MessageBox/messageBox';
 
 import PlusMessageFile from '@/assets/image/chat-components/MessageFile.svg';
@@ -10,7 +10,7 @@ import SendArrowBlue from '@/assets/image/chat-components/sendBlueArrow.svg';
 
 interface SendMessageProps {
   chatRoom: string;
-  currentUser: string; // currentUser prop 추가
+  currentUser: string;
 }
 
 const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
@@ -35,19 +35,24 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
       const newMessage = { message, time, sender: currentUser };
       stompClient.publish({ destination: `/app/chat/${chatRoom}`, body: JSON.stringify(newMessage) });
       setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
+      console.log('Message sent:', newMessage);
       setMessage('');
       setHasText(false);
+    } else {
+      console.error('STOMP client is not connected');
     }
   };
 
   const handleClick = () => {
     if (message.trim() !== '') {
+      console.log('Sending message:', message);
       sendMessage(message);
     }
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && message.trim() !== '') {
+      console.log('Sending message:', message);
       sendMessage(message);
     }
   };
@@ -56,25 +61,28 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
     const client = new Client({
       brokerURL: 'wss://hoolc.me/stomp/chat',
       connectHeaders: {
-        Authorization: `Bearer YOUR_JWT_TOKEN_HERE`, // Replace with your JWT token
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTcxNTg1ODkwMywiZXhwIjoxNzIxODU4OTAzfQ.F5_W4wAay4FbssM6XxJSCiUIvGCAcjAXqPxb-PXvUDo`, 
       },
       debug: (str) => {
-        if (str.includes('<<< PONG')) {
-          console.log('PONG received');
-        } else if (str.includes('<<< CONNECTED')) {
+        console.log(str);
+        if (str.includes('<<< CONNECTED')) {
           console.log('Connected to server');
         } else if (str.includes('<<< DISCONNECTED')) {
           console.log('Disconnected from server');
+        } else if (str.includes('<<< PONG')) {
+          console.log('PONG received');
         }
       },
       onConnect: () => {
+        console.log('STOMP client connected');
         client.subscribe(`/topic/messages/${chatRoom}`, (message) => {
           const newMessage = JSON.parse(message.body);
           setReceivedMessages(prevMessages => [...prevMessages, newMessage]);
+          console.log('Message received:', newMessage);
         });
       },
       onDisconnect: () => {
-        console.log('Disconnected');
+        console.log('STOMP client disconnected');
       },
       onStompError: (frame) => {
         console.error('Broker reported error: ' + frame.headers['message']);
@@ -90,7 +98,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
     };
   }, [chatRoom]);
 
-    const shouldShowTime = (index: number): boolean => {
+  const shouldShowTime = (index: number): boolean => {
     if (index === receivedMessages.length - 1) {
       return true;
     }
@@ -128,6 +136,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
           />
         ))}
       </div>
+      <S.Allwrap>
       <S.SendMessageWrap>
         <S.PlustFileButton>
           <S.PlusMessageFile src={PlusMessageFile} />
@@ -149,6 +158,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
           )}
         </S.SendArrowButton>
       </S.SendMessageWrap>
+      </S.Allwrap>
     </div>
   );
 };
