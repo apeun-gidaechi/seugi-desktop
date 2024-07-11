@@ -2,17 +2,10 @@ import * as S from "@/components/Login/login.style";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-<<<<<<< Updated upstream
-import config from '@/constants/login/config.json';
-import LoginButton from "@/components/button/Button";
-import TextField from '@/components/TextField/TextField';
-import CustomAlert from '@/components/Alert/Alert';
-=======
 import config from "@/constants/login/config.json";
 import LoginButton from "@/components/Button/Button";
 import TextField from "@/components/TextField/TextField";
 import CustomAlert from "@/components/Alert/Alert";
->>>>>>> Stashed changes
 import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import showPasswordimg from "@/assets/image/onbording/show_fill.svg";
 import hidePasswordimg from "@/assets/image/onbording/hide_fill.svg";
