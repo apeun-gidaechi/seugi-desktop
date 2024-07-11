@@ -9,28 +9,32 @@
       "date": "5월 3일 수요일",
       "title": "교내 체육대회 안내",
       "content": "5월말 체육대회 합니다. 깔쌈하게 준비해오십시오",
-      "emoji": [17, 32]
+      "emoji": [17, 32],
+      "like": [true, false]
     },
     {
       "author": "박유현",
       "date": "5월 3일 수요일",
       "title": "교내 체육대회 안내",
       "content": "5월말 체육대회 합니다. 깔쌈하게 준비해오십시오",
-      "emoji": [17, 32]
+      "emoji": [17, 32],
+      "like": [true, false]
     },
     {
       "author": "박유현",
       "date": "5월 3일 수요일",
       "title": "교내 체육대회 안내",
       "content": "5월말 체육대회 합니다. 깔쌈하게 준비해오십시오",
-      "emoji": [17, 32]
+      "emoji": [17, 32],
+      "like": [true, false]
     },
     {
       "author": "박유현",
       "date": "5월 3일 수요일",
       "title": "교내 체육대회 안내",
       "content": "5월말 체육대회 합니다. 깔쌈하게 준비해오십시오",
-      "emoji": [17, 32]
+      "emoji": [17, 32],
+      "like": [true, false]
     }
   ]
 }
