@@ -96,8 +96,6 @@ export const NoSubSchoolText = styled.span`
     line-height: 130%; /* 20.8px */
 
     padding:0 0 8px 0;
-
-    text-align:left;
 `
 
 export const SchoolBox = styled.div`
@@ -154,4 +152,8 @@ export const CreateSchool = styled.button`
 `
 
 export const NoSubscribedSchools = styled.div`
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    align-items:center;
 `
