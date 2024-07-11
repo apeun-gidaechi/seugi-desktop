@@ -28,7 +28,6 @@ export const SchoolImgContainer = styled.div`
   align-items: center;
 `
 
-
 export const SchoolImg = styled.img`
   width: 180px;
   height: 180px;
