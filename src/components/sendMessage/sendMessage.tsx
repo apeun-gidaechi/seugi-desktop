@@ -146,7 +146,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
           placeholder="메세지 보내기"
           value={message}
           onChange={handleChange}
-          onKeyPress={handleKeyPress}
+          onKeyPress={handleKeyPress} 
           disabled={!chatRoom}
         />
 
