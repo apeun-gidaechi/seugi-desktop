@@ -7,17 +7,26 @@ export const SuccessMain = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
-`;
+`
 
 export const Container = styled.div`
   display: flex;
+  width: 485px;
+  padding: 36px 32px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 32px;
-  flex: 1 0 0;
-  align-self: stretch;
-`;
+  flex-shrink: 0;
+`
+
+export const SchoolImgContainer = styled.div`
+  display: flex;
+  width: 180px;
+  height: 180px;
+  justify-content: center;
+  align-items: center;
+`
 
 export const SchoolImg = styled.img`
   width: 180px;
@@ -25,7 +34,7 @@ export const SchoolImg = styled.img`
 
   fill: url(<path-to-image>) lightgray 50% / cover no-repeat;
   filter: drop-shadow(0px 3px 9px rgba(0, 0, 0, 0.04));
-`;
+`
 
 export const SchoolInfoContainer = styled.div`
   display: flex;
@@ -33,7 +42,7 @@ export const SchoolInfoContainer = styled.div`
   justify-content: center;
   align-items: center;
   align-self: stretch;
-`;
+`
 
 export const SchoolName = styled.span`
   color: var(--Black, #000);
@@ -43,7 +52,7 @@ export const SchoolName = styled.span`
   font-style: normal;
   font-weight: 700;
   line-height: 130%; /* 36.4px */
-`;
+`
 
 export const SchoolInfo = styled.span`
     color: var(--Gray-Gray600, #787878);
@@ -52,7 +61,7 @@ export const SchoolInfo = styled.span`
     font-style: normal;
     font-weight: 600;
     line-height: 130%; /* 26px */
-`;
+`
 
 export const ButtonContainer = styled.div`
   display: flex;
@@ -60,19 +69,20 @@ export const ButtonContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
-`;
+  align-self: stretch;
+`
 
 export const BackButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  border: none;
-  background: none;
+  width: 32px;
+  height: 32px;
 
+  border:none;
+  background:none;
+  
   cursor: pointer;
-  margin-right: 27vw;
-`;
 
-export const BackImg = styled.img``;
+  margin-right:90%;
+`
+
+export const BackImg = styled.img`
+`

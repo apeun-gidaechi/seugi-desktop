@@ -5,7 +5,7 @@ export const SideBarMenu = styled.div`
     position: absolute;
     display: flex;
     width: 80px;
-    height: 840px;
+    height: 1020px;
     padding: 8px 0px;
     flex-direction: column;
     justify-content: flex-start;

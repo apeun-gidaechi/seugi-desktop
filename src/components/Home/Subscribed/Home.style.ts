@@ -1,10 +1,41 @@
 import styled from "styled-components";
 
-export const HomeTitle = styled.h1`
-  position: relative;
+export const HomeContainer = styled.div`
+  display: flex;
+  width: 1440px;
+  height: 1024px;
+  align-items: flex-start;
+`;
 
-  top: 64px;
-  left: 32px;
+export const HomeMain = styled.div`
+  display: flex;
+  padding: 64px 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1 0 0;
+  align-self: stretch;
+
+  width: 100vw;
+
+  background: var(--Primary-Primary050, #f8fcff);
+
+  margin-left: 4%;
+`;
+
+export const ComponentsBox = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+
+  margin-left: 1%;
+`;
+
+export const HomeTitle = styled.h1`
+  margin-left: 1.5%;
+
+  position: relative;
 
   width: 100%;
   height: 100%;
@@ -15,41 +46,167 @@ export const HomeTitle = styled.h1`
   font-size: 28px;
   font-style: normal;
   font-weight: 700;
-  line-height: 130%; /* 36.4px */
+  line-height: 130%;
 `;
 
-export const HomeContainer = styled.div`
-  background-color: var(--Primary-Primary050, #f8fcff);
+export const HomeWrapper1 = styled.div`
   display: flex;
-`;
-
-export const HomeWrapper = styled.div`
-  display: flex;
-
-  width: 100%;
-  height: 100%;
-
-  position: relative;
-
   flex-direction: column;
-
-  top: 84px;
-  left: 32px;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1 0 0;
 `;
 
-export const DailyScheduleBox = styled.div`
-  position: relative;
+export const HomeWrapper2 = styled.div`
+  display: flex;
+  width: 420px;
+  height: 440px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+`;
 
-  width: 864px;
-  height: 146px;
-
-  padding: 12px;
+export const HomeWrapper1UpContainer = styled.div`
+  display: flex;
+  padding: 12px 12px 16px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
 
   border-radius: 12px;
-
-  background-color: #fff;
+  background: #fff;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+`;
+
+export const ScheduleTitleBox = styled.div`
+  display: flex;
+  padding: 4px;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const HomeWrapper1DownContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  align-self: stretch;
+`;
+
+export const LeftContainer = styled.div`
+  display: flex;
+  padding: 12px 12px 16px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1 0 0;
+
+  border-radius: 12px;
+  background: #fff;
+
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+
+  width: 422px;
+  height: 658px;
+`;
+
+export const NotificationContainer = styled.div`
+  display: flex;
+  padding: 4px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+`;
+
+export const TitleContainer = styled.div`
+  display: flex;
+  padding: 4px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+`;
+
+export const RightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1 0 0;
+`;
+
+export const RightUpContainer = styled.div`
+  display: flex;
+  padding: 12px 12px 16px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+
+  border-radius: 12px;
+  background: #fff;
+
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+`;
+
+export const RightDownContainer = styled.div`
+  display: flex;
+  padding: 12px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+
+  border-radius: 12px;
+  background: #fff;
+
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+`;
+
+export const SeugiTitleContainer = styled.div`
+  display: flex;
+  padding: 4px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+`;
+
+export const UpContainer = styled.div`
+  display: flex;
+  padding: 12px 12px 16px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+
+  border-radius: 12px;
+  background: var(--Sub-White, #fff);
+
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+`;
+
+export const DownContainer = styled.div`
+  display: flex;
+  padding: 12px 12px 16px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1 0 0;
+  align-self: stretch;
+
+  border-radius: 12px;
+  background: #fff;
+
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+`;
+
+export const SoonScheduleBox = styled.div`
+  display: flex;
+  padding: 4px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
 `;
 
 export const BookLogo = styled.img`
@@ -57,17 +214,15 @@ export const BookLogo = styled.img`
 `;
 
 export const DailyScheduleTitle = styled.h2`
-  position: relative;
+  margin-left: 8px;
 
-  left: 8px;
-
-  color: var(--Black, #000);
+  color: #000;
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  line-height: 130%;
 `;
 
 export const NumberTable = styled.div`
@@ -144,23 +299,6 @@ export const Item = styled.div`
   }
 `;
 
-export const NotificationBox = styled.div`
-  position: relative;
-
-  background-color: #fff;
-
-  padding: 12px;
-
-  top: 20px;
-
-  border-radius: 12px;
-
-  width: 422px;
-  height: 658px;
-
-  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-`;
-
 export const NotificationLogo = styled.img`
   width: 32px;
   height: 32px;
@@ -186,144 +324,6 @@ export const NArrowLogo = styled.img`
   position: relative;
 `;
 
-export const NotificationContainer = styled.div`
-  display: flex;
-
-  position: relative;
-
-  flex-direction: column;
-
-  top: 10px;
-
-  width: 398px;
-  height: 580px;
-`;
-
-export const NotificationWrapper = styled.div`
-  display: flex;
-
-  flex-direction: column;
-
-  padding: 12px;
-
-  width: 398px;
-  height: 139px;
-
-  border-radius: 8px;
-
-  margin-bottom: 8px;
-
-  background: var(--Sub-White, #fff);
-  /* ev-black-1 */
-  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-`;
-
-export const NotificationContentAuthor = styled.span`
-  color: var(--Gray-Gray600, #787878);
-
-  /* Body2 */
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 18.2px */
-`;
-
-export const NotificationContentTitle = styled.span`
-  position: relative;
-
-  color: var(--Black, #000);
-
-  top: 8px;
-
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
-`;
-
-export const NotificationContentDescription = styled.span`
-  position: relative;
-
-  color: var(--Black, #000);
-
-  top: 7.5px;
-
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 18.2px */
-`;
-
-export const NotificationAddEmoji = styled.img`
-  position: relative;
-
-  top: 15px;
-
-  width: 28px;
-  height: 28px;
-
-  padding: 4px;
-`;
-
-export const NotificationEmojiBox = styled.div`
-  display: flex;
-
-  flex-direction: row;
-`;
-
-export const NotificationEmojiWrapper = styled.button`
-  position: relative;
-
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-  top: 15px;
-
-  margin-right: 4px;
-
-  cursor: pointer;
-
-  transition: background-color 0.25s ease;
-
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray200, #f1f1f1);
-  background: var(--Gray-Gray100, #f4f5f9);
-
-  &.Clicked {
-    background-color: var(--Primary-Primary500, #1d93f3);
-  }
-
-  width: 51px;
-  height: 29px;
-
-  position: relative;
-`;
-
-export const NotificationEmoji = styled.img`
-  position: relative;
-  width: 15px;
-  height: 16px;
-`;
-
-export const NotificationEmojiCount = styled.span`
-  margin: 3px;
-
-  color: var(--Gray-Gray600, #787878);
-  /* Body1 */
-  font-family: Pretendard;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-
-  &.Clicked {
-    color: white;
-  }
-`;
-
 export const ArrowLogo = styled.img`
   position: relative;
 
@@ -334,14 +334,11 @@ export const ScheduleBox = styled.div`
   display: flex;
   flex-direction: column;
 
-  position: absolute;
+  position: relative;
 
   background-color: #fff;
 
   padding: 12px;
-
-  top: 20.5%;
-  left: 32%;
 
   border-radius: 12px;
 
@@ -361,7 +358,6 @@ export const CalendarLogo = styled.img`
 export const ScheduleTitle = styled.span`
   color: var(--Black, #000);
 
-  /* Subtitle2 */
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -382,14 +378,11 @@ export const SArrowLogo = styled.img`
 `;
 
 export const CatSeugiBox = styled.div`
-  position: absolute;
+  position: relative;
 
   background-color: #fff;
 
   padding: 12px;
-
-  top: 56%;
-  left: 32%;
 
   border-radius: 12px;
 
@@ -422,33 +415,19 @@ export const CArrowLogo = styled.img`
   position: relative;
 `;
 
-export const HomeMain = styled.div`
-  margin-left: 5%;
-`;
-
-export const MySchoolBox = styled.div`
-  position: absolute;
-
-  background-color: #fff;
-
-  padding: 12px;
-
-  top: 0%;
-  left: 63.5%;
-
-  border-radius: 12px;
-
-  width: 422px;
-  height: 120px;
-
-  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-`;
-
 export const SchoolImg = styled.img`
   width: 28px;
   height: 28px;
 
   margin-right: 8px;
+`;
+
+export const SchoolTitleBox = styled.div`
+  display: flex;
+  padding: 4px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
 `;
 
 export const MySchooliTitle = styled.span`
@@ -459,26 +438,13 @@ export const MySchooliTitle = styled.span`
   font-style: normal;
   font-weight: 600;
   line-height: 130%;
-
-  margin-right: 73%;
 `;
-
-export const CafeteriaBox = styled.div`
-  position: absolute;
-
-  background-color: #fff;
-
-  padding: 12px;
-
-  top: 17%;
-  left: 63.5%;
-
-  border-radius: 12px;
-
-  width: 422px;
-  height: 310px;
-
-  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+export const CafeteriaTitleBox = styled.div`
+  display: flex;
+  padding: 4px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
 `;
 
 export const CafeteriaImg = styled.img`
@@ -500,92 +466,67 @@ export const CafeteriaTitle = styled.p`
   margin-right: 65%;
 `;
 
-export const Dummy = styled.div`
+export const DummyBox = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 4px;
   align-self: stretch;
-
-  margin-top: 10px;
 `;
 
-export const Dummy1 = styled.div`
-  width: 100%;
-
+export const DateDummy = styled.div`
   display: flex;
-  flex-direction: row;
+  padding: 4px;
+  flex-direction: column;
   align-items: center;
+  gap: 16px;
+  align-self: stretch;
 
-  padding: 0 0 16px 0;
+  border-radius: 8px;
 `;
 
-export const Dummy2 = styled.div`
-  width: 100%;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  padding: 0 0 16px 0;
-`;
-
-export const Dummy3 = styled.div`
-  width: 100%;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  padding: 0 0 16px 0;
-`;
-
-export const Dummy4 = styled.div`
-  width: 100%;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  padding: 0 0 16px 0;
-
-  top: 4px;
-`;
-
-export const Dummy5 = styled.div`
-  width: 100%;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const DummyDate = styled.span`
-  display: flex;
-
+export const DateText = styled.span`
   color: var(--Primary-Primary500, #1d93f3);
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: 130%;
+  line-height: 130%; /* 18.2px */
+`;
 
-  margin-right: 4px;
-
-  padding: 0 0 0 12px;
+export const SubDummy = styled.div`
+  display: flex;
+  padding: 4px 0px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1 0 0;
+  align-self: stretch;
 `;
 
 export const SubTitle = styled.span`
-  color: var(--Black, #000);
+  color: #000;
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%;
+  line-height: 130%; /* 18.2px */
 `;
 
-export const D_Day = styled.span`
+export const D_DayDummy = styled.div`
+  display: flex;
+  padding: 4px 0px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+
+  border-radius: 8px;
+`;
+
+export const D_DayText = styled.span`
   color: var(--Gray-Gray600, #787878);
 
   font-family: "Pretendard-Regular", sans-serif;
@@ -593,14 +534,9 @@ export const D_Day = styled.span`
   font-style: normal;
   font-weight: 600;
   line-height: 130%; /* 15.6px */
-
-  margin-left: auto;
-  margin-right: 14px;
 `;
 
 export const CatSeugi = styled.div`
-  width: 100%;
-
   display: flex;
   padding: 12px;
   justify-content: space-between;
@@ -610,8 +546,6 @@ export const CatSeugi = styled.div`
   border-radius: 99px;
   border: 1.5px solid var(--Gradient-Primary, #1c8df4);
   background: var(--Sub-White, #fff);
-
-  margin-top: 16px;
 `;
 
 export const CatSeugiInput = styled.input`
@@ -645,8 +579,30 @@ export const SearchImg = styled.img`
   padding: 0 4px 0 0;
 `;
 
+export const QuestionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+`;
+
 export const LastQuestionBox = styled.div`
-  padding: 16px 0 0 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+`;
+
+export const LastText = styled.div`
+  display: flex;
+  padding: 0px 4px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
 `;
 
 export const Lastweek = styled.span`
@@ -668,11 +624,6 @@ export const LastQuestion = styled.div`
 
   border-radius: 4px;
   background: var(--Gray-Gray100, #f4f5f9);
-
-  width: 100%;
-  height: 40px;
-  margin-top: 4px;
-  margin-bottom: 4px;
 `;
 
 export const QuestionText = styled.span`
@@ -697,10 +648,8 @@ export const QuestionDay = styled.span`
 
 export const CafeteriaDiv = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  padding: 10px 0 0 12px;
+  align-items: flex-start;
+  gap: 16px;
 `;
 
 export const TimeButton = styled.button`
@@ -708,8 +657,6 @@ export const TimeButton = styled.button`
   background: none;
 
   cursor: pointer;
-
-  padding: 10px 16px 0 0;
 `;
 
 export const Breakfast = styled.span`
@@ -743,16 +690,12 @@ export const Dinner = styled.span`
 `;
 
 export const MenuList = styled.div`
-  width: 100%;
-  height: 201px;
-
-  margin-top: 4px;
-
   display: flex;
   padding: 12px;
   flex-direction: column;
-
-  gap: 8px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
   align-self: stretch;
 
   border-radius: 8px;
@@ -766,9 +709,7 @@ export const Menu = styled.span`
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: 130%; /* 20.8px */
-
-  padding: 4px 0 0 4px;
+  line-height: 130%;
 `;
 
 export const SchoolBox = styled.div`
@@ -776,8 +717,6 @@ export const SchoolBox = styled.div`
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
-
-  padding: 16px 0 0 4px;
 `;
 
 export const SchoolName = styled.span`
@@ -787,7 +726,7 @@ export const SchoolName = styled.span`
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  line-height: 130%;
 `;
 
 export const ChangeSchool = styled.button`
@@ -806,11 +745,16 @@ export const ChangeSchool = styled.button`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 18.2px */
+  line-height: 130%;
 
   border: none;
 
   cursor: pointer;
+`;
 
-  line-height: 130%;
+export const SearchButton = styled.button`
+  border: none;
+  background: none;
+
+  cursor: pointer;
 `;
