@@ -12,7 +12,7 @@ import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
 import SchoolImg from '@/assets/image/home/school.svg';
 import CafeteriaImg from '@/assets/image/home/cafeteria.svg'
 
-const NHome = () => {
+const UnHome = () => {
     const [showChangeschool, setShowChangeschool] = useState(false);
 
     const handleOnClicked = () => {
@@ -117,4 +117,4 @@ const NHome = () => {
     )
 }
 
-export default NHome
+export default UnHome;
