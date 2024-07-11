@@ -69,15 +69,6 @@ const Navbar = () => {
           >
               <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
           </S.SideBarButton>
-          <S.SideBarButton
-              onClick={() => handleButtonClick("bell", "/notification")}
-              $isSelected={selected === "bell"}
-          >
-              <S.SideBarImage src={selected === "bell" ? SelectBell : Bell} />
-          </S.SideBarButton>
-          <S.SideAvatarImgWrap>
-              <S.SideAvatarImg src={AvatarImg} />
-          </S.SideAvatarImgWrap>
       </S.SideBarMenu>
     </div>
     
