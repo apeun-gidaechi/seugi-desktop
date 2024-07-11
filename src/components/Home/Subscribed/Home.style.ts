@@ -119,6 +119,145 @@ export const NotificationContainer = styled.div`
   align-self: stretch;
 `;
 
+export const NotificationBox = styled.div`
+  display: flex;
+
+  position: relative;
+
+  flex-direction: column;
+
+  top: 10px;
+
+  width: 398px;
+  height: 580px;
+`;
+
+export const NotificationWrapper = styled.div`
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 12px;
+
+  width: 398px;
+  height: 139px;
+
+  cursor: pointer;
+
+  border-radius: 8px;
+
+  margin-bottom: 8px;
+
+  background: var(--Sub-White, #fff);
+  /* ev-black-1 */
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+`;
+
+export const NotificationContentAuthor = styled.span`
+  color: var(--Gray-Gray600, #787878);
+
+  /* Body2 */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 18.2px */
+`;
+
+export const NotificationContentTitle = styled.span`
+  position: relative;
+
+  color: var(--Black, #000);
+
+  top: 8px;
+
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 20.8px */
+`;
+
+export const NotificationContentDescription = styled.span`
+  position: relative;
+
+  color: var(--Black, #000);
+
+  top: 7.5px;
+
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 18.2px */
+`;
+
+export const NotificationAddEmoji = styled.img`
+  position: relative;
+
+  top: 15px;
+
+  width: 28px;
+  height: 28px;
+
+  padding: 4px;
+`;
+
+export const NotificationEmojiBox = styled.div`
+  display: flex;
+
+  flex-direction: row;
+`;
+
+export const NotificationEmojiWrapper = styled.div`
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  top: 15px;
+
+  margin-right: 4px;
+
+  &.Clicked {
+    background-color: var(--Primary-Primary500, #1d93f3);
+  }
+
+  transition: background 0.25s;
+
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray200, #f1f1f1);
+  background: var(--Gray-Gray100, #f4f5f9);
+
+  width: 51px;
+  height: 29px;
+
+  position: relative;
+`;
+
+export const NotificationEmoji = styled.img`
+  position: relative;
+
+  width: 15px;
+  height: 16px;
+`;
+
+export const NotificationEmojiCount = styled.span`
+  margin: 3px;
+
+  color: var(--Gray-Gray600, #787878);
+  /* Body1 */
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+
+  &.Clicked {
+    color: white;
+  }
+`;
+
 export const TitleContainer = styled.div`
   display: flex;
   padding: 4px;
