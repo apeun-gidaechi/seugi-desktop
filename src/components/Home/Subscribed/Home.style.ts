@@ -82,7 +82,7 @@ export const HomeWrapper1UpContainer = styled.div`
 
 export const ScheduleTitleBox = styled.div`
   display: flex;
-  padding: 0.2em;
+  padding: 0.1em;
   justify-content: space-between;
   align-items: center;
 `;
@@ -400,8 +400,6 @@ export const ItemTable = styled.table`
   background-color: var(--Primary-Primary300, #7ec4fc);
 
   border-radius: 20px;
-
-  top: 0.9em;
 `;
 
 export const Item = styled.div`
