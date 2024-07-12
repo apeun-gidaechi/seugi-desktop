@@ -500,7 +500,7 @@ export const ScheduleTitle = styled.span`
   font-style: normal;
   font-weight: 600;
   line-height: 130%;
-  margin-right: 5%;
+  margin-right: 58%;
 `;
 
 export const ArrowLButton = styled.button`
