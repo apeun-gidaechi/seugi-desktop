@@ -126,6 +126,8 @@ export const NotificationBox = styled.div`
 
   flex-direction: column;
 
+  overflow: scroll;
+
   top: 0.8em;
 
   width: 398px;
