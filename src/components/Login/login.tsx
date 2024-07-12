@@ -57,8 +57,9 @@ const Login = () => {
       if (res.data.data && res.data.data.length === 0) {
         navigate("/unhome");
       } else {
-        getOneWorkspaceIdAndSet();
-        navigate("/home");
+        getOneWorkspaceIdAndSet().then(() => {
+          navigate("/home");
+        });
       }
     } catch (error) {
       console.log("Error fetching workspace:", error);

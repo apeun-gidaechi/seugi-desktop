@@ -35,6 +35,7 @@ const Home: React.FC = () => {
   const getWorkspaceName = async () => {
     const token = window.localStorage.getItem("accessToken");
     const workspaceId = window.localStorage.getItem("workspaceId");
+
     const res = await axios.get(`${temp.serverurl}/workspace/${workspaceId}`, {
       headers: {
         Authorization: `${token}`,
