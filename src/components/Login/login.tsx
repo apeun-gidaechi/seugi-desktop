@@ -32,6 +32,17 @@ const Login = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState<string>("");
 
+  const getOneWorkspaceIdAndSet = async () => {
+    const token = window.localStorage.getItem("accessToken");
+    const res = await axios.get(`${config.serverurl}/workspace/`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+
+    window.localStorage.setItem("workspaceId", res.data.data[0].workspaceId);
+  };
+
   const importWorkspace = async () => {
     try {
       const token = window.localStorage.getItem("accessToken");
@@ -46,6 +57,7 @@ const Login = () => {
       if (res.data.data && res.data.data.length === 0) {
         navigate("/unhome");
       } else {
+        getOneWorkspaceIdAndSet();
         navigate("/home");
       }
     } catch (error) {
