@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Changeschool from "@/components/ChangeSchool/ChangeSchool";
 
 import initialConfig from "@/constants/Home/config.json";
+import temp from "@/constants/config/config.json";
 
 import HomeBookImg from "@/assets/image/home/homebook.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
@@ -19,19 +20,37 @@ import Heart from "@/assets/image/home/heart.png";
 import Fire from "@/assets/image/home/fire.png";
 
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Home: React.FC = () => {
   const [showChangeschool, setShowChangeschool] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState("아침");
+  const [workspaceName, setWorkspaceName] = useState("");
 
   const [config, setConfig] = useState(() => {
     const savedConfig = localStorage.getItem("config");
     return savedConfig ? JSON.parse(savedConfig) : initialConfig;
   });
 
+  const getWorkspaceName = async () => {
+    const token = window.localStorage.getItem("accessToken");
+    const workspaceId = window.localStorage.getItem("workspaceId");
+    const res = await axios.get(`${temp.serverurl}/workspace/${workspaceId}`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+
+    setWorkspaceName(res.data.data.workspaceName);
+  };
+
   useEffect(() => {
     localStorage.setItem("config", JSON.stringify(config));
   }, [config]);
+
+  useEffect(() => {
+    getWorkspaceName();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -162,7 +181,7 @@ const Home: React.FC = () => {
                   </S.ArrowLButton>
                 </S.NotificationContainer>
                 <S.NotificationBox>
-                  {config.notification.map((item: any, parentKey:any) => (
+                  {config.notification.map((item: any, parentKey: any) => (
                     <S.NotificationWrapper key={parentKey}>
                       <S.NotificationContentAuthor>
                         {item.author} · {item.date}
@@ -175,7 +194,7 @@ const Home: React.FC = () => {
                       </S.NotificationContentDescription>
                       <S.NotificationEmojiBox>
                         <S.NotificationAddEmoji src={Emoji} />
-                        {item.emoji.map((emoji:any, childKey:any) => (
+                        {item.emoji.map((emoji: any, childKey: any) => (
                           <S.NotificationEmojiWrapper
                             onClick={() =>
                               handleEmojiClick(parentKey, childKey)
@@ -279,7 +298,7 @@ const Home: React.FC = () => {
                 <S.MySchooliTitle>내 학교</S.MySchooliTitle>
               </S.SchoolTitleBox>
               <S.SchoolBox>
-                <S.SchoolName>대구 소프트웨어 마이스터 고등학교</S.SchoolName>
+                <S.SchoolName>{workspaceName}</S.SchoolName>
                 <S.ChangeSchool onClick={handleOnClicked}>전환</S.ChangeSchool>
               </S.SchoolBox>
             </S.UpContainer>
