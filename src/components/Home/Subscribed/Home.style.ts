@@ -82,7 +82,7 @@ export const HomeWrapper1UpContainer = styled.div`
 
 export const ScheduleTitleBox = styled.div`
   display: flex;
-  padding: 0.1em;
+  padding: 0.5em;
   justify-content: space-between;
   align-items: center;
 `;
@@ -366,8 +366,6 @@ export const NumberTable = styled.div`
   display: flex;
 
   position: relative;
-
-  top: 0.9em;
 `;
 
 export const Number = styled.div`
