@@ -9,7 +9,7 @@ import CustomAlert from "@/components/Alert/Alert";
 import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import showPasswordimg from "@/assets/image/onbording/show_fill.svg";
 import hidePasswordimg from "@/assets/image/onbording/hide_fill.svg";
-import AppleLogo from "@/assets/image/onbording/Start/applelogo.svg";
+import AppleLogo from '@/assets/image/onbording/Start/apple.svg';
 import GoogleLogo from "@/assets/image/onbording/Start/googlelogo.svg";
 import Cloud1 from "@/assets/image/onbording/Start/LoginCloud1.svg";
 import Cloud2 from "@/assets/image/onbording/Start/LoginCloud2.svg";
