@@ -7,6 +7,13 @@ export const HomeContainer = styled.div`
   align-items: flex-start;
 `
 
+export const RegisterComponent = styled.div`  
+  position:absolute;
+  width: 1440px;
+  height: 1024px;
+  
+`
+
 export const HomeMain = styled.div`
   display: flex;
   padding: 64px 32px;
@@ -18,7 +25,7 @@ export const HomeMain = styled.div`
 
   background: var(--Primary-Primary050, #F8FCFF);
 
-  margin-left:4%;
+  margin-left:5.5%;
 `
 
 export const ComponentsBox = styled.div`
@@ -157,14 +164,6 @@ export const NDetail = styled.span`
   line-height: 130%; /* 18.2px */
 `
 
-export const TitleContainer = styled.div`
-  display: flex;
-  padding: 4px;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-`
-
 export const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -201,7 +200,7 @@ export const RightDownContainer = styled.div`
   background: #FFF;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-  `
+`
 
 export const SeugiTitleContainer = styled.div`
   display: flex;
@@ -291,7 +290,7 @@ export const SSDetail = styled.span`
 `
 
 export const BookLogo = styled.img`
-  position: relative;
+  
 `
 
 export const DailyScheduleTitle = styled.h2`
@@ -304,80 +303,6 @@ export const DailyScheduleTitle = styled.h2`
   font-style: normal;
   font-weight: 600;
   line-height: 130%; 
-`
-
-export const NumberTable = styled.div`
-  display: flex;
-
-  position: relative;
-
-  top: 10px;
-`
-
-export const Number = styled.div`
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-
-  color: var(--Primary-Primary300, #7ec4fc);
-
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 18.2px */
-
-  &.Today {
-    color: var(--Primary-Primary500, #1d93f3);
-  }
-
-  width: 120px;
-  height: 34px;
-`
-
-export const ItemTable = styled.table`
-  display: flex;
-
-  position: relative;
-
-  background-color: var(--Primary-Primary300, #7ec4fc);
-
-  border-radius: 20px;
-
-  top: 10px;
-`
-
-export const Item = styled.div`
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-
-  width: 120px;
-  height: 34px;
-
-  color: var(--Primary-Primary200, #b1dbfd);
-
-  background-color: var(--Primary-Primary500, #1d93f3);
-
-  &.First {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-  }
-
-  &.Last {
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-  }
-
-  &.Today {
-    color: white;
-  }
-
-  &.After {
-    background-color: var(--Primary-Primary300, #7ec4fc);
-  }
 `
 
 export const NotificationLogo = styled.img`
@@ -409,24 +334,6 @@ export const ArrowLogo = styled.img`
   position: relative;
 `
 
-export const ScheduleBox = styled.div`
-  display:flex;
-  flex-direction:column;
-
-  position: relative;
-
-  background-color: #fff;
-
-  padding: 12px;
-
-  border-radius: 12px;
-
-  width: 422px;
-  height: 270px;
-
-  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-`
-
 export const CalendarLogo = styled.img`
   width: 32px;
   height: 32px;
@@ -453,21 +360,6 @@ export const ArrowLButton = styled.button`
 
 export const SArrowLogo = styled.img`
   position: relative;
-`
-
-export const CatSeugiBox = styled.div`
-  position: relative;
-
-  background-color: #fff;
-
-  padding: 12px;
-
-  border-radius: 12px;
-
-  width: 422px;
-  height: 270px;
-
-  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
 
 export const SeugiImg = styled.img`
@@ -516,6 +408,8 @@ export const MySchooliTitle = styled.span`
   font-style: normal;
   font-weight: 600;
   line-height: 130%;
+
+  margin-right:18vw;
 `
 export const CafeteriaTitleBox = styled.div`
   display: flex;
@@ -548,117 +442,6 @@ export const CafeteriaTitle = styled.p`
   line-height: 130%; /* 20.8px */
 `
 
-export const CatSeugi = styled.div`
-  display: flex;
-  padding: 12px;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-
-  border-radius: 99px;
-  border: 1.5px solid var(--Gradient-Primary, #1C8DF4);
-  background: var(--Sub-White, #FFF);
-`
-
-export const CatSeugiInput = styled.input`
-
-  width:100%;
-  height:29px;
-  border:none;
-  &::placeholder{
-        color: var(--Gray-Gray500, #AAA);
-
-        font-family: 'Pretendard-Regular', sans-serif;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 130%; 
-    }
-
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; 
-
-    &:focus {
-        outline: none;
-    }
-
-    padding:0 0 0 4px;
-`
-
-export const SearchImg = styled.img`
-  padding:0 4px 0 0;
-`
-
-export const QuestionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 4px;
-  align-self: stretch;
-`
-
-export const LastQuestionBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 4px;
-  align-self: stretch;
-`
-
-export const LastText = styled.div`
-  display: flex;
-  padding: 0px 4px;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 10px;
-`
-
-export const Lastweek = styled.span`
-  color: var(--Sub-Black, #000);
-
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; 
-`
-
-export const LastQuestion = styled.div`
-  display: flex;
-  padding: 12px;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-
-  border-radius: 4px;
-  background: var(--Gray-Gray100, #F4F5F9);
-`
-
-export const QuestionText = styled.span`
-  color: var(--Black, #000);
-
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; 
-`
-
-export const QuestionDay = styled.span`
-  color: var(--Gray-Gray600, #787878);
-
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; 
-`
-
 export const CafeteriaDiv = styled.div`
   display: flex;
   padding: 12px 0px;
@@ -686,10 +469,11 @@ export const SchoolBox = styled.div`
 
 export const SchoolDetailBox = styled.div`
   display: flex;
-  flex-direction: column;
+  padding: 12px 0px;
   justify-content: center;
-  align-items: flex-start;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
+
 `
 
 export const SchoolDetail = styled.span`
@@ -700,30 +484,6 @@ export const SchoolDetail = styled.span`
   font-style: normal;
   font-weight: 400;
   line-height: 130%; /* 18.2px */
-`
 
-export const RegistrationButton = styled.button`
-  display: flex;
-  padding: 8px 125px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  align-self: stretch;
-
-  border-radius: 8px;
-  background: var(--Gray-Gray100, #F4F5F9);
-
-  border:none;
-  
-  height: 37px;
-
-  color: var(--Gray-Gray600, #787878);
-
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
-
-  cursor: pointer;
+  margin-left:9vw;
 `
