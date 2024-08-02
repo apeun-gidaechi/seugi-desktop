@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import * as S from '@/components/Signup/OAuthsignup/oauthsignup.style';
-import Button from '@/components/button/Button';
+import Button from '@/components/Button/Button';
 import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
@@ -31,7 +31,6 @@ const oauthsignup = () => {
         try {
             const response = await axios.post(`${config.serverurl}/member/register`, {
                 name,
-                // 토큰 추가
             });
             if (response.status === 200) {
                 navigate('/emailathentance');
