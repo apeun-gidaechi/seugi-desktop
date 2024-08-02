@@ -34,12 +34,9 @@ export const ComponentsBox = styled.div`
   gap: 20px;
   align-self: stretch;
 
-  padding: 0 0 0 32px;
 `
 
 export const HomeTitle = styled.h1`
-  padding: 0 0 0 32px;
-
   position: relative;
 
   width: 100%;

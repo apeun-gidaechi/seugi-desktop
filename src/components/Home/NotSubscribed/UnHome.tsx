@@ -25,7 +25,7 @@ const UnHome = () => {
 
     return (
         <S.HomeContainer>
-            <RegisterSchool />
+            {/* <RegisterSchool /> */}
             <Navbar />
             <S.HomeMain>
                 <S.HomeTitle>홈</S.HomeTitle>
