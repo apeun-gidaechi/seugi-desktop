@@ -11,7 +11,7 @@ const RegisterSchool = () => {
     }
 
     const handleJoin = () => {
-        navigate('/schoolcode');
+        navigate('/schoolcode ');
     }
 
     return (
