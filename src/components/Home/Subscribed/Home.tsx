@@ -23,6 +23,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Home: React.FC = () => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+  
   const [showChangeschool, setShowChangeschool] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState("아침");
   const [workspaceName, setWorkspaceName] = useState("");
