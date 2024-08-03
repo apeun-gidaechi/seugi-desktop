@@ -20,7 +20,7 @@ export const HomeMain = styled.div`
 
   background: var(--Primary-Primary050, #f8fcff);
 
-  margin-left: 4rem;
+  margin-left: 5.5%;
 `;
 
 export const ComponentsBox = styled.div`
@@ -99,7 +99,6 @@ export const LeftContainer = styled.div`
   padding: 0.6em 0.6em 0.8em 0.6em;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.9em;
   flex: 1 0 0;
 
   border-radius: 12px;
