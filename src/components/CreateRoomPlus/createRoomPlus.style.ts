@@ -13,6 +13,7 @@ export const CreateRoomPlusBox = styled.div`
     flex-direction: column;
 `;
 
+
 export const ChatRoomName = styled.div`
     color: var(--Black, #000);
 
@@ -24,6 +25,7 @@ export const ChatRoomName = styled.div`
 
     flex: 1;
     padding: 4px;
+    
 `;
 
 export const ChatRoomButton = styled.button`
@@ -51,6 +53,7 @@ export const InviteMemberWrap = styled.div`
     background: var(--Sub-White, #FFF);
 
     display: flex;
+    justify-content: center;
 `;
 
 export const InviteMemberFlex = styled.div`

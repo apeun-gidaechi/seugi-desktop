@@ -12,7 +12,7 @@ export const socketService = {
 
         socket.connect(headers, function (frame) {
             console.log('소켓 연결됨');
-            socket?.subscribe("/exchange/chat.exchange/room.666e9b0ee0b561622b357c3c", (message: Stomp.Message) => {
+            socket?.subscribe("/exchange/chat.exchange/room.66909b07ea628e48d96b825b", (message: Stomp.Message) => {
                 console.log(message.body);
             })
         });

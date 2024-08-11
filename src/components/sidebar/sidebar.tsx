@@ -6,10 +6,10 @@ import SearchIcon from "@/assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 
 import Navbar from "@/components/Navbar/Navbar";
-import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus"; // Import the correct path
+import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus"; 
 
 import config from "@/constants/ChatMember/config.json";
-import SendMessage from "@/components/SendMessage/sendMessage";
+import SendMessage from "@/components/sendMessage/sendMessage";
 
 interface SendMessageProps {
   chatRoom: string;
@@ -62,7 +62,7 @@ const Sidebar: React.FC = () => {
 
   const handleRoomCreation = (roomName: string) => {
     addChatRoom(roomName);
-    setShowCreateRoom(false); // Close the create room modal after creating room
+    setShowCreateRoom(false);
   };
 
   return (
