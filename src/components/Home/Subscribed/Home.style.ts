@@ -20,7 +20,7 @@ export const HomeMain = styled.div`
 
   background: var(--Primary-Primary050, #f8fcff);
 
-  margin-left: 5.5%;
+  margin-left: 5%;
 `;
 
 export const ComponentsBox = styled.div`
