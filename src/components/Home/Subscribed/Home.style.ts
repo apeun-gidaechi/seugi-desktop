@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const HomeContainer = styled.div`
   display: flex;
-  width: 100%;
-  height: 1024px;
+  width: 100vw;
+  height: 100vh;
   align-items: flex-start;
 `;
 
@@ -12,7 +12,7 @@ export const HomeMain = styled.div`
   padding: 64px 32px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1em;
+  gap: 20px;
   flex: 1 0 0;
   align-self: stretch;
 
@@ -26,14 +26,12 @@ export const HomeMain = styled.div`
 export const ComponentsBox = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 0.8em;
+  gap: 16px;
   align-self: stretch;
-
-  margin-left: 1%;
 `;
 
 export const HomeTitle = styled.h1`
-  margin-left: 1.5%;
+  margin-left: 1%;
 
   position: relative;
 
@@ -53,61 +51,66 @@ export const HomeWrapper1 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1em;
+  gap: 20px;
   flex: 1 0 0;
 `;
 
 export const HomeWrapper2 = styled.div`
   display: flex;
-  width: 100%;
-  height: 50%;
+  width: 29vw;
+  height: 22vw;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1em;
+  gap: 20px;
 `;
 
 export const HomeWrapper1UpContainer = styled.div`
   display: flex;
-  padding: 0.6em 0.6em 0.8em 0.6em;
+  padding: 12px 12px 16px 12px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.9em;
+  gap: var(--Corner-Small, 10px);
   align-self: stretch;
 
   border-radius: 12px;
-  background: #fff;
+  background: #FFF;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
 
 export const ScheduleTitleBox = styled.div`
   display: flex;
-  padding: 0.5em;
+  padding: 4px;
   justify-content: space-between;
   align-items: center;
+  align-self: stretch;
 `;
+
+export const ScheduleTitleDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`
 
 export const HomeWrapper1DownContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 1em;
+  gap: 20px;
   align-self: stretch;
 `;
 
 export const LeftContainer = styled.div`
   display: flex;
-  padding: 0.6em 0.6em 0.8em 0.6em;
+  padding: 12px 12px 16px 12px;
   flex-direction: column;
   align-items: flex-start;
+  gap: var(--Corner-Small, 10px);
   flex: 1 0 0;
 
   border-radius: 12px;
-  background: #fff;
+  background: #FFF;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-
-  width: 422px;
-  height: 658px;
 `;
 
 export const NotificationContainer = styled.div`
@@ -118,44 +121,38 @@ export const NotificationContainer = styled.div`
   align-self: stretch;
 `;
 
+export const NotificationTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 export const NotificationBox = styled.div`
   display: flex;
-
-  position: relative;
-
   flex-direction: column;
-
-  overflow: scroll;
-
-  top: 0.8em;
-
-  width: 398px;
-  height: 580px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
 `;
 
 export const NotificationWrapper = styled.div`
   display: flex;
-
+  padding: 12px;
   flex-direction: column;
-
-  padding: 0.8em;
-
-  width: 398px;
-  height: 139px;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
 
   border-radius: 8px;
+  background: var(--Sub-White, #FFF);
 
-  margin-bottom: 0.4em;
-
-  background: var(--Sub-White, #fff);
-
+  /* ev-black-1 */
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
 
 export const NotificationContentAuthor = styled.span`
   color: var(--Gray-Gray600, #787878);
 
-  /* Body2 */
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
@@ -167,8 +164,6 @@ export const NotificationContentTitle = styled.span`
   position: relative;
 
   color: var(--Black, #000);
-
-  top: 0.4em;
 
   font-family: Pretendard;
   font-size: 16px;
@@ -182,8 +177,6 @@ export const NotificationContentDescription = styled.span`
 
   color: var(--Black, #000);
 
-  top: 0.35em;
-
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
@@ -194,12 +187,10 @@ export const NotificationContentDescription = styled.span`
 export const NotificationAddEmoji = styled.img`
   position: relative;
 
-  top: 1.1em;
-
   width: 28px;
   height: 28px;
 
-  padding: 0.2em;
+  padding: 4px;
 `;
 
 export const NotificationEmojiBox = styled.div`
@@ -215,7 +206,6 @@ export const NotificationEmojiWrapper = styled.div`
 
   justify-content: center;
   align-items: center;
-  top: 1.1em;
 
   margin-right: 4px;
 
@@ -247,10 +237,10 @@ export const NotificationEmoji = styled.img`
 `;
 
 export const NotificationEmojiCount = styled.span`
-  margin: 0.15em;
+  margin: 3px;
 
   color: var(--Gray-Gray600, #787878);
-
+  /* Body1 */
   font-family: Pretendard;
   font-size: 15px;
   font-style: normal;
@@ -259,7 +249,7 @@ export const NotificationEmojiCount = styled.span`
 
 export const TitleContainer = styled.div`
   display: flex;
-  padding: 0.2em;
+  padding: 4px;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
@@ -269,7 +259,7 @@ export const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1em;
+  gap: 20px;
   flex: 1 0 0;
 `;
 
@@ -289,7 +279,7 @@ export const RightUpContainer = styled.div`
 
 export const RightDownContainer = styled.div`
   display: flex;
-  padding: 1em;
+  padding: 12px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -312,7 +302,7 @@ export const SeugiTitleContainer = styled.div`
 
 export const UpContainer = styled.div`
   display: flex;
-  padding: 0.6em 0.6em 0.8em 0.6em;
+  padding: 12px 12px 16px 12px;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
@@ -326,10 +316,10 @@ export const UpContainer = styled.div`
 
 export const DownContainer = styled.div`
   display: flex;
-  padding: 0.6em 0.6em 0.8em 0.6em;
+  padding: 12px 12px 16px 12px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.9em;
+  gap: 10px;
   flex: 1 0 0;
   align-self: stretch;
 
@@ -341,7 +331,7 @@ export const DownContainer = styled.div`
 
 export const SoonScheduleBox = styled.div`
   display: flex;
-  padding: 0.2em;
+  padding: 4px;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
@@ -352,8 +342,6 @@ export const BookLogo = styled.img`
 `;
 
 export const DailyScheduleTitle = styled.h2`
-  margin-left: 0.75em;
-
   color: #000;
 
   font-family: "Pretendard-Regular", sans-serif;
@@ -366,7 +354,8 @@ export const DailyScheduleTitle = styled.h2`
 export const NumberTable = styled.div`
   display: flex;
 
-  position: relative;
+  top: 10px;
+  padding: 8px 0;
 `;
 
 export const Number = styled.div`
@@ -374,6 +363,7 @@ export const Number = styled.div`
 
   justify-content: center;
   align-items: center;
+  flex: 1;
 
   color: var(--Primary-Primary300, #7ec4fc);
 
@@ -386,19 +376,16 @@ export const Number = styled.div`
   &.Today {
     color: var(--Primary-Primary500, #1d93f3);
   }
-
-  width: 120px;
-  height: 34px;
+  height: 1.7vh;
 `;
 
 export const ItemTable = styled.table`
   display: flex;
+  align-items: flex-start;
+  align-self: stretch;
 
-  position: relative;
-
-  background-color: var(--Primary-Primary300, #7ec4fc);
-
-  border-radius: 20px;
+  border-radius: 9999px;
+  background-color: #DCEFFF;
 `;
 
 export const Item = styled.div`
@@ -406,9 +393,9 @@ export const Item = styled.div`
 
   justify-content: center;
   align-items: center;
+  flex: 1;
 
-  width: 120px;
-  height: 34px;
+  padding: 8px 0;
 
   color: var(--Primary-Primary200, #b1dbfd);
 
@@ -429,7 +416,8 @@ export const Item = styled.div`
   }
 
   &.After {
-    background-color: var(--Primary-Primary300, #7ec4fc);
+    background-color: transparent;
+    color: var(--Primary-Primary300, #7EC4FC);
   }
 `;
 
@@ -441,7 +429,7 @@ export const NotificationLogo = styled.img`
 export const NotificationTitle = styled.h2`
   position: relative;
 
-  left: 0.75em;
+  left: 8px;
 
   color: var(--Black, #000);
 
@@ -450,8 +438,6 @@ export const NotificationTitle = styled.h2`
   font-style: normal;
   font-weight: 600;
   line-height: 130%; /* 20.8px */
-
-  margin-right: 78%;
 `;
 
 export const NArrowLogo = styled.img`
@@ -460,8 +446,6 @@ export const NArrowLogo = styled.img`
 
 export const ArrowLogo = styled.img`
   position: relative;
-
-  left: 44vw;
 `;
 
 export const ScheduleBox = styled.div`
@@ -472,21 +456,27 @@ export const ScheduleBox = styled.div`
 
   background-color: #fff;
 
-  padding: 1.2em;
+  padding: 12px;
 
   border-radius: 12px;
 
-  width: 422px;
-  height: 270px;
+  width: 21vw;
+  height: 18.5vh;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
 
+export const ScheduleDivBox = styled.div`
+  display: flex;
+  align-self: stretch;
+  align-items: stretch;
+  border-radius: 12px;
+  flex-direction: column;
+`
+
 export const CalendarLogo = styled.img`
   width: 32px;
   height: 32px;
-
-  margin-right: 0.7em;
 `;
 
 export const ScheduleTitle = styled.span`
@@ -497,7 +487,8 @@ export const ScheduleTitle = styled.span`
   font-style: normal;
   font-weight: 600;
   line-height: 130%;
-  margin-right: 58%;
+
+  margin-right: 60%;
 `;
 
 export const ArrowLButton = styled.button`
@@ -516,12 +507,12 @@ export const CatSeugiBox = styled.div`
 
   background-color: #fff;
 
-  padding: 1em;
+  padding: 12px;
 
   border-radius: 12px;
 
-  width: 422px;
-  height: 270px;
+  width: 21vw;
+  height: 16.5vh;
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
@@ -529,8 +520,6 @@ export const CatSeugiBox = styled.div`
 export const SeugiImg = styled.img`
   width: 28px;
   height: 28px;
-
-  margin-right: 0.75em;
 `;
 
 export const CatSeugiTitle = styled.span`
@@ -541,8 +530,6 @@ export const CatSeugiTitle = styled.span`
   font-style: normal;
   font-weight: 600;
   line-height: 130%;
-
-  margin-right: 73%;
 `;
 
 export const CArrowLogo = styled.img`
@@ -552,15 +539,13 @@ export const CArrowLogo = styled.img`
 export const SchoolImg = styled.img`
   width: 28px;
   height: 28px;
-
-  margin-right: 0.75em;
 `;
 
 export const SchoolTitleBox = styled.div`
   display: flex;
-  padding: 0.2em;
+  padding: 4px;
   align-items: center;
-  gap: 0.75em;
+  gap: 8px;
   align-self: stretch;
 `;
 
@@ -573,10 +558,9 @@ export const MySchooliTitle = styled.span`
   font-weight: 600;
   line-height: 130%;
 `;
-
 export const CafeteriaTitleBox = styled.div`
   display: flex;
-  padding: 0.2em;
+  padding: 4px;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
@@ -585,8 +569,6 @@ export const CafeteriaTitleBox = styled.div`
 export const CafeteriaImg = styled.img`
   width: 28px;
   height: 28px;
-
-  margin-right: 0.75em;
 `;
 
 export const CafeteriaTitle = styled.p`
@@ -604,7 +586,7 @@ export const CafeteriaTitle = styled.p`
 export const DummyBox = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 0.3m;
+  gap: 4px;
   align-self: stretch;
 `;
 
@@ -616,7 +598,7 @@ export const DateDummy = styled.div`
   gap: 16px;
   align-self: stretch;
 
-  border-radius: 0.75em;
+  border-radius: 8px;
 `;
 
 export const DateText = styled.span`
@@ -631,7 +613,7 @@ export const DateText = styled.span`
 
 export const SubDummy = styled.div`
   display: flex;
-  padding: 0.2em 0px;
+  padding: 4px 0px;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
@@ -785,6 +767,8 @@ export const CafeteriaDiv = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 16px;
+
+  margin-left: 5px;
 `;
 
 export const TimeButton = styled.button`
