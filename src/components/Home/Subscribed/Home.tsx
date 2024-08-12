@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import * as S from "@/components/Home/Subscribed/Home.style";
 import Navbar from "@/components/common/Navbar/Navbar";
 import Changeschool from "@/components/ChangeSchool/ChangeSchool";
+import TitleText from '@/components/common/TitleText/index'
 
 import initialConfig from "@/constants/Home/config.json";
 import temp from "@/constants/config/config.json";
@@ -157,7 +158,7 @@ const Home: React.FC = () => {
     <S.HomeContainer>
       <Navbar />
       <S.HomeMain>
-        <S.HomeTitle>홈</S.HomeTitle>
+        <TitleText/>
         {showChangeschool && <Changeschool />}
         <S.ComponentsBox>
           <S.HomeWrapper1>
