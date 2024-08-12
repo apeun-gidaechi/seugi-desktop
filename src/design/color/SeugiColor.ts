@@ -49,8 +49,14 @@ export const SeugiColor = Object.freeze({
 
     /*
     Sub
-     */
+    */
     White: '#FFFFFF',
     Black: '#000000',
-    Transparent: 'rgba(255,255,255,0)'
+    Transparent: 'rgba(255,255,255,0)',
+
+    /*
+    Gradient
+    */
+    GradientPrimary: 'linear-gradient(900deg, #1D93F3 0%, #0481E6 100%)', 
+    GradientSecondary: 'radial-gradient(circle, #EFF7FF 0%, #9EE8FF 100%)',
 });
