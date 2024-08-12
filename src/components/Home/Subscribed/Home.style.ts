@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiText } from "@/design/text/SeugiText";
 
 export const HomeContainer = styled.div`
   display: flex;
@@ -18,7 +20,7 @@ export const HomeMain = styled.div`
 
   width: 100vw;
 
-  background: var(--Primary-Primary050, #f8fcff);
+  background: ${SeugiColor.Primary050};
 
   margin-left: 5%;
 `;
@@ -38,7 +40,7 @@ export const HomeTitle = styled.h1`
   width: 100%;
   height: 100%;
 
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 28px;
@@ -73,7 +75,7 @@ export const HomeWrapper1UpContainer = styled.div`
   align-self: stretch;
 
   border-radius: 12px;
-  background: #FFF;
+  background: ${SeugiColor.White};
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
@@ -108,7 +110,7 @@ export const LeftContainer = styled.div`
   flex: 1 0 0;
 
   border-radius: 12px;
-  background: #FFF;
+  background: ${SeugiColor.White};
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
@@ -144,14 +146,14 @@ export const NotificationWrapper = styled.div`
   align-self: stretch;
 
   border-radius: 8px;
-  background: var(--Sub-White, #FFF);
+  background: ${SeugiColor.White};
 
   /* ev-black-1 */
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
 
 export const NotificationContentAuthor = styled.span`
-  color: var(--Gray-Gray600, #787878);
+  color:${SeugiColor.Gray600};
 
   font-family: Pretendard;
   font-size: 14px;
@@ -163,7 +165,7 @@ export const NotificationContentAuthor = styled.span`
 export const NotificationContentTitle = styled.span`
   position: relative;
 
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
   font-family: Pretendard;
   font-size: 16px;
@@ -175,7 +177,7 @@ export const NotificationContentTitle = styled.span`
 export const NotificationContentDescription = styled.span`
   position: relative;
 
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
   font-family: Pretendard;
   font-size: 14px;
@@ -213,15 +215,15 @@ export const NotificationEmojiWrapper = styled.div`
 
   &.Clicked {
     border-radius: 8px;
-    border: 1px solid var(--Primary-Primary300, #7ec4fc);
-    background: var(--Primary-Primary100, #dcefff);
+    border: 1px solid ${SeugiColor.Primary300};
+    background: ${SeugiColor.Primary100};
   }
 
   transition: background 0.25s;
 
   border-radius: 8px;
-  border: 1px solid var(--Gray-Gray200, #f1f1f1);
-  background: var(--Gray-Gray100, #f4f5f9);
+  border: 1px solid ${SeugiColor.Gray200};
+  background: ${SeugiColor.Gray100};
 
   width: 51px;
   height: 29px;
@@ -239,7 +241,7 @@ export const NotificationEmoji = styled.img`
 export const NotificationEmojiCount = styled.span`
   margin: 3px;
 
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
   /* Body1 */
   font-family: Pretendard;
   font-size: 15px;
@@ -272,7 +274,7 @@ export const RightUpContainer = styled.div`
   align-self: stretch;
 
   border-radius: 12px;
-  background: #fff;
+  background: ${SeugiColor.White};
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
@@ -287,7 +289,7 @@ export const RightDownContainer = styled.div`
   align-self: stretch;
 
   border-radius: 12px;
-  background: #fff;
+  background: ${SeugiColor.White};
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
@@ -309,7 +311,7 @@ export const UpContainer = styled.div`
   align-self: stretch;
 
   border-radius: 12px;
-  background: var(--Sub-White, #fff);
+  background: ${SeugiColor.White};
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
@@ -324,7 +326,7 @@ export const DownContainer = styled.div`
   align-self: stretch;
 
   border-radius: 12px;
-  background: #fff;
+  background: ${SeugiColor.White};
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
@@ -342,7 +344,7 @@ export const BookLogo = styled.img`
 `;
 
 export const DailyScheduleTitle = styled.h2`
-  color: #000;
+  color: ${SeugiColor.Black};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -365,7 +367,7 @@ export const Number = styled.div`
   align-items: center;
   flex: 1;
 
-  color: var(--Primary-Primary300, #7ec4fc);
+  color: ${SeugiColor.Primary300};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 14px;
@@ -374,7 +376,7 @@ export const Number = styled.div`
   line-height: 130%; /* 18.2px */
 
   &.Today {
-    color: var(--Primary-Primary500, #1d93f3);
+    color: ${SeugiColor.Primary500};
   }
   height: 1.7vh;
 `;
@@ -385,7 +387,7 @@ export const ItemTable = styled.table`
   align-self: stretch;
 
   border-radius: 9999px;
-  background-color: #DCEFFF;
+  background-color: ${SeugiColor.Primary100};
 `;
 
 export const Item = styled.div`
@@ -397,9 +399,9 @@ export const Item = styled.div`
 
   padding: 8px 0;
 
-  color: var(--Primary-Primary200, #b1dbfd);
+  color: ${SeugiColor.Primary200};
 
-  background-color: var(--Primary-Primary500, #1d93f3);
+  background-color: ${SeugiColor.Primary500};
 
   &.First {
     border-top-left-radius: 20px;
@@ -412,12 +414,12 @@ export const Item = styled.div`
   }
 
   &.Today {
-    color: white;
+    color: ${SeugiColor.White};
   }
 
   &.After {
     background-color: transparent;
-    color: var(--Primary-Primary300, #7EC4FC);
+    color: ${SeugiColor.Primary300};
   }
 `;
 
@@ -431,7 +433,7 @@ export const NotificationTitle = styled.h2`
 
   left: 8px;
 
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -454,7 +456,7 @@ export const ScheduleBox = styled.div`
 
   position: relative;
 
-  background-color: #fff;
+  background-color: ${SeugiColor.White};
 
   padding: 12px;
 
@@ -480,7 +482,7 @@ export const CalendarLogo = styled.img`
 `;
 
 export const ScheduleTitle = styled.span`
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -505,7 +507,7 @@ export const SArrowLogo = styled.img`
 export const CatSeugiBox = styled.div`
   position: relative;
 
-  background-color: #fff;
+  background-color: ${SeugiColor.White};
 
   padding: 12px;
 
@@ -523,7 +525,7 @@ export const SeugiImg = styled.img`
 `;
 
 export const CatSeugiTitle = styled.span`
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -550,7 +552,7 @@ export const SchoolTitleBox = styled.div`
 `;
 
 export const MySchooliTitle = styled.span`
-  color: var(--Sub-Black, #000);
+  color: ${SeugiColor.Black};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -572,7 +574,7 @@ export const CafeteriaImg = styled.img`
 `;
 
 export const CafeteriaTitle = styled.p`
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -602,7 +604,7 @@ export const DateDummy = styled.div`
 `;
 
 export const DateText = styled.span`
-  color: var(--Primary-Primary500, #1d93f3);
+  color: ${SeugiColor.Primary500};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 14px;
@@ -622,7 +624,7 @@ export const SubDummy = styled.div`
 `;
 
 export const SubTitle = styled.span`
-  color: #000;
+  color: ${SeugiColor.Black};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 14px;
@@ -644,7 +646,7 @@ export const D_DayDummy = styled.div`
 `;
 
 export const D_DayText = styled.span`
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 12px;
@@ -661,8 +663,8 @@ export const CatSeugi = styled.div`
   align-self: stretch;
 
   border-radius: 99px;
-  border: 1.5px solid var(--Gradient-Primary, #1c8df4);
-  background: var(--Sub-White, #fff);
+  border: 1.5px solid ${SeugiColor.GradientPrimary};
+  background: ${SeugiColor.White};
 `;
 
 export const CatSeugiInput = styled.input`
@@ -670,7 +672,7 @@ export const CatSeugiInput = styled.input`
   height: 29px;
   border: none;
   &::placeholder {
-    color: var(--Gray-Gray500, #aaa);
+    color: ${SeugiColor.Gray500};
 
     font-family: "Pretendard-Regular", sans-serif;
     font-size: 16px;
@@ -723,7 +725,7 @@ export const LastText = styled.div`
 `;
 
 export const Lastweek = styled.span`
-  color: var(--Sub-Black, #000);
+  color: ${SeugiColor.Black};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 14px;
@@ -740,11 +742,11 @@ export const LastQuestion = styled.div`
   align-self: stretch;
 
   border-radius: 4px;
-  background: var(--Gray-Gray100, #f4f5f9);
+  background: ${SeugiColor.Gray100};
 `;
 
 export const QuestionText = styled.span`
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 14px;
@@ -754,7 +756,7 @@ export const QuestionText = styled.span`
 `;
 
 export const QuestionDay = styled.span`
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 14px;
@@ -779,7 +781,7 @@ export const TimeButton = styled.button`
 `;
 
 export const Breakfast = styled.span`
-  color: var(--Sub-Black, #000);
+  color: ${SeugiColor.Black};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -789,7 +791,7 @@ export const Breakfast = styled.span`
 `;
 
 export const Lunch = styled.span`
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -799,7 +801,7 @@ export const Lunch = styled.span`
 `;
 
 export const Dinner = styled.span`
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -818,11 +820,11 @@ export const MenuList = styled.div`
   align-self: stretch;
 
   border-radius: 8px;
-  background: var(--Gray-Gray100, #f4f5f9);
+  background: ${SeugiColor.Gray100};
 `;
 
 export const Menu = styled.span`
-  color: var(--Gray-Gray700, #333);
+  color:${SeugiColor.Gray700};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -839,7 +841,7 @@ export const SchoolBox = styled.div`
 `;
 
 export const SchoolName = styled.span`
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 16px;
@@ -856,9 +858,9 @@ export const ChangeSchool = styled.button`
   gap: 10px;
 
   border-radius: 8px;
-  background: var(--Gray-Gray100, #f4f5f9);
+  background: ${SeugiColor.Gray100};
 
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
   font-family: "Pretendard-Regular", sans-serif;
   font-size: 14px;
