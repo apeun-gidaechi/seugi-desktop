@@ -5,18 +5,15 @@ import PlusButton from "@/assets/image/sidebar/plusButton.svg";
 import SearchIcon from "@/assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 
-import Navbar from "@/components/Navbar/Navbar";
-import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus"; // Import the correct path
+import Navbar from "@/components/common/Navbar/Navbar";
+import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus"; 
 
 import config from "@/constants/ChatMember/config.json";
-import SendMessage from "@/components/SendMessage/sendMessage";
+import SendMessage from "@/components/common//sendMessage/sendMessage";
 
-interface SendMessageProps {
-  chatRoom: string;
-  currentUser: string;
-}
+interface SidebarProps {}
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<SidebarProps> = () => {
   const [searchText, setSearchText] = useState("");
   const [chatRooms, setChatRooms] = useState<string[]>([]);
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
