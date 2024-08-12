@@ -29,7 +29,7 @@ const Home: React.FC = () => {
       document.body.style.overflow = "auto";
     };
   }, []);
-  
+
   const [showChangeschool, setShowChangeschool] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState("아침");
   const [workspaceName, setWorkspaceName] = useState("");
@@ -170,20 +170,26 @@ const Home: React.FC = () => {
           <S.HomeWrapper1>
             <S.HomeWrapper1UpContainer>
               <S.ScheduleTitleBox>
-                <S.BookLogo src={HomeBookImg} />
-                <S.DailyScheduleTitle>오늘의 시간표</S.DailyScheduleTitle>
+                <S.ScheduleTitleDiv>
+                  <S.BookLogo src={HomeBookImg} />
+                  <S.DailyScheduleTitle>오늘의 시간표</S.DailyScheduleTitle>
+                </S.ScheduleTitleDiv>
                 <S.ArrowLButton>
                   <S.ArrowLogo src={ArrowImg} />
                 </S.ArrowLButton>
               </S.ScheduleTitleBox>
-              <S.NumberTable>{numberLoop()}</S.NumberTable>
-              <S.ItemTable>{itemLoop()}</S.ItemTable>
+              <S.ScheduleDivBox>
+                <S.NumberTable>{numberLoop()}</S.NumberTable>
+                <S.ItemTable>{itemLoop()}</S.ItemTable>
+              </S.ScheduleDivBox>
             </S.HomeWrapper1UpContainer>
             <S.HomeWrapper1DownContainer>
               <S.LeftContainer>
                 <S.NotificationContainer>
-                  <S.NotificationLogo src={NotificationImg} />
-                  <S.NotificationTitle>알림</S.NotificationTitle>
+                  <S.NotificationTitleContainer>
+                    <S.NotificationLogo src={NotificationImg} />
+                    <S.NotificationTitle>알림</S.NotificationTitle>
+                  </S.NotificationTitleContainer>
                   <S.ArrowLButton>
                     <S.NArrowLogo src={ArrowImg} />
                   </S.ArrowLButton>
