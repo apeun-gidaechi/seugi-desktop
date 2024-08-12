@@ -148,7 +148,6 @@ export const NotificationWrapper = styled.div`
   border-radius: 8px;
   background: ${SeugiColor.White};
 
-  /* ev-black-1 */
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
 
@@ -159,7 +158,7 @@ export const NotificationContentAuthor = styled.span`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 18.2px */
+  line-height: 130%;
 `;
 
 export const NotificationContentTitle = styled.span`
@@ -171,7 +170,7 @@ export const NotificationContentTitle = styled.span`
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  line-height: 130%;
 `;
 
 export const NotificationContentDescription = styled.span`
@@ -663,7 +662,7 @@ export const CatSeugi = styled.div`
   align-self: stretch;
 
   border-radius: 99px;
-  border: 1.5px solid ${SeugiColor.GradientPrimary};
+  border: 1.5px solid var(--Gradient-Primary, #1C8DF4);
   background: ${SeugiColor.White};
 `;
 
