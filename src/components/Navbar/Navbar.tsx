@@ -1,66 +1,67 @@
-
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 import * as S from "@/components/Navbar/Navbar.style";
-import config from "@/constants/login/config.json";
 
 import Home from "@/assets/image/sidebar/home.svg";
 import Chat from "@/assets/image/sidebar/chat.svg";
 import Chats from "@/assets/image/sidebar/chats.svg";
-import Bell from "@/assets/image/sidebar/bell.svg";
-
 import AvatarImg from "@/assets/image/chat-components/Avatar.svg";
 
 import SelectHome from "@/assets/image/sidebar/slecthome.svg";
 import SelectChat from "@/assets/image/sidebar/selectchat.svg";
 import SelectChats from "@/assets/image/sidebar/selectgroup.svg";
-import SelectBell from "@/assets/image/sidebar/selectbell.svg";
 
-type SelectedButton = "home" | "chat" | "chats" | "bell" | null;
+type SelectedButton = "home" | "chat" | "chats" | null;
 
 const Navbar = () => {
-  const [selected, setSelected] = useState<SelectedButton>(null);
-  const [chatRooms, setChatRooms] = useState<string[]>([]);
-  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const [selected, setSelected] = useState<SelectedButton>(null);
 
-  const handleButtonClick = (button: SelectedButton, path: string) => {
+  useEffect(() => {
+    // 현재 경로에 따라 selected 상태를 설정
+    const pathMap: { [key: string]: SelectedButton } = {
+      "/home": "home",
+      "/chat": "chat",
+      "/groupchat": "chats",
+    };
+
+    const currentPath = location.pathname;
+    setSelected(pathMap[currentPath] || null);
+  }, [location]);
+
+  const handleButtonClick = (button: SelectedButton) => {
     setSelected(button);
-    navigate(path);
-    setSelectedChatRoom(null);
   };
 
   useEffect(() => {
-    // Load chat rooms from localStorage on component mount
-    const storedChatRooms = localStorage.getItem("chatRooms");
-    if (storedChatRooms) {
-      setChatRooms(JSON.parse(storedChatRooms));
+    if (selected) {
+      const pathMap = {
+        home: "/home",
+        chat: "/chat",
+        chats: "/groupchat",
+      };
+      navigate(pathMap[selected]);
     }
-  }, []);
-
-  useEffect(() => {
-    // Save chat rooms to localStorage whenever chatRooms state changes
-    localStorage.setItem("chatRooms", JSON.stringify(chatRooms));
-  }, [chatRooms]);
+  }, [selected, navigate]);
 
   return (
     <div>
       <S.SideBarMenu>
         <S.SideBarButton
-          onClick={() => handleButtonClick("home", "/home")}
+          onClick={() => handleButtonClick("home")}
           $isSelected={selected === "home"}
         >
           <S.SideBarImage src={selected === "home" ? SelectHome : Home} />
         </S.SideBarButton>
         <S.SideBarButton
-          onClick={() => handleButtonClick("chat", "/chat")}
+          onClick={() => handleButtonClick("chat")}
           $isSelected={selected === "chat"}
         >
           <S.SideBarImage src={selected === "chat" ? SelectChat : Chat} />
         </S.SideBarButton>
         <S.SideBarButton
-          onClick={() => handleButtonClick("chats", "/groupchat")}
+          onClick={() => handleButtonClick("chats")}
           $isSelected={selected === "chats"}
         >
           <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
