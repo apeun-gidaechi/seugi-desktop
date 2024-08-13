@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Changeschool from "@/components/ChangeSchool/ChangeSchool";
 
 import initialConfig from "@/constants/Home/config.json";
-import config from "@/constants/config/config.json";
+import serverconfig from "@/constants/config/config.json";
 
 import HomeBookImg from "@/assets/image/home/homebook.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
@@ -45,12 +45,13 @@ const Home: React.FC = () => {
     const token = window.localStorage.getItem("accessToken");
     const workspaceId = window.localStorage.getItem("workspaceId");
 
-    const res = await axios.get(`${config.serverurl}/workspace/${workspaceId}`, {
+    const res = await axios.get(`${serverconfig.serverurl}/workspace/${workspaceId}`, {
       headers: {
         Authorization: `${token}`,
       },
     });
 
+    console.log(res.data.data.workspaceName);
     setWorkspaceName(res.data.data.workspaceName);
   };
 

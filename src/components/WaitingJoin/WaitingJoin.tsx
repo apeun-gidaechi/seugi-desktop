@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@/components/Button/Button';
 import { isTokenExpired } from '@/util/tokenUtils';
 import axios from 'axios';
+
 import config from '@/constants/config/config.json';
 
 const WaitingJoin = () => {
@@ -35,7 +36,11 @@ const WaitingJoin = () => {
                     Authorization: `${token}`
                 },
             });
-            navigate('/');
+            if (res.data.data && res.data.data.length === 0) {
+                navigate("/unhome");
+            } else {
+                navigate("/home");
+            }
         } catch (error) {
             console.log("Error fetching workspace:", error);
         }
