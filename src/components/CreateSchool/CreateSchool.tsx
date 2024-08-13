@@ -32,7 +32,7 @@ const CreateSchool = () => {
         if (isTokenExpired(token)) {
             alert('세션이 만료되었습니다. 다시 로그인 해주세요.');
             window.localStorage.removeItem('accessToken');
-            navigate('/login');
+            navigate('/');
         }
     }, [token, navigate]);
 
@@ -100,7 +100,7 @@ const CreateSchool = () => {
                 },
             });
             console.log('Image uploaded', res.data);
-            setWorkspaceImageUrl(res.data.message);
+            setWorkspaceImageUrl(res.data.data);
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
@@ -129,8 +129,8 @@ const CreateSchool = () => {
                 </S.TitleContainer>
                 <S.ButtonContainer>
                     <S.UpLoadButtonLabel htmlFor="upload-button">
-                        <S.ButtonImg src={isworkspaceImg} style={{ zIndex: workspaceImageUrl ? 2 : 1 }} />
-                        <S.PlusButton src={PlusButtonimg} style={{ zIndex: workspaceImageUrl ? 1 : 2 }} />
+                        <S.ButtonImg src={isworkspaceImg} style={{ zIndex: workspaceImageUrl ? 2 : 1 }} $isImageUploaded={!!workspaceImageUrl} />
+                        <S.PlusButton src={PlusButtonimg} />
                     </S.UpLoadButtonLabel>
                     <S.Input id="upload-button" type="file" onChange={handleChangeImage} accept='image/png, image/jpeg, image/jpg' />
                 </S.ButtonContainer>

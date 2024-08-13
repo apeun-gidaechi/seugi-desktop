@@ -10,6 +10,8 @@ export const ChangeSchoolMain = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
+  left:70%;
+  top:27%;
 
   border-radius: 12px;
   background: #fff;
