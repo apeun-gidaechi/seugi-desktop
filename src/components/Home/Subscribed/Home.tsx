@@ -23,6 +23,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -59,12 +61,6 @@ const Home: React.FC = () => {
   useEffect(() => {
     getWorkspaceName();
   }, []);
-
-  const navigate = useNavigate();
-
-  const handleOnclicked = () => {
-    navigate("/");
-  };
 
   const numberLoop = () => {
     const numbers = [];

@@ -1,4 +1,4 @@
-import * as S from '@/components/Home/RegisterSchool/RegisterSchool.style';
+import * as S from '@/components/Home/NotSubscribed/RegisterSchool/RegisterSchool.style';
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
