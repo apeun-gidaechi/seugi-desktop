@@ -338,6 +338,12 @@ export const SoonScheduleBox = styled.div`
   align-self: stretch;
 `;
 
+export const SoonScheduleTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`
+
 export const BookLogo = styled.img`
   position: relative;
 `;
@@ -489,7 +495,6 @@ export const ScheduleTitle = styled.span`
   font-weight: 600;
   line-height: 130%;
 
-  margin-right: 60%;
 `;
 
 export const ArrowLButton = styled.button`
@@ -580,8 +585,6 @@ export const CafeteriaTitle = styled.p`
   font-style: normal;
   font-weight: 600;
   line-height: 130%; /* 20.8px */
-
-  margin-right: 65%;
 `;
 
 export const DummyBox = styled.div`
@@ -878,3 +881,10 @@ export const SearchButton = styled.button`
 
   cursor: pointer;
 `;
+
+
+export const CafeteriaTitleDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`
