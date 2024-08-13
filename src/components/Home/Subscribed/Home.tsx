@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Changeschool from "@/components/ChangeSchool/ChangeSchool";
 
 import initialConfig from "@/constants/Home/config.json";
-import temp from "@/constants/config/config.json";
+import config from "@/constants/config/config.json";
 
 import HomeBookImg from "@/assets/image/home/homebook.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
@@ -43,7 +43,7 @@ const Home: React.FC = () => {
     const token = window.localStorage.getItem("accessToken");
     const workspaceId = window.localStorage.getItem("workspaceId");
 
-    const res = await axios.get(`${temp.serverurl}/workspace/${workspaceId}`, {
+    const res = await axios.get(`${config.serverurl}/workspace/${workspaceId}`, {
       headers: {
         Authorization: `${token}`,
       },
@@ -240,8 +240,10 @@ const Home: React.FC = () => {
               <S.RightContainer>
                 <S.RightUpContainer>
                   <S.SoonScheduleBox>
-                    <S.CalendarLogo src={CalendarImg} />
-                    <S.ScheduleTitle>다가오는 일정</S.ScheduleTitle>
+                    <S.SoonScheduleTitle>
+                      <S.CalendarLogo src={CalendarImg} />
+                      <S.ScheduleTitle>다가오는 일정</S.ScheduleTitle>
+                    </S.SoonScheduleTitle>
                     <S.ArrowLButton>
                       <S.SArrowLogo src={ArrowImg} />
                     </S.ArrowLButton>
@@ -318,8 +320,10 @@ const Home: React.FC = () => {
             </S.UpContainer>
             <S.DownContainer>
               <S.CafeteriaTitleBox>
-                <S.CafeteriaImg src={CafeteriaImg} />
-                <S.CafeteriaTitle>오늘의 급식</S.CafeteriaTitle>
+                <S.CafeteriaTitleDiv>
+                  <S.CafeteriaImg src={CafeteriaImg} />
+                  <S.CafeteriaTitle>오늘의 급식</S.CafeteriaTitle>
+                </S.CafeteriaTitleDiv>
                 <S.ArrowLButton>
                   <S.CArrowLogo src={ArrowImg} />
                 </S.ArrowLButton>
