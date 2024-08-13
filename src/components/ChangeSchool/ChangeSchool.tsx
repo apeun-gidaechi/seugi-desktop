@@ -13,7 +13,11 @@ const Changeschool = () => {
   const navigate = useNavigate();
 
   const goCreateSchool = () => {
-    navigate("/selectschool");
+    navigate("/createschool");
+  };
+
+  const goJoinSchool = () => {
+    navigate("/schoolcode");
   };
 
   const setSubscribedSchools = async () => {
@@ -87,10 +91,10 @@ const Changeschool = () => {
           ))}
         </S.PendingSchool>
       )}
-
-      {subscribedSchools.length > 0 && (
-        <S.CreateSchool onClick={goCreateSchool}>새 학교 가입</S.CreateSchool>
-      )}
+      <S.MoveButton>
+        <S.CreateSchool onClick={goCreateSchool}>새 학교 등록</S.CreateSchool>
+        <S.JoinSchool onClick={goJoinSchool}>초대 코드로 가입</S.JoinSchool>
+      </S.MoveButton>
     </S.ChangeSchoolMain>
   );
 };
