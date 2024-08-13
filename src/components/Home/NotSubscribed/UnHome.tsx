@@ -12,7 +12,7 @@ import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
 import SchoolImg from '@/assets/image/home/school.svg';
 import CafeteriaImg from '@/assets/image/home/cafeteria.svg'
 
-import RegisterSchool from '@/components/Home/RegisterSchool/RegisterSchool';
+import RegisterSchool from '@/components/Home/NotSubscribed/RegisterSchool/RegisterSchool';
 const UnHome = () => {
     const [showChangeschool, setShowChangeschool] = useState(false);
 
