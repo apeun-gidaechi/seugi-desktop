@@ -39,6 +39,12 @@ const Correction: React.FC<CorrectionProps> = ({ value, content, onSave, onCance
     onCancel();
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSaveClick();
+    }
+  };
+
   return (
     <S.EditProfile>
       <S.CorrectionDiv>
@@ -51,6 +57,7 @@ const Correction: React.FC<CorrectionProps> = ({ value, content, onSave, onCance
               placeholder={`${transformValue(value)}를 입력해주세요`}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
             <S.CancleButton onClick={handleCancelClick}>
               <S.CancleImg src={CancelImg} />
