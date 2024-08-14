@@ -16,9 +16,10 @@ import GroupChat from '@/pages/GroupChat/index'
 import Notification from '@/pages/Notification/index'
 import UnHome from '@/components/Home/NotSubscribed/UnHome';
 
-import Profile from '@/components/Profile/Profile';
+import Correction from '@/components/Profile/Correction/Correction';
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 const Router = () => {
     return (
         <BrowserRouter>
@@ -40,7 +41,7 @@ const Router = () => {
                 <Route path='/GroupChat' element={<GroupChat />} />
                 <Route path='/Notification' element={<Notification />} />
                 <Route path='/unhome' element={<UnHome />} />
-                <Route path='/profile' element={<Profile />} />
+                <Route path='/correction' element={<Correction />} />
             </Routes>
         </BrowserRouter>
     )

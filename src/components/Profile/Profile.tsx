@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as S from '@/components/Profile/profile.style';
 
 import SettingImg from '@/assets/image/Profile/profilesetting_fill.svg';
@@ -8,6 +8,12 @@ import ProfileDivider from '@/assets/image/Profile/ProflieDivider.svg';
 import Divider from '@/assets/image/Profile/Divider.svg';
 
 const Profile = () => {
+    const [isEditing, setIsEditing] = useState(false);
+
+    const handleCorrectionClick = () => {
+        setIsEditing(true);
+    };
+
     return (
         <S.MyProfileDialog>
             <S.MyinfoDiv>
@@ -23,7 +29,7 @@ const Profile = () => {
             <S.ComponentDiv>
                 <S.TitleDiv>
                     <S.STitle>상태메세지</S.STitle>
-                    <S.CorrectionButton>
+                    <S.CorrectionButton onClick={handleCorrectionClick}>
                         <S.CorrectionButtonImg src={CorrectionImg}/>
                     </S.CorrectionButton>
                 </S.TitleDiv>

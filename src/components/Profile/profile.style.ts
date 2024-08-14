@@ -146,3 +146,4 @@ export const TitleDiv = styled.div`
     align-items: center;
     align-self: stretch;
 `
+
