@@ -2,6 +2,13 @@ import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components'; 
 
 export const MyProfileDialog = styled.div`
+    position:absolute;
+
+    z-index:999;
+
+    top:115px;
+    left:40px;
+
     display: flex;
     width: 360px;
     padding: 16px 0px;
