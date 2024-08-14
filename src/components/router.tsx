@@ -41,7 +41,7 @@ const Router = () => {
                 <Route path='/GroupChat' element={<GroupChat />} />
                 <Route path='/Notification' element={<Notification />} />
                 <Route path='/unhome' element={<UnHome />} />
-                <Route path='/correction' element={<Correction />} />
+
             </Routes>
         </BrowserRouter>
     )

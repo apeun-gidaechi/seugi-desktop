@@ -65,6 +65,7 @@ export const InputDiv = styled.div`
 export const CorrectionInputField = styled.input`
     display: flex;
     padding: 12px;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
