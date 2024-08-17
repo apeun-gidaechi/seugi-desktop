@@ -95,8 +95,10 @@ export const ListItem = styled.div`
 
 export const ComponentDiv = styled.div`
     display: flex;
+    padding: 16px 20px;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
+    align-self: stretch;
 `
 
 export const Text = styled.span`
