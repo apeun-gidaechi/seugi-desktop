@@ -27,7 +27,6 @@ export const ProfileContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-    align-self: stretch;
 `
 
 export const ProfileImgContainer = styled.div`
