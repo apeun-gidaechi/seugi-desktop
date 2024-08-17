@@ -6,13 +6,16 @@ import CorrectionImg from '@/assets/image/Profile/CorrectionImg.svg';
 import Arrow from '@/assets/image/Profile/arrow.svg';
 import Divider from '@/assets/image/Profile/ProflieDivider.svg';
 
+interface SettingProfileProps {
+    onClose: () => void;
+}
 
-const SettingProfile = () => {
+const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
     return (
         <S.SettingProfile>
             <S.ProfileContainer>
                 <S.ProfileImgContainer>
-                    <S.ProfileImg src={ProfileImg}/> {/** 수정 */}
+                    <S.ProfileImg src={ProfileImg}/>
                 </S.ProfileImgContainer>
                 <S.ProfileNameContainer>
                     <S.NameBox>
