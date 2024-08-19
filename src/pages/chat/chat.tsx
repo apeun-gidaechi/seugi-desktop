@@ -1,16 +1,18 @@
 import React from "react";
 import * as S from "@/pages/chat/chat.style";
 import SideBar from "@/components/common/ChatSidebar/Chat/index";
+import TopButton from '@/components/button/chatButton/index';
+import ChatRoom from "@/components/common/chatRoom/unSelect";
 import SendMessage from "@/components/common/sendMessage/sendMessage";
-// import SendMessage from "../../components/sendMessage/sendMessage"
-// import ChatForm from "../../components/ChatForm/chatForm"
 
-const chat = () => {
+import Layer from '@/components/layer/chat/index';
+
+const Chat = () => {
   return (
-    <S.ChatingBackground>
-        <SideBar />
-    </S.ChatingBackground>
+    <S.ChatContainer>
+      <Layer/>
+    </S.ChatContainer>
   );
 };
 
-export default chat;
+export default Chat;
