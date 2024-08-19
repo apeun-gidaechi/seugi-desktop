@@ -11,7 +11,7 @@ export const ChangeSchoolMain = styled.div`
   align-items: center;
   gap: 16px;
   left:70%;
-  top:27%;
+  top:17%;
 
   border-radius: 12px;
   background: #fff;
@@ -29,6 +29,7 @@ export const Subscribed = styled.div`
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
+
 `;
 
 export const SchoolName = styled.span`
@@ -130,6 +131,30 @@ export const WaitingJoin = styled.span`
   padding: 0 0 4px 0;
 `;
 
+export const JoinSchool = styled.button`
+  display: flex;
+  height: 36px;
+  padding: var(--Large, 12px);
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: var(--Large, 12px);
+
+  border: none;
+  background-color:none;
+  background:none;
+
+  cursor: pointer;
+
+  color: var(--Sub-Black, #000);
+
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; 
+`;
 export const CreateSchool = styled.button`
   display: flex;
   height: 36px;
@@ -139,19 +164,21 @@ export const CreateSchool = styled.button`
   gap: 10px;
 
   border-radius: var(--Large, 12px);
-  background: var(--Primary-Primary500, #1d93f3);
 
-  color: var(--Sub-White, #fff);
+  border: none;
+  background-color:none;
+  background:none;
 
-  font-family: "Pretendard-Regular", sans-serif;
+  cursor: pointer;
+
+  color: var(--Gray-Gray600, #787878);
+
+  /* Body2 */
+  font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%;
-
-  border: none;
-
-  cursor: pointer;
+  line-height: 130%; /* 18.2px */
 `;
 
 export const NoSubscribedSchools = styled.div`
@@ -160,3 +187,11 @@ export const NoSubscribedSchools = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const MoveButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+`
