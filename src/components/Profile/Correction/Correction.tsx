@@ -15,15 +15,15 @@ const Correction: React.FC<CorrectionProps> = ({ value, content, onSave, onCance
 
   const transformValue = (value: string) => {
     switch (value) {
-      case 'statusMessage':
+      case 'status':
         return "상태메세지"
-      case 'position':
+      case 'spot':
         return "직위"
-      case 'department':
+      case 'belong':
         return "소속"
-      case 'mobile':
-        return "휴대전화번호"
       case 'phone':
+        return "휴대전화번호"
+      case 'wire':
         return "유선전화번호"
       case "location":
         return "근무 위치"
