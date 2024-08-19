@@ -74,20 +74,20 @@ const Changeschool = () => {
           </S.Subscribed>
         ))
       )}
-      <S.PendingSchool>
-        <S.WaitingJoin>가입 대기 중</S.WaitingJoin>
-        {pendingSchools.length === 0 ? (
-          <S.NoPendingSchools>가입 대기중인 학교가 없습니다</S.NoPendingSchools>
-        ) : (
-          pendingSchools.map((school, index) => (
+
+      {pendingSchools.length > 0 && (
+        <S.PendingSchool>
+          <S.WaitingJoin>가입 대기 중</S.WaitingJoin>
+          {pendingSchools.map((school, index) => (
             <S.Subscribed key={index}>
               <S.SchoolBox>
                 <S.SchoolName>{school.workspaceName}</S.SchoolName>
               </S.SchoolBox>
             </S.Subscribed>
-          ))
-        )}
-      </S.PendingSchool>
+          ))}
+        </S.PendingSchool>
+      )}
+
       {subscribedSchools.length > 0 && (
         <S.CreateSchool onClick={goCreateSchool}>새 학교 가입</S.CreateSchool>
       )}

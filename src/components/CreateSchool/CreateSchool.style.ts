@@ -9,7 +9,7 @@ export const CreateSchoolMain = styled.div`
     gap: 193px;
     flex: 1 0 0;
     align-self: stretch;
-    margin-top:20vh;
+    margin-top:24vh;
 `
 
 export const CreateSchoolContainer = styled.div`
@@ -103,8 +103,8 @@ export const ButtonContainer = styled.div`
 `
 
 export const Input = styled.input.attrs({ type: 'file' })`
-    width: 180px;
-    height: 180px;
+    width: 220px;
+    height: 220px;
     background-color: transparent;
     border: none;
     position: relative;
@@ -120,27 +120,31 @@ export const Input = styled.input.attrs({ type: 'file' })`
     }
 `
 
-export const ButtonImg = styled.img`
-    width: 180px;
-    height: 180px;
+export const ButtonImg = styled.img<{ $isImageUploaded: boolean }>`
+    width: 200px;
+    height: 200px;
     flex-shrink: 0;
     display: inline-block;
-    z-index:4;
+    z-index: 4;
     cursor: pointer;
-`
+    border-radius: 20%; 
+    border: ${(props) => (props.$isImageUploaded ? '2px solid var(--Gray-Gray300, #E6E6E6)' : 'none')}; 
+`;
 
-export const PlusButton = styled.img`
+
+export const PlusButton = styled.img` // 반응형......./
     width: 60px;
     height: 60px;
-    position: absolute;
-    right: 43.5vw;
-    top: 48vh;
     cursor: pointer;
-    z-index:4;
+    z-index:300;
     display: flex;
     flex-direction:row;
     justify-content:center;
     align-items:center;
+
+    position: absolute;
+    right: 42.5%;
+    top: 50%;
 `
 
 export const UpLoadButtonLabel = styled.label`
