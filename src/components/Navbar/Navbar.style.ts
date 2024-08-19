@@ -5,14 +5,14 @@ export const SideBarMenu = styled.div`
     position: absolute;
     display: flex;
     width: 80px;
-    height: 115vh;
+    height: 100vh;
     padding: 8px 0px;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     background: #FFF;
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-    z-index: -1;
+    z-index: 999;
 
     @media (max-width: 768px) {
         width: 100%;
@@ -105,3 +105,12 @@ export const SideAvatarImg = styled.img`
         height: 24px;
     }
 `;
+
+export const SideAvatarButton = styled.button`
+    background:none;
+    border:none;
+
+    cursor: pointer;
+
+    z-index:999;
+`
