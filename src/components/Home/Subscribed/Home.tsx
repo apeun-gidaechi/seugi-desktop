@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Changeschool from "@/components/ChangeSchool/ChangeSchool";
 
 import initialConfig from "@/constants/Home/config.json";
-import temp from "@/constants/config/config.json";
+import serverconfig from "@/constants/config/config.json";
 
 import HomeBookImg from "@/assets/image/home/homebook.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
@@ -23,6 +23,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   const [showChangeschool, setShowChangeschool] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState("아침");
   const [workspaceName, setWorkspaceName] = useState("");
@@ -36,12 +45,13 @@ const Home: React.FC = () => {
     const token = window.localStorage.getItem("accessToken");
     const workspaceId = window.localStorage.getItem("workspaceId");
 
-    const res = await axios.get(`${temp.serverurl}/workspace/${workspaceId}`, {
+    const res = await axios.get(`${serverconfig.serverurl}/workspace/${workspaceId}`, {
       headers: {
         Authorization: `${token}`,
       },
     });
 
+    console.log(res.data.data.workspaceName);
     setWorkspaceName(res.data.data.workspaceName);
   };
 
@@ -52,12 +62,6 @@ const Home: React.FC = () => {
   useEffect(() => {
     getWorkspaceName();
   }, []);
-
-  const navigate = useNavigate();
-
-  const handleOnclicked = () => {
-    navigate("/");
-  };
 
   const numberLoop = () => {
     const numbers = [];
@@ -163,20 +167,26 @@ const Home: React.FC = () => {
           <S.HomeWrapper1>
             <S.HomeWrapper1UpContainer>
               <S.ScheduleTitleBox>
-                <S.BookLogo src={HomeBookImg} />
-                <S.DailyScheduleTitle>오늘의 시간표</S.DailyScheduleTitle>
+                <S.ScheduleTitleDiv>
+                  <S.BookLogo src={HomeBookImg} />
+                  <S.DailyScheduleTitle>오늘의 시간표</S.DailyScheduleTitle>
+                </S.ScheduleTitleDiv>
                 <S.ArrowLButton>
                   <S.ArrowLogo src={ArrowImg} />
                 </S.ArrowLButton>
               </S.ScheduleTitleBox>
-              <S.NumberTable>{numberLoop()}</S.NumberTable>
-              <S.ItemTable>{itemLoop()}</S.ItemTable>
+              <S.ScheduleDivBox>
+                <S.NumberTable>{numberLoop()}</S.NumberTable>
+                <S.ItemTable>{itemLoop()}</S.ItemTable>
+              </S.ScheduleDivBox>
             </S.HomeWrapper1UpContainer>
             <S.HomeWrapper1DownContainer>
               <S.LeftContainer>
                 <S.NotificationContainer>
-                  <S.NotificationLogo src={NotificationImg} />
-                  <S.NotificationTitle>알림</S.NotificationTitle>
+                  <S.NotificationTitleContainer>
+                    <S.NotificationLogo src={NotificationImg} />
+                    <S.NotificationTitle>알림</S.NotificationTitle>
+                  </S.NotificationTitleContainer>
                   <S.ArrowLButton>
                     <S.NArrowLogo src={ArrowImg} />
                   </S.ArrowLButton>
@@ -227,8 +237,10 @@ const Home: React.FC = () => {
               <S.RightContainer>
                 <S.RightUpContainer>
                   <S.SoonScheduleBox>
-                    <S.CalendarLogo src={CalendarImg} />
-                    <S.ScheduleTitle>다가오는 일정</S.ScheduleTitle>
+                    <S.SoonScheduleTitle>
+                      <S.CalendarLogo src={CalendarImg} />
+                      <S.ScheduleTitle>다가오는 일정</S.ScheduleTitle>
+                    </S.SoonScheduleTitle>
                     <S.ArrowLButton>
                       <S.SArrowLogo src={ArrowImg} />
                     </S.ArrowLButton>
@@ -305,8 +317,10 @@ const Home: React.FC = () => {
             </S.UpContainer>
             <S.DownContainer>
               <S.CafeteriaTitleBox>
-                <S.CafeteriaImg src={CafeteriaImg} />
-                <S.CafeteriaTitle>오늘의 급식</S.CafeteriaTitle>
+                <S.CafeteriaTitleDiv>
+                  <S.CafeteriaImg src={CafeteriaImg} />
+                  <S.CafeteriaTitle>오늘의 급식</S.CafeteriaTitle>
+                </S.CafeteriaTitleDiv>
                 <S.ArrowLButton>
                   <S.CArrowLogo src={ArrowImg} />
                 </S.ArrowLButton>
