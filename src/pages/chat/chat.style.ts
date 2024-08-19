@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-export const ChatingBackground = styled.div`
-    background: var(--Primary-Primary050, #F8FCFF);
-    display:flex;
-`
+export const ChatContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+    position: relative;
+`;
