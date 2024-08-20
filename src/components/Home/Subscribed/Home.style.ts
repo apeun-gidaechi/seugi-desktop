@@ -11,7 +11,7 @@ export const HomeContainer = styled.div`
 
 export const HomeMain = styled.div`
   display: flex;
-  padding: 64px 32px;
+  padding: 48px 32px;
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
