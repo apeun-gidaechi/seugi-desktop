@@ -8,6 +8,8 @@ import { isTokenExpired } from "@/util/tokenUtils";
 import Backimg from "@/assets/image/Backimg.svg";
 import config from "@/constants/config/config.json";
 
+import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
+
 const SchoolCode = () => {
   const navigate = useNavigate();
   const [code, setCode] = useState<string[]>(Array(6).fill(""));
@@ -39,13 +41,13 @@ const SchoolCode = () => {
     }
 
     try {
-      const res = await axios.get(
+      const res = await SeugiCustomAxios.get(
         `${config.serverurl}/workspace?code=${verificationCode}`,
-        {
-          headers: {
-            Authorization: `${token}`,
-          },
-        }
+        // {
+        //   headers: {
+        //     Authorization: `${token}`,
+        //   },
+        // }
       );
       console.log("Code sent successfully:", res.data);
       navigate("/joinsuccess", { state: { verificationCode } });
