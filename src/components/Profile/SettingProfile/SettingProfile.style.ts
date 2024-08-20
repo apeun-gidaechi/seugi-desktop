@@ -90,6 +90,8 @@ export const ListItem = styled.div`
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
+
+    cursor: pointer;
 `
 
 export const ComponentDiv = styled.div`
@@ -136,4 +138,15 @@ export const RText = styled.span`
 `
 
 export const Divider = styled.img`
+`
+
+export const ProfileImgButton = styled.button`
+    width:64px;
+    height:64px;
+
+    background:none;
+
+    border:none;
+
+    cursor: pointer;
 `
