@@ -27,6 +27,8 @@ const Correction: React.FC<CorrectionProps> = ({ value, content, onSave, onCance
         return "유선전화번호"
       case "location":
         return "근무 위치"
+      case "nick":
+        return "이름"
     }
   }
 
