@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from '@/components/Profile/profile.style';
 import Correction from '@/components/Profile/Correction/Correction';
 import SettingProfile from '@/components/Profile/SettingProfile/SettingProfile';
@@ -9,33 +9,84 @@ import CorrectionImg from '@/assets/image/Profile/CorrectionImg.svg';
 import ProfileDivider from '@/assets/image/Profile/ProflieDivider.svg';
 import Divider from '@/assets/image/Profile/Divider.svg';
 
+import axios from 'axios';
+import config from '@/constants/config/config.json';
+
 const Profile = () => {
+    const token = window.localStorage.getItem("accessToken");
+    const workspaceId = window.localStorage.getItem("workspaceId");
     const [isEditing, setIsEditing] = useState(null);
     const [isSettingOpen, setIsSettingOpen] = useState(false);
+    const [name, setName] = useState('');
     const [profileData, setProfileData] = useState({
-        statusMessage: "",
-        position: "",
-        department: "",
-        mobile: "",
+        status: "",
+        spot: "",
+        belong: "",
         phone: "",
+        wire: "",
         location: ""
     });
+
+    useEffect(() => {
+        const fetchProfileData = async () => {
+            try {
+                const res = await axios.get(`${config.serverurl}/profile/me?workspaceId=${workspaceId}`, {
+                    headers: {
+                        Authorization: `${token}`,
+                    },
+                });
+                console.log(res.data);
+
+                setProfileData(res.data.data);
+                setName(res.data.data.member.name);
+            } catch (error) {
+                console.error('Failed to fetch profile data.', error);
+            }
+        };
+        fetchProfileData();
+    }, [workspaceId, token]);
 
     const startEditing = (field: any) => {
         setIsEditing(field);
     };
 
-    const saveProfileData = (field: string, value: string) => {
-        setProfileData(prevData => ({ ...prevData, [field]: value }));
-        setIsEditing(null);
+    const saveProfileData = async (field: any, value: string) => {
+        try {
+            await axios.patch(`${config.serverurl}/profile/${workspaceId}`,
+                {
+                    status: field === "status" ? value : profileData.status,
+                    spot: field === "spot" ? value : profileData.spot,
+                    belong: field === "belong" ? value : profileData.belong,
+                    phone: field === "phone" ? value : profileData.phone,
+                    wire: field === "wire" ? value : profileData.wire,
+                    location: field === "location" ? value : profileData.location,
+                },
+                {
+                    headers: {
+                        Authorization: `${token}`,
+                    },
+                }
+            );
+
+            setProfileData(prevData => ({
+                ...prevData,
+                [field]: value
+            }));
+
+            setIsEditing(null);
+        } catch (error) {
+            console.error('프로필 저장 실패', error);
+        }
     };
+
+
 
     const cancelEditing = () => {
         setIsEditing(null);
     };
 
     const toggleSetting = () => {
-        setIsSettingOpen(prevState => !prevState); // Toggle the setting modal
+        setIsSettingOpen(prevState => !prevState);
     };
 
     return (
@@ -44,7 +95,7 @@ const Profile = () => {
                 <S.MyinfoDiv>
                     <S.MyProfileDiv>
                         <S.ProfileImg src={ProfileImg} />
-                        <S.ProfileName>노영재</S.ProfileName>
+                        <S.ProfileName>{name}</S.ProfileName>
                     </S.MyProfileDiv>
                     <S.SettingButton onClick={toggleSetting}>
                         <S.SettingButtonImg src={SettingImg} />
@@ -64,13 +115,13 @@ const Profile = () => {
                         <S.ComponentDiv>
                             <S.TitleDiv>
                                 <S.STitle>상태메세지</S.STitle>
-                                <S.CorrectionButton onClick={() => startEditing('statusMessage')}>
+                                <S.CorrectionButton onClick={() => startEditing('status')}>
                                     <S.CorrectionButtonImg src={CorrectionImg} />
                                 </S.CorrectionButton>
                             </S.TitleDiv>
                             <S.ContentDiv>
                                 <S.ScontentTextBox>
-                                    <S.SContent>{profileData.statusMessage}</S.SContent>
+                                    <S.SContent>{profileData.status}</S.SContent>
                                 </S.ScontentTextBox>
                             </S.ContentDiv>
                             <S.DividerDiv>
@@ -81,13 +132,13 @@ const Profile = () => {
                         <S.ComponentDiv>
                             <S.TitleDiv>
                                 <S.STitle>직위</S.STitle>
-                                <S.CorrectionButton onClick={() => startEditing('position')}>
+                                <S.CorrectionButton onClick={() => startEditing('spot')}>
                                     <S.CorrectionButtonImg src={CorrectionImg} />
                                 </S.CorrectionButton>
                             </S.TitleDiv>
                             <S.ContentDiv>
                                 <S.ScontentTextBox>
-                                    <S.SContent>{profileData.position}</S.SContent>
+                                    <S.SContent>{profileData.spot}</S.SContent>
                                 </S.ScontentTextBox>
                             </S.ContentDiv>
                             <S.DividerDiv>
@@ -98,13 +149,13 @@ const Profile = () => {
                         <S.ComponentDiv>
                             <S.TitleDiv>
                                 <S.STitle>소속</S.STitle>
-                                <S.CorrectionButton onClick={() => startEditing('department')}>
+                                <S.CorrectionButton onClick={() => startEditing('belong')}>
                                     <S.CorrectionButtonImg src={CorrectionImg} />
                                 </S.CorrectionButton>
                             </S.TitleDiv>
                             <S.ContentDiv>
                                 <S.ScontentTextBox>
-                                    <S.SContent>{profileData.department}</S.SContent>
+                                    <S.SContent>{profileData.belong}</S.SContent>
                                 </S.ScontentTextBox>
                             </S.ContentDiv>
                             <S.DividerDiv>
@@ -115,13 +166,13 @@ const Profile = () => {
                         <S.ComponentDiv>
                             <S.TitleDiv>
                                 <S.STitle>휴대전화번호</S.STitle>
-                                <S.CorrectionButton onClick={() => startEditing('mobile')}>
+                                <S.CorrectionButton onClick={() => startEditing('phone')}>
                                     <S.CorrectionButtonImg src={CorrectionImg} />
                                 </S.CorrectionButton>
                             </S.TitleDiv>
                             <S.ContentDiv>
                                 <S.ScontentTextBox>
-                                    <S.SContent>{profileData.mobile}</S.SContent>
+                                    <S.SContent>{profileData.phone}</S.SContent>
                                 </S.ScontentTextBox>
                             </S.ContentDiv>
                             <S.DividerDiv>
@@ -132,13 +183,13 @@ const Profile = () => {
                         <S.ComponentDiv>
                             <S.TitleDiv>
                                 <S.STitle>유선전화번호</S.STitle>
-                                <S.CorrectionButton onClick={() => startEditing('phone')}>
+                                <S.CorrectionButton onClick={() => startEditing('wire')}>
                                     <S.CorrectionButtonImg src={CorrectionImg} />
                                 </S.CorrectionButton>
                             </S.TitleDiv>
                             <S.ContentDiv>
                                 <S.ScontentTextBox>
-                                    <S.SContent>{profileData.phone}</S.SContent>
+                                    <S.SContent>{profileData.wire}</S.SContent>
                                 </S.ScontentTextBox>
                             </S.ContentDiv>
                             <S.DividerDiv>

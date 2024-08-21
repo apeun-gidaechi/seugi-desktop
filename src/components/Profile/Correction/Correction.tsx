@@ -35,8 +35,7 @@ const Correction: React.FC<CorrectionProps> = ({ value, content, onSave, onCance
   };
 
   const handleCancelClick = () => {
-    setInputValue(content);
-    onCancel();
+    setInputValue('');
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
