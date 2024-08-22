@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components'; 
 
@@ -37,13 +39,9 @@ export const CorrectionTitleDiv = styled.div`
 `
 
 export const CorrectionTitle = styled.span`
-    color: var(--Sub-Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+   ${SeugiFont.subtitle.subtitle2};
     
     margin-left: 2px;
 `
@@ -56,8 +54,8 @@ export const InputDiv = styled.div`
     width: 100%; 
 
     border-radius: var(--Large, 12px);
-    border: 1px solid var(--Gray-Gray300, #E6E6E6);
-    background: var(--Sub-White, #FFF);
+    border: 1px solid ${SeugiColor.Gray300};
+    background: ${SeugiColor.White};
     box-sizing: border-box; 
     overflow: hidden;
 `
@@ -75,21 +73,13 @@ export const CorrectionInputField = styled.input`
     border:none;
     box-sizing: border-box;
 
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; 
+    ${SeugiFont.subtitle.subtitle2};
     &::placeholder{
-        color: var(--Gray-Gray500, #AAA);
+        color: ${SeugiColor.Gray500};
 
-        font-family: Pretendard;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 130%;
+        ${SeugiFont.subtitle.subtitle2};
     }
 `
 
@@ -106,7 +96,7 @@ export const SaveButton = styled.button`
     gap: 10px;
 
     border-radius: var(--Large, 12px);
-    background: var(--Primary-Primary500, #1D93F3);
+    background: ${SeugiColor.Primary500};
 
     border:none;
 
@@ -114,13 +104,9 @@ export const SaveButton = styled.button`
 `
 
 export const ButtonText = styled.span`
-    color: var(--Sub-White, #FFF);
+    color: ${SeugiColor.White};
 
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    ${SeugiFont.subtitle.subtitle2};
 `
 
 export const CancleButton = styled.button`

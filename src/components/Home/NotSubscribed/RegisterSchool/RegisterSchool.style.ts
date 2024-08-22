@@ -1,3 +1,6 @@
+import { Subtitle2 } from '@/components/Login/login.style';
+import { SeugiColor } from '@/design/color/SeugiColor';
+import { SeugiFont }from '@/design/text/SeugiFont';
 import styled from 'styled-components';
 
 export const RegisterSchoolContainer = styled.div`
@@ -20,7 +23,7 @@ export const RegisterSchoolBox = styled.div`
     left: 556px;
     top: 300px;
     border-radius: 16px;
-    background: var(--Sub-White, #FFF);
+    background: ${SeugiColor.White};
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
@@ -35,23 +38,15 @@ export const TextBox = styled.div`
 `
 
 export const RegisterSchoolText = styled.span`
-    color: var(--Sub-Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 130%; /* 26px */
+    ${SeugiFont.subtitle.subtitle1};
 `;
 
 export const Subtitle = styled.span`
-    color: var(--Gray-Gray700, #333);
+    color: ${SeugiColor.Gray700};
 
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 `
 
 export const ButtonBox = styled.div`
@@ -70,7 +65,7 @@ export const NewSchoolButton = styled.button`
     flex: 1 0 0;
 
     border-radius: var(--Large, 12px);
-    background: var(--Gray-Gray100, #F4F5F9);
+    background: ${SeugiColor.Gray100};
 
     border:none;
 
@@ -78,13 +73,9 @@ export const NewSchoolButton = styled.button`
 `
 
 export const NewSchoolButtonText = styled.span`
-    color: var(--Gray-Gray600, #787878);
+    color: ${SeugiColor.Gray600};
 
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 `
 
 export const JoinSchoolButton = styled.button`
@@ -96,7 +87,7 @@ export const JoinSchoolButton = styled.button`
     flex: 1 0 0;
 
     border-radius: var(--Large, 12px);
-    background: var(--Primary-Primary500, #1D93F3);
+    background: ${SeugiColor.Primary500};
 
     border:none;
 
@@ -104,11 +95,7 @@ export const JoinSchoolButton = styled.button`
 `
 
 export const JoinSchoolButtonText = styled.span`
-    color: var(--Sub-White, #FFF);
+    color: ${SeugiColor.White};
 
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 `

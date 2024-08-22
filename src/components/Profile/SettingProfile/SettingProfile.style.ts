@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from '@/design/text/SeugiFont';
 import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components';
 
@@ -15,7 +17,7 @@ export const SettingProfile = styled.div`
     gap: 8px;
 
     border-radius: 16px;
-    background: var(--Sub-White, #FFF);
+    background:${SeugiColor.White};
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 
@@ -50,13 +52,9 @@ export const NameBox = styled.div`
 `
 
 export const Name = styled.span`
-    color: var(--Sub-Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 `
 
 export const CorrectionButton = styled.button`
@@ -103,14 +101,9 @@ export const ComponentDiv = styled.div`
 `
 
 export const Text = styled.span`
-    color: var(--Sub-Black, #000);
+    color: ${SeugiColor.Black};
 
-    /* Subtitle2 */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2}  
 `
 
 export const ArrowButton = styled.button`
@@ -127,14 +120,9 @@ export const ArrowButtonImg = styled.img`
 `
 
 export const RText = styled.span`
-    color: var(--Red-Red500, #F90707);
+    color: ${SeugiColor.Red500};
 
-    /* Subtitle2 */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 `
 
 export const Divider = styled.img`

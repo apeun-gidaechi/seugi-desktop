@@ -62,7 +62,6 @@ const Home: React.FC = () => {
       },
     });
 
-    console.log(res.data.data.workspaceName);
     setWorkspaceName(res.data.data.workspaceName);
   };
 

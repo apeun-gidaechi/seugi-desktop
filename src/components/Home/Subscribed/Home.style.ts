@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { SeugiColor } from "@/design/color/SeugiColor";
-import { SeugiText } from "@/design/text/SeugiText";
+import { SeugiFont } from "@/design/text/SeugiFont";
 
 export const HomeContainer = styled.div`
   display: flex;
@@ -42,11 +42,7 @@ export const HomeTitle = styled.h1`
 
   color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 130%;
+  ${SeugiFont.title.title1};
 `;
 
 export const HomeWrapper1 = styled.div`
@@ -154,11 +150,7 @@ export const NotificationWrapper = styled.div`
 export const NotificationContentAuthor = styled.span`
   color:${SeugiColor.Gray600};
 
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%;
+  ${SeugiFont.body.body2};
 `;
 
 export const NotificationContentTitle = styled.span`
@@ -166,11 +158,7 @@ export const NotificationContentTitle = styled.span`
 
   color: ${SeugiColor.Black};
 
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const NotificationContentDescription = styled.span`
@@ -178,11 +166,7 @@ export const NotificationContentDescription = styled.span`
 
   color: ${SeugiColor.Black};
 
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 18.2px */
+  ${SeugiFont.body.body2};
 `;
 
 export const NotificationAddEmoji = styled.img`
@@ -241,11 +225,7 @@ export const NotificationEmojiCount = styled.span`
   margin: 3px;
 
   color: ${SeugiColor.Gray600};
-  /* Body1 */
-  font-family: Pretendard;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
+  ${SeugiFont.body.body1};
 `;
 
 export const TitleContainer = styled.div`
@@ -351,11 +331,7 @@ export const BookLogo = styled.img`
 export const DailyScheduleTitle = styled.h2`
   color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const NumberTable = styled.div`
@@ -374,11 +350,7 @@ export const Number = styled.div`
 
   color: ${SeugiColor.Primary300};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 18.2px */
+  ${SeugiFont.body.body1};
 
   &.Today {
     color: ${SeugiColor.Primary500};
@@ -440,11 +412,7 @@ export const NotificationTitle = styled.h2`
 
   color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const NArrowLogo = styled.img`
@@ -489,11 +457,7 @@ export const CalendarLogo = styled.img`
 export const ScheduleTitle = styled.span`
   color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 
 `;
 
@@ -531,11 +495,7 @@ export const SeugiImg = styled.img`
 export const CatSeugiTitle = styled.span`
   color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const CArrowLogo = styled.img`
@@ -558,11 +518,7 @@ export const SchoolTitleBox = styled.div`
 export const MySchooliTitle = styled.span`
   color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 `;
 export const CafeteriaTitleBox = styled.div`
   display: flex;
@@ -580,11 +536,7 @@ export const CafeteriaImg = styled.img`
 export const CafeteriaTitle = styled.p`
   color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const DummyBox = styled.div`
@@ -608,11 +560,7 @@ export const DateDummy = styled.div`
 export const DateText = styled.span`
   color: ${SeugiColor.Primary500};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 18.2px */
+  ${SeugiFont.body.body1};
 `;
 
 export const SubDummy = styled.div`
@@ -628,11 +576,7 @@ export const SubDummy = styled.div`
 export const SubTitle = styled.span`
   color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 18.2px */
+  ${SeugiFont.body.body2};
 `;
 
 export const D_DayDummy = styled.div`
@@ -650,11 +594,7 @@ export const D_DayDummy = styled.div`
 export const D_DayText = styled.span`
   color: ${SeugiColor.Gray600};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 15.6px */
+  ${SeugiFont.caption.caption1};
 `;
 
 export const CatSeugi = styled.div`
@@ -676,18 +616,10 @@ export const CatSeugiInput = styled.input`
   &::placeholder {
     color: ${SeugiColor.Gray500};
 
-    font-family: "Pretendard-Regular", sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    ${SeugiFont.subtitle.subtitle2};
   }
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 
   &:focus {
     outline: none;
@@ -729,11 +661,7 @@ export const LastText = styled.div`
 export const Lastweek = styled.span`
   color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%;
+  ${SeugiFont.body.body2};
 `;
 
 export const LastQuestion = styled.div`
@@ -750,21 +678,13 @@ export const LastQuestion = styled.div`
 export const QuestionText = styled.span`
   color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.body.body1};
 `;
 
 export const QuestionDay = styled.span`
   color: ${SeugiColor.Gray600};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%;
+  ${SeugiFont.body.body2};
 `;
 
 export const CafeteriaDiv = styled.div`
@@ -785,31 +705,19 @@ export const TimeButton = styled.button`
 export const Breakfast = styled.span`
   color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const Lunch = styled.span`
   color: ${SeugiColor.Gray600};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const Dinner = styled.span`
   color: ${SeugiColor.Gray600};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const MenuList = styled.div`
@@ -828,11 +736,7 @@ export const MenuList = styled.div`
 export const Menu = styled.span`
   color:${SeugiColor.Gray700};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const SchoolBox = styled.div`
@@ -845,11 +749,7 @@ export const SchoolBox = styled.div`
 export const SchoolName = styled.span`
   color: ${SeugiColor.Gray600};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const ChangeSchool = styled.button`
@@ -864,11 +764,7 @@ export const ChangeSchool = styled.button`
 
   color: ${SeugiColor.Gray600};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%;
+  ${SeugiFont.body.body2};
 
   border: none;
 

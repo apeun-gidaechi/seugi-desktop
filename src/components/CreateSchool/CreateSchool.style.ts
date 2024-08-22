@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components';
 
@@ -31,13 +33,9 @@ export const TitleContainer = styled.div`
 `
 
 export const Title = styled.span`
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 130%; /* 36.4px */
+    ${SeugiFont.title.title1};
 `
 
 export const InputImg = styled.img`
@@ -74,23 +72,15 @@ export const SubtitleContainer = styled.div`
 
 export const Subtitle = styled.span`
     margin-left:4px;
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 18.2px */
+    ${SeugiFont.body.body1};
 `
 
 export const RedStar = styled.a`
-    color: var(--Red-Red500, #F90707);
+    color: ${SeugiColor.Red500};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    ${SeugiFont.body.body1};
 `
 
 export const ButtonContainer = styled.div`
@@ -105,7 +95,7 @@ export const ButtonContainer = styled.div`
 export const Input = styled.input.attrs({ type: 'file' })`
     width: 220px;
     height: 220px;
-    background-color: transparent;
+    background-color: ${SeugiColor.Transparent};
     border: none;
     position: relative;
     display: inline-block;
@@ -115,7 +105,7 @@ export const Input = styled.input.attrs({ type: 'file' })`
         width: 100%;
         height: 100%;
         cursor: pointer;
-        background-color: transparent;
+        background-color: ${SeugiColor.Transparent};
         border: none;
     }
 `
@@ -128,7 +118,7 @@ export const ButtonImg = styled.img<{ $isImageUploaded: boolean }>`
     z-index: 4;
     cursor: pointer;
     border-radius: 20%; 
-    border: ${(props) => (props.$isImageUploaded ? '2px solid var(--Gray-Gray300, #E6E6E6)' : 'none')}; 
+    border: ${(props) => (props.$isImageUploaded ? `2px solid ${SeugiColor.Gray300}` : 'none')}; 
 `;
 
 

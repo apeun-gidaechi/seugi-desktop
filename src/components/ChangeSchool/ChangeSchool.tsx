@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
+// import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
+import axios from 'axios';
 
 import * as S from "@/components/ChangeSchool/ChangeSchool.style";
 import Arrow from "@/assets/image/home/arrow.svg";
 import Setting from "@/assets/image/home/setting_fill.svg";
+import config from '@/constants/config/config.json';
 
 const Changeschool = () => {
   const [subscribedSchools, setSubSchools] = useState<any[]>([]);
   const [pendingSchools, setPenSchools] = useState<any[]>([]);
+
+  const token = window.localStorage.getItem("accessToken");
   const navigate = useNavigate();
 
   const goCreateSchool = () => {
@@ -20,13 +24,21 @@ const Changeschool = () => {
   };
 
   const setSubscribedSchools = async () => {
-    const res = await SeugiCustomAxios.get(`/workspace/`);
+    const res = await axios.get(`${config.serverurl}/workspace/`, {
+      headers:{
+        Authorization:`${token}`
+      }
+    });
 
     setSubSchools(res.data.data);
   };
 
   const setPendingSchools = async () => {
-    const pending = await SeugiCustomAxios.get(`/workspace/my/wait-list`,);
+    const pending = await axios.get(`${config.serverurl}/workspace/my/wait-list`, {
+      headers:{
+        Authorization: `${token}`
+      }
+    });
 
     setPenSchools(pending.data.data);
   };
