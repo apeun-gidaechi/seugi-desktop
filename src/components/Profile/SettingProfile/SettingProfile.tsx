@@ -70,7 +70,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
                     Authorization: `${token}`
                 }
             })
-            window.localStorage.clear();
+            localStorage.clear();
 
             window.location.href = '/';
         } catch (error) {
