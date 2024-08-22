@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SelectBar from "@/assets/image/sidebar/selectsidebar.svg";
+import { SeugiColor } from "@/design/color/SeugiColor";
 
 export const SideBarMenu = styled.div`
     position: absolute;
@@ -10,7 +11,7 @@ export const SideBarMenu = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background: #FFF;
+    background: ${SeugiColor.White};
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
     z-index: 998;
 

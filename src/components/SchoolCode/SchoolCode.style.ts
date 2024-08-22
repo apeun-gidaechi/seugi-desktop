@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components"; 
 import { createGlobalStyle } from 'styled-components'; 
 
@@ -40,13 +42,9 @@ export const Header = styled.div`
 `;
 
 export const Title = styled.div`
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 130%; /* 36.4px */
+    ${SeugiFont.title.title1};
 `;
 
 export const InputCodeContainer = styled.div`
@@ -68,16 +66,12 @@ export const InputCode = styled.input`
     text-align:center;
 
     border-radius: var(--Large, 12px);
-    border: 1px solid var(--Gray-Gray300, #E6E6E6);
-    background: var(--Sub-White, #FFF);
+    border: 1px solid ${SeugiColor.Gray300};
+    background: ${SeugiColor.White};
 
-    color: var(--Sub-Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const ButtonContainer = styled.div`

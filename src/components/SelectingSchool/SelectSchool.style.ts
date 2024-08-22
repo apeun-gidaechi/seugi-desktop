@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components"; 
 import { createGlobalStyle } from 'styled-components'; 
 
@@ -39,13 +41,9 @@ export const TitleContainer = styled.div`
 `;
 
 export const Title = styled.span`
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 130%; /* 36.4px */
+    ${SeugiFont.title.title1}
 `;
 
 export const ButtonContainer1 = styled.div`
@@ -76,18 +74,12 @@ export const ButtonImg = styled.img`
     width: 180px;
     height: 180px;
     flex-shrink: 0;
-
-    /* box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04); */
 `;
 
 export const Subtitle = styled.span`
-    color: var(--Gray-Gray700, #333);
+    color: ${SeugiColor.Gray700};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 26px */
+    ${SeugiFont.subtitle.subtitle1};
 `
 
 export const BackButton = styled.button`

@@ -1,3 +1,5 @@
+import { SeugiColor } from '@/design/color/SeugiColor';
+import { SeugiFont } from '@/design/text/SeugiFont';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components'; 
 
@@ -10,8 +12,6 @@ export const OauthMain = styled.div`
     height: 100vh;
     justify-content: center;
     align-items: center;
-
-    /* z-index: 10; */
 `
 
 export const OauthFirstWrap = styled.div`
@@ -25,7 +25,7 @@ export const OauthFirstWrap = styled.div`
     gap: 32px;
 
     border-radius: 36px;
-    background: #FFF;
+    background: ${SeugiColor.White};
 
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.06);
 `;
@@ -39,75 +39,56 @@ export const Header = styled.div`
 `;
 
 export const Title1 = styled.p`
-color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-font-family: 'Pretendard-Regular', sans-serif;
-font-size: 28px;
-font-style: normal;
-font-weight: 700;
-line-height: 130%;
+    ${SeugiFont.title.title1};
 `;
 
 export const TxtContainer = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 16px;
-align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
 `;
 
 export const EneterInfo = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: flex-start;
-gap: 4px;
-align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4px;
+    align-self: stretch;
 `;
 
 export const Subtitle = styled.div`
-display: flex;
-padding-left: 4px;
-justify-content: center;
-align-items: flex-start;
-gap: 10px;
+    display: flex;
+    padding-left: 4px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
 `;
 export const SubtitleName = styled.p`
     margin-left:4px;
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 18.2px */
+    ${SeugiFont.body.body1}
 `;
 
 export const Redstar = styled.a`
-color: var(--Red-Red500, #F90707);
+    color: ${SeugiColor.Red500};
 
-font-family: 'Pretendard-Regular', sans-serif;
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: 130%;
+    ${SeugiFont.body.body1};
 `;
 
 export const Txtfield = styled.input`
     &::placeholder{
-        color: var(--Gray-Gray500, #AAA);
+        color: ${SeugiColor.Gray500};
 
-        font-family: 'Pretendard-Regular', sans-serif;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 130%; /* 20.8px */
+        ${SeugiFont.subtitle.subtitle2};
     }
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
+    ${SeugiFont.subtitle.subtitle2};
 
     flex-grow: 1;
     padding: 17px 16px; 
@@ -122,7 +103,7 @@ export const Txtfield = styled.input`
     width: 421px;
     height: 52px;
 
-    background: #FFFFFF;
+    background: ${SeugiColor.White};
     border-radius: 12px;
 `;
 
@@ -145,7 +126,7 @@ export const Continuebtn = styled.button`
     align-self: stretch;
 
     border-radius: var(--Large, 12px);
-    background: var(--Primary-Primary500, #1D93F3);
+    background: ${SeugiColor.Primary500};
 
     cursor: pointer;
 `;
@@ -159,14 +140,12 @@ export const EmailCheck = styled.div`
 `;
 
 export const HaveEmail = styled.a`
-    color: var(--Primary-Primary500, #1D93F3);
+    color: ${SeugiColor.Primary500};
 
     margin-left:4px;
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 18.2px */ 
+
+    ${SeugiFont.body.body1};
+
     text-decoration:none;
 `;
 
@@ -177,8 +156,8 @@ export const InputContainer = styled.div`
     justify-content: space-between;
     width: 100%; 
     border-radius: var(--Large, 12px);
-    border: 1px solid var(--Gray-Gray300, #E6E6E6);
-    background: var(--Sub-White, #FFF);
+    border: 1px solid ${SeugiColor.Gray300};
+    background: ${SeugiColor.White};
 `
 
 export const Cloud1 = styled.img`

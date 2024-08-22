@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components'; 
 
@@ -17,7 +19,7 @@ export const MyProfileDialog = styled.div`
     gap: 8px;
 
     border-radius: 16px;
-    background: var(--Sub-White, #FFF);
+    background: ${SeugiColor.White};
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -44,13 +46,9 @@ export const ProfileImg = styled.img`
 `
 
 export const ProfileName = styled.span`
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    ${SeugiFont.subtitle.subtitle2};
 `
 
 export const SettingButton = styled.button`
@@ -75,13 +73,9 @@ export const DividerImg = styled.img`
 `
 
 export const STitle = styled.span`
-    color: var(--Gray-Gray500, #AAA);
+    color: ${SeugiColor.Gray500};
 
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; 
+    ${SeugiFont.body.body1};
 `
 
 export const CorrectionButton = styled.button`
@@ -113,13 +107,9 @@ export const ScontentTextBox = styled.div`
 `
 
 export const SContent = styled.span`
-    color: var(--Sub-Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 `
 
 export const DividerDiv = styled.div`
