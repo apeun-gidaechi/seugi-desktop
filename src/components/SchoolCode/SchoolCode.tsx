@@ -42,13 +42,7 @@ const SchoolCode = () => {
 
     try {
       const res = await SeugiCustomAxios.get(
-        `${config.serverurl}/workspace?code=${verificationCode}`,
-        // {
-        //   headers: {
-        //     Authorization: `${token}`,
-        //   },
-        // }
-      );
+        `${config.serverurl}/workspace?code=${verificationCode}`);
       console.log("Code sent successfully:", res.data);
       navigate("/joinsuccess", { state: { verificationCode } });
     } catch (error) {
