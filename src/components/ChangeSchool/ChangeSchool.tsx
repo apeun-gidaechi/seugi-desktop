@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
 
-import config from "@/constants/config/config.json";
 import * as S from "@/components/ChangeSchool/ChangeSchool.style";
 import Arrow from "@/assets/image/home/arrow.svg";
 import Setting from "@/assets/image/home/setting_fill.svg";
@@ -21,28 +20,13 @@ const Changeschool = () => {
   };
 
   const setSubscribedSchools = async () => {
-    const token = window.localStorage.getItem("accessToken");
+    const res = await SeugiCustomAxios.get(`/workspace/`);
 
-    const subscribed = await axios.get(`${config.serverurl}/workspace/`, {
-      headers: {
-        Authorization: `${token}`,
-      },
-    });
-
-    setSubSchools(subscribed.data.data);
+    setSubSchools(res.data.data);
   };
 
   const setPendingSchools = async () => {
-    const token = window.localStorage.getItem("accessToken");
-
-    const pending = await axios.get(
-      `${config.serverurl}/workspace/my/wait-list`,
-      {
-        headers: {
-          Authorization: `${token}`,
-        },
-      }
-    );
+    const pending = await SeugiCustomAxios.get(`/workspace/my/wait-list`,);
 
     setPenSchools(pending.data.data);
   };
