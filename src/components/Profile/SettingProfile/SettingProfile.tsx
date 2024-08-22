@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 
 import config from '@/constants/config/config.json';
 import * as S from '@/components/Profile/SettingProfile/SettingProfile.style';
@@ -28,11 +28,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                const res = await axios.get(`${config.serverurl}/profile/me?workspaceId=${workspaceId}`, {
-                    headers: {
-                        Authorization: `${token}`,
-                    },
-                });
+                const res = await SeugiCustomAxios.get(`/profile/me?workspaceId=${workspaceId}`);
                 console.log(res.data);
 
                 setName(res.data.data.member.name);
@@ -52,9 +48,9 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
 
     const handleSave = async (newName: string) => {
         try {
-            await axios.patch(`${config.serverurl}/profile/${workspaceId}`,
+            await SeugiCustomAxios.patch(`/profile/${workspaceId}`,
                 { nick: newName },
-                { headers: { Authorization: `${token}` } });
+            );
 
             setName(newName);
             setIsEditing(false);
@@ -65,11 +61,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
 
     const handleSecession = async () => {
         try {
-            await axios.delete(`${config.serverurl}/member/remove`, {
-                headers: {
-                    Authorization: `${token}`
-                }
-            })
+            await SeugiCustomAxios.delete(`/member/remove`)
             localStorage.clear();
 
             window.location.href = '/';

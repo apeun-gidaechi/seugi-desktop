@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
+import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
 import axios from 'axios';
 
 import * as S from "@/components/ChangeSchool/ChangeSchool.style";
@@ -24,21 +24,13 @@ const Changeschool = () => {
   };
 
   const setSubscribedSchools = async () => {
-    const res = await axios.get(`${config.serverurl}/workspace/`, {
-      headers:{
-        Authorization:`${token}`
-      }
-    });
+    const res = await SeugiCustomAxios.get(`${config.serverurl}/workspace/`);
 
     setSubSchools(res.data.data);
   };
 
   const setPendingSchools = async () => {
-    const pending = await axios.get(`${config.serverurl}/workspace/my/wait-list`, {
-      headers:{
-        Authorization: `${token}`
-      }
-    });
+    const pending = await SeugiCustomAxios.get(`${config.serverurl}/workspace/my/wait-list`);
 
     setPenSchools(pending.data.data);
   };

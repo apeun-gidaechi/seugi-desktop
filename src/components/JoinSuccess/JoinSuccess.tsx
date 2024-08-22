@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-// import SeugiAxios from '@/api/SeugiCutomAxios';
-import axios from "axios";
+import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 import Button from "@/components/Button/Button";
 import * as S from "@/components/JoinSuccess/JoinSuccess.style";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -25,29 +24,21 @@ const JoinSuccess = () => {
     const handleSchoolInfo = async () => {
       try {
         
-        const res = await axios.get(`${config.serverurl}/workspace/search/${verificationCode}`, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
+        const res = await SeugiCustomAxios.get(`/workspace/search/${verificationCode}`);
         const data = res.data.data;
-        console.log(data.workspaceName);
+
         setWorkspaceName(data.workspaceName);
         setSchoolInfo(
           `학생 ${data.studentCount}명 선생님 ${data.teacherCount}명`
         );
         setSchoolImgUrl(data.workspaceImageUrl);
         setWorkspaceId(data.workspaceId);
-        console.log(workspaceId);
       } catch (error) {
         console.error("Failed to fetch school information:", error);
       }
     };
     handleSchoolInfo();
   }, [verificationCode, token]);
-
-  console.log(verificationCode);
-  console.log(workspaceId);
 
   const Backclick = () => {
     navigate("/schoolcode");
