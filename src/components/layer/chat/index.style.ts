@@ -13,12 +13,3 @@ export const ButtonWrapper = styled.div`
     top: 0;
     right: 0;
 `;
-
-export const ChatRoomWrapper = styled.div`
-    flex: 1; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-`;
-

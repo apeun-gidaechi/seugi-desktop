@@ -6,4 +6,5 @@ export const ChatContainer = styled.div`
     height: 100vh;
     justify-content: space-between;
     position: relative;
+    width: 100vw;
 `;
