@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const ChatingBackground = styled.div`
     background: var(--Primary-Primary050, #F8FCFF);
-    display: flex;  /* Use flex to handle alignment */
-    flex-direction: column;  /* Align children in a column */
+    display: flex; 
+    flex-direction: column; 
     height: 100vh;
     position: relative;
 `;
@@ -15,7 +15,7 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const ChatRoomWrapper = styled.div`
-    flex: 1;  /* Allow this component to take up remaining space */
+    flex: 1; 
     display: flex;
     justify-content: center;
     align-items: center;

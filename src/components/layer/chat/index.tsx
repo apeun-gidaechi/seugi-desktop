@@ -11,7 +11,7 @@ const index = () => {
     <S.ChatingBackground>
         <S.ButtonWrapper>
             <TopButton />
-            <ChatRoom/>
+            {/* <ChatRoom/> */}
         </S.ButtonWrapper>
         <SideBar />
     </S.ChatingBackground>

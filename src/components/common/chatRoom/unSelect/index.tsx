@@ -2,14 +2,19 @@ import React from 'react'
 
 import * as S from '@/components/common/chatRoom/unSelect/index.style'
 
+import SelectChatRoom from '@/assets/image/chat/sadErrorImg.svg';
+
 
 const index = () => {
   return (
-    <S.ContainerWraper>
+    <S.ContainerWrapper>
         <S.Container>
-            <div>chatroom</div>
+            <S.SelectChatRoomImgWrap>
+              <S.SelectChatRoomImg src ={SelectChatRoom}/>
+              <S.SelectChatRoomMessage> 채팅방을 선택해주세요 </S.SelectChatRoomMessage>
+            </S.SelectChatRoomImgWrap>
         </S.Container>
-    </S.ContainerWraper>
+    </S.ContainerWrapper>
   )
 }
 
