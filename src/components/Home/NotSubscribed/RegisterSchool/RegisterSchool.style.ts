@@ -4,6 +4,7 @@ export const RegisterSchoolContainer = styled.div`
     position:absolute;
     width: 100%;
     height: 1024px;
+    z-index: 999;
     background: rgba(0, 0, 0, 0.30);
 `;
 

@@ -12,7 +12,7 @@ export const SideBarMenu = styled.div`
     align-items: center;
     background: #FFF;
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-    z-index: 999;
+    z-index: 998;
 
     @media (max-width: 768px) {
         width: 100%;
