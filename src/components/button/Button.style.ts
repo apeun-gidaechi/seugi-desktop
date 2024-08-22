@@ -17,7 +17,7 @@ export const Continuebtn = styled.button`
     background: ${SeugiColor.Primary500};
 
     color: ${SeugiColor.White};
-    ${SeugiFont.subtitle.subtitle1};
+    ${SeugiFont.subtitle.subtitle2};
 
     cursor: pointer;
 
