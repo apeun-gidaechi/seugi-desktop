@@ -21,7 +21,7 @@ import Fire from "@/assets/image/home/fire.png";
 
 import { isTokenExpired } from "@/util/tokenUtils";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
 
 const Home: React.FC = () => {
   const token = window.localStorage.getItem("accessToken");
@@ -56,11 +56,7 @@ const Home: React.FC = () => {
     const token = window.localStorage.getItem("accessToken");
     const workspaceId = window.localStorage.getItem("workspaceId");
 
-    const res = await axios.get(`${serverconfig.serverurl}/workspace/${workspaceId}`, {
-      headers: {
-        Authorization: `${token}`,
-      },
-    });
+    const res = await SeugiCustomAxios.get(`${serverconfig.serverurl}/workspace/${workspaceId}`);
 
     setWorkspaceName(res.data.data.workspaceName);
   };

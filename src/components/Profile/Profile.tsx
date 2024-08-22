@@ -9,8 +9,7 @@ import CorrectionImg from '@/assets/image/Profile/CorrectionImg.svg';
 import ProfileDivider from '@/assets/image/Profile/ProflieDivider.svg';
 import Divider from '@/assets/image/Profile/Divider.svg';
 
-import axios from 'axios';
-import config from '@/constants/config/config.json';
+import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 
 const Profile = () => {
     const token = window.localStorage.getItem("accessToken");
@@ -30,11 +29,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                const res = await axios.get(`${config.serverurl}/profile/me?workspaceId=${workspaceId}`, {
-                    headers: {
-                        Authorization: `${token}`,
-                    },
-                });
+                const res = await SeugiCustomAxios.get(`/profile/me?workspaceId=${workspaceId}`);
                 console.log(res.data);
 
                 setProfileData(res.data.data);
@@ -52,7 +47,7 @@ const Profile = () => {
 
     const saveProfileData = async (field: any, value: string) => {
         try {
-            await axios.patch(`${config.serverurl}/profile/${workspaceId}`,
+            await SeugiCustomAxios.patch(`/profile/${workspaceId}`,
                 {
                     status: field === "status" ? value : profileData.status,
                     spot: field === "spot" ? value : profileData.spot,
@@ -60,13 +55,7 @@ const Profile = () => {
                     phone: field === "phone" ? value : profileData.phone,
                     wire: field === "wire" ? value : profileData.wire,
                     location: field === "location" ? value : profileData.location,
-                },
-                {
-                    headers: {
-                        Authorization: `${token}`,
-                    },
-                }
-            );
+                },);
 
             setProfileData(prevData => ({
                 ...prevData,

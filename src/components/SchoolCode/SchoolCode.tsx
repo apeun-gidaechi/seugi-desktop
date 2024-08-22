@@ -6,7 +6,6 @@ import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { isTokenExpired } from "@/util/tokenUtils";
 import Backimg from "@/assets/image/Backimg.svg";
-import config from "@/constants/config/config.json";
 
 import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
 
@@ -41,8 +40,7 @@ const SchoolCode = () => {
     }
 
     try {
-      const res = await SeugiCustomAxios.get(
-        `${config.serverurl}/workspace?code=${verificationCode}`);
+      const res = await SeugiCustomAxios.get(`/workspace?code=${verificationCode}`);
       console.log("Code sent successfully:", res.data);
       navigate("/joinsuccess", { state: { verificationCode } });
     } catch (error) {
