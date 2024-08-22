@@ -56,18 +56,33 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
                 { nick: newName },
                 { headers: { Authorization: `${token}` } });
 
-            setName(newName); 
-            setIsEditing(false); 
+            setName(newName);
+            setIsEditing(false);
         } catch (error) {
             console.error('이름 저장 실패', error);
         }
     };
 
+    const handleSecession = async () => {
+        try {
+            await axios.delete(`${config.serverurl}/member/remove`, {
+                headers: {
+                    Authorization: `${token}`
+                }
+            })
+            window.localStorage.clear();
+
+            window.location.href = '/';
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <S.SettingProfile>
             {isEditing ? (
                 <Correction
-                    value="nick" 
+                    value="nick"
                     content={name}
                     onSave={handleSave}
                     onCancel={() => setIsEditing(false)}
@@ -83,7 +98,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
                         <S.ProfileNameContainer>
                             <S.NameBox>
                                 <S.Name>{name}</S.Name>
-                                    <S.CorrectionButton onClick={() => startEditing('nick')}>
+                                <S.CorrectionButton onClick={() => startEditing('nick')}>
                                     <S.CorrectionButtonImg src={CorrectionImg} />
                                 </S.CorrectionButton>
                             </S.NameBox>
@@ -96,7 +111,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
                                 <S.ArrowButtonImg src={Arrow} />
                             </S.ArrowButton>
                         </S.ListItem>
-                        <S.ListItem>
+                        <S.ListItem onClick={handleSecession}>
                             <S.RText> 회원탈퇴 </S.RText>
                             <S.ArrowButton>
                                 <S.ArrowButtonImg src={Arrow} />
