@@ -133,6 +133,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
                     </S.TextContainer>
                 </>
             )}
+
         </S.SettingProfile>
     );
 };
