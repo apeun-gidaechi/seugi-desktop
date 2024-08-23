@@ -14,22 +14,15 @@ const Correction: React.FC<CorrectionProps> = ({ value, content, onSave, onCance
   const [inputValue, setInputValue] = useState(content);
 
   const transformValue = (value: string) => {
-    switch (value) {
-      case 'status':
-        return "상태메세지"
-      case 'spot':
-        return "직위"
-      case 'belong':
-        return "소속"
-      case 'phone':
-        return "휴대전화번호"
-      case 'wire':
-        return "유선전화번호"
-      case "location":
-        return "근무 위치"
-      case "nick":
-        return "이름"
-    }
+    return {
+      status: '상태메세지',
+      spot: '직위',
+      belong: '소속',
+      phone: '휴대전화번호',
+      wire: '유선전화번호',
+      location: '근무 위치',
+      nick: '이름',
+    }[value];
   }
 
   const handleSaveClick = () => {
