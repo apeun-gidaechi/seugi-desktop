@@ -1,3 +1,6 @@
+import { SeugiImg } from "@/components/Login/login.style";
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components';
 
@@ -24,7 +27,7 @@ export const AuthenticationContainer = styled.div`
     left: calc(50% - 485px/2 + 0.5px);
     top: calc(50% - 378px/2);
 
-    background: #FFFFFF;
+    background: ${SeugiColor.White};
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
     border-radius: 36px;
     z-index:10;
@@ -48,12 +51,8 @@ export const TitleContainer = styled.div`
 export const Title = styled.span`
     width: 128px;
     height: 36px;
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 130%;
-    color: #000000;
+    ${SeugiFont.title.title1};
+    color: ${SeugiColor.Black};
     flex: none;
     order: 0;
     flex-grow: 0;
@@ -95,7 +94,6 @@ export const SubtitleContainer = styled.div`
     flex-direction: row;
     margin-left:4px;
     align-items: flex-start;
-    /* padding: 0px 0px 0px 4px; */
     gap: 10px;
 
     width: 80px;
@@ -106,23 +104,15 @@ export const SubtitleContainer = styled.div`
 `
 
 export const Subtitle = styled.p`    
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; 
+    ${SeugiFont.body.body1};
 `
 
 export const Redstar = styled.a`
-    color: var(--Red-Red500, #F90707);
+    color: ${SeugiColor.Red500};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    ${SeugiFont.body.body1};
 `;
 
 export const InputBox = styled.div`
@@ -144,13 +134,9 @@ export const CodeTextInput = styled.input`
     flex: 1 0 0;
 
     border-radius: var(--Large, 12px);
-    border: 1px solid var(--Gray-Gray300, #E6E6E6);
-    background: var(--Sub-White, #FFF);
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    border: 1px solid ${SeugiColor.Gray300};
+    background: ${SeugiColor.White};
+    ${SeugiFont.subtitle.subtitle2};
     text-align:center;
 `
 
@@ -162,15 +148,12 @@ export const CodeSpan = styled.button`
     align-items: center;
     gap: 10px;
     border-radius: var(--Large, 12px);
-    background: var(--Primary-Primary500, #1D93F3);
+    background: ${SeugiColor.Primary500};
     border:none;
 
-    color: var(--Sub-White, #FFF);
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%; /* 18.2px */
+    color: ${SeugiColor.White};
+
+   ${SeugiFont.body.body2};
 
     cursor: pointer;
 `
@@ -207,7 +190,7 @@ export const Cloud1 = styled.img`
 `
 
 export const Cloud2 = styled.img`
-position: absolute;
+    position: absolute;
    width: 100vw;
     height: 625px;
     flex-shrink: 0;
@@ -227,13 +210,9 @@ export const Cloud3 = styled.img`
 `
 
 export const TimerSpan = styled.span`
-    color: var(--Gray-Gray600, #787878);
+    color: ${SeugiColor.Gray600};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%; /* 18.2px */
+    ${SeugiFont.body.body2};
 `
 
 export const BackButton = styled.button`

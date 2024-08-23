@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 
@@ -45,22 +47,15 @@ export const SchoolInfoContainer = styled.div`
 `
 
 export const SchoolName = styled.span`
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 130%; /* 36.4px */
+  ${SeugiFont.title.title1};
 `
 
 export const SchoolInfo = styled.span`
-    color: var(--Gray-Gray600, #787878);
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 26px */
+    color: ${SeugiColor.Gray600};
+
+    ${SeugiFont.subtitle.subtitle1};
 `
 
 export const ButtonContainer = styled.div`
