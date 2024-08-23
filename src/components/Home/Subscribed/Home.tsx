@@ -19,10 +19,13 @@ import Emoji from "@/assets/image/home/emoji.svg";
 import Heart from "@/assets/image/home/heart.png";
 import Fire from "@/assets/image/home/fire.png";
 
+import { isTokenExpired } from "@/util/tokenUtils";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
 
 const Home: React.FC = () => {
+  const token = window.localStorage.getItem("accessToken");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +34,14 @@ const Home: React.FC = () => {
       document.body.style.overflow = "auto";
     };
   }, []);
+
+  useEffect(() => {
+    if (isTokenExpired(token)) {
+      alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
+      window.localStorage.removeItem("accessToken");
+      navigate("/");
+    }
+  }, [token, navigate]);
 
   const [showChangeschool, setShowChangeschool] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState("아침");
@@ -45,13 +56,8 @@ const Home: React.FC = () => {
     const token = window.localStorage.getItem("accessToken");
     const workspaceId = window.localStorage.getItem("workspaceId");
 
-    const res = await axios.get(`${serverconfig.serverurl}/workspace/${workspaceId}`, {
-      headers: {
-        Authorization: `${token}`,
-      },
-    });
+    const res = await SeugiCustomAxios.get(`${serverconfig.serverurl}/workspace/${workspaceId}`);
 
-    console.log(res.data.data.workspaceName);
     setWorkspaceName(res.data.data.workspaceName);
   };
 

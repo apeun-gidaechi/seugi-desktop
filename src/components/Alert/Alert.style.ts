@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components';
-
+import { SeugiFont } from '@/design/text/SeugiFont';
+import { SeugiColor } from "@/design/color/SeugiColor";
 
 export const Dialog = styled.div<{ position: string }>`
   position: fixed;
@@ -77,35 +77,21 @@ export const Button = styled.button`
   border-radius: var(--Large, 12px);
   background: rgba(0, 0, 0, 0.00);
 
-  color: var(--Primary-Primary500, #1D93F3);
+  color: ${SeugiColor.Primary500};
 
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  ${SeugiFont.subtitle.subtitle2};
 
   border:none;
   cursor: pointer;
 `
 
 export const TitleText = styled.span`
-  color: var(--Sub - Black, #000);
-
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 130%; 
+  color: ${SeugiColor.Black};
+  ${SeugiFont.subtitle.subtitle1};
 `
 
 export const SubText = styled.span`
-  color: var(--Gray-Gray700, #333);
-
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  color: ${SeugiColor.Gray700};
+  ${SeugiFont.subtitle.subtitle2};
 `
 

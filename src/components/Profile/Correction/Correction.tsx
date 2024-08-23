@@ -14,20 +14,15 @@ const Correction: React.FC<CorrectionProps> = ({ value, content, onSave, onCance
   const [inputValue, setInputValue] = useState(content);
 
   const transformValue = (value: string) => {
-    switch (value) {
-      case 'statusMessage':
-        return "상태메세지"
-      case 'position':
-        return "직위"
-      case 'department':
-        return "소속"
-      case 'mobile':
-        return "휴대전화번호"
-      case 'phone':
-        return "유선전화번호"
-      case "location":
-        return "근무 위치"
-    }
+    return {
+      status: '상태메세지',
+      spot: '직위',
+      belong: '소속',
+      phone: '휴대전화번호',
+      wire: '유선전화번호',
+      location: '근무 위치',
+      nick: '이름',
+    }[value];
   }
 
   const handleSaveClick = () => {
@@ -35,8 +30,7 @@ const Correction: React.FC<CorrectionProps> = ({ value, content, onSave, onCance
   };
 
   const handleCancelClick = () => {
-    setInputValue(content);
-    onCancel();
+    setInputValue('');
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

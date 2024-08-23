@@ -1,25 +1,19 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components';
 
 export const TxtField = styled.input`    
     &::placeholder{
-        color: var(--Gray-Gray500, #AAA);
+        color:${SeugiColor.Gray500};
 
-        font-family: 'Pretendard-Regular', sans-serif;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 130%;
+        ${SeugiFont.subtitle.subtitle2};
     }
     flex-grow: 1;
     padding: 17px 16px; 
     border: none;
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /*  20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 
     &:focus {
         outline: none;
@@ -30,7 +24,7 @@ export const TxtField = styled.input`
     width: 421px;
     height: 52px;
 
-    background: #FFFFFF;
+    background: ${SeugiColor.White};
     border-radius: 12px;
 
 `;

@@ -1,3 +1,5 @@
+import { SeugiFont } from "@/design/text/SeugiFont";
+import { SeugiColor } from "@/design/color/SeugiColor";
 import styled from "styled-components";
 
 export const Continuebtn = styled.button`
@@ -12,14 +14,10 @@ export const Continuebtn = styled.button`
 
     border:none;
     border-radius: var(--Large, 12px);
-    background: var(--Primary-Primary500, #1D93F3);
+    background: ${SeugiColor.Primary500};
 
-    color: var(--Sub-White, #FFF);
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    color: ${SeugiColor.White};
+    ${SeugiFont.subtitle.subtitle2};
 
     cursor: pointer;
 

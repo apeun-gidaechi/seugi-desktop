@@ -1,7 +1,6 @@
-export const SeugiText = Object.freeze({
+export const SeugiFont = Object.freeze({
     display: {
         display1: {
-            color: "var(--Sub-Black, #000)",
             fontFamily: "Pretendard",
             fontSize: "36px",
             fontStyle: "normal",
@@ -9,9 +8,8 @@ export const SeugiText = Object.freeze({
             lineHeight: "130%",
         },
         display2: {
-            color: "var(--Sub-Black, #000)",
-            fontFamily: "Pretendard", 
-            fontSize: "32px",        
+            fontFamily: "Pretendard",
+            fontSize: "32px",
             fontStyle: "normal",
             fontWeight: 700,
             lineHeight: "130%",
@@ -19,7 +17,6 @@ export const SeugiText = Object.freeze({
     },
     title: {
         title1: {
-            color: "var(--Sub-Black, #000)",
             fontFamily: "Pretendard",
             fontSize: "28px",
             fontStyle: "normal",
@@ -27,7 +24,6 @@ export const SeugiText = Object.freeze({
             lineHeight: "130%",
         },
         title2: {
-            color: "var(--Sub-Black, #000)",
             fontFamily: "Pretendard",
             fontSize: "24px",
             fontStyle: "normal",
@@ -37,7 +33,6 @@ export const SeugiText = Object.freeze({
     },
     subtitle: {
         subtitle1: {
-            color: "var(--Sub-Black, #000)",
             fontFamily: "Pretendard",
             fontSize: "20px",
             fontStyle: "normal",
@@ -46,7 +41,6 @@ export const SeugiText = Object.freeze({
 
         },
         subtitle2: {
-            color: "var(--Sub-Black, #000)",
             fontFamily: "Pretendard",
             fontSize: "16px",
             fontStyle: "normal",
@@ -56,7 +50,6 @@ export const SeugiText = Object.freeze({
     },
     body: {
         body1: {
-            color: "var(--Sub-Black, #000)",
             fontFamily: "Pretendard",
             fontSize: "14px",
             fontStyle: "normal",
@@ -64,7 +57,6 @@ export const SeugiText = Object.freeze({
             lineHeight: "130%",
         },
         body2: {
-            color: "var(--Sub-Black, #000)",
             fontFamily: "Pretendard",
             fontSize: "14px",
             fontStyle: "normal",
@@ -74,7 +66,6 @@ export const SeugiText = Object.freeze({
     },
     caption: {
         caption1: {
-            color: "var(--Sub-Black, #000)",
             fontFamily: "Pretendard",
             fontSize: "12px",
             fontStyle: "normal",
@@ -82,7 +73,6 @@ export const SeugiText = Object.freeze({
             lineHeight: "130%",
         },
         caption2: {
-            color: "var(--Sub-Black, #000)",
             fontFamily: "Pretendard",
             fontSize: "12px",
             fontStyle: "normal",

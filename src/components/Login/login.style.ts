@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components';
 
@@ -41,7 +43,7 @@ export const Header = styled.div`
     /* justify-content: center; */
 
     align-self: stretch;
-    background: var(--Primary-Primary300, #7EC4FC);
+    background: ${SeugiColor.Primary300};
 `;
 
 export const SeugiImg = styled.object`
@@ -55,14 +57,10 @@ export const SeugiImg = styled.object`
 `;
 
 export const Title2 = styled.span`
-    color: #FFF;
+    color: ${SeugiColor.White};
     
     display:flex;
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 130%; /* 31.2px */
+    ${SeugiFont.title.title2};
 `;
 
 
@@ -95,24 +93,17 @@ export const Enterinfo = styled.div`
 `;
 
 export const Subtitle2 = styled.div`
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
     
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    ${SeugiFont.subtitle.subtitle2};
+
     margin-left: 4px;
 `;
 
 export const Redstar = styled.a`
-    color: var(--Red-Red500, #F90707);
+    color: ${SeugiColor.Red500};
     
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    ${SeugiFont.subtitle.subtitle2};
 `;
 
 
@@ -126,15 +117,11 @@ export const Loginbtn = styled.button`
     align-self: stretch;
 
     border-radius: var(--Large, 12px);
-    background: var(--Primary-Primary500, #1D93F3);
+    background: ${SeugiColor.Primary500};
     border:none;
-    color: var(--Sub-White, #FFF);
+    color: ${SeugiColor.White};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+   ${SeugiFont.subtitle.subtitle2};
 
     cursor: pointer;
 `;
@@ -149,35 +136,23 @@ export const Buttonpart = styled.div`
 `;
 
 export const Body1 = styled.div`
-    color: var(--Gray-Gray600, #787878);
+    color: ${SeugiColor.Gray600};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    ${SeugiFont.body.body1};
 `;
 
 export const Gosignup = styled.a`
-    color: var(--Primary-Primary500, #1D93F3);
+    color: ${SeugiColor.Primary500};
     
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    ${SeugiFont.body.body1};
 
     text-decoration: none;
 `;
 
 export const Caption1 = styled.div`
-    color: var(--Gray-Gray500, #AAA);
+    color: ${SeugiColor.Gray500};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 15.6px */
+    ${SeugiFont.caption.caption1};
 `;
 
 export const Orpart = styled.div`
@@ -206,8 +181,8 @@ export const Authlogin = styled.button`
     align-items: center;
     gap: 8px;
     border-radius: 99px;
-    border: 1.5px solid var(--Gray-Gray300, #E6E6E6);
-    background: var(--Sub-White, #FFF);
+    border: 1.5px solid ${SeugiColor.Gray300};
+    background: ${SeugiColor.White};
     cursor: pointer;
 `;
 
@@ -229,8 +204,8 @@ export const InputContainer = styled.div`
     justify-content: space-between;
     width: 100%; 
     border-radius: var(--Large, 12px);
-    border: 1px solid var(--Gray-Gray300, #E6E6E6);
-    background: var(--Sub-White, #FFF);
+    border: 1px solid ${SeugiColor.Gray300};
+    background: ${SeugiColor.White};
 `;
 
 export const LogoImg = styled.img`

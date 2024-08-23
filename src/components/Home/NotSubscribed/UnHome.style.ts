@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components";
 
 export const HomeContainer = styled.div`
@@ -23,7 +25,7 @@ export const HomeMain = styled.div`
   flex: 1 0 0;
   align-self: stretch;
 
-  background: var(--Primary-Primary050, #F8FCFF);
+  background: ${SeugiColor.Primary050};
 
   margin-left:5.5%;
 `
@@ -41,13 +43,9 @@ export const HomeTitle = styled.h1`
 
   width: 100%;
 
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 130%;
+  ${SeugiFont.title.title1};
 `
 
 export const HomeWrapper1 = styled.div`
@@ -104,13 +102,9 @@ export const SDetailBox = styled.div`
 `
 
 export const SDetail = styled.span`
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 18.2px */
+  ${SeugiFont.body.body2};
 `
 
 export const HomeWrapper1DownContainer = styled.div`
@@ -152,13 +146,9 @@ export const NDtailBox = styled.div`
 `
 
 export const NDetail = styled.span`
-  color: var(--Gray-Gray600, #787878);
+  color:${SeugiColor.Gray600};
 
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 18.2px */
+  ${SeugiFont.body.body2};
 `
 
 export const RightContainer = styled.div`
@@ -179,7 +169,7 @@ export const RightUpContainer = styled.div`
   align-self: stretch;
 
   border-radius: 12px;
-  background: #FFF;
+  background: ${SeugiColor.White};
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -194,7 +184,7 @@ export const RightDownContainer = styled.div`
   align-self: stretch;
 
   border-radius: 12px;
-  background: #FFF;
+  background: ${SeugiColor.White};
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -216,13 +206,9 @@ export const SeugiDetailBox = styled.div`
 `
 
 export const SeugiDetail = styled.div`
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 18.2px */
+  ${SeugiFont.body.body2};
 `
 
 export const UpContainer = styled.div`
@@ -234,7 +220,7 @@ export const UpContainer = styled.div`
   align-self: stretch;
 
   border-radius: 12px;
-  background: var(--Sub-White, #FFF);
+  background: ${SeugiColor.White};
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -249,7 +235,7 @@ export const DownContainer = styled.div`
   align-self: stretch;
 
   border-radius: 12px;
-  background: #FFF;
+  background: ${SeugiColor.White};
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `
@@ -277,13 +263,9 @@ export const SSDetailBox = styled.div`
 `
 
 export const SSDetail = styled.span`
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 18.2px */
+  ${SeugiFont.body.body2};
 `
 
 export const BookLogo = styled.img`
@@ -293,13 +275,9 @@ export const BookLogo = styled.img`
 export const DailyScheduleTitle = styled.h2`
   margin-left:8px;
 
-  color: #000;
+  color: ${SeugiColor.Black};
 
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; 
+  ${SeugiFont.subtitle.subtitle2};
 `
 
 export const NotificationLogo = styled.img`
@@ -312,13 +290,9 @@ export const NotificationTitle = styled.h2`
 
   left: 8px;
 
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  ${SeugiFont.subtitle.subtitle2};
 
   margin-right:78%;
 `
@@ -339,13 +313,9 @@ export const CalendarLogo = styled.img`
 `
 
 export const ScheduleTitle = styled.span`
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 `
 
 export const ArrowLButton = styled.button`
@@ -367,13 +337,9 @@ export const SeugiImg = styled.img`
 `
 
 export const CatSeugiTitle = styled.span`
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 
   margin-right:73%;
 `
@@ -398,13 +364,9 @@ export const SchoolTitleBox = styled.div`
 `
 
 export const MySchooliTitle = styled.span`
-  color: var(--Sub-Black, #000);
+  color: ${SeugiColor.Black};
 
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 
   margin-right:18vw;
 `
@@ -430,13 +392,9 @@ export const CafeteriaImg = styled.img`
 `
 
 export const CafeteriaTitle = styled.p`
-  color: var(--Black, #000);
+  color: v${SeugiColor.Black};
 
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  ${SeugiFont.subtitle.subtitle2};
 `
 
 export const CafeteriaDiv = styled.div`
@@ -448,13 +406,9 @@ export const CafeteriaDiv = styled.div`
 `
 
 export const CafeteriaDetail = styled.span`
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 18.2px */
+  ${SeugiFont.body.body2};
 `
 
 export const SchoolBox = styled.div`
@@ -474,13 +428,9 @@ export const SchoolDetailBox = styled.div`
 `
 
 export const SchoolDetail = styled.span`
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 18.2px */
+  ${SeugiFont.body.body2};
 
   margin-left:9vw;
 `

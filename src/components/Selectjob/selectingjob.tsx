@@ -4,10 +4,9 @@ import * as S from '@/components/Selectjob/selectingjob.style';
 import Student from '@/assets/image/join-school/selectjob/student.svg';
 import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
-import axios from 'axios';
+import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 import { isTokenExpired } from '@/util/tokenUtils';
 import Backimg from '@/assets/image/Backimg.svg';
-import config from "@/constants/config/config.json";
 
 type Role = 'NONE' | 'STUDENT' | 'TEACHER';
 
@@ -63,14 +62,10 @@ const SelectingJob: React.FC = () => {
         }
 
         try {
-            const res = await axios.post(`${config.serverurl}/workspace/join`, {
+            const res = await SeugiCustomAxios.post(`/workspace/join`, {
                 workspaceId: workspaceId,
                 workspaceCode: verificationCode,
                 role: selectedRole,
-            }, {
-                headers: {
-                    'Authorization': `${token}`,
-                }
             });
 
             if (res.status === 200) {
