@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 
 import * as S from "@/components/Home/Subscribed/Home.style";
 import Navbar from "@/components/Navbar/Navbar";
+
 import Schools from '@/components/Home/Schools/Schools';
 import Meal from "@/components/Home/Meal/Meal";
 import CatSeugi from "@/components/Home/CatSeugi/CatSeugi";
 import Calendar from "@/components/Home/Calendar/Calendar";
 import Notification from '@/components/Home/Notification/Notification';
 import DailySchedule from "@/components/Home/DailySchedule/DailySchedule";
+
 
 import { isTokenExpired } from "@/util/tokenUtils";
 import { useNavigate } from "react-router-dom";
