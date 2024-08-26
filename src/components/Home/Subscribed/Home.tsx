@@ -8,7 +8,6 @@ import initialConfig from "@/constants/Home/config.json";
 import HomeBookImg from "@/assets/image/home/homebook.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
-import CalendarImg from "@/assets/image/home/calendar.svg";
 
 import Emoji from "@/assets/image/home/emoji.svg";
 import Heart from "@/assets/image/home/heart.png";
@@ -20,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import Schools from '@/components/Home/Schools/Schools';
 import Meal from "@/components/Home/Meal/Meal";
 import CatSeugi from "@/components/Home/CatSeugi/CatSeugi";
+import Calendar from "@/components/Home/Calendar/Calendar";
 
 const Home: React.FC = () => {
   const token = window.localStorage.getItem("accessToken");
@@ -178,40 +178,7 @@ const Home: React.FC = () => {
                 </S.NotificationBox>
               </S.LeftContainer>
               <S.RightContainer>
-                <S.RightUpContainer>
-                  <S.SoonScheduleBox>
-                    <S.SoonScheduleTitle>
-                      <S.CalendarLogo src={CalendarImg} />
-                      <S.ScheduleTitle>다가오는 일정</S.ScheduleTitle>
-                    </S.SoonScheduleTitle>
-                    <S.ArrowLButton>
-                      <S.SArrowLogo src={ArrowImg} />
-                    </S.ArrowLButton>
-                  </S.SoonScheduleBox>
-                  <S.DummyBox>
-                    <S.DateDummy>
-                      <S.DateText>7/21</S.DateText>
-                      <S.DateText>7/25</S.DateText>
-                      <S.DateText>8/15</S.DateText>
-                      <S.DateText>8/15</S.DateText>
-                      <S.DateText>8/15</S.DateText>
-                    </S.DateDummy>
-                    <S.SubDummy>
-                      <S.SubTitle>체육대회</S.SubTitle>
-                      <S.SubTitle>기숙사 정기점호</S.SubTitle>
-                      <S.SubTitle>KBS 촬영</S.SubTitle>
-                      <S.SubTitle>KBS 촬영</S.SubTitle>
-                      <S.SubTitle>KBS 촬영</S.SubTitle>
-                    </S.SubDummy>
-                    <S.D_DayDummy>
-                      <S.D_DayText>D-3</S.D_DayText>
-                      <S.D_DayText>D-7</S.D_DayText>
-                      <S.D_DayText>D-21</S.D_DayText>
-                      <S.D_DayText>D-21</S.D_DayText>
-                      <S.D_DayText>D-21</S.D_DayText>
-                    </S.D_DayDummy>
-                  </S.DummyBox>
-                </S.RightUpContainer>
+                <Calendar />
                 <CatSeugi/>
               </S.RightContainer>
             </S.HomeWrapper1DownContainer>
