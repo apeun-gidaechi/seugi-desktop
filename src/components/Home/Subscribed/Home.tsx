@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import * as S from "@/components/Home/Subscribed/Home.style";
 import Navbar from "@/components/Navbar/Navbar";
-import Changeschool from "@/components/ChangeSchool/ChangeSchool";
+import Changeschool from "@/components/Home/ChangeSchool/ChangeSchool";
 
 import initialConfig from "@/constants/Home/config.json";
-import serverconfig from "@/constants/config/config.json";
 
 import HomeBookImg from "@/assets/image/home/homebook.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
@@ -25,7 +24,6 @@ import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
 
 const Home: React.FC = () => {
   const token = window.localStorage.getItem("accessToken");
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,10 +51,9 @@ const Home: React.FC = () => {
   });
 
   const getWorkspaceName = async () => {
-    const token = window.localStorage.getItem("accessToken");
     const workspaceId = window.localStorage.getItem("workspaceId");
 
-    const res = await SeugiCustomAxios.get(`${serverconfig.serverurl}/workspace/${workspaceId}`);
+    const res = await SeugiCustomAxios.get(`/workspace/${workspaceId}`);
 
     setWorkspaceName(res.data.data.workspaceName);
   };
@@ -163,12 +160,35 @@ const Home: React.FC = () => {
     }
   };
 
+  const ChangeSchoolRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ChangeSchoolRef.current && !ChangeSchoolRef.current.contains(e.target as Node)) {
+        setShowChangeschool(false);
+      }
+    };
+
+    if (showChangeschool) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showChangeschool]);
   return (
     <S.HomeContainer>
       <Navbar />
       <S.HomeMain>
         <S.HomeTitle>홈</S.HomeTitle>
-        {showChangeschool && <Changeschool />}
+        {showChangeschool && (
+          <div ref={ChangeSchoolRef}>
+            <Changeschool onClose={handleOnClicked} />
+          </div>
+        )}
         <S.ComponentsBox>
           <S.HomeWrapper1>
             <S.HomeWrapper1UpContainer>

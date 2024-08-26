@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as S from '@/components/Profile/profile.style';
 import Correction from '@/components/Profile/Correction/Correction';
 import SettingProfile from '@/components/Profile/SettingProfile/SettingProfile';
@@ -25,6 +25,7 @@ const Profile = () => {
         wire: "",
         location: ""
     });
+    const dialogRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const fetchProfileData = async () => {
@@ -68,8 +69,6 @@ const Profile = () => {
         }
     };
 
-
-
     const cancelEditing = () => {
         setIsEditing(null);
     };
@@ -77,6 +76,24 @@ const Profile = () => {
     const toggleSetting = () => {
         setIsSettingOpen(prevState => !prevState);
     };
+
+    useEffect(() => {
+        const handleClickOutside = (e:any) => {
+            if (dialogRef.current && !dialogRef.current.contains(e.target)) {
+                setIsSettingOpen(false);
+            }
+        };
+
+        if (isSettingOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isSettingOpen]);
 
     return (
         <>

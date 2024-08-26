@@ -1,3 +1,4 @@
+import React from 'react';
 import * as S from '@/components/SelectingSchool/SelectSchool.style';
 import { useNavigate } from 'react-router-dom';
 
