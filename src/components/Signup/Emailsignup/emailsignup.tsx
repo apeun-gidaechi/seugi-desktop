@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import * as S from '@/components/Signup/Emailsignup/Emailsignup.style';
 import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg'
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';

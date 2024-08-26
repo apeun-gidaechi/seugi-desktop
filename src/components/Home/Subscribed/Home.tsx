@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar/Navbar";
 import Changeschool from "@/components/ChangeSchool/ChangeSchool";
 
 import initialConfig from "@/constants/Home/config.json";
-import serverconfig from "@/constants/config/config.json";
 
 import HomeBookImg from "@/assets/image/home/homebook.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
@@ -35,13 +34,13 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (isTokenExpired(token)) {
-      alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
-      window.localStorage.removeItem("accessToken");
-      navigate("/");
-    }
-  }, [token, navigate]);
+  // useEffect(() => {
+  //   if (isTokenExpired(token)) {
+  //     alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
+  //     window.localStorage.removeItem("accessToken");
+  //     navigate("/");
+  //   }
+  // }, [token, navigate]);
 
   const [showChangeschool, setShowChangeschool] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState("아침");
@@ -56,7 +55,7 @@ const Home: React.FC = () => {
     const token = window.localStorage.getItem("accessToken");
     const workspaceId = window.localStorage.getItem("workspaceId");
 
-    const res = await SeugiCustomAxios.get(`${serverconfig.serverurl}/workspace/${workspaceId}`);
+    const res = await SeugiCustomAxios.get(`/workspace/${workspaceId}`);
 
     setWorkspaceName(res.data.data.workspaceName);
   };
