@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import * as S from "@/components/Home/Subscribed/Home.style";
 import Navbar from "@/components/Navbar/Navbar";
-import Changeschool from "@/components/Home/ChangeSchool/ChangeSchool";
+import Changeschool from "@/components/ChangeSchool/ChangeSchool";
 
 import initialConfig from "@/constants/Home/config.json";
 
