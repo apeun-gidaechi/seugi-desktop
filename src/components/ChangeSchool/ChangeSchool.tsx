@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
 import axios from 'axios';
 
-import * as S from "@/components/Home/ChangeSchool/ChangeSchool.style";
+import * as S from "@/components/ChangeSchool/ChangeSchool.style";
 import Arrow from "@/assets/image/home/arrow.svg";
 import Setting from "@/assets/image/home/setting_fill.svg";
 import config from '@/constants/config/config.json';
