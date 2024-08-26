@@ -73,13 +73,14 @@ const useSignup = () => {
         if (password !== confirmPassword) {
             setErrorMessage('비밀번호가 일치하지 않습니다.');
             setTimeout(clearErrorMessage, 3000);
+            return;
         }
         if (!validatePassword(password)) {
             setErrorMessage('비밀번호는 8자리 이상, 특수문자 포함이어야 합니다.');
             setTimeout(clearErrorMessage, 3000);
+            return;
         } else {
             navigate('/emailauthentication', { state: { name, email, password } });
-            console.log(email, name, password);
         }
     };
 
