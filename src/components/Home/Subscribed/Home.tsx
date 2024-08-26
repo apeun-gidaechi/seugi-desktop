@@ -6,12 +6,8 @@ import Navbar from "@/components/Navbar/Navbar";
 import initialConfig from "@/constants/Home/config.json";
 
 import HomeBookImg from "@/assets/image/home/homebook.svg";
-import NotificationImg from "@/assets/image/home/notification.svg";
-import ArrowImg from "@/assets/image/home/arrow.svg";
 
-import Emoji from "@/assets/image/home/emoji.svg";
-import Heart from "@/assets/image/home/heart.png";
-import Fire from "@/assets/image/home/fire.png";
+import ArrowImg from "@/assets/image/home/arrow.svg";
 
 import { isTokenExpired } from "@/util/tokenUtils";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +16,7 @@ import Schools from '@/components/Home/Schools/Schools';
 import Meal from "@/components/Home/Meal/Meal";
 import CatSeugi from "@/components/Home/CatSeugi/CatSeugi";
 import Calendar from "@/components/Home/Calendar/Calendar";
+import Notification from '@/components/Home/Notification/Notification';
 
 const Home: React.FC = () => {
   const token = window.localStorage.getItem("accessToken");
@@ -124,59 +121,7 @@ const Home: React.FC = () => {
               </S.ScheduleDivBox>
             </S.HomeWrapper1UpContainer>
             <S.HomeWrapper1DownContainer>
-              <S.LeftContainer>
-                <S.NotificationContainer>
-                  <S.NotificationTitleContainer>
-                    <S.NotificationLogo src={NotificationImg} />
-                    <S.NotificationTitle>알림</S.NotificationTitle>
-                  </S.NotificationTitleContainer>
-                  <S.ArrowLButton>
-                    <S.NArrowLogo src={ArrowImg} />
-                  </S.ArrowLButton>
-                </S.NotificationContainer>
-                <S.NotificationBox>
-                  {config.notification.map((item: any, parentKey: any) => (
-                    <S.NotificationWrapper key={parentKey}>
-                      <S.NotificationContentAuthor>
-                        {item.author} · {item.date}
-                      </S.NotificationContentAuthor>
-                      <S.NotificationContentTitle>
-                        {item.title}
-                      </S.NotificationContentTitle>
-                      <S.NotificationContentDescription>
-                        {item.content}
-                      </S.NotificationContentDescription>
-                      <S.NotificationEmojiBox>
-                        <S.NotificationAddEmoji src={Emoji} />
-                        {item.emoji.map((emoji: any, childKey: any) => (
-                          <S.NotificationEmojiWrapper
-                            onClick={() =>
-                              handleEmojiClick(parentKey, childKey)
-                            }
-                            key={childKey}
-                            className={
-                              item.like[childKey] === true ? "Clicked" : ""
-                            }
-                          >
-                            {childKey === 0 ? (
-                              <S.NotificationEmoji src={Heart} />
-                            ) : (
-                              <S.NotificationEmoji src={Fire} />
-                            )}
-                            <S.NotificationEmojiCount
-                              className={
-                                item.like[childKey] === true ? "Clicked" : ""
-                              }
-                            >
-                              {emoji}
-                            </S.NotificationEmojiCount>
-                          </S.NotificationEmojiWrapper>
-                        ))}
-                      </S.NotificationEmojiBox>
-                    </S.NotificationWrapper>
-                  ))}
-                </S.NotificationBox>
-              </S.LeftContainer>
+              <Notification />
               <S.RightContainer>
                 <Calendar />
                 <CatSeugi/>
