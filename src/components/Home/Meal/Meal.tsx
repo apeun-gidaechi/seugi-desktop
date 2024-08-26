@@ -86,7 +86,12 @@ const Meal = () => {
                     </S.Meal>
                 </S.TimeButton>
             </S.CafeteriaDiv>
-            <S.MenuList>{getMenu()}</S.MenuList>
+            <S.MenuList>
+                {getMenu()}
+                <S.CalorieDiv>
+                    <S.CalorieText>872kcal</S.CalorieText>
+                </S.CalorieDiv>
+            </S.MenuList>
         </S.DownContainer>
     )
 }

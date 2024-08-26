@@ -92,3 +92,20 @@ export const Menu = styled.span`
 
   ${SeugiFont.subtitle.subtitle2};
 `;
+
+export const CalorieDiv = styled.div`
+  display: flex;
+  padding: 4px 8px;
+  align-items: flex-start;
+  gap: var(--Corner-Small, 10px);
+
+  border-radius: 34px;
+  background: ${SeugiColor.Primary500};
+`
+
+export const CalorieText = styled.span`
+  color: ${SeugiColor.White};
+
+  ${SeugiFont.caption.caption1};
+ `
+ 
