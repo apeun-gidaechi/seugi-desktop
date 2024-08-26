@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import * as S from "@/components/Home/Subscribed/Home.style";
 import Navbar from "@/components/Navbar/Navbar";
-import Changeschool from "@/components/ChangeSchool/ChangeSchool";
+import Changeschool from "@/components/Home/ChangeSchool/ChangeSchool";
 
 import initialConfig from "@/constants/Home/config.json";
 
@@ -24,7 +24,6 @@ import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
 
 const Home: React.FC = () => {
   const token = window.localStorage.getItem("accessToken");
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,13 +33,13 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (isTokenExpired(token)) {
-  //     alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
-  //     window.localStorage.removeItem("accessToken");
-  //     navigate("/");
-  //   }
-  // }, [token, navigate]);
+  useEffect(() => {
+    if (isTokenExpired(token)) {
+      alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
+      window.localStorage.removeItem("accessToken");
+      navigate("/");
+    }
+  }, [token, navigate]);
 
   const [showChangeschool, setShowChangeschool] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState("아침");
@@ -52,7 +51,6 @@ const Home: React.FC = () => {
   });
 
   const getWorkspaceName = async () => {
-    const token = window.localStorage.getItem("accessToken");
     const workspaceId = window.localStorage.getItem("workspaceId");
 
     const res = await SeugiCustomAxios.get(`/workspace/${workspaceId}`);
@@ -162,12 +160,35 @@ const Home: React.FC = () => {
     }
   };
 
+  const ChangeSchoolRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ChangeSchoolRef.current && !ChangeSchoolRef.current.contains(e.target as Node)) {
+        setShowChangeschool(false);
+      }
+    };
+
+    if (showChangeschool) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showChangeschool]);
   return (
     <S.HomeContainer>
       <Navbar />
       <S.HomeMain>
         <S.HomeTitle>홈</S.HomeTitle>
-        {showChangeschool && <Changeschool />}
+        {showChangeschool && (
+          <div ref={ChangeSchoolRef}>
+            <Changeschool onClose={handleOnClicked} />
+          </div>
+        )}
         <S.ComponentsBox>
           <S.HomeWrapper1>
             <S.HomeWrapper1UpContainer>
