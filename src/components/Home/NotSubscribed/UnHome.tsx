@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import * as S from '@/components/Home/NotSubscribed/UnHome.style';
 
 import Navbar from '@/components/Navbar/Navbar';
-import Changeschool from '@/components/ChangeSchool/ChangeSchool';
+import Changeschool from '@/components/Home/ChangeSchool/ChangeSchool';
 
 import HomeBookImg from '@/assets/image/home/homebook.svg';
 import NotificationImg from '@/assets/image/home/notification.svg';
@@ -37,13 +37,17 @@ const UnHome = () => {
         };
     }, []);
 
+    const handleOnClicked = () => {
+        setShowChangeschool(!showChangeschool)
+    }
+
     return (
         <S.HomeContainer>
             <RegisterSchool />
             <Navbar />
             <S.HomeMain>
                 <S.HomeTitle>홈</S.HomeTitle>
-                {showChangeschool && <Changeschool />}
+                {showChangeschool && <Changeschool onClose={handleOnClicked} />}
                 <S.ComponentsBox>
                     <S.HomeWrapper1>
                         <S.HomeWrapper1UpContainer>

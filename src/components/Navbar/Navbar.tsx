@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "@/components/Navbar/Navbar.style";
 
@@ -20,6 +20,7 @@ const Navbar = () => {
   const [isProfileVisible, setIsProfileVisible] = useState(false);
 
   const navigate = useNavigate();
+  const profileRef = useRef<HTMLDivElement>(null);
 
   const handleButtonClick = (button: SelectedButton, path: string) => {
     setSelected(button);
@@ -42,6 +43,24 @@ const Navbar = () => {
     localStorage.setItem("chatRooms", JSON.stringify(chatRooms));
   }, [chatRooms]);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setIsProfileVisible(false);
+      }
+    };
+
+    if (isProfileVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isProfileVisible]);
+
   return (
     <div>
       <S.SideBarMenu>
@@ -63,14 +82,18 @@ const Navbar = () => {
         >
           <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
         </S.SideBarButton>
-        <S.SideAvatarImgWrap >
+        <S.SideAvatarImgWrap>
           <S.SideAvatarButton onClick={handleAvatarClick}>
-          <S.SideAvatarImg src={AvatarImg} />
+            <S.SideAvatarImg src={AvatarImg} />
           </S.SideAvatarButton>
         </S.SideAvatarImgWrap>
       </S.SideBarMenu>
 
-      {isProfileVisible && <Profile />} 
+      {isProfileVisible && (
+        <div ref={profileRef}>
+          <Profile />
+        </div>
+      )}
     </div>
   );
 };
