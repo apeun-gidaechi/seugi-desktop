@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { SeugiColor } from '@/design/color/SeugiColor';
 import { SeugiFont } from '@/design/text/SeugiFont';
 
-export const DownContainer = styled.div`
+export const CafeteriaContainer = styled.div`
   display: flex;
   padding: 12px 12px 16px 12px;
   flex-direction: column;
@@ -108,4 +108,3 @@ export const CalorieText = styled.span`
 
   ${SeugiFont.caption.caption1};
  `
- 
