@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
-import axios from 'axios';
 
 import * as S from "@/components/ChangeSchool/ChangeSchool.style";
 import Arrow from "@/assets/image/home/arrow.svg";
-import Setting from "@/assets/image/home/setting_fill.svg";
 import config from '@/constants/config/config.json';
 
 interface Props {
@@ -16,7 +14,6 @@ const Changeschool = ({ onClose }: Props) => {
   const [subscribedSchools, setSubSchools] = useState<any[]>([]);
   const [pendingSchools, setPenSchools] = useState<any[]>([]);
 
-  const token = window.localStorage.getItem("accessToken");
   const navigate = useNavigate();
 
   const goCreateSchool = () => {
@@ -60,14 +57,12 @@ const Changeschool = ({ onClose }: Props) => {
         ) : (
           subscribedSchools.map((school, index) => (
             <S.Subscribed key={index}>
-              <S.SchoolBox>
+              <S.JoinSchoolBox onClick={() => handleArrowClick(school.workspaceId)}>
                 <S.SchoolName>{school.workspaceName}</S.SchoolName>
-                <S.ArrowButton
-                  onClick={() => handleArrowClick(school.workspaceId)}
-                >
+                <S.ArrowButton>
                   <S.ArrowImg src={Arrow} />
                 </S.ArrowButton>
-              </S.SchoolBox>
+              </S.JoinSchoolBox>
             </S.Subscribed>
           ))
         )}
@@ -77,9 +72,9 @@ const Changeschool = ({ onClose }: Props) => {
             <S.WaitingJoin>가입 대기 중</S.WaitingJoin>
             {pendingSchools.map((school, index) => (
               <S.Subscribed key={index}>
-                <S.SchoolBox>
+                <S.PendingSchoolBox>
                   <S.SchoolName>{school.workspaceName}</S.SchoolName>
-                </S.SchoolBox>
+                </S.PendingSchoolBox>
               </S.Subscribed>
             ))}
           </S.PendingSchool>
