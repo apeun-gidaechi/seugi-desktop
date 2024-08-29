@@ -1,21 +1,30 @@
-import React from 'react'
+// Chat.tsx
+import React, { useState } from "react";
+import * as S from "@/pages/chat/chat.style";
+import Sidebar from "@/components/common/sidebar/sidebar";
+import UnChatRoom from '@/components/common/chatRoom/unSelect/index';
+import Selected from '@/components/common/chatRoom/Selected/index';
+import Layer from '@/components/layer/chat/index';
 
-import * as S from '@/components/layer/chat/index.style';
+const Chat: React.FC = () => {
+  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
 
-import SideBar from "@/components/common/ChatSidebar/Chat/index";
-import TopButton from '@/components/button/chatButton/index';
-import ChatRoom from '@/components/common/chatRoom/unSelect/index'
+  const handleSelectChatRoom = (room: string) => {
+    setSelectedChatRoom(room);
+    console.log("Selected chat room:", room);
+  };
 
-const index = () => {
   return (
-    <S.ChatingBackground>
-        <S.ButtonWrapper>
-            <TopButton />
-            {/* <ChatRoom/> */}
-        </S.ButtonWrapper>
-        <SideBar />
-    </S.ChatingBackground>
-  )
-}
+    <S.ChatContainer>
+      <Layer />
+      <Sidebar onSelectChatRoom={handleSelectChatRoom} />
+      {selectedChatRoom ? (
+        <Selected roomName={selectedChatRoom} />
+      ) : (
+        <UnChatRoom />
+      )}
+    </S.ChatContainer>
+  );
+};
 
-export default index
+export default Chat;
