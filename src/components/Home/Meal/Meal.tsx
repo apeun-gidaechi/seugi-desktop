@@ -18,22 +18,37 @@ const Meal = () => {
     const day = String(today.getDate()).padStart(2, '0');
     const date = `${year}${month}${day}`;
 
-    const getMenu = async () => {
+    const getMenu = async (mealIndex: number) => {
         try {
             const res = await SeugiCustomAxios.get(`/meal?workspaceId=${workspaceId}&date=${date}`);
-            setMenu(res.data.data[selectedMeal].menu);
-            setMealType(res.data.data[selectedMeal].mealType);
-            setCalorie(res.data.data[selectedMeal].calorie);
+            setMenu(res.data.data[mealIndex].menu);
+            setMealType(res.data.data[mealIndex].mealType);
+            setCalorie(res.data.data[mealIndex].calorie);
         } catch (error) {
             console.error("Error fetching menu:", error);
         }
     };
 
-    useEffect(() => {
-        getMenu();
-    }, [date, workspaceId, selectedMeal]);
+    const determineMealBasedOnTime = () => {
+        const hour = today.getHours();
+        if (hour < 9) {
+            setSelectedMeal(0); 
+        } else if (hour < 13) {
+            setSelectedMeal(1); 
+        } else {
+            setSelectedMeal(2); 
+        }
+    };
 
-    const handleMealChange = (mealIndex:number) => {
+    useEffect(() => {
+        determineMealBasedOnTime();
+    }, []);
+
+    useEffect(() => {
+        getMenu(selectedMeal);
+    }, [selectedMeal]);
+
+    const handleMealChange = (mealIndex: number) => {
         setSelectedMeal(mealIndex);
     };
 
