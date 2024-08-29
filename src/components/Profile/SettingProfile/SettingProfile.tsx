@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 
-import config from '@/constants/config/config.json';
 import * as S from '@/components/Profile/SettingProfile/SettingProfile.style';
 import Correction from '@/components/Profile/Correction/Correction';
 
@@ -10,12 +9,12 @@ import CorrectionImg from '@/assets/image/Profile/CorrectionImg.svg';
 import Arrow from '@/assets/image/Profile/arrow.svg';
 import Divider from '@/assets/image/Profile/ProflieDivider.svg';
 
-
 interface SettingProfileProps {
     onClose: () => void;
+    onNameChange: (newName: string) => void;
 }
 
-const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
+const SettingProfile: React.FC<SettingProfileProps> = ({ onClose, onNameChange }) => {
     const workspaceId = window.localStorage.getItem('workspaceId');
     const token = window.localStorage.getItem('accessToken');
     const [name, setName] = useState('');
@@ -42,18 +41,16 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
     const handleLogout = () => {
         window.localStorage.removeItem('accessToken');
         window.localStorage.removeItem('workspaceId');
-
         window.location.href = '/';
     };
 
     const handleSave = async (newName: string) => {
         try {
-            await SeugiCustomAxios.patch(`/profile/${workspaceId}`,
-                { nick: newName },
-            );
+            await SeugiCustomAxios.patch(`/profile/${workspaceId}`, { nick: newName });
 
             setName(newName);
             setIsEditing(false);
+            onNameChange(newName); 
         } catch (error) {
             console.error('이름 저장 실패', error);
         }
@@ -61,14 +58,13 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
 
     const handleSecession = async () => {
         try {
-            await SeugiCustomAxios.delete(`/member/remove`)
+            await SeugiCustomAxios.delete(`/member/remove`);
             localStorage.clear();
-
             window.location.href = '/';
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     return (
         <S.SettingProfile>
@@ -125,7 +121,6 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose }) => {
                     </S.TextContainer>
                 </>
             )}
-
         </S.SettingProfile>
     );
 };

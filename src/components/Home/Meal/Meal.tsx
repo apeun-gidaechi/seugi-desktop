@@ -1,50 +1,59 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 import * as S from '@/components/Home/Meal/Meal.style';
 
 import CafeteriaImg from "@/assets/image/home/cafeteria.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
 
 const Meal = () => {
-    const [selectedMeal, setSelectedMeal] = useState("아침");
-    const getMenu = () => {
-        switch (selectedMeal) {
-            case "아침":
-                return (
-                    <>
-                        <S.Menu> 쇠고기야채죽 </S.Menu>
-                        <S.Menu> 연유프렌치토스트 </S.Menu>
-                        <S.Menu> 배추김치 </S.Menu>
-                        <S.Menu> 포도 </S.Menu>
-                        <S.Menu> 허쉬초코크런치시리얼+우유 </S.Menu>
-                    </>
-                );
-            case "점심":
-                return (
-                    <>
-                        <S.Menu> 추가밥 </S.Menu>
-                        <S.Menu> 메콤로제해물파스타 </S.Menu>
-                        <S.Menu> #브리오슈수제버거 </S.Menu>
-                        <S.Menu> 모둠야채피클 </S.Menu>
-                        <S.Menu> 맥케인 </S.Menu>
-                        <S.Menu> 망고사고 </S.Menu>
-                    </>
-                );
-            case "저녁":
-                return (
-                    <>
-                        <S.Menu> 현미밥 </S.Menu>
-                        <S.Menu> 돼지국밥 </S.Menu>
-                        <S.Menu> 삼색나물무침 </S.Menu>
-                        <S.Menu> -오징어야채볶음 </S.Menu>
-                        <S.Menu> 석박지 </S.Menu>
-                    </>
-                );
-            default:
-                return null;
+    const [selectedMeal, setSelectedMeal] = useState(0);
+    const [Menu, setMenu] = useState<string[]>([]);
+    const [MealType, setMealType] = useState<string>('');
+    const [Calorie, setCalorie] = useState<string>('');
+    const workspaceId = window.localStorage.getItem('workspaceId');
+
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const date = `${year}${month}${day}`;
+
+    const getMenu = async (mealIndex: number) => {
+        try {
+            const res = await SeugiCustomAxios.get(`/meal?workspaceId=${workspaceId}&date=${date}`);
+            setMenu(res.data.data[mealIndex].menu);
+            setMealType(res.data.data[mealIndex].mealType);
+            setCalorie(res.data.data[mealIndex].calorie);
+        } catch (error) {
+            console.error("Error fetching menu:", error);
         }
     };
+
+    const determineMealBasedOnTime = () => {
+        const hour = today.getHours();
+        if (hour < 9) {
+            setSelectedMeal(0); 
+        } else if (hour < 13) {
+            setSelectedMeal(1); 
+        } else {
+            setSelectedMeal(2); 
+        }
+    };
+
+    useEffect(() => {
+        determineMealBasedOnTime();
+    }, []);
+
+    useEffect(() => {
+        getMenu(selectedMeal);
+    }, [selectedMeal]);
+
+    const handleMealChange = (mealIndex: number) => {
+        setSelectedMeal(mealIndex);
+    };
+
     return (
-        <S.DownContainer>
+        <S.CafeteriaContainer>
             <S.CafeteriaTitleBox>
                 <S.CafeteriaTitleDiv>
                     <S.CafeteriaImg src={CafeteriaImg} />
@@ -55,40 +64,47 @@ const Meal = () => {
                 </S.ArrowLButton>
             </S.CafeteriaTitleBox>
             <S.CafeteriaDiv>
-                <S.TimeButton onClick={() => setSelectedMeal("아침")}>
+                <S.TimeButton onClick={() => handleMealChange(0)}>
                     <S.Meal
-                        className={selectedMeal === "아침" ? "selected" : ""}
+                        className={selectedMeal === 0 ? "selected" : ""}
                         style={{
-                            color: selectedMeal === "아침" ? "#000" : "#787878",
+                            color: selectedMeal === 0 ? "#000" : "#787878",
                         }}
                     >
                         아침
                     </S.Meal>
                 </S.TimeButton>
-                <S.TimeButton onClick={() => setSelectedMeal("점심")}>
+                <S.TimeButton onClick={() => handleMealChange(1)}>
                     <S.Meal
-                        className={selectedMeal === "점심" ? "selected" : ""}
+                        className={selectedMeal === 1 ? "selected" : ""}
                         style={{
-                            color: selectedMeal === "점심" ? "#000" : "#787878",
+                            color: selectedMeal === 1 ? "#000" : "#787878",
                         }}
                     >
                         점심
                     </S.Meal>
                 </S.TimeButton>
-                <S.TimeButton onClick={() => setSelectedMeal("저녁")}>
+                <S.TimeButton onClick={() => handleMealChange(2)}>
                     <S.Meal
-                        className={selectedMeal === "저녁" ? "selected" : ""}
+                        className={selectedMeal === 2 ? "selected" : ""}
                         style={{
-                            color: selectedMeal === "저녁" ? "#000" : "#787878",
+                            color: selectedMeal === 2 ? "#000" : "#787878",
                         }}
                     >
                         저녁
                     </S.Meal>
                 </S.TimeButton>
             </S.CafeteriaDiv>
-            <S.MenuList>{getMenu()}</S.MenuList>
-        </S.DownContainer>
-    )
-}
+            <S.MenuList>
+                {Menu && Menu.map((item, index) => (
+                    <S.Menu key={index}>{item}</S.Menu>
+                ))}
+                <S.CalorieDiv>
+                    <S.CalorieText>{Calorie}</S.CalorieText>
+                </S.CalorieDiv>
+            </S.MenuList>
+        </S.CafeteriaContainer>
+    );
+};
 
 export default Meal;

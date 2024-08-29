@@ -92,7 +92,23 @@ export const NoSubSchoolText = styled.span`
   padding: 0 0 8px 0;
 `;
 
-export const SchoolBox = styled.div`
+export const JoinSchoolBox = styled.div`
+  width: 280px;
+  height: 40px;
+
+  display: flex;
+  padding: 16px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+
+  border-radius: 8px;
+  background: ${SeugiColor.Primary050};
+
+  cursor: pointer;
+`;
+
+export const PendingSchoolBox = styled.div`
   width: 280px;
   height: 40px;
 
