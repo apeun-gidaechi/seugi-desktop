@@ -16,6 +16,11 @@ export const LeftContainer = styled.div`
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
 
+export const NoNotification = styled.span`
+  color: ${SeugiColor.Black};
+
+  ${SeugiFont.subtitle.subtitle2};
+`
 export const NotificationContainer = styled.div`
   display: flex;
   padding: 4px;
@@ -62,6 +67,10 @@ export const NotificationBox = styled.div`
   align-items: center;
   gap: 8px;
   align-self: stretch;
+  max-height: 500px; 
+  overflow-y: auto; 
+  padding-right: 10px;
+  margin-top: 10px;
 `;
 
 export const NotificationWrapper = styled.div`
@@ -106,13 +115,22 @@ export const NotificationEmojiBox = styled.div`
   flex-direction: row;
 `;
 
+export const NotificationAddEmojiButton = styled.button`
+  border:none;
+  background:none;
+
+  cursor: pointer;
+`
+
 export const NotificationAddEmoji = styled.img`
   position: relative;
 
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
 
   padding: 4px;
+
+
 `;
 
 export const NotificationEmojiWrapper = styled.div`
