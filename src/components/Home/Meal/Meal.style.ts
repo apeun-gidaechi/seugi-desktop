@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { SeugiColor } from '@/design/color/SeugiColor';
 import { SeugiFont } from '@/design/text/SeugiFont';
 
-export const DownContainer = styled.div`
+export const CafeteriaContainer = styled.div`
   display: flex;
   padding: 12px 12px 16px 12px;
   flex-direction: column;
@@ -92,3 +92,19 @@ export const Menu = styled.span`
 
   ${SeugiFont.subtitle.subtitle2};
 `;
+
+export const CalorieDiv = styled.div`
+  display: flex;
+  padding: 4px 8px;
+  align-items: flex-start;
+  gap: var(--Corner-Small, 10px);
+
+  border-radius: 34px;
+  background: ${SeugiColor.Primary500};
+`
+
+export const CalorieText = styled.span`
+  color: ${SeugiColor.White};
+
+  ${SeugiFont.caption.caption1};
+ `

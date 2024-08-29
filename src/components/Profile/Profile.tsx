@@ -95,6 +95,10 @@ const Profile = () => {
         };
     }, [isSettingOpen]);
 
+    const handleNameChange = (newName: string) => {
+        setName(newName);
+    };
+
     return (
         <>
             <S.MyProfileDialog>
@@ -221,7 +225,7 @@ const Profile = () => {
             </S.MyProfileDialog>
             {isSettingOpen && (
                 <S.SettingWrapper>
-                    <SettingProfile onClose={toggleSetting} />
+                    <SettingProfile onClose={toggleSetting} onNameChange={handleNameChange} />
                 </S.SettingWrapper>
             )}
         </>
