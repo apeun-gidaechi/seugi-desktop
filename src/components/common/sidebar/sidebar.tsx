@@ -1,19 +1,20 @@
+// Sidebar.tsx
 import React, { useState } from "react";
-import * as S from "./sidebar.style";
-
+import * as S from "@/components/common/ChatSidebar/Chat/index.style";
 import PlusButton from "@/assets/image/sidebar/plusButton.svg";
 import SearchIcon from "@/assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
-
 import Navbar from "@/components/common/Navbar/Navbar";
 import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus"; 
-
+import TitleText from "@/components/common/TitleText/index";
 import config from "@/constants/ChatMember/config.json";
-import SendMessage from "@/components/common//sendMessage/sendMessage";
+import SendMessage from "@/components/common/sendMessage/sendMessage";
 
-interface SidebarProps {}
+interface SidebarProps {
+  onSelectChatRoom: (room: string) => void;
+}
 
-const Sidebar: React.FC<SidebarProps> = () => {
+const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const [searchText, setSearchText] = useState("");
   const [chatRooms, setChatRooms] = useState<string[]>([]);
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
@@ -47,6 +48,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
 
   const handleChatRoomClick = (room: string) => {
     setSelectedChatRoom(room);
+    onSelectChatRoom(room); // Notify parent about room selection
   };
 
   const handleCreateRoomClick = () => {
@@ -59,7 +61,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
 
   const handleRoomCreation = (roomName: string) => {
     addChatRoom(roomName);
-    setShowCreateRoom(false); // Close the create room modal after creating room
+    setShowCreateRoom(false);
   };
 
   return (
@@ -67,6 +69,9 @@ const Sidebar: React.FC<SidebarProps> = () => {
       <S.ChatingPage>
         <Navbar />
         <S.SideBarChat>
+          <div style={{ marginLeft: '1.5%' }}>
+            <TitleText/>
+          </div>
           <S.SideFinder>
             <S.FindChatingRoom
               type="text"
@@ -81,19 +86,18 @@ const Sidebar: React.FC<SidebarProps> = () => {
             />
             <S.SearchIcon src={SearchIcon} onClick={handleSearch} />
           </S.SideFinder>
-          <S.PlusButton>
-            <S.PlusButtonImg src={PlusButton} onClick={handleCreateRoomClick} />
-          </S.PlusButton>
-          <S.ChatRoomList>
-            {chatRooms.map((room, index) => (
-              <S.ChatRoom key={index} onClick={() => handleChatRoomClick(room)}>
-                <S.ChatRoomAvatarWrap>
-                  <S.ChatRoomAvatar src={AvatarProfile} />
-                </S.ChatRoomAvatarWrap>
-                {room}
-              </S.ChatRoom>
-            ))}
-          </S.ChatRoomList>
+          <S.ChatRoomsWrap>
+            <S.ChatRoomList>
+                {chatRooms.map((room, index) => (
+                <S.ChatRoom key={index} onClick={() => handleChatRoomClick(room)}>
+                    <S.ChatRoomAvatarWrap>
+                    <S.ChatRoomAvatar src={AvatarProfile} />
+                    </S.ChatRoomAvatarWrap>
+                    {room}
+                </S.ChatRoom>
+                ))}
+            </S.ChatRoomList>
+          </S.ChatRoomsWrap>
         </S.SideBarChat>
         {selectedChatRoom && (
           <SendMessage chatRoom={selectedChatRoom} currentUser="사용자 이름" />
