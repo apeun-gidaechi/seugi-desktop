@@ -8,6 +8,9 @@ import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
 import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
 import SendArrowBlue from "@/assets/image/chat-components/sendBlueArrow.svg";
 
+import UnSelectRoom from "@/components/common/chatRoom/unSelect/index";
+import SelectRoom from "@/components/common/chatRoom/Selected/index";
+
 interface SendMessageProps {
   chatRoom: string;
   currentUser: string;
@@ -66,7 +69,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
     const client = new Client({
       brokerURL: "wss://hoolc.me/stomp/chat",
       connectHeaders: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTcxNTg1ODkwMywiZXhwIjoxNzIxODU4OTAzfQ.F5_W4wAay4FbssM6XxJSCiUIvGCAcjAXqPxb-PXvUDo`,
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZW1haWwiOiJsa2gxMDI4NUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzI0OTE4NDQ3LCJleHAiOjE3MjQ5MjQ0NDd9.L7qv9AOd2C055fwWJUQacf2m8PK7Df42eNFfui5ljrA`,
       },
       debug: (str) => {
         console.log(str);
@@ -173,3 +176,5 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
 };
 
 export default SendMessage;
+
+
