@@ -19,6 +19,7 @@
     "@types/stompjs": "^2.3.9",
     "axios": "^1.6.8",
     "electron-is-dev": "^3.0.1",
+    "emoji-picker-react": "^4.11.1",
     "express": "^4.19.2",
     "http-proxy-middleware": "^3.0.0",
     "react": "^18.2.0",
