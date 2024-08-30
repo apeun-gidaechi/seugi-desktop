@@ -35,7 +35,7 @@ const Meal = () => {
             setCalorie(mealData.calorie || '');
         } catch (error) {
             console.error("Error fetching menu:", error);
-            setMenu([]); // Clear the menu in case of an error
+            setMenu([]); 
             setMealType('');
             setCalorie('');
         }
