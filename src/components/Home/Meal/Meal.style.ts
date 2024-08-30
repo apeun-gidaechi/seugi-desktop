@@ -108,3 +108,9 @@ export const CalorieText = styled.span`
 
   ${SeugiFont.caption.caption1};
  `
+
+export const NoMealMessage = styled.span`
+  color:${SeugiColor.Gray700};
+
+  ${SeugiFont.subtitle.subtitle2};
+`
