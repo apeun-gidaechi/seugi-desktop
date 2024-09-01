@@ -18,7 +18,7 @@ const Schools = () => {
         };
 
         if (showChangeschool) {
-            document.addEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         } else {
             document.removeEventListener("mousedown", handleClickOutside);
         }
