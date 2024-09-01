@@ -12,7 +12,6 @@ import Divider from '@/assets/image/Profile/Divider.svg';
 import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 
 const Profile = () => {
-    const token = window.localStorage.getItem("accessToken");
     const workspaceId = window.localStorage.getItem("workspaceId");
     const [isEditing, setIsEditing] = useState(null);
     const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -40,7 +39,7 @@ const Profile = () => {
             }
         };
         fetchProfileData();
-    }, [workspaceId, token]);
+    }, [workspaceId]);
 
     const startEditing = (field: any) => {
         setIsEditing(field);
@@ -78,7 +77,7 @@ const Profile = () => {
     };
 
     useEffect(() => {
-        const handleClickOutside = (e:any) => {
+        const handleClickOutside = (e: any) => {
             if (dialogRef.current && !dialogRef.current.contains(e.target)) {
                 setIsSettingOpen(false);
             }

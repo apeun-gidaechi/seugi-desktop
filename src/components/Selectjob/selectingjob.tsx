@@ -4,9 +4,9 @@ import * as S from '@/components/Selectjob/selectingjob.style';
 import Student from '@/assets/image/join-school/selectjob/student.svg';
 import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
-import { isTokenExpired } from '@/util/tokenUtils';
+import { clearAccessToken, SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 import Backimg from '@/assets/image/Backimg.svg';
+import Session from '@/util/TokenExpired/TokenExpired';
 
 type Role = 'NONE' | 'STUDENT' | 'TEACHER';
 
@@ -23,14 +23,6 @@ const SelectingJob: React.FC = () => {
             document.body.style.overflow = 'auto';
         }
     }, []);
-
-    useEffect(() => {
-        if (isTokenExpired(token)) {
-            alert('세션이 만료되었습니다. 다시 로그인 해주세요.');
-            window.localStorage.removeItem('accessToken');
-            navigate('/');
-        }
-    }, [token, navigate]);
 
     const handleStudentClick = () => {
         setSelectedRole('STUDENT');
@@ -51,13 +43,6 @@ const SelectingJob: React.FC = () => {
     const handleSelectedJob = async () => {
         if (selectedRole === 'NONE') {
             alert("학생/선생님 선택해주세요");
-            return;
-        }
-
-        if (isTokenExpired(token)) {
-            alert('세션이 만료되었습니다. 다시 로그인 해주세요.');
-            window.localStorage.removeItem('accessToken');
-            navigate('/');
             return;
         }
 
@@ -84,6 +69,7 @@ const SelectingJob: React.FC = () => {
 
     return (
         <S.SelectMain>
+            <Session token={token} clearAccessToken={clearAccessToken} />
             <S.SelectFirstWrap>
                 <S.BackButton onClick={Backclick}>
                     <S.BackImg src={Backimg} />

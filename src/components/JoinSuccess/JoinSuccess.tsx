@@ -5,6 +5,7 @@ import * as S from "@/components/JoinSuccess/JoinSuccess.style";
 import { useNavigate, useLocation } from "react-router-dom";
 import Backimg from "@/assets/image/Backimg.svg";
 import config from '@/constants/config/config.json';
+import React from "react";
 
 const JoinSuccess = () => {
   const navigate = useNavigate();
@@ -12,7 +13,6 @@ const JoinSuccess = () => {
   const [schoolInfo, setSchoolInfo] = useState("");
   const [schoolImgUrl, setSchoolImgUrl] = useState("");
   const [workspaceId, setWorkspaceId] = useState("");
-  const token = window.localStorage.getItem("accessToken");
   const location = useLocation();
   const { verificationCode } = location.state || {};
 
@@ -38,7 +38,7 @@ const JoinSuccess = () => {
       }
     };
     handleSchoolInfo();
-  }, [verificationCode, token]);
+  }, [verificationCode]);
 
   const Backclick = () => {
     navigate("/schoolcode");
