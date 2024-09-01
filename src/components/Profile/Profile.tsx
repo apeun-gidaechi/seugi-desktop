@@ -84,7 +84,7 @@ const Profile = () => {
         };
 
         if (isSettingOpen) {
-            document.addEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         } else {
             document.removeEventListener("mousedown", handleClickOutside);
         }

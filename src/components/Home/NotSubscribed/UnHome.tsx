@@ -14,14 +14,12 @@ import CafeteriaImg from '@/assets/image/home/cafeteria.svg'
 
 import RegisterSchool from '@/components/Home/NotSubscribed/RegisterSchool/RegisterSchool';
 
-import { useNavigate } from 'react-router-dom';
 import Session from '@/util/TokenExpired/TokenExpired';
 import { clearAccessToken } from '@/api/SeugiCutomAxios';
 
 const UnHome = () => {
     const [showChangeschool, setShowChangeschool] = useState(false);
     const token = window.localStorage.getItem("accessToken");
-    const navigate = useNavigate();
 
     useEffect(() => {
         document.body.style.overflow = "hidden";
