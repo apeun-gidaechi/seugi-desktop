@@ -10,13 +10,11 @@ import Calendar from "@/components/Home/Calendar/Calendar";
 import Notification from '@/components/Home/Notification/Notification';
 import DailySchedule from "@/components/Home/DailySchedule/DailySchedule";
 
-
-import { isTokenExpired } from "@/util/tokenUtils";
-import { useNavigate } from "react-router-dom";
+import { clearAccessToken } from "@/api/SeugiCutomAxios";
+import Session from "@/util/TokenExpired/TokenExpired";
 
 const Home: React.FC = () => {
   const token = window.localStorage.getItem("accessToken");
-  const navigate = useNavigate();
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -25,17 +23,9 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (isTokenExpired(token)) {
-      alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
-      window.localStorage.removeItem("accessToken");
-      navigate("/");
-    }
-  }, [token, navigate]);
-
-  
   return (
     <S.HomeContainer>
+      <Session token={token} clearAccessToken={clearAccessToken} />
       <Navbar />
       <S.HomeMain>
         <S.HomeTitle>홈</S.HomeTitle>
@@ -46,7 +36,7 @@ const Home: React.FC = () => {
               <Notification />
               <S.RightContainer>
                 <Calendar />
-                <CatSeugi/>
+                <CatSeugi />
               </S.RightContainer>
             </S.HomeWrapper1DownContainer>
           </S.HomeWrapper1>

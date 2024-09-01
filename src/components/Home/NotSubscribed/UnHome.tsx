@@ -14,21 +14,14 @@ import CafeteriaImg from '@/assets/image/home/cafeteria.svg'
 
 import RegisterSchool from '@/components/Home/NotSubscribed/RegisterSchool/RegisterSchool';
 
-import { isTokenExpired } from "@/util/tokenUtils";
 import { useNavigate } from 'react-router-dom';
+import Session from '@/util/TokenExpired/TokenExpired';
+import { clearAccessToken } from '@/api/SeugiCutomAxios';
 
 const UnHome = () => {
     const [showChangeschool, setShowChangeschool] = useState(false);
     const token = window.localStorage.getItem("accessToken");
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (isTokenExpired(token)) {
-            alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
-            window.localStorage.removeItem("accessToken");
-            navigate("/");
-        }
-    }, [token, navigate]);
 
     useEffect(() => {
         document.body.style.overflow = "hidden";
@@ -43,6 +36,7 @@ const UnHome = () => {
 
     return (
         <S.HomeContainer>
+            <Session token={token} clearAccessToken={clearAccessToken} />
             <RegisterSchool />
             <Navbar />
             <S.HomeMain>

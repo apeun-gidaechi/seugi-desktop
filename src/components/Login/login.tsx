@@ -16,6 +16,8 @@ import Cloud2 from "@/assets/image/onbording/Start/LoginCloud2.svg";
 import Sun from "@/assets/image/onbording/Start/LoginSun.svg";
 import Divider from "@/assets/image/onbording/Start/Divider.svg";
 
+import { setAccessToken } from '@/api/SeugiCutomAxios';
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -89,10 +91,9 @@ const Login = () => {
 
       const { accessToken, refreshToken } = res.data.data;
 
+      setAccessToken(accessToken);
       window.localStorage.setItem("accessToken", accessToken);
       window.localStorage.setItem("refreshToken", refreshToken);
-
-      console.log(res);
 
       importWorkspace();
     } catch (error) {
