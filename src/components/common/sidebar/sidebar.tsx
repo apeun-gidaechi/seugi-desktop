@@ -39,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   };
 
   const handleChatRoomClick = (room: string) => {
-    onSelectChatRoom(room); // Notify parent about room selection
+    onSelectChatRoom(room);
   };
 
   const handleCreateRoomClick = () => {
