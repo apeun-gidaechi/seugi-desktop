@@ -77,22 +77,28 @@ const Profile = () => {
     };
 
     useEffect(() => {
-        const handleClickOutside = (e: any) => {
-            if (dialogRef.current && !dialogRef.current.contains(e.target)) {
+        const handleClickOutside = (e: MouseEvent) => {
+            const target = e.target as Node | null;
+
+            if (
+                dialogRef.current &&
+                !dialogRef.current.contains(target) &&
+                !(target && (target as Element).closest('.SettingButton'))
+            ) {
                 setIsSettingOpen(false);
             }
         };
 
         if (isSettingOpen) {
-            document.removeEventListener("mousedown", handleClickOutside);
-        } else {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.addEventListener("mousedown", handleClickOutside);
         }
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [isSettingOpen]);
+
+
 
     const handleNameChange = (newName: string) => {
         setName(newName);
@@ -106,7 +112,7 @@ const Profile = () => {
                         <S.ProfileImg src={ProfileImg} />
                         <S.ProfileName>{name}</S.ProfileName>
                     </S.MyProfileDiv>
-                    <S.SettingButton onClick={toggleSetting}>
+                    <S.SettingButton onClick={toggleSetting} className='SettingButton'>
                         <S.SettingButtonImg src={SettingImg} />
                     </S.SettingButton>
                 </S.MyinfoDiv>

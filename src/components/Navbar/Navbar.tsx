@@ -29,7 +29,7 @@ const Navbar = () => {
   };
 
   const handleAvatarClick = () => {
-    setIsProfileVisible((prev) => !prev);
+    setIsProfileVisible(prev => !prev);
   };
 
   useEffect(() => {
@@ -45,15 +45,19 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+      const target = e.target as Node | null;
+
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(target) &&
+        !(target && (target as Element).closest('.AvactarClick'))
+      ) {
         setIsProfileVisible(false);
       }
     };
 
     if (isProfileVisible) {
-      document.removeEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
@@ -83,7 +87,7 @@ const Navbar = () => {
           <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
         </S.SideBarButton>
         <S.SideAvatarImgWrap>
-          <S.SideAvatarButton onClick={handleAvatarClick}>
+          <S.SideAvatarButton onClick={handleAvatarClick} className="AvactarClick">
             <S.SideAvatarImg src={AvatarImg} />
           </S.SideAvatarButton>
         </S.SideAvatarImgWrap>
