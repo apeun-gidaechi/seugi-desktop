@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import * as S from "@/pages/chat/chat.style";
-import SideBar from "@/components/common/sidebar/sidebar";
 import UnChatRoom from '@/components/common/chatRoom/unSelect/index';
-
+import SelectedChatRoom from '@/components/common/chatRoom/Selecte/index';
 import Layer from '@/components/layer/chat/index';
+import Sidebar from '@/components/common/sidebar/sidebar'; // Import Sidebar component
 
-const Chat: React.FC = () => {
+const Chat = () => {
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
 
   const handleSelectChatRoom = (room: string) => {
-    console.log('1')
     setSelectedChatRoom(room);
-    console.log("Selected chat room:", room)
   };
 
   return (
     <S.ChatContainer>
       <Layer />
-      <SideBar onSelectChatRoom={handleSelectChatRoom} /> 
-
+      <Sidebar onSelectChatRoom={handleSelectChatRoom} /> {/* Pass handleSelectChatRoom as prop */}
+      {selectedChatRoom ? (
+        <SelectedChatRoom room={selectedChatRoom} />
+      ) : (
+        <UnChatRoom />
+      )}
     </S.ChatContainer>
   );
 };
