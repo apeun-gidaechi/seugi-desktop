@@ -1,14 +1,12 @@
-// Sidebar.tsx
 import React, { useState } from "react";
 import * as S from "@/components/common/ChatSidebar/Chat/index.style";
 import PlusButton from "@/assets/image/sidebar/plusButton.svg";
 import SearchIcon from "@/assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 import Navbar from "@/components/common/Navbar/Navbar";
-import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus"; 
+import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus";
 import TitleText from "@/components/common/TitleText/index";
 import config from "@/constants/ChatMember/config.json";
-import SendMessage from "@/components/common/sendMessage/sendMessage";
 
 interface SidebarProps {
   onSelectChatRoom: (room: string) => void;
@@ -17,13 +15,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const [searchText, setSearchText] = useState("");
   const [chatRooms, setChatRooms] = useState<string[]>([]);
-  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
   const [showCreateRoom, setShowCreateRoom] = useState(false);
-
-  const handleCreatePersonalChat = () => {
-    const newRoomId = `room-${Date.now()}`;
-    addChatRoom(newRoomId);
-  };
 
   const handleSearch = () => {
     if (searchText.trim() !== "") {
@@ -47,7 +39,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   };
 
   const handleChatRoomClick = (room: string) => {
-    setSelectedChatRoom(room);
     onSelectChatRoom(room); // Notify parent about room selection
   };
 
@@ -70,7 +61,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
         <Navbar />
         <S.SideBarChat>
           <div style={{ marginLeft: '1.5%' }}>
-            <TitleText/>
+            <TitleText />
           </div>
           <S.SideFinder>
             <S.FindChatingRoom
@@ -88,20 +79,17 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
           </S.SideFinder>
           <S.ChatRoomsWrap>
             <S.ChatRoomList>
-                {chatRooms.map((room, index) => (
+              {chatRooms.map((room, index) => (
                 <S.ChatRoom key={index} onClick={() => handleChatRoomClick(room)}>
-                    <S.ChatRoomAvatarWrap>
+                  <S.ChatRoomAvatarWrap>
                     <S.ChatRoomAvatar src={AvatarProfile} />
-                    </S.ChatRoomAvatarWrap>
-                    {room}
+                  </S.ChatRoomAvatarWrap>
+                  {room}
                 </S.ChatRoom>
-                ))}
+              ))}
             </S.ChatRoomList>
           </S.ChatRoomsWrap>
         </S.SideBarChat>
-        {selectedChatRoom && (
-          <SendMessage chatRoom={selectedChatRoom} currentUser="사용자 이름" />
-        )}
         {showCreateRoom && (
           <CreateRoomPlus
             onClose={handleCloseCreateRoom}

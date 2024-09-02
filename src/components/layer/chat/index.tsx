@@ -13,7 +13,7 @@ const index = () => {
             <TopButton />
             {/* <ChatRoom/> */}
         </S.ButtonWrapper>
-        <SideBar />
+        {/* <SideBar /> */}
     </S.ChatingBackground>
   )
 }
