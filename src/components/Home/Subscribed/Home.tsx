@@ -9,19 +9,26 @@ import CatSeugi from "@/components/Home/CatSeugi/CatSeugi";
 import Calendar from "@/components/Home/Calendar/Calendar";
 import Notification from '@/components/Home/Notification/Notification';
 import DailySchedule from "@/components/Home/DailySchedule/DailySchedule";
-
+import { handleUserRole } from '@/util/Role/WhatisYourRole';
 import { clearAccessToken } from "@/api/SeugiCutomAxios";
 import Session from "@/util/TokenExpired/TokenExpired";
 
 const Home: React.FC = () => {
   const token = window.localStorage.getItem("accessToken");
-
+  const workspaceId = window.localStorage.getItem('workspaceId');
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, []);
+
+  if (workspaceId !== null) {
+    handleUserRole(workspaceId);
+  } else {
+    console.error('워크스페이스가 없어요');
+  }
+
 
   return (
     <S.HomeContainer>
