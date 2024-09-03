@@ -2,29 +2,31 @@ import React, { useState } from "react";
 import * as S from "@/pages/chat/chat.style";
 import UnChatRoom from '@/components/common/chatRoom/unSelect/index';
 import SelectedChatRoom from '@/components/common/chatRoom/Selecte/index';
-import Layer from '@/components/layer/chat/index';
 import Sidebar from '@/components/common/sidebar/sidebar'; 
-import TopButton from '@/components/button/chatButton/index'
+import TopButton from '@/components/button/chatButton/index';
 
 const Chat = () => {
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
+  const currentUser = "JohnDoe"; // 하드코딩 수정예정
 
   const handleSelectChatRoom = (room: string) => {
     setSelectedChatRoom(room);
   };
 
   return (
-    <S.ChatContainer>
-      <S.ButtonWrapper>
-            <TopButton />
+    <S.ChatWrapper>
+      <Sidebar onSelectChatRoom={handleSelectChatRoom} />
+      <S.ChatContent>
+        <S.ButtonWrapper>
+          <TopButton />
         </S.ButtonWrapper>
-      <Sidebar onSelectChatRoom={handleSelectChatRoom} /> 
-      {selectedChatRoom ? (
-        <SelectedChatRoom room={selectedChatRoom} />
-      ) : (
-        <UnChatRoom />
-      )}
-    </S.ChatContainer>
+        {selectedChatRoom ? (
+          <SelectedChatRoom room={selectedChatRoom} currentUser={currentUser} />
+        ) : (
+          <UnChatRoom />
+        )}
+      </S.ChatContent>
+    </S.ChatWrapper>
   );
 };
 
