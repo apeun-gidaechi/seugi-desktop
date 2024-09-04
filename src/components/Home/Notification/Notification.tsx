@@ -32,8 +32,8 @@ const Notification: React.FC = () => {
     const [isEmojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
     const [activeNotification, setActiveNotification] = useState<number | null>(null);
     const [isCreateNoticeVisible, setCreateNoticeVisible] = useState<boolean>(false);
-    const [userRole, setUserRole] = useState<string | null>(null); // 역할 상태 추가
-    const [showAlert, setShowAlert] = useState<boolean>(false); // 알림 표시 상태
+    const [userRole, setUserRole] = useState<string | null>(null); 
+    const [showAlert, setShowAlert] = useState<boolean>(false); 
     const CreateNoticeRef = useRef<HTMLDivElement>(null);
 
     const getNotification = async () => {
