@@ -15,9 +15,8 @@ import Chat from '@/pages/chat/chat'
 import GroupChat from '@/pages/GroupChat/index'
 import Notification from '@/pages/Notification/index'
 import UnHome from '@/components/Home/NotSubscribed/UnHome';
-
+import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 
 const Router = () => {
     return (

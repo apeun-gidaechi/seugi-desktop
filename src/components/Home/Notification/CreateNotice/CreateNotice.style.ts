@@ -2,6 +2,22 @@ import styled from "styled-components";
 import { SeugiColor } from "@/design/color/SeugiColor";
 import { SeugiFont } from "@/design/text/SeugiFont";
 
+export const NoticeMain = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    position:absolute;
+
+    background: rgba(0, 0, 0, 0.30);
+    
+    z-index:998;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+`
+
 export const CreateNoticeContainer = styled.div`
     position: absolute;
     left: 400px;
@@ -19,6 +35,9 @@ export const CreateNoticeContainer = styled.div`
     background: ${SeugiColor.White};
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+
+    z-index:999;
+
 `
 
 export const TitleContainer = styled.div`
