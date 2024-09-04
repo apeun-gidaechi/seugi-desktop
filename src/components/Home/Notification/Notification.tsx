@@ -8,13 +8,12 @@ import AddEmoji from '@/components/Home/Notification/Emoji/emojipicker';
 
 import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 import { EmojiClickData } from 'emoji-picker-react';
-
-import config from '@/constants/config/config.json';
+import CreateNotice from '@/components/Home/Notification/CreateNotice/CreateNotice';
 
 interface EmojiItem {
     emoji: string;
     count: number;
-    liked: boolean;  // 이모지를 사용자가 좋아했는지 여부
+    liked: boolean;
 }
 
 interface NotificationItem {
@@ -28,7 +27,6 @@ interface NotificationItem {
 
 const Notification: React.FC = () => {
     const workspaceId = window.localStorage.getItem('workspaceId');
-    const userId = window.localStorage.getItem('userId');  // User ID 가져오기
     const [notifications, setNotifications] = useState<NotificationItem[]>([]);
     const [isEmojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
     const [activeNotification, setActiveNotification] = useState<number | null>(null);
@@ -38,12 +36,11 @@ const Notification: React.FC = () => {
             const res = await SeugiCustomAxios.get(`/notification/${workspaceId}?page=0&size=20`);
             console.log("알람 :", workspaceId);
 
-            // 서버에서 받아온 데이터에서 liked 필드를 설정 (기본적으로 false)
             const formattedNotifications = res.data.data.map((notification: NotificationItem) => ({
                 ...notification,
                 emoji: notification.emoji.map((emoji: EmojiItem) => ({
                     ...emoji,
-                    liked: false, // 처음에는 모든 이모지를 좋아하지 않은 상태로 설정
+                    liked: false,
                 })),
             }));
 
@@ -92,7 +89,7 @@ const Notification: React.FC = () => {
 
         setNotifications(updatedNotifications);
 
-        // 서버에 이모지 클릭 정보 전송 (옵션)
+        // 서버에 이모지 클릭 정보 전송
         try {
             await SeugiCustomAxios.patch(`/notification/emoji`, {
                 notificationId: notification.id,
