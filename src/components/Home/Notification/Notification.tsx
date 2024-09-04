@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as S from '@/components/Home/Notification/Notification.style';
+import CustomAlert from '@/components/Alert/Alert';
 
 import Emoji from "@/assets/image/home/emoji.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
@@ -30,6 +31,10 @@ const Notification: React.FC = () => {
     const [notifications, setNotifications] = useState<NotificationItem[]>([]);
     const [isEmojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
     const [activeNotification, setActiveNotification] = useState<number | null>(null);
+    const [isCreateNoticeVisible, setCreateNoticeVisible] = useState<boolean>(false);
+    const [userRole, setUserRole] = useState<string | null>(null); // 역할 상태 추가
+    const [showAlert, setShowAlert] = useState<boolean>(false); // 알림 표시 상태
+    const CreateNoticeRef = useRef<HTMLDivElement>(null);
 
     const getNotification = async () => {
         try {
@@ -51,31 +56,42 @@ const Notification: React.FC = () => {
     };
 
     useEffect(() => {
+        const role = window.localStorage.getItem('Role');
+        setUserRole(role);
+    }, []);
+
+    useEffect(() => {
         getNotification();
     }, []);
+
+    const handleCorrectionClick = () => {
+        if (userRole === 'STUDENT') {
+            setShowAlert(true);
+            return;
+        }
+        setCreateNoticeVisible(true);
+    };
 
     const handleEmojiClick = async (parentKey: number, childKey: number) => {
         const notification = notifications[parentKey];
         const emoji = notification.emoji[childKey];
 
-        // 이모지 클릭 처리
         const updatedNotifications = notifications.map((item, index) => {
             if (index === parentKey) {
                 const updatedEmoji = item.emoji.map((emoji, idx) => {
                     if (idx === childKey) {
-                        // 이모지가 이미 눌린 상태인 경우
                         if (emoji.liked) {
                             const newCount = emoji.count - 1;
                             return {
                                 ...emoji,
                                 count: newCount,
-                                liked: false,  // 누른 상태를 취소
+                                liked: false,
                             };
                         } else {
                             return {
                                 ...emoji,
                                 count: emoji.count + 1,
-                                liked: true,  // 이모지 누른 상태로 변경
+                                liked: true,
                             };
                         }
                     }
@@ -89,7 +105,6 @@ const Notification: React.FC = () => {
 
         setNotifications(updatedNotifications);
 
-        // 서버에 이모지 클릭 정보 전송
         try {
             await SeugiCustomAxios.patch(`/notification/emoji`, {
                 notificationId: notification.id,
@@ -143,14 +158,49 @@ const Notification: React.FC = () => {
         setActiveNotification(null);
     };
 
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            const target = e.target as Node | null;
+
+            if (
+                CreateNoticeRef.current &&
+                !CreateNoticeRef.current.contains(target)
+            ) {
+                setCreateNoticeVisible(false);
+            }
+        };
+
+        if (CreateNoticeRef.current) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [CreateNoticeRef]);
+
     return (
         <S.LeftContainer>
+            {isCreateNoticeVisible && (
+                <div ref={CreateNoticeRef}>
+                    <CreateNotice onClose={() => setCreateNoticeVisible(false)} />
+                </div>
+            )}
+            {showAlert && (
+                <CustomAlert
+                    titletext="권한이 없습니다"
+                    subtext='선생님만 할 수 있는 작업입니다.'
+                    buttontext="닫기"
+                    onClose={() => setShowAlert(false)}
+                    position="top-right" 
+                />
+            )}
             <S.NotificationContainer>
                 <S.NotificationTitleContainer>
                     <S.NotificationLogo src={NotificationImg} />
                     <S.NotificationTitle>알림</S.NotificationTitle>
                 </S.NotificationTitleContainer>
-                <S.ArrowLButton>
+                <S.ArrowLButton onClick={handleCorrectionClick}>
                     <S.NArrowLogo src={CorrectionImg} />
                 </S.ArrowLButton>
             </S.NotificationContainer>

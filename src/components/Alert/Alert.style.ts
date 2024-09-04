@@ -47,6 +47,8 @@ export const Dialog = styled.div<{ position: string }>`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   border-radius: 18px;
+
+  width:450px;
 `;
 
 

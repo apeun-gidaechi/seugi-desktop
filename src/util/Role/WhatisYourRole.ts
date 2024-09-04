@@ -22,7 +22,7 @@ const fetchUser = async (workspaceId: string): Promise<User | undefined> => {
             role: data.data as Role
         };
         
-        window.localStorage.setItem('userInfo', user.role);
+        window.localStorage.setItem('Role', user.role);
 
         return user;
     } catch (error) {
@@ -36,9 +36,9 @@ export const handleUserRole = async (workspaceId: string) => {
 
     if (user) {
         if (user.role === Role.Teacher) {
-            console.log(`선생님입니다.`);
+            console.log(user.role);
         } else if (user.role === Role.Student) {
-            console.log(`학생입니다.`);
+            console.log(user.role);
         } else {
             console.log("정체가 무엇입니까");
         }
