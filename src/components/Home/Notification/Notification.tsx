@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as S from '@/components/Home/Notification/Notification.style';
 import CustomAlert from '@/components/Alert/Alert';
 
+import Point from '@/assets/image/home/point.svg';
 import Emoji from "@/assets/image/home/emoji.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
 import CorrectionImg from '@/assets/image/home/Correction.svg';
@@ -10,6 +11,7 @@ import AddEmoji from '@/components/Home/Notification/Emoji/emojipicker';
 import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 import { EmojiClickData } from 'emoji-picker-react';
 import CreateNotice from '@/components/Home/Notification/CreateNotice/CreateNotice';
+import ChangeNotice from './ChangeNotice/ChangeNotice';
 
 interface EmojiItem {
     emoji: string;
@@ -32,14 +34,15 @@ const Notification: React.FC = () => {
     const [isEmojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
     const [activeNotification, setActiveNotification] = useState<number | null>(null);
     const [isCreateNoticeVisible, setCreateNoticeVisible] = useState<boolean>(false);
-    const [userRole, setUserRole] = useState<string | null>(null); 
-    const [showAlert, setShowAlert] = useState<boolean>(false); 
+    const [userRole, setUserRole] = useState<string | null>(null);
+    const [showAlert, setShowAlert] = useState<boolean>(false);
     const CreateNoticeRef = useRef<HTMLDivElement>(null);
+    const [changeNoticeId, setChangeNoticeId] = useState<number | null>(null);
 
     const getNotification = async () => {
         try {
             const res = await SeugiCustomAxios.get(`/notification/${workspaceId}?page=0&size=20`);
-            console.log("알람 :", workspaceId);
+            console.log("알림 :", workspaceId);
 
             const formattedNotifications = res.data.data.map((notification: NotificationItem) => ({
                 ...notification,
@@ -179,6 +182,10 @@ const Notification: React.FC = () => {
         };
     }, [CreateNoticeRef]);
 
+    const handleActionButtonClick = (notificationId: number) => {
+        setChangeNoticeId(prev => (prev === notificationId ? null : notificationId));
+    };
+
     return (
         <S.LeftContainer>
             {isCreateNoticeVisible && (
@@ -192,7 +199,7 @@ const Notification: React.FC = () => {
                     subtext='선생님만 할 수 있는 작업입니다.'
                     buttontext="닫기"
                     onClose={() => setShowAlert(false)}
-                    position="top-right" 
+                    position="top-right"
                 />
             )}
             <S.NotificationContainer>
@@ -207,9 +214,12 @@ const Notification: React.FC = () => {
             <S.NotificationBox>
                 {notifications.length > 0 ? (
                     notifications.map((item, parentKey) => (
-                        <S.NotificationWrapper key={parentKey}>
+                        <S.NotificationWrapper key={item.id}>
                             <S.NotificationContentAuthor>
-                                {item.author} · {item.date}
+                                <S.NotificationContentAuthorSpan> {item.author} · {item.date} </S.NotificationContentAuthorSpan>
+                                <S.NotificationActionButton onClick={() => handleActionButtonClick(item.id)}>
+                                    <S.NotificationActionButtonimg src={Point} />
+                                </S.NotificationActionButton>
                             </S.NotificationContentAuthor>
                             <S.NotificationContentTitle>
                                 {item.title}
@@ -240,6 +250,11 @@ const Notification: React.FC = () => {
                                     isOpened={isEmojiPickerVisible}
                                     setIsOpened={setEmojiPickerVisible}
                                     onSelect={handleEmojiSelect}
+                                />
+                            )}
+                            {changeNoticeId === item.id && (
+                                <ChangeNotice
+                                    onClose={() => handleActionButtonClick(item.id)}
                                 />
                             )}
                         </S.NotificationWrapper>

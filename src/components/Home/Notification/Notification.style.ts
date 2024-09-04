@@ -87,11 +87,18 @@ export const NotificationWrapper = styled.div`
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
 
-export const NotificationContentAuthor = styled.span`
+export const NotificationContentAuthor = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+`;
+
+export const NotificationContentAuthorSpan = styled.span`
   color:${SeugiColor.Gray600};
 
   ${SeugiFont.body.body2};
-`;
+`
 
 export const NotificationContentTitle = styled.span`
   position: relative;
@@ -226,3 +233,15 @@ export const Item = styled.div`
     color: ${SeugiColor.Primary300};
   }
 `;
+
+export const NotificationActionButton = styled.button`
+    cursor: pointer;
+
+    background:none;
+    border:none;
+
+    margin-left:25vw;
+`;
+
+export const NotificationActionButtonimg = styled.img`
+`
