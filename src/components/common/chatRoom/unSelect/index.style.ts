@@ -22,7 +22,8 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     border-radius: 12px;
-    background: var(--Sub-White, #FFF);
+    /* background: var(--Sub-White, #FFF); */
+    background: red;
     width: 100%;
     height: calc(100% - 40px); 
     max-height: 650px; 

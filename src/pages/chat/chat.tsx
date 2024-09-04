@@ -7,7 +7,7 @@ import TopButton from '@/components/button/chatButton/index';
 
 const Chat = () => {
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
-  const currentUser = "JohnDoe"; // 하드코딩 수정예정
+  const currentUser = "ㅠㅠ"; // 하드코딩 수정예정
 
   const handleSelectChatRoom = (room: string) => {
     setSelectedChatRoom(room);
