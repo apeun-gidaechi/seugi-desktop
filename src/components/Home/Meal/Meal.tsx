@@ -29,6 +29,7 @@ const Meal = () => {
     const getMenu = async (mealIndex: number) => {
         try {
             const res = await SeugiCustomAxios.get(`/meal?workspaceId=${workspaceId}&date=${date}`);
+            console.log("급식 :", workspaceId);
             const mealData = res.data.data[mealIndex];
             setMenu(mealData.menu || []);
             setMealType(mealData.mealType || '');
@@ -56,9 +57,9 @@ const Meal = () => {
                     <S.CafeteriaImg src={CafeteriaImg} />
                     <S.CafeteriaTitle>오늘의 급식</S.CafeteriaTitle>
                 </S.CafeteriaTitleDiv>
-                <S.ArrowLButton>
+                {/* <S.ArrowLButton>
                     <S.CArrowLogo src={ArrowImg} />
-                </S.ArrowLButton>
+                </S.ArrowLButton> */}
             </S.CafeteriaTitleBox>
             <S.CafeteriaDiv>
                 <S.TimeButton onClick={() => handleMealChange(0)}>
