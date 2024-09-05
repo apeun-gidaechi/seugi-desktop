@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const SideBarChat = styled.div`
   display: flex;
   flex-direction: column;
-  width: 366px;
+  width: 452px;
   height: 100%;
   padding: 8px 0px;
   /* background: #FFF;  */
