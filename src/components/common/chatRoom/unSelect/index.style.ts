@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const AllWrapContainer = styled.div`
-    margin: 70px 0 64px 452px;
+    /* margin: 70px 0 64px 452px; */
+    margin: 70px 0 64px 0;
     position: absolute;
     padding: 20px 32px 0 0;
-    width: calc(100% - 452px);
+    /* width: calc(100% - 452px); */
+    width: 100%;
     height: calc(100vh - 100px); 
 `;
 
@@ -22,8 +24,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     border-radius: 12px;
-    /* background: var(--Sub-White, #FFF); */
-    background: red;
+    background: var(--Sub-White, #FFF);
     width: 100%;
     height: calc(100% - 40px); 
     max-height: 650px; 
