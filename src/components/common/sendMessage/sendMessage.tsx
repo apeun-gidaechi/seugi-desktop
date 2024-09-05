@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Client } from "@stomp/stompjs";
 import axios from "axios";
-import * as S from "@/components/SendMessage/sendMessage.style";
+import * as S from "@/components/common/sendMessage/sendMessage.style";
 import MessageBox from "@/components/MessageBox/messageBox";
 
 import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
