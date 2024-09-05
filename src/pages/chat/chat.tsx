@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as S from "@/pages/chat/chat.style";
 import UnChatRoom from '@/components/common/chatRoom/unSelect/index';
-import SelectedChatRoom from '@/components/common/chatRoom/Selecte/index';
+import SelectedChatRoom from '@/components/common/chatRoom/Select/index';
 import Sidebar from '@/components/common/sidebar/sidebar'; 
 import TopButton from '@/components/button/chatButton/index';
 
