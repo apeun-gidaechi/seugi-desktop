@@ -10,7 +10,7 @@ import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus";
 import TitleText from "../../TitleText";
 
 import config from "@/constants/ChatMember/config.json";
-import SendMessage from "@/components/common//sendMessage/sendMessage";
+import SendMessage from "@/components/common/sendMessage/sendMessage";
 
 interface SidebarProps {}
 
