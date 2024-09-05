@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components";
 
 export const ChangeSchoolMain = styled.div`
@@ -10,6 +12,8 @@ export const ChangeSchoolMain = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
+  left:70%;
+  top: 17%;
 
   border-radius: 12px;
   background: #fff;
@@ -27,16 +31,13 @@ export const Subscribed = styled.div`
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
+
 `;
 
 export const SchoolName = styled.span`
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  ${SeugiFont.subtitle.subtitle2};
 
   margin-right: auto;
 `;
@@ -51,13 +52,9 @@ export const SettingButton = styled.button`
 `;
 
 export const NoPendingSchools = styled.span`
-  color: #000;
+  color: ${SeugiColor.Black};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const PendingSchool = styled.div`
@@ -88,18 +85,14 @@ export const ArrowImg = styled.img`
 export const NoSubSchoolText = styled.span`
   display: block;
 
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  ${SeugiFont.subtitle.subtitle2};
 
   padding: 0 0 8px 0;
 `;
 
-export const SchoolBox = styled.div`
+export const JoinSchoolBox = styled.div`
   width: 280px;
   height: 40px;
 
@@ -110,24 +103,56 @@ export const SchoolBox = styled.div`
   align-self: stretch;
 
   border-radius: 8px;
-  background: var(--Primary-Primary050, #f8fcff);
+  background: ${SeugiColor.Primary050};
+
+  cursor: pointer;
+`;
+
+export const PendingSchoolBox = styled.div`
+  width: 280px;
+  height: 40px;
+
+  display: flex;
+  padding: 16px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+
+  border-radius: 8px;
+  background: ${SeugiColor.Primary050};
 `;
 
 export const WaitingJoin = styled.span`
   display: flex;
   flex-direction: row;
   left: 10px;
-  color: var(--Gray-Gray600, #787878);
+  color: ${SeugiColor.Gray600};
 
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+ ${SeugiFont.body.body1};
 
   padding: 0 0 4px 0;
 `;
 
+export const JoinSchool = styled.button`
+  display: flex;
+  height: 36px;
+  padding: var(--Large, 12px);
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: var(--Large, 12px);
+
+  border: none;
+  background-color:none;
+  background:none;
+
+  cursor: pointer;
+
+  color: ${SeugiColor.Black};
+
+  ${SeugiFont.body.body2};
+`;
 export const CreateSchool = styled.button`
   display: flex;
   height: 36px;
@@ -137,19 +162,16 @@ export const CreateSchool = styled.button`
   gap: 10px;
 
   border-radius: var(--Large, 12px);
-  background: var(--Primary-Primary500, #1d93f3);
-
-  color: var(--Sub-White, #fff);
-
-  font-family: "Pretendard-Regular", sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%;
 
   border: none;
+  background-color:none;
+  background:none;
 
   cursor: pointer;
+
+  color: ${SeugiColor.Gray600};
+
+  ${SeugiFont.body.body2};
 `;
 
 export const NoSubscribedSchools = styled.div`
@@ -158,3 +180,11 @@ export const NoSubscribedSchools = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const MoveButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+`

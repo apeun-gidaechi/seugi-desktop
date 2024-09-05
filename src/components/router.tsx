@@ -15,14 +15,14 @@ import Chat from '@/pages/chat/chat'
 import GroupChat from '@/pages/GroupChat/index'
 import UnHome from '@/components/Home/NotSubscribed/UnHome';
 
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+
 const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/login" element={<Login />} />
                 <Route path='/selectjob' element={<Selectingjob />} />
                 <Route path='/chat' element={<ChatMain />} />
                 <Route path='/oauthsignup' element={<Oauthsignup />} />

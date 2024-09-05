@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import * as S from '@/components/Home/NotSubscribed/UnHome.style';
 
 import Navbar from '@/components/common/Navbar/Navbar';
@@ -12,20 +12,42 @@ import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
 import SchoolImg from '@/assets/image/home/school.svg';
 import CafeteriaImg from '@/assets/image/home/cafeteria.svg'
 
+import RegisterSchool from '@/components/Home/NotSubscribed/RegisterSchool/RegisterSchool';
+
+import { isTokenExpired } from "@/util/tokenUtils";
+import { useNavigate } from 'react-router-dom';
+
 const UnHome = () => {
     const [showChangeschool, setShowChangeschool] = useState(false);
+    const token = window.localStorage.getItem("accessToken");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isTokenExpired(token)) {
+            alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
+            window.localStorage.removeItem("accessToken");
+            navigate("/");
+        }
+    }, [token, navigate]);
+
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, []);
 
     const handleOnClicked = () => {
-        setShowChangeschool(!showChangeschool);
+        setShowChangeschool(!showChangeschool)
     }
 
     return (
         <S.HomeContainer>
-            <Navbar >
-            </Navbar>
+            <RegisterSchool />
+            <Navbar />
             <S.HomeMain>
                 <S.HomeTitle>홈</S.HomeTitle>
-                {showChangeschool && <Changeschool />}
+                {showChangeschool && <Changeschool onClose={handleOnClicked} />}
                 <S.ComponentsBox>
                     <S.HomeWrapper1>
                         <S.HomeWrapper1UpContainer>
@@ -88,13 +110,15 @@ const UnHome = () => {
                             <S.SchoolTitleBox>
                                 <S.SchoolImg src={SchoolImg} />
                                 <S.MySchooliTitle>내 학교</S.MySchooliTitle>
+                                <S.ArrowLButton>
+                                    <S.SArrowLogo src={ArrowImg} />
+                                </S.ArrowLButton>
                             </S.SchoolTitleBox>
                             <S.SchoolBox>
                                 <S.SchoolDetailBox>
                                     <S.SchoolDetail>내 학교를 등록해주세요</S.SchoolDetail>
                                 </S.SchoolDetailBox>
                             </S.SchoolBox>
-                            <S.RegistrationButton onClick={handleOnClicked}>등록하러 가기</S.RegistrationButton>
                         </S.UpContainer>
                         <S.DownContainer>
                             <S.CafeteriaTitleBox>

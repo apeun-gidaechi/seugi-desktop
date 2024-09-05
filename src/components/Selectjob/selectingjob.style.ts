@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components';
 
@@ -11,7 +13,6 @@ export const SelectMain = styled.div`
 
 export const SelectFirstWrap = styled.div`
     z-index:5;
-    /* width: 443px; */
     text-align: center;
     height: 447px;
     display: flex;
@@ -19,7 +20,7 @@ export const SelectFirstWrap = styled.div`
     padding: 36px 32px;
     gap: 30px;
     border-radius: 36px;
-    background: #FFF;
+    background: ${SeugiColor.White};
 `;
 
 export const OutButton = styled.div`
@@ -29,12 +30,9 @@ export const OutButton = styled.div`
 `
 
 export const Selectjob = styled.p`
-    color: var(--Black, #000);
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 130%;
+    color: ${SeugiColor.Black};
+
+    ${SeugiFont.title.title1};
 `;
 
 export const PickContainer = styled.div`
@@ -52,12 +50,12 @@ export const PickJob = styled.button`
     justify-content: center;
     align-items: center;
     gap: 16px;
-    color: var(--Primary900, #020202);
+    color: ${SeugiColor.Primary700};
     cursor: pointer;
     position: relative; 
     border-radius: var(--Large, 12px);
-    border: 1px solid var(--Gray300, #E6E6E6);
-    background: var(--Primary-Primary050, #F8FCFF);
+    border: 1px solid ${SeugiColor.Gray300};
+    background: ${SeugiColor.Primary050};
 `;
 
 export const Stdimg = styled.img`
@@ -66,13 +64,9 @@ export const Stdimg = styled.img`
 `;
 
 export const Txtstudent = styled.p`
-    color: var(--Primary900, #020202);
+    color: ${SeugiColor.Primary700};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+   ${SeugiFont.subtitle.subtitle2};
     position: relative; 
     z-index: 1; 
 `;
@@ -83,13 +77,9 @@ export const Teacherimg = styled.img`
 `;
 
 export const TxtTeacher = styled.p`
-    color: var(--Primary900, #020202);
+    color: ${SeugiColor.Primary700};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
     position: relative; 
     z-index: 1; 
 `;
@@ -111,13 +101,9 @@ export const Haveemail = styled.a`
     align-items: flex-start;
     gap: 10px;
 
-    color: var(--Primary-Primary500, #1D93F3);
+    color: ${SeugiColor.Primary500};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; 
+   ${SeugiFont.body.body1};
 
     text-decoration:none;
 `;
@@ -134,15 +120,11 @@ export const Button = styled.button`
 
     border:none;
     border-radius: var(--Large, 12px);
-    background: var(--Primary-Primary500, #1D93F3);
+    background: ${SeugiColor.Primary500};
 
-    color: var(--Sub-White, #FFF);
+    color: ${SeugiColor.White};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+   ${SeugiFont.subtitle.subtitle2};
 
     cursor: pointer;
 `
