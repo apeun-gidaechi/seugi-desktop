@@ -92,12 +92,14 @@ export const NotificationContentAuthor = styled.div`
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
+
+  width:26vw;
 `;
 
 export const NotificationContentAuthorSpan = styled.span`
   color:${SeugiColor.Gray600};
 
-  ${SeugiFont.body.body2};
+  ${SeugiFont.caption.caption2};
 `
 
 export const NotificationContentTitle = styled.span`
@@ -239,8 +241,6 @@ export const NotificationActionButton = styled.button`
 
     background:none;
     border:none;
-
-    margin-left:25vw;
 `;
 
 export const NotificationActionButtonimg = styled.img`

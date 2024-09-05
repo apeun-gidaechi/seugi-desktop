@@ -1,19 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import * as S from '@/components/Home/Notification/Notification.style';
 import CustomAlert from '@/components/Alert/Alert';
-
 import Point from '@/assets/image/home/point.svg';
 import Emoji from "@/assets/image/home/emoji.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
 import CorrectionImg from '@/assets/image/home/Correction.svg';
 import AddEmoji from '@/components/Home/Notification/Emoji/emojipicker';
-
 import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 import { EmojiClickData } from 'emoji-picker-react';
 import CreateNotice from '@/components/Home/Notification/CreateNotice/CreateNotice';
 import ChangeNotice from './ChangeNotice/ChangeNotice';
+import { useUserContext } from '@/contexts/userContext';
 
 interface EmojiItem {
+    emoji: string;
+    userId: number;
+}
+
+interface EmojiDisplayItem {
     emoji: string;
     count: number;
     liked: boolean;
@@ -21,14 +25,27 @@ interface EmojiItem {
 
 interface NotificationItem {
     id: number;
-    author: string;
-    date: string;
+    userName: string;
+    userId: number;
+    lastModifiedDate: string;
     title: string;
     content: string;
     emoji: EmojiItem[];
 }
 
+interface FormattedNotificationItem extends NotificationItem {
+    emojiDisplay: EmojiDisplayItem[];
+}
+
 const Notification: React.FC = () => {
+    const formatDate = (dateString: string): string => {
+        const date = new Date(dateString);
+        const year = String(date.getFullYear()).slice(2);
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}${month}${day}`;
+    };
+    const user = useUserContext();
     const workspaceId = window.localStorage.getItem('workspaceId');
     const [notifications, setNotifications] = useState<NotificationItem[]>([]);
     const [isEmojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
@@ -37,24 +54,48 @@ const Notification: React.FC = () => {
     const [userRole, setUserRole] = useState<string | null>(null);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const CreateNoticeRef = useRef<HTMLDivElement>(null);
+    const ChangeNoticeRef = useRef<HTMLDivElement>(null);
     const [changeNoticeId, setChangeNoticeId] = useState<number | null>(null);
+
+    const formattedNotifications: FormattedNotificationItem[] = useMemo(() => {
+        return notifications.map((notification: NotificationItem) => {
+            let emojiDisplay: EmojiDisplayItem[] = [];
+            notification.emoji.forEach((emoji: EmojiItem) => {
+                const existEmoji = emojiDisplay.find((item) => item.emoji === emoji.emoji);
+                if (existEmoji) {
+                    existEmoji.count += 1;
+                } else {
+                    emojiDisplay.push({
+                        emoji: emoji.emoji,
+                        count: 1,
+                        liked: false,
+                    });
+                }
+            });
+            emojiDisplay = emojiDisplay.map((emojiItem) => {
+                // TODO: selected 이름 바꾸기
+                const selected = notification.emoji.find(emoji => emoji.emoji === emojiItem.emoji && user.id === emoji.userId);
+                if (selected) {
+                    return {
+                        ...emojiItem,
+                        liked: true,
+                    };
+                }
+                return emojiItem;
+            });
+            return {
+                ...notification,
+                emojiDisplay,
+            }
+        });
+    }, [notifications, user]);
 
     const getNotification = async () => {
         try {
             const res = await SeugiCustomAxios.get(`/notification/${workspaceId}?page=0&size=20`);
-            console.log("알림 :", workspaceId);
-
-            const formattedNotifications = res.data.data.map((notification: NotificationItem) => ({
-                ...notification,
-                emoji: notification.emoji.map((emoji: EmojiItem) => ({
-                    ...emoji,
-                    liked: false,
-                })),
-            }));
-
-            setNotifications(formattedNotifications);
+            setNotifications(res.data.data);
         } catch (error) {
-            console.error('알림 불러오기 실패:', error);
+            console.error('Failed to load notifications:', error);
         }
     };
 
@@ -67,99 +108,11 @@ const Notification: React.FC = () => {
         getNotification();
     }, []);
 
-    const handleCorrectionClick = () => {
+    useEffect(() => {
         if (userRole === 'STUDENT') {
             setShowAlert(true);
-            return;
         }
-        setCreateNoticeVisible(true);
-    };
-
-    const handleEmojiClick = async (parentKey: number, childKey: number) => {
-        const notification = notifications[parentKey];
-        const emoji = notification.emoji[childKey];
-
-        const updatedNotifications = notifications.map((item, index) => {
-            if (index === parentKey) {
-                const updatedEmoji = item.emoji.map((emoji, idx) => {
-                    if (idx === childKey) {
-                        if (emoji.liked) {
-                            const newCount = emoji.count - 1;
-                            return {
-                                ...emoji,
-                                count: newCount,
-                                liked: false,
-                            };
-                        } else {
-                            return {
-                                ...emoji,
-                                count: emoji.count + 1,
-                                liked: true,
-                            };
-                        }
-                    }
-                    return emoji;
-                });
-
-                return { ...item, emoji: updatedEmoji };
-            }
-            return item;
-        });
-
-        setNotifications(updatedNotifications);
-
-        try {
-            await SeugiCustomAxios.patch(`/notification/emoji`, {
-                notificationId: notification.id,
-                emoji: emoji.emoji,
-            });
-        } catch (error) {
-            console.error('Failed to send emoji:', error);
-        }
-    };
-
-    const handleAddEmojiClick = (notificationIndex: number) => {
-        setActiveNotification(notificationIndex);
-        setEmojiPickerVisible(true);
-    };
-
-    const handleEmojiSelect = async (emoji: EmojiClickData) => {
-        if (activeNotification !== null) {
-            const notification = notifications[activeNotification];
-
-            const updatedNotifications = notifications.map((item, index) => {
-                if (index === activeNotification) {
-                    const existingEmoji = item.emoji.find(e => e.emoji === emoji.emoji);
-                    if (existingEmoji) {
-                        const updatedEmoji = item.emoji.map(e =>
-                            e.emoji === emoji.emoji
-                                ? { ...e, count: e.count + 1, liked: true }
-                                : e
-                        );
-                        return { ...item, emoji: updatedEmoji };
-                    } else {
-                        const newEmoji = { emoji: emoji.emoji, count: 1, liked: true };
-                        return { ...item, emoji: [...item.emoji, newEmoji] };
-                    }
-                }
-                return item;
-            });
-
-            setNotifications(updatedNotifications);
-
-            try {
-                await SeugiCustomAxios.patch(`/notification/emoji`, {
-                    notificationId: notification.id,
-                    emoji: emoji.emoji,
-                });
-            } catch (error) {
-                console.error('Failed to send new emoji:', error);
-            }
-        }
-
-        setEmojiPickerVisible(false);
-        setActiveNotification(null);
-    };
+    }, [userRole]);
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -173,14 +126,94 @@ const Notification: React.FC = () => {
             }
         };
 
-        if (CreateNoticeRef.current) {
-            document.addEventListener("mousedown", handleClickOutside);
-        }
+        document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [CreateNoticeRef]);
+    }, []);
+
+    const handleCorrectionClick = () => {
+        if (userRole === 'STUDENT') {
+            setShowAlert(true);
+            return;
+        }
+        setCreateNoticeVisible(true);
+    };
+
+    const handleAddEmojiClick = (notificationIndex: number) => {
+        setActiveNotification(notificationIndex);
+        setEmojiPickerVisible(true);
+    };
+
+    const handleEmojiClick = async (parentKey: number, emoji: EmojiDisplayItem) => {
+        try {
+            const updatedNotifications = notifications.map((notification, index) => {
+                if (index !== parentKey) {
+                    return notification;
+                }
+                const existingEmoji = notification.emoji.find(emojiItem => emojiItem.userId === user.id && emojiItem.emoji === emoji.emoji);
+                return {
+                    ...notification,
+                    emoji: existingEmoji
+                        ? notification.emoji.filter(emojiItem => emojiItem.userId !== user.id || emojiItem.emoji !== emoji.emoji)
+                        : notification.emoji.concat({ emoji: emoji.emoji, userId: user.id }),
+                }
+            });
+            setNotifications(updatedNotifications);
+            await SeugiCustomAxios.patch(`/notification/emoji`, {
+                notificationId: notifications[parentKey].id,
+                emoji: emoji.emoji,
+            });
+        } catch (error) {
+            console.error(error);
+            setNotifications(notifications);
+        }
+    };
+
+    const handleEmojiSelect = async (emoji: EmojiClickData) => {
+        try {
+            if (activeNotification !== null) {
+                const notification = notifications[activeNotification];
+
+                const updatedNotifications = notifications.map((notification, index) => {
+                    if (index !== activeNotification) {
+                        return notification;
+                    }
+                    const existingEmoji = notification.emoji.find(emojiItem => emojiItem.userId === user.id && emojiItem.emoji === emoji.emoji);
+                    return {
+                        ...notification,
+                        emoji: existingEmoji
+                            ? notification.emoji.filter(emojiItem => emojiItem.userId !== user.id || emojiItem.emoji !== emoji.emoji)
+                            : notification.emoji.concat({ emoji: emoji.emoji, userId: user.id }),
+                    }
+                });
+
+                setNotifications(updatedNotifications);
+                await SeugiCustomAxios.patch(`/notification/emoji`, {
+                    notificationId: notification.id,
+                    emoji: emoji.emoji,
+                });
+            }
+        } catch (error) {
+            console.error(error);
+            setNotifications(notifications);
+        } finally {
+            setEmojiPickerVisible(false);
+            setActiveNotification(null);
+        }
+    };
+
+    const updateNotificationEmoji = async (notificationId: string, emojiStr: string) => {
+        try {
+            await SeugiCustomAxios.patch(`/notification/emoji`, {
+                notificationId: notificationId,
+                emoji: emojiStr,
+            });
+        } catch (err) {
+            console.error('Failed to send new emoji:', err);
+        }
+    };
 
     const handleActionButtonClick = (notificationId: number) => {
         setChangeNoticeId(prev => (prev === notificationId ? null : notificationId));
@@ -205,18 +238,18 @@ const Notification: React.FC = () => {
             <S.NotificationContainer>
                 <S.NotificationTitleContainer>
                     <S.NotificationLogo src={NotificationImg} />
-                    <S.NotificationTitle>알림</S.NotificationTitle>
+                    <S.NotificationTitle>공지</S.NotificationTitle>
                 </S.NotificationTitleContainer>
                 <S.ArrowLButton onClick={handleCorrectionClick}>
                     <S.NArrowLogo src={CorrectionImg} />
                 </S.ArrowLButton>
             </S.NotificationContainer>
             <S.NotificationBox>
-                {notifications.length > 0 ? (
-                    notifications.map((item, parentKey) => (
+                {formattedNotifications.length > 0 ? (
+                    formattedNotifications.map((item, parentKey) => (
                         <S.NotificationWrapper key={item.id}>
                             <S.NotificationContentAuthor>
-                                <S.NotificationContentAuthorSpan> {item.author} · {item.date} </S.NotificationContentAuthorSpan>
+                                <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)} </S.NotificationContentAuthorSpan>
                                 <S.NotificationActionButton onClick={() => handleActionButtonClick(item.id)}>
                                     <S.NotificationActionButtonimg src={Point} />
                                 </S.NotificationActionButton>
@@ -231,9 +264,9 @@ const Notification: React.FC = () => {
                                 <S.NotificationAddEmojiButton onClick={() => handleAddEmojiClick(parentKey)}>
                                     <S.NotificationAddEmoji src={Emoji} />
                                 </S.NotificationAddEmojiButton>
-                                {item.emoji.map((emoji, childKey) => (
+                                {item.emojiDisplay.map((emoji, childKey) => (
                                     <S.NotificationEmojiWrapper
-                                        onClick={() => handleEmojiClick(parentKey, childKey)}
+                                        onClick={() => handleEmojiClick(parentKey, emoji)}
                                         key={childKey}
                                         className={emoji.liked ? "Clicked" : ""}
                                     >
@@ -255,6 +288,8 @@ const Notification: React.FC = () => {
                             {changeNoticeId === item.id && (
                                 <ChangeNotice
                                     onClose={() => handleActionButtonClick(item.id)}
+                                    notificationId={item.id}
+                                    userId={item.userId}
                                 />
                             )}
                         </S.NotificationWrapper>
