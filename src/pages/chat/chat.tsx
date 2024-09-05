@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "@/pages/chat/chat.style";
-import SideBar from "@/components/sidebar/sidebar";
-import SendMessage from "@/components/SendMessage/sendMessage";
-// import SendMessage from "../../components/sendMessage/sendMessage"
-// import ChatForm from "../../components/ChatForm/chatForm"
+import UnChatRoom from '@/components/common/chatRoom/unSelect/index';
+import SelectedChatRoom from '@/components/common/chatRoom/Select/index';
+import Sidebar from '@/components/common/sidebar/sidebar'; 
+import TopButton from '@/components/button/chatButton/index';
 
-const chat = () => {
+const Chat = () => {
+  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
+  const currentUser = "ㅠㅠ"; // 하드코딩 수정예정
+
+  const handleSelectChatRoom = (room: string) => {
+    setSelectedChatRoom(room);
+  };
+
   return (
-    <S.ChatingBackground>
-      <SideBar />
-    </S.ChatingBackground>
+    <S.ChatWrapper>
+      <Sidebar onSelectChatRoom={handleSelectChatRoom} />
+      <S.ChatContent>
+        <S.ButtonWrapper>
+          <TopButton />
+        </S.ButtonWrapper>
+        {selectedChatRoom ? (
+          <SelectedChatRoom room={selectedChatRoom} currentUser={currentUser} />
+        ) : (
+          <UnChatRoom />
+        )}
+      </S.ChatContent>
+    </S.ChatWrapper>
   );
 };
 
-export default chat;
+export default Chat;

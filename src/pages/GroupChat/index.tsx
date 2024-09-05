@@ -1,5 +1,5 @@
 import React from 'react'
-import SideBar from "@/components/sidebar/sidebar"
+import SideBar from "@/components/common/sidebar/sidebar"
 
 const index = () => {
   return (

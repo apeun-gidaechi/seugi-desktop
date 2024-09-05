@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 
 import * as S from "@/components/Home/Subscribed/Home.style";
-import Navbar from "@/components/Navbar/Navbar";
+import Navbar from "@/components/common/Navbar/Navbar";
+import Changeschool from "@/components/ChangeSchool/ChangeSchool";
+import TitleText from '@/components/common/TitleText/index'
 
 import Schools from '@/components/Home/Schools/Schools';
 import Meal from "@/components/Home/Meal/Meal";
@@ -13,10 +15,12 @@ import DailySchedule from "@/components/Home/DailySchedule/DailySchedule";
 
 import { isTokenExpired } from "@/util/tokenUtils";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-const Home: React.FC = () => {
+const Home = () => {
   const token = window.localStorage.getItem("accessToken");
   const navigate = useNavigate();
+  const [showChangeschool, setShowChangeschool] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -38,7 +42,10 @@ const Home: React.FC = () => {
     <S.HomeContainer>
       <Navbar />
       <S.HomeMain>
-        <S.HomeTitle>홈</S.HomeTitle>
+        <TitleText/>
+        {showChangeschool && (
+          <Changeschool onClose={() => setShowChangeschool(false)} /> 
+        )}
         <S.ComponentsBox>
           <S.HomeWrapper1>
             <DailySchedule />
