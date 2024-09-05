@@ -2,6 +2,7 @@ import * as S from "@/components/Login/login.style";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
 import config from "@/constants/config/config.json";
 import LoginButton from "@/components/Button/Button";
 import TextField from "@/components/TextField/TextField";
@@ -17,7 +18,7 @@ import Sun from "@/assets/image/onbording/Start/LoginSun.svg";
 import Divider from "@/assets/image/onbording/Start/Divider.svg";
 
 import { setAccessToken } from '@/api/SeugiCutomAxios';
-
+import { useUserDispatchContext } from '@/contexts/userContext';
 const Login = () => {
   const navigate = useNavigate();
 
@@ -96,6 +97,7 @@ const Login = () => {
       window.localStorage.setItem("refreshToken", refreshToken);
 
       importWorkspace();
+      getMyInfo();
     } catch (error) {
       setAlertMessage(
         "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다"
@@ -114,6 +116,14 @@ const Login = () => {
   const handleCloseAlert = () => {
     setShowAlert(false);
   };
+
+  const setUser = useUserDispatchContext();
+
+  const getMyInfo = async () => {
+    const res = await SeugiCustomAxios.get(`/member/myInfo`);
+    setUser(res.data.data);
+  }
+
 
   return (
     <S.LoginMain>
