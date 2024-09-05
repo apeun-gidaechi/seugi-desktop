@@ -9,17 +9,19 @@ import SelectHome from "@/assets/image/sidebar/slecthome.svg";
 import SelectChat from "@/assets/image/sidebar/selectchat.svg";
 import SelectChats from "@/assets/image/sidebar/selectgroup.svg";
 import Profile from "@/components/Profile/Profile";
+import { useEffect, useRef, useState } from "react";
 
 type SelectedButton = "home" | "chat" | "chats" | null;
 
 const Navbar = () => {
+  
   const [selected, setSelected] = useState<SelectedButton>(null);
   const [chatRooms, setChatRooms] = useState<string[]>([]);
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const [selected, setSelected] = useState<SelectedButton>(null);
   const profileRef = useRef<HTMLDivElement>(null);
+  const [isProfileVisible, setIsProfileVisible] = useState(false)
 
   useEffect(() => {
     // 현재 경로에 따라 selected 상태를 설정
@@ -45,6 +47,7 @@ const Navbar = () => {
     const storedChatRooms = localStorage.getItem("chatRooms");
     if (storedChatRooms) {
       setChatRooms(JSON.parse(storedChatRooms));
+    }
     if (selected) {
       const pathMap = {
         home: "/home",
