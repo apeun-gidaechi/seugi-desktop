@@ -105,3 +105,12 @@ export const SideAvatarImg = styled.img`
     height: 24px;
   }
 `;
+
+export const SideAvatarButton = styled.button`
+    background:none;
+    border:none;
+
+    cursor: pointer;
+
+    z-index:999;
+`

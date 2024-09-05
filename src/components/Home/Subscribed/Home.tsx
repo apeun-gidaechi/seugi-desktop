@@ -15,10 +15,12 @@ import DailySchedule from "@/components/Home/DailySchedule/DailySchedule";
 
 import { isTokenExpired } from "@/util/tokenUtils";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-const Home: React.FC = () => {
+const Home = () => {
   const token = window.localStorage.getItem("accessToken");
   const navigate = useNavigate();
+  const [showChangeschool, setShowChangeschool] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -41,7 +43,9 @@ const Home: React.FC = () => {
       <Navbar />
       <S.HomeMain>
         <TitleText/>
-        {showChangeschool && <Changeschool />}
+        {showChangeschool && (
+          <Changeschool onClose={() => setShowChangeschool(false)} /> 
+        )}
         <S.ComponentsBox>
           <S.HomeWrapper1>
             <DailySchedule />

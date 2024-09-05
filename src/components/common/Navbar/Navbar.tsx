@@ -56,6 +56,13 @@ const Navbar = () => {
   }, [selected, navigate]);
 
   useEffect(() => {
+    const storedChatRooms = localStorage.getItem("chatRooms");
+    if (storedChatRooms) {
+      setChatRooms(JSON.parse(storedChatRooms));
+    }
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("chatRooms", JSON.stringify(chatRooms));
   }, [chatRooms]);
 
