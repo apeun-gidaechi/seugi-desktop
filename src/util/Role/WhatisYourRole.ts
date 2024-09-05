@@ -10,16 +10,17 @@ enum Role {
 interface User {
     role: Role;
 }
+
 const fetchUser = async (workspaceId: string): Promise<User | undefined> => {
     try {
-        const res = await SeugiCustomAxios.get(`/workspace/permission`, {
+        const res = await SeugiCustomAxios.get(`/profile/me`, {
             params: { workspaceId } 
         });
 
-        const data = res.data; 
+        const data = res.data.data.permission; 
 
         const user: User = {
-            role: data.data as Role
+            role: data as Role
         };
         
         window.localStorage.setItem('Role', user.role);
