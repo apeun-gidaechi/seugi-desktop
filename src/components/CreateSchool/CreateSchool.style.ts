@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from "@/design/text/SeugiFont";
 import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components';
 
@@ -9,7 +11,7 @@ export const CreateSchoolMain = styled.div`
     gap: 193px;
     flex: 1 0 0;
     align-self: stretch;
-    margin-top:20vh;
+    margin-top:24vh;
 `
 
 export const CreateSchoolContainer = styled.div`
@@ -31,13 +33,9 @@ export const TitleContainer = styled.div`
 `
 
 export const Title = styled.span`
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 130%; /* 36.4px */
+    ${SeugiFont.title.title1};
 `
 
 export const InputImg = styled.img`
@@ -74,23 +72,15 @@ export const SubtitleContainer = styled.div`
 
 export const Subtitle = styled.span`
     margin-left:4px;
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 18.2px */
+    ${SeugiFont.body.body1};
 `
 
 export const RedStar = styled.a`
-    color: var(--Red-Red500, #F90707);
+    color: ${SeugiColor.Red500};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    ${SeugiFont.body.body1};
 `
 
 export const ButtonContainer = styled.div`
@@ -103,9 +93,9 @@ export const ButtonContainer = styled.div`
 `
 
 export const Input = styled.input.attrs({ type: 'file' })`
-    width: 180px;
-    height: 180px;
-    background-color: transparent;
+    width: 220px;
+    height: 220px;
+    background-color: ${SeugiColor.Transparent};
     border: none;
     position: relative;
     display: inline-block;
@@ -115,32 +105,36 @@ export const Input = styled.input.attrs({ type: 'file' })`
         width: 100%;
         height: 100%;
         cursor: pointer;
-        background-color: transparent;
+        background-color: ${SeugiColor.Transparent};
         border: none;
     }
 `
 
-export const ButtonImg = styled.img`
-    width: 180px;
-    height: 180px;
+export const ButtonImg = styled.img<{ $isImageUploaded: boolean }>`
+    width: 200px;
+    height: 200px;
     flex-shrink: 0;
     display: inline-block;
-    z-index:4;
+    z-index: 4;
     cursor: pointer;
-`
+    border-radius: 20%; 
+    border: ${(props) => (props.$isImageUploaded ? `2px solid ${SeugiColor.Gray300}` : 'none')}; 
+`;
 
-export const PlusButton = styled.img`
+
+export const PlusButton = styled.img` // 반응형......./
     width: 60px;
     height: 60px;
-    position: absolute;
-    right: 43.5vw;
-    top: 48vh;
     cursor: pointer;
-    z-index:4;
+    z-index:300;
     display: flex;
     flex-direction:row;
     justify-content:center;
     align-items:center;
+
+    position: absolute;
+    right: 42.5%;
+    top: 50%;
 `
 
 export const UpLoadButtonLabel = styled.label`

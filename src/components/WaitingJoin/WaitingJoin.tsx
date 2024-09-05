@@ -5,8 +5,7 @@ import ment from '@/assets/image/join-school/ment.svg';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/Button/Button';
 import { isTokenExpired } from '@/util/tokenUtils';
-import axios from 'axios';
-import config from '@/constants/config/config.json';
+import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 
 const WaitingJoin = () => {
     const navigate = useNavigate();
@@ -30,14 +29,7 @@ const WaitingJoin = () => {
     const handleWaitingJoin = async () => {
         try {
             const token = window.localStorage.getItem("accessToken");
-            const res = await axios.get(`${config.serverurl}/workspace/`, {
-                headers: {
-                    Authorization: `${token}`
-                },
-            });
-
-            console.log(res.data.data.length)
-
+            const res = await SeugiCustomAxios.get(`/workspace/`);
             if (res.data.data && res.data.data.length === 0) {
                 navigate("/unhome");
             } else {
