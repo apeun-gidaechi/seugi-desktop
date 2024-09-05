@@ -5,8 +5,6 @@ export const SideBarChat = styled.div`
   flex-direction: column;
   width: 452px;
   height: 100%;
-  padding: 8px 0px;
-  /* background: #FFF;  */
   margin-left: 80px;
 
   overflow-y: auto;
