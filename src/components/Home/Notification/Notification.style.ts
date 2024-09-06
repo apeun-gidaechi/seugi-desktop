@@ -183,7 +183,7 @@ export const NotificationEmojiCount = styled.span`
   margin: 3px;
 
   color: ${SeugiColor.Gray600};
-  ${SeugiFont.body.body1};
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const Number = styled.div`
