@@ -73,9 +73,8 @@ const Notification: React.FC = () => {
                 }
             });
             emojiDisplay = emojiDisplay.map((emojiItem) => {
-                // TODO: selected 이름 바꾸기
-                const selected = notification.emoji.find(emoji => emoji.emoji === emojiItem.emoji && user.id === emoji.userId);
-                if (selected) {
+                const selectedEmoji = notification.emoji.find(emoji => emoji.emoji === emojiItem.emoji && user.id === emoji.userId);
+                if (selectedEmoji) {
                     return {
                         ...emojiItem,
                         liked: true,
@@ -201,17 +200,6 @@ const Notification: React.FC = () => {
         } finally {
             setEmojiPickerVisible(false);
             setActiveNotification(null);
-        }
-    };
-
-    const updateNotificationEmoji = async (notificationId: string, emojiStr: string) => {
-        try {
-            await SeugiCustomAxios.patch(`/notification/emoji`, {
-                notificationId: notificationId,
-                emoji: emojiStr,
-            });
-        } catch (err) {
-            console.error('Failed to send new emoji:', err);
         }
     };
 
