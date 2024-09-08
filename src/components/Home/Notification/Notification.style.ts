@@ -63,14 +63,12 @@ export const NArrowLogo = styled.img`
 export const NotificationBox = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 8px;
   align-self: stretch;
   max-height: 500px; 
   overflow-y: auto; 
   padding-right: 10px;
-  margin-top: 10px;
 `;
 
 export const NotificationWrapper = styled.div`
