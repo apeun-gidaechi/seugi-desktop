@@ -243,3 +243,8 @@ export const NotificationActionButton = styled.button`
 
 export const NotificationActionButtonimg = styled.img`
 `
+
+export const EditedLabel = styled.span`
+    color : ${SeugiColor.Gray500};
+    ${SeugiFont.caption.caption1};
+`
