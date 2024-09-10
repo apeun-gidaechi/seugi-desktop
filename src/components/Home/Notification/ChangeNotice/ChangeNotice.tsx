@@ -8,9 +8,10 @@ interface Props {
     onClose: () => void;
     notificationId: number;
     userId: number;
+    refreshNotifications: () => void;
 }
 
-const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose }) => {
+const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refreshNotifications }) => {
     const [currentUserId, setCurrentUserId] = useState<number | undefined>(undefined);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [editMode, setEditMode] = useState<boolean>(false); 
@@ -44,17 +45,12 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose }) => {
         try {
             await SeugiCustomAxios.delete(`/notification/${workspaceId}/${notificationId}`);
             handleGetNoticeId();
+            refreshNotifications();
         } catch (error) {
             console.error('Delete Error', error);
         }
     };
-
-    const handleEditComplete = () => {
-        setEditMode(false); // 수정 모드를 비활성화
-        setIsEdited(true); // 수정됨 상태 활성화
-        setTimeout(() => setIsEdited(false), 3000); // 3초 후 수정됨 메시지를 숨김
-    };
-
+    
     const canDelete = currentUserId === userId || userRole === 'MIDDLE_ADMIN' || userRole === 'ADMIN';
 
     return (
@@ -62,7 +58,8 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose }) => {
             {editMode ? (
                 <CreateNotice
                     notificationId={notificationId} 
-                    onClose={handleEditComplete}
+                    onClose={onClose}
+                    refreshNotifications={refreshNotifications}
                 />
             ) : (
                 <S.CorrectionNoticeMain>

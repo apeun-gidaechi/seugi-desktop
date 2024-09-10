@@ -4,10 +4,11 @@ import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 
 interface CreateNoticeProps {
     onClose: () => void;
-    notificationId?: number; // 수정할 때 사용할 notificationId
+    notificationId?: number; 
+    refreshNotifications: () => void;
 }
 
-const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId }) => {
+const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, refreshNotifications }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const workspaceId = window.localStorage.getItem('workspaceId');
@@ -51,6 +52,7 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId }) 
                     workspaceId
                 });
             }
+            refreshNotifications();
             onClose();
         } catch (error) {
             console.error("Error posting notice:", error);
