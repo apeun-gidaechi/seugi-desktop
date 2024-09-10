@@ -207,11 +207,18 @@ const Notification: React.FC = () => {
         setChangeNoticeId(prev => (prev === notificationId ? null : notificationId));
     };
 
+    const refreshNotifications = () => {
+        getNotification();  // Re-fetch the notifications
+    };
+
     return (
         <S.LeftContainer>
             {isCreateNoticeVisible && (
                 <div ref={CreateNoticeRef}>
-                    <CreateNotice onClose={() => setCreateNoticeVisible(false)} />
+                    <CreateNotice 
+                        onClose={() => setCreateNoticeVisible(false)} 
+                        refreshNotifications={refreshNotifications}
+                        />
                 </div>
             )}
             {showAlert && (
@@ -278,6 +285,7 @@ const Notification: React.FC = () => {
                                     onClose={() => handleActionButtonClick(item.id)}
                                     notificationId={item.id}
                                     userId={item.userId}
+                                    refreshNotifications={refreshNotifications}
                                 />
                             )}
                         </S.NotificationWrapper>
