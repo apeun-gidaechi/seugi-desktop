@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as S from '@/components/Home/Notification/ChangeNotice/ChangeNotice.style';
 import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 import AlertContainer from '@/components/Alert/Alert';
@@ -14,10 +14,11 @@ interface Props {
 const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refreshNotifications }) => {
     const [currentUserId, setCurrentUserId] = useState<number | undefined>(undefined);
     const [showAlert, setShowAlert] = useState<boolean>(false);
-    const [editMode, setEditMode] = useState<boolean>(false); 
-    const [isEdited, setIsEdited] = useState<boolean>(false);
+    const [editMode, setEditMode] = useState<boolean>(false);
     const workspaceId = window.localStorage.getItem('workspaceId');
     const userRole = window.localStorage.getItem('Role');
+
+    const ref = useRef<HTMLDivElement>(null);  
 
     const handleGetNoticeId = async () => {
         try {
@@ -50,19 +51,32 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refres
             console.error('Delete Error', error);
         }
     };
-    
+
     const canDelete = currentUserId === userId || userRole === 'MIDDLE_ADMIN' || userRole === 'ADMIN';
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (ref.current && !ref.current.contains(event.target as Node)) {
+            onClose(); 
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
         <>
             {editMode ? (
                 <CreateNotice
-                    notificationId={notificationId} 
+                    notificationId={notificationId}
                     onClose={onClose}
                     refreshNotifications={refreshNotifications}
                 />
             ) : (
-                <S.CorrectionNoticeMain>
+                <S.CorrectionNoticeMain ref={ref}> 
                     <S.ButtonContainer>
                         <S.CorrectionNotice onClick={() => setEditMode(true)}>공지 수정</S.CorrectionNotice>
                     </S.ButtonContainer>
