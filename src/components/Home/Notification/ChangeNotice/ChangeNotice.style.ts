@@ -15,11 +15,10 @@ export const CorrectionNoticeMain = styled.div`
 
     box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.08);
 
-    position:absolute;
+    /* position:absolute; */
     z-index:999;
 
-    top: 10%; 
-    left: 100%;
+    /* left: 100%; */
 `
 
 export const ButtonContainer = styled.button`

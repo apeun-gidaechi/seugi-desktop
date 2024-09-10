@@ -31,6 +31,7 @@ interface NotificationItem {
     title: string;
     content: string;
     emoji: EmojiItem[];
+    createdDate: string;
 }
 
 interface FormattedNotificationItem extends NotificationItem {
@@ -131,7 +132,7 @@ const Notification: React.FC = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
-
+    
     const handleCorrectionClick = () => {
         if (userRole === 'STUDENT') {
             setShowAlert(true);
@@ -208,7 +209,7 @@ const Notification: React.FC = () => {
     };
 
     const refreshNotifications = () => {
-        getNotification();  // Re-fetch the notifications
+        getNotification();  
     };
 
     return (
@@ -244,7 +245,11 @@ const Notification: React.FC = () => {
                     formattedNotifications.map((item, parentKey) => (
                         <S.NotificationWrapper key={item.id}>
                             <S.NotificationContentAuthor>
-                                <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)} </S.NotificationContentAuthorSpan>
+                                <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)} 
+                                    {item.createdDate !== item.lastModifiedDate && (
+                                        <S.EditedLabel>(수정됨)</S.EditedLabel> 
+                                    )}
+                                </S.NotificationContentAuthorSpan>
                                 <S.NotificationActionButton onClick={() => handleActionButtonClick(item.id)}>
                                     <S.NotificationActionButtonimg src={Point} />
                                 </S.NotificationActionButton>
