@@ -18,9 +18,8 @@ export const CorrectionNoticeMain = styled.div`
     position:absolute;
     z-index:999;
 
-    top: 30%; 
-    right: 0%;
-    transform: 'translate(-50%, -50%)'; 
+    top: 10%; 
+    left: 100%;
 `
 
 export const ButtonContainer = styled.button`
