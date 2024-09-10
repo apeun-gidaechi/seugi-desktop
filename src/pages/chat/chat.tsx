@@ -20,11 +20,13 @@ const Chat = () => {
         <S.ButtonWrapper>
           <TopButton />
         </S.ButtonWrapper>
-        {selectedChatRoom ? (
-          <SelectedChatRoom room={selectedChatRoom} currentUser={currentUser} />
-        ) : (
-          <UnChatRoom />
-        )}
+        <S.ChatRoomWrap>
+          {selectedChatRoom ? (
+            <SelectedChatRoom room={selectedChatRoom} currentUser={currentUser} />
+          ) : (
+            <UnChatRoom />
+          )}
+        </S.ChatRoomWrap>
       </S.ChatContent>
     </S.ChatWrapper>
   );

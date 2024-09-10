@@ -1,6 +1,6 @@
 import React from 'react'
 
-import * as S from '@/components/common/chatRoom/unSelect/index.style'
+import * as S from '@/components/common/chatRoom/Select/index.style'
 
 import SelectChatRoom from '@/assets/image/chat/sadErrorImg.svg';
 import SendMessage from '../../sendMessage/sendMessage';
@@ -13,10 +13,16 @@ interface SelectedChatRoomProps {
 
 const SelectedChatRoom: React.FC<SelectedChatRoomProps> = ({ room, currentUser }) => {
   return (
+    <S.AllWrapContainer>
+    <S.ContainerWrapper>
+        <S.Container>
+          <h1>{room}</h1>
+        </S.Container>
+    </S.ContainerWrapper>
     <div>
-      <h1>Chat Room: {room}</h1>
       <SendMessage chatRoom={room} currentUser={currentUser} />
     </div>
+  </S.AllWrapContainer>
   );
 };
 
