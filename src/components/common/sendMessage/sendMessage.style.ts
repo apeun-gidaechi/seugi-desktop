@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 
 export const Allwrap = styled.div`
-    
 `
 
 export const SendMessageWrap = styled.div`
@@ -15,10 +14,9 @@ export const SendMessageWrap = styled.div`
     border-radius: 12px;
     background: var(--Sub-White, #FFF);
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-    width: 70vw;
-    max-width: 1016px;
-    margin-left: 12px;
-    margin-top: 731px; 
+    width: 100%;
+    /* max-width: 1016px; */
+    /* margin-left: 12px; */
 `
 
 export const PlustFileButton = styled.button`
