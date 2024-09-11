@@ -13,7 +13,6 @@ const Meal = () => {
     const date = `${year}${month}${day}`;
     const hour = today.getHours();
     const minute = today.getMinutes();
-
     const [selectedMeal, setSelectedMeal] = useState(() => {
         if (hour < 8 || (hour === 8 && minute <= 20)) {
             return 0;
@@ -31,7 +30,6 @@ const Meal = () => {
     const getMenu = async (mealIndex: number) => {
         try {
             const res = await SeugiCustomAxios.get(`/meal?workspaceId=${workspaceId}&date=${date}`);
-            console.log("급식 :", workspaceId);
             const mealData = res.data.data[mealIndex];
             setMenu(mealData.menu || []);
             setMealType(mealData.mealType || '');
