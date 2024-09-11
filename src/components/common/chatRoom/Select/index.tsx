@@ -16,7 +16,6 @@ const SelectedChatRoom: React.FC<SelectedChatRoomProps> = ({ room, currentUser }
     <S.AllWrapContainer>
     <S.ContainerWrapper>
         <S.Container>
-          <h1>{room}</h1>
         </S.Container>
     </S.ContainerWrapper>
     <div>
