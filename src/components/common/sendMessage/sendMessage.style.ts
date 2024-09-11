@@ -93,7 +93,7 @@ export const DropdownItem = styled.button`
     align-items: flex-start;
     gap: var(--Corner-Small, 10px);
 
-align-self: stretch;
+    align-self: stretch;
   background: none;
   border: none;
   text-align: left;
