@@ -15,13 +15,15 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const [chatRooms, setChatRooms] = useState<string[]>([]);
 
   const handleSearch = async () => {
+    console.log("Search triggered with:", searchText);
     if (searchText.trim() !== "") {
       const roomFound = chatRooms.includes(searchText) || config.name.includes(searchText);
 
       if (roomFound) {
+        console.log("found room");
+        
         handleChatRoomClick(searchText);
       } else {
-        // Create room if not found
         await createRoom(searchText);
       }
 
@@ -30,43 +32,52 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   };
 
   const createRoom = async (roomName: string) => {
+    console.log("Creating room:", roomName);
     try {
-      const joinUsers = new Set<number>(); // Replace with actual user IDs if needed
-      const chatRoomImg = ""; // Set the chat room image if applicable
-
-      const response = await fetch('/api/createChatRoom', {
+      const requestData = {
+        workspaceId: "669e339593e10f4f59f8c583",
+        roomName: roomName, 
+        joinUsers: [10], 
+        chatRoomImg: "" 
+      };
+  
+      const response = await fetch('https://api.seugi.com/chat/personal/create', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTcyNjA2NDc0NywiZXhwIjoxNzI2MDcwNzQ3fQ.UHfrc2EM-3C5efG-aQy_ROE4KwpxflrqH2nIv7qr6i8"
         },
-        body: JSON.stringify({
-          roomName,
-          joinUsers: Array.from(joinUsers), // Convert Set to Array
-          chatRoomImg,
-        }),
+        body: JSON.stringify(requestData),
       });
-
-      const result = await response.text(); // Assuming the API returns a string
-
+  
+      const result = await response.text(); 
+  
+      console.log("API response:", result);
+  
       if (response.ok) {
+        console.log("Room created successfully:", roomName);
         addChatRoom(roomName);
         handleChatRoomClick(roomName);
       } else {
-        alert(`Error creating room: ${result}`);
+        console.error(`Error creating room: ${result}`);
       }
     } catch (error) {
       if (error instanceof Error) {
-        alert(`An error occurred: ${error.message}`);
+        console.error(`An error occurred: ${error.message}`);
       } else {
-        alert('An unknown error occurred');
+        console.error('An unknown error occurred');
       }
     }
   };
 
   const addChatRoom = (roomName: string) => {
+    console.log("Adding room to state:", roomName);
     setChatRooms((prevRooms) => {
+      console.log("Previous rooms:", prevRooms); 
       if (!prevRooms.includes(roomName)) {
-        return [...prevRooms, roomName];
+        const updatedRooms = [...prevRooms, roomName];
+        console.log("Updated rooms:", updatedRooms); 
+        return updatedRooms;
       }
       return prevRooms;
     });
