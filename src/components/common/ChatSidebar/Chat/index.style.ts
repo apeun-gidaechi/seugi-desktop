@@ -6,14 +6,13 @@ export const SideBarChat = styled.div`
   width: 452px;
   height: 100%;
   margin-left: 80px;
-
   overflow-y: auto;
 
   @media (max-width: 768px) {
     width: 100%;
     margin-left: 0;
   }
-    padding: 64px 20px 64px 32px;
+  padding: 64px 20px 64px 32px;
 `;
 
 export const ChatingPage = styled.div`
@@ -29,20 +28,14 @@ export const ChatingPage = styled.div`
 
 export const SideFinder = styled.div`
   display: flex;
+  position: relative; /* Added for positioning the icons */
   height: 52px;
   width: 100%;
   padding: 12px;
-
-  justify-content: space-between;
   align-items: center;
-  align-self: stretch;
-
-  border-radius: 12px;
   background: var(--Sub-White, #FFF);
-
   margin-top: 20px;
-
-  /* ev-black-1 */
+  border-radius: 12px;
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 
   @media (max-width: 768px) {
@@ -53,19 +46,20 @@ export const SideFinder = styled.div`
 `;
 
 export const FindChatingRoom = styled.input`
-    color: var(--Gray-Gray500, #AAA);
+  flex: 1;
+  /* padding: 0 40px; */
+  /* margin-left: 12px; */
+  color: var(--Gray-Gray500, #AAA);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 130%;
+  outline: none;
+  border: none;
+  background: none;
 
-    /* Subtitle2 */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
-
-    outline: none;
-    border: none;
   &:focus {
-    color: black; 
+    color: black;
   }
 
   @media (max-width: 768px) {
@@ -75,41 +69,38 @@ export const FindChatingRoom = styled.input`
   }
 `;
 
-export const PlusButtonImg = styled.img`
-  width: 26.667px;
-  height: 26.667px;
+export const IconWrapper = styled.div`
+  position: absolute;
+  right: 16px;
+  display: flex;
+  align-items: center;
 `;
 
 export const SearchIcon = styled.img`
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  /* margin-right: 10px; */
 `;
 
-export const PlusButton = styled.button`
-  background: none; 
-  border: none; 
-  display: inline; 
-  position: absolute;
-  margin-left: 282px;
-  margin-top: 10px; 
-  z-index: 10; 
-
-  @media (max-width: 768px) {
-    margin-left: calc(100% - 38px);
-  }
+export const PlusButtonImg = styled.img`
+  cursor: pointer;
+  width: 26.667px;
+  height: 26.667px;
+  margin-left: 5px;
 `;
 
 export const ChatRoomsWrap = styled.div`
-    margin-top: 20px;
-    display: flex;
-    width: 100%;
-    padding: 8px;
-
-    flex-direction: column;
-    flex: 1 0 0;
-
-    border-radius: 12px;
-    background: #FFF;
-    box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-`
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+  padding: 8px;
+  flex-direction: column;
+  flex: 1 0 0;
+  border-radius: 12px;
+  background: #FFF;
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+`;
 
 export const ChatRoomList = styled.div`
   display: flex;
@@ -121,23 +112,16 @@ export const ChatRoomList = styled.div`
 export const ChatRoom = styled.div`
   display: flex;
   height: 72px;
-
   align-items: center;
-
   cursor: pointer;
-
   color: var(--Black, #000);
   font-family: Pretendard;
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
-  line-height: 130%; 
-
-  padding: 4px 16px; 
-  width: 100%; 
-  
-
-  box-sizing: border-box; 
+  line-height: 130%;
+  padding: 4px 16px;
+  width: 100%;
+  box-sizing: border-box;
   text-align: left;
 `;
 

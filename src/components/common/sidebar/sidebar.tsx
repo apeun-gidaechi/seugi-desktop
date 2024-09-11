@@ -1,59 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import * as S from "@/components/common/ChatSidebar/Chat/index.style";
-import PlusButton from "@/assets/image/sidebar/plusButton.svg";
 import SearchIcon from "@/assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 import Navbar from "@/components/common/Navbar/Navbar";
-import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus";
 import TitleText from "@/components/common/TitleText/index";
-import config from "@/constants/ChatMember/config.json";
+import CreateRoomBtn from "@/assets/image/sidebar/add_fill.svg";
+import useChatSidebar from "@/hooks/Sidebar/useChatSidebar";
 
 interface SidebarProps {
   onSelectChatRoom: (room: string) => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
-  const [searchText, setSearchText] = useState("");
-  const [chatRooms, setChatRooms] = useState<string[]>([]);
-  const [showCreateRoom, setShowCreateRoom] = useState(false);
-
-  const handleSearch = () => {
-    if (searchText.trim() !== "") {
-      const isRoomFound = config.name.includes(searchText);
-      if (isRoomFound) {
-        addChatRoom(searchText);
-        setSearchText("");
-      } else {
-        alert(`Room '${searchText}' not found.`);
-      }
-    }
-  };
-
-  const addChatRoom = (roomName: string) => {
-    setChatRooms((prevRooms) => {
-      if (!prevRooms.includes(roomName)) {
-        return [...prevRooms, roomName];
-      }
-      return prevRooms;
-    });
-  };
-
-  const handleChatRoomClick = (room: string) => {
-    onSelectChatRoom(room);
-  };
-
-  const handleCreateRoomClick = () => {
-    setShowCreateRoom(true);
-  };
-
-  const handleCloseCreateRoom = () => {
-    setShowCreateRoom(false);
-  };
-
-  const handleRoomCreation = (roomName: string) => {
-    addChatRoom(roomName);
-    setShowCreateRoom(false);
-  };
+  const location = useLocation();
+  const { searchText, setSearchText, chatRooms, handleSearch, handleChatRoomClick } = useChatSidebar(onSelectChatRoom);
 
   return (
     <>
@@ -75,7 +36,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
                 }
               }}
             />
-            <S.SearchIcon src={SearchIcon} onClick={handleSearch} />
+            <S.IconWrapper>
+              <S.SearchIcon src={SearchIcon} onClick={handleSearch} />
+              {location.pathname === '/groupchat' && (
+                <S.PlusButtonImg src={CreateRoomBtn} alt="Create Room" onClick={handleSearch} />
+              )}
+            </S.IconWrapper>
           </S.SideFinder>
           <S.ChatRoomsWrap>
             <S.ChatRoomList>
@@ -90,12 +56,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
             </S.ChatRoomList>
           </S.ChatRoomsWrap>
         </S.SideBarChat>
-        {showCreateRoom && (
-          <CreateRoomPlus
-            onClose={handleCloseCreateRoom}
-            onCreateRoom={handleRoomCreation}
-          />
-        )}
       </S.ChatingPage>
     </>
   );
