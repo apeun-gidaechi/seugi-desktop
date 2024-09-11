@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import * as S from "@/components/common/ChatSidebar/Chat/index.style";
-import PlusButton from "@/assets/image/sidebar/plusButton.svg";
 import SearchIcon from "@/assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 import Navbar from "@/components/common/Navbar/Navbar";
-import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus";
 import TitleText from "@/components/common/TitleText/index";
 import config from "@/constants/ChatMember/config.json";
 
@@ -15,16 +13,52 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const [searchText, setSearchText] = useState("");
   const [chatRooms, setChatRooms] = useState<string[]>([]);
-  const [showCreateRoom, setShowCreateRoom] = useState(false);
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (searchText.trim() !== "") {
-      const isRoomFound = config.name.includes(searchText);
-      if (isRoomFound) {
-        addChatRoom(searchText);
-        setSearchText("");
+      const roomFound = chatRooms.includes(searchText) || config.name.includes(searchText);
+
+      if (roomFound) {
+        handleChatRoomClick(searchText);
       } else {
-        alert(`Room '${searchText}' not found.`);
+        // Create room if not found
+        await createRoom(searchText);
+      }
+
+      setSearchText("");
+    }
+  };
+
+  const createRoom = async (roomName: string) => {
+    try {
+      const joinUsers = new Set<number>(); // Replace with actual user IDs if needed
+      const chatRoomImg = ""; // Set the chat room image if applicable
+
+      const response = await fetch('/api/createChatRoom', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          roomName,
+          joinUsers: Array.from(joinUsers), // Convert Set to Array
+          chatRoomImg,
+        }),
+      });
+
+      const result = await response.text(); // Assuming the API returns a string
+
+      if (response.ok) {
+        addChatRoom(roomName);
+        handleChatRoomClick(roomName);
+      } else {
+        alert(`Error creating room: ${result}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(`An error occurred: ${error.message}`);
+      } else {
+        alert('An unknown error occurred');
       }
     }
   };
@@ -40,19 +74,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
 
   const handleChatRoomClick = (room: string) => {
     onSelectChatRoom(room);
-  };
-
-  const handleCreateRoomClick = () => {
-    setShowCreateRoom(true);
-  };
-
-  const handleCloseCreateRoom = () => {
-    setShowCreateRoom(false);
-  };
-
-  const handleRoomCreation = (roomName: string) => {
-    addChatRoom(roomName);
-    setShowCreateRoom(false);
   };
 
   return (
@@ -90,12 +111,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
             </S.ChatRoomList>
           </S.ChatRoomsWrap>
         </S.SideBarChat>
-        {showCreateRoom && (
-          <CreateRoomPlus
-            onClose={handleCloseCreateRoom}
-            onCreateRoom={handleRoomCreation}
-          />
-        )}
       </S.ChatingPage>
     </>
   );
