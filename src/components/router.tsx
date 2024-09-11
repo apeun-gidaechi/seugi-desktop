@@ -9,7 +9,6 @@ import Emailsignup from '@/pages/EmailSignUp/EmailSignUpPage';
 import CreateSchool from '@/pages/CreateSchoolPage/CreateSchoolPage';
 import Authentication from '@/pages/EmailAuthentication/EmailAuthenticationPage';
 import WaitingJoin from '@/pages/WaitingJoin/WaitingJoinPage';
-import ComponentsStoryBook from '@/pages/Storybook'
 import Home from '@/pages/Home/home'
 import Chat from '@/pages/chat/chat'
 import GroupChat from '@/pages/GroupChat/index'
@@ -33,7 +32,6 @@ const Router = () => {
                 <Route path='/createschool' element={<CreateSchool />} />
                 <Route path='/emailauthentication' element={<Authentication />} />
                 <Route path='/waitingjoin' element={<WaitingJoin />} />
-                <Route path='/storybook' element={<ComponentsStoryBook />} />
                 <Route path='/home' element={<Home />} />
                 <Route path='/Chat' element={<Chat />} />
                 <Route path='/GroupChat' element={<GroupChat />} />
