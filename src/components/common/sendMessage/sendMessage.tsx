@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Client } from "@stomp/stompjs";
-import axios from "axios";
 import * as S from "@/components/common/sendMessage/sendMessage.style";
 import MessageBox from "@/components/MessageBox/messageBox";
-import UploadAssetButton from "@/components/button/uploadButton/index"
 
 import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
 import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
 import SendArrowBlue from "@/assets/image/chat-components/sendBlueArrow.svg";
+import FileIcon from "@/assets/image/chat/fileButton/file_line.svg"; 
+import ImageIcon from "@/assets/image/chat/fileButton/image_line.svg"; 
 
 interface SendMessageProps {
   chatRoom: string;
@@ -25,6 +25,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
     }[]
   >([]);
   const [stompClient, setStompClient] = useState<Client | null>(null);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
@@ -41,24 +42,19 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
         body: JSON.stringify(newMessage),
       });
       setReceivedMessages((prevMessages) => [...prevMessages, newMessage]);
-      console.log("Message sent:", newMessage);
       setMessage("");
       setHasText(false);
-    } else {
-      console.error("STOMP client is not connected");
     }
   };
 
   const handleClick = () => {
     if (message.trim() !== "") {
-      console.log("Sending message:", message);
       sendMessage(message);
     }
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && message.trim() !== "") {
-      console.log("Sending message:", message);
       sendMessage(message);
     }
   };
@@ -67,32 +63,19 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
     const client = new Client({
       brokerURL: "wss://hoolc.me/stomp/chat",
       connectHeaders: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTcxNTg1ODkwMywiZXhwIjoxNzIxODU4OTAzfQ.F5_W4wAay4FbssM6XxJSCiUIvGCAcjAXqPxb-PXvUDo`,
+        Authorization: `Bearer token_here`,
       },
       debug: (str) => {
         console.log(str);
         if (str.includes("<<< CONNECTED")) {
           console.log("Connected to server");
-        } else if (str.includes("<<< DISCONNECTED")) {
-          console.log("Disconnected from server");
-        } else if (str.includes("<<< PONG")) {
-          console.log("PONG received");
         }
       },
       onConnect: () => {
-        console.log("STOMP client connected");
         client.subscribe(`/topic/messages/${chatRoom}`, (message) => {
           const newMessage = JSON.parse(message.body);
           setReceivedMessages((prevMessages) => [...prevMessages, newMessage]);
-          console.log("Message received:", newMessage);
         });
-      },
-      onDisconnect: () => {
-        console.log("STOMP client disconnected");
-      },
-      onStompError: (frame) => {
-        console.error("Broker reported error: " + frame.headers["message"]);
-        console.error("Additional details: " + frame.body);
       },
     });
 
@@ -104,34 +87,6 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
     };
   }, [chatRoom]);
 
-  const shouldShowTime = (index: number): boolean => {
-    if (index === receivedMessages.length - 1) {
-      return true;
-    }
-
-    const currentMessage = receivedMessages[index];
-    const nextMessage = receivedMessages[index + 1];
-
-    const currentTime = new Date(currentMessage.time);
-    const nextTime = new Date(nextMessage.time);
-
-    const timeDifference =
-      (nextTime.getTime() - currentTime.getTime()) / (1000 * 60 * 60);
-
-    return nextMessage.sender !== currentUser || timeDifference >= 24;
-  };
-
-  const formatTime = (time: string) => {
-    const date = new Date(time);
-    let hours = date.getHours();
-    const minutes = date.getMinutes();
-    const period = hours >= 12 ? "오후" : "오전";
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-
-    return `${period} ${hours}:${minutes.toString().padStart(2, "0")}`;
-  };
-
   return (
     <div>
       <div>
@@ -139,37 +94,47 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
           <MessageBox
             key={index}
             message={msg.message}
-            time={shouldShowTime(index) ? formatTime(msg.time) : ""}
+            time={msg.time}
           />
         ))}
       </div>
+
       <S.Allwrap>
+        {showDropdown && (
+          <S.DropdownMenu>
+            <S.DropdownItem>
+              <S.UploadImg src={FileIcon} alt="File upload" />
+              파일 업로드
+            </S.DropdownItem>
+            <S.DropdownItem>
+              <S.UploadImg src={ImageIcon} alt="Image upload" />
+              이미지 업로드
+            </S.DropdownItem>
+          </S.DropdownMenu>
+        )}
+
         <S.SendMessageWrap>
-          <S.PlustFileButton>
+          <S.PlustFileButton onClick={() => setShowDropdown(!showDropdown)}>
             <S.PlusMessageFile src={PlusMessageFile} />
           </S.PlustFileButton>
+
           <S.SendMessageInput
             type="text"
             placeholder="메세지 보내기"
             value={message}
             onChange={handleChange}
             onKeyPress={handleKeyPress}
-            disabled={!chatRoom}
           />
 
-          <S.SendArrowButton
-            onClick={handleClick}
-            disabled={!chatRoom || !hasText}
-          >
+          <S.SendArrowButton onClick={handleClick} disabled={!hasText}>
             {hasText ? (
-              <S.SendArrow src={SendArrowBlue} alt="Send Message" />
+              <S.SendArrow src={SendArrowBlue} />
             ) : (
-              <S.SendArrow src={SendArrow} alt="Send Message" />
+              <S.SendArrow src={SendArrow} />
             )}
           </S.SendArrowButton>
         </S.SendMessageWrap>
       </S.Allwrap>
-      <UploadAssetButton/>
     </div>
   );
 };
