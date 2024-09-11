@@ -12,14 +12,16 @@ const Meal = () => {
     const day = String(today.getDate()).padStart(2, '0');
     const date = `${year}${month}${day}`;
     const hour = today.getHours();
+    const minute = today.getMinutes();
 
     const [selectedMeal, setSelectedMeal] = useState(() => {
-        if (hour < 9) {
+        if (hour < 8 || (hour === 8 && minute <= 20)) {
             return 0;
-        } else if (hour < 13) {
+        } else if (hour < 13 || (hour === 13 && minute <= 30)) {
             return 1;
+        } else {
+            return 2; 
         }
-        return 2;
     });
     const [Menu, setMenu] = useState<string[]>([]);
     const [MealType, setMealType] = useState<string>('');
