@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Client } from "@stomp/stompjs";
+import { socketService } from './socketService'; 
 import axios from "axios";
 import * as S from "@/components/common/sendMessage/sendMessage.style";
 import MessageBox from "@/components/MessageBox/messageBox";
@@ -24,9 +24,8 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
   const [message, setMessage] = useState("");
   const [hasText, setHasText] = useState(false);
   const [receivedMessages, setReceivedMessages] = useState<
-    { message: string; time: string; sender: string }[]
+    { message: string; time: string; sender: string; type: FileType }[]
   >([]);
-  const [stompClient, setStompClient] = useState<Client | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -38,53 +37,72 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
     setHasText(!!text);
   };
 
-  const sendMessage = (message: string) => {
-    if (stompClient && stompClient.connected) {
-      const time = new Date().toISOString();
-      const newMessage = { message, time, sender: currentUser };
-      stompClient.publish({
-        destination: `/app/chat/${chatRoom}`,
-        body: JSON.stringify(newMessage),
-      });
-      setReceivedMessages((prevMessages) => [...prevMessages, newMessage]);
-      setMessage("");
-      setHasText(false);
-    }
+  const sendMessage = (message: string, type: FileType = FileType.FILE) => {
+    const time = new Date().toISOString();
+    const newMessage = {
+      roomId: chatRoom,
+      type: type,
+      message: message,
+      mention: [],
+      mentionAll: false,
+      emoticon: "",
+      time: time,
+      sender: currentUser,
+    };
+    socketService.sendMessage(JSON.stringify(newMessage), chatRoom); // Pass roomId here
+    setReceivedMessages((prevMessages) => [
+      ...prevMessages,
+      { message: message, time: time, sender: currentUser, type: type },
+    ]);
+    setMessage("");
+    setHasText(false);
   };
 
   const handleClick = () => {
     if (message.trim() !== "") {
-      sendMessage(message);
+      sendMessage(message, FileType.FILE);
     }
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && message.trim() !== "") {
-      sendMessage(message);
+      sendMessage(message, FileType.FILE); 
     }
   };
 
   const uploadFile = async (file: File, type: FileType) => {
     const formData = new FormData();
     formData.append("file", file);
-
+  
     try {
       const response = await axios.post(`/upload/${type}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-
+  
       const fileUrl = response.data;
       const time = new Date().toISOString();
-      const newMessage = { message: fileUrl, time, sender: currentUser };
-
-      stompClient?.publish({
-        destination: `/app/chat/${chatRoom}`,
-        body: JSON.stringify(newMessage),
-      });
-
-      setReceivedMessages((prevMessages) => [...prevMessages, newMessage]);
+  
+      const newMessageForServer = {
+        roomId: chatRoom,
+        type: type,
+        message: fileUrl,
+        mention: [],
+        mentionAll: false,
+        emoticon: "",
+      };
+  
+      const newMessageForState = {
+        message: fileUrl,
+        time: time,
+        sender: currentUser,
+        type: type,
+      };
+  
+      socketService.sendMessage(JSON.stringify(newMessageForServer), chatRoom); // Pass roomId here
+  
+      setReceivedMessages((prevMessages) => [...prevMessages, newMessageForState]);
     } catch (error) {
       console.error("File upload failed:", error);
     }
@@ -107,30 +125,17 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
   };
 
   useEffect(() => {
-    const client = new Client({
-      brokerURL: "wss://hoolc.me/stomp/chat",
-      connectHeaders: {
-        Authorization: `Bearer token_here`,
-      },
-      debug: (str) => {
-        console.log(str);
-        if (str.includes("<<< CONNECTED")) {
-          console.log("Connected to server");
-        }
-      },
-      onConnect: () => {
-        client.subscribe(`/topic/messages/${chatRoom}`, (message) => {
-          const newMessage = JSON.parse(message.body);
-          setReceivedMessages((prevMessages) => [...prevMessages, newMessage]);
-        });
-      },
+    socketService.connect();
+
+    // Correct subscription topic format
+    const topic = `/exchange/chat.exchange/room.${chatRoom}`;
+    socketService.subscribeToMessages(topic, (message) => {
+      const newMessage = JSON.parse(message);
+      setReceivedMessages((prevMessages) => [...prevMessages, newMessage]);
     });
 
-    client.activate();
-    setStompClient(client);
-
     return () => {
-      client.deactivate();
+      socketService.unsubscribeFromMessages(topic); // Ensure to unsubscribe on cleanup
     };
   }, [chatRoom]);
 
