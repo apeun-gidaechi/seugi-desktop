@@ -13,7 +13,6 @@ export const ChatContainer = styled.div`
 export const ChatWrapper = styled.div`
   background: var(--Primary-Primary050, #F8FCFF);
   position: relative;
-  padding-top: 10px;
 
   display: flex;
 `;

@@ -3,6 +3,7 @@ import { Client } from "@stomp/stompjs";
 import axios from "axios";
 import * as S from "@/components/common/sendMessage/sendMessage.style";
 import MessageBox from "@/components/MessageBox/messageBox";
+import UploadAssetButton from "@/components/button/uploadButton/index"
 
 import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
 import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
@@ -168,6 +169,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
           </S.SendArrowButton>
         </S.SendMessageWrap>
       </S.Allwrap>
+      <UploadAssetButton/>
     </div>
   );
 };
