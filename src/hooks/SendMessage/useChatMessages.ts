@@ -12,8 +12,6 @@ const useChatMessages = (chatRoom: string, currentUser: string) => {
   const [receivedMessages, setReceivedMessages] = useState<Message[]>([]);
 
   useEffect(() => {
-    socketService.connect();
-
     const topic = `/exchange/chat.exchange/room.${chatRoom}`;
     socketService.subscribeToMessages(topic, (message) => {
       const newMessage = JSON.parse(message);

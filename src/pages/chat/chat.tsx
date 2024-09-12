@@ -10,6 +10,7 @@ const Chat = () => {
   const currentUser = "ㅠㅠ"; // 하드코딩 수정예정
 
   const handleSelectChatRoom = (room: string) => {
+    console.log(room)
     setSelectedChatRoom(room);
   };
 

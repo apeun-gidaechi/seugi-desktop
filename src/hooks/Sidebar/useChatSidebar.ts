@@ -51,6 +51,7 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
   };
 
   const addChatRoom = (roomName: string) => {
+    console.log(`Adding chat room: ${roomName}`);
     setChatRooms((prevRooms) => {
       if (!prevRooms.includes(roomName)) {
         return [...prevRooms, roomName];
@@ -59,8 +60,15 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
     });
   };
 
-  const handleChatRoomClick = (room: string) => {
-    onSelectChatRoom(room);
+  const handleChatRoomClick = (roomName: string) => {
+    onSelectChatRoom(roomName);
+    console.log(`Adding chat room: ${roomName}`);
+    setChatRooms((prevRooms) => {
+      if (!prevRooms.includes(roomName)) {
+        return [...prevRooms, roomName];
+      }
+      return prevRooms;
+    });
   };
 
   return {
