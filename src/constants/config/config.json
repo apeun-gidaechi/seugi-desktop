@@ -1,3 +1,4 @@
 {
-    "serverurl": "https://api.seugi.com"
+  "serverurl": "https://api.seugi.com",
+  "google-client-id": "1030248081772-lf6qk465vqfk3f7m30k0uglp0l50fll2.apps.googleusercontent.com"
 }
