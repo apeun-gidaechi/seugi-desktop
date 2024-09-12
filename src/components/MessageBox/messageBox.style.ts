@@ -5,10 +5,10 @@ export const messageContainer = styled.div`
     clear: both;
     float: right;
     align-items: flex-end; 
+    z-index: 100;
 `;
 
 export const messageBox = styled.div`
-    color: white;
     border-radius: 5px;
     margin: 5px 0;
     width: fit-content;
@@ -18,6 +18,14 @@ export const messageBox = styled.div`
     border-radius: 8px 0px 8px 8px;
     background: var(--Primary-Primary500, #1D93F3);
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+    color: var(--Sub-White, #FFF);
+
+    /* Body1 */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%; /* 18.2px */
 `;
 
 export const messageTime = styled.div`

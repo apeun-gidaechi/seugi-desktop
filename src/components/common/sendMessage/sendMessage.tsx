@@ -68,11 +68,13 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
 
   return (
     <div>
-      <div>
-        {receivedMessages.map((msg, index) => (
-          <MessageBox key={index} message={msg.message} time={msg.time} />
-        ))}
-      </div>
+      <S.MessageBoxInBox>
+        <S.MessageWrap>
+          {receivedMessages.map((msg, index) => (
+            <MessageBox key={index} message={msg.message} time={msg.time} />
+          ))}
+        </S.MessageWrap>
+      </S.MessageBoxInBox>
 
       <S.Allwrap>
         {showDropdown && (
