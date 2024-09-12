@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "@/components/common/ChatSidebar/Chat/index.style";
+import * as S from "./index.style";
 
 import PlusButton from "@/assets/image/sidebar/plusButton.svg";
 import SearchIcon from "@/assets/image/chat-components/Search.svg";
@@ -7,7 +7,7 @@ import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 
 import Navbar from "@/components/common/Navbar/Navbar";
 import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus";
-import TitleText from "../../TitleText";
+import TitleText from "../TitleText/index";
 
 import SendMessage from "@/components/common/sendMessage/sendMessage";
 import useChatRooms from "@/hooks/Chat/useChatRooms";
