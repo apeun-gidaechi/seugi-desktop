@@ -4,7 +4,7 @@ import * as S from '@/components/layer/chat/index.style';
 
 import SideBar from "@/components/common/ChatSidebar/Chat/index";
 import TopButton from '@/components/Button/chatButton/index';
-import ChatRoom from '@/components/Common/chatRoom/unSelect/index'
+import ChatRoom from '@/components/Common/ChatRoom/UnSelect/index'
 
 const index = () => {
   return (

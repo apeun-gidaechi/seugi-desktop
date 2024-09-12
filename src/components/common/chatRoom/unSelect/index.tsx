@@ -1,6 +1,6 @@
 import React from 'react'
 
-import * as S from '@/components/Common/chatRoom/unSelect/index.style'
+import * as S from '@/components/Common/ChatRoom/UnSelect/index.style'
 
 import SelectChatRoom from '@/assets/image/chat/sadErrorImg.svg';
 
