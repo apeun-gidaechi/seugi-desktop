@@ -8,8 +8,8 @@ export const MyProfileDialog = styled.div`
 
     z-index:999;
 
-    top:115px;
-    left:40px;
+    bottom:3rem;
+    left: 3rem;
 
     display: flex;
     width: 360px;
