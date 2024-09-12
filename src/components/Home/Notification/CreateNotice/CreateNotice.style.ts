@@ -20,8 +20,8 @@ export const NoticeMain = styled.div`
 
 export const CreateNoticeContainer = styled.div`
     position: absolute;
-    left: 400px;
-    top: 117px;
+    left: 30rem;
+    top: 14rem;
 
     display: flex;
     width: 640px;

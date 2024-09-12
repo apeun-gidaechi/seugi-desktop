@@ -41,7 +41,7 @@ const DailySchedule = () => {
         const lunchStart = new Date();
         lunchStart.setHours(12, 40, 0, 0); // 점심시간 시작 12:40
         const lunchEnd = new Date();
-        lunchEnd.setHours(13, 20, 0, 0); // 점심시간 끝 13:20
+        lunchEnd.setHours(13, 30, 0, 0); // 점심시간 끝 13:30
 
         let lastPeriodEnd = null;
 
