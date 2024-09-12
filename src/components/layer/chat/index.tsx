@@ -3,7 +3,7 @@ import React from 'react'
 import * as S from '@/components/Layer/chat/index.style';
 
 import SideBar from "@/components/common/ChatSidebar/Chat/index";
-import TopButton from '@/components/Button/chatButton/index';
+import TopButton from '@/components/Button/ChatButton/Index';
 import ChatRoom from '@/components/Common/ChatRoom/UnSelect/index'
 
 const index = () => {
