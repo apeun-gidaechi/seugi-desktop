@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 
 import * as S from "@/components/Home/Subscribed/Home.style";
-import Navbar from "@/components/common/Navbar/Navbar";
-import Changeschool from "@/components/ChangeSchool/ChangeSchool";
-import TitleText from '@/components/common/TitleText/index'
+import Navbar from "@/components/Navbar/Navbar";
 
 import Schools from '@/components/Home/Schools/Schools';
 import Meal from "@/components/Home/Meal/Meal";
@@ -11,17 +9,13 @@ import CatSeugi from "@/components/Home/CatSeugi/CatSeugi";
 import Calendar from "@/components/Home/Calendar/Calendar";
 import Notification from '@/components/Home/Notification/Notification';
 import DailySchedule from "@/components/Home/DailySchedule/DailySchedule";
+import { handleUserRole } from '@/util/Role/WhatisYourRole';
+import { clearAccessToken } from "@/api/SeugiCutomAxios";
+import Session from "@/util/TokenExpired/TokenExpired";
 
-
-import { isTokenExpired } from "@/util/tokenUtils";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-
-const Home = () => {
+const Home: React.FC = () => {
   const token = window.localStorage.getItem("accessToken");
-  const navigate = useNavigate();
-  const [showChangeschool, setShowChangeschool] = useState(false);
-
+  const workspaceId = window.localStorage.getItem('workspaceId');
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -29,23 +23,19 @@ const Home = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (isTokenExpired(token)) {
-      alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
-      window.localStorage.removeItem("accessToken");
-      navigate("/");
-    }
-  }, [token, navigate]);
+  if (workspaceId !== null) {
+    handleUserRole(workspaceId);
+  } else {
+    console.error('워크스페이스가 없어요');
+  }
 
-  
+
   return (
     <S.HomeContainer>
+      <Session token={token} clearAccessToken={clearAccessToken} />
       <Navbar />
       <S.HomeMain>
-        <TitleText/>
-        {showChangeschool && (
-          <Changeschool onClose={() => setShowChangeschool(false)} /> 
-        )}
+        <S.HomeTitle>홈</S.HomeTitle>
         <S.ComponentsBox>
           <S.HomeWrapper1>
             <DailySchedule />
@@ -53,7 +43,7 @@ const Home = () => {
               <Notification />
               <S.RightContainer>
                 <Calendar />
-                <CatSeugi/>
+                <CatSeugi />
               </S.RightContainer>
             </S.HomeWrapper1DownContainer>
           </S.HomeWrapper1>

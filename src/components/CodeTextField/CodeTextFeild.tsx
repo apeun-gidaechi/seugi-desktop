@@ -29,8 +29,7 @@ const CodeTextField: React.FC<CodeTextFieldProps> = ({ onChange, onKeyDown }) =>
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const value = e.target.value;
-        if (value === ' ') return; // Prevent space character
-
+        if (value === ' ') return; 
         const updatedValues = [...inputValues];
         if (value.length <= 1) {
             updatedValues[index] = value;

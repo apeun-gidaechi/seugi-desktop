@@ -6,43 +6,41 @@ import CafeteriaImg from "@/assets/image/home/cafeteria.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
 
 const Meal = () => {
-    const [selectedMeal, setSelectedMeal] = useState(0);
-    const [Menu, setMenu] = useState<string[]>([]);
-    const [MealType, setMealType] = useState<string>('');
-    const [Calorie, setCalorie] = useState<string>('');
-    const workspaceId = window.localStorage.getItem('workspaceId');
-
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     const date = `${year}${month}${day}`;
+    const hour = today.getHours();
+    const minute = today.getMinutes();
+    const [selectedMeal, setSelectedMeal] = useState(() => {
+        if (hour === 8 && minute <= 20) {
+            return 0;
+        } else if (hour === 13 && minute <= 30) {
+            return 1;
+        } else {
+            return 2; 
+        }
+    });
+    const [Menu, setMenu] = useState<string[]>([]);
+    const [MealType, setMealType] = useState<string>('');
+    const [Calorie, setCalorie] = useState<string>('');
+    const workspaceId = window.localStorage.getItem('workspaceId');
 
     const getMenu = async (mealIndex: number) => {
         try {
             const res = await SeugiCustomAxios.get(`/meal?workspaceId=${workspaceId}&date=${date}`);
-            setMenu(res.data.data[mealIndex].menu);
-            setMealType(res.data.data[mealIndex].mealType);
-            setCalorie(res.data.data[mealIndex].calorie);
+            const mealData = res.data.data[mealIndex];
+            setMenu(mealData.menu || []);
+            setMealType(mealData.mealType || '');
+            setCalorie(mealData.calorie || '');
         } catch (error) {
             console.error("Error fetching menu:", error);
+            setMenu([]); 
+            setMealType('');
+            setCalorie('');
         }
     };
-
-    const determineMealBasedOnTime = () => {
-        const hour = today.getHours();
-        if (hour < 9) {
-            setSelectedMeal(0); 
-        } else if (hour < 13) {
-            setSelectedMeal(1); 
-        } else {
-            setSelectedMeal(2); 
-        }
-    };
-
-    useEffect(() => {
-        determineMealBasedOnTime();
-    }, []);
 
     useEffect(() => {
         getMenu(selectedMeal);
@@ -59,9 +57,9 @@ const Meal = () => {
                     <S.CafeteriaImg src={CafeteriaImg} />
                     <S.CafeteriaTitle>오늘의 급식</S.CafeteriaTitle>
                 </S.CafeteriaTitleDiv>
-                <S.ArrowLButton>
+                {/* <S.ArrowLButton>
                     <S.CArrowLogo src={ArrowImg} />
-                </S.ArrowLButton>
+                </S.ArrowLButton> */}
             </S.CafeteriaTitleBox>
             <S.CafeteriaDiv>
                 <S.TimeButton onClick={() => handleMealChange(0)}>
@@ -96,9 +94,13 @@ const Meal = () => {
                 </S.TimeButton>
             </S.CafeteriaDiv>
             <S.MenuList>
-                {Menu && Menu.map((item, index) => (
-                    <S.Menu key={index}>{item}</S.Menu>
-                ))}
+                {Menu && Menu.length > 0 ? (
+                    Menu.map((item, index) => (
+                        <S.Menu key={index}>{item}</S.Menu>
+                    ))
+                ) : (
+                    <S.NoMealMessage>급식이 없습니다.</S.NoMealMessage>
+                )}
                 <S.CalorieDiv>
                     <S.CalorieText>{Calorie}</S.CalorieText>
                 </S.CalorieDiv>

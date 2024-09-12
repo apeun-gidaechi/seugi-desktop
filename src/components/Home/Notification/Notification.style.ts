@@ -14,8 +14,15 @@ export const LeftContainer = styled.div`
   background: ${SeugiColor.White};
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+
+  /* position:relative; */
 `;
 
+export const NoNotification = styled.span`
+  color: ${SeugiColor.Black};
+
+  ${SeugiFont.subtitle.subtitle2};
+`
 export const NotificationContainer = styled.div`
   display: flex;
   padding: 4px;
@@ -58,10 +65,12 @@ export const NArrowLogo = styled.img`
 export const NotificationBox = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 8px;
   align-self: stretch;
+  max-height: 500px; 
+  overflow-y: auto; 
+  padding-right: 10px;
 `;
 
 export const NotificationWrapper = styled.div`
@@ -78,11 +87,20 @@ export const NotificationWrapper = styled.div`
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
 
-export const NotificationContentAuthor = styled.span`
+export const NotificationContentAuthor = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+
+  width:26vw;
+`;
+
+export const NotificationContentAuthorSpan = styled.span`
   color:${SeugiColor.Gray600};
 
-  ${SeugiFont.body.body2};
-`;
+  ${SeugiFont.caption.caption2};
+`
 
 export const NotificationContentTitle = styled.span`
   position: relative;
@@ -106,13 +124,22 @@ export const NotificationEmojiBox = styled.div`
   flex-direction: row;
 `;
 
+export const NotificationAddEmojiButton = styled.button`
+  border:none;
+  background:none;
+
+  cursor: pointer;
+`
+
 export const NotificationAddEmoji = styled.img`
   position: relative;
 
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
 
   padding: 4px;
+
+
 `;
 
 export const NotificationEmojiWrapper = styled.div`
@@ -156,7 +183,7 @@ export const NotificationEmojiCount = styled.span`
   margin: 3px;
 
   color: ${SeugiColor.Gray600};
-  ${SeugiFont.body.body1};
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const Number = styled.div`
@@ -208,3 +235,18 @@ export const Item = styled.div`
     color: ${SeugiColor.Primary300};
   }
 `;
+
+export const NotificationActionButton = styled.button`
+    cursor: pointer;
+
+    background:none;
+    border:none;
+`;
+
+export const NotificationActionButtonimg = styled.img`
+`
+
+export const EditedLabel = styled.span`
+    color : ${SeugiColor.Gray500};
+    ${SeugiFont.caption.caption1};
+`

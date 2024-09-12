@@ -12,15 +12,19 @@ const Schools = () => {
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
-            if (ChangeSchoolRef.current && !ChangeSchoolRef.current.contains(e.target as Node)) {
+            const target = e.target as Node | null;
+
+            if (
+                ChangeSchoolRef.current &&
+                !ChangeSchoolRef.current.contains(target) &&
+                !(target && (target as Element).closest('.ChangeSchool'))
+            ) {
                 setShowChangeschool(false);
             }
         };
 
         if (showChangeschool) {
             document.addEventListener("mousedown", handleClickOutside);
-        } else {
-            document.removeEventListener("mousedown", handleClickOutside);
         }
 
         return () => {
@@ -56,7 +60,7 @@ const Schools = () => {
             </S.SchoolTitleBox>
             <S.SchoolBox>
                 <S.SchoolName>{workspaceName}</S.SchoolName>
-                <S.ChangeSchool onClick={handleOnClicked}>전환</S.ChangeSchool>
+                <S.ChangeSchool onClick={handleOnClicked} className='ChangeSchool'>전환</S.ChangeSchool>
             </S.SchoolBox>
         </S.UpContainer>
     )

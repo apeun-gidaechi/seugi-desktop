@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import * as S from '@/components/Signup/Emailsignup/Emailsignup.style';
+import * as S from '@/components/Signup/Emailsignup/emailsignup.style';
 import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg'
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
 import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
