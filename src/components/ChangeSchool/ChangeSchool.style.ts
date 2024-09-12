@@ -179,6 +179,7 @@ export const NoSubscribedSchools = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-top: 5rem;
 `;
 
 export const MoveButton = styled.div`
