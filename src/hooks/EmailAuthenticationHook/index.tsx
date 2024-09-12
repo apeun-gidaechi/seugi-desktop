@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import config from '@/constants/login/config.json';
+import config from '@/constants/config/config.json';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const index = () => {
