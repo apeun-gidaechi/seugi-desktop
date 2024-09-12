@@ -1,4 +1,4 @@
-import CreateSchool from '@/Components/CreateSchool/CreateSchool'
+import CreateSchool from '@/Components/WorkSpace/CreateSchool/CreateSchool'
 import React from 'react'
 
 const CreateSchoolPage = () => {

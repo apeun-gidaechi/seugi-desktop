@@ -1,5 +1,5 @@
 import React from 'react'
-import EmailAuthentication from '@/Components/Signup/EmailAuthentication/EmailAuthentication';
+import EmailAuthentication from '@/Components/OnBording/Signup/EmailAuthentication/EmailAuthentication';
 
 const EmailAuthenticationPage = () => {
   return (

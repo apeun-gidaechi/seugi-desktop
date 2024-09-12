@@ -1,4 +1,4 @@
-import SelectingSchool from "@/Components/SelectingSchool/SelectSchool";
+import SelectingSchool from "@/Components/WorkSpace/SelectSchool/SelectSchool";
 
 const SelectSchool = () => {
     return (
