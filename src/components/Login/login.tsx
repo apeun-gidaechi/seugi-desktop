@@ -9,12 +9,13 @@ import CustomAlert from "@/components/Alert/Alert";
 import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import showPasswordimg from "@/assets/image/onbording/show_fill.svg";
 import hidePasswordimg from "@/assets/image/onbording/hide_fill.svg";
-import AppleLogo from '@/assets/image/onbording/Start/apple.svg';
+import AppleLogo from "@/assets/image/onbording/Start/apple.svg";
 import GoogleLogo from "@/assets/image/onbording/Start/googlelogo.svg";
 import Cloud1 from "@/assets/image/onbording/Start/LoginCloud1.svg";
 import Cloud2 from "@/assets/image/onbording/Start/LoginCloud2.svg";
 import Sun from "@/assets/image/onbording/Start/LoginSun.svg";
 import Divider from "@/assets/image/onbording/Start/Divider.svg";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -104,6 +105,39 @@ const Login = () => {
     }
   };
 
+  const handleGoogleLogin = useGoogleLogin({
+    flow: "auth-code",
+    scope: "email profile",
+    onSuccess: async ({ code }) => {
+      try {
+        const res = await axios.post(
+          `${config.serverurl}/oauth/google/authenticate`,
+          { code }
+        );
+
+        if (res.status !== 200) {
+          return;
+        }
+
+        const { accessToken, refreshToken } = res.data.data;
+
+        window.localStorage.setItem("accessToken", accessToken);
+        window.localStorage.setItem("refreshToken", refreshToken);
+
+        importWorkspace();
+      } catch (error) {
+        setAlertMessage(
+          "구글 로그인 중 오류가 발생했습니다. 다시 시도해주세요."
+        );
+        setShowAlert(true);
+        console.log(error);
+      }
+    },
+    onError: (errorResponse) => {
+      console.error(errorResponse);
+    },
+  });
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleLogin();
@@ -184,7 +218,7 @@ const Login = () => {
             <S.Authlogin>
               <S.LogoImg src={AppleLogo} />
             </S.Authlogin>
-            <S.Authlogin>
+            <S.Authlogin onClick={handleGoogleLogin}>
               <S.LogoImg src={GoogleLogo} />
             </S.Authlogin>
           </S.Oauthpart>
