@@ -136,8 +136,8 @@ export const QuestionDay = styled.span`
 `;
 
 export const MessageContainer = styled.div`
-    width:380px;
-    margin-top: 20px;
+    width:100%;
+    margin-top: 10px;
     padding: 10px;
     background-color: ${SeugiColor.Gray100};
     border: 1px solid ${SeugiColor.Gray100};

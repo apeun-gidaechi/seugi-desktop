@@ -41,7 +41,7 @@ const CatSeugi = () => {
             </S.CatSeugi>
             {showMessage && (
                 <S.MessageContainer>
-                    <S.MessageText>다음교시는 프로그래밍 실습입니다</S.MessageText>
+                    <S.MessageText>다음교시는 국어입니다</S.MessageText>
                 </S.MessageContainer>
             )}
             <S.QuestionContainer>
