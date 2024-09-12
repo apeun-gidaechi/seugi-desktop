@@ -21,10 +21,10 @@ const WaitingJoin = () => {
     const handleWaitingJoin = async () => {
         try {
             const res = await SeugiCustomAxios.get(`/workspace/`);
-            if (res.data.data && res.data.data.length === 0) {
-                navigate("/unhome");
+            if (res.data.data.length > 0) {
+                navigate('/home');
             } else {
-                navigate("/home");
+                navigate('/unhome');
             }
         } catch (error) {
             console.log("Error fetching workspace:", error);

@@ -33,11 +33,14 @@ const CreateSchool = () => {
         }
 
         try {
-            await SeugiCustomAxios.post(`/workspace`, {
-                workspaceName,
-                workspaceImageUrl,
-            });
-            navigate('/');
+            const res = await SeugiCustomAxios.get(`/workspace/`);
+            console.log(res);
+
+            if (res.data.data.length > 0) {
+                navigate('/home');
+            } else {
+                navigate('/unhome');
+            }
         } catch (error) {
             if (isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
@@ -63,7 +66,7 @@ const CreateSchool = () => {
         formData.append('file', e.target.files[0]);
 
         try {
-            const res = await SeugiCustomAxios.post(`${config.serverurl}/file/upload/IMG`, formData, {
+            const res = await SeugiCustomAxios.post(`/file/upload/IMG`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
