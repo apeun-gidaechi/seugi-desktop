@@ -2,7 +2,7 @@ import * as S from "@/components/Login/login.style";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import config from "@/constants/login/config.json";
+import config from "@/constants/config/config.json";
 import LoginButton from "@/components/Button/Button";
 import TextField from "@/components/TextField/TextField";
 import CustomAlert from "@/components/Alert/Alert";
