@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const CreateRoomPlusBox = styled.div`
     display: flex;
-    width: 443px;
-    height: 334px;
+    width: 440px;
+    height: 406px;
     padding: 24px;
     gap: 12px;
 
@@ -11,6 +11,11 @@ export const CreateRoomPlusBox = styled.div`
     background: #FFF;
 
     flex-direction: column;
+    position: absolute;
+    z-index: 100;
+    box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.08);
+
+    margin-top: 120px;
 `;
 
 export const ChatRoomName = styled.div`
@@ -51,7 +56,27 @@ export const InviteMemberWrap = styled.div`
     background: var(--Sub-White, #FFF);
 
     display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ::placeholder{
+        color: var(--Gray-Gray500, #AAA);
+
+        /* Subtitle2 */
+        font-family: Pretendard;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%; /* 20.8px */
+    }
 `;
+
+export const SearchIconImg = styled.img`
+    width: 28px;
+    height: auto;
+
+    margin: 12px;
+`
 
 export const InviteMemberFlex = styled.div`
     display: flex;
@@ -67,8 +92,9 @@ export const InviteMember = styled.input`
     font-weight: 600;
     line-height: 130%; /* 20.8px */
 
-    padding: 14px;
-    margin-left: 2px;
+    /* padding: 14px; */
+     /* margin-left: 2px;*/
+    padding: 12px;
 
     flex: 1;
 

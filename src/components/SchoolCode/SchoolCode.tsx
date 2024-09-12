@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import * as S from "@/components/SchoolCode/SchoolCode.style";
 import Button from "@/components/Button/Button";
 import CodeTextField from "@/components/CodeTextField/CodeTextFeild";
-import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import { isTokenExpired } from "@/util/tokenUtils";
 import Backimg from "@/assets/image/Backimg.svg";
 
 import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
+import Session from "@/util/TokenExpired/TokenExpired";
+import { clearAccessToken } from "@/api/SeugiCutomAxios";
 
 const SchoolCode = () => {
   const navigate = useNavigate();
@@ -21,23 +21,8 @@ const SchoolCode = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (isTokenExpired(token)) {
-      alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
-      window.localStorage.removeItem("accessToken");
-      navigate("/");
-    }
-  }, [token, navigate]);
-
   const handleContinue = async () => {
     const verificationCode = code.join("");
-
-    if (isTokenExpired(token)) {
-      alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
-      window.localStorage.removeItem("accessToken");
-      navigate("/");
-      return;
-    }
 
     try {
       const res = await SeugiCustomAxios.get(`/workspace?code=${verificationCode}`);
@@ -64,6 +49,7 @@ const SchoolCode = () => {
 
   return (
     <S.SchoolCodeMain>
+      <Session token={token} clearAccessToken={clearAccessToken} />
       <S.SchoolCode>
         <S.SchoolCodeContainer>
           <S.Header>

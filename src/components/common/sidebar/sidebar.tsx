@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import * as S from "@/components/common/ChatSidebar/Chat/index.style";
+import * as S from "@/components/common/ChatSideBar/index.style";
 import SearchIcon from "@/assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 import Navbar from "@/components/common/Navbar/Navbar";
 import TitleText from "@/components/common/TitleText/index";
 import CreateRoomBtn from "@/assets/image/sidebar/add_fill.svg";
 import useChatSidebar from "@/hooks/Sidebar/useChatSidebar";
+import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus";
 
 interface SidebarProps {
   onSelectChatRoom: (room: string) => void;
@@ -14,7 +15,23 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const location = useLocation();
+
   const { searchText, setSearchText, chatRooms, handleSearch, handleChatRoomClick } = useChatSidebar(onSelectChatRoom);
+
+  const [isCreateRoomVisible, setCreateRoomVisible] = useState(false);
+
+  const handleCreateRoomClick = () => {
+    setCreateRoomVisible(prevState => !prevState);
+  };
+
+  const handleCloseCreateRoom = () => {
+    setCreateRoomVisible(false);
+  };
+
+  const handleCreateRoom = (roomName: string) => {
+    console.log(`Creating room: ${roomName}`);
+    handleCloseCreateRoom();
+  };
 
   return (
     <>
@@ -39,7 +56,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
             <S.IconWrapper>
               <S.SearchIcon src={SearchIcon} onClick={handleSearch} />
               {location.pathname === '/groupchat' && (
-                <S.PlusButtonImg src={CreateRoomBtn} alt="Create Room" onClick={handleSearch} />
+                <S.PlusButtonImg
+                  src={CreateRoomBtn}
+                  alt="Create Room"
+                  onClick={handleCreateRoomClick}
+                />
               )}
             </S.IconWrapper>
           </S.SideFinder>
@@ -55,6 +76,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
               ))}
             </S.ChatRoomList>
           </S.ChatRoomsWrap>
+          {isCreateRoomVisible && (
+            <CreateRoomPlus 
+              onClose={handleCloseCreateRoom} 
+              onCreateRoom={handleCreateRoom} 
+            />
+          )}
         </S.SideBarChat>
       </S.ChatingPage>
     </>

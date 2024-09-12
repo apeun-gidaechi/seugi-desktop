@@ -2,45 +2,29 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import * as S from '@/components/CreateSchool/CreateSchool.style';
 import Button from '@/components/Button/Button';
 import TextField from '@/components/TextField/TextField';
-import axios from 'axios';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
+import Backimg from '@/assets/image/Backimg.svg';
 import PlusButtonimg from '@/assets/image/join-school/plus.svg';
 import { useNavigate } from 'react-router-dom';
-import { isTokenExpired } from '@/util/tokenUtils';
-import Backimg from '@/assets/image/Backimg.svg';
 import config from '@/constants/config/config.json';
+
+import Session from '@/util/TokenExpired/TokenExpired';
+import { clearAccessToken, SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 
 const CreateSchool = () => {
     const navigate = useNavigate();
-
-    // 스크롤 막기
-    useEffect(() => {
-        document.body.style.overflow = 'hidden';
-        return () => {
-            document.body.style.overflow = 'auto';
-        }
-    }, []);
-
-
+    const token = window.localStorage.getItem("accessToken");
     const [workspaceName, setWorkspaceName] = useState<string>('');
     const [workspaceImageUrl, setWorkspaceImageUrl] = useState<string | null>(null);
-    const token = window.localStorage.getItem("accessToken");
 
     const isworkspaceImg = workspaceImageUrl ? workspaceImageUrl : createSchoolImg;
 
     useEffect(() => {
-        if (isTokenExpired(token)) {
-            alert('세션이 만료되었습니다. 다시 로그인 해주세요.');
-            window.localStorage.removeItem('accessToken');
-            navigate('/');
-        }
-    }, [token, navigate]);
-
-    const handleTokenExpiration = () => {
-        alert('토큰이 만료되었습니다. 다시 로그인 해주세요.');
-        window.localStorage.removeItem('accessToken');
-        navigate('/login');
-    };
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, []);
 
     const handleCreateSchool = async () => {
         if (!workspaceName.trim()) {
@@ -48,26 +32,17 @@ const CreateSchool = () => {
             return;
         }
 
-        if (isTokenExpired(token)) {
-            handleTokenExpiration();
-            return;
-        }
-
         try {
-            const res = await axios.post(`${config.serverurl}/workspace`, {
+            await SeugiCustomAxios.post(`/workspace`, {
                 workspaceName,
                 workspaceImageUrl,
-            }, {
-                headers: {
-                    Authorization: `${token}`
-                },
             });
-            console.log('Code', res.data);
             navigate('/');
         } catch (error) {
-            if (axios.isAxiosError(error)) {
+            if (isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
-                    handleTokenExpiration();
+                    clearAccessToken();
+                    navigate('/');
                 } else {
                     console.error('Error sending code:', error.response?.data);
                 }
@@ -87,24 +62,19 @@ const CreateSchool = () => {
         formData.append('type', 'IMG');
         formData.append('file', e.target.files[0]);
 
-        if (isTokenExpired(token)) {
-            handleTokenExpiration();
-            return;
-        }
-
         try {
-            const res = await axios.post(`${config.serverurl}/file/upload/IMG`, formData, {
+            const res = await SeugiCustomAxios.post(`${config.serverurl}/file/upload/IMG`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    Authorization: `${token}`
                 },
             });
             console.log('Image uploaded', res.data);
             setWorkspaceImageUrl(res.data.data);
         } catch (error) {
-            if (axios.isAxiosError(error)) {
+            if (isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
-                    handleTokenExpiration();
+                    clearAccessToken();
+                    navigate('/');
                 } else {
                     console.error('Error uploading image:', error.response?.data);
                 }
@@ -114,12 +84,17 @@ const CreateSchool = () => {
         }
     };
 
+    const isAxiosError = (error: unknown): error is { response: { status: number, data: any } } => {
+        return (error as any).isAxiosError === true;
+    };
+
     const Backclick = () => {
-        navigate('/selectschool')
-    }
+        navigate('/selectschool');
+    };
 
     return (
         <S.CreateSchoolMain>
+            <Session token={token} clearAccessToken={clearAccessToken} />
             <S.CreateSchoolContainer>
                 <S.TitleContainer>
                     <S.BackButton onClick={Backclick}>

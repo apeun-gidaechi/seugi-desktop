@@ -12,7 +12,6 @@ import Divider from '@/assets/image/Profile/Divider.svg';
 import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 
 const Profile = () => {
-    const token = window.localStorage.getItem("accessToken");
     const workspaceId = window.localStorage.getItem("workspaceId");
     const [isEditing, setIsEditing] = useState(null);
     const [isSettingOpen, setIsSettingOpen] = useState(false);
@@ -40,7 +39,7 @@ const Profile = () => {
             }
         };
         fetchProfileData();
-    }, [workspaceId, token]);
+    }, [workspaceId]);
 
     const startEditing = (field: any) => {
         setIsEditing(field);
@@ -78,22 +77,28 @@ const Profile = () => {
     };
 
     useEffect(() => {
-        const handleClickOutside = (e:any) => {
-            if (dialogRef.current && !dialogRef.current.contains(e.target)) {
+        const handleClickOutside = (e: MouseEvent) => {
+            const target = e.target as Node | null;
+
+            if (
+                dialogRef.current &&
+                !dialogRef.current.contains(target) &&
+                !(target && (target as Element).closest('.SettingButton'))
+            ) {
                 setIsSettingOpen(false);
             }
         };
 
         if (isSettingOpen) {
             document.addEventListener("mousedown", handleClickOutside);
-        } else {
-            document.removeEventListener("mousedown", handleClickOutside);
         }
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [isSettingOpen]);
+
+
 
     const handleNameChange = (newName: string) => {
         setName(newName);
@@ -107,7 +112,7 @@ const Profile = () => {
                         <S.ProfileImg src={ProfileImg} />
                         <S.ProfileName>{name}</S.ProfileName>
                     </S.MyProfileDiv>
-                    <S.SettingButton onClick={toggleSetting}>
+                    <S.SettingButton onClick={toggleSetting} className='SettingButton'>
                         <S.SettingButtonImg src={SettingImg} />
                     </S.SettingButton>
                 </S.MyinfoDiv>

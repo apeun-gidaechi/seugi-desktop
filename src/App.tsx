@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import React from 'react'
 import Router from "@/components/router"
 import './App.css'
+import { UserContextProvider } from './contexts/userContext'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <Router />
+    <UserContextProvider>
+      <Router />
+    </UserContextProvider>
   )
 }
 

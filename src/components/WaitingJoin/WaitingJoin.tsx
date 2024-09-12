@@ -4,8 +4,8 @@ import schoolimg from '@/assets/image/join-school/schoolimg.svg';
 import ment from '@/assets/image/join-school/ment.svg';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/Button/Button';
-import { isTokenExpired } from '@/util/tokenUtils';
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import { clearAccessToken, SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import Session from '@/util/TokenExpired/TokenExpired';
 
 const WaitingJoin = () => {
     const navigate = useNavigate();
@@ -17,18 +17,9 @@ const WaitingJoin = () => {
             document.body.style.overflow = 'auto';
         }
     }, []);
-    
-    useEffect(() => {
-        if (isTokenExpired(token)) {
-            alert('세션이 만료되었습니다. 다시 로그인 해주세요.');
-            window.localStorage.removeItem('accessToken');
-            navigate('/');
-        }
-    }, [token, navigate]);
 
     const handleWaitingJoin = async () => {
         try {
-            const token = window.localStorage.getItem("accessToken");
             const res = await SeugiCustomAxios.get(`/workspace/`);
             if (res.data.data && res.data.data.length === 0) {
                 navigate("/unhome");
@@ -42,6 +33,7 @@ const WaitingJoin = () => {
 
     return (
         <S.WaitingAcceptanceFrame>
+            <Session token={token} clearAccessToken={clearAccessToken} />
             <S.WaitingAcceptanceContainer>
                 <S.SchoolInfoContainer>
                     <S.SchoolImg src={schoolimg} />

@@ -6,8 +6,8 @@ import { createGlobalStyle } from 'styled-components';
 export const SettingProfile = styled.div`
     position:absolute;
 
-    top:14.5vh;
-    left:28.5vw;
+    bottom:19.05rem;
+    left: 25.7rem;
 
     display: flex;
     width: 360px;
