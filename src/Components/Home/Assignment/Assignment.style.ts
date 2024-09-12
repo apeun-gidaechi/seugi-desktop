@@ -47,7 +47,7 @@ export const PostAssignment = styled.span`
 
   ${SeugiFont.body.body1};
 
-  margin-left:15vw;
+  margin-right:1rem;
 `
 
 export const AssignmentButton = styled.a`
