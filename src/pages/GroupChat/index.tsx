@@ -3,7 +3,7 @@ import * as S from "./index.style";
 import UnChatRoom from '@/components/Common/ChatRoom/UnSelect/index';
 import SelectedChatRoom from '@/components/Common/ChatRoom/Select/index';
 import Sidebar from '@/components/Common/Sidebar/sidebar'; 
-import TopButton from '@/components/Button/chatButton/index';
+import TopButton from '@/components/Button/ChatButton/index';
 
 const Chat = () => {
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);

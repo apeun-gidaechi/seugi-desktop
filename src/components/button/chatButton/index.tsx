@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import * as S from '@/components/Button/chatButton/index.style';
+import * as S from './index.style';
 import SearchIcon from '@/assets/image/chat/blackSearchIcon.svg';
 import HamburgerIcon from '@/assets/image/chat/hamburgerLine.svg';
 

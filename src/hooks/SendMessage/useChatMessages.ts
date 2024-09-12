@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { socketService } from './socketService'; 
+import { socketService } from './SocketService'; 
 
 interface Message {
   message: string;
