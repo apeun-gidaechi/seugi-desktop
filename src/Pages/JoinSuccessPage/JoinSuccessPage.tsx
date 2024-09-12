@@ -1,5 +1,5 @@
 import React from 'react'
-import JoinSuccess from '@/Components/JoinSuccess/JoinSuccess'
+import JoinSuccess from '@/Components/WorkSpace/JoinSuccess/JoinSuccess'
 
 const JoinSuccessPage = () => {
   return (

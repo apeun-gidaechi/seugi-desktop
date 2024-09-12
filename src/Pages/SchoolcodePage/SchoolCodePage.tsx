@@ -1,4 +1,4 @@
-import SchoolCode from '../../Components/SchoolCode/SchoolCode';
+import SchoolCode from '@/components/WorkSpace/SchoolCode/SchoolCode';
 import React from 'react'
 
 const index = () => {

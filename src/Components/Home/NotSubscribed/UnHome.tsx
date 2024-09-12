@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as S from '@/Components/Home/NotSubscribed/UnHome.style';
-import Navbar from '@/Components/Common/Navbar/Navbar';
-import Changeschool from '@/Components/ChangeSchool/ChangeSchool';
+import Navbar from '@/Components/common/Navbar/Navbar';
+import Changeschool from '@/Components/Home/ChangeSchool/ChangeSchool';
 import HomeBookImg from '@/assets/image/home/homebook.svg';
 import NotificationImg from '@/assets/image/home/notification.svg';
 import ArrowImg from '@/assets/image/home/arrow.svg';

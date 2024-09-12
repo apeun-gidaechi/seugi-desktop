@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import * as S from '@/Components/Common/TitleText/index.style';
+import * as S from './index.style';
 
 const TitleText = () => {
   const location = useLocation();
