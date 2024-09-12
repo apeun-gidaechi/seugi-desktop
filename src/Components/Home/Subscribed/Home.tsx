@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import * as S from "@/Components/Home/Subscribed/Home.style";
-import Navbar from "@/Components/common/Navbar/Navbar";
+import Navbar from "@/Components/Common/Navbar/Navbar";
 
 import Schools from '@/Components/Home/Schools/Schools';
 import Meal from "@/Components/Home/Meal/Meal";
