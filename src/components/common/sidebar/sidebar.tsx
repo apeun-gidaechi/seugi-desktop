@@ -15,6 +15,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const location = useLocation();
+
   const { searchText, setSearchText, chatRooms, handleSearch, handleChatRoomClick } = useChatSidebar(onSelectChatRoom);
 
   const [isCreateRoomVisible, setCreateRoomVisible] = useState(false);
