@@ -5,6 +5,7 @@ export const messageContainer = styled.div`
     clear: both;
     float: right;
     align-items: flex-end; 
+    z-index: 100;
 `;
 
 export const messageBox = styled.div`

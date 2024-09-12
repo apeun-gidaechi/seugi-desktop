@@ -1,5 +1,23 @@
 import styled from "styled-components";
 
+export const MessageBoxInBox = styled.div`
+  position: absolute;
+  z-index: 100;
+  /* margin: 70px 0 64px 452px; */
+  margin: 80px 0 64px 0;
+  padding: 20px 32px 0 0;
+  /* width: calc(100% - 452px); */
+  width: 100%;
+  height: calc(100vh - 200px); 
+  margin-top: -100vh;
+  /* margin-top: calc(-100vh + 230px); */
+`
+
+export const MessageWrap = styled.div`
+  margin-top: 240px;
+  margin-right: 20px;
+`
+
 export const Allwrap = styled.div`
   display: flex;
   flex-direction: column;
