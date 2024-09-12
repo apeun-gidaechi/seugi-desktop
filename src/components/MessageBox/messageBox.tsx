@@ -7,9 +7,13 @@ interface MessageBoxProps {
 }
 
 const MessageBox: React.FC<MessageBoxProps> = ({ message, time }) => {
+  const date = new Date(time);
+  
+  const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
   return (
     <S.messageContainer>
-      <S.messageTime>{time}</S.messageTime>
+      <S.messageTime>{formattedTime}</S.messageTime>
       <S.messageBox className="message-box">
         {message}
       </S.messageBox>
