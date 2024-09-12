@@ -137,16 +137,20 @@ export const Btnview = styled.button`
     }
 `
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<{ error?: boolean }>`
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%; 
+    width: 100%;
     border-radius: var(--Large, 12px);
-    border: 1px solid ${SeugiColor.Gray300};
+    border: 1px solid ${({ error }) => (error ? 'red' : SeugiColor.Gray300)};
     background: ${SeugiColor.White};
-`
+    
+    /* 애니메이션을 추가하여 에러 발생 시 부드러운 강조 효과 */
+    transition: border-color 0.3s ease;
+`;
+
 
 export const ErrorText = styled.p`
     color: ${SeugiColor.Red500};
