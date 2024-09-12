@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import * as S from '@/components/Common/TitleText/index.style';
+import * as S from '@/Components/Common/TitleText/index.style';
 
 const TitleText = () => {
   const location = useLocation();
@@ -18,7 +18,7 @@ const TitleText = () => {
       title = '단체채팅';
       break;
     default:
-      title = ''; 
+      title = '';
       break;
   }
 

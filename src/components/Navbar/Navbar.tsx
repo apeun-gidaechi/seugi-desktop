@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import * as S from "@/components/Navbar/Navbar.style";
+import * as S from "@/Components/Navbar/Navbar.style";
 
 import Home from "@/assets/image/sidebar/home.svg";
 import Chat from "@/assets/image/sidebar/chat.svg";
@@ -9,7 +9,7 @@ import AvatarImg from "@/assets/image/chat-components/Avatar.svg";
 import SelectHome from "@/assets/image/sidebar/slecthome.svg";
 import SelectChat from "@/assets/image/sidebar/selectchat.svg";
 import SelectChats from "@/assets/image/sidebar/selectgroup.svg";
-import Profile from "@/components/Profile/Profile";
+import Profile from "@/Components/Profile/Profile";
 
 type SelectedButton = "home" | "chat" | "chats" | "bell" | null;
 

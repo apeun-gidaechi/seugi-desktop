@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import * as S from '@/components/Home/NotSubscribed/UnHome.style';
-import Navbar from '@/components/Common/Navbar/Navbar';
-import Changeschool from '@/components/ChangeSchool/ChangeSchool';
+import * as S from '@/Components/Home/NotSubscribed/UnHome.style';
+import Navbar from '@/Components/Common/Navbar/Navbar';
+import Changeschool from '@/Components/ChangeSchool/ChangeSchool';
 import HomeBookImg from '@/assets/image/home/homebook.svg';
 import NotificationImg from '@/assets/image/home/notification.svg';
 import ArrowImg from '@/assets/image/home/arrow.svg';
@@ -9,9 +9,9 @@ import CalendarImg from '@/assets/image/home/calendar.svg';
 import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
 import SchoolImg from '@/assets/image/home/school.svg';
 import CafeteriaImg from '@/assets/image/home/cafeteria.svg';
-import RegisterSchool from '@/components/Home/NotSubscribed/RegisterSchool/RegisterSchool';
+import RegisterSchool from '@/Components/Home/NotSubscribed/RegisterSchool/RegisterSchool';
 import Session from '@/Util/TokenExpired/TokenExpired';
-import { clearAccessToken, SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import { clearAccessToken, SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import { useNavigate } from 'react-router-dom';
 
 const UnHome = () => {
@@ -41,7 +41,7 @@ const UnHome = () => {
             const workspaceId = await checkWorkspaceSubscription();
             if (workspaceId) {
                 clearInterval(intervalId);
-                navigate(`/home`); 
+                navigate(`/home`);
             }
         }, 1000);
 

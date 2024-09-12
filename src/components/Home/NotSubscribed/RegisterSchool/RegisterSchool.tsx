@@ -1,4 +1,4 @@
-import * as S from '@/components/Home/NotSubscribed/RegisterSchool/RegisterSchool.style';
+import * as S from '@/Components/Home/NotSubscribed/RegisterSchool/RegisterSchool.style';
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +27,7 @@ const RegisterSchool = () => {
                     </S.NewSchoolButton>
                     <S.JoinSchoolButton onClick={handleJoin}>
                         <S.JoinSchoolButtonText> 기존 학교 가입 </S.JoinSchoolButtonText>
-                    </S.JoinSchoolButton> 
+                    </S.JoinSchoolButton>
                 </S.ButtonBox>
             </S.RegisterSchoolBox>
         </S.RegisterSchoolContainer>

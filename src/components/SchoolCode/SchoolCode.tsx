@@ -1,12 +1,12 @@
 import React from "react";
-import * as S from "@/components/SchoolCode/SchoolCode.style";
-import Button from "@/components/Button/Button";
-import CodeTextField from "@/components/CodeTextField/CodeTextFeild";
+import * as S from "@/Components/SchoolCode/SchoolCode.style";
+import Button from "@/Components/Button/Button";
+import CodeTextField from "@/Components/CodeTextField/CodeTextFeild";
 
 import Backimg from "@/assets/image/Backimg.svg";
 
 import Session from "@/Util/TokenExpired/TokenExpired";
-import { clearAccessToken } from "@/api/SeugiCutomAxios";
+import { clearAccessToken } from "@/Api/SeugiCutomAxios";
 
 import useSchoolCode from '@/Hooks/Schoolcode/index';
 

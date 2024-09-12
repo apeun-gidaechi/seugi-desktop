@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from '@/components/TextField/TextField.style';
+import * as S from '@/Components/TextField/TextField.style';
 import { CSSObject } from 'styled-components';
 
 interface SeugiTextFieldProps {
@@ -9,7 +9,7 @@ interface SeugiTextFieldProps {
     type?: React.HTMLInputTypeAttribute;
     onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
     style: React.CSSProperties;
-    value:string;
+    value: string;
 }
 
 const TextField: React.FC<SeugiTextFieldProps> = ({ onChange, placeholder, type = 'text', onKeyDown, style }) => {

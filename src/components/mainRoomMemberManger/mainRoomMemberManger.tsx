@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as S from "@/components/MainRoomMemberManger/mainRoomMemberManger.style";
+import * as S from "@/Components/MainRoomMemberManger/mainRoomMemberManger.style";
 
 const MainRoomMemberManager = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -10,7 +10,7 @@ const MainRoomMemberManager = () => {
 
   return (
     <>
-      <div style={{display: "flex", flexDirection: "column"}}>
+      <div style={{ display: "flex", flexDirection: "column" }}>
         <S.ChatRoomForm>
           <S.FileUpload
             onMouseEnter={() => setIsHovered(true)}

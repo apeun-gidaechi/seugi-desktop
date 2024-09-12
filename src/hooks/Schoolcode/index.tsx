@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
+import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 
 const index = () => {
     const navigate = useNavigate();
@@ -39,13 +39,13 @@ const index = () => {
     const Backclick = () => {
         navigate("/selectschool");
     };
-  return {
-      token,
-      Backclick,
-      handleKeyDown,
-      handleContinue,
-      handleCodeChange,
-  }
+    return {
+        token,
+        Backclick,
+        handleKeyDown,
+        handleContinue,
+        handleCodeChange,
+    }
 }
 
 export default index

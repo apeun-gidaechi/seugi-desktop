@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import * as S from '@/components/CodeTextField/CodeTextField.style';
+import * as S from '@/Components/CodeTextField/CodeTextField.style';
 
 interface CodeTextFieldProps {
     onChange: (value: string[]) => void;
@@ -29,7 +29,7 @@ const CodeTextField: React.FC<CodeTextFieldProps> = ({ onChange, onKeyDown }) =>
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const value = e.target.value;
-        if (value === ' ') return; 
+        if (value === ' ') return;
         const updatedValues = [...inputValues];
         if (value.length <= 1) {
             updatedValues[index] = value;

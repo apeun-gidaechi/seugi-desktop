@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import SchoolImg from "@/assets/image/home/school.svg";
-import * as S from '@/components/Home/Schools/Schools.style';
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import * as S from '@/Components/Home/Schools/Schools.style';
+import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 
-import Changeschool from '@/components/ChangeSchool/ChangeSchool';
+import Changeschool from '@/Components/ChangeSchool/ChangeSchool';
 
 const Schools = () => {
     const [workspaceName, setWorkspaceName] = useState("");

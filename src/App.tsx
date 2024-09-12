@@ -1,5 +1,5 @@
 import React from 'react'
-import Router from "@/components/router"
+import Router from "@/Components/router"
 import './App.css'
 import { UserContextProvider } from './Contexts/userContext'
 

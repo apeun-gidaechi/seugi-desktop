@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as S from '@/components/Home/CatSeugi/CatSeugi.style';
+import * as S from '@/Components/Home/CatSeugi/CatSeugi.style';
 
 import SearchImg from "@/assets/image/home/search.svg";
 import SeugiImg from "@/assets/image/onbording/Start/seugilogo.svg";

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
-import * as S from '@/components/Home/Meal/Meal.style';
+import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import * as S from '@/Components/Home/Meal/Meal.style';
 
 import CafeteriaImg from "@/assets/image/home/cafeteria.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
@@ -19,7 +19,7 @@ const Meal = () => {
         } else if (hour === 13 && minute <= 30) {
             return 1;
         } else {
-            return 2; 
+            return 2;
         }
     });
     const [Menu, setMenu] = useState<string[]>([]);
@@ -36,7 +36,7 @@ const Meal = () => {
             setCalorie(mealData.calorie || '');
         } catch (error) {
             console.error("Error fetching menu:", error);
-            setMenu([]); 
+            setMenu([]);
             setMealType('');
             setCalorie('');
         }

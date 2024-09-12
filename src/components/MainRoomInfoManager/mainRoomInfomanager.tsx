@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as S from "@/components/MainRoomInfoManager/mainRoomInfoManager.style";
+import * as S from "@/Components/MainRoomInfoManager/mainRoomInfoManager.style";
 
 const MainRoomInfoManager: React.FC = () => {
     const [isPressed1, setIsPressed1] = useState(false);
@@ -36,8 +36,8 @@ const MainRoomInfoManager: React.FC = () => {
         <>
             {alertVisible && (
                 <div onClick={handleCloseAlert}>
-                    <div style={{position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0, 0, 0, 0.5)"}} />
-                    <div style={{position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", backgroundColor: "white", padding: "20px", borderRadius: "8px"}}>
+                    <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0, 0, 0, 0.5)" }} />
+                    <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", backgroundColor: "white", padding: "20px", borderRadius: "8px" }}>
                         <p>확인</p>
                     </div>
                 </div>

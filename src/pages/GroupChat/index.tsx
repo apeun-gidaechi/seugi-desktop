@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import * as S from "./index.style";
-import UnChatRoom from '@/components/Common/ChatRoom/UnSelect/index';
-import SelectedChatRoom from '@/components/Common/ChatRoom/Select/index';
-import Sidebar from '@/components/Common/Sidebar/sidebar'; 
-import TopButton from '@/components/Button/ChatButton/index';
+import UnChatRoom from '@/Components/Common/ChatRoom/UnSelect/index';
+import SelectedChatRoom from '@/Components/Common/ChatRoom/Select/index';
+import Sidebar from '@/Components/Common/Sidebar/sidebar';
+import TopButton from '@/Components/Button/ChatButton/index';
 
 const Chat = () => {
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);

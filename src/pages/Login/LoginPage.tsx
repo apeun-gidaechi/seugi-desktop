@@ -1,4 +1,4 @@
-import Login from "@/components/Login/login";
+import Login from "@/Components/Login/login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import config from "@/constants/config/config.json";
 

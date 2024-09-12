@@ -1,4 +1,4 @@
-import { SeugiImg } from "@/components/Login/login.style";
+import { SeugiImg } from "@/Components/Login/login.style";
 import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";

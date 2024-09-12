@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from '@/components/Home/Assignment/Assignment.style';
+import * as S from '@/Components/Home/Assignment/Assignment.style';
 import AssignmentImg from '@/assets/image/home/checkAssignment.svg';
 
 

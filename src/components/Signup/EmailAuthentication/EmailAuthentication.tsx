@@ -1,13 +1,13 @@
 import React from 'react';
-import * as S from '@/components/Signup/EmailAuthentication/EmailAuthentication.style';
-import Button from '@/components/Button/Button';
+import * as S from '@/Components/Signup/EmailAuthentication/EmailAuthentication.style';
+import Button from '@/Components/Button/Button';
 import Sun from '@/assets/image/onbording/EmailAuthentication/sun.svg';
 import Cloud1 from '@/assets/image/onbording/EmailAuthentication/cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/EmailAuthentication/cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
 import Backimg from '@/assets/image/Backimg.svg'
-import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
-import CustomAlert from '@/components/Alert/Alert';
+import CodeTextField from '@/Components/CodeTextField/CodeTextFeild';
+import CustomAlert from '@/Components/Alert/Alert';
 
 import useAuthentication from '@/Hooks/EmailAuthenticationHook/index';
 
@@ -24,7 +24,7 @@ const EmailAuthentication = () => {
         handleKeyDown,
         Backclick
     } = useAuthentication();
-    
+
     return (
         <S.AuthenticationMain>
             <S.Cloud1 src={Cloud1} />

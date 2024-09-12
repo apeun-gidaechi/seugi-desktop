@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 
-import * as S from "@/components/Home/Subscribed/Home.style";
-import Navbar from "@/components/Navbar/Navbar";
+import * as S from "@/Components/Home/Subscribed/Home.style";
+import Navbar from "@/Components/Navbar/Navbar";
 
-import Schools from '@/components/Home/Schools/Schools';
-import Meal from "@/components/Home/Meal/Meal";
-import CatSeugi from "@/components/Home/CatSeugi/CatSeugi";
-import Calendar from "@/components/Home/Calendar/Calendar";
-import Notification from '@/components/Home/Notification/Notification';
-import DailySchedule from "@/components/Home/DailySchedule/DailySchedule";
+import Schools from '@/Components/Home/Schools/Schools';
+import Meal from "@/Components/Home/Meal/Meal";
+import CatSeugi from "@/Components/Home/CatSeugi/CatSeugi";
+import Calendar from "@/Components/Home/Calendar/Calendar";
+import Notification from '@/Components/Home/Notification/Notification';
+import DailySchedule from "@/Components/Home/DailySchedule/DailySchedule";
 import { handleUserRole } from '@/Util/Role/WhatisYourRole';
-import { clearAccessToken } from "@/api/SeugiCutomAxios";
+import { clearAccessToken } from "@/Api/SeugiCutomAxios";
 import Session from "@/Util/TokenExpired/TokenExpired";
 import Assignment from "../Assignment/Assignment";
 

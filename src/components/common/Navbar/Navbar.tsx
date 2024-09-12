@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import * as S from "@/components/Common/Navbar/Navbar.style";
+import * as S from "@/Components/Common/Navbar/Navbar.style";
 
 import Home from "@/assets/image/sidebar/home.svg";
 import Chat from "@/assets/image/sidebar/chat.svg";
@@ -8,13 +8,13 @@ import AvatarImg from "@/assets/image/chat-components/Avatar.svg";
 import SelectHome from "@/assets/image/sidebar/slecthome.svg";
 import SelectChat from "@/assets/image/sidebar/selectchat.svg";
 import SelectChats from "@/assets/image/sidebar/selectgroup.svg";
-import Profile from "@/components/Profile/Profile";
+import Profile from "@/Components/Profile/Profile";
 import { useEffect, useRef, useState } from "react";
 
 type SelectedButton = "home" | "chat" | "chats" | null;
 
 const Navbar = () => {
-  
+
   const [selected, setSelected] = useState<SelectedButton>(null);
   const [chatRooms, setChatRooms] = useState<string[]>([]);
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);

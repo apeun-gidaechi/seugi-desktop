@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import * as S from '@/components/Profile/profile.style';
-import Correction from '@/components/Profile/Correction/Correction';
-import SettingProfile from '@/components/Profile/SettingProfile/SettingProfile';
+import * as S from '@/Components/Profile/profile.style';
+import Correction from '@/Components/Profile/Correction/Correction';
+import SettingProfile from '@/Components/Profile/SettingProfile/SettingProfile';
 
 import SettingImg from '@/assets/image/profile/profilesetting_fill.svg';
 import ProfileImg from '@/assets/image/profile/proflie.svg';
@@ -9,7 +9,7 @@ import CorrectionImg from '@/assets/image/profile/CorrectionImg.svg';
 import ProfileDivider from '@/assets/image/profile/ProflieDivider.svg';
 import Divider from '@/assets/image/profile/Divider.svg';
 
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 
 const Profile = () => {
     const workspaceId = window.localStorage.getItem("workspaceId");

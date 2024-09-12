@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import * as S from '@/components/Home/Notification/ChangeNotice/ChangeNotice.style';
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
-import AlertContainer from '@/components/Alert/Alert';
-import CreateNotice from '@/components/Home/Notification/CreateNotice/CreateNotice';
+import * as S from '@/Components/Home/Notification/ChangeNotice/ChangeNotice.style';
+import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import AlertContainer from '@/Components/Alert/Alert';
+import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNotice';
 
 interface Props {
     onClose: () => void;
@@ -18,7 +18,7 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refres
     const workspaceId = window.localStorage.getItem('workspaceId');
     const userRole = window.localStorage.getItem('Role');
 
-    const ref = useRef<HTMLDivElement>(null);  
+    const ref = useRef<HTMLDivElement>(null);
 
     const handleGetNoticeId = async () => {
         try {
@@ -56,7 +56,7 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refres
 
     const handleClickOutside = (event: MouseEvent) => {
         if (ref.current && !ref.current.contains(event.target as Node)) {
-            onClose(); 
+            onClose();
         }
     };
 
@@ -76,7 +76,7 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refres
                     refreshNotifications={refreshNotifications}
                 />
             ) : (
-                <S.CorrectionNoticeMain ref={ref}> 
+                <S.CorrectionNoticeMain ref={ref}>
                     <S.ButtonContainer>
                         <S.CorrectionNotice onClick={() => setEditMode(true)}>공지 수정</S.CorrectionNotice>
                     </S.ButtonContainer>

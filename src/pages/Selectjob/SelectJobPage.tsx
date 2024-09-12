@@ -1,4 +1,4 @@
-import SelectingJob from "@/components/Selectjob/selectingjob";
+import SelectingJob from "@/Components/Selectjob/selectingjob";
 
 const SelectPage = () => {
     return (

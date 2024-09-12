@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
-import * as S from '@/components/CreateSchool/CreateSchool.style';
-import Button from '@/components/Button/Button';
-import TextField from '@/components/TextField/TextField';
+import * as S from '@/Components/CreateSchool/CreateSchool.style';
+import Button from '@/Components/Button/Button';
+import TextField from '@/Components/TextField/TextField';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
 import Backimg from '@/assets/image/Backimg.svg';
 import PlusButtonimg from '@/assets/image/join-school/plus.svg';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import config from '@/constants/config/config.json';
 
 import Session from '@/Util/TokenExpired/TokenExpired';
-import { clearAccessToken, SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import { clearAccessToken, SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 
 const CreateSchool = () => {
     const navigate = useNavigate();

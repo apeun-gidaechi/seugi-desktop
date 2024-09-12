@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as S from "@/components/Button/Toggle/toggle.style";
+import * as S from "@/Components/Button/Toggle/toggle.style";
 
 const Toggle = () => {
   const [latestSort, setLatestSort] = useState(true);
