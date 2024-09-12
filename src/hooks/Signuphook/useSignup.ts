@@ -7,9 +7,14 @@ const useSignup = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [errorMessage, setErrorMessage] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
+    const [errors, setErrors] = useState({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
@@ -45,41 +50,37 @@ const useSignup = () => {
         return re.test(password);
     };
 
-
-    const clearErrorMessage = () => {
-        setErrorMessage('');
-    }
     const handleSignup = async () => {
+        const newErrors = {
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+        };
+
         if (!name.trim()) {
-            setErrorMessage('이름을 입력해주세요');
-            setTimeout(clearErrorMessage, 3000);
-            return;
+            newErrors.name = '이름을 입력해주세요';
         }
+
         if (!email.trim()) {
-            setErrorMessage('이메일을 입력해주세요.');
-            setTimeout(clearErrorMessage, 3000);
-            return;
+            newErrors.email = '이메일을 입력해주세요.';
+        } else if (!validateEmail(email)) {
+            newErrors.email = '유효한 이메일 형식을 입력해주세요.';
         }
-        if (!validateEmail(email)) {
-            setErrorMessage('유효한 이메일 형식을 입력해주세요.');
-            setTimeout(clearErrorMessage, 3000);
-            return;
-        }
+
         if (!password.trim()) {
-            setErrorMessage('비밀번호를 입력해주세요.');
-            setTimeout(clearErrorMessage, 3000);
-            return;
+            newErrors.password = '비밀번호를 입력해주세요.';
+        } else if (!validatePassword(password)) {
+            newErrors.password = '비밀번호는 8자리 이상, 특수문자 포함이어야 합니다.';
         }
+
         if (password !== confirmPassword) {
-            setErrorMessage('비밀번호가 일치하지 않습니다.');
-            setTimeout(clearErrorMessage, 3000);
-            return;
+            newErrors.confirmPassword = '비밀번호가 일치하지 않습니다.';
         }
-        if (!validatePassword(password)) {
-            setErrorMessage('비밀번호는 8자리 이상, 특수문자 포함이어야 합니다.');
-            setTimeout(clearErrorMessage, 3000);
-            return;
-        } else {
+
+        setErrors(newErrors);
+
+        if (!newErrors.name && !newErrors.email && !newErrors.password && !newErrors.confirmPassword) {
             navigate('/emailauthentication', { state: { name, email, password } });
         }
     };
@@ -89,14 +90,15 @@ const useSignup = () => {
             handleSignup();
         }
     }
-    
+
     return {
         name,
         email,
         password,
+        confirmPassword,
         showPassword,
         showConfirmPassword,
-        errorMessage,
+        errors,
         handleNameChange,
         handleEmailChange,
         handlePasswordChange,

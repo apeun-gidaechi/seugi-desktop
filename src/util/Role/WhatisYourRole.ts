@@ -18,7 +18,7 @@ const fetchUser = async (workspaceId: string): Promise<User | undefined> => {
         });
 
         const data = res.data.data.permission; 
-
+        console.log(data);
         const user: User = {
             role: data as Role
         };
@@ -39,6 +39,10 @@ export const handleUserRole = async (workspaceId: string) => {
         if (user.role === Role.Teacher) {
             console.log(user.role);
         } else if (user.role === Role.Student) {
+            console.log(user.role);
+        } else if (user.role === Role.Admin) {
+            console.log(user.role);
+        } else if (user.role === Role.MiddleAdmin) {
             console.log(user.role);
         } else {
             console.log("정체가 무엇입니까");
