@@ -134,3 +134,18 @@ export const QuestionDay = styled.span`
 
   ${SeugiFont.body.body2};
 `;
+
+export const MessageContainer = styled.div`
+    width:380px;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: ${SeugiColor.Gray100};
+    border: 1px solid ${SeugiColor.Gray100};
+    border-radius: 4px;
+`;
+
+export const MessageText = styled.p`
+    margin: 0;
+    ${SeugiFont.subtitle.subtitle2};
+    color: #333;
+`;
