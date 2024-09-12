@@ -1,36 +1,59 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import * as S from '@/components/Home/NotSubscribed/UnHome.style';
-
 import Navbar from '@/components/common/Navbar/Navbar';
 import Changeschool from '@/components/ChangeSchool/ChangeSchool';
-
 import HomeBookImg from '@/assets/image/home/homebook.svg';
 import NotificationImg from '@/assets/image/home/notification.svg';
 import ArrowImg from '@/assets/image/home/arrow.svg';
 import CalendarImg from '@/assets/image/home/calendar.svg';
 import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
 import SchoolImg from '@/assets/image/home/school.svg';
-import CafeteriaImg from '@/assets/image/home/cafeteria.svg'
-
+import CafeteriaImg from '@/assets/image/home/cafeteria.svg';
 import RegisterSchool from '@/components/Home/NotSubscribed/RegisterSchool/RegisterSchool';
-
 import Session from '@/util/TokenExpired/TokenExpired';
-import { clearAccessToken } from '@/api/SeugiCutomAxios';
+import { clearAccessToken, SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import { useNavigate } from 'react-router-dom';
 
 const UnHome = () => {
+    const navigate = useNavigate();
     const [showChangeschool, setShowChangeschool] = useState(false);
     const token = window.localStorage.getItem("accessToken");
 
+    const checkWorkspaceSubscription = async () => {
+        try {
+            const res = await SeugiCustomAxios.get('/workspace/');
+            const workspaces = res.data.data;
+            window.localStorage.setItem("workspaceId", workspaces[0].workspaceId);
+            if (workspaces.length > 0) {
+                navigate('/home');
+            }
+            return null;
+        } catch (error) {
+            console.error('워크스페이스 확인 중 오류 발생:', error);
+            return null;
+        }
+    };
+
     useEffect(() => {
         document.body.style.overflow = "hidden";
+
+        const intervalId = setInterval(async () => {
+            const workspaceId = await checkWorkspaceSubscription();
+            if (workspaceId) {
+                clearInterval(intervalId);
+                navigate(`/home`); 
+            }
+        }, 1000);
+
         return () => {
             document.body.style.overflow = "auto";
+            clearInterval(intervalId);
         };
     }, []);
 
     const handleOnClicked = () => {
-        setShowChangeschool(!showChangeschool)
-    }
+        setShowChangeschool(!showChangeschool);
+    };
 
     return (
         <S.HomeContainer>
@@ -130,7 +153,7 @@ const UnHome = () => {
                 </S.ComponentsBox>
             </S.HomeMain>
         </S.HomeContainer>
-    )
-}
+    );
+};
 
 export default UnHome;
