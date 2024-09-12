@@ -14,9 +14,9 @@ const Meal = () => {
     const hour = today.getHours();
     const minute = today.getMinutes();
     const [selectedMeal, setSelectedMeal] = useState(() => {
-        if (hour < 8 || (hour === 8 && minute <= 20)) {
+        if (hour === 8 && minute <= 20) {
             return 0;
-        } else if (hour < 13 || (hour === 13 && minute <= 30)) {
+        } else if (hour === 13 && minute <= 30) {
             return 1;
         } else {
             return 2; 
