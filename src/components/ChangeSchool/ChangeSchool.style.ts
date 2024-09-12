@@ -9,7 +9,7 @@ export const ChangeSchoolMain = styled.div`
   height: 312px;
   padding: 16px;
   flex-direction: column;
-  justify-content: center;
+
   align-items: center;
   gap: 16px;
   left:70%;
@@ -179,6 +179,7 @@ export const NoSubscribedSchools = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-top: 5rem;
 `;
 
 export const MoveButton = styled.div`
