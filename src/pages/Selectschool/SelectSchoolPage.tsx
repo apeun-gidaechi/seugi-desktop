@@ -1,8 +1,8 @@
-import SelectingSchool  from "@/components/SelectingSchool/SelectSchool";
+import SelectingSchool from "@/Components/SelectingSchool/SelectSchool";
 
-const SelectSchool = ()=>{
-    return(
-        <SelectingSchool/>
+const SelectSchool = () => {
+    return (
+        <SelectingSchool />
     )
 }
 export default SelectSchool; 

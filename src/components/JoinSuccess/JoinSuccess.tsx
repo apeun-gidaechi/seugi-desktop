@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
-import Button from "@/components/Button/Button";
-import * as S from "@/components/JoinSuccess/JoinSuccess.style";
+import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import Button from "@/Components/Button/Button";
+import * as S from "@/Components/JoinSuccess/JoinSuccess.style";
 import { useNavigate, useLocation } from "react-router-dom";
 import Backimg from "@/assets/image/Backimg.svg";
 import config from '@/constants/config/config.json';
@@ -23,7 +23,7 @@ const JoinSuccess = () => {
   useEffect(() => {
     const handleSchoolInfo = async () => {
       try {
-        
+
         const res = await SeugiCustomAxios.get(`/workspace/search/${verificationCode}`);
         const data = res.data.data;
 
@@ -51,7 +51,7 @@ const JoinSuccess = () => {
           <S.BackImg src={Backimg} />
         </S.BackButton>
         <S.SchoolImgContainer>
-        <S.SchoolImg src={schoolImgUrl} alt="error" />
+          <S.SchoolImg src={schoolImgUrl} alt="error" />
         </S.SchoolImgContainer>
         <S.SchoolInfoContainer>
           <S.SchoolName>{workspaceName}</S.SchoolName>

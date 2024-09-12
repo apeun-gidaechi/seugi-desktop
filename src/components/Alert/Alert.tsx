@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from '@/components/Alert/Alert.style';
+import * as S from '@/Components/Alert/Alert.style';
 
 interface SeugiAlertProps {
     titletext?: string;

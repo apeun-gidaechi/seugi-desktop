@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 
-import * as S from '@/components/Profile/SettingProfile/SettingProfile.style';
-import Correction from '@/components/Profile/Correction/Correction';
+import * as S from '@/Components/Profile/SettingProfile/SettingProfile.style';
+import Correction from '@/Components/Profile/Correction/Correction';
 
 import ProfileImg from '@/assets/image/profile/settingprofile.svg';
 import CorrectionImg from '@/assets/image/profile/CorrectionImg.svg';
@@ -50,7 +50,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onClose, onNameChange }
 
             setName(newName);
             setIsEditing(false);
-            onNameChange(newName); 
+            onNameChange(newName);
         } catch (error) {
             console.error('이름 저장 실패', error);
         }

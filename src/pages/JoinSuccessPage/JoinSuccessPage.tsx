@@ -1,9 +1,9 @@
 import React from 'react'
-import JoinSuccess from '@/components/JoinSuccess/JoinSuccess'
+import JoinSuccess from '@/Components/JoinSuccess/JoinSuccess'
 
 const JoinSuccessPage = () => {
   return (
-    <JoinSuccess/>
+    <JoinSuccess />
   )
 }
 

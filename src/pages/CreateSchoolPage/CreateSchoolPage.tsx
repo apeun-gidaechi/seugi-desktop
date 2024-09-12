@@ -1,9 +1,9 @@
-import CreateSchool from '@/components/CreateSchool/CreateSchool'
+import CreateSchool from '@/Components/CreateSchool/CreateSchool'
 import React from 'react'
 
 const CreateSchoolPage = () => {
   return (
-    <CreateSchool/>
+    <CreateSchool />
   )
 }
 

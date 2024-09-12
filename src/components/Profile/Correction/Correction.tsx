@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as S from '@/components/Profile/Correction/Correction.style';
+import * as S from '@/Components/Profile/Correction/Correction.style';
 
 import CancelImg from '@/assets/image/profile/CancleImg.svg';
 

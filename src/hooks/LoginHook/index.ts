@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setAccessToken } from '@/api/SeugiCutomAxios';
+import { setAccessToken } from '@/Api/SeugiCutomAxios';
 import { useUserDispatchContext } from '@/Contexts/userContext';
 import axios from "axios";
 import config from "@/constants/config/config.json";
-import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
+import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 import { useGoogleLogin } from "@react-oauth/google";
 
 const index = () => {

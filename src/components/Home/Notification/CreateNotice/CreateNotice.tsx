@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import * as S from '@/components/Home/Notification/CreateNotice/CreateNotice.style';
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import * as S from '@/Components/Home/Notification/CreateNotice/CreateNotice.style';
+import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 
 interface CreateNoticeProps {
     onClose: () => void;
-    notificationId?: number; 
+    notificationId?: number;
     refreshNotifications: () => void;
 }
 

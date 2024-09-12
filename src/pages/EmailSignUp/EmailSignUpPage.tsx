@@ -1,8 +1,8 @@
-import  EmailSignup  from "@/components/Signup/Emailsignup/Emailsignup";
+import EmailSignup from "@/Components/Signup/Emailsignup/Emailsignup";
 
-const SelectPage = ()=>{
-    return(
-        <EmailSignup/>
+const SelectPage = () => {
+    return (
+        <EmailSignup />
     )
 }
 export default SelectPage; 

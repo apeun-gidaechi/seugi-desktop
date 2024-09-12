@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import * as S from "@/components/Common/ChatSideBar/index.style";
+import * as S from "@/Components/Common/ChatSideBar/index.style";
 import SearchIcon from "@/assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
-import Navbar from "@/components/Common/Navbar/Navbar";
-import TitleText from "@/components/Common/TitleText/index";
+import Navbar from "@/Components/Common/Navbar/Navbar";
+import TitleText from "@/Components/Common/TitleText/index";
 import CreateRoomBtn from "@/assets/image/sidebar/add_fill.svg";
 import useChatSidebar from "@/Hooks/Sidebar/useChatSidebar";
-import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus";
+import CreateRoomPlus from "@/Components/CreateRoomPlus/createRoomPlus";
 
 interface SidebarProps {
   onSelectChatRoom: (room: string) => void;
@@ -78,9 +78,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
             </S.ChatRoomList>
           </S.ChatRoomsWrap>
           {isCreateRoomVisible && (
-            <CreateRoomPlus 
-              onClose={handleCloseCreateRoom} 
-              onCreateRoom={handleCreateRoom} 
+            <CreateRoomPlus
+              onClose={handleCloseCreateRoom}
+              onCreateRoom={handleCreateRoom}
             />
           )}
         </S.SideBarChat>

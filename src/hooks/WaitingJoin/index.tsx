@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 
 const index = () => {
     const navigate = useNavigate();

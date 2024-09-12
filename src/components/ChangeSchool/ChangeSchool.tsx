@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
+import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 
-import * as S from "@/components/ChangeSchool/ChangeSchool.style";
+import * as S from "@/Components/ChangeSchool/ChangeSchool.style";
 import Arrow from "@/assets/image/home/arrow.svg";
 import config from '@/constants/config/config.json';
 

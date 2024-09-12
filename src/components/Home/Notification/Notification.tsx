@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import * as S from '@/components/Home/Notification/Notification.style';
-import CustomAlert from '@/components/Alert/Alert';
+import * as S from '@/Components/Home/Notification/Notification.style';
+import CustomAlert from '@/Components/Alert/Alert';
 import Point from '@/assets/image/home/point.svg';
 import Emoji from "@/assets/image/home/emoji.svg";
 import NotificationImg from "@/assets/image/home/notification.svg";
 import CorrectionImg from '@/assets/image/home/Correction.svg';
-import AddEmoji from '@/components/Home/Notification/Emoji/emojipicker';
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import AddEmoji from '@/Components/Home/Notification/Emoji/emojipicker';
+import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import { EmojiClickData } from 'emoji-picker-react';
-import CreateNotice from '@/components/Home/Notification/CreateNotice/CreateNotice';
+import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNotice';
 import ChangeNotice from './ChangeNotice/ChangeNotice';
 import { useUserContext } from '@/Contexts/userContext';
 
@@ -123,8 +123,8 @@ const Notification: React.FC = () => {
                 (ChangeNoticeRef.current && !ChangeNoticeRef.current.contains(target)) &&
                 isEmojiPickerVisible
             ) {
-                setEmojiPickerVisible(false); 
-                setActiveNotification(null);  
+                setEmojiPickerVisible(false);
+                setActiveNotification(null);
             }
         };
 
@@ -134,7 +134,7 @@ const Notification: React.FC = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [isEmojiPickerVisible]);
-    
+
     const handleCorrectionClick = () => {
         if (userRole === 'STUDENT') {
             setShowAlert(true);
@@ -216,17 +216,17 @@ const Notification: React.FC = () => {
     };
 
     const refreshNotifications = () => {
-        getNotification();  
+        getNotification();
     };
 
     return (
         <S.LeftContainer>
             {isCreateNoticeVisible && (
                 <div ref={CreateNoticeRef}>
-                    <CreateNotice 
-                        onClose={() => setCreateNoticeVisible(false)} 
+                    <CreateNotice
+                        onClose={() => setCreateNoticeVisible(false)}
                         refreshNotifications={refreshNotifications}
-                        />
+                    />
                 </div>
             )}
             {showAlert && (
@@ -252,7 +252,7 @@ const Notification: React.FC = () => {
                     formattedNotifications.map((item, parentKey) => (
                         <S.NotificationWrapper key={item.id}>
                             <S.NotificationContentAuthor>
-                                <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)} 
+                                <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)}
                                     {/* {item.createdDate !== item.lastModifiedDate && (
                                         <S.EditedLabel>(수정됨)</S.EditedLabel> 
                                     )} */}

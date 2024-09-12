@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import useChatMessages from '@/Hooks/SendMessage/useChatMessages';
 import useFileUpload from '@/Hooks/SendMessage/useFileUpload';
-import * as S from "@/components/Common/SendMessage/sendMessage.style";
-import MessageBox from "@/components/MessageBox/messageBox";
+import * as S from "@/Components/Common/SendMessage/sendMessage.style";
+import MessageBox from "@/Components/MessageBox/messageBox";
 import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
 import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
 import SendArrowBlue from "@/assets/image/chat-components/sendBlueArrow.svg";
@@ -23,7 +23,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatRoom, currentUser }) => {
   const [message, setMessage] = useState("");
   const [hasText, setHasText] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const imageInputRef = useRef<HTMLInputElement | null>(null);
 

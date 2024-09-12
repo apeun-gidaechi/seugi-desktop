@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router';
-import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 
 type Role = 'NONE' | 'STUDENT' | 'TEACHER';
 

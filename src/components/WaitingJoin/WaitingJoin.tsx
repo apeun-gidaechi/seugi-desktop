@@ -1,9 +1,9 @@
 import React from 'react';
-import * as S from '@/components/WaitingJoin/WaitingJoin.style';
+import * as S from '@/Components/WaitingJoin/WaitingJoin.style';
 import schoolimg from '@/assets/image/join-school/schoolimg.svg';
 import ment from '@/assets/image/join-school/ment.svg';
-import Button from '@/components/Button/Button';
-import { clearAccessToken } from '@/api/SeugiCutomAxios';
+import Button from '@/Components/Button/Button';
+import { clearAccessToken } from '@/Api/SeugiCutomAxios';
 import Session from '@/Util/TokenExpired/TokenExpired';
 
 import useWaitingJoin from '@/Hooks/WaitingJoin/index';

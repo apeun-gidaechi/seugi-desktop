@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as S from "@/components/MainRoomSearch/mainRoomSearch.style";
+import * as S from "@/Components/MainRoomSearch/mainRoomSearch.style";
 
 import AvatarImg from '@/assets/image/chat-components/Avatar.svg';
 import FindIcon from "@/assets/image/sidebar/Findicon.svg";
@@ -20,8 +20,8 @@ const MainRoomSearch: React.FC = () => {
         { id: 6, name: "제민국", department: "뚝뚝딱딱뚝" },
     ];
 
-    const [searchTerm, setSearchTerm] = useState<string>(""); 
-    const [searchResult, setSearchResult] = useState<DataType[]>([]); 
+    const [searchTerm, setSearchTerm] = useState<string>("");
+    const [searchResult, setSearchResult] = useState<DataType[]>([]);
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);

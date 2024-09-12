@@ -1,8 +1,8 @@
-import * as S from "@/components/Login/login.style";
+import * as S from "@/Components/Login/login.style";
 import React from "react";
-import LoginButton from "@/components/Button/Button";
-import TextField from "@/components/TextField/TextField";
-import CustomAlert from "@/components/Alert/Alert";
+import LoginButton from "@/Components/Button/Button";
+import TextField from "@/Components/TextField/TextField";
+import CustomAlert from "@/Components/Alert/Alert";
 import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import showPasswordimg from "@/assets/image/onbording/show_fill.svg";
 import hidePasswordimg from "@/assets/image/onbording/hide_fill.svg";
@@ -16,7 +16,7 @@ import Divider from "@/assets/image/onbording/Start/Divider.svg";
 import useLogin from '@/Hooks/LoginHook/index';
 
 const Login = () => {
-  const { 
+  const {
     email,
     password,
     showPassword,

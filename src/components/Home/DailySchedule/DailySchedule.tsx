@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import HomeBookImg from "@/assets/image/home/homebook.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
-import * as S from '@/components/Home/DailySchedule/DailySchedule.style';
-import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
+import * as S from '@/Components/Home/DailySchedule/DailySchedule.style';
+import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 import { SeugiColor } from '@/Design/color/SeugiColor';
 
 interface TimetableItem {
@@ -53,7 +53,7 @@ const DailySchedule = () => {
             }
 
             const periodEnd = new Date(periodStart.getTime() + periodDuration);
-            lastPeriodEnd = periodEnd; 
+            lastPeriodEnd = periodEnd;
 
             if (now >= periodStart && now < periodEnd) {
                 return i + 1;

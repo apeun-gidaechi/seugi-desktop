@@ -1,6 +1,6 @@
-import { Subtitle2 } from '@/components/Login/login.style';
+import { Subtitle2 } from '@/Components/Login/login.style';
 import { SeugiColor } from '@/Design/color/SeugiColor';
-import { SeugiFont }from '@/Design/text/SeugiFont';
+import { SeugiFont } from '@/Design/text/SeugiFont';
 import styled from 'styled-components';
 
 export const RegisterSchoolContainer = styled.div`

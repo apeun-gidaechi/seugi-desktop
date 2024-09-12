@@ -13,7 +13,7 @@ import WaitingJoin from '@/Pages/WaitingJoin/WaitingJoinPage';
 import Home from '@/Pages/Home/home'
 import Chat from '@/Pages/Chat/chat'
 import GroupChat from '@/Pages/GroupChat/index'
-import UnHome from '@/components/Home/NotSubscribed/UnHome';
+import UnHome from '@/Components/Home/NotSubscribed/UnHome';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 

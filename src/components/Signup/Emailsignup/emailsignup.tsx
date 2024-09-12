@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import * as S from '@/components/Signup/Emailsignup/emailsignup.style';
+import * as S from '@/Components/Signup/Emailsignup/emailsignup.style';
 import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg'
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
 import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
@@ -7,8 +7,8 @@ import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
 import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg';
 import Backimg from '@/assets/image/Backimg.svg';
-import Button from '@/components/Button/Button';
-import TextField from '@/components/TextField/TextField';
+import Button from '@/Components/Button/Button';
+import TextField from '@/Components/TextField/TextField';
 import useSignup from '@/Hooks/Signuphook/useSignup';
 import { useNavigate } from 'react-router-dom';
 
@@ -78,7 +78,7 @@ const emailsignup = () => {
                         <S.InputContainer error={!!signUp.errors.password}>
                             <TextField
                                 value={signUp.password}
-                                style={{border: "none"}}
+                                style={{ border: "none" }}
                                 placeholder="비밀번호를 입력해주세요"
                                 onChange={signUp.handlePasswordChange}
                                 type={signUp.showPassword ? 'text' : 'password'}
@@ -96,7 +96,7 @@ const emailsignup = () => {
                         <S.InputContainer data-error={!!signUp.errors.confirmPassword}>
                             <TextField
                                 value={signUp.confirmPassword}
-                                style={{ border: "none"}}
+                                style={{ border: "none" }}
                                 type={signUp.showConfirmPassword ? 'text' : 'password'}
                                 placeholder='비밀번호를 다시 입력해주세요'
                                 onChange={signUp.handleConfirmPasswordChange}

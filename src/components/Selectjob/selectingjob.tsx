@@ -1,10 +1,10 @@
 import React from 'react';
 
-import * as S from '@/components/Selectjob/selectingjob.style';
+import * as S from '@/Components/Selectjob/selectingjob.style';
 import Student from '@/assets/image/join-school/selectjob/student.svg';
 import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
-import { clearAccessToken } from '@/api/SeugiCutomAxios';
+import { clearAccessToken } from '@/Api/SeugiCutomAxios';
 import Backimg from '@/assets/image/Backimg.svg';
 import Session from '@/Util/TokenExpired/TokenExpired';
 
@@ -13,7 +13,7 @@ import useSelectJob from '@/Hooks/SelectJob/index';
 
 const SelectingJob: React.FC = () => {
     const {
-        token, 
+        token,
         selectedRole,
         handleStudentClick,
         handleTeacherClick,
@@ -21,8 +21,8 @@ const SelectingJob: React.FC = () => {
         getBorderColor,
         handleSelectedJob,
         Backclick,
-    } = useSelectJob();   
-     
+    } = useSelectJob();
+
     return (
         <S.SelectMain>
             <Session token={token} clearAccessToken={clearAccessToken} />

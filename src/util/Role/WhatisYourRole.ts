@@ -1,4 +1,4 @@
-import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
+import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 
 enum Role {
     Teacher = "TEACHER",
@@ -14,15 +14,15 @@ interface User {
 const fetchUser = async (workspaceId: string): Promise<User | undefined> => {
     try {
         const res = await SeugiCustomAxios.get(`/profile/me`, {
-            params: { workspaceId } 
+            params: { workspaceId }
         });
 
-        const data = res.data.data.permission; 
+        const data = res.data.data.permission;
         console.log(data);
         const user: User = {
             role: data as Role
         };
-        
+
         window.localStorage.setItem('Role', user.role);
 
         return user;
