@@ -1,22 +1,18 @@
 import React from 'react';
 import * as S from '@/components/SelectingSchool/SelectSchool.style';
-import { useNavigate } from 'react-router-dom';
 
 import JoinSchoolimg from '@/assets/image/join-school/JoinSchool.svg';
 import CreateSchoolimg from '@/assets/image/join-school/JoinSchool/RoundedCircleImage.svg';
 import Backimg from '@/assets/image/Backimg.svg'
 
+import useSelectSchool from '@/hooks/SelectSchool/index';
+
 const SelectSchool = () => {
-    const navigate = useNavigate();
-    const handleJoinSchool = () => {
-        navigate('/schoolcode')
-    }
-    const handleNewSchool = () => {
-        navigate('/createschool')
-    }
-    const Backclick = () => {
-        navigate('/home')
-    }
+    const {
+        Backclick,
+        handleJoinSchool,
+        handleNewSchool,
+    } = useSelectSchool();
   return (
     <S.SelectschoolMain>
         <S.SelectschoolFirstWrap>
