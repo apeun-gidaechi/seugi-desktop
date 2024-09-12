@@ -4,10 +4,10 @@ import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 import * as S from '@/components/Profile/SettingProfile/SettingProfile.style';
 import Correction from '@/components/Profile/Correction/Correction';
 
-import ProfileImg from '@/assets/image/Profile/settingprofile.svg';
-import CorrectionImg from '@/assets/image/Profile/CorrectionImg.svg';
-import Arrow from '@/assets/image/Profile/arrow.svg';
-import Divider from '@/assets/image/Profile/ProflieDivider.svg';
+import ProfileImg from '@/assets/image/profile/settingprofile.svg';
+import CorrectionImg from '@/assets/image/profile/CorrectionImg.svg';
+import Arrow from '@/assets/image/profile/arrow.svg';
+import Divider from '@/assets/image/profile/ProflieDivider.svg';
 
 interface SettingProfileProps {
     onClose: () => void;

@@ -3,11 +3,11 @@ import * as S from '@/components/Profile/profile.style';
 import Correction from '@/components/Profile/Correction/Correction';
 import SettingProfile from '@/components/Profile/SettingProfile/SettingProfile';
 
-import SettingImg from '@/assets/image/Profile/profilesetting_fill.svg';
-import ProfileImg from '@/assets/image/Profile/proflie.svg';
-import CorrectionImg from '@/assets/image/Profile/CorrectionImg.svg';
-import ProfileDivider from '@/assets/image/Profile/ProflieDivider.svg';
-import Divider from '@/assets/image/Profile/Divider.svg';
+import SettingImg from '@/assets/image/profile/profilesetting_fill.svg';
+import ProfileImg from '@/assets/image/profile/proflie.svg';
+import CorrectionImg from '@/assets/image/profile/CorrectionImg.svg';
+import ProfileDivider from '@/assets/image/profile/ProflieDivider.svg';
+import Divider from '@/assets/image/profile/Divider.svg';
 
 import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 
