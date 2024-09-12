@@ -1,72 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router';
+import React from 'react';
+
 import * as S from '@/components/Selectjob/selectingjob.style';
 import Student from '@/assets/image/join-school/selectjob/student.svg';
 import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
-import { clearAccessToken, SeugiCustomAxios } from '@/api/SeugiCutomAxios';
+import { clearAccessToken } from '@/api/SeugiCutomAxios';
 import Backimg from '@/assets/image/Backimg.svg';
 import Session from '@/util/TokenExpired/TokenExpired';
 
-type Role = 'NONE' | 'STUDENT' | 'TEACHER';
+import useSelectJob from '@/hooks/SelectJob/index';
+
 
 const SelectingJob: React.FC = () => {
-    const navigate = useNavigate();
-    const token = window.localStorage.getItem("accessToken");
-    const [selectedRole, setSelectedRole] = useState<Role>('NONE');
-    const location = useLocation();
-    const { verificationCode, workspaceId } = location.state || {};
-
-    useEffect(() => {
-        document.body.style.overflow = 'hidden';
-        return () => {
-            document.body.style.overflow = 'auto';
-        }
-    }, []);
-
-    const handleStudentClick = () => {
-        setSelectedRole('STUDENT');
-    };
-
-    const handleTeacherClick = () => {
-        setSelectedRole('TEACHER');
-    };
-
-    const getTextColor = (role: Role) => {
-        return selectedRole === role ? '#000000' : '#808080';
-    };
-
-    const getBorderColor = (role: Role) => {
-        return selectedRole === role ? '#1D93F3' : '#E0E0E0';
-    };
-
-    const handleSelectedJob = async () => {
-        if (selectedRole === 'NONE') {
-            alert("학생/선생님 선택해주세요");
-            return;
-        }
-
-        try {
-            const res = await SeugiCustomAxios.post(`/workspace/join`, {
-                workspaceId: workspaceId,
-                workspaceCode: verificationCode,
-                role: selectedRole,
-            });
-
-            if (res.status === 200) {
-                navigate('/waitingjoin', { state: { token } });
-            } else {
-                console.error("워크스페이스 가입 실패:", res.data);
-            }
-        } catch (error) {
-            console.error("error", error);
-        }
-    };
-
-    const Backclick = () => {
-        navigate('/joinsuccess')
-    }
-
+    const {
+        token, 
+        selectedRole,
+        handleStudentClick,
+        handleTeacherClick,
+        getTextColor,
+        getBorderColor,
+        handleSelectedJob,
+        Backclick,
+    } = useSelectJob();   
+     
     return (
         <S.SelectMain>
             <Session token={token} clearAccessToken={clearAccessToken} />
