@@ -5,14 +5,20 @@ export const ButtonWrap = styled.div`
     justify-content: flex-end;
 
     padding: 64px 32px 0 0;
+    z-index: 200;
 `
 
 export const TopButton = styled.button`
     outline: none;
     border: none;
     background: none;
-    cursor: pointer;
+    
     padding-left: 16px;
+
+    &:hover{
+        cursor: pointer;
+    }
+  
 `
 
 export const TopButtonIconImg = styled.img`
