@@ -246,9 +246,9 @@ const Notification: React.FC = () => {
                         <S.NotificationWrapper key={item.id}>
                             <S.NotificationContentAuthor>
                                 <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)} 
-                                    {item.createdDate !== item.lastModifiedDate && (
+                                    {/* {item.createdDate !== item.lastModifiedDate && (
                                         <S.EditedLabel>(수정됨)</S.EditedLabel> 
-                                    )}
+                                    )} */}
                                 </S.NotificationContentAuthorSpan>
                                 <S.NotificationActionButton onClick={() => handleActionButtonClick(item.id)}>
                                     <S.NotificationActionButtonimg src={Point} />
