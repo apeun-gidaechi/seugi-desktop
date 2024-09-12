@@ -12,7 +12,6 @@ import Cloud1 from "@/assets/image/onbording/Start/LoginCloud1.svg";
 import Cloud2 from "@/assets/image/onbording/Start/LoginCloud2.svg";
 import Sun from "@/assets/image/onbording/Start/LoginSun.svg";
 import Divider from "@/assets/image/onbording/Start/Divider.svg";
-import { useGoogleLogin } from "@react-oauth/google";
 
 import useLogin from '@/hooks/LoginHook/index';
 
@@ -29,6 +28,7 @@ const Login = () => {
     handleLogin,
     handleKeyDown,
     handleCloseAlert,
+    handleGoogleLogin
   } = useLogin();
 
   return (

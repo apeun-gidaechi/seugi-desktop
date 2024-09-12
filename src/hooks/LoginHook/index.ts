@@ -5,6 +5,7 @@ import { useUserDispatchContext } from '@/contexts/userContext';
 import axios from "axios";
 import config from "@/constants/config/config.json";
 import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const index = () => {
     const navigate = useNavigate();
@@ -111,6 +112,39 @@ const index = () => {
         setUser(res.data.data);
     }
 
+    const handleGoogleLogin = useGoogleLogin({
+        flow: "auth-code",
+        scope: "email profile",
+        onSuccess: async ({ code }) => {
+            try {
+                const res = await axios.post(
+                    `${config.serverurl}/oauth/google/authenticate`,
+                    { code }
+                );
+
+                if (res.status !== 200) {
+                    return;
+                }
+
+                const { accessToken, refreshToken } = res.data.data;
+
+                window.localStorage.setItem("accessToken", accessToken);
+                window.localStorage.setItem("refreshToken", refreshToken);
+
+                importWorkspace();
+            } catch (error) {
+                setAlertMessage(
+                    "구글 로그인 중 오류가 발생했습니다. 다시 시도해주세요."
+                );
+                setShowAlert(true);
+                console.log(error);
+            }
+        },
+        onError: (errorResponse: any) => {
+            console.error(errorResponse);
+        },
+    });
+
     return {
         email,
         password,
@@ -125,7 +159,7 @@ const index = () => {
         handleKeyDown,
         handleCloseAlert,
         getMyInfo,
-
+        handleGoogleLogin
     }
 }
 
