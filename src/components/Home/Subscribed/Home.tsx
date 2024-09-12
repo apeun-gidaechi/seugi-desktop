@@ -9,9 +9,9 @@ import CatSeugi from "@/components/Home/CatSeugi/CatSeugi";
 import Calendar from "@/components/Home/Calendar/Calendar";
 import Notification from '@/components/Home/Notification/Notification';
 import DailySchedule from "@/components/Home/DailySchedule/DailySchedule";
-import { handleUserRole } from '@/util/Role/WhatisYourRole';
+import { handleUserRole } from '@/Util/Role/WhatisYourRole';
 import { clearAccessToken } from "@/api/SeugiCutomAxios";
-import Session from "@/util/TokenExpired/TokenExpired";
+import Session from "@/Util/TokenExpired/TokenExpired";
 import Assignment from "../Assignment/Assignment";
 
 const Home: React.FC = () => {

@@ -6,7 +6,7 @@ import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 import Navbar from "@/components/Common/Navbar/Navbar";
 import TitleText from "@/components/Common/TitleText/index";
 import CreateRoomBtn from "@/assets/image/sidebar/add_fill.svg";
-import useChatSidebar from "@/hooks/Sidebar/useChatSidebar";
+import useChatSidebar from "@/Hooks/Sidebar/useChatSidebar";
 import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus";
 
 interface SidebarProps {

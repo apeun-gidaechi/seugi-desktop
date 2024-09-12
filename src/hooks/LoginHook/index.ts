@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { setAccessToken } from '@/api/SeugiCutomAxios';
-import { useUserDispatchContext } from '@/contexts/userContext';
+import { useUserDispatchContext } from '@/Contexts/userContext';
 import axios from "axios";
 import config from "@/constants/config/config.json";
 import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";

@@ -3,7 +3,7 @@ import HomeBookImg from "@/assets/image/home/homebook.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
 import * as S from '@/components/Home/DailySchedule/DailySchedule.style';
 import { SeugiCustomAxios } from "@/api/SeugiCutomAxios";
-import { SeugiColor } from '@/design/color/SeugiColor';
+import { SeugiColor } from '@/Design/color/SeugiColor';
 
 interface TimetableItem {
     id: number;

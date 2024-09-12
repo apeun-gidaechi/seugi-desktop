@@ -10,7 +10,7 @@ import { SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 import { EmojiClickData } from 'emoji-picker-react';
 import CreateNotice from '@/components/Home/Notification/CreateNotice/CreateNotice';
 import ChangeNotice from './ChangeNotice/ChangeNotice';
-import { useUserContext } from '@/contexts/userContext';
+import { useUserContext } from '@/Contexts/userContext';
 
 interface EmojiItem {
     emoji: string;

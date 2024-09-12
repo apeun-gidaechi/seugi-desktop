@@ -8,7 +8,7 @@ import PlusButtonimg from '@/assets/image/join-school/plus.svg';
 import { useNavigate } from 'react-router-dom';
 import config from '@/constants/config/config.json';
 
-import Session from '@/util/TokenExpired/TokenExpired';
+import Session from '@/Util/TokenExpired/TokenExpired';
 import { clearAccessToken, SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 
 const CreateSchool = () => {

@@ -6,7 +6,7 @@ import SelectChatRoom from '@/assets/image/chat/sadErrorImg.svg';
 import SendMessage from '@/components/Common/SendMessage/sendMessage';
 // import Sidebar from '../../sidebar/sidebar';
 import MessageBox from "@/components/MessageBox/messageBox";
-import useChatMessages from '@/hooks/SendMessage/useChatMessages';
+import useChatMessages from '@/Hooks/SendMessage/useChatMessages';
 
 interface SelectedChatRoomProps {
   room: string;

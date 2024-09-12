@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import useChatMessages from '@/hooks/SendMessage/useChatMessages';
-import useFileUpload from '@/hooks/SendMessage/useFileUpload';
+import useChatMessages from '@/Hooks/SendMessage/useChatMessages';
+import useFileUpload from '@/Hooks/SendMessage/useFileUpload';
 import * as S from "@/components/Common/SendMessage/sendMessage.style";
 import MessageBox from "@/components/MessageBox/messageBox";
 import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";

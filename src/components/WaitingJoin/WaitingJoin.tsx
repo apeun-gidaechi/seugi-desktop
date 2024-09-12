@@ -4,9 +4,9 @@ import schoolimg from '@/assets/image/join-school/schoolimg.svg';
 import ment from '@/assets/image/join-school/ment.svg';
 import Button from '@/components/Button/Button';
 import { clearAccessToken } from '@/api/SeugiCutomAxios';
-import Session from '@/util/TokenExpired/TokenExpired';
+import Session from '@/Util/TokenExpired/TokenExpired';
 
-import useWaitingJoin from '@/hooks/WaitingJoin/index';
+import useWaitingJoin from '@/Hooks/WaitingJoin/index';
 
 const WaitingJoin = () => {
     const {

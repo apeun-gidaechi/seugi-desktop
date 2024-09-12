@@ -1,4 +1,4 @@
-import { SeugiFont } from '@/design/text/SeugiFont';
+import { SeugiFont } from '@/Design/text/SeugiFont';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components'; 
 
