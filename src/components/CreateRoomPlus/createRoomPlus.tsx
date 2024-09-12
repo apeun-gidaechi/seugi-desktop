@@ -21,6 +21,7 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchResult, setSearchResult] = useState<Member[]>([]);
   const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
   const dummyData: Member[] = [
     { id: 1, name: '123', department: '1' },
@@ -52,16 +53,118 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
     );
   };
 
-  const handleContinueClick = () => {
-    if (selectedMembers.length > 0) {
-      const selectedMemberNames = selectedMembers.map(
-        (id) => dummyData.find((item) => item.id === id)?.name
-      );
-      const roomName = selectedMemberNames.join(', '); 
-      onCreateRoom(roomName); 
-      onClose(); 
+  const login = async (email: string, password: string) => {
+    try {
+      const response = await fetch('https://api.seugi.com/member/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`Error logging in: ${response.status} ${response.statusText} - ${errorText}`);
+        throw new Error('Login failed');
+      }
+
+      const data = await response.json();
+      setAccessToken(data.accessToken);
+    } catch (error) {
+      console.error('Error logging in:', error);
+      alert('Failed to login. Please check your credentials.');
+    }
+  };
+
+  const refreshAccessToken = async (): Promise<string> => {
+    try {
+      const response = await fetch('https://api.seugi.com/member/refresh', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ refreshToken: accessToken }), // use the current accessToken as refreshToken
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`Error refreshing token: ${response.status} ${response.statusText} - ${errorText}`);
+        throw new Error('Failed to refresh access token');
+      }
+
+      const data = await response.json();
+      return data.accessToken;
+    } catch (error) {
+      console.error('Error refreshing token:', error);
+      throw error;
+    }
+  };
+
+  const handleContinueClick = async () => {
+    if (selectedMembers.length > 1) {
+      if (!accessToken) {
+        await login('lkh10285@gmail.com', '1'); // Log in with specific credentials
+      }
+
+      try {
+        const requestData = {
+          workspaceId: "669e339593e10f4f59f8c583",
+          joinUsers: Array.from(selectedMembers),
+          roomName: `Group Chat (${selectedMembers.length} members)`,
+          chatRoomImg: "",
+        };
+
+        let response = await fetch('https://api.seugi.com/chat/group/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify(requestData),
+        });
+
+        if (response.status === 401) {
+          try {
+            const newAccessToken = await refreshAccessToken();  // Get new token
+            response = await fetch('https://api.seugi.com/chat/group/create', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${newAccessToken}`,
+              },
+              body: JSON.stringify(requestData),
+            });
+
+            if (!response.ok) {
+              const errorText = await response.text();
+              console.error(`Failed to create room with refreshed token: ${response.status} ${response.statusText} - ${errorText}`);
+              throw new Error(`Failed to create room with refreshed token: ${response.statusText}`);
+            }
+          } catch (refreshError) {
+            console.error('Error refreshing token:', refreshError);
+            alert('Failed to refresh access token. Please login again.');
+            return;
+          }
+        }
+
+        const result = await response.text();
+
+        if (response.ok) {
+          console.log("Room created successfully:", result);
+          onCreateRoom(result);
+          onClose();
+        } else {
+          console.error("Error creating group chat room:", result);
+          alert('그룹 채팅방 생성에 실패했습니다. 다시 시도해주세요.');
+        }
+      } catch (error) {
+        console.error(`An error occurred: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        alert('에러가 발생했습니다. 다시 시도해주세요.');
+      }
     } else {
-      alert('Please select at least one member.');
+      alert('두 명 이상의 멤버를 선택해주세요.');
     }
   };
 

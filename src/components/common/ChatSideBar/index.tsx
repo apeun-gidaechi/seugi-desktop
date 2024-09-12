@@ -1,85 +1,110 @@
-import React from "react";
-import * as S from "./index.style";
+import { useState } from "react";
+import config from "@/constants/ChatMember/config.json";
 
-import PlusButton from "@/assets/image/sidebar/plusButton.svg";
-import SearchIcon from "@/assets/image/chat-components/Search.svg";
-import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
+const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
+  const [searchText, setSearchText] = useState("");
+  const [chatRooms, setChatRooms] = useState<string[]>([]);
 
-import Navbar from "@/components/common/Navbar/Navbar";
-import CreateRoomPlus from "@/components/CreateRoomPlus/createRoomPlus";
-import TitleText from "../TitleText/index";
+  // Refresh token function
+  const refreshToken = async () => {
+    try {
+      const response = await fetch('https://api.seugi.com/auth/refresh-token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          refreshToken: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZW1haWwiOiJsa2gxMDI4NUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzI2MTA0NDEwLCJleHAiOjE3MjY5Njg0MTB9.Qj1xs6sG28RmevA7k5ieGL47b0m-S2sVSGkYLXjTApw",
+        }),
+      });
 
-import SendMessage from "@/components/common/sendMessage/sendMessage";
-import useChatRooms from "@/hooks/Chat/useChatRooms";
-import useCreateRoom from "@/hooks/Chat/useCreateRoom";
+      const result = await response.json();
 
-interface SidebarProps {}
+      if (response.ok) {
+        // Assuming the API returns the new access token
+        return result.accessToken;
+      } else {
+        console.error('Failed to refresh token:', result.message);
+        throw new Error('Token refresh failed');
+      }
+    } catch (error) {
+      console.error('Error refreshing token:', error);
+    }
+  };
 
-const Sidebar: React.FC<SidebarProps> = () => {
-  const {
-    chatRooms,
-    selectedChatRoom,
+  // Create Room function with token refresh logic
+  const createRoom = async (roomName: string) => {
+    try {
+      // Refresh the token
+      let token = await refreshToken();
+
+      if (!token) {
+        throw new Error("Failed to obtain new token");
+      }
+
+      const requestData = {
+        workspaceId: "669e339593e10f4f59f8c583",
+        roomName: roomName,
+        joinUsers: [10],
+        chatRoomImg: "",
+      };
+
+      const response = await fetch('https://api.seugi.com/chat/personal/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Use the refreshed token
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const result = await response.text();
+
+      if (response.ok) {
+        addChatRoom(roomName);
+        handleChatRoomClick(roomName);
+      } else {
+        console.error(`Error creating room: ${result}`);
+      }
+    } catch (error) {
+      console.error(`An error occurred: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  };
+
+  const handleSearch = async () => {
+    if (searchText.trim() !== "") {
+      const roomFound = chatRooms.includes(searchText) || config.name.includes(searchText);
+
+      if (roomFound) {
+        handleChatRoomClick(searchText);
+      } else {
+        await createRoom(searchText); // Trigger room creation if not found
+      }
+
+      setSearchText("");
+    }
+  };
+
+  const addChatRoom = (roomName: string) => {
+    setChatRooms((prevRooms) => {
+      if (!prevRooms.includes(roomName)) {
+        return [...prevRooms, roomName];
+      }
+      return prevRooms;
+    });
+  };
+
+  const handleChatRoomClick = (room: string) => {
+    onSelectChatRoom(room);
+  };
+
+  return {
     searchText,
     setSearchText,
+    chatRooms,
     handleSearch,
     handleChatRoomClick,
-    addChatRoom,
-  } = useChatRooms();
-
-  const {
-    showCreateRoom,
-    handleCreateRoomClick,
-    handleCloseCreateRoom,
-    handleRoomCreation,
-  } = useCreateRoom(addChatRoom);
-
-  return (
-    <>
-      <S.ChatingPage>
-        <Navbar />
-        <S.SideBarChat>
-          <div style={{ marginLeft: "1.5%" }}>
-            <TitleText />
-          </div>
-          <S.SideFinder>
-            <S.FindChatingRoom
-              type="text"
-              placeholder="채팅방 검색"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  handleSearch();
-                }
-              }}
-            />
-            <S.SearchIcon src={SearchIcon} onClick={handleSearch} />
-          </S.SideFinder>
-          <S.ChatRoomsWrap>
-            <S.ChatRoomList>
-              {chatRooms.map((room, index) => (
-                <S.ChatRoom key={index} onClick={() => handleChatRoomClick(room)}>
-                  <S.ChatRoomAvatarWrap>
-                    <S.ChatRoomAvatar src={AvatarProfile} />
-                  </S.ChatRoomAvatarWrap>
-                  {room}
-                </S.ChatRoom>
-              ))}
-            </S.ChatRoomList>
-          </S.ChatRoomsWrap>
-        </S.SideBarChat>
-        {selectedChatRoom && (
-          <SendMessage chatRoom={selectedChatRoom} currentUser="사용자 이름" />
-        )}
-        {showCreateRoom && (
-          <CreateRoomPlus
-            onClose={handleCloseCreateRoom}
-            onCreateRoom={handleRoomCreation}
-          />
-        )}
-      </S.ChatingPage>
-    </>
-  );
+  };
 };
 
-export default Sidebar;
+export default useChatSidebar;
