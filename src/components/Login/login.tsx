@@ -6,12 +6,13 @@ import CustomAlert from "@/components/Alert/Alert";
 import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
 import showPasswordimg from "@/assets/image/onbording/show_fill.svg";
 import hidePasswordimg from "@/assets/image/onbording/hide_fill.svg";
-import AppleLogo from '@/assets/image/onbording/Start/apple.svg';
+import AppleLogo from "@/assets/image/onbording/Start/apple.svg";
 import GoogleLogo from "@/assets/image/onbording/Start/googlelogo.svg";
 import Cloud1 from "@/assets/image/onbording/Start/LoginCloud1.svg";
 import Cloud2 from "@/assets/image/onbording/Start/LoginCloud2.svg";
 import Sun from "@/assets/image/onbording/Start/LoginSun.svg";
 import Divider from "@/assets/image/onbording/Start/Divider.svg";
+import { useGoogleLogin } from "@react-oauth/google";
 
 import useLogin from '@/hooks/LoginHook/index';
 
@@ -100,7 +101,7 @@ const Login = () => {
             <S.Authlogin>
               <S.LogoImg src={AppleLogo} />
             </S.Authlogin>
-            <S.Authlogin>
+            <S.Authlogin onClick={handleGoogleLogin}>
               <S.LogoImg src={GoogleLogo} />
             </S.Authlogin>
           </S.Oauthpart>
