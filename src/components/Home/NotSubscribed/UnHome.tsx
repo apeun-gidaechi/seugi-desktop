@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as S from '@/components/Home/NotSubscribed/UnHome.style';
-import Navbar from '@/components/common/Navbar/Navbar';
+import Navbar from '@/components/Common/Navbar/Navbar';
 import Changeschool from '@/components/ChangeSchool/ChangeSchool';
 import HomeBookImg from '@/assets/image/home/homebook.svg';
 import NotificationImg from '@/assets/image/home/notification.svg';
