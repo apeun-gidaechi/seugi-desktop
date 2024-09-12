@@ -87,7 +87,7 @@ export const PlusButtonImg = styled.img`
   cursor: pointer;
   width: 26.667px;
   height: 26.667px;
-  margin-left: 5px;
+  margin-left: 6px;
 `;
 
 export const ChatRoomsWrap = styled.div`
