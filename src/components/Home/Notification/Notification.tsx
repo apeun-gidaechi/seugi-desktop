@@ -119,10 +119,12 @@ const Notification: React.FC = () => {
             const target = e.target as Node | null;
 
             if (
-                CreateNoticeRef.current &&
-                !CreateNoticeRef.current.contains(target)
+                (CreateNoticeRef.current && !CreateNoticeRef.current.contains(target)) &&
+                (ChangeNoticeRef.current && !ChangeNoticeRef.current.contains(target)) &&
+                isEmojiPickerVisible
             ) {
-                setCreateNoticeVisible(false);
+                setEmojiPickerVisible(false); 
+                setActiveNotification(null);  
             }
         };
 
@@ -131,7 +133,7 @@ const Notification: React.FC = () => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
+    }, [isEmojiPickerVisible]);
     
     const handleCorrectionClick = () => {
         if (userRole === 'STUDENT') {
@@ -142,8 +144,13 @@ const Notification: React.FC = () => {
     };
 
     const handleAddEmojiClick = (notificationIndex: number) => {
-        setActiveNotification(notificationIndex);
-        setEmojiPickerVisible(true);
+        if (activeNotification === notificationIndex && isEmojiPickerVisible) {
+            setEmojiPickerVisible(false);
+            setActiveNotification(null);
+        } else {
+            setActiveNotification(notificationIndex);
+            setEmojiPickerVisible(true);
+        }
     };
 
     const handleEmojiClick = async (parentKey: number, emoji: EmojiDisplayItem) => {
@@ -261,7 +268,7 @@ const Notification: React.FC = () => {
                                 {item.content}
                             </S.NotificationContentDescription>
                             <S.NotificationEmojiBox>
-                                <S.NotificationAddEmojiButton onClick={() => handleAddEmojiClick(parentKey)}>
+                                <S.NotificationAddEmojiButton onClick={() => handleAddEmojiClick(parentKey)} className='AddEmojiButton'>
                                     <S.NotificationAddEmoji src={Emoji} />
                                 </S.NotificationAddEmojiButton>
                                 {item.emojiDisplay.map((emoji, childKey) => (
