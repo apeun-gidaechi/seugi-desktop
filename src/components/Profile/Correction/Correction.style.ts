@@ -11,6 +11,8 @@ export const EditProfile = styled.div`
     justify-content: center;
     align-items: center;
     gap: 32px;
+
+    margin-bottom:9.8rem;
 `
 
 export const CorrectionDiv = styled.div`
