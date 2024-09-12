@@ -13,10 +13,6 @@ interface SelectedChatRoomProps {
   currentUser: string;
 }
 
-interface SendMessageProps {
-  chatRoom: string;
-  currentUser: string;
-}
 
 const SelectedChatRoom: React.FC<SelectedChatRoomProps> = ({ room, currentUser }) => {
   const { receivedMessages } = useChatMessages(room, currentUser); // Move receivedMessages here
@@ -25,11 +21,7 @@ const SelectedChatRoom: React.FC<SelectedChatRoomProps> = ({ room, currentUser }
     <S.AllWrapContainer>
       <S.ContainerWrapper>
         <S.Container>
-          <div>
-            {receivedMessages.map((msg, index) => (
-              <MessageBox key={index} message={msg.message} time={msg.time} />
-            ))}
-          </div>
+          
         </S.Container>
       </S.ContainerWrapper>
       <div>
