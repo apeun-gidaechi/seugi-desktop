@@ -4,6 +4,7 @@ import * as S from './createRoomPlus.style';
 import AvatarImg from '@/assets/image/chat-components/Avatar.svg';
 import NonClicked from '@/assets/image/chat-components/nonClick.svg';
 import Clicked from '@/assets/image/chat-components/clicked.svg';
+import SearchIcon from '@/assets/image/sidebar/Findicon.svg';
 
 interface Member {
   id: number;
@@ -22,12 +23,12 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
   const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
 
   const dummyData: Member[] = [
-    { id: 1, name: '노영재', department: '뚝딱' },
-    { id: 2, name: '노일재', department: '뚝딱뚝딱' },
-    { id: 3, name: '노이재', department: '뚝딱' },
-    { id: 4, name: '노삼재', department: '뚝딱' },
-    { id: 5, name: '노사재', department: '뚝딱뚝딱' },
-    { id: 6, name: '제민국', department: '뚝딱뚝딱제갈' },
+    { id: 1, name: '123', department: '1' },
+    { id: 2, name: '1234', department: '1' },
+    { id: 3, name: 'q', department: '1' },
+    { id: 4, name: 'qw', department: '2' },
+    { id: 5, name: 'qwe', department: '2' },
+    { id: 6, name: 'qwer', department: '1' },
   ];
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -72,16 +73,17 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
   return (
     <S.CreateRoomPlusBox>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <S.ChatRoomName>멤버를 선택해 주세요</S.ChatRoomName>
+        <S.ChatRoomName>채팅방 멤버</S.ChatRoomName>
         <S.ChatRoomButton onClick={handleContinueClick}>계속하기</S.ChatRoomButton>
       </div>
       <S.InviteMemberWrap>
         <S.InviteMember
           type="text"
-          placeholder="멤버 검색"
+          placeholder="이름, 소속 등을 입력해 주세요"
           value={searchTerm}
           onChange={handleSearchChange}
         />
+        <S.SearchIconImg src={SearchIcon}/>
       </S.InviteMemberWrap>
       <S.ScrollableMemberList>
         {combinedResults.map((item) => (
