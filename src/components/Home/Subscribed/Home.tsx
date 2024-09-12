@@ -12,6 +12,7 @@ import DailySchedule from "@/components/Home/DailySchedule/DailySchedule";
 import { handleUserRole } from '@/util/Role/WhatisYourRole';
 import { clearAccessToken } from "@/api/SeugiCutomAxios";
 import Session from "@/util/TokenExpired/TokenExpired";
+import Assignment from "../Assignment/Assignment";
 
 const Home: React.FC = () => {
   const token = window.localStorage.getItem("accessToken");
@@ -51,6 +52,7 @@ const Home: React.FC = () => {
           <S.HomeWrapper2>
             <Schools />
             <Meal />
+            <Assignment />
           </S.HomeWrapper2>
         </S.ComponentsBox>
       </S.HomeMain>
