@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import * as S from "@/components/common/ChatSidebar/Chat/index.style";
+import * as S from "@/components/common/ChatSideBar/index.style";
 import SearchIcon from "@/assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
 import Navbar from "@/components/common/Navbar/Navbar";
