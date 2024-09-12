@@ -40,9 +40,10 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, re
         try {
             if (notificationId) {
                 // 공지 수정 API 호출
-                await SeugiCustomAxios.put(`/notification/${workspaceId}/${notificationId}`, {
+                await SeugiCustomAxios.patch(`/notification`, {
                     title,
-                    content
+                    content,
+                    id: notificationId
                 });
             } else {
                 // 새 공지 작성 API 호출
