@@ -5,7 +5,7 @@ import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
 import Cloud1 from '@/assets/image/onbording/oauthsignup/Cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/oauthsignup/Cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/oauthsignup/Cloud3.svg';
-import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg'
+import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg';
 import Backimg from '@/assets/image/Backimg.svg';
 import Button from '@/components/Button/Button';
 import TextField from '@/components/TextField/TextField';
@@ -45,56 +45,58 @@ const emailsignup = () => {
                         <S.Subtitle>
                             <S.Body1> 이름 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
-                        <S.InputContainer>
+                        <S.InputContainer data-error={!!signUp.errors.name}>
                             <TextField
-                                value="name"
+                                value={signUp.name}
                                 placeholder='이름을 입력해주세요'
                                 onChange={signUp.handleNameChange}
-                                style={{ border: "none" }}
+                                style={{ border: signUp.errors.name ? "1px solid red" : "none" }}
                                 onKeyDown={signUp.handleKeyDown}
                             />
                         </S.InputContainer>
+                        {signUp.errors.name && <S.ErrorText>{signUp.errors.name}</S.ErrorText>}
                     </S.EneterInfo>
                     <S.EneterInfo>
                         <S.Subtitle>
                             <S.Body1> 이메일 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
-                        <S.InputContainer>
+                        <S.InputContainer data-error={!!signUp.errors.email}>
                             <TextField
-                                value='email'
-                                style={{ border: "none" }}
+                                value={signUp.email}
+                                style={{ border: signUp.errors.email ? "1px solid red" : "none" }}
                                 placeholder='이메일을 입력해주세요'
                                 onChange={signUp.handleEmailChange}
                                 onKeyDown={signUp.handleKeyDown}
                             />
                         </S.InputContainer>
+                        {signUp.errors.email && <S.ErrorText>{signUp.errors.email}</S.ErrorText>}
                     </S.EneterInfo>
                     <S.EneterInfo>
                         <S.Subtitle>
                             <S.Body1> 비밀번호 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
-                        <S.InputContainer>
+                        <S.InputContainer error={!!signUp.errors.password}>
                             <TextField
-                                value='password'
-                                style={{ border: "none" }}
-                                type={signUp.showPassword ? 'text' : 'password'}
-                                placeholder='비밀번호를 입력해주세요'
+                                value={signUp.password}
+                                style={{border: "none"}}
+                                placeholder="비밀번호를 입력해주세요"
                                 onChange={signUp.handlePasswordChange}
-                                onKeyDown={signUp.handleKeyDown}
+                                type={signUp.showPassword ? 'text' : 'password'}
                             />
                             <S.Btnview onClick={signUp.togglePasswordVisibility}>
                                 {signUp.showPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />}
                             </S.Btnview>
                         </S.InputContainer>
+                        {signUp.errors.password && <S.ErrorText>{signUp.errors.password}</S.ErrorText>}
                     </S.EneterInfo>
                     <S.EneterInfo>
                         <S.Subtitle>
                             <S.Body1> 비밀번호 확인 <S.Redstar>*</S.Redstar> </S.Body1>
                         </S.Subtitle>
-                        <S.InputContainer>
+                        <S.InputContainer data-error={!!signUp.errors.confirmPassword}>
                             <TextField
-                                value="confirmPassword"
-                                style={{ border: "none" }}
+                                value={signUp.confirmPassword}
+                                style={{ border: "none"}}
                                 type={signUp.showConfirmPassword ? 'text' : 'password'}
                                 placeholder='비밀번호를 다시 입력해주세요'
                                 onChange={signUp.handleConfirmPasswordChange}
@@ -104,7 +106,7 @@ const emailsignup = () => {
                                 {signUp.showConfirmPassword ? <img src={hidePasswordimg} alt="숨기기" /> : <img src={showPasswordimg} alt="보이기" />}
                             </S.Btnview>
                         </S.InputContainer>
-                        {signUp.errorMessage && <S.ErrorText>{signUp.errorMessage}</S.ErrorText>}
+                        {signUp.errors.confirmPassword && <S.ErrorText>{signUp.errors.confirmPassword}</S.ErrorText>}
                     </S.EneterInfo>
                 </S.TxtContainer>
                 <S.ButtonContainer>
