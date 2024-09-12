@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { SeugiColor } from "@/design/color/SeugiColor";
-import { SeugiFont } from "@/design/text/SeugiFont";
+import { SeugiColor } from "@/Design/color/SeugiColor";
+import { SeugiFont } from "@/Design/text/SeugiFont";
 
 export const RightDownContainer = styled.div`
   display: flex;

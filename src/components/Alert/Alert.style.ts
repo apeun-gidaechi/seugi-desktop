@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { SeugiFont } from '@/design/text/SeugiFont';
-import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiFont } from '@/Design/text/SeugiFont';
+import { SeugiColor } from "@/Design/color/SeugiColor";
 
 export const Dialog = styled.div<{ position: string }>`
   position: fixed;

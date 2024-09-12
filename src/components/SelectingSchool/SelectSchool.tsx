@@ -5,7 +5,7 @@ import JoinSchoolimg from '@/assets/image/join-school/JoinSchool.svg';
 import CreateSchoolimg from '@/assets/image/join-school/JoinSchool/RoundedCircleImage.svg';
 import Backimg from '@/assets/image/Backimg.svg'
 
-import useSelectSchool from '@/hooks/SelectSchool/index';
+import useSelectSchool from '@/Hooks/SelectSchool/index';
 
 const SelectSchool = () => {
     const {

@@ -5,10 +5,10 @@ import CodeTextField from "@/components/CodeTextField/CodeTextFeild";
 
 import Backimg from "@/assets/image/Backimg.svg";
 
-import Session from "@/util/TokenExpired/TokenExpired";
+import Session from "@/Util/TokenExpired/TokenExpired";
 import { clearAccessToken } from "@/api/SeugiCutomAxios";
 
-import useSchoolCode from '@/hooks/Schoolcode/index';
+import useSchoolCode from '@/Hooks/Schoolcode/index';
 
 const SchoolCode = () => {
   const {

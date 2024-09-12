@@ -6,9 +6,9 @@ import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
 import { clearAccessToken } from '@/api/SeugiCutomAxios';
 import Backimg from '@/assets/image/Backimg.svg';
-import Session from '@/util/TokenExpired/TokenExpired';
+import Session from '@/Util/TokenExpired/TokenExpired';
 
-import useSelectJob from '@/hooks/SelectJob/index';
+import useSelectJob from '@/Hooks/SelectJob/index';
 
 
 const SelectingJob: React.FC = () => {

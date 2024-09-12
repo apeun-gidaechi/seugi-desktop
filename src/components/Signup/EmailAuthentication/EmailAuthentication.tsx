@@ -9,7 +9,7 @@ import Backimg from '@/assets/image/Backimg.svg'
 import CodeTextField from '@/components/CodeTextField/CodeTextFeild';
 import CustomAlert from '@/components/Alert/Alert';
 
-import useAuthentication from '@/hooks/EmailAuthenticationHook/index';
+import useAuthentication from '@/Hooks/EmailAuthenticationHook/index';
 
 const EmailAuthentication = () => {
     const {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import SelectBar from "@/assets/image/sidebar/selectsidebar.svg";
-import { SeugiColor } from "@/design/color/SeugiColor";
+import { SeugiColor } from "@/Design/color/SeugiColor";
 
 export const SideBarMenu = styled.div`
     position: absolute;

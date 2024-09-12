@@ -1,6 +1,6 @@
 import React from 'react'
 
-import * as S from '@/components/layer/chat/index.style';
+import * as S from '@/components/Layer/chat/index.style';
 
 import SideBar from "@/components/common/ChatSidebar/Chat/index";
 import TopButton from '@/components/Button/chatButton/index';

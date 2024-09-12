@@ -10,7 +10,7 @@ import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
 import SchoolImg from '@/assets/image/home/school.svg';
 import CafeteriaImg from '@/assets/image/home/cafeteria.svg';
 import RegisterSchool from '@/components/Home/NotSubscribed/RegisterSchool/RegisterSchool';
-import Session from '@/util/TokenExpired/TokenExpired';
+import Session from '@/Util/TokenExpired/TokenExpired';
 import { clearAccessToken, SeugiCustomAxios } from '@/api/SeugiCutomAxios';
 import { useNavigate } from 'react-router-dom';
 
