@@ -9,7 +9,7 @@ import SelectHome from "@/assets/image/sidebar/slecthome.svg";
 import SelectChat from "@/assets/image/sidebar/selectchat.svg";
 import SelectChats from "@/assets/image/sidebar/selectgroup.svg";
 import Profile from "@/Components/Profile/Profile";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 type SelectedButton = "home" | "chat" | "chats" | null;
 

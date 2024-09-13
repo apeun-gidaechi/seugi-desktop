@@ -64,7 +64,7 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
           chatRoomImg: "",
         };
 
-        let response = await axios.post('https://api.seugi.com/chat/group/create', requestData, {
+        const response = await axios.post('https://api.seugi.com/chat/group/create', requestData, {
           headers: {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${accessToken}`,
