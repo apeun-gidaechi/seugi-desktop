@@ -6,29 +6,23 @@ import Backimg from "@/assets/image/Backimg.svg";
 import useJoinSuccess from '@/Hooks/JoinSuccess/index';
 
 const JoinSuccess = () => {
-  const {
-    workspaceName,
-    schoolInfo,
-    schoolImgUrl,
-    handleJoinSuccess,
-    Backclick
-  } = useJoinSuccess();
-  
+  const { ...JoinSuccess } = useJoinSuccess();
+
   return (
     <S.SuccessMain>
       <S.Container>
-        <S.BackButton onClick={Backclick}>
+        <S.BackButton onClick={JoinSuccess.Backclick}>
           <S.BackImg src={Backimg} />
         </S.BackButton>
         <S.SchoolImgContainer>
-          <S.SchoolImg src={schoolImgUrl} alt="error" />
+          <S.SchoolImg src={JoinSuccess.schoolImgUrl} alt="error" />
         </S.SchoolImgContainer>
         <S.SchoolInfoContainer>
-          <S.SchoolName>{workspaceName}</S.SchoolName>
-          <S.SchoolInfo>{schoolInfo}</S.SchoolInfo>
+          <S.SchoolName>{JoinSuccess.workspaceName}</S.SchoolName>
+          <S.SchoolInfo>{JoinSuccess.schoolInfo}</S.SchoolInfo>
         </S.SchoolInfoContainer>
         <S.ButtonContainer>
-          <Button onClick={handleJoinSuccess} text="계속하기" />
+          <Button onClick={JoinSuccess.handleJoinSuccess} text="계속하기" />
         </S.ButtonContainer>
       </S.Container>
     </S.SuccessMain>

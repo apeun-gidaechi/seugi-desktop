@@ -11,33 +11,27 @@ import { clearAccessToken } from "@/Api/SeugiCutomAxios";
 import useSchoolCode from '@/Hooks/Schoolcode/index';
 
 const SchoolCode = () => {
-  const {
-    token,
-    Backclick,
-    handleKeyDown,
-    handleCodeChange,
-    handleContinue
-  } = useSchoolCode();
+  const { ...SchoolCode } = useSchoolCode();
 
   return (
     <S.SchoolCodeMain>
-      <Session token={token} clearAccessToken={clearAccessToken} />
+      <Session token={SchoolCode.token} clearAccessToken={clearAccessToken} />
       <S.SchoolCode>
         <S.SchoolCodeContainer>
           <S.Header>
-            <S.BackButton onClick={Backclick}>
+            <S.BackButton onClick={SchoolCode.Backclick}>
               <S.BackImg src={Backimg} />
             </S.BackButton>
             <S.Title>학교 코드를 입력해주세요</S.Title>
           </S.Header>
           <S.InputCodeContainer>
             <CodeTextField
-              onKeyDown={handleKeyDown}
-              onChange={handleCodeChange}
+              onKeyDown={SchoolCode.handleKeyDown}
+              onChange={SchoolCode.handleCodeChange}
             />
           </S.InputCodeContainer>
           <S.ButtonContainer>
-            <Button text="계속하기" onClick={handleContinue} />
+            <Button text="계속하기" onClick={SchoolCode.handleContinue} />
           </S.ButtonContainer>
         </S.SchoolCodeContainer>
       </S.SchoolCode>
