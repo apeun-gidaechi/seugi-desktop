@@ -12,9 +12,8 @@ import Divider from '@/assets/image/profile/Divider.svg';
 import useProfile from '@/Hooks/Profile/index';
 
 const Profile = () => {
-    const {
-        ...Profile
-    } = useProfile();
+    const { ...Profile } = useProfile();
+    
     return (
         <>
             <S.MyProfileDialog>

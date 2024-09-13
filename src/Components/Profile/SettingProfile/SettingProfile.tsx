@@ -14,7 +14,7 @@ interface SettingProfileProps {
     onNameChange: (newName: string) => void;
 }
 
-const SettingProfile: React.FC<SettingProfileProps> = ({ onClose, onNameChange }) => {
+const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
     const workspaceId = window.localStorage.getItem('workspaceId');
     const token = window.localStorage.getItem('accessToken');
     const [name, setName] = useState('');
