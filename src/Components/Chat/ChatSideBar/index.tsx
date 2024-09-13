@@ -36,7 +36,7 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
   const createRoom = async (roomName: string) => {
     try {
       // Refresh the token
-      let token = await refreshToken();
+      const token = await refreshToken();
 
       if (!token) {
         throw new Error("Failed to obtain new token");
