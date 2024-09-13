@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./SchoolCode.style";
 import Button from "@/Components/Button/Button";
-import CodeTextField from "@/Components/OnBording/CodeTextField/CodeTextFeild";
+import CodeTextField from "@/Components/OnBording/CodeTextField/CodeTextField";
 
 import Backimg from "@/assets/image/Backimg.svg";
 
