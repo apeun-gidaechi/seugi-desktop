@@ -13,6 +13,7 @@ const SelectSchool = () => {
         handleJoinSchool,
         handleNewSchool,
     } = useSelectSchool();
+    
     return (
         <S.SelectschoolMain>
             <S.SelectschoolFirstWrap>
