@@ -8,7 +8,7 @@ import Backimg from "@/assets/image/Backimg.svg";
 import Session from "@/Util/TokenExpired/TokenExpired";
 import { clearAccessToken } from "@/Api/SeugiCutomAxios";
 
-import useSchoolCode from '@/Hooks/Schoolcode/index';
+import useSchoolCode from '@/Hooks/Workspace/Schoolcode/index';
 
 const SchoolCode = () => {
   const { ...SchoolCode } = useSchoolCode();

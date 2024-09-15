@@ -8,7 +8,7 @@ import { clearAccessToken } from '@/Api/SeugiCutomAxios';
 import Backimg from '@/assets/image/Backimg.svg';
 import Session from '@/Util/TokenExpired/TokenExpired';
 
-import useSelectJob from '@/Hooks/SelectJob/index';
+import useSelectJob from '@/Hooks/Workspace/SelectJob/index';
 
 const SelectingJob: React.FC = () => {
     const { ...SelectJob } = useSelectJob();

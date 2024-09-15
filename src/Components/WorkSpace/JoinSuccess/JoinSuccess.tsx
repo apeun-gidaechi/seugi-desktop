@@ -3,7 +3,7 @@ import Button from "@/Components/Button/Button";
 import * as S from "./JoinSuccess.style";
 import Backimg from "@/assets/image/Backimg.svg";
 
-import useJoinSuccess from '@/Hooks/JoinSuccess/index';
+import useJoinSuccess from '@/Hooks/Workspace/JoinSuccess/index';
 
 const JoinSuccess = () => {
   const { ...JoinSuccess } = useJoinSuccess();

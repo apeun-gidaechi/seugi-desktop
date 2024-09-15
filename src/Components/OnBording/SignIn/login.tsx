@@ -13,7 +13,7 @@ import Cloud2 from "@/assets/image/onbording/Start/LoginCloud2.svg";
 import Sun from "@/assets/image/onbording/Start/LoginSun.svg";
 import Divider from "@/assets/image/onbording/Start/Divider.svg";
 
-import useLogin from '@/Hooks/LoginHook/index';
+import useLogin from '@/Hooks/OnBording/LoginHook/index';
 
 const Login = () => {
   const { ...Login } = useLogin();
