@@ -6,7 +6,7 @@ import Button from '@/Components/Button/Button';
 import { clearAccessToken } from '@/Api/SeugiCutomAxios';
 import Session from '@/Util/TokenExpired/TokenExpired';
 
-import useWaitingJoin from '@/Hooks/WaitingJoin/index';
+import useWaitingJoin from '@/Hooks/Workspace/WaitingJoin/index';
 
 const WaitingJoin = () => {
     const { ...WaitingJoin } = useWaitingJoin();

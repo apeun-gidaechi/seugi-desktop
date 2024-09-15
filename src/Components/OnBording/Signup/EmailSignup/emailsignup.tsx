@@ -9,7 +9,7 @@ import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg';
 import Backimg from '@/assets/image/Backimg.svg';
 import Button from '@/Components/Button/Button';
 import TextField from '@/Components/common/TextField/TextField';
-import useSignup from '@/Hooks/Signuphook/index';
+import useSignup from '@/Hooks/OnBording/Signuphook/index';
 import { useNavigate } from 'react-router-dom';
 
 const emailsignup = () => {
