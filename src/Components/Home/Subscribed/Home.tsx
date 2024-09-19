@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import * as S from "@/Components/Home/Subscribed/Home.style";
 import Navbar from "@/Components/common/Navbar/Navbar";
@@ -9,31 +9,18 @@ import CatSeugi from "@/Components/Home/CatSeugi/CatSeugi";
 import Calendar from "@/Components/Home/Calendar/Calendar";
 import Notification from '@/Components/Home/Notification/Notification';
 import DailySchedule from "@/Components/Home/DailySchedule/DailySchedule";
-import { handleUserRole } from '@/Util/Role/WhatisYourRole';
 import { clearAccessToken } from "@/Api/SeugiCutomAxios";
 import Session from "@/Util/TokenExpired/TokenExpired";
 import Assignment from "../Assignment/Assignment";
 
-const Home: React.FC = () => {
-  const token = window.localStorage.getItem("accessToken");
-  const workspaceId = window.localStorage.getItem('workspaceId');
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
+import useHome from '@/Hooks/HomeHook/Home/index';
 
-  if (workspaceId !== null) {
-    handleUserRole(workspaceId);
-  } else {
-    console.error('워크스페이스가 없어요');
-  }
-
+const Home = () => {
+  const { ...Home } = useHome();
 
   return (
     <S.HomeContainer>
-      <Session token={token} clearAccessToken={clearAccessToken} />
+      <Session token={Home.token} clearAccessToken={clearAccessToken} />
       <Navbar />
       <S.HomeMain>
         <S.HomeTitle>홈</S.HomeTitle>

@@ -13,23 +13,10 @@ import Cloud2 from "@/assets/image/onbording/Start/LoginCloud2.svg";
 import Sun from "@/assets/image/onbording/Start/LoginSun.svg";
 import Divider from "@/assets/image/onbording/Start/Divider.svg";
 
-import useLogin from '@/Hooks/LoginHook/index';
+import useLogin from '@/Hooks/OnBording/LoginHook/index';
 
 const Login = () => {
-  const {
-    email,
-    password,
-    showPassword,
-    showAlert,
-    alertMessage,
-    setEmail,
-    setPassword,
-    setShowPassword,
-    handleLogin,
-    handleKeyDown,
-    handleCloseAlert,
-    handleGoogleLogin
-  } = useLogin();
+  const { ...Login } = useLogin();
 
   return (
     <S.LoginMain>
@@ -51,11 +38,11 @@ const Login = () => {
               </S.Subtitle2>
               <S.InputContainer>
                 <TextField
-                  value={email}
+                  value={Login.email}
                   type="email"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => Login.setEmail(e.target.value)}
                   placeholder="이메일을 입력해주세요"
-                  onKeyDown={handleKeyDown}
+                  onKeyDown={Login.handleKeyDown}
                   style={{ border: "none" }}
                 />
               </S.InputContainer>
@@ -66,15 +53,15 @@ const Login = () => {
               </S.Subtitle2>
               <S.InputContainer>
                 <TextField
-                  value={password}
-                  type={showPassword ? "text" : "password"}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={Login.password}
+                  type={Login.showPassword ? "text" : "password"}
+                  onChange={(e) => Login.setPassword(e.target.value)}
                   placeholder="비밀번호를 입력해주세요"
-                  onKeyDown={handleKeyDown}
+                  onKeyDown={Login.handleKeyDown}
                   style={{ border: "none" }}
                 />
-                <S.Btnview onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? (
+                <S.Btnview onClick={() => Login.setShowPassword(!Login.showPassword)}>
+                  {Login.showPassword ? (
                     <img src={hidePasswordimg} alt="숨기기" />
                   ) : (
                     <img src={showPasswordimg} alt="보이기" />
@@ -84,7 +71,7 @@ const Login = () => {
             </S.Enterinfo>
           </S.Inputpart>
           <S.Buttonpart>
-            <LoginButton text="로그인" onClick={handleLogin} />
+            <LoginButton text="로그인" onClick={Login.handleLogin} />
             <S.Body1>
               계정이 없으시다면?{" "}
               <S.Gosignup href="http://localhost:5173/emailsignup">
@@ -101,18 +88,18 @@ const Login = () => {
             <S.Authlogin>
               <S.LogoImg src={AppleLogo} />
             </S.Authlogin>
-            <S.Authlogin onClick={handleGoogleLogin}>
+            <S.Authlogin onClick={Login.handleGoogleLogin}>
               <S.LogoImg src={GoogleLogo} />
             </S.Authlogin>
           </S.Oauthpart>
         </S.Inputarea>
       </S.LoginFirstWrap>
-      {showAlert && (
+      {Login.showAlert && (
         <CustomAlert
           position=""
           titletext="로그인 에러"
-          subtext={alertMessage}
-          onClose={handleCloseAlert}
+          subtext={Login.alertMessage}
+          onClose={Login.handleCloseAlert}
         />
       )}
     </S.LoginMain>

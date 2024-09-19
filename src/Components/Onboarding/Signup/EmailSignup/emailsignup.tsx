@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import * as S from './emailsignup.style';
 import hidePasswordimg from '@/assets/image/onbording/hide_fill.svg'
 import showPasswordimg from '@/assets/image/onbording/show_fill.svg';
@@ -9,23 +9,11 @@ import Sun from '@/assets/image/onbording/oauthsignup/Sun.svg';
 import Backimg from '@/assets/image/Backimg.svg';
 import Button from '@/Components/Button/Button';
 import TextField from '@/Components/common/TextField/TextField';
-import useSignup from '@/Hooks/Signuphook/useSignup';
+import useSignup from '@/Hooks/OnBording/Signuphook/index';
 import { useNavigate } from 'react-router-dom';
 
 const emailsignup = () => {
-    const navigate = useNavigate();
     const { ...signUp } = useSignup();
-
-    useEffect(() => {
-        document.body.style.overflow = 'hidden';
-        return () => {
-            document.body.style.overflow = 'auto';
-        }
-    }, []);
-
-    const Backclick = () => {
-        navigate('/')
-    }
 
     return (
         <S.EmailMain>
@@ -35,7 +23,7 @@ const emailsignup = () => {
             <S.Sun src={Sun} />
             <S.EmailFirstWrap>
                 <S.Header>
-                    <S.BackButton onClick={Backclick}>
+                    <S.BackButton onClick={signUp.Backclick}>
                         <S.BackImg src={Backimg} />
                     </S.BackButton>
                     <S.Title1> 새 계정 만들기 </S.Title1>

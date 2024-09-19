@@ -8,61 +8,51 @@ import { clearAccessToken } from '@/Api/SeugiCutomAxios';
 import Backimg from '@/assets/image/Backimg.svg';
 import Session from '@/Util/TokenExpired/TokenExpired';
 
-import useSelectJob from '@/Hooks/SelectJob/index';
-
+import useSelectJob from '@/Hooks/Workspace/SelectJob/index';
 
 const SelectingJob: React.FC = () => {
-    const {
-        token,
-        selectedRole,
-        handleStudentClick,
-        handleTeacherClick,
-        getTextColor,
-        getBorderColor,
-        handleSelectedJob,
-        Backclick,
-    } = useSelectJob();
+    const { ...SelectJob } = useSelectJob();
 
     return (
         <S.SelectMain>
-            <Session token={token} clearAccessToken={clearAccessToken} />
+            <Session token={SelectJob.token} clearAccessToken={clearAccessToken} />
             <S.SelectFirstWrap>
-                <S.BackButton onClick={Backclick}>
+                <S.BackButton onClick={SelectJob.Backclick}>
                     <S.BackImg src={Backimg} />
                 </S.BackButton>
                 <S.Selectjob>학생인가요 선생님인가요?</S.Selectjob>
                 <S.PickContainer>
-                    <S.PickJob onClick={handleStudentClick} style={{ borderColor: getBorderColor('STUDENT') }}>
+                    <S.PickJob onClick={SelectJob.handleStudentClick} style={{ borderColor: SelectJob.getBorderColor('STUDENT') }}>
                         <S.SubtitleContainer>
                             <S.Txtstudent
                                 style={{
-                                    color: getTextColor('STUDENT'),
-                                    transform: selectedRole === 'STUDENT' ? 'translateX(-8px)' : 'translateX(0)',
+                                    color: SelectJob.getTextColor('STUDENT'),
+                                    transform: SelectJob.selectedRole === 'STUDENT' ? 'translateX(-8px)' : 'translateX(0)',
                                     transition: 'transform 0.5s ease-in-out',
                                 }}
                             >
                                 학생
                                 <S.StdCheckLine
                                     src={Checkline}
-                                    style={{ display: selectedRole === 'STUDENT' ? 'block' : 'none', marginLeft: '8px' }}
+                                    style={{ display: SelectJob.selectedRole === 'STUDENT' ? 'block' : 'none', marginLeft: '8px' }}
                                 />
                             </S.Txtstudent>
                         </S.SubtitleContainer>
                         <S.Stdimg src={Student} />
                     </S.PickJob>
-                    <S.PickJob onClick={handleTeacherClick} style={{ borderColor: getBorderColor('TEACHER') }}>
+                    <S.PickJob onClick={SelectJob.handleTeacherClick} style={{ borderColor: SelectJob.getBorderColor('TEACHER') }}>
                         <S.SubtitleContainer>
                             <S.TxtTeacher
                                 style={{
-                                    color: getTextColor('TEACHER'),
-                                    transform: selectedRole === 'TEACHER' ? 'translateX(-8px)' : 'translateX(0)',
+                                    color: SelectJob.getTextColor('TEACHER'),
+                                    transform: SelectJob.selectedRole === 'TEACHER' ? 'translateX(-8px)' : 'translateX(0)',
                                     transition: 'transform 0.5s ease-in-out',
                                 }}
                             >
                                 선생님
                                 <S.TchCheckLine
                                     src={Checkline}
-                                    style={{ display: selectedRole === 'TEACHER' ? 'block' : 'none', marginLeft: '8px' }}
+                                    style={{ display: SelectJob.selectedRole === 'TEACHER' ? 'block' : 'none', marginLeft: '8px' }}
                                 />
                             </S.TxtTeacher>
                         </S.SubtitleContainer>
@@ -70,7 +60,7 @@ const SelectingJob: React.FC = () => {
                     </S.PickJob>
                 </S.PickContainer>
                 <S.ButtonContainer>
-                    <S.OutButton onClick={handleSelectedJob}>
+                    <S.OutButton onClick={SelectJob.handleSelectedJob}>
                         <S.Button>계속하기</S.Button>
                     </S.OutButton>
                 </S.ButtonContainer>
