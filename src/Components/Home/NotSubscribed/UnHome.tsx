@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as S from '@/Components/Home/NotSubscribed/UnHome.style';
 import Navbar from '@/Components/common/Navbar/Navbar';
 import Changeschool from '@/Components/Home/ChangeSchool/ChangeSchool';
@@ -11,58 +11,21 @@ import SchoolImg from '@/assets/image/home/school.svg';
 import CafeteriaImg from '@/assets/image/home/cafeteria.svg';
 import RegisterSchool from '@/Components/Home/NotSubscribed/RegisterSchool/RegisterSchool';
 import Session from '@/Util/TokenExpired/TokenExpired';
-import { clearAccessToken, SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
-import { useNavigate } from 'react-router-dom';
+import { clearAccessToken } from '@/Api/SeugiCutomAxios';
+
+import useUnhome from '@/Hooks/HomeHook/UnHome/index';
 
 const UnHome = () => {
-    const navigate = useNavigate();
-    const [showChangeschool, setShowChangeschool] = useState(false);
-    const token = window.localStorage.getItem("accessToken");
-
-    const checkWorkspaceSubscription = async () => {
-        try {
-            const res = await SeugiCustomAxios.get('/workspace/');
-            const workspaces = res.data.data;
-            window.localStorage.setItem("workspaceId", workspaces[0].workspaceId);
-            if (workspaces.length > 0) {
-                navigate('/home');
-            }
-            return null;
-        } catch (error) {
-            console.error('워크스페이스 확인 중 오류 발생:', error);
-            return null;
-        }
-    };
-
-    useEffect(() => {
-        document.body.style.overflow = "hidden";
-
-        const intervalId = setInterval(async () => {
-            const workspaceId = await checkWorkspaceSubscription();
-            if (workspaceId) {
-                clearInterval(intervalId);
-                navigate(`/home`);
-            }
-        }, 1000);
-
-        return () => {
-            document.body.style.overflow = "auto";
-            clearInterval(intervalId);
-        };
-    }, []);
-
-    const handleOnClicked = () => {
-        setShowChangeschool(!showChangeschool);
-    };
-
+    const { ...unHome } = useUnhome();
+    
     return (
         <S.HomeContainer>
-            <Session token={token} clearAccessToken={clearAccessToken} />
+            <Session token={unHome.token} clearAccessToken={clearAccessToken} />
             <RegisterSchool />
             <Navbar />
             <S.HomeMain>
                 <S.HomeTitle>홈</S.HomeTitle>
-                {showChangeschool && <Changeschool onClose={handleOnClicked} />}
+                {unHome.showChangeschool && <Changeschool onClose={unHome.handleOnClicked} />}
                 <S.ComponentsBox>
                     <S.HomeWrapper1>
                         <S.HomeWrapper1UpContainer>

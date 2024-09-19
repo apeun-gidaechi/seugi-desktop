@@ -5,33 +5,30 @@ import JoinSchoolimg from '@/assets/image/join-school/JoinSchool.svg';
 import CreateSchoolimg from '@/assets/image/join-school/JoinSchool/RoundedCircleImage.svg';
 import Backimg from '@/assets/image/Backimg.svg'
 
-import useSelectSchool from '@/Hooks/SelectSchool/index';
+import useSelectSchool from '@/Hooks/Workspace/SelectSchool/index';
 
 const SelectSchool = () => {
-    const {
-        Backclick,
-        handleJoinSchool,
-        handleNewSchool,
-    } = useSelectSchool();
+    const { ...SelectSchool } = useSelectSchool();
+
     return (
         <S.SelectschoolMain>
             <S.SelectschoolFirstWrap>
                 <S.ContainerBox>
                     <S.TitleContainer>
-                        <S.BackButton onClick={Backclick}>
+                        <S.BackButton onClick={SelectSchool.Backclick}>
                             <S.BackImg src={Backimg} />
                         </S.BackButton>
                         <S.Title>학교 가입 또는 생성</S.Title>
                     </S.TitleContainer>
                     <S.ButtonContainer1>
                         <S.ButtonContainer>
-                            <S.Button onClick={handleJoinSchool}>
+                            <S.Button onClick={SelectSchool.handleJoinSchool}>
                                 <S.ButtonImg src={JoinSchoolimg} />
                             </S.Button>
                             <S.Subtitle> 초대 코드로 가입 </S.Subtitle>
                         </S.ButtonContainer>
                         <S.ButtonContainer>
-                            <S.Button onClick={handleNewSchool}>
+                            <S.Button onClick={SelectSchool.handleNewSchool}>
                                 <S.ButtonImg src={CreateSchoolimg} />
                             </S.Button>
                             <S.Subtitle> 새 학교 등록 </S.Subtitle>

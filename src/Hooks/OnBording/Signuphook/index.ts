@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 const useSignup = () => {
@@ -91,6 +91,17 @@ const useSignup = () => {
         }
     }
 
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = 'auto';
+        }
+    }, []);
+
+    const Backclick = () => {
+        navigate('/')
+    }
+    
     return {
         name,
         email,
@@ -107,6 +118,7 @@ const useSignup = () => {
         toggleConfirmPasswordVisibility,
         handleConfirmPasswordChange,
         handleSignup,
+        Backclick
     }
 }
 
