@@ -6,7 +6,7 @@ import Cloud1 from '@/assets/image/onbording/EmailAuthentication/cloud1.svg';
 import Cloud2 from '@/assets/image/onbording/EmailAuthentication/cloud2.svg';
 import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
 import Backimg from '@/assets/image/Backimg.svg'
-import CodeTextField from '@/Components/OnBording/CodeTextField/CodeTextField';
+import CodeTextField from '@/Components/Onboarding/CodeTextField/CodeTextField';
 import CustomAlert from '@/Components/Alert/Alert';
 
 import useAuthentication from '@/Hooks/OnBording/EmailAuthenticationHook/index';

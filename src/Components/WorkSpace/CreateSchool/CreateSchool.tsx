@@ -7,7 +7,7 @@ import PlusButtonimg from '@/assets/image/join-school/plus.svg';
 import Session from '@/Util/TokenExpired/TokenExpired';
 import { clearAccessToken } from '@/Api/SeugiCutomAxios';
 
-import useCreateSchool from '@/Hooks/CreateSchool/index';
+import useCreateSchool from '@/Hooks/Workspace/CreateSchool/index';
 
 const CreateSchool = () => {
     const { ...CreateSchool } = useCreateSchool();
