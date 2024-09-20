@@ -71,7 +71,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node) && (e.target as HTMLElement).classList.contains("avatar")) {
         setIsProfileVisible(false);
       }
     };
@@ -109,7 +109,7 @@ const Navbar = () => {
           <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
         </S.SideBarButton>
         <S.SideAvatarImgWrap>
-          <S.SideAvatarButton onClick={handleAvatarClick}>
+          <S.SideAvatarButton onClick={handleAvatarClick} className="avactar">
             <S.SideAvatarImg src={AvatarImg} />
           </S.SideAvatarButton>
         </S.SideAvatarImgWrap>
