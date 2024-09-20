@@ -7,6 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 config
+firebase
+#-----------------------
+firebase-messaging-sw.js 
+# 일단 가려놓겠습니다--------
 node_modules
 dist
 dist-ssr
