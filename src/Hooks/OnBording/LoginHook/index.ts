@@ -22,6 +22,7 @@ const index = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState<string>("");
+    const fcmToken = window.localStorage.getItem('fcmToken');
 
     const getOneWorkspaceIdAndSet = async () => {
         const token = window.localStorage.getItem("accessToken");
@@ -66,6 +67,7 @@ const index = () => {
                 {
                     email,
                     password,
+                    token: fcmToken,
                 },
                 {
                     headers: {

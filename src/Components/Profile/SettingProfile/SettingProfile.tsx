@@ -38,10 +38,20 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
         fetchProfileData();
     }, [workspaceId, token]);
 
-    const handleLogout = () => {
-        window.localStorage.removeItem('accessToken');
-        window.localStorage.removeItem('workspaceId');
-        window.location.href = '/';
+    const handleLogout = async () => {
+        const fcmToken = window.localStorage.getItem('fcmToken');
+        try{
+            await SeugiCustomAxios.post(`/member/logout`, {
+                fcmToken
+            })
+            window.localStorage.removeItem('accessToken');
+            window.localStorage.removeItem('workspaceId');
+            window.location.href = '/';
+            console.log('Delete successfully');
+        } catch (err) {
+            console.error(err);
+        }
+        
     };
 
     const handleSave = async (newName: string) => {
