@@ -71,7 +71,12 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (profileRef.current && !profileRef.current.contains(e.target as Node) && (e.target as HTMLElement).classList.contains("avatar")) {
+      const target = e.target as Node | null;
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(e.target as Node) &&
+        !(target && (target as Element).closest('.avactar')) 
+      ){
         setIsProfileVisible(false);
       }
     };
