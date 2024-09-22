@@ -26,14 +26,24 @@ const index = () => {
 
     const getOneWorkspaceIdAndSet = async () => {
         const token = window.localStorage.getItem("accessToken");
+        const lastWorkspace = window.localStorage.getItem("lastworkspace");
         const res = await axios.get(`${config.serverurl}/workspace/`, {
             headers: {
                 Authorization: `${token}`,
             },
         });
 
-        window.localStorage.setItem("workspaceId", res.data.data[0].workspaceId);
+        if (lastWorkspace) {
+            window.localStorage.setItem("workspaceId", lastWorkspace);
+        } else if (res.data.data && res.data.data.length > 0) {
+            window.localStorage.setItem("workspaceId", res.data.data[0].workspaceId);
+        } else {
+            console.error("워크스페이스를 찾을 수 없습니다.");
+            return; 
+        }
+        window.localStorage.removeItem('lastworkspace');
     };
+
 
     const importWorkspace = async () => {
         try {
