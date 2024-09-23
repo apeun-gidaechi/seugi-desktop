@@ -257,7 +257,7 @@ const Notification: React.FC = () => {
                                         <S.EditedLabel>(수정됨)</S.EditedLabel> 
                                     )} */}
                                 </S.NotificationContentAuthorSpan>
-                                <S.NotificationActionButton onClick={() => handleActionButtonClick(item.id)}>
+                                <S.NotificationActionButton onClick={() => handleActionButtonClick(item.id)} className='point'>
                                     <S.NotificationActionButtonimg src={Point} />
                                 </S.NotificationActionButton>
                             </S.NotificationContentAuthor>

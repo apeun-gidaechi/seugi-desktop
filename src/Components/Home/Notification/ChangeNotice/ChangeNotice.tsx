@@ -55,13 +55,20 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refres
     const canDelete = currentUserId === userId || userRole === 'MIDDLE_ADMIN' || userRole === 'ADMIN';
 
     const handleClickOutside = (event: MouseEvent) => {
-        if (ref.current && !ref.current.contains(event.target as Node)) {
+        const target = event.target as Node | null;
+
+        if (target instanceof Element && target.closest('.point')) {
+            return;
+        }
+
+        if (ref.current && !ref.current.contains(target)) {
             onClose();
         }
     };
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
+
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
