@@ -1,22 +1,28 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
+import config from "@/constants/config/config.json"; 
 
 const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
   const [searchText, setSearchText] = useState("");
   const [chatRooms, setChatRooms] = useState<string[]>([]);
 
-  // 서버에서 구독된 채팅방 목록을 가져오는 함수
   const fetchChatRooms = async () => {
     try {
-      const response = await fetch("https://api.example.com/chat/rooms");
-      const data = await response.json();
-      setChatRooms(data.rooms); // 서버 응답에서 채팅방 목록을 가져옴
+      const token = localStorage.getItem("accessToken"); 
+      const response = await axios.get("/chat/rooms", {
+        baseURL: config.serverurl, 
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+      setChatRooms(response.data.rooms); 
     } catch (error) {
-      console.error("Failed to fetch chat rooms:", error);
+      console.error("채팅방 목록을 불러오는데 실패했습니다:", error);
     }
   };
 
   useEffect(() => {
-    fetchChatRooms(); // 컴포넌트가 마운트될 때 채팅방 목록을 가져옴
+    fetchChatRooms(); 
   }, []);
 
   const handleSearch = async () => {
@@ -42,25 +48,27 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
         chatRoomImg: "",
       };
 
-      const response = await fetch('https://api.seugi.com/chat/personal/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "Authorization": "Bearer YOUR_TOKEN_HERE",
-        },
-        body: JSON.stringify(requestData),
-      });
+      const token = localStorage.getItem("accessToken"); 
+      const response = await axios.post(
+        "/chat/personal/create",
+        requestData,
+        {
+          baseURL: config.serverurl, 
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, 
+          },
+        }
+      );
 
-      const result = await response.text();
-
-      if (response.ok) {
+      if (response.status === 200) {
         addChatRoom(roomName);
         handleChatRoomClick(roomName);
       } else {
-        console.error(`Error creating room: ${result}`);
+        console.error(`방 생성 중 오류: ${response.data}`);
       }
     } catch (error) {
-      console.error(`An error occurred: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error(`방 생성 중 오류가 발생했습니다: ${error}`);
     }
   };
 

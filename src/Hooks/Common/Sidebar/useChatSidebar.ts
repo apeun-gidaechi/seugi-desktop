@@ -1,13 +1,33 @@
-import { useState } from "react";
-import config from "@/constants/ChatMember/config.json";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import config from "@/constants/config/config.json";
 
 const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
   const [searchText, setSearchText] = useState("");
   const [chatRooms, setChatRooms] = useState<string[]>([]);
 
+  const fetchChatRooms = async () => {
+    try {
+      const token = localStorage.getItem("accessToken"); 
+      const response = await axios.get("/chat/rooms", {
+        baseURL: config.serverurl, 
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setChatRooms(response.data.rooms); 
+    } catch (error) {
+      console.error("채팅방 목록을 불러오는데 실패했습니다:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchChatRooms(); 
+  }, []);
+
   const handleSearch = async () => {
     if (searchText.trim() !== "") {
-      const roomFound = chatRooms.includes(searchText) || config.name.includes(searchText);
+      const roomFound = chatRooms.includes(searchText);
 
       if (roomFound) {
         handleChatRoomClick(searchText);
@@ -28,30 +48,31 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
         chatRoomImg: "",
       };
 
-      const response = await fetch('https://api.seugi.com/chat/personal/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTcyNjA2NDc0NywiZXhwIjoxNzI2MDcwNzQ3fQ.UHfrc2EM-3C5efG-aQy_ROE4KwpxflrqH2nIv7qr6i8",
-        },
-        body: JSON.stringify(requestData),
-      });
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.post(
+        "/chat/personal/create",
+        requestData,
+        {
+          baseURL: config.serverurl, // config에서 기본 URL 설정
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, 
+          },
+        }
+      );
 
-      const result = await response.text();
-
-      if (response.ok) {
+      if (response.status === 200) {
         addChatRoom(roomName);
         handleChatRoomClick(roomName);
       } else {
-        console.error(`Error creating room: ${result}`);
+        console.error(`Error creating room: ${response.data}`);
       }
     } catch (error) {
-      console.error(`An error occurred: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error(`방 생성 중 오류가 발생했습니다: ${error}`);
     }
   };
 
   const addChatRoom = (roomName: string) => {
-    console.log(`Adding chat room: ${roomName}`);
     setChatRooms((prevRooms) => {
       if (!prevRooms.includes(roomName)) {
         return [...prevRooms, roomName];
@@ -60,15 +81,8 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
     });
   };
 
-  const handleChatRoomClick = (roomName: string) => {
-    onSelectChatRoom(roomName);
-    console.log(`Adding chat room: ${roomName}`);
-    setChatRooms((prevRooms) => {
-      if (!prevRooms.includes(roomName)) {
-        return [...prevRooms, roomName];
-      }
-      return prevRooms;
-    });
+  const handleChatRoomClick = (room: string) => {
+    onSelectChatRoom(room);
   };
 
   return {

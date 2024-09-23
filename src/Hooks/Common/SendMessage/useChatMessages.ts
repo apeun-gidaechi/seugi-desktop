@@ -19,18 +19,14 @@ enum MessageType {
 const useChatMessages = (chatRoom: string, currentUser: string) => {
   const [receivedMessages, setReceivedMessages] = useState<Message[]>([]);
 
-  // 구독을 통해 메시지 수신
   useEffect(() => {
-    // 소켓 연결 및 메시지 수신
     socketService.subscribeToMessages(chatRoom, handleIncomingMessage);
 
-    // 컴포넌트가 언마운트되거나 방이 바뀔 때 구독 해제
     return () => {
       socketService.unsubscribeFromMessages(chatRoom);
     };
   }, [chatRoom]);
 
-  // 수신된 메시지를 처리하는 함수
   const handleIncomingMessage = (message: string) => {
     try {
       const parsedMessage: Message = JSON.parse(message);
@@ -53,12 +49,9 @@ const useChatMessages = (chatRoom: string, currentUser: string) => {
       sender: currentUser,
     };
   
-    // 메시지 소켓을 통해 발송
     try {
-      // 세 번째 인수로 type을 추가
       socketService.sendMessage(JSON.stringify(newMessage), chatRoom, type);
       
-      // 성공적으로 전송된 메시지를 로컬 상태에 추가
       setReceivedMessages((prevMessages) => [
         ...prevMessages,
         { message: message, time: time, sender: currentUser, type: type },
