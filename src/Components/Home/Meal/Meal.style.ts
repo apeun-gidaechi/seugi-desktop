@@ -3,11 +3,7 @@ import { SeugiColor } from '@/Design/color/SeugiColor';
 import { SeugiFont } from '@/Design/text/SeugiFont';
 
 export const CafeteriaContainer = styled.div`
-  display: flex;
   padding: 12px 12px 16px 12px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
   flex: 1 0 0;
   align-self: stretch;
 
@@ -51,8 +47,8 @@ export const CafeteriaDiv = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 16px;
-
-  margin-left: 5px;
+  
+  margin:4px 0 4px 5px;
 `;
 
 export const TimeButton = styled.button`
@@ -113,4 +109,16 @@ export const NoMealMessage = styled.span`
   color:${SeugiColor.Gray700};
 
   ${SeugiFont.subtitle.subtitle2};
+`
+
+export const NoMealImg = styled.img`
+  margin-bottom:4px;
+`;
+
+export const NoMealDiv = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `

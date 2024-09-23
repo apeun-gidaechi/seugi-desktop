@@ -250,3 +250,14 @@ export const EditedLabel = styled.span`
     color : ${SeugiColor.Gray500};
     ${SeugiFont.caption.caption1};
 `
+
+export const NoNotificationDiv = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
+export const NoNotificationImg = styled.img`
+  margin-bottom:4px;
+`

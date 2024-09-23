@@ -3,11 +3,7 @@ import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 
 export const RightUpContainer = styled.div`
-  display: flex;
   padding: 12px 12px 16px 12px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
   align-self: stretch;
 
   border-radius: 12px;
@@ -111,3 +107,19 @@ export const D_DayText = styled.span`
   ${SeugiFont.caption.caption1};
 `;
 
+export const NoCalendarDiv = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
+
+export const NoCalendarImg = styled.img`
+  margin-bottom:4px;
+`
+
+export const NoCalendarText = styled.span`
+  ${SeugiFont.subtitle.subtitle2};
+  color: ${SeugiColor.Black};
+`

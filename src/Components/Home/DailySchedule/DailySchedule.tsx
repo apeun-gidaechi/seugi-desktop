@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import HomeBookImg from "@/assets/image/home/homebook.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
+import NoSchedule from '@/Assets/image/home/NoSchedule.svg';
 import * as S from '@/Components/Home/DailySchedule/DailySchedule.style';
 import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 import { SeugiColor } from '@/Design/color/SeugiColor';
@@ -128,7 +129,10 @@ const DailySchedule = () => {
                         </S.TimetableRow>
                     </>
                 ) : (
-                    <S.NoScheduleText>오늘은 수업이 없습니다.</S.NoScheduleText>
+                    <S.NoScheduleDiv>
+                        <S.NoScheduleImg src={NoSchedule}/>
+                        <S.NoScheduleText>오늘은 수업이 없습니다.</S.NoScheduleText>
+                    </S.NoScheduleDiv>
                 )}
             </S.ScheduleDivBox>
         </S.HomeWrapper1UpContainer>
