@@ -3,6 +3,7 @@ import * as S from '@/Components/Home/Calendar/Calendar.style';
 
 import CalendarImg from "@/assets/image/home/calendar.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
+import NoCalendar from '@/Assets/image/home/NoCalendar.svg';
 
 const Calendar = () => {
     return (
@@ -16,29 +17,12 @@ const Calendar = () => {
                     <S.SArrowLogo src={ArrowImg} />
                 </S.ArrowLButton>
             </S.SoonScheduleBox>
-            <S.DummyBox>
-                <S.DateDummy>
-                    <S.DateText>7/21</S.DateText>
-                    <S.DateText>7/25</S.DateText>
-                    <S.DateText>8/15</S.DateText>
-                    <S.DateText>8/15</S.DateText>
-                    <S.DateText>8/15</S.DateText>
-                </S.DateDummy>
-                <S.SubDummy>
-                    <S.SubTitle>체육대회</S.SubTitle>
-                    <S.SubTitle>기숙사 정기점호</S.SubTitle>
-                    <S.SubTitle>KBS 촬영</S.SubTitle>
-                    <S.SubTitle>KBS 촬영</S.SubTitle>
-                    <S.SubTitle>KBS 촬영</S.SubTitle>
-                </S.SubDummy>
-                <S.D_DayDummy>
-                    <S.D_DayText>D-3</S.D_DayText>
-                    <S.D_DayText>D-7</S.D_DayText>
-                    <S.D_DayText>D-21</S.D_DayText>
-                    <S.D_DayText>D-21</S.D_DayText>
-                    <S.D_DayText>D-21</S.D_DayText>
-                </S.D_DayDummy>
-            </S.DummyBox>
+            {/* 일정이 있는 경우 */}
+            {/* 일정이 없는 경우 */}
+            <S.NoCalendarDiv>
+                <S.NoCalendarImg src={NoCalendar} />
+                <S.NoCalendarText>일정이 없어요</S.NoCalendarText>
+            </S.NoCalendarDiv>
         </S.RightUpContainer>
     )
 }

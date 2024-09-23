@@ -3,6 +3,7 @@ import * as S from '@/Components/Home/Notification/Notification.style';
 import CustomAlert from '@/Components/Alert/Alert';
 import Point from '@/assets/image/home/point.svg';
 import Emoji from "@/assets/image/home/emoji.svg";
+import NoNotification from '@/Assets/image/home/NoNotification.svg';
 import NotificationImg from "@/assets/image/home/notification.svg";
 import CorrectionImg from '@/assets/image/home/Correction.svg';
 import AddEmoji from '@/Components/Home/Notification/Emoji/emojipicker';
@@ -303,7 +304,10 @@ const Notification: React.FC = () => {
                         </S.NotificationWrapper>
                     ))
                 ) : (
-                    <S.NoNotification>알림이 없습니다.</S.NoNotification>
+                    <S.NoNotificationDiv>
+                        <S.NoNotificationImg src={NoNotification} />
+                        <S.NoNotification>알림이 없습니다.</S.NoNotification>
+                    </S.NoNotificationDiv>
                 )}
             </S.NotificationBox>
         </S.LeftContainer>
