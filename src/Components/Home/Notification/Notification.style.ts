@@ -248,7 +248,9 @@ export const NotificationActionButtonimg = styled.img`
 
 export const EditedLabel = styled.span`
     color : ${SeugiColor.Gray500};
-    ${SeugiFont.caption.caption1};
+    ${SeugiFont.caption.caption2};
+
+    margin-left:4px;
 `
 
 export const NoNotificationDiv = styled.div`
