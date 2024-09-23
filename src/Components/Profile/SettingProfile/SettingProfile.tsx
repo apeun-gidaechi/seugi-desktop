@@ -50,7 +50,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
             await SeugiCustomAxios.post(`/member/logout`, {
                 fcmToken
             });
-            window.localStorage.setItem('lastworkspace', workspaceId); 
+            window.localStorage.setItem('lastworkspace', workspaceId);
             window.localStorage.removeItem('accessToken');
             window.localStorage.removeItem('workspaceId');
             window.location.href = '/';
@@ -80,6 +80,14 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
         } catch (error) {
             console.error(error);
         }
+    };
+
+    const handleServiceOperation = () => {
+        window.open("https://www.notion.so/byungjjun/5ba79e224f53439bbfa3607e581fe6bf", "_blank");
+    };
+
+    const handlePrivacyPolicy = () => {
+        window.open("https://www.notion.so/byungjjun/58f95c1209fb48b4b74434701290f838", "_blank");
     };
 
     return (
@@ -122,13 +130,13 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
                             </S.ArrowButton>
                         </S.ListItem>
                         <S.Divider src={Divider} />
-                        <S.ListItem>
+                        <S.ListItem onClick={handlePrivacyPolicy}>
                             <S.Text> 개인정보 처리 방침 </S.Text>
                             <S.ArrowButton>
                                 <S.ArrowButtonImg src={Arrow} />
                             </S.ArrowButton>
                         </S.ListItem>
-                        <S.ListItem>
+                        <S.ListItem onClick={handleServiceOperation}>
                             <S.Text> 서비스 운영 정책 </S.Text>
                             <S.ArrowButton>
                                 <S.ArrowButtonImg src={Arrow} />
