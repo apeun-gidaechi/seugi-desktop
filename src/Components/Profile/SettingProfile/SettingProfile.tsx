@@ -30,7 +30,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
                 const res = await SeugiCustomAxios.get(`/profile/me?workspaceId=${workspaceId}`);
                 console.log(res.data);
 
-                setName(res.data.data.member.name);
+                setName(res.data.data.nick);
             } catch (error) {
                 console.error('프로필 데이터를 가져오는데 실패했습니다.', error);
             }
@@ -40,19 +40,25 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
 
     const handleLogout = async () => {
         const fcmToken = window.localStorage.getItem('fcmToken');
-        try{
+
+        if (!workspaceId) {
+            console.error('워크스페이스가 없습니다.');
+            return;
+        }
+
+        try {
             await SeugiCustomAxios.post(`/member/logout`, {
                 fcmToken
-            })
+            });
+            window.localStorage.setItem('lastworkspace', workspaceId); 
             window.localStorage.removeItem('accessToken');
             window.localStorage.removeItem('workspaceId');
             window.location.href = '/';
-            console.log('Delete successfully');
         } catch (err) {
             console.error(err);
         }
-        
     };
+
 
     const handleSave = async (newName: string) => {
         try {

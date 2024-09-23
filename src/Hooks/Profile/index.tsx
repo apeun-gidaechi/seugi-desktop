@@ -23,7 +23,7 @@ const index = () => {
                 console.log(res.data);
 
                 setProfileData(res.data.data);
-                setName(res.data.data.member.name);
+                setName(res.data.data.nick);
             } catch (error) {
                 console.error('Failed to fetch profile data.', error);
             }
