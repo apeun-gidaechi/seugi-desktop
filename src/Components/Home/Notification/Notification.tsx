@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import * as S from '@/Components/Home/Notification/Notification.style';
 import CustomAlert from '@/Components/Alert/Alert';
 import Point from '@/assets/image/home/point.svg';
@@ -55,9 +55,15 @@ const Notification: React.FC = () => {
     const [isCreateNoticeVisible, setCreateNoticeVisible] = useState<boolean>(false);
     const [userRole, setUserRole] = useState<string | null>(null);
     const [showAlert, setShowAlert] = useState<boolean>(false);
+    const [changeNoticeId, setChangeNoticeId] = useState<number | null>(null);
+    const [page, setPage] = useState<number>(0); // 페이지 상태 추가
+    const [isLoading, setIsLoading] = useState<boolean>(false); // 로딩 상태
+    const [hasMore, setHasMore] = useState<boolean>(true); // 더 로드할 데이터 여부
+
     const CreateNoticeRef = useRef<HTMLDivElement>(null);
     const ChangeNoticeRef = useRef<HTMLDivElement>(null);
-    const [changeNoticeId, setChangeNoticeId] = useState<number | null>(null);
+    const observerRef = useRef<IntersectionObserver | null>(null); // 옵저버 참조
+
 
     const formattedNotifications: FormattedNotificationItem[] = useMemo(() => {
         return notifications.map((notification: NotificationItem) => {
@@ -91,12 +97,22 @@ const Notification: React.FC = () => {
         });
     }, [notifications, user]);
 
-    const getNotification = async () => {
+    const getNotifications = async () => {
+        if (isLoading || !hasMore) return; // 로딩 중이거나 더 이상 로드할 데이터가 없으면 종료
+
+        setIsLoading(true);
         try {
-            const res = await SeugiCustomAxios.get(`/notification/${workspaceId}?page=0&size=20`);
-            setNotifications(res.data.data);
+
+            const res = await SeugiCustomAxios.get(`/notification/${workspaceId}?page=${page}&size=20`);
+            const newNotifications = res.data.data;
+
+            setNotifications((prevNotifications) => [...prevNotifications, ...newNotifications]);
+            setHasMore(newNotifications.length > 0); // 더 이상 로드할 데이터가 없으면 false
+            setPage((prevPage) => prevPage + 1); // 페이지 증가
         } catch (error) {
             console.error('Failed to load notifications:', error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -106,7 +122,7 @@ const Notification: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        getNotification();
+        getNotifications();
     }, []);
 
     useEffect(() => {
@@ -217,8 +233,21 @@ const Notification: React.FC = () => {
     };
 
     const refreshNotifications = () => {
-        getNotification();
+        getNotifications();
     };
+
+    const lastNotificationRef = useCallback((node: HTMLDivElement | null) => {
+        if (isLoading) return;
+        if (observerRef.current) observerRef.current.disconnect(); // 기존 옵저버 해제
+
+        observerRef.current = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && hasMore) {
+                getNotifications(); // 페이지 끝에 도달하면 추가 데이터 로드
+            }
+        });
+
+        if (node) observerRef.current.observe(node); // 새로운 옵저버 연결
+    }, [isLoading, hasMore]);
 
     return (
         <S.LeftContainer>
@@ -251,7 +280,10 @@ const Notification: React.FC = () => {
             <S.NotificationBox>
                 {formattedNotifications.length > 0 ? (
                     formattedNotifications.map((item, parentKey) => (
-                        <S.NotificationWrapper key={item.id}>
+                        <S.NotificationWrapper
+                            key={item.id}
+                            ref={parentKey === formattedNotifications.length - 1 ? lastNotificationRef : null} // 마지막 아이템에 ref 연결
+                        >
                             <S.NotificationContentAuthor>
                                 <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)}
                                     {/* {item.createdDate !== item.lastModifiedDate && (
