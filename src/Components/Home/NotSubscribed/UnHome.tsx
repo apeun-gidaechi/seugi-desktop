@@ -14,6 +14,8 @@ import Session from '@/Util/TokenExpired/TokenExpired';
 import { clearAccessToken } from '@/Api/SeugiCutomAxios';
 
 import useUnhome from '@/Hooks/HomeHook/UnHome/index';
+import AssignmentImg from '@/assets/image/home/checkAssignment.svg';
+
 
 const UnHome = () => {
     const { ...unHome } = useUnhome();
@@ -112,6 +114,15 @@ const UnHome = () => {
                                 <S.CafeteriaDetail>학교를 등록하고 급식을 확인하세요</S.CafeteriaDetail>
                             </S.CafeteriaDiv>
                         </S.DownContainer>
+                        <S.AssignmentMain>
+                            <S.AssignmentTitleBox>
+                                <S.AssignmentImg src={AssignmentImg} />
+                                <S.AssignmentTitleText>과제</S.AssignmentTitleText>
+                            </S.AssignmentTitleBox>
+                            <S.AssignmentBox>
+                                학교를 등록하고 과제를 확인하세요
+                            </S.AssignmentBox>
+                        </S.AssignmentMain>
                     </S.HomeWrapper2>
                 </S.ComponentsBox>
             </S.HomeMain>
