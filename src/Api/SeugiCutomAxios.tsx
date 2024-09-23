@@ -1,5 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
-import config from '@/constants/config/config.json';
+
+interface Config {
+  serverurl: string;
+}
+
+import configData from '@/constants/config/config.json';
+const config = configData as Config;
 
 
 export const SeugiCustomAxios: AxiosInstance = axios.create({
