@@ -13,7 +13,6 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, re
     const [content, setContent] = useState('');
     const workspaceId = window.localStorage.getItem('workspaceId');
 
-    // 공지 불러오는 함수 (수정 모드일 때)
     const fetchNotice = async () => {
         if (notificationId) {
             console.log(notificationId);
@@ -31,11 +30,9 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, re
     };
 
     useEffect(() => {
-        // 컴포넌트가 마운트될 때 공지 데이터를 불러옴 (수정 모드인 경우)
         fetchNotice();
     }, [notificationId]);
 
-    // 공지 작성 또는 수정 함수
     const handlePostNotice = async () => {
         try {
             if (notificationId) {
@@ -45,6 +42,7 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, re
                     content,
                     id: notificationId
                 });
+
             } else {
                 // 새 공지 작성 API 호출
                 await SeugiCustomAxios.post(`/notification`, {

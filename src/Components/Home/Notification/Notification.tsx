@@ -28,10 +28,10 @@ interface NotificationItem {
     id: number;
     userName: string;
     userId: number;
-    lastModifiedDate: string;
     title: string;
     content: string;
     emoji: EmojiItem[];
+    lastModifiedDate: string;
     createdDate: string;
 }
 
@@ -233,7 +233,7 @@ const Notification: React.FC = () => {
             {showAlert && (
                 <CustomAlert
                     titletext="권한이 없습니다"
-                    subtext='선생님만 할 수 있는 작업입니다.'
+                    subtext='관리자만 할 수 있는 작업입니다.'
                     buttontext="닫기"
                     onClose={() => setShowAlert(false)}
                     position="top-right"
@@ -255,7 +255,7 @@ const Notification: React.FC = () => {
                             <S.NotificationContentAuthor>
                                 <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)}
                                     {/* {item.createdDate !== item.lastModifiedDate && (
-                                        <S.EditedLabel>(수정됨)</S.EditedLabel> 
+                                            <S.EditedLabel>(수정됨)</S.EditedLabel>
                                     )} */}
                                 </S.NotificationContentAuthorSpan>
                                 <S.NotificationActionButton onClick={() => handleActionButtonClick(item.id)} className='point'>

@@ -25,7 +25,7 @@ const DailySchedule = () => {
     const handleGetTimeTable = async () => {
         try {
             const res = await SeugiCustomAxios.get(`/timetable/day?workspaceId=${workspaceId}`);
-            console.log(res.data);
+            // console.log(res.data);
             setTimetable(res.data.data);
         } catch (error) {
             console.error("Failed to load timetable:", error);
