@@ -25,6 +25,7 @@ export const CreateSchoolContainer = styled.div`
 `
 
 export const TitleContainer = styled.div`
+    position:relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -133,11 +134,12 @@ export const PlusButton = styled.img` // 반응형......./
     align-items:center;
 
     position: absolute;
-    right: 42.5%;
-    top: 50%;
+    right: 0;
+    bottom:0;
 `
 
 export const UpLoadButtonLabel = styled.label`
+    position:relative;
     display:flex;
     flex-direction:row;
     justify-content:center;
@@ -145,6 +147,7 @@ export const UpLoadButtonLabel = styled.label`
 `
 
 export const BackButton = styled.button`
+    left:0;
     display:flex;
     flex-direction:row;
     align-items:center;
