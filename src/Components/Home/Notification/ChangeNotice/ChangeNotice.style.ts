@@ -3,6 +3,7 @@ import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 
 export const CorrectionNoticeMain = styled.div`
+    position:absolute;
     display: inline-flex;
     min-width: 220px;
     padding: 16px;
@@ -15,10 +16,9 @@ export const CorrectionNoticeMain = styled.div`
 
     box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.08);
 
-    /* position:absolute; */
     z-index:999;
 
-    /* left: 100%; */
+    right: 0;
 `
 
 export const ButtonContainer = styled.button`

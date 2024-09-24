@@ -74,6 +74,7 @@ export const NotificationBox = styled.div`
 `;
 
 export const NotificationWrapper = styled.div`
+  position:relative;
   display: flex;
   padding: 12px;
   flex-direction: column;
