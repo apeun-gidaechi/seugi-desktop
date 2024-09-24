@@ -16,7 +16,7 @@ const index = () => {
             document.body.style.overflow = "auto";
         };
     }, []);
-
+    
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -25,13 +25,8 @@ const index = () => {
     const fcmToken = window.localStorage.getItem('fcmToken');
 
     const getOneWorkspaceIdAndSet = async () => {
-        const token = window.localStorage.getItem("accessToken");
         const lastWorkspace = window.localStorage.getItem("lastworkspace");
-        const res = await axios.get(`${config.serverurl}/workspace/`, {
-            headers: {
-                Authorization: `${token}`,
-            },
-        });
+        const res = await SeugiCustomAxios.get(`${config.serverurl}/workspace/`);
 
         if (lastWorkspace) {
             window.localStorage.setItem("workspaceId", lastWorkspace);
@@ -47,12 +42,7 @@ const index = () => {
 
     const importWorkspace = async () => {
         try {
-            const token = window.localStorage.getItem("accessToken");
-            const res = await axios.get(`${config.serverurl}/workspace/`, {
-                headers: {
-                    Authorization: `${token}`,
-                },
-            });
+            const res = await SeugiCustomAxios.get(`${config.serverurl}/workspace/`);
 
             console.log(res.data.data.length);
 
@@ -106,6 +96,7 @@ const index = () => {
             console.log(error);
         }
     };
+
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
