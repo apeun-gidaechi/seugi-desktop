@@ -56,13 +56,13 @@ const Notification: React.FC = () => {
     const [userRole, setUserRole] = useState<string | null>(null);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [changeNoticeId, setChangeNoticeId] = useState<number | null>(null);
-    const [page, setPage] = useState<number>(0); // 페이지 상태 추가
-    const [isLoading, setIsLoading] = useState<boolean>(false); // 로딩 상태
-    const [hasMore, setHasMore] = useState<boolean>(true); // 더 로드할 데이터 여부
+    const [page, setPage] = useState<number>(0); 
+    const [isLoading, setIsLoading] = useState<boolean>(false); 
+    const [hasMore, setHasMore] = useState<boolean>(true); 
 
     const CreateNoticeRef = useRef<HTMLDivElement>(null);
     const ChangeNoticeRef = useRef<HTMLDivElement>(null);
-    const observerRef = useRef<IntersectionObserver | null>(null); // 옵저버 참조
+    const observerRef = useRef<IntersectionObserver | null>(null);
 
 
     const formattedNotifications: FormattedNotificationItem[] = useMemo(() => {
@@ -98,7 +98,7 @@ const Notification: React.FC = () => {
     }, [notifications, user]);
 
     const getNotifications = async () => {
-        if (isLoading || !hasMore) return; // 로딩 중이거나 더 이상 로드할 데이터가 없으면 종료
+        if (isLoading || !hasMore) return;
 
         setIsLoading(true);
         try {
@@ -107,8 +107,8 @@ const Notification: React.FC = () => {
             const newNotifications = res.data.data;
 
             setNotifications((prevNotifications) => [...prevNotifications, ...newNotifications]);
-            setHasMore(newNotifications.length > 0); // 더 이상 로드할 데이터가 없으면 false
-            setPage((prevPage) => prevPage + 1); // 페이지 증가
+            setHasMore(newNotifications.length > 0);
+            setPage((prevPage) => prevPage + 1); 
         } catch (error) {
             console.error('Failed to load notifications:', error);
         } finally {
@@ -238,15 +238,15 @@ const Notification: React.FC = () => {
 
     const lastNotificationRef = useCallback((node: HTMLDivElement | null) => {
         if (isLoading) return;
-        if (observerRef.current) observerRef.current.disconnect(); // 기존 옵저버 해제
+        if (observerRef.current) observerRef.current.disconnect(); 
 
         observerRef.current = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting && hasMore) {
-                getNotifications(); // 페이지 끝에 도달하면 추가 데이터 로드
+                getNotifications();
             }
         });
 
-        if (node) observerRef.current.observe(node); // 새로운 옵저버 연결
+        if (node) observerRef.current.observe(node);
     }, [isLoading, hasMore]);
 
     return (
@@ -282,7 +282,7 @@ const Notification: React.FC = () => {
                     formattedNotifications.map((item, parentKey) => (
                         <S.NotificationWrapper
                             key={item.id}
-                            ref={parentKey === formattedNotifications.length - 1 ? lastNotificationRef : null} // 마지막 아이템에 ref 연결
+                            ref={parentKey === formattedNotifications.length - 1 ? lastNotificationRef : null} 
                         >
                             <S.NotificationContentAuthor>
                                 <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)}
