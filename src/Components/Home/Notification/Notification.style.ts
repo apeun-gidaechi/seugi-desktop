@@ -122,6 +122,8 @@ export const NotificationContentDescription = styled.span`
 export const NotificationEmojiBox = styled.div`
   display: flex;
 
+  flex-wrap: wrap; 
+  gap: 5px;
   flex-direction: row;
 `;
 
@@ -147,6 +149,9 @@ export const NotificationEmojiWrapper = styled.div`
   position: relative;
 
   display: flex;
+  &.Clicked {
+    font-weight: bold;
+  }
 
   justify-content: center;
   align-items: center;
