@@ -56,9 +56,9 @@ const Notification: React.FC = () => {
     const [userRole, setUserRole] = useState<string | null>(null);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [changeNoticeId, setChangeNoticeId] = useState<number | null>(null);
-    const [page, setPage] = useState<number>(0); 
-    const [isLoading, setIsLoading] = useState<boolean>(false); 
-    const [hasMore, setHasMore] = useState<boolean>(true); 
+    const [page, setPage] = useState<number>(0);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [hasMore, setHasMore] = useState<boolean>(true);
 
     const CreateNoticeRef = useRef<HTMLDivElement>(null);
     const ChangeNoticeRef = useRef<HTMLDivElement>(null);
@@ -108,7 +108,7 @@ const Notification: React.FC = () => {
 
             setNotifications((prevNotifications) => [...prevNotifications, ...newNotifications]);
             setHasMore(newNotifications.length > 0);
-            setPage((prevPage) => prevPage + 1); 
+            setPage((prevPage) => prevPage + 1);
         } catch (error) {
             console.error('Failed to load notifications:', error);
         } finally {
@@ -238,7 +238,7 @@ const Notification: React.FC = () => {
 
     const lastNotificationRef = useCallback((node: HTMLDivElement | null) => {
         if (isLoading) return;
-        if (observerRef.current) observerRef.current.disconnect(); 
+        if (observerRef.current) observerRef.current.disconnect();
 
         observerRef.current = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting && hasMore) {
@@ -282,7 +282,7 @@ const Notification: React.FC = () => {
                     formattedNotifications.map((item, parentKey) => (
                         <S.NotificationWrapper
                             key={item.id}
-                            ref={parentKey === formattedNotifications.length - 1 ? lastNotificationRef : null} 
+                            ref={parentKey === formattedNotifications.length - 1 ? lastNotificationRef : null}
                         >
                             <S.NotificationContentAuthor>
                                 <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)}

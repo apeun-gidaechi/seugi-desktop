@@ -39,7 +39,7 @@ const Emoji: React.FC<AddEmojiProps> = ({ isOpened, setIsOpened, onSelect }) => 
     };
 
     return (
-        <div ref={emojiPickerRef} className="EmojiPickerContainer" style={{ position: 'absolute', bottom: '0', right: '0', zIndex: 1000 }}>
+        <div ref={emojiPickerRef} className="EmojiPickerContainer" style={{ position: 'absolute', top: '10rem', left: '0', zIndex: 999 }}>
             {isOpened && <EmojiPicker onEmojiClick={handleEmojiClick} />}
         </div>
     );
