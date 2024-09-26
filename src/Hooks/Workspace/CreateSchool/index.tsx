@@ -63,8 +63,7 @@ const index = () => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log('Image uploaded', res.data);
-            setWorkspaceImageUrl(res.data.data);
+            setWorkspaceImageUrl(res.data.data.url);
         } catch (error) {
             if (isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
