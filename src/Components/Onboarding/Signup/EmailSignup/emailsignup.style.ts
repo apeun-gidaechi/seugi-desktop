@@ -14,6 +14,7 @@ export const EmailMain = styled.div`
 `;
 
 export const EmailFirstWrap = styled.div`
+    position:relative;
     z-index:5;
     display: flex;
     width: 485px;
@@ -30,6 +31,7 @@ export const EmailFirstWrap = styled.div`
 `;
 
 export const Header = styled.div`
+    position:relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -205,16 +207,18 @@ export const Sun = styled.img`
 `
 
 export const BackButton = styled.button`
+    position:absolute;
+    
     display:flex;
     flex-direction:row;
     align-items:center;
     justify-content:center;
-    position:absolute;
+    
     border:none;
     background:none;
 
     cursor: pointer;
-    margin-right:27vw;
+    left: 0;
 
 `
 

@@ -34,6 +34,7 @@ export const AuthenticationContainer = styled.div`
 `
 
 export const TitleContainer = styled.div`
+    position:relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -225,8 +226,7 @@ export const BackButton = styled.button`
     background:none;
 
     cursor: pointer;
-    margin-right:27vw;
-
+    left:0;
 `
 
 export const BackImg = styled.img`
