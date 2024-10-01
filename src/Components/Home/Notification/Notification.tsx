@@ -12,6 +12,7 @@ import { EmojiClickData } from 'emoji-picker-react';
 import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNotice';
 import ChangeNotice from './ChangeNotice/ChangeNotice';
 import { useUserContext } from '@/Contexts/userContext';
+import { getNotification } from '@/Api/Home';
 
 interface EmojiItem {
     emoji: string;
@@ -39,7 +40,12 @@ interface FormattedNotificationItem extends NotificationItem {
     emojiDisplay: EmojiDisplayItem[];
 }
 
-const Notification: React.FC = () => {
+interface Props {
+    notifications: NotificationItem[];
+    mutateNotifications: (notifications?: NotificationItem[]) => void;
+}
+
+const Notification = ({ notifications = [], mutateNotifications}: Props) => {
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
         const year = String(date.getFullYear()).slice(2);
@@ -49,7 +55,8 @@ const Notification: React.FC = () => {
     };
     const user = useUserContext();
     const workspaceId = window.localStorage.getItem('workspaceId');
-    const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+    // const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+
     const [isEmojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
     const [activeNotification, setActiveNotification] = useState<number | null>(null);
     const [isCreateNoticeVisible, setCreateNoticeVisible] = useState<boolean>(false);
@@ -81,7 +88,7 @@ const Notification: React.FC = () => {
                 }
             });
             emojiDisplay = emojiDisplay.map((emojiItem) => {
-                const selectedEmoji = notification.emoji.find(emoji => emoji.emoji === emojiItem.emoji && user.id === emoji.userId);
+                const selectedEmoji = notification.emoji.find(emoji => emoji.emoji === emojiItem.emoji && user?.id === emoji.userId);
                 if (selectedEmoji) {
                     return {
                         ...emojiItem,
@@ -97,32 +104,31 @@ const Notification: React.FC = () => {
         });
     }, [notifications, user]);
 
-    const getNotifications = async () => {
-        if (isLoading || !hasMore) return;
+    // const getNotifications = async () => {
+    //     if (isLoading || !hasMore) return;
 
-        setIsLoading(true);
-        try {
+    //     setIsLoading(true);
+    //     try {
+    //         if (workspaceId !== null) {
+    //             const getNotice = await getNotification(workspaceId, page);
 
-            const res = await SeugiCustomAxios.get(`/notification/${workspaceId}?page=${page}&size=20`);
-            const newNotifications = res.data.data;
+    //             const newNotifications = getNotice;
 
-            setNotifications((prevNotifications) => [...prevNotifications, ...newNotifications]);
-            setHasMore(newNotifications.length > 0);
-            setPage((prevPage) => prevPage + 1);
-        } catch (error) {
-            console.error('Failed to load notifications:', error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    //             setNotifications((prevNotifications) => [...prevNotifications, ...newNotifications]);
+    //             setHasMore(newNotifications.length > 0);
+    //             setPage((prevPage) => prevPage + 1);
+    //         }
+
+    //     } catch (error) {
+    //         console.error('Failed to load notifications:', error);
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
 
     useEffect(() => {
         const role = window.localStorage.getItem('Role');
         setUserRole(role);
-    }, []);
-
-    useEffect(() => {
-        getNotifications();
     }, []);
 
     useEffect(() => {
@@ -176,22 +182,22 @@ const Notification: React.FC = () => {
                 if (index !== parentKey) {
                     return notification;
                 }
-                const existingEmoji = notification.emoji.find(emojiItem => emojiItem.userId === user.id && emojiItem.emoji === emoji.emoji);
+                const existingEmoji = notification.emoji.find(emojiItem => emojiItem.userId === user?.id && emojiItem.emoji === emoji.emoji);
                 return {
                     ...notification,
                     emoji: existingEmoji
-                        ? notification.emoji.filter(emojiItem => emojiItem.userId !== user.id || emojiItem.emoji !== emoji.emoji)
-                        : notification.emoji.concat({ emoji: emoji.emoji, userId: user.id }),
+                        ? notification.emoji.filter(emojiItem => emojiItem.userId !== user?.id || emojiItem.emoji !== emoji.emoji)
+                        : notification.emoji.concat({ emoji: emoji.emoji, userId: user?.id ?? 0 }),
                 }
             });
-            setNotifications(updatedNotifications);
+            mutateNotifications(updatedNotifications);
             await SeugiCustomAxios.patch(`/notification/emoji`, {
                 notificationId: notifications[parentKey].id,
                 emoji: emoji.emoji,
             });
         } catch (error) {
             console.error(error);
-            setNotifications(notifications);
+            mutateNotifications(notifications);
         }
     };
 
@@ -204,16 +210,16 @@ const Notification: React.FC = () => {
                     if (index !== activeNotification) {
                         return notification;
                     }
-                    const existingEmoji = notification.emoji.find(emojiItem => emojiItem.userId === user.id && emojiItem.emoji === emoji.emoji);
+                    const existingEmoji = notification.emoji.find(emojiItem => emojiItem.userId === user?.id && emojiItem.emoji === emoji.emoji);
                     return {
                         ...notification,
                         emoji: existingEmoji
-                            ? notification.emoji.filter(emojiItem => emojiItem.userId !== user.id || emojiItem.emoji !== emoji.emoji)
-                            : notification.emoji.concat({ emoji: emoji.emoji, userId: user.id }),
+                            ? notification.emoji.filter(emojiItem => emojiItem.userId !== user?.id || emojiItem.emoji !== emoji.emoji)
+                            : notification.emoji.concat({ emoji: emoji.emoji, userId: user?.id ?? 0 }),
                     }
                 });
 
-                setNotifications(updatedNotifications);
+                mutateNotifications(updatedNotifications);
                 await SeugiCustomAxios.patch(`/notification/emoji`, {
                     notificationId: notification.id,
                     emoji: emoji.emoji,
@@ -221,7 +227,7 @@ const Notification: React.FC = () => {
             }
         } catch (error) {
             console.error(error);
-            setNotifications(notifications);
+            mutateNotifications(notifications);
         } finally {
             setEmojiPickerVisible(false);
             setActiveNotification(null);
@@ -232,22 +238,18 @@ const Notification: React.FC = () => {
         setChangeNoticeId(prev => (prev === notificationId ? null : notificationId));
     };
 
-    const refreshNotifications = () => {
-        getNotifications();
-    };
+    // const lastNotificationRef = useCallback((node: HTMLDivElement | null) => {
+    //     if (isLoading) return;
+    //     if (observerRef.current) observerRef.current.disconnect();
 
-    const lastNotificationRef = useCallback((node: HTMLDivElement | null) => {
-        if (isLoading) return;
-        if (observerRef.current) observerRef.current.disconnect();
+    //     observerRef.current = new IntersectionObserver((entries) => {
+    //         if (entries[0].isIntersecting && hasMore) {
+    //             getNotifications();
+    //         }
+    //     });
 
-        observerRef.current = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && hasMore) {
-                getNotifications();
-            }
-        });
-
-        if (node) observerRef.current.observe(node);
-    }, [isLoading, hasMore]);
+    //     if (node) observerRef.current.observe(node);
+    // }, [isLoading, hasMore]);
 
     return (
         <S.LeftContainer>
@@ -255,7 +257,7 @@ const Notification: React.FC = () => {
                 <div ref={CreateNoticeRef}>
                     <CreateNotice
                         onClose={() => setCreateNoticeVisible(false)}
-                        refreshNotifications={refreshNotifications}
+                        mutateNotifications={mutateNotifications}
                     />
                 </div>
             )}
@@ -282,7 +284,7 @@ const Notification: React.FC = () => {
                     formattedNotifications.map((item, parentKey) => (
                         <S.NotificationWrapper
                             key={item.id}
-                            ref={parentKey === formattedNotifications.length - 1 ? lastNotificationRef : null}
+                            // ref={parentKey === formattedNotifications.length - 1 ? lastNotificationRef : null}
                         >
                             <S.NotificationContentAuthor>
                                 <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)}
@@ -330,7 +332,7 @@ const Notification: React.FC = () => {
                                     onClose={() => handleActionButtonClick(item.id)}
                                     notificationId={item.id}
                                     userId={item.userId}
-                                    refreshNotifications={refreshNotifications}
+                                    mutateNotifications={mutateNotifications}
                                 />
                             )}
                         </S.NotificationWrapper>

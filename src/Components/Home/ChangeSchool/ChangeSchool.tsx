@@ -6,13 +6,32 @@ import Arrow from "@/assets/image/home/arrow.svg";
 import { getMyWaitingWorkspace, getMyWorkspaces } from "@/Api/workspace";
 import { paths } from "@/Constants/paths";
 
-interface Props {
-  onClose: () => void;
+interface workspaceItem {
+  workspaceId: string;
+  workspaceName: string;
+  workspaceImageUrl: string;
+  workspaceAdmin: number
+  middleAdmin: number[];
+  teacher: number[];
+  student: number[];
 }
 
-const Changeschool = ({ onClose }: Props) => {
-  const [subscribedSchools, setSubSchools] = useState<any[]>([]);
-  const [pendingSchools, setPenSchools] = useState<any[]>([]);
+interface pendingWorkspaceItem {
+  workspaceId: string;
+  workspaceName: string
+  workspaceImageUrl: string;
+  studentCount: string;
+  teacherCount: string;
+}
+interface Props {
+  onClose: () => void;
+  workspaces: workspaceItem[];
+  pendingWorkspaces: pendingWorkspaceItem[];
+}
+
+const Changeschool = ({ onClose, workspaces = [], pendingWorkspaces= [] }: Props) => {
+  // const [subscribedSchools, setSubSchools] = useState<any[]>([]);
+  // const [pendingSchools, setPenSchools] = useState<any[]>([]);
 
   const navigate = useNavigate();
 
@@ -24,38 +43,38 @@ const Changeschool = ({ onClose }: Props) => {
     navigate(paths.schoolcode);
   };
 
-  const setSubscribedSchools = async () => {
-    const workspaces = await getMyWorkspaces();
+  // const setSubscribedSchools = async () => {
+  //   const workspaces = await getMyWorkspaces();
 
-    setSubSchools(workspaces);
-  };
+  //   setSubSchools(workspaces);
+  // };
 
-  const setPendingSchools = async () => {
-    const pending = await getMyWaitingWorkspace();
+  // const setPendingSchools = async () => {
+  //   const pending = await getMyWaitingWorkspace();
 
-    setPenSchools(pending);
-  };
+  //   setPenSchools(pending);
+  // };
 
   const handleArrowClick = (workspaceId: string) => {
     window.localStorage.setItem("workspaceId", workspaceId);
     window.location.reload();
   };
 
-  useEffect(() => {
-    setSubscribedSchools();
-    setPendingSchools();
-  }, []);
+  // useEffect(() => {
+  //   setSubscribedSchools();
+  //   setPendingSchools();
+  // }, []);
 
   return (
     <div onClick={onClose}>
       <S.ChangeSchoolMain>
-        {subscribedSchools.length === 0 ? (
+        {workspaces.length === 0 ? (
           <S.NoSubscribedSchools>
             <S.NoSubSchoolText>가입된 학교가 없습니다.</S.NoSubSchoolText>
             <S.CreateSchool onClick={goCreateSchool}>새 학교 가입</S.CreateSchool>
           </S.NoSubscribedSchools>
         ) : (
-          subscribedSchools.map((school, index) => (
+          workspaces.map((school, index) => (
             <S.Subscribed key={index}>
               <S.JoinSchoolBox onClick={() => handleArrowClick(school.workspaceId)}>
                 <S.SchoolName>{school.workspaceName}</S.SchoolName>
@@ -67,10 +86,10 @@ const Changeschool = ({ onClose }: Props) => {
           ))
         )}
 
-        {pendingSchools.length > 0 && (
+        {pendingWorkspaces.length > 0 && (
           <S.PendingSchool>
             <S.WaitingJoin>가입 대기 중</S.WaitingJoin>
-            {pendingSchools.map((school, index) => (
+            {pendingWorkspaces.map((school, index) => (
               <S.Subscribed key={index}>
                 <S.PendingSchoolBox>
                   <S.SchoolName>{school.workspaceName}</S.SchoolName>

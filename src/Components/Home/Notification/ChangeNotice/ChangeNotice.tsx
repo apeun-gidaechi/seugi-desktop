@@ -9,10 +9,10 @@ interface Props {
     onClose: () => void;
     notificationId: number;
     userId: number;
-    refreshNotifications: () => void;
+    mutateNotifications: () => void;
 }
 
-const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refreshNotifications }) => {
+const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutateNotifications }) => {
     const [currentUserId, setCurrentUserId] = useState<number | undefined>(undefined);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [editMode, setEditMode] = useState<boolean>(false);
@@ -50,7 +50,7 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refres
         try {
             await SeugiCustomAxios.delete(`/notification/${workspaceId}/${notificationId}`);
             handleGetNoticeId();
-            refreshNotifications();
+            mutateNotifications();
         } catch (error) {
             console.error('Delete Error', error);
         }
@@ -84,7 +84,7 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refres
                 <CreateNotice
                     notificationId={notificationId}
                     onClose={onClose}
-                    refreshNotifications={refreshNotifications}
+                    mutateNotifications={mutateNotifications}
                 />
             ) : (
                 <S.CorrectionNoticeMain ref={ref}>

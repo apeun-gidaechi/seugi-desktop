@@ -6,10 +6,10 @@ import { fetchingNotice } from '@/Api/Home';
 interface CreateNoticeProps {
     onClose: () => void;
     notificationId?: number;
-    refreshNotifications: () => void;
+    mutateNotifications: () => void;
 }
 
-const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, refreshNotifications }) => {
+const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, mutateNotifications }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const workspaceId = window.localStorage.getItem('workspaceId');
@@ -54,7 +54,7 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, re
                     workspaceId
                 });
             }
-            refreshNotifications();
+            mutateNotifications();
             onClose();
         } catch (error) {
             console.error("Error posting notice:", error);
