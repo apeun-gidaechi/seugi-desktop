@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from '@/Components/Home/Meal/Meal.style';
 
 import CafeteriaImg from "@/assets/image/home/cafeteria.svg";
 import ArrowImg from "@/assets/image/home/arrow.svg";
 
 import NoMeal from '@/Assets/image/home/NoMeal.svg';
-import useMeal from '@/Hooks/HomeHook/Meal/index';
 
-const Meal = () => {
-    const { Menu, Calorie, selectedMeal, handleMealChange } = useMeal();
+interface MenuProps {
+    id: number;
+    workspaceId: string;
+    mealType: string;
+    menu: string[];
+    calorie: string;
+    mealInfo: string[];
+    mealDate: string;
+}
+
+interface Props {
+    todayMenu: MenuProps[];
+}
+
+const Meal = ({ todayMenu }: Props) => {
+    const today = new Date();
+    const hour = today.getHours();
+    const minute = today.getMinutes();
+    const [selectedMeal, setSelectedMeal] = useState(() => {
+        if (hour < 8 || (hour === 8 && minute <= 20)) {
+            return 0;
+        }
+        else if ((hour === 8 && minute >= 21) || (hour > 8 && hour < 13) || (hour === 13 && minute <= 30)) {
+            return 1;
+        }
+        else if ((hour === 13 && minute >= 31) || (hour > 13 && hour < 23) || (hour === 23 && minute <= 5)) {
+            return 2;
+        } else {
+            return 3;
+        }
+    });
+
+    const handleMealChange = (mealIndex: number) => {
+        setSelectedMeal(mealIndex);
+    };
 
     return (
         <S.CafeteriaContainer>
@@ -22,7 +54,7 @@ const Meal = () => {
                 </S.ArrowLButton> */}
             </S.CafeteriaTitleBox>
 
-            {Menu && Menu.length > 0 ? (
+            {todayMenu && todayMenu.length > 0 ? (
                 <>
                     <S.CafeteriaDiv>
                         <S.TimeButton onClick={() => handleMealChange(0)}>
@@ -52,11 +84,11 @@ const Meal = () => {
                     </S.CafeteriaDiv>
 
                     <S.MenuList>
-                        {Menu.map((item, index) => (
+                        {todayMenu?.[selectedMeal]?.menu.map((item, index) => (
                             <S.Menu key={index}>{item}</S.Menu>
-                        ))}
+                        ))} 
                         <S.CalorieDiv>
-                            <S.CalorieText>{Calorie}</S.CalorieText>
+                            <S.CalorieText>{todayMenu?.[selectedMeal]?.calorie}</S.CalorieText>
                         </S.CalorieDiv>
                     </S.MenuList>
                 </>

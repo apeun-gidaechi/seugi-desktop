@@ -5,14 +5,37 @@ import Changeschool from '@/Components/Home/ChangeSchool/ChangeSchool';
 
 import useSchools from '@/Hooks/HomeHook/Schools/index';
 
-const Schools = () => {
+interface workspaceItem {
+    workspaceId: string;
+    workspaceName: string;
+    workspaceImageUrl: string;
+    workspaceAdmin: number
+    middleAdmin: number[];
+    teacher: number[];
+    student: number[];
+}
+
+interface pendingWorkspaceItem {
+    workspaceId: string;
+    workspaceName: string
+    workspaceImageUrl: string;
+    studentCount: string;
+    teacherCount: string;
+}
+
+interface Props {
+    workspaces: workspaceItem[];
+    pendingWorkspaces: pendingWorkspaceItem[];
+}
+
+const Schools = ({ workspaces, pendingWorkspaces }:Props) => {
     const { ...Schools } = useSchools();
     
     return (
         <S.UpContainer>
             {Schools.showChangeschool && (
                 <div ref={Schools.ChangeSchoolRef}>
-                    <Changeschool onClose={Schools.handleOnClicked} />
+                    <Changeschool onClose={Schools.handleOnClicked} workspaces={workspaces} pendingWorkspaces={pendingWorkspaces}/>
                 </div>
             )}
             <S.SchoolTitleBox>
