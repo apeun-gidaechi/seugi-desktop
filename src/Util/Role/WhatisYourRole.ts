@@ -1,3 +1,4 @@
+import { fetchingProfile } from "@/Api/profile";
 import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 
 enum Role {
@@ -13,9 +14,7 @@ interface User {
 
 const fetchUser = async (workspaceId: string): Promise<User | undefined> => {
     try {
-        const res = await SeugiCustomAxios.get(`/profile/me`, {
-            params: { workspaceId }
-        });
+        const res = await fetchingProfile(workspaceId);
 
         const data = res.data.data.permission;
         console.log(data);

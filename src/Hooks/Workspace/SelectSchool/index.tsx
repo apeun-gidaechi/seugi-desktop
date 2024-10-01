@@ -1,16 +1,17 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { paths } from '@/Constants/paths';
 
 const index = () => {
     const navigate = useNavigate();
     const handleJoinSchool = () => {
-        navigate('/schoolcode')
+        navigate(paths.schoolcode);
     }
     const handleNewSchool = () => {
-        navigate('/createschool')
+        navigate(paths.createschool)
     }
     const Backclick = () => {
-        navigate('/home')
+        navigate(paths.home)
     }
     return {
         handleJoinSchool,

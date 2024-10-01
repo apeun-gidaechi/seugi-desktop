@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { paths } from '@/Constants/paths';
 
 const useSignup = () => {
     const navigate = useNavigate();
@@ -81,7 +82,7 @@ const useSignup = () => {
         setErrors(newErrors);
 
         if (!newErrors.name && !newErrors.email && !newErrors.password && !newErrors.confirmPassword) {
-            navigate('/emailauthentication', { state: { name, email, password } });
+            navigate(paths.auth, { state: { name, email, password } });
         }
     };
 
@@ -99,7 +100,7 @@ const useSignup = () => {
     }, []);
 
     const Backclick = () => {
-        navigate('/')
+        navigate(paths.login)
     }
     
     return {

@@ -4,7 +4,6 @@ import SchoolCode from '@/Pages/Workspace/Schoolcode/SchoolCodePage';
 import JoinSuccess from '@/Pages/Workspace/JoinSuccess/JoinSuccessPage';
 import Login from '@/Pages/OnBording/Login/LoginPage';
 import Selectingjob from '@/Pages/Workspace/Selectjob/SelectJobPage';
-import ChatMain from '@/Pages/chat/chat'
 import Emailsignup from '@/Pages/OnBording/EmailSignUp/EmailSignUpPage';
 import CreateSchool from '@/Pages/Workspace/CreateSchool/CreateSchoolPage';
 import Authentication from '@/Pages/OnBording/EmailAuthentication/EmailAuthenticationPage';
@@ -15,25 +14,28 @@ import GroupChat from '@/Pages/GroupChat/index'
 import UnHome from '@/Components/Home/NotSubscribed/UnHome';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { paths } from '@/Constants/paths';
+import Shell from './Shell/Shell';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/selectjob" element={<Selectingjob />} />
-        <Route path="/chat" element={<ChatMain />} />
-        <Route path="/emailsignup" element={<Emailsignup />} />
-        <Route path="/selectschool" element={<SelectSchool />} />
-        <Route path="/schoolcode" element={<SchoolCode />} />
-        <Route path="/joinsuccess" element={<JoinSuccess />} />
-        <Route path="/createschool" element={<CreateSchool />} />
-        <Route path="/emailauthentication" element={<Authentication />} />
-        <Route path="/waitingjoin" element={<WaitingJoin />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/Chat" element={<Chat />} />
-        <Route path="/GroupChat" element={<GroupChat />} />
-        <Route path="/unhome" element={<UnHome />} />
+        <Route path={paths.login} element={<Login />} />
+        <Route path={paths.signup} element={<Emailsignup />} />
+        <Route path={paths.auth} element={<Authentication />} />
+        <Route path={paths.selectjob} element={<Selectingjob />} />
+        <Route path={paths.schoolcode} element={<SchoolCode />} />
+        <Route path={paths.joinsuccess} element={<JoinSuccess />} />
+        <Route path={paths.selectschool} element={<SelectSchool />} />
+        <Route path={paths.createschool} element={<CreateSchool />} />
+        <Route path={paths.waitingjoin} element={<WaitingJoin />} />
+        <Route path="/" element={<Shell />}>
+          <Route path={paths.home} element={<Home />} />
+          <Route path={paths.chat} element={<Chat />} />
+          <Route path={paths.GroupChat} element={<GroupChat />} />
+          <Route path="/unhome" element={<UnHome />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

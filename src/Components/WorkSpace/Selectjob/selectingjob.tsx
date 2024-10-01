@@ -6,7 +6,6 @@ import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
 import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
 import { clearAccessToken } from '@/Api/SeugiCutomAxios';
 import Backimg from '@/assets/image/Backimg.svg';
-import Session from '@/Util/TokenExpired/TokenExpired';
 
 import useSelectJob from '@/Hooks/Workspace/SelectJob/index';
 
@@ -15,7 +14,6 @@ const SelectingJob: React.FC = () => {
 
     return (
         <S.SelectMain>
-            <Session token={SelectJob.token} clearAccessToken={clearAccessToken} />
             <S.SelectFirstWrap>
                 <S.BackButton onClick={SelectJob.Backclick}>
                     <S.BackImg src={Backimg} />

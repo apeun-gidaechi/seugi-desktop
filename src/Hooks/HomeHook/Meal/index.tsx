@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { getMenus } from '@/Api/Home';
 
 const index = () => {
     const today = new Date();
@@ -29,11 +30,13 @@ const index = () => {
 
     const getMenu = async (mealIndex: number) => {
         try {
-            const res = await SeugiCustomAxios.get(`/meal?workspaceId=${workspaceId}&date=${date}`);
-            const mealData = res.data.data[mealIndex];
-            setMenu(mealData.menu || []);
-            setMealType(mealData.mealType || '');
-            setCalorie(mealData.calorie || '');
+            if (workspaceId !== null) {
+                const menus = await getMenus(workspaceId, date);
+                const mealData = menus[mealIndex];
+                setMenu(mealData.menu || []);
+                setMealType(mealData.mealType || '');
+                setCalorie(mealData.calorie || '');
+            }
         } catch (error) {
             console.error("Error fetching menu:", error);
             setMenu([]);

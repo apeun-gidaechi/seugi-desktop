@@ -8,6 +8,7 @@ import ProfileImg from '@/assets/image/profile/settingprofile.svg';
 import CorrectionImg from '@/assets/image/profile/CorrectionImg.svg';
 import Arrow from '@/assets/image/profile/arrow.svg';
 import Divider from '@/assets/image/profile/ProflieDivider.svg';
+import { fetchingProfile } from '@/Api/profile';
 
 interface SettingProfileProps {
     onClose: () => void;
@@ -27,10 +28,11 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                const res = await SeugiCustomAxios.get(`/profile/me?workspaceId=${workspaceId}`);
-                console.log(res.data);
+                if (workspaceId !== null) {
+                    const profileRes = await fetchingProfile(workspaceId);
 
-                setName(res.data.data.nick);
+                    setName(profileRes.nick);
+                }
             } catch (error) {
                 console.error('프로필 데이터를 가져오는데 실패했습니다.', error);
             }
@@ -53,7 +55,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
             window.localStorage.setItem('lastworkspace', workspaceId);
             window.localStorage.removeItem('accessToken');
             window.localStorage.removeItem('workspaceId');
-            window.location.href = '/';
+            window.location.href = '/login';
         } catch (err) {
             console.error(err);
         }
@@ -76,7 +78,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
         try {
             await SeugiCustomAxios.delete(`/member/remove`);
             localStorage.clear();
-            window.location.href = '/';
+            window.location.href = '/login';
         } catch (error) {
             console.error(error);
         }

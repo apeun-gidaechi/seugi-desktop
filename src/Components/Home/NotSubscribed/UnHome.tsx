@@ -10,9 +10,6 @@ import SeugiImg from '@/assets/image/onbording/Start/seugilogo.svg';
 import SchoolImg from '@/assets/image/home/school.svg';
 import CafeteriaImg from '@/assets/image/home/cafeteria.svg';
 import RegisterSchool from '@/Components/Home/NotSubscribed/RegisterSchool/RegisterSchool';
-import Session from '@/Util/TokenExpired/TokenExpired';
-import { clearAccessToken } from '@/Api/SeugiCutomAxios';
-
 import useUnhome from '@/Hooks/HomeHook/UnHome/index';
 import AssignmentImg from '@/assets/image/home/checkAssignment.svg';
 
@@ -22,7 +19,6 @@ const UnHome = () => {
     
     return (
         <S.HomeContainer>
-            <Session token={unHome.token} clearAccessToken={clearAccessToken} />
             <RegisterSchool />
             <Navbar />
             <S.HomeMain>

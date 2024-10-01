@@ -3,6 +3,7 @@ import * as S from '@/Components/Home/Notification/ChangeNotice/ChangeNotice.sty
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import AlertContainer from '@/Components/Alert/Alert';
 import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNotice';
+import { getNoticeId } from '@/Api/Home';
 
 interface Props {
     onClose: () => void;
@@ -22,12 +23,15 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refres
 
     const handleGetNoticeId = async () => {
         try {
-            const res = await SeugiCustomAxios.get(`notification/${workspaceId}`);
-            const notification = res.data.data.find((item: any) => item.id === notificationId);
+            if (workspaceId !== null) {
+                const NoticeIds = await getNoticeId(workspaceId);
+                const notification = NoticeIds.find((item: any) => item.id === notificationId);
 
-            if (notification) {
-                setCurrentUserId(notification.userId);
+                if (notification) {
+                    setCurrentUserId(notification.userId);
+                }
             }
+
         } catch (error) {
             console.error('Failed to fetch notification data', error);
         }

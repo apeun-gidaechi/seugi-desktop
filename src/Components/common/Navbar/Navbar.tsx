@@ -10,6 +10,7 @@ import SelectChat from "@/assets/image/sidebar/selectchat.svg";
 import SelectChats from "@/assets/image/sidebar/selectgroup.svg";
 import Profile from "@/Components/Profile/Profile";
 import React, { useEffect, useRef, useState } from "react";
+import { paths } from '@/Constants/paths';
 
 type SelectedButton = "home" | "chat" | "chats" | null;
 
@@ -26,7 +27,7 @@ const Navbar = () => {
   useEffect(() => {
     // 현재 경로에 따라 selected 상태를 설정
     const pathMap: { [key: string]: SelectedButton } = {
-      "/home": "home",
+      "/": "home",
       "/chat": "chat",
       "/groupchat": "chats",
     };
@@ -50,9 +51,9 @@ const Navbar = () => {
     }
     if (selected) {
       const pathMap = {
-        home: "/home",
-        chat: "/chat",
-        chats: "/groupchat",
+        home: paths.home,
+        chat: paths.chat,
+        chats: paths.GroupChat,
       };
       navigate(pathMap[selected]);
     }

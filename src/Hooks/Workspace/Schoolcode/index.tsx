@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
+import { getWorkspaceCode } from '@/Api/workspace';
+import { paths } from '@/Constants/paths';
 
 const index = () => {
     const navigate = useNavigate();
@@ -18,9 +19,8 @@ const index = () => {
         const verificationCode = code.join("");
 
         try {
-            const res = await SeugiCustomAxios.get(`/workspace?code=${verificationCode}`);
-            console.log("Code sent successfully:", res.data);
-            navigate("/joinsuccess", { state: { verificationCode } });
+            await getWorkspaceCode(verificationCode);
+            navigate(paths.joinsuccess, { state: { verificationCode } });
         } catch (error) {
             console.error("Error sending code:", error);
         }
@@ -37,7 +37,7 @@ const index = () => {
     };
 
     const Backclick = () => {
-        navigate("/selectschool");
+        navigate(paths.selectschool);
     };
     return {
         token,

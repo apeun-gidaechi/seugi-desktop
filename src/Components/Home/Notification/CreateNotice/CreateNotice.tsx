@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '@/Components/Home/Notification/CreateNotice/CreateNotice.style';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { fetchingNotice } from '@/Api/Home';
 
 interface CreateNoticeProps {
     onClose: () => void;
@@ -17,11 +18,13 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, re
         if (notificationId) {
             console.log(notificationId);
             try {
-                const res = await SeugiCustomAxios.get(`/notification/${workspaceId}`);
-                const notice = res.data.data.find((item: any) => item.id === notificationId);
-                if (notice) {
-                    setTitle(notice.title);
-                    setContent(notice.content);
+                if (workspaceId !== null) {
+                    const fetching = await fetchingNotice(workspaceId);
+                    const notice = fetching.find((item: any) => item.id === notificationId);
+                    if (notice) {
+                        setTitle(notice.title);
+                        setContent(notice.content);
+                    }
                 }
             } catch (error) {
                 console.error("Error fetching notice:", error);
