@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { clearAccessToken, SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
+import { getMyWorkspaces } from '@/Api/workspace';
+import { paths } from '@/Constants/paths';
 
 const index = () => {
     const navigate = useNavigate();
@@ -25,19 +27,18 @@ const index = () => {
         }
 
         try {
-            const res = await SeugiCustomAxios.get(`/workspace/`);
-            console.log(res);
+            const myWorkspace = await getMyWorkspaces();
 
-            if (res.data.data.length > 0) {
-                navigate('/home');
+            if (myWorkspace.length > 0) {
+                navigate(paths.home);
             } else {
-                navigate('/unhome');
+                navigate(paths.unhome);
             }
         } catch (error) {
             if (isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
                     clearAccessToken();
-                    navigate('/');
+                    navigate(paths.login);
                 } else {
                     console.error('Error sending code:', error.response?.data);
                 }
@@ -68,7 +69,7 @@ const index = () => {
             if (isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
                     clearAccessToken();
-                    navigate('/');
+                    navigate(paths.login);
                 } else {
                     console.error('Error uploading image:', error.response?.data);
                 }
@@ -83,7 +84,7 @@ const index = () => {
     };
 
     const Backclick = () => {
-        navigate('/selectschool');
+        navigate(paths.selectschool);
     };
 
     return {

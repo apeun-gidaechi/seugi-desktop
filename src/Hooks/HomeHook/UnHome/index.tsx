@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { getMyWorkspaces } from '@/Api/workspace';
+import { paths } from '@/Constants/paths';
 
 const index = () => {
     const navigate = useNavigate();
@@ -9,11 +10,11 @@ const index = () => {
 
     const checkWorkspaceSubscription = async () => {
         try {
-            const res = await SeugiCustomAxios.get('/workspace/');
-            const workspaces = res.data.data;
+            const checkWorkspaces = await getMyWorkspaces();
+            const workspaces = checkWorkspaces;
             window.localStorage.setItem("workspaceId", workspaces[0].workspaceId);
             if (workspaces.length > 0) {
-                navigate('/home');
+                navigate(paths.home);
             }
             return null;
         } catch (error) {
@@ -44,11 +45,11 @@ const index = () => {
     };
 
     const handleCreate = () => {
-        navigate('/createschool');
+        navigate(paths.createschool);
     }
 
     const handleJoin = () => {
-        navigate('/schoolcode ');
+        navigate(paths.schoolcode);
     }
 
     return {

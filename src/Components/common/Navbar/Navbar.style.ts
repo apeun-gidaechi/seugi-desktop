@@ -2,7 +2,7 @@ import styled from "styled-components";
 import SelectBar from "@/assets/image/sidebar/selectsidebar.svg";
 
 export const SideBarMenu = styled.div`
-  position: absolute;
+  position: relative;
   display: flex;
   width: 80px;
   height: 100vh; /* 화면 높이에 맞추기 */

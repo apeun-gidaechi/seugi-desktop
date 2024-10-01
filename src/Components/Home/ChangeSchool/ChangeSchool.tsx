@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 
 import * as S from "./ChangeSchool.style";
 import Arrow from "@/assets/image/home/arrow.svg";
-import config from '@/constants/config/config.json';
+import { getMyWaitingWorkspace, getMyWorkspaces } from "@/Api/workspace";
+import { paths } from "@/Constants/paths";
 
 interface Props {
   onClose: () => void;
@@ -17,23 +17,23 @@ const Changeschool = ({ onClose }: Props) => {
   const navigate = useNavigate();
 
   const goCreateSchool = () => {
-    navigate("/createschool");
+    navigate(paths.createschool);
   };
 
   const goJoinSchool = () => {
-    navigate("/schoolcode");
+    navigate(paths.schoolcode);
   };
 
   const setSubscribedSchools = async () => {
-    const res = await SeugiCustomAxios.get(`/workspace/`);
+    const workspaces = await getMyWorkspaces();
 
-    setSubSchools(res.data.data);
+    setSubSchools(workspaces);
   };
 
   const setPendingSchools = async () => {
-    const pending = await SeugiCustomAxios.get(`/workspace/my/wait-list`);
+    const pending = await getMyWaitingWorkspace();
 
-    setPenSchools(pending.data.data);
+    setPenSchools(pending);
   };
 
   const handleArrowClick = (workspaceId: string) => {

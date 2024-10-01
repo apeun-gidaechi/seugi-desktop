@@ -6,6 +6,9 @@ import axios from "axios";
 import config from "@/constants/config/config.json";
 import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 import { useGoogleLogin } from "@react-oauth/google";
+import { getMyWorkspaces } from "@/Api/workspace";
+import { getMyInfos } from "@/Api/profile";
+import { paths } from "@/Constants/paths";
 
 const index = () => {
     const navigate = useNavigate();
@@ -26,12 +29,12 @@ const index = () => {
 
     const getOneWorkspaceIdAndSet = async () => {
         const lastWorkspace = window.localStorage.getItem("lastworkspace");
-        const res = await SeugiCustomAxios.get(`${config.serverurl}/workspace/`);
+        const checkWorkspaces = await getMyWorkspaces();
 
         if (lastWorkspace) {
             window.localStorage.setItem("workspaceId", lastWorkspace);
-        } else if (res.data.data && res.data.data.length > 0) {
-            window.localStorage.setItem("workspaceId", res.data.data[0].workspaceId);
+        } else if (checkWorkspaces && checkWorkspaces.length > 0) {
+            window.localStorage.setItem("workspaceId", checkWorkspaces[0].workspaceId);
         } else {
             console.error("워크스페이스를 찾을 수 없습니다.");
             return; 
@@ -42,15 +45,15 @@ const index = () => {
 
     const importWorkspace = async () => {
         try {
-            const res = await SeugiCustomAxios.get(`${config.serverurl}/workspace/`);
+            const checkWorkspaces = await getMyWorkspaces();
 
-            console.log(res.data.data.length);
+            console.log(checkWorkspaces.length);
 
-            if (res.data.data && res.data.data.length === 0) {
-                navigate("/unhome");
+            if (checkWorkspaces && checkWorkspaces.length === 0) {
+                navigate(paths.unhome);
             } else {
                 getOneWorkspaceIdAndSet().then(() => {
-                    navigate("/home");
+                    navigate(paths.home);
                 });
             }
         } catch (error) {
@@ -111,8 +114,8 @@ const index = () => {
     const setUser = useUserDispatchContext();
 
     const getMyInfo = async () => {
-        const res = await SeugiCustomAxios.get(`/member/myInfo`);
-        setUser(res.data.data);
+        const MyInfos = await getMyInfos();
+        setUser(MyInfos);
     }
 
     const handleGoogleLogin = useGoogleLogin({

@@ -5,9 +5,6 @@ import CodeTextField from "@/Components/Onboarding/CodeTextField/CodeTextField";
 
 import Backimg from "@/assets/image/Backimg.svg";
 
-import Session from "@/Util/TokenExpired/TokenExpired";
-import { clearAccessToken } from "@/Api/SeugiCutomAxios";
-
 import useSchoolCode from '@/Hooks/Workspace/Schoolcode/index';
 
 const SchoolCode = () => {
@@ -15,7 +12,6 @@ const SchoolCode = () => {
 
   return (
     <S.SchoolCodeMain>
-      <Session token={SchoolCode.token} clearAccessToken={clearAccessToken} />
       <S.SchoolCode>
         <S.SchoolCodeContainer>
           <S.Header>

@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 
-export const HomeContainer = styled.div`
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  align-items: flex-start;
-`;
+// export const HomeContainer = styled.div`
+//   display: flex;
+//   width: 100vw;
+//   height: 100vh;
+//   align-items: flex-start;
+// `;
 
 export const HomeMain = styled.div`
   display: flex;
@@ -18,11 +18,7 @@ export const HomeMain = styled.div`
   flex: 1 0 0;
   align-self: stretch;
 
-  width: 100vw;
-
   background: ${SeugiColor.Primary050};
-
-  margin-left: 5%;
 `;
 
 export const ComponentsBox = styled.div`

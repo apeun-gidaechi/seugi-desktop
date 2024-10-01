@@ -4,8 +4,6 @@ import Button from '@/Components/Button/Button';
 import TextField from '@/Components/common/TextField/TextField';
 import Backimg from '@/assets/image/Backimg.svg';
 import PlusButtonimg from '@/assets/image/join-school/plus.svg';
-import Session from '@/Util/TokenExpired/TokenExpired';
-import { clearAccessToken } from '@/Api/SeugiCutomAxios';
 
 import useCreateSchool from '@/Hooks/Workspace/CreateSchool/index';
 
@@ -14,7 +12,6 @@ const CreateSchool = () => {
 
     return (
         <S.CreateSchoolMain>
-            <Session token={CreateSchool.token} clearAccessToken={clearAccessToken} />
             <S.CreateSchoolContainer>
                 <S.TitleContainer>
                     <S.BackButton onClick={CreateSchool.Backclick}>

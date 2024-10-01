@@ -40,9 +40,6 @@ export const UserContextProvider = ({ children }: Props) => {
 
 export const useUserContext = () => {
     const user = useContext(UserContext);
-    if (user == null) {
-        throw new Error();
-    }
     return user;
 };
 
