@@ -66,3 +66,17 @@ export const ChangeSchool = styled.button`
 
   cursor: pointer;
 `;
+
+export const NoSchoolDiv = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
+
+export const NoSchoolMessage = styled.span`
+  color:${SeugiColor.Gray700};
+
+  ${SeugiFont.subtitle.subtitle2};
+`

@@ -1,4 +1,3 @@
-// import { Subtitle2 } from '@/Components/Login/login.style';
 import { SeugiColor } from '@/Design/color/SeugiColor';
 import { SeugiFont } from '@/Design/text/SeugiFont';
 import styled from 'styled-components';
@@ -8,7 +7,6 @@ export const RegisterSchoolContainer = styled.div`
     width: 100%;
     height: 1024px;
     z-index: 999;
-    background: rgba(0, 0, 0, 0.30);
 `;
 
 export const RegisterSchoolBox = styled.div`
@@ -20,8 +18,8 @@ export const RegisterSchoolBox = styled.div`
     gap: 18px;
 
     position: absolute;
-    left: 556px;
-    top: 300px;
+    left: 40vw;
+    top: 45vh;
     border-radius: 16px;
     background: ${SeugiColor.White};
 
