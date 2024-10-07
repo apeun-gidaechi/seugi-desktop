@@ -2,14 +2,21 @@ import styled from "styled-components";
 import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 
-// export const HomeContainer = styled.div`
-//   display: flex;
-//   width: 100vw;
-//   height: 100vh;
-//   align-items: flex-start;
-// `;
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+`;
 
 export const HomeMain = styled.div`
+  overflow-y: auto;
   display: flex;
   padding: 48px 32px;
   flex-direction: column;

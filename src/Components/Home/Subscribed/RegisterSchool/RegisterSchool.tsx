@@ -1,4 +1,4 @@
-import * as S from '@/Components/Home/NotSubscribed/RegisterSchool/RegisterSchool.style';
+import * as S from '@/Components/Home/Subscribed/RegisterSchool/RegisterSchool.style';
 import React from 'react';
 
 import useUnhome from '@/Hooks/HomeHook/UnHome/index';

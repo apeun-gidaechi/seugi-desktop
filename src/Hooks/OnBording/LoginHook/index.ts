@@ -50,7 +50,7 @@ const index = () => {
             console.log(checkWorkspaces.length);
 
             if (checkWorkspaces && checkWorkspaces.length === 0) {
-                navigate(paths.unhome);
+                navigate(paths.home);
             } else {
                 getOneWorkspaceIdAndSet().then(() => {
                     navigate(paths.home);
