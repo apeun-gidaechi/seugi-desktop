@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as S from '@/Components/Profile/Correction/Correction.style';
 
-import CancelImg from '@/assets/image/profile/CancleImg.svg';
+import CancelImg from '@/Assets/image/profile/CancleImg.svg';
 
 interface CorrectionProps {
   value: string;

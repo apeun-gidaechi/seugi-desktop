@@ -1,5 +1,4 @@
 import { useState } from "react";
-import config from "@/constants/ChatMember/config.json";
 
 const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
   const [searchText, setSearchText] = useState("");
@@ -73,7 +72,7 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
 
   const handleSearch = async () => {
     if (searchText.trim() !== "") {
-      const roomFound = chatRooms.includes(searchText) || config.name.includes(searchText);
+      const roomFound = chatRooms.includes(searchText);
 
       if (roomFound) {
         handleChatRoomClick(searchText);

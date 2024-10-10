@@ -3,7 +3,7 @@ import * as S from "./SchoolCode.style";
 import Button from "@/Components/Button/Button";
 import CodeTextField from "@/Components/Onboarding/CodeTextField/CodeTextField";
 
-import Backimg from "@/assets/image/Backimg.svg";
+import Backimg from "@/Assets/image/Backimg.svg";
 
 import Session from "@/Util/TokenExpired/TokenExpired";
 import { clearAccessToken } from "@/Api/SeugiCutomAxios";
