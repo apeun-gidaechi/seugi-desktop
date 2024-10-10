@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import * as S from '@/Components/Home/Notification/Notification.style';
 import CustomAlert from '@/Components/Alert/Alert';
-import Point from '@/assets/image/home/point.svg';
-import Emoji from "@/assets/image/home/emoji.svg";
-import NotificationImg from "@/assets/image/home/notification.svg";
-import CorrectionImg from '@/assets/image/home/Correction.svg';
+import Point from '@/Assets/image/home/point.svg';
+import Emoji from "@/Assets/image/home/emoji.svg";
+import NotificationImg from "@/Assets/image/home/notification.svg";
+import CorrectionImg from '@/Assets/image/home/Correction.svg';
 import AddEmoji from '@/Components/Home/Notification/Emoji/emojipicker';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import { EmojiClickData } from 'emoji-picker-react';

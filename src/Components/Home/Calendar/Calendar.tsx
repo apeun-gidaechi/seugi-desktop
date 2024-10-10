@@ -1,8 +1,8 @@
 import React from 'react'
 import * as S from '@/Components/Home/Calendar/Calendar.style';
 
-import CalendarImg from "@/assets/image/home/calendar.svg";
-import ArrowImg from "@/assets/image/home/arrow.svg";
+import CalendarImg from "@/Assets/image/home/calendar.svg";
+import ArrowImg from "@/Assets/image/home/arrow.svg";
 
 const Calendar = () => {
     return (

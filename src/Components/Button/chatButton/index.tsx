@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import * as S from '@/Components/Button/chatButton/index.style';
-import SearchIcon from '@/assets/image/chat/blackSearchIcon.svg';
-import HamburgerIcon from '@/assets/image/chat/hamburgerLine.svg';
+import SearchIcon from '@/Assets/image/chat/blackSearchIcon.svg';
+import HamburgerIcon from '@/Assets/image/chat/hamburgerLine.svg';
 
 import Drawer from '../Drawer/index';
 

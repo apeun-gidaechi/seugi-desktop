@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 
 import * as S from "./ChangeSchool.style";
-import Arrow from "@/assets/image/home/arrow.svg";
+import Arrow from "@/Assets/image/home/arrow.svg";
 // import config from '@/constants/config/config.json';
 
 interface Props {

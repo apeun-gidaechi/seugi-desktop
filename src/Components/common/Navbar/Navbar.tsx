@@ -1,13 +1,13 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import * as S from "@/components/common/Navbar/Navbar.style";
 
-import Home from "@/assets/image/sidebar/home.svg";
-import Chat from "@/assets/image/sidebar/chat.svg";
-import Chats from "@/assets/image/sidebar/chats.svg";
-import AvatarImg from "@/assets/image/chat-components/Avatar.svg";
-import SelectHome from "@/assets/image/sidebar/slecthome.svg";
-import SelectChat from "@/assets/image/sidebar/selectchat.svg";
-import SelectChats from "@/assets/image/sidebar/selectgroup.svg";
+import Home from "@/Assets/image/sidebar/home.svg";
+import Chat from "@/Assets/image/sidebar/chat.svg";
+import Chats from "@/Assets/image/sidebar/chats.svg";
+import AvatarImg from "@/Assets/image/chat-components/Avatar.svg";
+import SelectHome from "@/Assets/image/sidebar/slecthome.svg";
+import SelectChat from "@/Assets/image/sidebar/selectchat.svg";
+import SelectChats from "@/Assets/image/sidebar/selectgroup.svg";
 import Profile from "@/Components/Profile/Profile";
 import React, { useEffect, useRef, useState } from "react";
 
