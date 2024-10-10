@@ -5,6 +5,7 @@ import { SeugiFont } from "@/Design/text/SeugiFont";
 export const LeftContainer = styled.div`
   display: flex;
   padding: 12px 12px 16px 12px;
+  justify-content:center;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--Corner-Small, 10px);
@@ -268,4 +269,30 @@ export const NoNotificationDiv = styled.div`
 `
 export const NoNotificationImg = styled.img`
   margin-bottom:4px;
+`
+
+export const PaginationContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  /* padding:0 0 0 12vw; */
+  /* text-align:center; */
+  margin: 0 auto;
+  gap:4px;
+`
+
+export const PageButton = styled.button`
+  width:30px;
+  height:30px;
+
+  border:none;
+  border-radius:4px;
+
+  background-color:${SeugiColor.Primary200};
+  ${SeugiFont.body.body1};
+  color:${SeugiColor.White};
+
+  cursor: pointer;
 `
