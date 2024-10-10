@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import * as S from "@/components/common/Navbar/Navbar.style";
+import * as S from "@/Components/common/Navbar/Navbar.style";
 
 import Home from "@/Assets/image/sidebar/home.svg";
 import Chat from "@/Assets/image/sidebar/chat.svg";
