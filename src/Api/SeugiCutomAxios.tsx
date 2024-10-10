@@ -2,8 +2,10 @@ import axios, { AxiosInstance } from 'axios';
 import config from '@/constants/config/config.json';
 
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
+
 export const SeugiCustomAxios: AxiosInstance = axios.create({
-  baseURL: `${config.serverurl}`,
+  baseURL: SERVER_URL,
 });
 
 
