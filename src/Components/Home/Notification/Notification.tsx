@@ -69,36 +69,40 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
 
 
     const formattedNotifications: FormattedNotificationItem[] = useMemo(() => {
-        return notifications.map((notification: NotificationItem) => {
-            let emojiDisplay: EmojiDisplayItem[] = [];
-            notification.emoji.forEach((emoji: EmojiItem) => {
-                const existEmoji = emojiDisplay.find((item) => item.emoji === emoji.emoji);
-                if (existEmoji) {
-                    existEmoji.count += 1;
-                } else {
-                    emojiDisplay.push({
-                        emoji: emoji.emoji,
-                        count: 1,
-                        liked: false,
-                    });
-                }
+        return notifications
+            .slice() 
+            .sort((a, b) => b.id - a.id) 
+            .map((notification: NotificationItem) => {
+                let emojiDisplay: EmojiDisplayItem[] = [];
+                notification.emoji.forEach((emoji: EmojiItem) => {
+                    const existEmoji = emojiDisplay.find((item) => item.emoji === emoji.emoji);
+                    if (existEmoji) {
+                        existEmoji.count += 1;
+                    } else {
+                        emojiDisplay.push({
+                            emoji: emoji.emoji,
+                            count: 1,
+                            liked: false,
+                        });
+                    }
+                });
+                emojiDisplay = emojiDisplay.map((emojiItem) => {
+                    const selectedEmoji = notification.emoji.find(emoji => emoji.emoji === emojiItem.emoji && user?.id === emoji.userId);
+                    if (selectedEmoji) {
+                        return {
+                            ...emojiItem,
+                            liked: true,
+                        };
+                    }
+                    return emojiItem;
+                });
+                return {
+                    ...notification,
+                    emojiDisplay,
+                };
             });
-            emojiDisplay = emojiDisplay.map((emojiItem) => {
-                const selectedEmoji = notification.emoji.find(emoji => emoji.emoji === emojiItem.emoji && user?.id === emoji.userId);
-                if (selectedEmoji) {
-                    return {
-                        ...emojiItem,
-                        liked: true,
-                    };
-                }
-                return emojiItem;
-            });
-            return {
-                ...notification,
-                emojiDisplay,
-            }
-        });
     }, [notifications, user]);
+
 
     useEffect(() => {
         const role = window.localStorage.getItem('Role');
