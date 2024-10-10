@@ -3,6 +3,8 @@ import axios from 'axios';
 import config from '@/constants/config/config.json';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
+
 const index = () => {
     const location = useLocation();
     const { name, email, password } = location.state || {};
@@ -27,7 +29,7 @@ const index = () => {
     const handleSendCode = async () => {
         try {
             console.log(email);
-            const res = await axios.get(`${config.serverurl}/email/send`, {
+            const res = await axios.get(`${SERVER_URL}/email/send`, {
                 params: { email: email }
             });
             console.log('Code sent successfully:', res.data);
@@ -49,7 +51,7 @@ const index = () => {
         const verificationCode = code.join('');
         console.log(name, email, password, verificationCode);
         try {
-            const res = await axios.post(`${config.serverurl}/member/register`, {
+            const res = await axios.post(`${SERVER_URL}/member/register`, {
                 name,
                 email,
                 password,

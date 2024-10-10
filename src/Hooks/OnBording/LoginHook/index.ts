@@ -7,6 +7,8 @@ import config from "@/constants/config/config.json";
 import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 import { useGoogleLogin } from "@react-oauth/google";
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
+
 const index = () => {
     const navigate = useNavigate();
 
@@ -26,7 +28,7 @@ const index = () => {
 
     const getOneWorkspaceIdAndSet = async () => {
         const token = window.localStorage.getItem("accessToken");
-        const res = await axios.get(`${config.serverurl}/workspace/`, {
+        const res = await axios.get(`${SERVER_URL}/workspace/`, {
             headers: {
                 Authorization: `${token}`,
             },
@@ -38,7 +40,7 @@ const index = () => {
     const importWorkspace = async () => {
         try {
             const token = window.localStorage.getItem("accessToken");
-            const res = await axios.get(`${config.serverurl}/workspace/`, {
+            const res = await axios.get(`${SERVER_URL}/workspace/`, {
                 headers: {
                     Authorization: `${token}`,
                 },
@@ -63,7 +65,7 @@ const index = () => {
     const handleLogin = async () => {
         try {
             const res = await axios.post(
-                `${config.serverurl}/member/login`,
+                `${SERVER_URL}/member/login`,
                 {
                     email,
                     password,
@@ -120,7 +122,7 @@ const index = () => {
         onSuccess: async ({ code }) => {
             try {
                 const res = await axios.post(
-                    `${config.serverurl}/oauth/google/authenticate`,
+                    `${SERVER_URL}/oauth/google/authenticate`,
                     { code }
                 );
 
