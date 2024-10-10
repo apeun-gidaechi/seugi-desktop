@@ -15,7 +15,7 @@ export const LeftContainer = styled.div`
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 
-  /* position:relative; */
+  position:relative;
 `;
 
 export const NoNotification = styled.span`
