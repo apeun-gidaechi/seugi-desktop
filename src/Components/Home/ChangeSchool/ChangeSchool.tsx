@@ -4,7 +4,7 @@ import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 
 import * as S from "./ChangeSchool.style";
 import Arrow from "@/assets/image/home/arrow.svg";
-import config from '@/constants/config/config.json';
+// import config from '@/constants/config/config.json';
 
 interface Props {
   onClose: () => void;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import config from '@/constants/config/config.json';
+// import config from '@/constants/config/config.json';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
