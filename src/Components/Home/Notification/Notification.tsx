@@ -12,7 +12,6 @@ import { EmojiClickData } from 'emoji-picker-react';
 import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNotice';
 import ChangeNotice from './ChangeNotice/ChangeNotice';
 import { useUserContext } from '@/Contexts/userContext';
-import { getNotification } from '@/Api/Home';
 
 interface EmojiItem {
     emoji: string;
@@ -54,22 +53,19 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
         return `${year}${month}${day}`;
     };
     const user = useUserContext();
-    const workspaceId = window.localStorage.getItem('workspaceId');
-    // const [notifications, setNotifications] = useState<NotificationItem[]>([]);
-
     const [isEmojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
     const [activeNotification, setActiveNotification] = useState<number | null>(null);
     const [isCreateNoticeVisible, setCreateNoticeVisible] = useState<boolean>(false);
     const [userRole, setUserRole] = useState<string | null>(null);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [changeNoticeId, setChangeNoticeId] = useState<number | null>(null);
-    const [page, setPage] = useState<number>(0);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [hasMore, setHasMore] = useState<boolean>(true);
+    const [currentPage, setCurrentPage] = useState<number>(1); 
+    const itemsPerPage = 20;
+    const totalPages = Math.ceil(notifications.length / itemsPerPage);
+
 
     const CreateNoticeRef = useRef<HTMLDivElement>(null);
     const ChangeNoticeRef = useRef<HTMLDivElement>(null);
-    const observerRef = useRef<IntersectionObserver | null>(null);
 
 
     const formattedNotifications: FormattedNotificationItem[] = useMemo(() => {
@@ -104,28 +100,6 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
         });
     }, [notifications, user]);
 
-    // const getNotifications = async () => {
-    //     if (isLoading || !hasMore) return;
-
-    //     setIsLoading(true);
-    //     try {
-    //         if (workspaceId !== null) {
-    //             const getNotice = await getNotification(workspaceId, page);
-
-    //             const newNotifications = getNotice;
-
-    //             setNotifications((prevNotifications) => [...prevNotifications, ...newNotifications]);
-    //             setHasMore(newNotifications.length > 0);
-    //             setPage((prevPage) => prevPage + 1);
-    //         }
-
-    //     } catch (error) {
-    //         console.error('Failed to load notifications:', error);
-    //     } finally {
-    //         setIsLoading(false);
-    //     }
-    // };
-
     useEffect(() => {
         const role = window.localStorage.getItem('Role');
         setUserRole(role);
@@ -157,14 +131,6 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [isEmojiPickerVisible]);
-
-    const handleCorrectionClick = () => {
-        if (userRole === 'STUDENT') {
-            setShowAlert(true);
-            return;
-        }
-        setCreateNoticeVisible(true);
-    };
 
     const handleAddEmojiClick = (notificationIndex: number) => {
         if (activeNotification === notificationIndex && isEmojiPickerVisible) {
@@ -238,28 +204,22 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
         setChangeNoticeId(prev => (prev === notificationId ? null : notificationId));
     };
 
-    // const lastNotificationRef = useCallback((node: HTMLDivElement | null) => {
-    //     if (isLoading) return;
-    //     if (observerRef.current) observerRef.current.disconnect();
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
 
-    //     observerRef.current = new IntersectionObserver((entries) => {
-    //         if (entries[0].isIntersecting && hasMore) {
-    //             getNotifications();
-    //         }
-    //     });
-
-    //     if (node) observerRef.current.observe(node);
-    // }, [isLoading, hasMore]);
+    const currentNotifications = useMemo(() => {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        return formattedNotifications.slice(startIndex, startIndex + itemsPerPage);
+    }, [formattedNotifications, currentPage]);
 
     return (
         <S.LeftContainer>
             {isCreateNoticeVisible && (
-                <div ref={CreateNoticeRef}>
-                    <CreateNotice
-                        onClose={() => setCreateNoticeVisible(false)}
-                        mutateNotifications={mutateNotifications}
-                    />
-                </div>
+                <CreateNotice
+                    onClose={() => setCreateNoticeVisible(false)}
+                    mutateNotifications={mutateNotifications}
+                />
             )}
             {showAlert && (
                 <CustomAlert
@@ -275,23 +235,16 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
                     <S.NotificationLogo src={NotificationImg} />
                     <S.NotificationTitle>공지</S.NotificationTitle>
                 </S.NotificationTitleContainer>
-                <S.ArrowLButton onClick={handleCorrectionClick}>
+                <S.ArrowLButton onClick={() => setCreateNoticeVisible(true)}>
                     <S.NArrowLogo src={CorrectionImg} />
                 </S.ArrowLButton>
             </S.NotificationContainer>
             <S.NotificationBox>
-                {formattedNotifications.length > 0 ? (
-                    formattedNotifications.map((item, parentKey) => (
-                        <S.NotificationWrapper
-                            key={item.id}
-                            // ref={parentKey === formattedNotifications.length - 1 ? lastNotificationRef : null}
-                        >
+                {currentNotifications.length > 0 ? (
+                    currentNotifications.map((item, parentKey) => (
+                        <S.NotificationWrapper key={item.id}>
                             <S.NotificationContentAuthor>
-                                <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)}
-                                    {/* {item.createdDate !== item.lastModifiedDate && (
-                                            <S.EditedLabel>(수정됨)</S.EditedLabel>
-                                    )} */}
-                                </S.NotificationContentAuthorSpan>
+                                <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)} </S.NotificationContentAuthorSpan>
                                 <S.NotificationActionButton onClick={() => handleActionButtonClick(item.id)} className='point'>
                                     <S.NotificationActionButtonimg src={Point} />
                                 </S.NotificationActionButton>
@@ -312,9 +265,7 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
                                         key={childKey}
                                         className={emoji.liked ? "Clicked" : ""}
                                     >
-                                        <S.NotificationEmojiCount
-                                            className={emoji.liked ? "Clicked" : ""}
-                                        >
+                                        <S.NotificationEmojiCount className={emoji.liked ? "Clicked" : ""}>
                                             {emoji.emoji} {emoji.count}
                                         </S.NotificationEmojiCount>
                                     </S.NotificationEmojiWrapper>
@@ -344,6 +295,17 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
                     </S.NoNotificationDiv>
                 )}
             </S.NotificationBox>
+            <S.PaginationContainer>
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <S.PageButton
+                        key={index + 1}
+                        onClick={() => handlePageChange(index + 1)}
+                        active={currentPage === index + 1}
+                    >
+                        {index + 1}
+                    </S.PageButton>
+                ))}
+            </S.PaginationContainer>
         </S.LeftContainer>
     );
 };
