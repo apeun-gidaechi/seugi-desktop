@@ -2,10 +2,10 @@ import React, { useState, ChangeEvent } from 'react';
 import axios, { AxiosError } from 'axios';
 import * as S from './createRoomPlus.style'; 
 
-import AvatarImg from '@/assets/image/chat-components/Avatar.svg';
-import NonClicked from '@/assets/image/chat-components/nonClick.svg';
-import Clicked from '@/assets/image/chat-components/clicked.svg';
-import SearchIcon from '@/assets/image/sidebar/Findicon.svg';
+import AvatarImg from '@/Assets/image/chat-components/Avatar.svg';
+import NonClicked from '@/Assets/image/chat-components/nonClick.svg';
+import Clicked from '@/Assets/image/chat-components/clicked.svg';
+import SearchIcon from '@/Assets/image/sidebar/Findicon.svg';
 
 interface Member {
   id: number;

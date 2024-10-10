@@ -2,8 +2,8 @@ import React from 'react';
 import * as S from './CreateSchool.style';
 import Button from '@/Components/Button/Button';
 import TextField from '@/Components/common/TextField/TextField';
-import Backimg from '@/assets/image/Backimg.svg';
-import PlusButtonimg from '@/assets/image/join-school/plus.svg';
+import Backimg from '@/Assets/image/Backimg.svg';
+import PlusButtonimg from '@/Assets/image/join-school/plus.svg';
 import Session from '@/Util/TokenExpired/TokenExpired';
 import { clearAccessToken } from '@/Api/SeugiCutomAxios';
 
