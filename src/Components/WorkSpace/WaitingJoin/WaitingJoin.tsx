@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './WaitingJoin.style';
-import schoolimg from '@/assets/image/join-school/schoolimg.svg';
-import ment from '@/assets/image/join-school/ment.svg';
+import schoolimg from '@/Assets/image/join-school/schoolimg.svg';
+import ment from '@/Assets/image/join-school/ment.svg';
 import Button from '@/Components/Button/Button';
 import { clearAccessToken } from '@/Api/SeugiCutomAxios';
 import Session from '@/Util/TokenExpired/TokenExpired';

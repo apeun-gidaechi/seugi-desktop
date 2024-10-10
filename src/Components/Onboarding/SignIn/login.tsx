@@ -3,15 +3,15 @@ import React from "react";
 import LoginButton from "@/Components/Button/Button";
 import TextField from "@/Components/common/TextField/TextField";
 import CustomAlert from "@/Components/Alert/Alert";
-import seugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
-import showPasswordimg from "@/assets/image/onbording/show_fill.svg";
-import hidePasswordimg from "@/assets/image/onbording/hide_fill.svg";
-import AppleLogo from "@/assets/image/onbording/Start/apple.svg";
-import GoogleLogo from "@/assets/image/onbording/Start/googlelogo.svg";
-import Cloud1 from "@/assets/image/onbording/Start/LoginCloud1.svg";
-import Cloud2 from "@/assets/image/onbording/Start/LoginCloud2.svg";
-import Sun from "@/assets/image/onbording/Start/LoginSun.svg";
-import Divider from "@/assets/image/onbording/Start/Divider.svg";
+import seugiImg from "@/Assets/image/onbording/Start/seugilogo.svg";
+import showPasswordimg from "@/Assets/image/onbording/show_fill.svg";
+import hidePasswordimg from "@/Assets/image/onbording/hide_fill.svg";
+import AppleLogo from "@/Assets/image/onbording/Start/apple.svg";
+import GoogleLogo from "@/Assets/image/onbording/Start/googlelogo.svg";
+import Cloud1 from "@/Assets/image/onbording/Start/LoginCloud1.svg";
+import Cloud2 from "@/Assets/image/onbording/Start/LoginCloud2.svg";
+import Sun from "@/Assets/image/onbording/Start/LoginSun.svg";
+import Divider from "@/Assets/image/onbording/Start/Divider.svg";
 
 import useLogin from '@/Hooks/OnBording/LoginHook/index';
 

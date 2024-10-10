@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import config from '@/constants/config/config.json';
+// import config from '@/constants/config/config.json';
 
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;

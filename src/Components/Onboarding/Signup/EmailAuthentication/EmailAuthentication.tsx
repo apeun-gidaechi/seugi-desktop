@@ -1,11 +1,11 @@
 import React from 'react';
 import * as S from './EmailAuthentication.style';
 import Button from '@/Components/Button/Button';
-import Sun from '@/assets/image/onbording/EmailAuthentication/sun.svg';
-import Cloud1 from '@/assets/image/onbording/EmailAuthentication/cloud1.svg';
-import Cloud2 from '@/assets/image/onbording/EmailAuthentication/cloud2.svg';
-import Cloud3 from '@/assets/image/onbording/EmailAuthentication/cloud3.svg';
-import Backimg from '@/assets/image/Backimg.svg'
+import Sun from '@/Assets/image/onbording/EmailAuthentication/sun.svg';
+import Cloud1 from '@/Assets/image/onbording/EmailAuthentication/cloud1.svg';
+import Cloud2 from '@/Assets/image/onbording/EmailAuthentication/cloud2.svg';
+import Cloud3 from '@/Assets/image/onbording/EmailAuthentication/cloud3.svg';
+import Backimg from '@/Assets/image/Backimg.svg'
 import CodeTextField from '@/Components/Onboarding/CodeTextField/CodeTextField';
 import CustomAlert from '@/Components/Alert/Alert';
 

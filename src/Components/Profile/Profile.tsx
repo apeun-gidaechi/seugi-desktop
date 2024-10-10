@@ -3,11 +3,11 @@ import * as S from '@/Components/Profile/profile.style';
 import Correction from '@/Components/Profile/Correction/Correction';
 import SettingProfile from '@/Components/Profile/SettingProfile/SettingProfile';
 
-import SettingImg from '@/assets/image/profile/profilesetting_fill.svg';
-import ProfileImg from '@/assets/image/profile/proflie.svg';
-import CorrectionImg from '@/assets/image/profile/CorrectionImg.svg';
-import ProfileDivider from '@/assets/image/profile/ProflieDivider.svg';
-import Divider from '@/assets/image/profile/Divider.svg';
+import SettingImg from '@/Assets/image/profile/profilesetting_fill.svg';
+import ProfileImg from '@/Assets/image/profile/proflie.svg';
+import CorrectionImg from '@/Assets/image/profile/CorrectionImg.svg';
+import ProfileDivider from '@/Assets/image/profile/ProflieDivider.svg';
+import Divider from '@/Assets/image/profile/Divider.svg';
 
 import useProfile from '@/Hooks/Profile/index';
 

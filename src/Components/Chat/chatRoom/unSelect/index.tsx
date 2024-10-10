@@ -2,7 +2,7 @@ import React from 'react'
 
 import * as S from './index.style'
 
-import SelectChatRoom from '@/assets/image/chat/sadErrorImg.svg';
+import SelectChatRoom from '@/Assets/image/chat/sadErrorImg.svg';
 
 
 const index = () => {
