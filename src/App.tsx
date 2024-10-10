@@ -4,11 +4,18 @@ import './App.css';
 import { UserContextProvider } from './Contexts/userContext';
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-import VapidKey from '@/Constants/firebase/VapidKey.json';
-import config from '@/Constants/firebase/firebaseConfig.json';
 
+const VAPID_PUBLIC = import.meta.env.VITE_VAPID_PUBLIC as string;
 
-const firebaseConfig = config;
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+};
 
 const fapp = initializeApp(firebaseConfig);
 const messaging = getMessaging(fapp);
@@ -23,7 +30,7 @@ function App() {
 
           // FCM 토큰 요청
           getToken(messaging, {
-            vapidKey: `${VapidKey.public}`,
+            vapidKey: VAPID_PUBLIC,
           })
             .then((currentToken) => {
               if (currentToken) {
