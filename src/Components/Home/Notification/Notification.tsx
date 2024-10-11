@@ -15,13 +15,7 @@ import { useUserContext } from '@/Contexts/userContext';
 
 interface EmojiItem {
     emoji: string;
-    userId: number;
-}
-
-interface EmojiDisplayItem {
-    emoji: string;
-    count: number;
-    liked: boolean;
+    userList: number[];
 }
 
 interface NotificationItem {
@@ -35,16 +29,12 @@ interface NotificationItem {
     createdDate: string;
 }
 
-interface FormattedNotificationItem extends NotificationItem {
-    emojiDisplay: EmojiDisplayItem[];
-}
-
 interface Props {
     notifications: NotificationItem[];
     mutateNotifications: (notifications?: NotificationItem[]) => void;
 }
 
-const Notification = ({ notifications = [], mutateNotifications}: Props) => {
+const Notification = ({ notifications = [], mutateNotifications }: Props) => {
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
         const year = String(date.getFullYear()).slice(2);
@@ -54,12 +44,12 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
     };
     const user = useUserContext();
     const [isEmojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
-    const [activeNotification, setActiveNotification] = useState<number | null>(null);
+    const [activeNotificationId, setActiveNotificationId] = useState<number | null>(null);
     const [isCreateNoticeVisible, setCreateNoticeVisible] = useState<boolean>(false);
     const [userRole, setUserRole] = useState<string | null>(null);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [changeNoticeId, setChangeNoticeId] = useState<number | null>(null);
-    const [currentPage, setCurrentPage] = useState<number>(1); 
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const itemsPerPage = 20;
     const totalPages = Math.ceil(notifications.length / itemsPerPage);
 
@@ -68,40 +58,39 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
     const ChangeNoticeRef = useRef<HTMLDivElement>(null);
 
 
-    const formattedNotifications: FormattedNotificationItem[] = useMemo(() => {
-        return notifications
-            .slice() 
-            .sort((a, b) => b.id - a.id) 
-            .map((notification: NotificationItem) => {
-                let emojiDisplay: EmojiDisplayItem[] = [];
-                notification.emoji.forEach((emoji: EmojiItem) => {
-                    const existEmoji = emojiDisplay.find((item) => item.emoji === emoji.emoji);
-                    if (existEmoji) {
-                        existEmoji.count += 1;
-                    } else {
-                        emojiDisplay.push({
-                            emoji: emoji.emoji,
-                            count: 1,
-                            liked: false,
-                        });
-                    }
-                });
-                emojiDisplay = emojiDisplay.map((emojiItem) => {
-                    const selectedEmoji = notification.emoji.find(emoji => emoji.emoji === emojiItem.emoji && user?.id === emoji.userId);
-                    if (selectedEmoji) {
-                        return {
-                            ...emojiItem,
-                            liked: true,
-                        };
-                    }
-                    return emojiItem;
-                });
-                return {
-                    ...notification,
-                    emojiDisplay,
-                };
-            });
-    }, [notifications, user]);
+    // const formattedNotifications: FormattedNotificationItem[] = useMemo(() => {
+    //     return notifications
+    //         .toSorted((a, b) => b.id - a.id)
+    //         .map((notification: NotificationItem) => {
+    //             let emojiDisplay: EmojiDisplayItem[] = [];
+    //             notification.emoji.forEach((emoji: EmojiItem) => {
+    //                 const existEmoji = emojiDisplay.find((item) => item.emoji === emoji.emoji);
+    //                 if (existEmoji) {
+    //                     existEmoji.count += 1;
+    //                 } else {
+    //                     emojiDisplay.push({
+    //                         emoji: emoji.emoji,
+    //                         count: 1,
+    //                         liked: false,
+    //                     });
+    //                 }
+    //             });
+    //             emojiDisplay = emojiDisplay.map((emojiItem) => {
+    //                 const selectedEmoji = notification.emoji.find(emoji => emoji.emoji === emojiItem.emoji && user?.id === emoji.userId);
+    //                 if (selectedEmoji) {
+    //                     return {
+    //                         ...emojiItem,
+    //                         liked: true,
+    //                     };
+    //                 }
+    //                 return emojiItem;
+    //             });
+    //             return {
+    //                 ...notification,
+    //                 emojiDisplay,
+    //             };
+    //         });
+    // }, [notifications, user]);
 
 
     useEffect(() => {
@@ -125,7 +114,7 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
                 isEmojiPickerVisible
             ) {
                 setEmojiPickerVisible(false);
-                setActiveNotification(null);
+                setActiveNotificationId(null);
             }
         };
 
@@ -136,73 +125,149 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
         };
     }, [isEmojiPickerVisible]);
 
-    const handleAddEmojiClick = (notificationIndex: number) => {
-        if (activeNotification === notificationIndex && isEmojiPickerVisible) {
+    const handleAddEmojiClick = (notificationId: number) => {
+        if (activeNotificationId === notificationId && isEmojiPickerVisible) {
             setEmojiPickerVisible(false);
-            setActiveNotification(null);
+            setActiveNotificationId(null);
         } else {
-            setActiveNotification(notificationIndex);
+            setActiveNotificationId(notificationId);
             setEmojiPickerVisible(true);
         }
     };
 
-    const handleEmojiClick = async (parentKey: number, emoji: EmojiDisplayItem) => {
+    // 이모지 관련
+    const handleEmojiClick = async (parentKey: number, emoji: EmojiItem) => {
         try {
+            if (!user) {
+                return;
+            }
+
             const updatedNotifications = notifications.map((notification, index) => {
                 if (index !== parentKey) {
                     return notification;
                 }
-                const existingEmoji = notification.emoji.find(emojiItem => emojiItem.userId === user?.id && emojiItem.emoji === emoji.emoji);
-                return {
-                    ...notification,
-                    emoji: existingEmoji
-                        ? notification.emoji.filter(emojiItem => emojiItem.userId !== user?.id || emojiItem.emoji !== emoji.emoji)
-                        : notification.emoji.concat({ emoji: emoji.emoji, userId: user?.id ?? 0 }),
+
+                const isEmojiIncluded = !!notification.emoji.find(it => it.emoji === emoji.emoji);
+
+                if (!isEmojiIncluded) {
+                    return {
+                        ...notification, 
+                        emoji: notification.emoji.concat({
+                            emoji: emoji.emoji,
+                            userList: [user.id],
+                        }),
+                    };
+                } else {
+                    const existingEmojiIndex = notification.emoji.findIndex(it => it.emoji === emoji.emoji); 
+                    const existingEmoji = notification.emoji[existingEmojiIndex];
+
+                    if (existingEmoji.userList.includes(user.id)) {
+                        existingEmoji.userList = existingEmoji.userList.filter(id => id !== user.id);
+
+                        if (existingEmoji.userList.length === 0) {
+                            return {
+                                ...notification,
+                                emoji: notification.emoji.filter(it => it.emoji !== emoji.emoji),
+                            };
+                        }
+                    } else {
+                        existingEmoji.userList.push(user.id);
+                    }
+
+                    return {
+                        ...notification,
+                        emoji: [
+                            ...notification.emoji.slice(0, existingEmojiIndex),
+                            existingEmoji, 
+                            ...notification.emoji.slice(existingEmojiIndex + 1), 
+                        ],
+                    };
                 }
             });
-            mutateNotifications(updatedNotifications);
+
             await SeugiCustomAxios.patch(`/notification/emoji`, {
                 notificationId: notifications[parentKey].id,
                 emoji: emoji.emoji,
             });
+
+            mutateNotifications(updatedNotifications);
         } catch (error) {
             console.error(error);
-            mutateNotifications(notifications);
+            mutateNotifications(notifications); 
         }
-    };
+    }
 
+    // 이모지 관련
     const handleEmojiSelect = async (emoji: EmojiClickData) => {
         try {
-            if (activeNotification !== null) {
-                const notification = notifications[activeNotification];
+            if (activeNotificationId === null) {
+                return;
+            }
 
-                const updatedNotifications = notifications.map((notification, index) => {
-                    if (index !== activeNotification) {
-                        return notification;
+            const notification = notifications.find(it => it.id === activeNotificationId) ?? null;
+            if (notification === null) {
+                return;
+            }
+
+            if (user === null) {
+                return;
+            }
+
+            const updatedNotifications = notifications.map((notification) => {
+                if (notification.id !== activeNotificationId) {
+                    return notification;
+                }
+
+                const existingEmojiIndex = notification.emoji.findIndex(emojiItem => emojiItem.emoji === emoji.emoji);
+                const existingEmoji = notification.emoji[existingEmojiIndex];
+
+                if (existingEmoji) {
+                    if (existingEmoji.userList.includes(user?.id)) {
+                        existingEmoji.userList = existingEmoji.userList.filter(id => id !== user?.id);
+
+                        if (existingEmoji.userList.length === 0) {
+                            return {
+                                ...notification,
+                                emoji: notification.emoji.filter(it => it.emoji !== emoji.emoji),
+                            };
+                        }
+                    } else {
+                        existingEmoji.userList.push(user?.id ?? 0);
                     }
-                    const existingEmoji = notification.emoji.find(emojiItem => emojiItem.userId === user?.id && emojiItem.emoji === emoji.emoji);
+
                     return {
                         ...notification,
-                        emoji: existingEmoji
-                            ? notification.emoji.filter(emojiItem => emojiItem.userId !== user?.id || emojiItem.emoji !== emoji.emoji)
-                            : notification.emoji.concat({ emoji: emoji.emoji, userId: user?.id ?? 0 }),
-                    }
-                });
+                        emoji: [
+                            ...notification.emoji.slice(0, existingEmojiIndex),
+                            existingEmoji,
+                            ...notification.emoji.slice(existingEmojiIndex + 1),
+                        ],
+                    };
+                } else {
+                    return {
+                        ...notification,
+                        emoji: notification.emoji.concat({
+                            emoji: emoji.emoji,
+                            userList: [user?.id ?? 0],
+                        }),
+                    };
+                }
+            });
 
-                mutateNotifications(updatedNotifications);
-                await SeugiCustomAxios.patch(`/notification/emoji`, {
-                    notificationId: notification.id,
-                    emoji: emoji.emoji,
-                });
-            }
+            await SeugiCustomAxios.patch(`/notification/emoji`, {
+                notificationId: notification.id,
+                emoji: emoji.emoji,
+            });
+            mutateNotifications(updatedNotifications);
         } catch (error) {
             console.error(error);
             mutateNotifications(notifications);
         } finally {
             setEmojiPickerVisible(false);
-            setActiveNotification(null);
+            setActiveNotificationId(null);
         }
     };
+
 
     const handleActionButtonClick = (notificationId: number) => {
         setChangeNoticeId(prev => (prev === notificationId ? null : notificationId));
@@ -214,8 +279,8 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
 
     const currentNotifications = useMemo(() => {
         const startIndex = (currentPage - 1) * itemsPerPage;
-        return formattedNotifications.slice(startIndex, startIndex + itemsPerPage);
-    }, [formattedNotifications, currentPage]);
+        return notifications.slice(startIndex, startIndex + itemsPerPage);
+    }, [notifications, currentPage]);
 
     return (
         <S.LeftContainer>
@@ -260,22 +325,22 @@ const Notification = ({ notifications = [], mutateNotifications}: Props) => {
                                 {item.content}
                             </S.NotificationContentDescription>
                             <S.NotificationEmojiBox>
-                                <S.NotificationAddEmojiButton onClick={() => handleAddEmojiClick(parentKey)} className='AddEmojiButton'>
+                                <S.NotificationAddEmojiButton onClick={() => handleAddEmojiClick(item.id)} className='AddEmojiButton'>
                                     <S.NotificationAddEmoji src={Emoji} />
                                 </S.NotificationAddEmojiButton>
-                                {item.emojiDisplay.map((emoji, childKey) => (
+                                {item.emoji.map((emoji, childKey) => (
                                     <S.NotificationEmojiWrapper
                                         onClick={() => handleEmojiClick(parentKey, emoji)}
                                         key={childKey}
-                                        className={emoji.liked ? "Clicked" : ""}
+                                        className={emoji.userList?.includes(user?.id ?? -1) ? "Clicked" : ""}
                                     >
-                                        <S.NotificationEmojiCount className={emoji.liked ? "Clicked" : ""}>
-                                            {emoji.emoji} {emoji.count}
+                                        <S.NotificationEmojiCount className={emoji.userList?.includes(user?.id ?? -1) ? "Clicked" : ""}>
+                                            {emoji.emoji} {emoji.userList?.length}
                                         </S.NotificationEmojiCount>
                                     </S.NotificationEmojiWrapper>
                                 ))}
                             </S.NotificationEmojiBox>
-                            {isEmojiPickerVisible && activeNotification === parentKey && (
+                            {isEmojiPickerVisible && activeNotificationId === item.id && (
                                 <AddEmoji
                                     isOpened={isEmojiPickerVisible}
                                     setIsOpened={setEmojiPickerVisible}

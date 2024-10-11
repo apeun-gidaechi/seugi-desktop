@@ -283,14 +283,14 @@ export const PaginationContainer = styled.div`
   gap:4px;
 `
 
-export const PageButton = styled.button`
+export const PageButton = styled.button<{ active: boolean }>`
   width:30px;
   height:30px;
 
   border:none;
   border-radius:4px;
 
-  background-color:${SeugiColor.Primary200};
+  background-color: ${(props) => (props.active ? `${SeugiColor.Primary200}` : `${SeugiColor.Gray300}`)};
   ${SeugiFont.body.body1};
   color:${SeugiColor.White};
 
