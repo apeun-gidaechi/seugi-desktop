@@ -3,7 +3,7 @@ import { handleUserRole } from '@/Util/Role/WhatisYourRole';
 
 const index = () => {
     const token = window.localStorage.getItem("accessToken");
-    const workspaceId = window.localStorage.getItem('workspaceId');
+    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
     
     useEffect(() => {
         document.body.style.overflow = "hidden";

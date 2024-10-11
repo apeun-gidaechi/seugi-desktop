@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import { WorkspaceName } from '@/Api/workspace';
 
 const index = () => {
     const [workspaceName, setWorkspaceName] = useState("");
     const [showChangeschool, setShowChangeschool] = useState(false);
     const ChangeSchoolRef = useRef<HTMLDivElement>(null);
-    const workspaceId = window.localStorage.getItem('workspaceId');
+    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             const target = e.target as Node | null;

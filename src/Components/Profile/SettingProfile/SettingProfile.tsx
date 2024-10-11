@@ -16,7 +16,7 @@ interface SettingProfileProps {
 }
 
 const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
-    const workspaceId = window.localStorage.getItem('workspaceId');
+    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
     const token = window.localStorage.getItem('accessToken');
     const [name, setName] = useState('');
     const [isEditing, setIsEditing] = useState(false);
