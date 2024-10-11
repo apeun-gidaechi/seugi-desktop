@@ -3,7 +3,7 @@ import * as S from '@/Components/Home/Notification/ChangeNotice/ChangeNotice.sty
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import AlertContainer from '@/Components/Alert/Alert';
 import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNotice';
-import { getNoticeId } from '@/Api/Home';
+import { fetchingNotice } from '@/Api/Home';
 
 interface Props {
     onClose: () => void;
@@ -16,7 +16,7 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutate
     const [currentUserId, setCurrentUserId] = useState<number | undefined>(undefined);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [editMode, setEditMode] = useState<boolean>(false);
-    const workspaceId = window.localStorage.getItem('workspaceId');
+    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
     const userRole = window.localStorage.getItem('Role');
 
     const ref = useRef<HTMLDivElement>(null);
@@ -24,7 +24,7 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutate
     const handleGetNoticeId = async () => {
         try {
             if (workspaceId !== null) {
-                const NoticeIds = await getNoticeId(workspaceId);
+                const NoticeIds = await fetchingNotice(workspaceId);
                 const notification = NoticeIds.find((item: any) => item.id === notificationId);
 
                 if (notification) {
