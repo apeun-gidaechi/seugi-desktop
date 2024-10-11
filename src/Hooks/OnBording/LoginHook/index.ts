@@ -27,41 +27,32 @@ const index = () => {
     const [alertMessage, setAlertMessage] = useState<string>("");
     const fcmToken = window.localStorage.getItem('fcmToken');
 
-    const getOneWorkspaceIdAndSet = async () => {
-        const lastWorkspace = window.localStorage.getItem("lastworkspace");
-        const checkWorkspaces = await getMyWorkspaces();
-
-        if (lastWorkspace) {
-            window.localStorage.setItem("workspaceId", lastWorkspace);
-        } else if (checkWorkspaces && checkWorkspaces.length > 0) {
-            window.localStorage.setItem("workspaceId", checkWorkspaces[0].workspaceId);
-        } else {
-            console.error("워크스페이스를 찾을 수 없습니다.");
-            return; 
-        }
-        window.localStorage.removeItem('lastworkspace');
-    };
-
-
-    const importWorkspace = async () => {
+    const manageWorkspace = async () => {
         try {
+            const lastWorkspace = window.localStorage.getItem("lastworkspace");
             const checkWorkspaces = await getMyWorkspaces();
 
-            console.log(checkWorkspaces.length);
-
-            if (checkWorkspaces && checkWorkspaces.length === 0) {
+            if (!checkWorkspaces || checkWorkspaces.length === 0) {
+                console.error("워크스페이스를 찾을 수 없습니다.");
                 navigate(paths.home);
-            } else {
-                getOneWorkspaceIdAndSet().then(() => {
-                    navigate(paths.home);
-                });
+                return;
             }
+
+            if (lastWorkspace) {
+                window.localStorage.setItem("workspaceId", lastWorkspace);
+            } else {
+                window.localStorage.setItem("workspaceId", checkWorkspaces[0].workspaceId);
+            }
+
+            window.localStorage.removeItem('lastworkspace');
+            navigate(paths.home);
         } catch (error) {
             console.log("Error fetching workspace:", error);
             setAlertMessage("워크스페이스 정보를 가져오는 중 오류가 발생했습니다.");
             setShowAlert(true);
         }
     };
+
 
     const handleLogin = async () => {
         try {
@@ -89,7 +80,7 @@ const index = () => {
             window.localStorage.setItem("accessToken", accessToken);
             window.localStorage.setItem("refreshToken", refreshToken);
 
-            importWorkspace();
+            manageWorkspace();
             getMyInfo();
         } catch (error) {
             setAlertMessage(
@@ -137,7 +128,7 @@ const index = () => {
                 window.localStorage.setItem("accessToken", accessToken);
                 window.localStorage.setItem("refreshToken", refreshToken);
 
-                importWorkspace();
+                manageWorkspace();
             } catch (error) {
                 setAlertMessage(
                     "구글 로그인 중 오류가 발생했습니다. 다시 시도해주세요."
@@ -161,7 +152,7 @@ const index = () => {
         handleLogin,
         setPassword,
         setShowPassword,
-        getOneWorkspaceIdAndSet,
+        manageWorkspace,
         handleKeyDown,
         handleCloseAlert,
         getMyInfo,
