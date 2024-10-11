@@ -12,7 +12,7 @@ interface CreateNoticeProps {
 const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, mutateNotifications }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const workspaceId = window.localStorage.getItem('workspaceId');
+    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
 
     const fetchNotice = async () => {
         if (notificationId) {

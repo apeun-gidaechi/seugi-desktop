@@ -3,7 +3,7 @@ import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import React, { useState, useEffect, useRef } from 'react';
 
 const index = () => {
-    const workspaceId = window.localStorage.getItem("workspaceId");
+    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
     const [isEditing, setIsEditing] = useState(null);
     const [isSettingOpen, setIsSettingOpen] = useState(false);
     const [name, setName] = useState('');
