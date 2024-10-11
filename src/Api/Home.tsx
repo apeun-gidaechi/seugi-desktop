@@ -10,11 +10,6 @@ export const getNotification = async (workspaceId: string, page: number) => {
     return res.data.data;
 }
 
-export const getNoticeId = async (workspaceId: string) => {
-    const res = await SeugiCustomAxios.get(`notification/${workspaceId}`);
-    return res.data.data
-}
-
 export const fetchingNotice = async (workspaceId: string) => {
     const res = await SeugiCustomAxios.get(`/notification/${workspaceId}`);
     return res.data.data;
