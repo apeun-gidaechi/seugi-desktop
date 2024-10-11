@@ -6,7 +6,6 @@ export const getTimeTable = async (workspaceId: string) => {
 }
 
 export const getNotification = async (workspaceId: string, page: number) => {
-    console.log(workspaceId, page);
     const res = await SeugiCustomAxios.get(`/notification/${workspaceId}?page=${page}&size=365`);
     return res.data.data;
 }
