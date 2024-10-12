@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { clearAccessToken, SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
-import createSchoolImg from '@/assets/image/join-school/createshoolimg.svg';
+import createSchoolImg from '@/Assets/image/join-school/createshoolimg.svg';
 import { getMyWorkspaces } from '@/Api/workspace';
 import { paths } from '@/Constants/paths';
 

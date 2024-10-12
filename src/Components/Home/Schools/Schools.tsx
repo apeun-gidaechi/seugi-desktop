@@ -1,5 +1,5 @@
 import React from 'react';
-import SchoolImg from "@/assets/image/home/school.svg";
+import SchoolImg from "@/Assets/image/home/school.svg";
 import * as S from '@/Components/Home/Schools/Schools.style';
 import Changeschool from '@/Components/Home/ChangeSchool/ChangeSchool';
 

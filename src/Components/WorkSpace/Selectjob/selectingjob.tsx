@@ -1,11 +1,10 @@
 import React from 'react';
 
 import * as S from './selectingjob.style';
-import Student from '@/assets/image/join-school/selectjob/student.svg';
-import Teacher from '@/assets/image/join-school/selectjob/teacher.svg';
-import Checkline from '@/assets/image/join-school/selectjob/check_line.svg';
-import { clearAccessToken } from '@/Api/SeugiCutomAxios';
-import Backimg from '@/assets/image/Backimg.svg';
+import Student from '@/Assets/image/join-school/selectjob/student.svg';
+import Teacher from '@/Assets/image/join-school/selectjob/teacher.svg';
+import Checkline from '@/Assets/image/join-school/selectjob/check_line.svg';
+import Backimg from '@/Assets/image/Backimg.svg';
 
 import useSelectJob from '@/Hooks/Workspace/SelectJob/index';
 

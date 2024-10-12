@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import HomeBookImg from "@/assets/image/home/homebook.svg";
-import ArrowImg from "@/assets/image/home/arrow.svg";
+import HomeBookImg from "@/Assets/image/home/homebook.svg";
+import ArrowImg from "@/Assets/image/home/arrow.svg";
 import NoSchedule from '@/Assets/image/home/NoSchedule.svg';
 import * as S from '@/Components/Home/DailySchedule/DailySchedule.style';
 import { SeugiColor } from '@/Design/color/SeugiColor';
