@@ -4,7 +4,6 @@ import { setAccessToken } from '@/Api/SeugiCutomAxios';
 import { useUserDispatchContext } from '@/Contexts/userContext';
 import axios from "axios";
 import config from "@/constants/config/config.json";
-import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { getMyWorkspaces } from "@/Api/workspace";
 import { getMyInfos } from "@/Api/profile";

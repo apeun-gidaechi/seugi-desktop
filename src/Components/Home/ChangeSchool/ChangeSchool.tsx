@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as S from "./ChangeSchool.style";
-import Arrow from "@/assets/image/home/arrow.svg";
+import Arrow from "@/Assets/image/home/arrow.svg";
 import { getMyWaitingWorkspace, getMyWorkspaces } from "@/Api/workspace";
 import { paths } from "@/Constants/paths";
 
