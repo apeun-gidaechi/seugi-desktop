@@ -27,13 +27,9 @@ const index = () => {
         }
 
         try {
-            const myWorkspace = await getMyWorkspaces();
+            await getMyWorkspaces();
+            navigate(paths.home);
 
-            if (myWorkspace.length > 0) {
-                navigate(paths.home);
-            } else {
-                navigate(paths.unhome);
-            }
         } catch (error) {
             if (isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
