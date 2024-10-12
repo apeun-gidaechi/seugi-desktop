@@ -11,5 +11,4 @@ export const paths = {
     createschool: '/createschool',
     waitingjoin: '/waitingjoin',
     GroupChat: 'GroupChat',
-    unhome: '/unhome',
 } as const;
