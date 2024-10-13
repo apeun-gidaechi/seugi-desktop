@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import * as S from "@/components/Chat/ChatSideBar/index.style"
-import SearchIcon from "@/assets/image/chat-components/Search.svg";
-import AvatarProfile from "@/assets/image/chat-components/Avatar.svg";
+import * as S from "@/Components/Chat/ChatSideBar/index.style"
+import SearchIcon from "@/Assets/image/chat-components/Search.svg";
+import AvatarProfile from "@/Assets/image/chat-components/Avatar.svg";
 import Navbar from "@/Components/common/Navbar/Navbar";
 import TitleText from "@/Components/common/TitleText/index";
-import CreateRoomBtn from "@/assets/image/sidebar/add_fill.svg";
+import CreateRoomBtn from "@/Assets/image/sidebar/add_fill.svg";
 import useChatSidebar from "@/Hooks/Common/Sidebar/useChatSidebar";
 import CreateRoomPlus from "@/Components/Chat/CreateRoomPlus/createRoomPlus";
 

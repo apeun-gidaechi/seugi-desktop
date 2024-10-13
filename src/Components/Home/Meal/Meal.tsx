@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import * as S from '@/Components/Home/Meal/Meal.style';
 
-import CafeteriaImg from "@/assets/image/home/cafeteria.svg";
-import ArrowImg from "@/assets/image/home/arrow.svg";
+import CafeteriaImg from "@/Assets/image/home/cafeteria.svg";
+import ArrowImg from "@/Assets/image/home/arrow.svg";
 
 import NoMeal from '@/Assets/image/home/NoMeal.svg';
 

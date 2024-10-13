@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@/Components/Button/Button";
 import * as S from "./JoinSuccess.style";
-import Backimg from "@/assets/image/Backimg.svg";
+import Backimg from "@/Assets/image/Backimg.svg";
 
 import useJoinSuccess from '@/Hooks/Workspace/JoinSuccess/index';
 

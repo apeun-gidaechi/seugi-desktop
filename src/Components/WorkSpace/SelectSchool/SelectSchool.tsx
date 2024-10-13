@@ -1,9 +1,9 @@
 import React from 'react';
 import * as S from './SelectSchool.style';
 
-import JoinSchoolimg from '@/assets/image/join-school/JoinSchool.svg';
-import CreateSchoolimg from '@/assets/image/join-school/JoinSchool/RoundedCircleImage.svg';
-import Backimg from '@/assets/image/Backimg.svg'
+import JoinSchoolimg from '@/Assets/image/join-school/JoinSchool.svg';
+import CreateSchoolimg from '@/Assets/image/join-school/JoinSchool/RoundedCircleImage.svg';
+import Backimg from '@/Assets/image/Backimg.svg'
 
 import useSelectSchool from '@/Hooks/Workspace/SelectSchool/index';
 

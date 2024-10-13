@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import * as S from "./mainRoomSearch.style";
 
-import AvatarImg from '@/assets/image/chat-components/Avatar.svg';
-import FindIcon from "@/assets/image/sidebar/Findicon.svg";
+import AvatarImg from '@/Assets/image/chat-components/Avatar.svg';
+import FindIcon from "@/Assets/image/sidebar/Findicon.svg";
 
 interface DataType {
     id: number;
