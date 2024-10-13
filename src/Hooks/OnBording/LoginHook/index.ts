@@ -8,6 +8,8 @@ import { getMyWorkspaces } from "@/Api/workspace";
 import { getMyInfos } from "@/Api/profile";
 import { paths } from "@/Constants/paths";
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
+
 const index = () => {
     const navigate = useNavigate();
 
