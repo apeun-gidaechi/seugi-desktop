@@ -3,7 +3,7 @@ import * as S from "./SchoolCode.style";
 import Button from "@/Components/Button/Button";
 import CodeTextField from "@/Components/Onboarding/CodeTextField/CodeTextField";
 
-import Backimg from "@/assets/image/Backimg.svg";
+import Backimg from "@/Assets/image/Backimg.svg";
 
 import useSchoolCode from '@/Hooks/Workspace/Schoolcode/index';
 

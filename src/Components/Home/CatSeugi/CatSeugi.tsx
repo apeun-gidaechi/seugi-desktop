@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import * as S from '@/Components/Home/CatSeugi/CatSeugi.style';
 
-import SearchImg from "@/assets/image/home/search.svg";
-import SeugiImg from "@/assets/image/onbording/Start/seugilogo.svg";
+import SearchImg from "@/Assets/image/home/search.svg";
+import SeugiImg from "@/Assets/image/onbording/Start/seugilogo.svg";
 
 const CatSeugi = () => {
     const [inputValue, setInputValue] = useState('');

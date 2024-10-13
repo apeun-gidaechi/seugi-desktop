@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SelectBar from "@/assets/image/sidebar/selectsidebar.svg";
+import SelectBar from "@/Assets/image/sidebar/selectsidebar.svg";
 
 export const SideBarMenu = styled.div`
   position: relative;

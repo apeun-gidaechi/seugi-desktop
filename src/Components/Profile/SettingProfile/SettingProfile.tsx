@@ -10,6 +10,7 @@ import Arrow from '@/assets/image/profile/arrow.svg';
 import Divider from '@/assets/image/profile/ProflieDivider.svg';
 import { fetchingProfile } from '@/Api/profile';
 
+
 interface SettingProfileProps {
     onClose: () => void;
     onNameChange: (newName: string) => void;

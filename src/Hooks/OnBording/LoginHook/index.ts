@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { setAccessToken } from '@/Api/SeugiCutomAxios';
 import { useUserDispatchContext } from '@/Contexts/userContext';
 import axios from "axios";
-import config from "@/constants/config/config.json";
 import { useGoogleLogin } from "@react-oauth/google";
 import { getMyWorkspaces } from "@/Api/workspace";
 import { getMyInfos } from "@/Api/profile";
@@ -18,7 +17,7 @@ const index = () => {
             document.body.style.overflow = "auto";
         };
     }, []);
-    
+
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -56,7 +55,7 @@ const index = () => {
     const handleLogin = async () => {
         try {
             const res = await axios.post(
-                `${config.serverurl}/member/login`,
+                `${SERVER_URL}/member/login`,
                 {
                     email,
                     password,
@@ -114,7 +113,7 @@ const index = () => {
         onSuccess: async ({ code }) => {
             try {
                 const res = await axios.post(
-                    `${config.serverurl}/oauth/google/authenticate`,
+                    `${SERVER_URL}/oauth/google/authenticate`,
                     { code }
                 );
 

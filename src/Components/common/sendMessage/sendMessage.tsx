@@ -3,11 +3,11 @@ import useChatMessages from '@/Hooks/Common/SendMessage/useChatMessages';
 import useFileUpload from '@/Hooks/Common/SendMessage/useFileUpload';
 import * as S from "./sendMessage.style";
 import MessageBox from "@/Components/Chat/MessageBox/messageBox";
-import PlusMessageFile from "@/assets/image/chat-components/MessageFile.svg";
-import SendArrow from "@/assets/image/chat-components/SendArrow.svg";
-import SendArrowBlue from "@/assets/image/chat-components/sendBlueArrow.svg";
-import FileIcon from "@/assets/image/chat/fileButton/file_line.svg";
-import ImageIcon from "@/assets/image/chat/fileButton/image_line.svg";
+import PlusMessageFile from "@/Assets/image/chat-components/MessageFile.svg";
+import SendArrow from "@/Assets/image/chat-components/SendArrow.svg";
+import SendArrowBlue from "@/Assets/image/chat-components/sendBlueArrow.svg";
+import FileIcon from "@/Assets/image/chat/fileButton/file_line.svg";
+import ImageIcon from "@/Assets/image/chat/fileButton/image_line.svg";
 
 enum FileType {
   IMG = "IMG",
