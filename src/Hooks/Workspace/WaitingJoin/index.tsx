@@ -16,12 +16,8 @@ const index = () => {
 
     const handleWaitingJoin = async () => {
         try {
-            const workspaces = await getMyWorkspaces();
-            if (workspaces.length > 0) {
-                navigate(paths.home);
-            } else {
-                navigate(paths.unhome);
-            }
+            await getMyWorkspaces();
+            navigate(paths.home);
         } catch (error) {
             console.log("Error fetching workspace:", error);
         }
