@@ -10,5 +10,5 @@ export const paths = {
     joinsuccess: '/joinsuccess',
     createschool: '/createschool',
     waitingjoin: '/waitingjoin',
-    GroupChat: 'GroupChat',
+    groupchat: '/groupchat',
 } as const;

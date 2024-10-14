@@ -15,6 +15,7 @@ export const ChatWrapper = styled.div`
   position: relative;
 
   display: flex;
+  width: 100vw;
 `;
 
 export const ChatContent = styled.div`
