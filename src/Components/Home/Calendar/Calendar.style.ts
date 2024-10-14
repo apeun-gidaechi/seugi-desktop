@@ -49,14 +49,14 @@ export const SArrowLogo = styled.img`
   position: relative;
 `;
 
-export const DummyBox = styled.div`
+export const Box = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 4px;
   align-self: stretch;
 `;
 
-export const DateDummy = styled.div`
+export const DateBox = styled.div`
   display: flex;
   padding: 4px;
   flex-direction: column;
@@ -73,7 +73,7 @@ export const DateText = styled.span`
   ${SeugiFont.body.body1};
 `;
 
-export const SubDummy = styled.div`
+export const SubBox = styled.div`
   display: flex;
   padding: 4px 0px;
   flex-direction: column;
@@ -89,7 +89,7 @@ export const SubTitle = styled.span`
   ${SeugiFont.body.body2};
 `;
 
-export const D_DayDummy = styled.div`
+export const D_DayBox = styled.div`
   display: flex;
   padding: 4px 0px;
   flex-direction: column;
