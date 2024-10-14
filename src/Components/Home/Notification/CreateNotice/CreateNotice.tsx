@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '@/Components/Home/Notification/CreateNotice/CreateNotice.style';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { fetchingNotice } from '@/Api/Home';
 
 interface CreateNoticeProps {
     onClose: () => void;
     notificationId?: number;
-    refreshNotifications: () => void;
+    mutateNotifications: () => void;
 }
 
-const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, refreshNotifications }) => {
+const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, mutateNotifications }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const workspaceId = window.localStorage.getItem('workspaceId');
+    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
 
-    // 공지 불러오는 함수 (수정 모드일 때)
     const fetchNotice = async () => {
         if (notificationId) {
             console.log(notificationId);
             try {
-                const res = await SeugiCustomAxios.get(`/notification/${workspaceId}`);
-                const notice = res.data.data.find((item: any) => item.id === notificationId);
-                if (notice) {
-                    setTitle(notice.title);
-                    setContent(notice.content);
+                if (workspaceId !== null) {
+                    const fetching = await fetchingNotice(workspaceId);
+                    const notice = fetching.find((item: any) => item.id === notificationId);
+                    if (notice) {
+                        setTitle(notice.title);
+                        setContent(notice.content);
+                    }
                 }
             } catch (error) {
                 console.error("Error fetching notice:", error);
@@ -31,11 +33,9 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, re
     };
 
     useEffect(() => {
-        // 컴포넌트가 마운트될 때 공지 데이터를 불러옴 (수정 모드인 경우)
         fetchNotice();
     }, [notificationId]);
 
-    // 공지 작성 또는 수정 함수
     const handlePostNotice = async () => {
         try {
             if (notificationId) {
@@ -45,6 +45,7 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, re
                     content,
                     id: notificationId
                 });
+
             } else {
                 // 새 공지 작성 API 호출
                 await SeugiCustomAxios.post(`/notification`, {
@@ -53,7 +54,7 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, re
                     workspaceId
                 });
             }
-            refreshNotifications();
+            mutateNotifications();
             onClose();
         } catch (error) {
             console.error("Error posting notice:", error);

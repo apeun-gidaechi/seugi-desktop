@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { WorkspaceName } from '@/Api/workspace';
 
 const index = () => {
     const [workspaceName, setWorkspaceName] = useState("");
     const [showChangeschool, setShowChangeschool] = useState(false);
     const ChangeSchoolRef = useRef<HTMLDivElement>(null);
-
+    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             const target = e.target as Node | null;
@@ -29,11 +29,11 @@ const index = () => {
     }, [showChangeschool]);
 
     const getWorkspaceName = async () => {
-        const workspaceId = window.localStorage.getItem("workspaceId");
+        if (workspaceId !== null) {
+            const workspaceNms = await WorkspaceName(workspaceId);
 
-        const res = await SeugiCustomAxios.get(`/workspace/${workspaceId}`);
-
-        setWorkspaceName(res.data.data.workspaceName);
+            setWorkspaceName(workspaceNms.workspaceName);
+        }
     };
 
     useEffect(() => {

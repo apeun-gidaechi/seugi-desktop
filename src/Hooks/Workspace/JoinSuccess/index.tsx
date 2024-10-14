@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { getWorkspaceInfo } from "@/Api/workspace";
+import { paths } from '@/Constants/paths';
 
 const index = () => {
     const navigate = useNavigate();
@@ -12,22 +13,20 @@ const index = () => {
     const { verificationCode } = location.state || {};
 
     const handleJoinSuccess = () => {
-        navigate('/selectjob', { state: { verificationCode, workspaceId } });
+        navigate(paths.selectjob, { state: { verificationCode, workspaceId } });
     };
 
     useEffect(() => {
         const handleSchoolInfo = async () => {
             try {
+                const schoolInfos = await getWorkspaceInfo(verificationCode);
 
-                const res = await SeugiCustomAxios.get(`/workspace/search/${verificationCode}`);
-                const data = res.data.data;
-
-                setWorkspaceName(data.workspaceName);
+                setWorkspaceName(schoolInfos.workspaceName);
                 setSchoolInfo(
-                    `학생 ${data.studentCount}명 선생님 ${data.teacherCount}명`
+                    `학생 ${schoolInfos.studentCount}명 선생님 ${schoolInfos.teacherCount}명`
                 );
-                setSchoolImgUrl(data.workspaceImageUrl);
-                setWorkspaceId(data.workspaceId);
+                setSchoolImgUrl(schoolInfos.workspaceImageUrl);
+                setWorkspaceId(schoolInfos.workspaceId);
             } catch (error) {
                 console.error("Failed to fetch school information:", error);
             }
@@ -36,7 +35,7 @@ const index = () => {
     }, [verificationCode]);
 
     const Backclick = () => {
-        navigate("/schoolcode");
+        navigate(paths.schoolcode);
     };
   return {
       workspaceName,

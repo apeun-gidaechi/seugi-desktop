@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 // import config from '@/constants/config/config.json';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { paths } from '@/Constants/paths';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
@@ -58,7 +59,7 @@ const index = () => {
                 code: verificationCode,
             });
             console.log(res);
-            navigate('/');
+            navigate(paths.login);
         } catch (error) {
             console.error('Error sending code:', error);
         }
@@ -88,7 +89,7 @@ const index = () => {
     };
 
     const Backclick = () => {
-        navigate('/emailsignup')
+        navigate(paths.signup)
     }
 
     return {

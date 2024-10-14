@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { paths } from '@/Constants/paths';
 
 type Role = 'NONE' | 'STUDENT' | 'TEACHER';
 
@@ -48,7 +49,7 @@ const index = () => {
             });
 
             if (res.status === 200) {
-                navigate('/waitingjoin', { state: { token } });
+                navigate(paths.waitingjoin, { state: { token } });
             } else {
                 console.error("워크스페이스 가입 실패:", res.data);
             }
@@ -58,7 +59,7 @@ const index = () => {
     };
 
     const Backclick = () => {
-        navigate('/joinsuccess')
+        navigate(paths.joinsuccess);
     }
 
     return {

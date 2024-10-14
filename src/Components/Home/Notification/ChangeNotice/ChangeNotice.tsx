@@ -3,31 +3,35 @@ import * as S from '@/Components/Home/Notification/ChangeNotice/ChangeNotice.sty
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import AlertContainer from '@/Components/Alert/Alert';
 import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNotice';
+import { fetchingNotice } from '@/Api/Home';
 
 interface Props {
     onClose: () => void;
     notificationId: number;
     userId: number;
-    refreshNotifications: () => void;
+    mutateNotifications: () => void;
 }
 
-const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refreshNotifications }) => {
+const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutateNotifications }) => {
     const [currentUserId, setCurrentUserId] = useState<number | undefined>(undefined);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [editMode, setEditMode] = useState<boolean>(false);
-    const workspaceId = window.localStorage.getItem('workspaceId');
+    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
     const userRole = window.localStorage.getItem('Role');
 
     const ref = useRef<HTMLDivElement>(null);
 
     const handleGetNoticeId = async () => {
         try {
-            const res = await SeugiCustomAxios.get(`notification/${workspaceId}`);
-            const notification = res.data.data.find((item: any) => item.id === notificationId);
+            if (workspaceId !== null) {
+                const NoticeIds = await fetchingNotice(workspaceId);
+                const notification = NoticeIds.find((item: any) => item.id === notificationId);
 
-            if (notification) {
-                setCurrentUserId(notification.userId);
+                if (notification) {
+                    setCurrentUserId(notification.userId);
+                }
             }
+
         } catch (error) {
             console.error('Failed to fetch notification data', error);
         }
@@ -46,7 +50,7 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refres
         try {
             await SeugiCustomAxios.delete(`/notification/${workspaceId}/${notificationId}`);
             handleGetNoticeId();
-            refreshNotifications();
+            mutateNotifications();
         } catch (error) {
             console.error('Delete Error', error);
         }
@@ -55,13 +59,20 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refres
     const canDelete = currentUserId === userId || userRole === 'MIDDLE_ADMIN' || userRole === 'ADMIN';
 
     const handleClickOutside = (event: MouseEvent) => {
-        if (ref.current && !ref.current.contains(event.target as Node)) {
+        const target = event.target as Node | null;
+
+        if (target instanceof Element && target.closest('.point')) {
+            return;
+        }
+
+        if (ref.current && !ref.current.contains(target)) {
             onClose();
         }
     };
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
+
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
@@ -73,7 +84,7 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, refres
                 <CreateNotice
                     notificationId={notificationId}
                     onClose={onClose}
-                    refreshNotifications={refreshNotifications}
+                    mutateNotifications={mutateNotifications}
                 />
             ) : (
                 <S.CorrectionNoticeMain ref={ref}>

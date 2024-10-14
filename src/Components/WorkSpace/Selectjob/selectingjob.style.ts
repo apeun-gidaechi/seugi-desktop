@@ -12,6 +12,7 @@ export const SelectMain = styled.div`
 `
 
 export const SelectFirstWrap = styled.div`
+    position:relative;
     z-index:5;
     text-align: center;
     height: 447px;
@@ -201,7 +202,7 @@ export const BackButton = styled.button`
     background:none;
 
     cursor: pointer;
-    margin-right:27vw;
+    left:0;
 `
 
 export const BackImg = styled.img`
