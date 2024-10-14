@@ -5,7 +5,7 @@ import SelectedChatRoom from '@/Components/Chat/chatRoom/Select/index';
 import Sidebar from '@/Components/common/sidebar/sidebar';
 import TopButton from '@/Components/Button/chatButton/index';
 
-const Chat = () => {
+const GroupChat = () => {
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
   const currentUser = "ㅠㅠ"; // 하드코딩 수정예정
 
@@ -32,4 +32,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default GroupChat;
