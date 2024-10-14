@@ -4,7 +4,6 @@ import schoolimg from '@/Assets/image/join-school/schoolimg.svg';
 import ment from '@/Assets/image/join-school/ment.svg';
 import Button from '@/Components/Button/Button';
 import { clearAccessToken } from '@/Api/SeugiCutomAxios';
-import Session from '@/Util/TokenExpired/TokenExpired';
 
 import useWaitingJoin from '@/Hooks/Workspace/WaitingJoin/index';
 
@@ -13,7 +12,6 @@ const WaitingJoin = () => {
 
     return (
         <S.WaitingAcceptanceFrame>
-            <Session token={WaitingJoin.token} clearAccessToken={clearAccessToken} />
             <S.WaitingAcceptanceContainer>
                 <S.SchoolInfoContainer>
                     <S.SchoolImg src={schoolimg} />

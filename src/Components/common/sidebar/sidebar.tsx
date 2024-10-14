@@ -37,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   return (
     <>
       <S.ChatingPage>
-        <Navbar />
+        {/* <Navbar /> */}
         <S.SideBarChat>
           <div style={{ marginLeft: '1.5%' }}>
             <TitleText />

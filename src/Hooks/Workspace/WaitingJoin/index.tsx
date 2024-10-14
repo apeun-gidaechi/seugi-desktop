@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { paths } from '@/Constants/paths';
+import { getMyWorkspaces } from '@/Api/workspace';
 
 const index = () => {
     const navigate = useNavigate();
@@ -15,12 +16,8 @@ const index = () => {
 
     const handleWaitingJoin = async () => {
         try {
-            const res = await SeugiCustomAxios.get(`/workspace/`);
-            if (res.data.data.length > 0) {
-                navigate('/home');
-            } else {
-                navigate('/unhome');
-            }
+            await getMyWorkspaces();
+            navigate(paths.home);
         } catch (error) {
             console.log("Error fetching workspace:", error);
         }

@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { setAccessToken } from '@/Api/SeugiCutomAxios';
 import { useUserDispatchContext } from '@/Contexts/userContext';
 import axios from "axios";
-// import config from "@/constants/config/config.json";
-import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 import { useGoogleLogin } from "@react-oauth/google";
+import { getMyWorkspaces } from "@/Api/workspace";
+import { getMyInfos } from "@/Api/profile";
+import { paths } from "@/Constants/paths";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
@@ -26,41 +27,32 @@ const index = () => {
     const [alertMessage, setAlertMessage] = useState<string>("");
     const fcmToken = window.localStorage.getItem('fcmToken');
 
-    const getOneWorkspaceIdAndSet = async () => {
-        const token = window.localStorage.getItem("accessToken");
-        const res = await axios.get(`${SERVER_URL}/workspace/`, {
-            headers: {
-                Authorization: `${token}`,
-            },
-        });
-
-        window.localStorage.setItem("workspaceId", res.data.data[0].workspaceId);
-    };
-
-    const importWorkspace = async () => {
+    const manageWorkspace = async () => {
         try {
-            const token = window.localStorage.getItem("accessToken");
-            const res = await axios.get(`${SERVER_URL}/workspace/`, {
-                headers: {
-                    Authorization: `${token}`,
-                },
-            });
+            const lastWorkspace = window.localStorage.getItem("lastworkspace");
+            const checkWorkspaces = await getMyWorkspaces();
 
-            console.log(res.data.data.length);
-
-            if (res.data.data && res.data.data.length === 0) {
-                navigate("/unhome");
-            } else {
-                getOneWorkspaceIdAndSet().then(() => {
-                    navigate("/home");
-                });
+            if (!checkWorkspaces || checkWorkspaces.length === 0) {
+                console.error("워크스페이스를 찾을 수 없습니다.");
+                navigate(paths.home);
+                return;
             }
+
+            if (lastWorkspace) {
+                window.localStorage.setItem("workspaceId", lastWorkspace);
+            } else {
+                window.localStorage.setItem("workspaceId", checkWorkspaces[0].workspaceId);
+            }
+
+            window.localStorage.removeItem('lastworkspace');
+            navigate(paths.home);
         } catch (error) {
             console.log("Error fetching workspace:", error);
             setAlertMessage("워크스페이스 정보를 가져오는 중 오류가 발생했습니다.");
             setShowAlert(true);
         }
     };
+
 
     const handleLogin = async () => {
         try {
@@ -88,7 +80,7 @@ const index = () => {
             window.localStorage.setItem("accessToken", accessToken);
             window.localStorage.setItem("refreshToken", refreshToken);
 
-            importWorkspace();
+            manageWorkspace();
             getMyInfo();
         } catch (error) {
             setAlertMessage(
@@ -98,6 +90,7 @@ const index = () => {
             console.log(error);
         }
     };
+
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -112,8 +105,8 @@ const index = () => {
     const setUser = useUserDispatchContext();
 
     const getMyInfo = async () => {
-        const res = await SeugiCustomAxios.get(`/member/myInfo`);
-        setUser(res.data.data);
+        const MyInfos = await getMyInfos();
+        setUser(MyInfos);
     }
 
     const handleGoogleLogin = useGoogleLogin({
@@ -135,7 +128,7 @@ const index = () => {
                 window.localStorage.setItem("accessToken", accessToken);
                 window.localStorage.setItem("refreshToken", refreshToken);
 
-                importWorkspace();
+                manageWorkspace();
             } catch (error) {
                 setAlertMessage(
                     "구글 로그인 중 오류가 발생했습니다. 다시 시도해주세요."
@@ -159,7 +152,7 @@ const index = () => {
         handleLogin,
         setPassword,
         setShowPassword,
-        getOneWorkspaceIdAndSet,
+        manageWorkspace,
         handleKeyDown,
         handleCloseAlert,
         getMyInfo,

@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { clearAccessToken, SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import createSchoolImg from '@/Assets/image/join-school/createshoolimg.svg';
+import { getMyWorkspaces } from '@/Api/workspace';
+import { paths } from '@/Constants/paths';
 
 const index = () => {
     const navigate = useNavigate();
@@ -25,19 +27,14 @@ const index = () => {
         }
 
         try {
-            const res = await SeugiCustomAxios.get(`/workspace/`);
-            console.log(res);
+            await getMyWorkspaces();
+            navigate(paths.home);
 
-            if (res.data.data.length > 0) {
-                navigate('/home');
-            } else {
-                navigate('/unhome');
-            }
         } catch (error) {
             if (isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
                     clearAccessToken();
-                    navigate('/');
+                    navigate(paths.login);
                 } else {
                     console.error('Error sending code:', error.response?.data);
                 }
@@ -63,13 +60,12 @@ const index = () => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log('Image uploaded', res.data);
-            setWorkspaceImageUrl(res.data.data);
+            setWorkspaceImageUrl(res.data.data.url);
         } catch (error) {
             if (isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
                     clearAccessToken();
-                    navigate('/');
+                    navigate(paths.login);
                 } else {
                     console.error('Error uploading image:', error.response?.data);
                 }
@@ -84,7 +80,7 @@ const index = () => {
     };
 
     const Backclick = () => {
-        navigate('/selectschool');
+        navigate(paths.selectschool);
     };
 
     return {

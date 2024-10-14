@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import HomeBookImg from "@/Assets/image/home/homebook.svg";
 import ArrowImg from "@/Assets/image/home/arrow.svg";
+import NoSchedule from '@/Assets/image/home/NoSchedule.svg';
 import * as S from '@/Components/Home/DailySchedule/DailySchedule.style';
-import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 import { SeugiColor } from '@/Design/color/SeugiColor';
+import { getTimeTable } from "@/Api/Home";
 
 interface TimetableItem {
     id: number;
@@ -15,21 +16,27 @@ interface TimetableItem {
     date: string;
 }
 
-const DailySchedule = () => {
-    const workspaceId = window.localStorage.getItem('workspaceId');
-    const [timetable, setTimetable] = useState<TimetableItem[]>([]);
+interface Props {
+    timetable: TimetableItem[];
+}
+
+const DailySchedule = ({ timetable = [] }: Props) => {
+    // const workspaceId = window.localStorage.getItem('workspaceId');
+    // const [timetable, setTimetable] = useState<TimetableItem[]>([]);
     const [currentPeriod, setCurrentPeriod] = useState<number | null>(null);
     const [allPeriodsOver, setAllPeriodsOver] = useState<boolean>(false);
 
-    const handleGetTimeTable = async () => {
-        try {
-            const res = await SeugiCustomAxios.get(`/timetable/day?workspaceId=${workspaceId}`);
-            console.log(res.data);
-            setTimetable(res.data.data);
-        } catch (error) {
-            console.error("Failed to load timetable:", error);
-        }
-    };
+    // const handleGetTimeTable = async () => {
+    //     try {
+    //         if (workspaceId !== null) {
+    //             const timetableres = await getTimeTable(workspaceId);
+    //             setTimetable(timetableres);
+    //         }
+
+    //     } catch (error) {
+    //         console.error("Failed to load timetable:", error);
+    //     }
+    // };
 
     const getCurrentPeriod = () => {
         const now = new Date();
@@ -68,10 +75,6 @@ const DailySchedule = () => {
 
         return null;
     };
-
-    useEffect(() => {
-        handleGetTimeTable();
-    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -128,7 +131,10 @@ const DailySchedule = () => {
                         </S.TimetableRow>
                     </>
                 ) : (
-                    <S.NoScheduleText>오늘은 수업이 없습니다.</S.NoScheduleText>
+                    <S.NoScheduleDiv>
+                        <S.NoScheduleImg src={NoSchedule} />
+                        <S.NoScheduleText>오늘은 수업이 없습니다.</S.NoScheduleText>
+                    </S.NoScheduleDiv>
                 )}
             </S.ScheduleDivBox>
         </S.HomeWrapper1UpContainer>

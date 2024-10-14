@@ -1,8 +1,9 @@
+import { fetchingProfile } from '@/Api/profile';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import React, { useState, useEffect, useRef } from 'react';
 
 const index = () => {
-    const workspaceId = window.localStorage.getItem("workspaceId");
+    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
     const [isEditing, setIsEditing] = useState(null);
     const [isSettingOpen, setIsSettingOpen] = useState(false);
     const [name, setName] = useState('');
@@ -19,11 +20,12 @@ const index = () => {
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                const res = await SeugiCustomAxios.get(`/profile/me?workspaceId=${workspaceId}`);
-                console.log(res.data);
+                if (workspaceId !== null) {
+                    const Profiles = await fetchingProfile(workspaceId);
 
-                setProfileData(res.data.data);
-                setName(res.data.data.member.name);
+                    setProfileData(Profiles);
+                    setName(Profiles.nick);
+                }
             } catch (error) {
                 console.error('Failed to fetch profile data.', error);
             }
@@ -92,17 +94,17 @@ const index = () => {
         setName(newName);
     };
 
-  return {
-      name,
-      isEditing,
-      profileData,
-      isSettingOpen,
-      startEditing,
-      saveProfileData,
-      cancelEditing,
-      toggleSetting,
-      handleNameChange
-  }
+    return {
+        name,
+        isEditing,
+        profileData,
+        isSettingOpen,
+        startEditing,
+        saveProfileData,
+        cancelEditing,
+        toggleSetting,
+        handleNameChange
+    }
 }
 
 export default index

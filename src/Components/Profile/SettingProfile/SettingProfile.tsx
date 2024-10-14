@@ -4,10 +4,12 @@ import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import * as S from '@/Components/Profile/SettingProfile/SettingProfile.style';
 import Correction from '@/Components/Profile/Correction/Correction';
 
-import ProfileImg from '@/Assets/image/profile/settingprofile.svg';
-import CorrectionImg from '@/Assets/image/profile/CorrectionImg.svg';
-import Arrow from '@/Assets/image/profile/arrow.svg';
-import Divider from '@/Assets/image/profile/ProflieDivider.svg';
+import ProfileImg from '@/assets/image/profile/settingprofile.svg';
+import CorrectionImg from '@/assets/image/profile/CorrectionImg.svg';
+import Arrow from '@/assets/image/profile/arrow.svg';
+import Divider from '@/assets/image/profile/ProflieDivider.svg';
+import { fetchingProfile } from '@/Api/profile';
+
 
 interface SettingProfileProps {
     onClose: () => void;
@@ -15,7 +17,7 @@ interface SettingProfileProps {
 }
 
 const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
-    const workspaceId = window.localStorage.getItem('workspaceId');
+    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
     const token = window.localStorage.getItem('accessToken');
     const [name, setName] = useState('');
     const [isEditing, setIsEditing] = useState(false);
@@ -27,10 +29,11 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                const res = await SeugiCustomAxios.get(`/profile/me?workspaceId=${workspaceId}`);
-                console.log(res.data);
+                if (workspaceId !== null) {
+                    const profileRes = await fetchingProfile(workspaceId);
 
-                setName(res.data.data.member.name);
+                    setName(profileRes.nick);
+                }
             } catch (error) {
                 console.error('프로필 데이터를 가져오는데 실패했습니다.', error);
             }
@@ -40,19 +43,25 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
 
     const handleLogout = async () => {
         const fcmToken = window.localStorage.getItem('fcmToken');
-        try{
+
+        if (!workspaceId) {
+            console.error('워크스페이스가 없습니다.');
+            return;
+        }
+
+        try {
             await SeugiCustomAxios.post(`/member/logout`, {
                 fcmToken
-            })
+            });
+            window.localStorage.setItem('lastworkspace', workspaceId);
             window.localStorage.removeItem('accessToken');
             window.localStorage.removeItem('workspaceId');
-            window.location.href = '/';
-            console.log('Delete successfully');
+            window.location.href = '/login';
         } catch (err) {
             console.error(err);
         }
-        
     };
+
 
     const handleSave = async (newName: string) => {
         try {
@@ -70,10 +79,18 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
         try {
             await SeugiCustomAxios.delete(`/member/remove`);
             localStorage.clear();
-            window.location.href = '/';
+            window.location.href = '/login';
         } catch (error) {
             console.error(error);
         }
+    };
+
+    const handleServiceOperation = () => {
+        window.open("https://www.notion.so/byungjjun/5ba79e224f53439bbfa3607e581fe6bf", "_blank");
+    };
+
+    const handlePrivacyPolicy = () => {
+        window.open("https://www.notion.so/byungjjun/58f95c1209fb48b4b74434701290f838", "_blank");
     };
 
     return (
@@ -116,13 +133,13 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
                             </S.ArrowButton>
                         </S.ListItem>
                         <S.Divider src={Divider} />
-                        <S.ListItem>
+                        <S.ListItem onClick={handlePrivacyPolicy}>
                             <S.Text> 개인정보 처리 방침 </S.Text>
                             <S.ArrowButton>
                                 <S.ArrowButtonImg src={Arrow} />
                             </S.ArrowButton>
                         </S.ListItem>
-                        <S.ListItem>
+                        <S.ListItem onClick={handleServiceOperation}>
                             <S.Text> 서비스 운영 정책 </S.Text>
                             <S.ArrowButton>
                                 <S.ArrowButtonImg src={Arrow} />

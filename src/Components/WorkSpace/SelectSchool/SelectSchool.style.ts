@@ -33,6 +33,7 @@ export const ContainerBox = styled.div`
 `;
 
 export const TitleContainer = styled.div`
+    position:relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -83,6 +84,7 @@ export const Subtitle = styled.span`
 `
 
 export const BackButton = styled.button`
+    left:0;
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -92,8 +94,6 @@ export const BackButton = styled.button`
     background:none;
 
     cursor: pointer;
-    margin-right:25vw;
-
 `
 
 export const BackImg = styled.img`

@@ -5,6 +5,7 @@ import { SeugiFont } from "@/Design/text/SeugiFont";
 export const LeftContainer = styled.div`
   display: flex;
   padding: 12px 12px 16px 12px;
+  justify-content:center;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--Corner-Small, 10px);
@@ -15,7 +16,7 @@ export const LeftContainer = styled.div`
 
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 
-  /* position:relative; */
+  position:relative;
 `;
 
 export const NoNotification = styled.span`
@@ -74,6 +75,7 @@ export const NotificationBox = styled.div`
 `;
 
 export const NotificationWrapper = styled.div`
+  position:relative;
   display: flex;
   padding: 12px;
   flex-direction: column;
@@ -121,6 +123,8 @@ export const NotificationContentDescription = styled.span`
 export const NotificationEmojiBox = styled.div`
   display: flex;
 
+  flex-wrap: wrap; 
+  gap: 5px;
   flex-direction: row;
 `;
 
@@ -146,6 +150,9 @@ export const NotificationEmojiWrapper = styled.div`
   position: relative;
 
   display: flex;
+  &.Clicked {
+    font-weight: bold;
+  }
 
   justify-content: center;
   align-items: center;
@@ -248,5 +255,44 @@ export const NotificationActionButtonimg = styled.img`
 
 export const EditedLabel = styled.span`
     color : ${SeugiColor.Gray500};
-    ${SeugiFont.caption.caption1};
+    ${SeugiFont.caption.caption2};
+
+    margin-left:4px;
+`
+
+export const NoNotificationDiv = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
+export const NoNotificationImg = styled.img`
+  margin-bottom:4px;
+`
+
+export const PaginationContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  /* padding:0 0 0 12vw; */
+  /* text-align:center; */
+  margin: 0 auto;
+  gap:4px;
+`
+
+export const PageButton = styled.button<{ active: boolean }>`
+  width:30px;
+  height:30px;
+
+  border:none;
+  border-radius:4px;
+
+  background-color: ${(props) => (props.active ? `${SeugiColor.Primary200}` : `${SeugiColor.Gray300}`)};
+  ${SeugiFont.body.body1};
+  color:${SeugiColor.White};
+
+  cursor: pointer;
 `

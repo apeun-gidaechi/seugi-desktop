@@ -34,6 +34,7 @@ export const SchoolCodeContainer =styled.div`
 `;
 
 export const Header = styled.div`
+    position:relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,6 +85,7 @@ export const ButtonContainer = styled.div`
 `;
 
 export const BackButton = styled.button`
+    left:0;
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -93,8 +95,6 @@ export const BackButton = styled.button`
     background:none;
 
     cursor: pointer;
-    margin-right:27vw;
-
 `
 
 export const BackImg = styled.img`
