@@ -116,7 +116,11 @@ const index = () => {
             try {
                 const res = await axios.post(
                     `${SERVER_URL}/oauth/google/authenticate`,
-                    { code }
+                    {
+                        code,
+                        token:fcmToken,
+                        platform: "WEB"
+                    }
                 );
 
                 if (res.status !== 200) {
