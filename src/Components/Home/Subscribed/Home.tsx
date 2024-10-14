@@ -11,7 +11,7 @@ import Assignment from "../Assignment/Assignment";
 import RegisterSchool from "@/Components/Home/Subscribed/RegisterSchool/RegisterSchool";
 import useSWR from "swr";
 import { getMyWorkspaces, getMyWaitingWorkspace } from "@/Api/workspace";
-import { getNotification, getTimeTable, getMenus } from "@/Api/Home";
+import { getNotification, getTimeTable, getMenus, getSchedules } from "@/Api/Home";
 
 const Home = () => {
   const today = new Date();
@@ -26,10 +26,11 @@ const Home = () => {
 
   const { data: workspaces } = useSWR('workspaces', getMyWorkspaces);
   const { data: pendingWorkspaces } = useSWR('pendingWorkspaces', getMyWaitingWorkspace);
-  const { data: timeTable } = useSWR([workspaceId, 'timetable'], (args) => getTimeTable(...args));
+  const { data: timeTable } = useSWR([workspaceId], (args) => getTimeTable(...args));
   const { data: notifications, mutate: mutateNotifications } = useSWR([workspaceId, page], (args) => getNotification(...args));
   const { data: menu } = useSWR([workspaceId, date], (args) => getMenus(...args));
-
+  const { data: schedule } = useSWR([workspaceId, month], (args) => getSchedules(...args));
+  
   return (
     <S.HomeMain>
       <S.HomeTitle>홈</S.HomeTitle>
@@ -40,7 +41,7 @@ const Home = () => {
           <S.HomeWrapper1DownContainer>
             <Notification notifications={notifications} mutateNotifications={mutateNotifications} />
             <S.RightContainer>
-              <Calendar />
+              <Calendar schedules={schedule}/>
               <CatSeugi />
             </S.RightContainer>
           </S.HomeWrapper1DownContainer>
