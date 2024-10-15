@@ -1,4 +1,11 @@
 import { useState } from "react";
+import axios, { AxiosInstance } from 'axios';
+
+const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
+
+export const SeugiCustomAxios: AxiosInstance = axios.create({
+  baseURL: SERVER_URL,
+});
 
 const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
   const [searchText, setSearchText] = useState("");
@@ -20,29 +27,31 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
 
   const createRoom = async (roomName: string) => {
     try {
+      const accessToken = window.localStorage.getItem("accessToken");
+
+      if (!accessToken) {
+        console.error("Access token not found. Please log in again.");
+        return;
+      }
+
       const requestData = {
-        workspaceId: "669e339593e10f4f59f8c583",
+        workspaceId: "669e339593e10f4f59f8c583", 
         roomName: roomName,
         joinUsers: [10],
         chatRoomImg: "",
       };
 
-      const response = await fetch('https://api.seugi.com/chat/personal/create', {
-        method: 'POST',
+      const response = await SeugiCustomAxios.post('/chat/personal/create', requestData, {
         headers: {
-          'Content-Type': 'application/json',
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTcyNjA2NDc0NywiZXhwIjoxNzI2MDcwNzQ3fQ.UHfrc2EM-3C5efG-aQy_ROE4KwpxflrqH2nIv7qr6i8",
+          'Authorization': accessToken,
         },
-        body: JSON.stringify(requestData),
       });
 
-      const result = await response.text();
-
-      if (response.ok) {
+      if (response.status === 200) {
         addChatRoom(roomName);
         handleChatRoomClick(roomName);
       } else {
-        console.error(`Error creating room: ${result}`);
+        console.error(`Error creating room: ${response.data}`);
       }
     } catch (error) {
       console.error(`An error occurred: ${error instanceof Error ? error.message : 'Unknown error'}`);

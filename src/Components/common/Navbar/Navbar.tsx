@@ -53,7 +53,7 @@ const Navbar = () => {
       const pathMap = {
         home: paths.home,
         chat: paths.chat,
-        chats: paths.GroupChat,
+        chats: paths.groupchat,
       };
       navigate(pathMap[selected]);
     }
