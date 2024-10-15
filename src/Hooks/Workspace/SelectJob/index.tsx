@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import { paths } from '@/Constants/paths';
+import Cookies from 'js-cookie';
 
 type Role = 'NONE' | 'STUDENT' | 'TEACHER';
 
 const index = () => {
     const navigate = useNavigate();
-    const token = window.localStorage.getItem("accessToken");
+    const token = Cookies.get("accessToken");
     const [selectedRole, setSelectedRole] = useState<Role>('NONE');
     const location = useLocation();
     const { verificationCode, workspaceId } = location.state || {};

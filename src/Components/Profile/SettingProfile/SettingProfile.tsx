@@ -9,7 +9,7 @@ import CorrectionImg from '@/assets/image/profile/CorrectionImg.svg';
 import Arrow from '@/assets/image/profile/arrow.svg';
 import Divider from '@/assets/image/profile/ProflieDivider.svg';
 import { fetchingProfile } from '@/Api/profile';
-
+import Cookies from 'js-cookie';
 
 interface SettingProfileProps {
     onClose: () => void;
@@ -18,7 +18,7 @@ interface SettingProfileProps {
 
 const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
     const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
-    const token = window.localStorage.getItem('accessToken');
+    const token = Cookies.get('accessToken');
     const [name, setName] = useState('');
     const [isEditing, setIsEditing] = useState(false);
 
@@ -54,7 +54,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
                 fcmToken
             });
             window.localStorage.setItem('lastworkspace', workspaceId);
-            window.localStorage.removeItem('accessToken');
+            Cookies.remove('accessToken');
             window.localStorage.removeItem('workspaceId');
             window.location.href = '/login';
         } catch (err) {

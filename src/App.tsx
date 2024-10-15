@@ -5,6 +5,7 @@ import { UserContextProvider } from './Contexts/userContext';
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 import { appleAuthHelpers, useScript } from 'react-apple-signin-auth';
+import Cookies from 'js-cookie';
 
 const VAPID_PUBLIC = import.meta.env.VITE_VAPID_PUBLIC as string;
 
@@ -38,7 +39,7 @@ function App() {
           })
             .then((currentToken) => {
               if (currentToken) {
-                window.localStorage.setItem('fcmToken', currentToken);
+                Cookies.set('fcmToken', currentToken);
               } else {
                 console.log('No registration token available.');
               }

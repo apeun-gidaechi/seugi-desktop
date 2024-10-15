@@ -34,7 +34,6 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
   // Create Room function with token refresh logic
   const createRoom = async (roomName: string) => {
     try {
-      // Refresh the token
       const token = await refreshToken();
 
       if (!token) {

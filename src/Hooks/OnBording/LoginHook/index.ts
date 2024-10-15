@@ -8,6 +8,7 @@ import { getMyWorkspaces } from "@/Api/workspace";
 import { getMyInfos } from "@/Api/profile";
 import { paths } from "@/Constants/paths";
 import { appleAuthHelpers, AppleAuthResponse } from "react-apple-signin-auth";
+import Cookies from "js-cookie"; 
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
@@ -26,7 +27,8 @@ const index = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState<string>("");
-    const fcmToken = window.localStorage.getItem('fcmToken');
+
+    const fcmToken = Cookies.get('fcmToken'); 
 
     const manageWorkspace = async () => {
         try {
@@ -54,7 +56,6 @@ const index = () => {
         }
     };
 
-
     const handleLogin = async () => {
         try {
             const res = await axios.post(
@@ -62,7 +63,7 @@ const index = () => {
                 {
                     email,
                     password,
-                    token: fcmToken,
+                    token: fcmToken, 
                 },
                 {
                     headers: {
@@ -78,8 +79,8 @@ const index = () => {
             const { accessToken, refreshToken } = res.data.data;
 
             setAccessToken(accessToken);
-            window.localStorage.setItem("accessToken", accessToken);
-            window.localStorage.setItem("refreshToken", refreshToken);
+            Cookies.set("accessToken", accessToken);  
+            Cookies.set("refreshToken", refreshToken); 
 
             manageWorkspace();
             getMyInfo();
@@ -91,7 +92,6 @@ const index = () => {
             console.log(error);
         }
     };
-
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -119,7 +119,7 @@ const index = () => {
                     `${SERVER_URL}/oauth/google/authenticate`,
                     {
                         code,
-                        token: fcmToken,
+                        token: fcmToken, 
                         platform: "WEB"
                     }
                 );
@@ -130,8 +130,8 @@ const index = () => {
 
                 const { accessToken, refreshToken } = res.data.data;
 
-                window.localStorage.setItem("accessToken", accessToken);
-                window.localStorage.setItem("refreshToken", refreshToken);
+                Cookies.set("accessToken", accessToken); 
+                Cookies.set("refreshToken", refreshToken);
 
                 manageWorkspace();
             } catch (error) {
@@ -165,15 +165,15 @@ const index = () => {
                 const name = response.user?.name;
                 const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
                     code,
-                    token: fcmToken,
+                    token: fcmToken, 
                     platform: "WEB",
                     name: name
                 });
 
                 const { accessToken, refreshToken } = token.data.data;
 
-                window.localStorage.setItem("accessToken", accessToken);
-                window.localStorage.setItem("refreshToken", refreshToken);
+                Cookies.set("accessToken", accessToken);  
+                Cookies.set("refreshToken", refreshToken);  
             },
             onError: (error: any) => {
                 console.error("Apple login error: ", error);
@@ -203,4 +203,4 @@ const index = () => {
     }
 }
 
-export default index
+export default index;
