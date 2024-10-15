@@ -4,6 +4,7 @@ import './App.css';
 import { UserContextProvider } from './Contexts/userContext';
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import { appleAuthHelpers, useScript } from 'react-apple-signin-auth';
 
 const VAPID_PUBLIC = import.meta.env.VITE_VAPID_PUBLIC as string;
 
@@ -21,6 +22,9 @@ const fapp = initializeApp(firebaseConfig);
 const messaging = getMessaging(fapp);
 
 function App() {
+
+  useScript(appleAuthHelpers.APPLE_SCRIPT_SRC);
+
   useEffect(() => {
     // 알림 권한 요청
     Notification.requestPermission()
