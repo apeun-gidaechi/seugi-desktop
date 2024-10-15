@@ -32,7 +32,7 @@ const index = () => {
 
     const manageWorkspace = async () => {
         try {
-            const lastWorkspace = window.localStorage.getItem("lastworkspace");
+            const lastWorkspace = Cookies.get("lastworkspace");
             const checkWorkspaces = await getMyWorkspaces();
 
             if (!checkWorkspaces || checkWorkspaces.length === 0) {
@@ -42,12 +42,12 @@ const index = () => {
             }
 
             if (lastWorkspace) {
-                window.localStorage.setItem("workspaceId", lastWorkspace);
+                Cookies.set("workspaceId", lastWorkspace);
             } else {
-                window.localStorage.setItem("workspaceId", checkWorkspaces[0].workspaceId);
+                Cookies.set("workspaceId", checkWorkspaces[0].workspaceId);
             }
 
-            window.localStorage.removeItem('lastworkspace');
+            Cookies.remove('lastworkspace');
             navigate(paths.home);
         } catch (error) {
             console.log("Error fetching workspace:", error);

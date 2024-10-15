@@ -4,6 +4,7 @@ import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import AlertContainer from '@/Components/Alert/Alert';
 import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNotice';
 import { fetchingNotice } from '@/Api/Home';
+import Cookies from 'js-cookie';
 
 interface Props {
     onClose: () => void;
@@ -16,7 +17,7 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutate
     const [currentUserId, setCurrentUserId] = useState<number | undefined>(undefined);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [editMode, setEditMode] = useState<boolean>(false);
-    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') || '' : null;
     const userRole = window.localStorage.getItem('Role');
 
     const ref = useRef<HTMLDivElement>(null);

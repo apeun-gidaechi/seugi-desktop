@@ -17,7 +17,7 @@ interface SettingProfileProps {
 }
 
 const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
-    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') || '' : null;
     const token = Cookies.get('accessToken');
     const [name, setName] = useState('');
     const [isEditing, setIsEditing] = useState(false);
@@ -42,7 +42,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
     }, [workspaceId, token]);
 
     const handleLogout = async () => {
-        const fcmToken = window.localStorage.getItem('fcmToken');
+        const fcmToken = Cookies.get('fcmToken');
 
         if (!workspaceId) {
             console.error('워크스페이스가 없습니다.');
@@ -53,9 +53,9 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
             await SeugiCustomAxios.post(`/member/logout`, {
                 fcmToken
             });
-            window.localStorage.setItem('lastworkspace', workspaceId);
+            Cookies.set('lastworkspace', workspaceId);
             Cookies.remove('accessToken');
-            window.localStorage.removeItem('workspaceId');
+            Cookies.remove('workspaceId');
             window.location.href = '/login';
         } catch (err) {
             console.error(err);

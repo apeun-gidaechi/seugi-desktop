@@ -12,6 +12,7 @@ import RegisterSchool from "@/Components/Home/Subscribed/RegisterSchool/Register
 import useSWR from "swr";
 import { getMyWorkspaces, getMyWaitingWorkspace } from "@/Api/workspace";
 import { getNotification, getTimeTable, getMenus, getSchedules } from "@/Api/Home";
+import Cookies from "js-cookie";
 
 const Home = () => {
   const today = new Date();
@@ -21,7 +22,7 @@ const Home = () => {
   const date = `${year}${month}${day}`;
 
   const [page, setPage] = useState(0);
-  const currentWorkspaceId = window.localStorage.getItem('workspaceId') ?? '';
+  const currentWorkspaceId = Cookies.get('workspaceId') ?? '';
   const [workspaceId, setWorkspaceId] = useState(currentWorkspaceId);
 
   const { data: workspaces } = useSWR('workspaces', getMyWorkspaces);

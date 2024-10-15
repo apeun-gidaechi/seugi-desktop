@@ -1,9 +1,10 @@
+import React, { useState, useEffect, useRef } from 'react';
 import { fetchingProfile } from '@/Api/profile';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
-import React, { useState, useEffect, useRef } from 'react';
+import Cookies from 'js-cookie';
 
 const index = () => {
-    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') || '' : null;
     const [isEditing, setIsEditing] = useState(null);
     const [isSettingOpen, setIsSettingOpen] = useState(false);
     const [name, setName] = useState('');

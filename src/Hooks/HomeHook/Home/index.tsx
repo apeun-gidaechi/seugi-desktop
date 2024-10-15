@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 const index = () => {
     const token = Cookies.get("accessToken");
     const navigate = useNavigate();
-    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') || '' : null;
     
     useEffect(() => {
         document.body.style.overflow = "hidden";

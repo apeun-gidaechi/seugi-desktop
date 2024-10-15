@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { WorkspaceName } from '@/Api/workspace';
+import Cookies from 'js-cookie';
 
 const index = () => {
     const [workspaceName, setWorkspaceName] = useState("");
     const [showChangeschool, setShowChangeschool] = useState(false);
     const ChangeSchoolRef = useRef<HTMLDivElement>(null);
-    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') || '' : null;
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             const target = e.target as Node | null;

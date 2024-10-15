@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as S from '@/Components/Home/Notification/CreateNotice/CreateNotice.style';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import { fetchingNotice } from '@/Api/Home';
+import Cookies from 'js-cookie';
 
 interface CreateNoticeProps {
     onClose: () => void;
@@ -12,7 +13,7 @@ interface CreateNoticeProps {
 const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, mutateNotifications }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') || '' : null;
 
     const fetchNotice = async () => {
         if (notificationId) {
