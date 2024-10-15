@@ -9,7 +9,7 @@ import NoCalendar from '@/Assets/image/home/NoCalendar.svg';
 interface ScheduleItem {
     id: number;
     workspaceId: string;
-    date: string; // format: YYYY-MM-DD
+    date: string;
     eventName: string;
     eventContent: string;
     grade: number[];
@@ -20,17 +20,26 @@ interface Props {
 }
 
 const Calendar = ({ schedules = [] }: Props) => {
+    const today = new Date();
+    const currentDay = String(today.getDate()).padStart(2, '0');
 
-    // D-Day 계산 함수
-    const calculateDDay = (eventDate: string) => {
-        const currentDate = new Date();
-        const eventDay = new Date(eventDate);
+    const formatDate = (dateString: string) => {
+        const month = dateString.substring(4, 6);
+        const day = dateString.substring(6, 8);
 
-        // 두 날짜 차이를 밀리초로 계산 후, 일 단위로 변환
-        const differenceInTime = eventDay.getTime() - currentDate.getTime();
-        const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24)); // 하루를 밀리초로 환산
+        return `${month}/${day}`;
+    };
 
-        return differenceInDays >= 0 ? `D-${differenceInDays}` : `D+${Math.abs(differenceInDays)}`;
+    const calculateDDay = (schedule: ScheduleItem) => {
+        const eventDay = schedule.date.substring(6, 8);
+        const dPlus = Number(currentDay) - Number(eventDay);
+        const dMinus = Number(eventDay) - Number(currentDay);
+
+        if (currentDay > eventDay) {
+            return `D+${dPlus}`;
+        } else {
+            return `D-${dMinus}`;
+        }
     };
 
     return (
@@ -47,20 +56,14 @@ const Calendar = ({ schedules = [] }: Props) => {
             {schedules.length > 0 ? (
                 <S.Box>
                     <S.DateBox>
-                        {schedules.map((item, index) => (
-                            <S.DateText key={item.id}>{index}</S.DateText>
+                        {schedules.map((item) => (
+                            <S.Row key={item.id}>
+                                <S.DateText>{formatDate(item.date)}</S.DateText>
+                                <S.SubTitle>{item.eventName}</S.SubTitle>
+                                <S.D_DayText>{calculateDDay(item)}</S.D_DayText>
+                            </S.Row>
                         ))}
                     </S.DateBox>
-                    <S.SubBox>
-                        {schedules.map((item) => (
-                            <S.SubTitle key={item.id}>{item.eventName}</S.SubTitle>
-                        ))}
-                    </S.SubBox>
-                    <S.D_DayBox>
-                        {schedules.map((item) => (
-                            <S.D_DayText key={item.id}>{calculateDDay(item.date)}</S.D_DayText>
-                        ))}
-                    </S.D_DayBox>
                 </S.Box>
             ) : (
                 <S.NoCalendarDiv>
@@ -68,6 +71,7 @@ const Calendar = ({ schedules = [] }: Props) => {
                     <S.NoCalendarText>일정이 없어요</S.NoCalendarText>
                 </S.NoCalendarDiv>
             )}
+
         </S.RightUpContainer>
     );
 };
