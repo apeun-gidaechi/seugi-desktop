@@ -10,7 +10,7 @@ import Authentication from '@/Pages/OnBording/EmailAuthentication/EmailAuthentic
 import WaitingJoin from '@/Pages/Workspace/WaitingJoin/WaitingJoinPage';
 import Home from '@/Pages/Home/home'
 import Chat from '@/Pages/chat/chat'
-import GroupChat from '@/Pages/GroupChat/index'
+import Groupchat from '@/Pages/GroupChat/index'
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { paths } from '@/Constants/paths';
@@ -32,7 +32,7 @@ const Router = () => {
         <Route path="/" element={<Shell />}>
           <Route path={paths.home} element={<Home />} />
           <Route path={paths.chat} element={<Chat />} />
-          <Route path={paths.GroupChat} element={<GroupChat />} />
+          <Route path={paths.groupchat} element={<Groupchat />} />
         </Route>
       </Routes>
     </BrowserRouter>
