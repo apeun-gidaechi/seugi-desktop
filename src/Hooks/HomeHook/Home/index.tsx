@@ -21,6 +21,7 @@ const index = () => {
     } else {
         console.error('워크스페이스가 없어요');
     }
+    
     const handleCreate = () => {
         navigate(paths.createschool);
     }
