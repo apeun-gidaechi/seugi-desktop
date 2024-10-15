@@ -42,6 +42,8 @@ const Meal = ({ todayMenu }: Props) => {
         setSelectedMeal(mealIndex);
     };
 
+    const selectedMenu = todayMenu?.[selectedMeal];
+
     return (
         <S.CafeteriaContainer>
             <S.CafeteriaTitleBox>
@@ -83,14 +85,20 @@ const Meal = ({ todayMenu }: Props) => {
                         </S.TimeButton>
                     </S.CafeteriaDiv>
 
-                    <S.MenuList>
-                        {todayMenu?.[selectedMeal]?.menu.map((item, index) => (
-                            <S.Menu key={index}>{item}</S.Menu>
-                        ))} 
-                        <S.CalorieDiv>
-                            <S.CalorieText>{todayMenu?.[selectedMeal]?.calorie}</S.CalorieText>
-                        </S.CalorieDiv>
-                    </S.MenuList>
+                    {selectedMenu && selectedMenu.menu.length > 0 ? (
+                        <S.MenuList>
+                            {selectedMenu.menu.map((item, index) => (
+                                <S.Menu key={index}>{item}</S.Menu>
+                            ))}
+                            <S.CalorieDiv>
+                                <S.CalorieText>{selectedMenu.calorie}</S.CalorieText>
+                            </S.CalorieDiv>
+                        </S.MenuList>
+                    ) : (
+                        <S.MenuList>
+                            <S.NoMealMessage>급식이 없습니다.</S.NoMealMessage>
+                        </S.MenuList>
+                    )}
                 </>
             ) : (
                 <S.NoMealDiv>

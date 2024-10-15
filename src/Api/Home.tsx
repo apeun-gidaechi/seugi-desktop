@@ -19,3 +19,9 @@ export const getMenus = async (workspaceId: string, date: string) => {
     const res = await SeugiCustomAxios.get(`/meal?workspaceId=${workspaceId}&date=${date}`);
     return res.data.data
 }
+
+export const getSchedules = async (workspaceId: string, month: string) => {
+    const res = await SeugiCustomAxios.get(`/schedule/month?workspaceId=${workspaceId}&month=${month}`);
+    console.log(res);
+    return res.data.data;
+}
