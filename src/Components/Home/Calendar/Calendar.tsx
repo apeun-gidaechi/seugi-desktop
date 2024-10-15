@@ -37,6 +37,8 @@ const Calendar = ({ schedules = [] }: Props) => {
 
         if (currentDay > eventDay) {
             return `D+${dPlus}`;
+        } else if (currentDay === eventDay) {
+            return `D-Day`;
         } else {
             return `D-${dMinus}`;
         }
