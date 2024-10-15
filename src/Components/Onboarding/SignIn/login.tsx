@@ -85,7 +85,7 @@ const Login = () => {
             <S.Dividerimg src={Divider} />
           </S.Orpart>
           <S.Oauthpart>
-            <S.Authlogin>
+            <S.Authlogin onClick={Login.handleAppleLogin}>
               <S.LogoImg src={AppleLogo} />
             </S.Authlogin>
             <S.Authlogin onClick={Login.handleGoogleLogin}>

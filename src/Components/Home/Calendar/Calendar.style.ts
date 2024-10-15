@@ -49,15 +49,12 @@ export const SArrowLogo = styled.img`
   position: relative;
 `;
 
-export const DummyBox = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 4px;
-  align-self: stretch;
+export const Box = styled.div`
+  overflow-y: auto;
+  max-height: 200px; 
 `;
 
-export const DateDummy = styled.div`
-  display: flex;
+export const DateBox = styled.div`
   padding: 4px;
   flex-direction: column;
   align-items: center;
@@ -67,45 +64,33 @@ export const DateDummy = styled.div`
   border-radius: 8px;
 `;
 
-export const DateText = styled.span`
-  color: ${SeugiColor.Primary500};
+export const Row = styled.div`
+  margin-top:4px;
+  padding:0 0 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;            
+  margin-bottom: 10px;
+`;
 
+export const DateText = styled.span`
+  margin-right: 4px;  
+  color: ${SeugiColor.Primary500};
   ${SeugiFont.body.body1};
 `;
 
-export const SubDummy = styled.div`
-  display: flex;
-  padding: 4px 0px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  flex: 1 0 0;
-  align-self: stretch;
-`;
-
 export const SubTitle = styled.span`
+  flex-grow: 1;       
   color: ${SeugiColor.Black};
-
   ${SeugiFont.body.body2};
 `;
 
-export const D_DayDummy = styled.div`
-  display: flex;
-  padding: 4px 0px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 16px;
-  align-self: stretch;
-
-  border-radius: 8px;
-`;
-
 export const D_DayText = styled.span`
+  margin-left: 4px;   
   color: ${SeugiColor.Gray600};
-
   ${SeugiFont.caption.caption1};
 `;
+
 
 export const NoCalendarDiv = styled.div`
   position: relative;
