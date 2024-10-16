@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import * as S from "@/Components/Chat/ChatSideBar/index.style"
+import * as S from "@/Components/Chat/ChatSideBar/index.style";
 import SearchIcon from "@/Assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/Assets/image/chat-components/Avatar.svg";
 import Navbar from "@/Components/common/Navbar/Navbar";
@@ -15,11 +15,9 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const location = useLocation();
-
   const { searchText, setSearchText, chatRooms, handleSearch, handleChatRoomClick } = useChatSidebar(onSelectChatRoom);
-  // console.log(chatRooms);
-
   const [isCreateRoomVisible, setCreateRoomVisible] = useState(false);
+  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null); // 현재 선택된 방의 상태
 
   const handleCreateRoomClick = () => {
     setCreateRoomVisible(prevState => !prevState);
@@ -32,6 +30,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const handleCreateRoom = (roomName: string) => {
     console.log(`Creating room: ${roomName}`);
     handleCloseCreateRoom();
+  };
+
+  const handleChatRoomSelect = (room: string) => {
+    setSelectedChatRoom(room); // 선택된 방 업데이트
+    handleChatRoomClick(room); // 기존 클릭 핸들러 호출
   };
 
   return (
@@ -68,7 +71,13 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
           <S.ChatRoomsWrap>
             <S.ChatRoomList>
               {chatRooms.map((room, index) => (
-                <S.ChatRoom key={index} onClick={() => handleChatRoomClick(room)}>
+                <S.ChatRoom
+                  key={index}
+                  onClick={() => handleChatRoomSelect(room)} // 클릭 시 방 선택
+                  style={{
+                    backgroundColor: selectedChatRoom === room ? '#F5FBFF' : 'transparent', 
+                  }}
+                >
                   <S.ChatRoomAvatarWrap>
                     <S.ChatRoomAvatar src={AvatarProfile} />
                   </S.ChatRoomAvatarWrap>
