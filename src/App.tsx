@@ -23,15 +23,12 @@ const fapp = initializeApp(firebaseConfig);
 const messaging = getMessaging(fapp);
 
 function App() {
-
   useScript(appleAuthHelpers.APPLE_SCRIPT_SRC);
-
   useEffect(() => {
-    // 알림 권한 요청
     Notification.requestPermission()
       .then((permission) => {
         if (permission === 'granted') {
-          console.log('Notification permission granted.');
+          console.log('알림 권한이 부여되었습니다.');
 
           // FCM 토큰 요청
           getToken(messaging, {
@@ -41,26 +38,26 @@ function App() {
               if (currentToken) {
                 Cookies.set('fcmToken', currentToken);
               } else {
-                console.log('No registration token available.');
+                console.log('사용 가능한 등록 토큰이 없습니다.');
               }
             })
             .catch((err) => {
-              console.error('An error occurred while retrieving token: ', err);
+              console.error('토큰을 검색하는 동안 오류가 발생했습니다.', err);
             });
 
           // FCM 메시지 수신 처리
           onMessage(messaging, (payload) => {
-            console.log('Message received: ', payload);
+            console.log('메시지 수신됨: ', payload);
             // 알림 표시 등 추가 처리 로직
           });
         } else {
-          console.log('Notification permission denied.');
+          console.log('알림 권한이 거부되었습니다.');
         }
       })
       .catch((err) => {
         console.error('Error occurred while requesting notification permission: ', err);
       });
-  }, []);
+  });
 
   return (
     <UserContextProvider>
