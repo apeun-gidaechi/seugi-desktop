@@ -123,6 +123,10 @@ export const ChatRoom = styled.div`
   width: 100%;
   box-sizing: border-box;
   text-align: left;
+
+  &:active{
+    background-color: red;
+  }
 `;
 
 export const ChatRoomAvatar = styled.img`
