@@ -13,6 +13,7 @@ import useSignup from '@/Hooks/OnBording/Signuphook/index';
 import { useNavigate } from 'react-router-dom';
 
 const emailsignup = () => {
+    const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
     const { ...signUp } = useSignup();
 
     return (
@@ -100,7 +101,7 @@ const emailsignup = () => {
                 <S.ButtonContainer>
                     <Button onClick={signUp.handleSignup} />
                     <S.EmailCheck>
-                        <S.Haveemail href='http://localhost:5173/login'>이미 계정이 있으신가요?</S.Haveemail>
+                        <S.Haveemail href={`${SERVER_URL}/login`}>이미 계정이 있으신가요?</S.Haveemail>
                     </S.EmailCheck>
                 </S.ButtonContainer>
             </S.EmailFirstWrap>

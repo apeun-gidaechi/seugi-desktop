@@ -16,6 +16,7 @@ import Divider from "@/Assets/image/onbording/Start/Divider.svg";
 import useLogin from '@/Hooks/OnBording/LoginHook/index';
 
 const Login = () => {
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
   const { ...Login } = useLogin();
  
   return (
@@ -74,7 +75,7 @@ const Login = () => {
             <LoginButton text="로그인" onClick={Login.handleLogin} />
             <S.Body1>
               계정이 없으시다면?{" "}
-              <S.Gosignup href="http://localhost:5173/emailsignup">
+              <S.Gosignup href={`${SERVER_URL}/emailsignup`}>
                 가입하기
               </S.Gosignup>{" "}
             </S.Body1>
