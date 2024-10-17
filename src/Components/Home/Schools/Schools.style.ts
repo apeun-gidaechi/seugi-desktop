@@ -3,6 +3,7 @@ import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 
 export const UpContainer = styled.div`
+  position:relative;
   display: flex;
   padding: 12px 12px 16px 12px;
   flex-wrap:wrap;
