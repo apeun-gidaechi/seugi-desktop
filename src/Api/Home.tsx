@@ -5,6 +5,12 @@ export const getTimeTable = async (workspaceId: string) => {
     return res.data.data;
 }
 
+export const resetTimeTable = async (workspaceId: string) => {
+    const res = await SeugiCustomAxios.post(`/timetable/reset?workspaceId=${workspaceId}`);
+    console.log(res);
+    return res.data.data;
+}
+
 export const getNotification = async (workspaceId: string, page: number) => {
     const res = await SeugiCustomAxios.get(`/notification/${workspaceId}?page=${page}&size=365`);
     return res.data.data;
@@ -22,6 +28,5 @@ export const getMenus = async (workspaceId: string, date: string) => {
 
 export const getSchedules = async (workspaceId: string, month: string) => {
     const res = await SeugiCustomAxios.get(`/schedule/month?workspaceId=${workspaceId}&month=${month}`);
-    console.log(res);
     return res.data.data;
 }

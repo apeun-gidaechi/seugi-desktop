@@ -3,7 +3,8 @@ import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 
 export const RightDownContainer = styled.div`
-  display: flex;
+  display: inline-flex;
+  flex-wrap: wrap;
   padding: 12px;
   flex-direction: column;
   justify-content: center;
@@ -20,6 +21,7 @@ export const RightDownContainer = styled.div`
 
 export const SeugiTitleContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding: 4px;
   align-items: center;
   gap: 8px;
@@ -82,6 +84,7 @@ export const SearchImg = styled.img`
 
 export const QuestionContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -91,6 +94,7 @@ export const QuestionContainer = styled.div`
 
 export const LastQuestionBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -101,6 +105,7 @@ export const LastQuestionBox = styled.div`
 
 export const LastText = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding: 0px 4px;
   justify-content: center;
   align-items: flex-start;
@@ -115,6 +120,7 @@ export const Lastweek = styled.span`
 
 export const LastQuestion = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding: 12px;
   justify-content: space-between;
   align-items: center;

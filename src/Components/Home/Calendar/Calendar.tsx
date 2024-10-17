@@ -22,16 +22,18 @@ interface Props {
 const Calendar = ({ schedules = [] }: Props) => {
     const today = new Date();
     const currentDay = String(today.getDate()).padStart(2, '0');
-
-    const formatDate = (dateString: string) => {
-        const month = dateString.substring(4, 6);
-        const day = dateString.substring(6, 8);
+    // 2024-10-17
+    // 20241017
+    // 0123456789
+    const formatDate = (date: string) => {
+        const month = date.substring(5, 7);
+        const day = date.substring(8, 10);
 
         return `${month}/${day}`;
     };
 
     const calculateDDay = (schedule: ScheduleItem) => {
-        const eventDay = schedule.date.substring(6, 8);
+        const eventDay = schedule.date.substring(8, 10);
         const dPlus = Number(currentDay) - Number(eventDay);
         const dMinus = Number(eventDay) - Number(currentDay);
 

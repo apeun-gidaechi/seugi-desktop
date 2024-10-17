@@ -3,7 +3,8 @@ import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 
 export const AssignmentMain = styled.div`
-    display: flex;
+    display: inline-flex;
+    flex-wrap: wrap;
     padding: 12px 12px 16px 12px;
     flex-direction: column;
     align-items: flex-start;
@@ -18,6 +19,7 @@ export const AssignmentMain = styled.div`
 
 export const AssignmentTitleBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding: 4px;
   align-items: center;
   gap: 8px;
@@ -37,6 +39,7 @@ export const AssignmentTitleText = styled.span`
 
 export const AssignmentBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;

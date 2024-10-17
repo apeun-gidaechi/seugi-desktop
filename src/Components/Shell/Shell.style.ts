@@ -5,4 +5,5 @@ export const HomeContainer = styled.div`
   width: 100vw;
   height: 100vh;
   align-items: flex-start;
+  flex-wrap:wrap;
 `;

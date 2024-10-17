@@ -10,6 +10,7 @@ export const ChatRoomForm = styled.div`
     background: #FFF; 
 
     display: flex;
+    
     width: 272px;
     padding: 16px;
     gap: 8px;

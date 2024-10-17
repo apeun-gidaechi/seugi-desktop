@@ -3,9 +3,13 @@ import { SeugiColor } from '@/Design/color/SeugiColor';
 import { SeugiFont } from '@/Design/text/SeugiFont';
 
 export const CafeteriaContainer = styled.div`
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction:column;
   padding: 12px 12px 16px 12px;
   flex: 1 0 0;
   align-self: stretch;
+  min-width:312px;
 
   border-radius: 12px;
   background: ${SeugiColor.White};

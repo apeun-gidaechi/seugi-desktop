@@ -4,11 +4,12 @@ import styled from "styled-components";
 
 export const ChangeSchoolMain = styled.div`
   position: absolute;
-  display: flex;
+  display: inline-flex;
   width: 312px;
   height: 312px;
   padding: 16px;
   flex-direction: column;
+  min-width:312px;
 
   align-items: center;
   gap: 16px;
@@ -59,6 +60,7 @@ export const NoPendingSchools = styled.span`
 
 export const PendingSchool = styled.div`
   display: flex;
+  /* flex-wrap: wrap; */
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
@@ -135,6 +137,7 @@ export const WaitingJoin = styled.span`
 
 export const JoinSchool = styled.button`
   display: flex;
+  /* flex-wrap: wrap; */
   height: 36px;
   padding: var(--Large, 12px);
   justify-content: center;
@@ -155,6 +158,7 @@ export const JoinSchool = styled.button`
 `;
 export const CreateSchool = styled.button`
   display: flex;
+  flex-wrap: wrap;
   height: 36px;
   padding: var(--Large, 12px);
   justify-content: center;
@@ -176,6 +180,7 @@ export const CreateSchool = styled.button`
 
 export const NoSubscribedSchools = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -184,6 +189,7 @@ export const NoSubscribedSchools = styled.div`
 
 export const MoveButton = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
   gap: 4px;

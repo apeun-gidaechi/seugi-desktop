@@ -3,7 +3,8 @@ import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 
 export const Number = styled.div`
-  display: flex;
+  display: inline-flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   flex: 1;
@@ -47,9 +48,10 @@ export const Item = styled.div`
 `;
 
 export const HomeWrapper1UpContainer = styled.div`
-  display: flex;
+  display: inline-flex;
   padding: 12px 12px 16px 12px;
   flex-direction: column;
+  flex-wrap:wrap;
   align-items: flex-start;
   gap: var(--Corner-Small, 10px);
   align-self: stretch;
@@ -102,6 +104,8 @@ export const ScheduleDivBox = styled.div`
   align-items: stretch;
   border-radius: 12px;
   flex-direction: column;
+  overflow-x:scroll;
+  min-width:100px;
 `
 
 export const NumberTable = styled.div`
@@ -164,4 +168,19 @@ export const NoScheduleDiv = styled.div`
 
 export const NoScheduleImg = styled.img`
   margin-bottom:4px;
+`
+
+export const resetTimetableButton = styled.button`
+  width:100px;
+  height:20px;
+
+  ${SeugiFont.caption.caption1};
+
+  border:none;
+  background-color:${SeugiColor.Gray200};
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  margin-top:4px;
+
+  cursor: pointer;
 `

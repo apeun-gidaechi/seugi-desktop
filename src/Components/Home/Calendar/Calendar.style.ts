@@ -3,8 +3,11 @@ import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 
 export const RightUpContainer = styled.div`
+  display: inline-flex;
+  flex-wrap: wrap;
   padding: 12px 12px 16px 12px;
   align-self: stretch;
+  flex-direction: column;
 
   border-radius: 12px;
   background: ${SeugiColor.White};
@@ -14,6 +17,7 @@ export const RightUpContainer = styled.div`
 
 export const SoonScheduleBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding: 4px;
   justify-content: space-between;
   align-items: center;
@@ -22,6 +26,7 @@ export const SoonScheduleBox = styled.div`
 
 export const SoonScheduleTitle = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
 `
@@ -68,6 +73,7 @@ export const Row = styled.div`
   margin-top:4px;
   padding:0 0 12px 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;            
   margin-bottom: 10px;
@@ -95,6 +101,7 @@ export const D_DayText = styled.span`
 export const NoCalendarDiv = styled.div`
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   flex-direction: column;

@@ -4,6 +4,8 @@ import ArrowImg from "@/Assets/image/home/arrow.svg";
 import NoSchedule from '@/Assets/image/home/NoSchedule.svg';
 import * as S from '@/Components/Home/DailySchedule/DailySchedule.style';
 import { SeugiColor } from '@/Design/color/SeugiColor';
+import { resetTimeTable } from "@/Api/Home";
+import Cookies from "js-cookie";
 
 interface TimetableItem {
     id: number;
@@ -12,7 +14,7 @@ interface TimetableItem {
     classNum: string;
     time: string;
     subject: string;
-    date: string;
+    date: string; 
 }
 
 interface Props {
@@ -22,6 +24,7 @@ interface Props {
 const DailySchedule = ({ timetable = [] }: Props) => {
     const [currentPeriod, setCurrentPeriod] = useState<number | null>(null);
     const [allPeriodsOver, setAllPeriodsOver] = useState<boolean>(false);
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') || '' : "";
 
     const getCurrentPeriod = () => {
         const now = new Date();
@@ -69,6 +72,11 @@ const DailySchedule = ({ timetable = [] }: Props) => {
         return () => clearInterval(interval);
     }, [timetable]);
 
+    const handleResetTimeTable = () => {
+        console.log(workspaceId);
+        resetTimeTable(workspaceId);
+    }
+
     return (
         <S.HomeWrapper1UpContainer>
             <S.ScheduleTitleBox>
@@ -96,7 +104,6 @@ const DailySchedule = ({ timetable = [] }: Props) => {
                                 const isPastPeriod = currentPeriod && index + 1 < currentPeriod;
                                 const isFirstPeriod = index === 0;
                                 const isLastPeriod = allPeriodsOver || currentPeriod === timetable.length;
-
                                 return (
                                     <S.TimetableItem
                                         key={item.id}
@@ -119,6 +126,7 @@ const DailySchedule = ({ timetable = [] }: Props) => {
                     <S.NoScheduleDiv>
                         <S.NoScheduleImg src={NoSchedule} />
                         <S.NoScheduleText>오늘은 수업이 없습니다.</S.NoScheduleText>
+                        <S.resetTimetableButton onClick={handleResetTimeTable}>시간표 다시 불러오기</S.resetTimetableButton>
                     </S.NoScheduleDiv>
                 )}
             </S.ScheduleDivBox>

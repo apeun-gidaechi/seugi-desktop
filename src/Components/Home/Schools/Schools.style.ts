@@ -5,6 +5,7 @@ import { SeugiFont } from "@/Design/text/SeugiFont";
 export const UpContainer = styled.div`
   display: flex;
   padding: 12px 12px 16px 12px;
+  flex-wrap:wrap;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;

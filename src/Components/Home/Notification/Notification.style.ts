@@ -3,7 +3,8 @@ import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 
 export const LeftContainer = styled.div`
-  display: flex;
+  display: inline-flex;
+  flex-wrap: wrap;
   padding: 12px 12px 16px 12px;
   justify-content:center;
   flex-direction: column;
@@ -26,6 +27,7 @@ export const NoNotification = styled.span`
 `
 export const NotificationContainer = styled.div`
   display: flex;
+  flex-wrap:wrap;
   padding: 4px;
   justify-content: space-between;
   align-items: center;
@@ -94,8 +96,6 @@ export const NotificationContentAuthor = styled.div`
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
-
-  width:26vw;
 `;
 
 export const NotificationContentAuthorSpan = styled.span`
@@ -122,6 +122,8 @@ export const NotificationContentDescription = styled.span`
 
 export const NotificationEmojiBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
+
   max-height: 80px; 
   overflow-x: auto;
 
@@ -152,6 +154,8 @@ export const NotificationEmojiWrapper = styled.div`
   position: relative;
 
   display: flex;
+  flex-wrap: wrap;
+
   &.Clicked {
     font-weight: bold;
   }
@@ -246,6 +250,7 @@ export const Item = styled.div`
 `;
 
 export const NotificationActionButton = styled.button`
+  right:0;
     cursor: pointer;
 
     background:none;

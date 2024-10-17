@@ -37,11 +37,15 @@ interface Props {
 const Notification = ({ notifications = [], mutateNotifications }: Props) => {
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
-        const year = String(date.getFullYear()).slice(2);
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
-        return `${year}${month}${day}`;
+
+        const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+        const dayOfWeek = weekdays[date.getDay()];
+
+        return `${month}월 ${day}일 ${dayOfWeek}요일`;
     };
+
     const user = useUserContext();
     const [isEmojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
     const [activeNotificationId, setActiveNotificationId] = useState<number | null>(null);
@@ -53,45 +57,8 @@ const Notification = ({ notifications = [], mutateNotifications }: Props) => {
     const itemsPerPage = 20;
     const totalPages = Math.ceil(notifications.length / itemsPerPage);
 
-
     const CreateNoticeRef = useRef<HTMLDivElement>(null);
     const ChangeNoticeRef = useRef<HTMLDivElement>(null);
-
-
-    // const formattedNotifications: FormattedNotificationItem[] = useMemo(() => {
-    //     return notifications
-    //         .toSorted((a, b) => b.id - a.id)
-    //         .map((notification: NotificationItem) => {
-    //             let emojiDisplay: EmojiDisplayItem[] = [];
-    //             notification.emoji.forEach((emoji: EmojiItem) => {
-    //                 const existEmoji = emojiDisplay.find((item) => item.emoji === emoji.emoji);
-    //                 if (existEmoji) {
-    //                     existEmoji.count += 1;
-    //                 } else {
-    //                     emojiDisplay.push({
-    //                         emoji: emoji.emoji,
-    //                         count: 1,
-    //                         liked: false,
-    //                     });
-    //                 }
-    //             });
-    //             emojiDisplay = emojiDisplay.map((emojiItem) => {
-    //                 const selectedEmoji = notification.emoji.find(emoji => emoji.emoji === emojiItem.emoji && user?.id === emoji.userId);
-    //                 if (selectedEmoji) {
-    //                     return {
-    //                         ...emojiItem,
-    //                         liked: true,
-    //                     };
-    //                 }
-    //                 return emojiItem;
-    //             });
-    //             return {
-    //                 ...notification,
-    //                 emojiDisplay,
-    //             };
-    //         });
-    // }, [notifications, user]);
-
 
     useEffect(() => {
         const role = window.localStorage.getItem('Role');
