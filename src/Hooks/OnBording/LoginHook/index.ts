@@ -8,6 +8,7 @@ import { getMyWorkspaces } from "@/Api/workspace";
 import { getMyInfos } from "@/Api/profile";
 import { paths } from "@/Constants/paths";
 import { appleAuthHelpers, AppleAuthResponse } from "react-apple-signin-auth";
+import Cookies from 'js-cookie';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
@@ -159,30 +160,40 @@ const index = () => {
                 redirectURI: "https://api.seugi.com/oauth2/code/apple",
                 usePopup: true
             },
-            onSuccess: async (response: AppleAuthResponse) => {
-                const code = response.authorization.code;
-                console.log(code);
-                const name = response.user?.name;
-                const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
-                    code,
-                    token: fcmToken,
-                    platform: "WEB",
-                    name: name
-                });
-
-                const { accessToken, refreshToken } = token.data.data;
-
-                window.localStorage.setItem("accessToken", accessToken);
-                window.localStorage.setItem("refreshToken", refreshToken);
-            },
-            onError: (error: any) => {
-                console.error("Apple login error: ", error);
-                setAlertMessage("애플 로그인 중 오류가 발생했습니다. 다시 시도해주세요.");
-                setShowAlert(true);
-            }
-
         })
     };
+
+    useEffect(() => {
+        const handleSuccess = async (response: any) => {
+            const code = response.authorization.code;
+            const name = response.user?.name;
+            const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
+                code,
+                token: fcmToken,
+                platform: "WEB",
+                name: name
+            });
+
+            const { accessToken, refreshToken } = token.data.data;
+
+            Cookies.set("accessToken", accessToken);
+            Cookies.set("refreshToken", refreshToken);
+        };
+
+        const handleFailure = (error: any) => {
+            console.error("Apple login error: ", error);
+            setAlertMessage("애플 로그인 중 오류가 발생했습니다. 다시 시도해주세요.");
+            setShowAlert(true);
+        };
+
+        document.addEventListener('AppleIDSignInOnSuccess', handleSuccess);
+        document.addEventListener('AppleIDSignInOnFailure', handleFailure);
+
+        return () => {
+            document.removeEventListener('AppleIDSignInOnSuccess', handleSuccess);
+            document.removeEventListener('AppleIDSignInOnFailure', handleFailure);
+        };
+    }, []);
 
     return {
         email,
