@@ -1,5 +1,5 @@
-import React, { useState, ChangeEvent } from 'react';
-import axios, { AxiosError } from 'axios';
+import React, { useState, ChangeEvent, useEffect } from 'react';
+import axios, { AxiosInstance } from 'axios';
 import * as S from './createRoomPlus.style'; 
 
 import AvatarImg from '@/Assets/image/chat-components/Avatar.svg';
@@ -18,34 +18,65 @@ interface CreateRoomPlusProps {
   onCreateRoom: (roomName: string) => void;
 }
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
+
+export const SeugiCustomAxios: AxiosInstance = axios.create({
+  baseURL: SERVER_URL,
+});
+
 const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchResult, setSearchResult] = useState<Member[]>([]);
   const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  const workspaceId = "669e339593e10f4f59f8c583"; 
 
-  const dummyData: Member[] = [
-    { id: 1, name: '박재욱', department: '2-1' },
-    { id: 2, name: '박병준', department: '2-1' },
-    { id: 3, name: '이슬아', department: '2-4' },
-    { id: 4, name: '배채희', department: '2-4' },
-    { id: 5, name: '양예성', department: '2-1' },
-    { id: 6, name: '한준혁', department: '2-3' },
-  ];
+  useEffect(() => {
+    // 로컬 스토리지에서 accessToken을 가져옵니다.
+    const token = window.localStorage.getItem("accessToken");
+    setAccessToken(token);
+  }, []);
+
+  const searchMembers = async (term: string) => {
+    if (term && accessToken) { // accessToken이 있을 때만 요청
+      try {
+        const response = await SeugiCustomAxios.get(`/workspace/members`, {
+          params: {
+            workspaceId: workspaceId,
+          },
+          headers: {
+            "Authorization": accessToken,
+          },
+        });
+
+        // API 응답 구조 확인
+        console.log("API Response:", response.data); // 응답 전체 출력
+
+        // 응답 데이터에서 member 정보 추출
+        const members: Member[] = (response.data.member || []).map((m: any) => ({
+          id: m.id,
+          name: m.name,
+          department: m.belong, 
+        }));
+
+        setSearchResult(members.filter(
+          (item) =>
+            item.name.toLowerCase().includes(term.toLowerCase()) ||
+            item.department.toLowerCase().includes(term.toLowerCase())
+        ));
+      } catch (error) {
+        console.error("Error fetching members:", error);
+        alert('멤버를 가져오는 중 오류가 발생했습니다.');
+      }
+    } else {
+      setSearchResult([]);
+    }
+  };
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
-    if (value === '') {
-      setSearchResult([]);
-    } else {
-      const result = dummyData.filter(
-        (item) =>
-          item.name.toLowerCase().includes(value.toLowerCase()) ||
-          item.department.toLowerCase().includes(value.toLowerCase())
-      );
-      setSearchResult(result);
-    }
+    searchMembers(value); 
   };
 
   const handleMemberClick = (id: number) => {
@@ -58,35 +89,33 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
     if (selectedMembers.length > 1) {
       try {
         const requestData = {
-          workspaceId: "669e339593e10f4f59f8c583",
+          workspaceId: workspaceId,
           joinUsers: Array.from(selectedMembers),
           roomName: `Group Chat (${selectedMembers.length} members)`,
           chatRoomImg: "",
         };
 
-        const response = await axios.post('https://api.seugi.com/chat/group/create', requestData, {
+        const response = await SeugiCustomAxios.post('/chat/group/create', requestData, {
           headers: {
             'Content-Type': 'application/json',
-            "Authorization": `Bearer ${accessToken}`,
+            "Authorization": accessToken,
           },
         });
 
-        if (response.status === 401) {
-          alert('Session expired. Please login again.');
-          setAccessToken(null); // Clear the token
-          return;
+        if (response.status === 200) {
+          const result = response.data;
+          console.log("Room created successfully:", result);
+          onCreateRoom(result);
+          onClose();
+        } else {
+          console.error(`Error creating room: ${response.data}`);
         }
-
-        const result = response.data;
-
-        console.log("Room created successfully:", result);
-        onCreateRoom(result);
-        onClose();
       } catch (error) {
         if (axios.isAxiosError(error)) {
           if (error.response?.status === 401) {
             alert('Session expired. Please login again.');
             setAccessToken(null); // Clear the token
+            window.localStorage.removeItem("accessToken"); // 로컬 스토리지에서 제거
             return;
           }
           console.error(`An error occurred: ${error.message}`);
@@ -102,7 +131,7 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
   };
 
   const combinedResults = [
-    ...selectedMembers.map((id) => dummyData.find((item) => item.id === id)!).filter(Boolean),
+    ...selectedMembers.map((id) => searchResult.find((item) => item.id === id)!).filter(Boolean),
     ...searchResult.filter((item) => !selectedMembers.includes(item.id)),
   ];
 
