@@ -28,8 +28,9 @@ const Home = () => {
   const [workspaceId, setWorkspaceId] = useState<string>(currentWorkspaceId);
 
   useEffect(() => {
+    const refreshToken = Cookies.get('refrechToken');
     const accessToken = Cookies.get('accessToken');
-    if (!accessToken) {
+    if (!refreshToken || !accessToken) {
       navigate(paths.login);
     }
   }, []);
