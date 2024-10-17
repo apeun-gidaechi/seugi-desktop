@@ -42,6 +42,9 @@ const ProtectedRoute = (props: Props) => {
             },
         );
         return () => {
+            if (interceptor === null){
+                return;
+            }
             SeugiCustomAxios.interceptors.response.eject(interceptor);
         };
     }, [navigate]);
