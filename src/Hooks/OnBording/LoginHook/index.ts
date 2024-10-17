@@ -196,7 +196,7 @@ const index = () => {
             if (authorization && authorization.code) {
                 const appleAuthResponse = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
                     code: authorization.code,
-                    token: '',
+                    token: fcmToken,
                     platform: "WEB",
                     name: response.user?.name
                 });
@@ -246,12 +246,12 @@ const index = () => {
         loadAppleScript();
 
         // 컴포넌트 언마운트 시 스크립트 제거
-        return () => {
-            const script = document.querySelector('script[src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"]');
-            if (script) {
-                document.body.removeChild(script);
-            }
-        };
+        // return () => {
+        //     // const script = document.querySelector('script[src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"]');
+        //     // if (script) {
+        //     //     document.body.removeChild(script);
+        //     // }
+        // };
     }, []);
 
     return {
