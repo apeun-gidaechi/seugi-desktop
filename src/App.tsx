@@ -21,6 +21,16 @@ const firebaseConfig = {
 const fapp = initializeApp(firebaseConfig);
 const messaging = getMessaging(fapp);
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/firebase-messaging-sw.js', {
+    type: 'module' // 이 옵션을 통해 서비스 워커가 ES 모듈로 처리되도록 설정합니다.
+  }).then((registration) => {
+    console.log('Service worker registered with scope:', registration.scope);
+  }).catch((error) => {
+    console.error('Service worker registration failed:', error);
+  });
+}
+
 function App() {
 
   useScript(appleAuthHelpers.APPLE_SCRIPT_SRC);
