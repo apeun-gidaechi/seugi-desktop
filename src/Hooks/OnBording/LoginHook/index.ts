@@ -196,7 +196,7 @@ const index = () => {
             if (authorization && authorization.code) {
                 const appleAuthResponse = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
                     code: authorization.code,
-                    token: '',
+                    token: fcmToken,
                     platform: "WEB",
                     name: response.user?.name
                 });
