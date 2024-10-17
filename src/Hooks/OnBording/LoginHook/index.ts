@@ -233,7 +233,7 @@ const index = () => {
                     window.AppleID.auth.init({
                         clientId: 'com.seugi.services',
                         scope: 'email name',
-                        redirectURI: 'https://www.seugi.com/login',
+                        redirectURI: 'https://seugi.com/login',
                         usePopup: true
                     });
                 } else {
