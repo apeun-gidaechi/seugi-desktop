@@ -32,7 +32,6 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
   const workspaceId = "669e339593e10f4f59f8c583"; 
 
   useEffect(() => {
-    // 로컬 스토리지에서 accessToken을 가져옵니다.
     const token = window.localStorage.getItem("accessToken");
     setAccessToken(token);
   }, []);
@@ -48,22 +47,26 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
             "Authorization": accessToken,
           },
         });
-
+  
         // API 응답 구조 확인
-        console.log("API Response:", response.data); // 응답 전체 출력
-
+        console.log("API Response:", response.data);
+  
         // 응답 데이터에서 member 정보 추출
-        const members: Member[] = (response.data.member || []).map((m: any) => ({
-          id: m.id,
-          name: m.name,
-          department: m.belong, 
+        const members: Member[] = (response.data.data || []).map((m: any) => ({
+          id: m.member.id, // id 필드
+          name: m.nick, // nick 필드를 사용하여 이름 설정
+          department: m.belong || "", // 소속 (비어있을 경우 기본값 "")
+          // 다른 필요한 속성도 추가할 수 있습니다.
         }));
-
+  
+        // 필터링된 멤버 결과 설정
         setSearchResult(members.filter(
           (item) =>
             item.name.toLowerCase().includes(term.toLowerCase()) ||
             item.department.toLowerCase().includes(term.toLowerCase())
         ));
+  
+        console.log("Search Result:", members);
       } catch (error) {
         console.error("Error fetching members:", error);
         alert('멤버를 가져오는 중 오류가 발생했습니다.');
@@ -114,8 +117,8 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
         if (axios.isAxiosError(error)) {
           if (error.response?.status === 401) {
             alert('Session expired. Please login again.');
-            setAccessToken(null); // Clear the token
-            window.localStorage.removeItem("accessToken"); // 로컬 스토리지에서 제거
+            setAccessToken(null); 
+            window.localStorage.removeItem("accessToken"); 
             return;
           }
           console.error(`An error occurred: ${error.message}`);
@@ -148,13 +151,13 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <S.SearchIconImg src={SearchIcon}/>
+        <S.SearchIconImg src={SearchIcon} alt="Search" />
       </S.InviteMemberWrap>
       <S.ScrollableMemberList>
         {combinedResults.map((item) => (
           <S.PlusMemberClick key={item.id} onClick={() => handleMemberClick(item.id)}>
             <S.AvatarProfileWrap>
-              <S.AvatarProfile src={AvatarImg} />
+              <S.AvatarProfile src={AvatarImg} alt={`${item.name}'s Avatar`} />
             </S.AvatarProfileWrap>
             <S.InviterName>{item.name}</S.InviterName>
             <S.PlusButtonCheck>
