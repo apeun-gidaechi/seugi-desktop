@@ -27,9 +27,13 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
     setCreateRoomVisible(false);
   };
 
-  const handleCreateRoom = (roomName: string) => {
-    console.log(`Creating room: ${roomName}`);
-    handleCloseCreateRoom();
+  const handleCreateRoom = (roomInfo: { roomId: string; roomName: string }) => {
+    if (roomInfo.roomName) {
+      console.log(`Creating room: ${roomInfo.roomName}`); 
+      handleCloseCreateRoom();
+    } else {
+      console.log("Room name is empty");
+    }
   };
 
   const handleChatRoomSelect = (room: string) => {
@@ -73,7 +77,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
               {chatRooms.map((room, index) => (
                 <S.ChatRoom
                   key={index}
-                  onClick={() => handleChatRoomSelect(room)} // 클릭 시 방 선택
+                  onClick={() => handleChatRoomSelect(room)} 
                   style={{
                     backgroundColor: selectedChatRoom === room ? '#F5FBFF' : 'transparent', 
                   }}
