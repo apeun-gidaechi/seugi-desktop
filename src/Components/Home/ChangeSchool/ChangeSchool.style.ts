@@ -13,7 +13,7 @@ export const ChangeSchoolMain = styled.div`
 
   align-items: center;
   gap: 16px;
-  left:70%;
+  left:7rem;
   top: 17%;
 
   border-radius: 12px;
