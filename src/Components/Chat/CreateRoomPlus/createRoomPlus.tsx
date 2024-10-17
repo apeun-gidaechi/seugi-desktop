@@ -1,17 +1,12 @@
-import React, { useState, ChangeEvent, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios, { AxiosInstance } from 'axios';
+import useMembers from '@/Hooks/Common/Sidebar/useMembers'; 
 import * as S from './createRoomPlus.style'; 
 
 import AvatarImg from '@/Assets/image/chat-components/Avatar.svg';
 import NonClicked from '@/Assets/image/chat-components/nonClick.svg';
 import Clicked from '@/Assets/image/chat-components/clicked.svg';
 import SearchIcon from '@/Assets/image/sidebar/Findicon.svg';
-
-interface Member {
-  id: number;
-  name: string;
-  department: string;
-}
 
 interface CreateRoomPlusProps {
   onClose: () => void;
@@ -25,9 +20,6 @@ export const SeugiCustomAxios: AxiosInstance = axios.create({
 });
 
 const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }) => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [searchResult, setSearchResult] = useState<Member[]>([]);
-  const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const workspaceId = "669e339593e10f4f59f8c583"; 
 
@@ -36,57 +28,13 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
     setAccessToken(token);
   }, []);
 
-  const searchMembers = async (term: string) => {
-    if (term && accessToken) { // accessToken이 있을 때만 요청
-      try {
-        const response = await SeugiCustomAxios.get(`/workspace/members`, {
-          params: {
-            workspaceId: workspaceId,
-          },
-          headers: {
-            "Authorization": accessToken,
-          },
-        });
-  
-        // API 응답 구조 확인
-        console.log("API Response:", response.data);
-  
-        // 응답 데이터에서 member 정보 추출
-        const members: Member[] = (response.data.data || []).map((m: any) => ({
-          id: m.member.id, // id 필드
-          name: m.nick, // nick 필드를 사용하여 이름 설정
-          department: m.belong || "", // 소속 (비어있을 경우 기본값 "")
-          // 다른 필요한 속성도 추가할 수 있습니다.
-        }));
-  
-        // 필터링된 멤버 결과 설정
-        setSearchResult(members.filter(
-          (item) =>
-            item.name.toLowerCase().includes(term.toLowerCase()) ||
-            item.department.toLowerCase().includes(term.toLowerCase())
-        ));
-  
-        console.log("Search Result:", members);
-      } catch (error) {
-        console.error("Error fetching members:", error);
-        alert('멤버를 가져오는 중 오류가 발생했습니다.');
-      }
-    } else {
-      setSearchResult([]);
-    }
-  };
-
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    searchMembers(value); 
-  };
-
-  const handleMemberClick = (id: number) => {
-    setSelectedMembers((prev) =>
-      prev.includes(id) ? prev.filter((memberId) => memberId !== id) : [...prev, id]
-    );
-  };
+  const {
+    searchTerm,
+    handleSearchChange,
+    handleMemberClick,
+    combinedResults,
+    selectedMembers,
+  } = useMembers(workspaceId, accessToken); // 훅 사용
 
   const handleContinueClick = async () => {
     if (selectedMembers.length > 1) {
@@ -133,11 +81,6 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
     }
   };
 
-  const combinedResults = [
-    ...selectedMembers.map((id) => searchResult.find((item) => item.id === id)!).filter(Boolean),
-    ...searchResult.filter((item) => !selectedMembers.includes(item.id)),
-  ];
-
   return (
     <S.CreateRoomPlusBox>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -149,7 +92,7 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
           type="text"
           placeholder="이름, 소속 등을 입력해 주세요"
           value={searchTerm}
-          onChange={handleSearchChange}
+          onChange={(e) => handleSearchChange(e.target.value)} // 변경된 부분
         />
         <S.SearchIconImg src={SearchIcon} alt="Search" />
       </S.InviteMemberWrap>
