@@ -6,7 +6,7 @@
   "homepage": "/",
   "scripts": {
     "dev": "node src/swEnvBuild.js && vite",
-    "build": "node src/swEnvBuild.js",
+    "build": "node src/swEnvBuild.js && vite build",
     "preview": "vite preview",
     "electron-test": "electron .",
     "test": "echo 'test1' && wait-on tcp:127.0.0.1:5173 && echo 'test'",
