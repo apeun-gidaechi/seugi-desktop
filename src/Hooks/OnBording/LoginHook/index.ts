@@ -7,7 +7,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { getMyWorkspaces } from "@/Api/workspace";
 import { getMyInfos } from "@/Api/profile";
 import { paths } from "@/Constants/paths";
-import { appleAuthHelpers, AppleAuthResponse } from "react-apple-signin-auth";
+import { appleAuthHelpers } from "react-apple-signin-auth";
 import Cookies from 'js-cookie';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
@@ -55,44 +55,43 @@ const index = () => {
         }
     };
 
-
     const handleLogin = async () => {
-        try {
-            const res = await axios.post(
-                `${SERVER_URL}/member/login`,
-                {
-                    email,
-                    password,
-                    token: fcmToken,
+    try {
+        const res = await axios.post(
+            `${SERVER_URL}/member/login`,
+            {
+                email,
+                password,
+                token: fcmToken,
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
                 },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-
-            if (res.status !== 200) {
-                return;
             }
+        );
 
-            const { accessToken, refreshToken } = res.data.data;
-
-            setAccessToken(accessToken);
-            window.localStorage.setItem("accessToken", accessToken);
-            window.localStorage.setItem("refreshToken", refreshToken);
-
-            manageWorkspace();
-            getMyInfo();
-        } catch (error) {
-            setAlertMessage(
-                "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다"
-            );
-            setShowAlert(true);
-            console.log(error);
+        if (res.status !== 200) {
+            return;
         }
-    };
 
+        const { accessToken, refreshToken } = res.data.data;
+
+        setAccessToken(accessToken);
+        window.localStorage.setItem("accessToken", accessToken);
+        window.localStorage.setItem("refreshToken", refreshToken);
+
+        // manageWorkspace 호출 전에 getMyInfo로 사용자 정보 가져오기
+        getMyInfo();
+        manageWorkspace();
+    } catch (error) {
+        setAlertMessage(
+            "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다"
+        );
+        setShowAlert(true);
+        console.log(error);
+    }
+};
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -110,6 +109,26 @@ const index = () => {
         const MyInfos = await getMyInfos();
         setUser(MyInfos);
     }
+
+    const refreshAccessToken = async () => {
+        const refreshToken = window.localStorage.getItem("refreshToken");
+        if (!refreshToken) {
+            console.log("리프레시 토큰이 없습니다.");
+            return;
+        }
+    
+        try {
+            const response = await axios.post(`${SERVER_URL}/auth/refresh?token=${refreshToken}`);
+    
+            const { accessToken, refreshToken: newRefreshToken } = response.data.data;
+            setAccessToken(accessToken);
+            window.localStorage.setItem("accessToken", accessToken);
+            window.localStorage.setItem("refreshToken", newRefreshToken);
+        } catch (error) {
+            console.error("리프레시 토큰 요청 중 오류:", error);
+            // 추가적인 에러 처리 (예: 로그아웃)
+        }
+    };
 
     const handleGoogleLogin = useGoogleLogin({
         flow: "auth-code",
@@ -151,8 +170,6 @@ const index = () => {
     const handleAppleLogin = async (e: any) => {
         e.preventDefault();
 
-        console.log("LOG")
-
         appleAuthHelpers.signIn({
             authOptions: {
                 clientId: 'com.seugi.services',
@@ -160,24 +177,29 @@ const index = () => {
                 redirectURI: "https://api.seugi.com/oauth2/code/apple",
                 usePopup: true
             },
-        })
+        });
     };
 
     useEffect(() => {
         const handleSuccess = async (response: any) => {
             const code = response.authorization.code;
             const name = response.user?.name;
-            const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
-                code,
-                token: fcmToken,
-                platform: "WEB",
-                name: name
-            });
+            try {
+                const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
+                    code,
+                    token: fcmToken,
+                    platform: "WEB",
+                    name: name
+                });
 
-            const { accessToken, refreshToken } = token.data.data;
+                const { accessToken, refreshToken } = token.data.data;
 
-            Cookies.set("accessToken", accessToken);
-            Cookies.set("refreshToken", refreshToken);
+                Cookies.set("accessToken", accessToken);
+                Cookies.set("refreshToken", refreshToken);
+                manageWorkspace();
+            } catch (error) {
+                console.error("애플 로그인 처리 중 오류:", error);
+            }
         };
 
         const handleFailure = (error: any) => {
@@ -214,4 +236,4 @@ const index = () => {
     }
 }
 
-export default index
+export default index;
