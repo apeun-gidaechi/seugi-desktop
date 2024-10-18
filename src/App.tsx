@@ -18,13 +18,13 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
+// Firebase 앱 초기화
 const fapp = initializeApp(firebaseConfig);
 const messaging = getMessaging(fapp);
 
+// 서비스 워커 등록
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/firebase-messaging-sw.js', {
-    type: 'module' // 이 옵션을 통해 서비스 워커가 ES 모듈로 처리되도록 설정합니다.
-  }).then((registration) => {
+  navigator.serviceWorker.register('/firebase-messaging-sw.js').then((registration) => {
     console.log('Service worker registered with scope:', registration.scope);
   }).catch((error) => {
     console.error('Service worker registration failed:', error);
@@ -32,43 +32,37 @@ if ('serviceWorker' in navigator) {
 }
 
 function App() {
-
   useScript(appleAuthHelpers.APPLE_SCRIPT_SRC);
 
   useEffect(() => {
     // 알림 권한 요청
-    Notification.requestPermission()
-      .then((permission) => {
-        if (permission === 'granted') {
-          console.log('Notification permission granted.');
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        console.log('Notification permission granted.');
 
-          // FCM 토큰 요청
-          getToken(messaging, {
-            vapidKey: VAPID_PUBLIC,
-          })
-            .then((currentToken) => {
-              if (currentToken) {
-                window.localStorage.setItem('fcmToken', currentToken);
-              } else {
-                console.log('No registration token available.');
-              }
-            })
-            .catch((err) => {
-              console.error('An error occurred while retrieving token: ', err);
-            });
+        // FCM 토큰 요청
+        getToken(messaging, { vapidKey: VAPID_PUBLIC }).then((currentToken) => {
+          if (currentToken) {
+            window.localStorage.setItem('fcmToken', currentToken);
+            console.log('FCM Token:', currentToken);
+          } else {
+            console.log('No registration token available.');
+          }
+        }).catch((err) => {
+          console.error('An error occurred while retrieving token: ', err);
+        });
 
-          // FCM 메시지 수신 처리
-          onMessage(messaging, (payload) => {
-            console.log('Message received: ', payload);
-            // 알림 표시 등 추가 처리 로직
-          });
-        } else {
-          console.log('Notification permission denied.');
-        }
-      })
-      .catch((err) => {
-        console.error('Error occurred while requesting notification permission: ', err);
-      });
+        // FCM 메시지 수신 처리
+        onMessage(messaging, (payload) => {
+          console.log('Message received: ', payload);
+          // 알림 표시 등 추가 처리 로직
+        });
+      } else {
+        console.log('Notification permission denied.');
+      }
+    }).catch((err) => {
+      console.error('Error occurred while requesting notification permission: ', err);
+    });
   }, []);
 
   return (
