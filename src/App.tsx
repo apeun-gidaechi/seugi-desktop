@@ -22,19 +22,31 @@ const firebaseConfig = {
 const fapp = initializeApp(firebaseConfig);
 const messaging = getMessaging(fapp);
 
-// 서비스 워커 등록
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/firebase-messaging-sw.js').then((registration) => {
-    console.log('Service worker registered with scope:', registration.scope);
-  }).catch((error) => {
-    console.error('Service worker registration failed:', error);
-  });
-}
+// 서비스 워커 등록 함수
+const registerServiceWorker = async () => {
+  const scriptURL = '/firebase-messaging-sw.js';
+  if ('serviceWorker' in navigator) {
+    try {
+      const registration = await navigator.serviceWorker.register(scriptURL);
+      if (registration.installing) {
+        console.log('Service worker installing');
+      } else if (registration.waiting) {
+        console.log('Service worker installed');
+      } else if (registration.active) {
+        console.log('Service worker active');
+      }
+    } catch (error) {
+      console.error(`Service worker registration failed: ${error}`);
+    }
+  }
+};
 
 function App() {
   useScript(appleAuthHelpers.APPLE_SCRIPT_SRC);
 
   useEffect(() => {
+    registerServiceWorker(); // 서비스 워커 등록
+
     // 알림 권한 요청
     Notification.requestPermission().then((permission) => {
       if (permission === 'granted') {
