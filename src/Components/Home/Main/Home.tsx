@@ -27,15 +27,6 @@ const Home = () => {
   const currentWorkspaceId = Cookies.get('workspaceId') ?? '';
   const [workspaceId, setWorkspaceId] = useState<string>(currentWorkspaceId);
 
-  useEffect(() => {
-    const refreshToken = Cookies.get('refrechToken');
-    const accessToken = Cookies.get('accessToken');
-    if (!refreshToken || !accessToken) {
-      navigate(paths.login);
-    }
-  }, []);
-  //   const refreshToken = Cookies.get('refrechToken');
-
   const { data: workspaces } = useSWR('workspaces', getMyWorkspaces);
   const { data: pendingWorkspaces } = useSWR('pendingWorkspaces', getMyWaitingWorkspace);
   const { data: timeTable } = useSWR([workspaceId], (args) => getTimeTable(...args));
