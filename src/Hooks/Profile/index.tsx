@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { fetchingProfile } from '@/Api/profile';
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/Axios/SeugiCutomAxios';
 import Cookies from 'js-cookie';
 
 const index = () => {

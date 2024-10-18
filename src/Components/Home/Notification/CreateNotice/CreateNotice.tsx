@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '@/Components/Home/Notification/CreateNotice/CreateNotice.style';
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/Axios/SeugiCutomAxios';
 import { fetchingNotice } from '@/Api/Home';
 import Cookies from 'js-cookie';
 

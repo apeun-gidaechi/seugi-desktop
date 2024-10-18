@@ -34,6 +34,7 @@ const Home = () => {
       navigate(paths.login);
     }
   }, []);
+  //   const refreshToken = Cookies.get('refrechToken');
 
   const { data: workspaces } = useSWR('workspaces', getMyWorkspaces);
   const { data: pendingWorkspaces } = useSWR('pendingWorkspaces', getMyWaitingWorkspace);

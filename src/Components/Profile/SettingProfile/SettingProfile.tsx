@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/Axios/SeugiCutomAxios';
 
 import * as S from '@/Components/Profile/SettingProfile/SettingProfile.style';
 import Correction from '@/Components/Profile/Correction/Correction';
