@@ -1,5 +1,6 @@
-import React, { useState, ChangeEvent } from 'react';
-import axios, { AxiosError } from 'axios';
+import React, { useEffect, useState } from 'react';
+import axios, { AxiosInstance } from 'axios';
+import useMembers from '@/Hooks/Common/Sidebar/useMembers'; 
 import * as S from './createRoomPlus.style'; 
 
 import AvatarImg from '@/Assets/image/chat-components/Avatar.svg';
@@ -7,86 +8,65 @@ import NonClicked from '@/Assets/image/chat-components/nonClick.svg';
 import Clicked from '@/Assets/image/chat-components/clicked.svg';
 import SearchIcon from '@/Assets/image/sidebar/Findicon.svg';
 
-interface Member {
-  id: number;
-  name: string;
-  department: string;
-}
-
 interface CreateRoomPlusProps {
   onClose: () => void;
   onCreateRoom: (roomName: string) => void;
 }
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
+
+export const SeugiCustomAxios: AxiosInstance = axios.create({
+  baseURL: SERVER_URL,
+});
+
 const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }) => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [searchResult, setSearchResult] = useState<Member[]>([]);
-  const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  const workspaceId = "669e339593e10f4f59f8c583"; 
 
-  const dummyData: Member[] = [
-    { id: 1, name: '박재욱', department: '2-1' },
-    { id: 2, name: '박병준', department: '2-1' },
-    { id: 3, name: '이슬아', department: '2-4' },
-    { id: 4, name: '배채희', department: '2-4' },
-    { id: 5, name: '양예성', department: '2-1' },
-    { id: 6, name: '한준혁', department: '2-3' },
-  ];
+  useEffect(() => {
+    const token = window.localStorage.getItem("accessToken");
+    setAccessToken(token);
+  }, []);
 
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    if (value === '') {
-      setSearchResult([]);
-    } else {
-      const result = dummyData.filter(
-        (item) =>
-          item.name.toLowerCase().includes(value.toLowerCase()) ||
-          item.department.toLowerCase().includes(value.toLowerCase())
-      );
-      setSearchResult(result);
-    }
-  };
-
-  const handleMemberClick = (id: number) => {
-    setSelectedMembers((prev) =>
-      prev.includes(id) ? prev.filter((memberId) => memberId !== id) : [...prev, id]
-    );
-  };
+  const {
+    searchTerm,
+    handleSearchChange,
+    handleMemberClick,
+    combinedResults,
+    selectedMembers,
+  } = useMembers(workspaceId, accessToken); // 훅 사용
 
   const handleContinueClick = async () => {
     if (selectedMembers.length > 1) {
       try {
         const requestData = {
-          workspaceId: "669e339593e10f4f59f8c583",
+          workspaceId: workspaceId,
           joinUsers: Array.from(selectedMembers),
           roomName: `Group Chat (${selectedMembers.length} members)`,
           chatRoomImg: "",
         };
 
-        const response = await axios.post('https://api.seugi.com/chat/group/create', requestData, {
+        const response = await SeugiCustomAxios.post('/chat/group/create', requestData, {
           headers: {
             'Content-Type': 'application/json',
-            "Authorization": `Bearer ${accessToken}`,
+            "Authorization": accessToken,
           },
         });
 
-        if (response.status === 401) {
-          alert('Session expired. Please login again.');
-          setAccessToken(null); // Clear the token
-          return;
+        if (response.status === 200) {
+          const result = response.data;
+          console.log("Room created successfully:", result);
+          onCreateRoom(result);
+          onClose();
+        } else {
+          console.error(`Error creating room: ${response.data}`);
         }
-
-        const result = response.data;
-
-        console.log("Room created successfully:", result);
-        onCreateRoom(result);
-        onClose();
       } catch (error) {
         if (axios.isAxiosError(error)) {
           if (error.response?.status === 401) {
             alert('Session expired. Please login again.');
-            setAccessToken(null); // Clear the token
+            setAccessToken(null); 
+            window.localStorage.removeItem("accessToken"); 
             return;
           }
           console.error(`An error occurred: ${error.message}`);
@@ -101,11 +81,6 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
     }
   };
 
-  const combinedResults = [
-    ...selectedMembers.map((id) => dummyData.find((item) => item.id === id)!).filter(Boolean),
-    ...searchResult.filter((item) => !selectedMembers.includes(item.id)),
-  ];
-
   return (
     <S.CreateRoomPlusBox>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -117,15 +92,15 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
           type="text"
           placeholder="이름, 소속 등을 입력해 주세요"
           value={searchTerm}
-          onChange={handleSearchChange}
+          onChange={(e) => handleSearchChange(e.target.value)} // 변경된 부분
         />
-        <S.SearchIconImg src={SearchIcon}/>
+        <S.SearchIconImg src={SearchIcon} alt="Search" />
       </S.InviteMemberWrap>
       <S.ScrollableMemberList>
         {combinedResults.map((item) => (
           <S.PlusMemberClick key={item.id} onClick={() => handleMemberClick(item.id)}>
             <S.AvatarProfileWrap>
-              <S.AvatarProfile src={AvatarImg} />
+              <S.AvatarProfile src={AvatarImg} alt={`${item.name}'s Avatar`} />
             </S.AvatarProfileWrap>
             <S.InviterName>{item.name}</S.InviterName>
             <S.PlusButtonCheck>
