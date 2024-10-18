@@ -58,9 +58,9 @@ const Changeschool = ({ onClose, workspaces = [], pendingWorkspaces= [] }: Props
             <S.Subscribed key={index}>
               <S.JoinSchoolBox onClick={() => handleArrowClick(school.workspaceId)}>
                 <S.SchoolName>{school.workspaceName}</S.SchoolName>
-                <S.ArrowButton>
+                {/* <S.ArrowButton>
                   <S.ArrowImg src={Arrow} />
-                </S.ArrowButton>
+                </S.ArrowButton> */}
               </S.JoinSchoolBox>
             </S.Subscribed>
           ))
