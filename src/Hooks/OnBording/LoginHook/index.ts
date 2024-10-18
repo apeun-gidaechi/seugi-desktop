@@ -27,7 +27,7 @@ const index = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState<string>("");
-    const fcmToken = window.localStorage.getItem('fcmToken');
+    const fcmToken = window.localStorage.getItem('fcmToken') || '';
 
     const manageWorkspace = async () => {
         try {
