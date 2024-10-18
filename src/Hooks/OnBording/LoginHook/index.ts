@@ -174,7 +174,7 @@ const index = () => {
             authOptions: {
                 clientId: 'com.seugi.services',
                 scope: "email name",
-                redirectURI: "https://api.seugi.com/oauth2/code/apple",
+                redirectURI: 'https://www.seugi.com',
                 usePopup: true
             },
         });
