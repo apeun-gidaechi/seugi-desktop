@@ -24,7 +24,7 @@ const messaging = getMessaging(fapp);
 
 // 서비스 워커 등록 함수
 const registerServiceWorker = async () => {
-  const scriptURL = 'public/firebase-messaging-sw.js';
+  const scriptURL = 'firebase-messaging-sw.js';
   if ('serviceWorker' in navigator) {
     try {
       const registration = await navigator.serviceWorker.register(scriptURL);
