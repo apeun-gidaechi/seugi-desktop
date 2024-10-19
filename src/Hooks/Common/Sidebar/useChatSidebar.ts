@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios, { AxiosInstance } from 'axios';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
@@ -7,9 +7,29 @@ export const SeugiCustomAxios: AxiosInstance = axios.create({
   baseURL: SERVER_URL,
 });
 
-const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
+const useChatSidebar = (onSelectChatRoom: (room: string) => void, pathname: string) => {
   const [searchText, setSearchText] = useState("");
   const [chatRooms, setChatRooms] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetchChatRooms();
+  }, [pathname]);
+
+  const fetchChatRooms = async () => {
+    try {
+      const response = await SeugiCustomAxios.get('/chat/rooms');
+      const rooms = response.data;
+
+      // 경로에 따라 개인 또는 단체 채팅방만 필터링
+      if (pathname === "/chat") {
+        setChatRooms(rooms.filter((room: any) => room.type === "personal"));
+      } else if (pathname === "/groupchat") {
+        setChatRooms(rooms.filter((room: any) => room.type === "group"));
+      }
+    } catch (error) {
+      console.error("Error fetching chat rooms:", error);
+    }
+  };
 
   const handleSearch = async () => {
     if (searchText.trim() !== "") {
