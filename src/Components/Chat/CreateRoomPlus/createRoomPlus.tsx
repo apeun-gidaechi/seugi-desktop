@@ -10,7 +10,7 @@ import SearchIcon from '@/Assets/image/sidebar/Findicon.svg';
 
 interface CreateRoomPlusProps {
   onClose: () => void;
-  onCreateRoom: (roomName: string) => void;
+  onCreateRoom: (roomInfo: { roomId: string; roomName: string }) => void;
 }
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
@@ -57,6 +57,14 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
           const result = response.data;
           console.log("Room created successfully:", result);
           onCreateRoom(result);
+  
+          // 채팅방 ID와 이름을 함께 전달
+          const chatRoomInfo = {
+            roomId: result.data.roomId,   // 서버에서 반환된 채팅방 ID
+            roomName: requestData.roomName // 생성 시 지정한 채팅방 이름
+          };
+  
+          onCreateRoom(chatRoomInfo); // ID와 이름 모두 전달
           onClose();
         } else {
           console.error(`Error creating room: ${response.data}`);

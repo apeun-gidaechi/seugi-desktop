@@ -17,8 +17,16 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const [isCreateRoomVisible, setCreateRoomVisible] = useState(false);
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
 
-  // useChatSidebar에서 개인 및 단체 채팅방을 가져옵니다.
-  const { searchText, setSearchText, chatRooms, handleSearch, handleChatRoomClick } = useChatSidebar(onSelectChatRoom, location.pathname);
+  // 개인 채팅방과 그룹 채팅방을 각각 상태로 관리
+  const [personalChatRooms, setPersonalChatRooms] = useState<string[]>([]);
+  const [groupChatRooms, setGroupChatRooms] = useState<string[]>([]);
+
+  const { searchText, setSearchText, handleSearch, handleChatRoomClick } = useChatSidebar(
+    onSelectChatRoom,
+    location.pathname,
+    setPersonalChatRooms,
+    setGroupChatRooms
+  );
 
   const handleCreateRoomClick = () => {
     setCreateRoomVisible((prevState) => !prevState);
@@ -28,15 +36,27 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
     setCreateRoomVisible(false);
   };
 
-  const handleCreateRoom = (roomName: string) => {
-    console.log(`Creating room: ${roomName}`);
-    handleCloseCreateRoom();
+  // 방이 생성되면 그룹 채팅방에 추가
+  const handleCreateRoom = (roomInfo: { roomId: string; roomName: string }) => {
+    if (roomInfo.roomName) {
+      console.log(`Creating room: ${roomInfo.roomName}`);
+      
+      // 새로 생성된 그룹 채팅방을 groupChatRooms에 추가
+      setGroupChatRooms((prevRooms) => [...prevRooms, roomInfo.roomName]);
+
+      handleCloseCreateRoom();
+    } else {
+      console.log("Room name is empty");
+    }
   };
 
   const handleChatRoomSelect = (room: string) => {
     setSelectedChatRoom(room);
     handleChatRoomClick(room);
   };
+
+  // 개인 채팅방과 그룹 채팅방을 합쳐서 렌더링
+  const combinedChatRooms = [...personalChatRooms, ...groupChatRooms];
 
   return (
     <>
@@ -70,7 +90,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
           </S.SideFinder>
           <S.ChatRoomsWrap>
             <S.ChatRoomList>
-              {chatRooms.map((room, index) => (
+              {combinedChatRooms.map((room, index) => (
                 <S.ChatRoom
                   key={index}
                   onClick={() => handleChatRoomSelect(room)}
