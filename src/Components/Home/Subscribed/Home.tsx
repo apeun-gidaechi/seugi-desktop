@@ -18,7 +18,7 @@ const Home = () => {
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, '0');
   const day = String(today.getDate()).padStart(2, '0');
-  const date = `${year}${month}${day}`;
+  const date = `${year}-${month}-${day}`;
 
   const [page, setPage] = useState(0);
   const currentWorkspaceId = window.localStorage.getItem('workspaceId') ?? '';

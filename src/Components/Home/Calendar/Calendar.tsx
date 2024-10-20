@@ -24,14 +24,14 @@ const Calendar = ({ schedules = [] }: Props) => {
     const currentDay = String(today.getDate()).padStart(2, '0');
 
     const formatDate = (dateString: string) => {
-        const month = dateString.substring(4, 6);
-        const day = dateString.substring(6, 8);
+        const month = dateString.substring(5, 7);
+        const day = dateString.substring(8, 10);
 
         return `${month}/${day}`;
     };
 
     const calculateDDay = (schedule: ScheduleItem) => {
-        const eventDay = schedule.date.substring(6, 8);
+        const eventDay = schedule.date.substring(8, 10);
         const dPlus = Number(currentDay) - Number(eventDay);
         const dMinus = Number(eventDay) - Number(currentDay);
 
