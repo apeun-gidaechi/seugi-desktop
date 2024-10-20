@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import * as S from "@/Components/Chat/ChatSideBar/index.style";
 import SearchIcon from "@/Assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/Assets/image/chat-components/Avatar.svg";
-import Navbar from "@/Components/common/Navbar/Navbar";
 import TitleText from "@/Components/common/TitleText/index";
 import CreateRoomBtn from "@/Assets/image/sidebar/add_fill.svg";
 import useChatSidebar from "@/Hooks/Common/Sidebar/useChatSidebar";
@@ -15,12 +14,14 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const location = useLocation();
-  const { searchText, setSearchText, chatRooms, handleSearch, handleChatRoomClick } = useChatSidebar(onSelectChatRoom);
   const [isCreateRoomVisible, setCreateRoomVisible] = useState(false);
-  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null); // 현재 선택된 방의 상태
+  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
+
+  // useChatSidebar에서 개인 및 단체 채팅방을 가져옵니다.
+  const { searchText, setSearchText, chatRooms, handleSearch, handleChatRoomClick } = useChatSidebar(onSelectChatRoom, location.pathname);
 
   const handleCreateRoomClick = () => {
-    setCreateRoomVisible(prevState => !prevState);
+    setCreateRoomVisible((prevState) => !prevState);
   };
 
   const handleCloseCreateRoom = () => {
@@ -33,16 +34,15 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   };
 
   const handleChatRoomSelect = (room: string) => {
-    setSelectedChatRoom(room); // 선택된 방 업데이트
-    handleChatRoomClick(room); // 기존 클릭 핸들러 호출
+    setSelectedChatRoom(room);
+    handleChatRoomClick(room);
   };
 
   return (
     <>
       <S.ChatingPage>
-        {/* <Navbar /> */}
         <S.SideBarChat>
-          <div style={{ marginLeft: '1.5%' }}>
+          <div style={{ marginLeft: "1.5%" }}>
             <TitleText />
           </div>
           <S.SideFinder>
@@ -59,7 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
             />
             <S.IconWrapper>
               <S.SearchIcon src={SearchIcon} onClick={handleSearch} />
-              {location.pathname === '/groupchat' && (
+              {location.pathname === "/groupchat" && (
                 <S.PlusButtonImg
                   src={CreateRoomBtn}
                   alt="Create Room"
@@ -73,9 +73,10 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
               {chatRooms.map((room, index) => (
                 <S.ChatRoom
                   key={index}
-                  onClick={() => handleChatRoomSelect(room)} // 클릭 시 방 선택
+                  onClick={() => handleChatRoomSelect(room)}
                   style={{
-                    backgroundColor: selectedChatRoom === room ? '#F5FBFF' : 'transparent', 
+                    backgroundColor:
+                      selectedChatRoom === room ? "#F5FBFF" : "transparent",
                   }}
                 >
                   <S.ChatRoomAvatarWrap>
