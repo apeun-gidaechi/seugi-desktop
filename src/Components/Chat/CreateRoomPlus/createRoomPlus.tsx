@@ -39,20 +39,28 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
   const handleContinueClick = async () => {
     if (selectedMembers.length > 1) {
       try {
+        // 선택된 멤버들의 이름을 가져옴
+        const selectedMemberNames = combinedResults
+          .filter((member) => selectedMembers.includes(member.id))
+          .map((member) => member.name);
+        
+        // 멤버 이름을 기반으로 채팅방 이름 생성
+        const roomName = `${selectedMemberNames.join(', ')}`;
+  
         const requestData = {
           workspaceId: workspaceId,
           joinUsers: Array.from(selectedMembers),
-          roomName: `Group Chat (${selectedMembers.length} members)`,
+          roomName: roomName,
           chatRoomImg: "",
         };
-
+  
         const response = await SeugiCustomAxios.post('/chat/group/create', requestData, {
           headers: {
             'Content-Type': 'application/json',
             "Authorization": accessToken,
           },
         });
-
+  
         if (response.status === 200) {
           const result = response.data;
           console.log("Room created successfully:", result);
