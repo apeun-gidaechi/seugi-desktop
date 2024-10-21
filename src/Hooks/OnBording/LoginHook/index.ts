@@ -179,7 +179,6 @@ const index = () => {
             },
         });
 
-
         useEffect(() => {
             const handleSuccess = async (response: any) => {
                 const code = response.authorization.code;
@@ -217,7 +216,6 @@ const index = () => {
             };
         }, []);
     };
-
     return {
         email,
         password,
