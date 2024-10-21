@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios, { AxiosInstance } from 'axios';
+import Cookies from "js-cookie";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
@@ -27,7 +28,7 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
 
   const createRoom = async (roomName: string) => {
     try {
-      const accessToken = window.localStorage.getItem("accessToken");
+      const accessToken = Cookies.get("accessToken");
 
       if (!accessToken) {
         console.error("Access token not found. Please log in again.");

@@ -1,13 +1,21 @@
 import { fetchingProfile } from '@/Api/profile';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import React, { useState, useEffect, useRef } from 'react';
+import Cookies from 'js-cookie';
 
 const index = () => {
-    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
-    const [isEditing, setIsEditing] = useState(null);
-    const [isSettingOpen, setIsSettingOpen] = useState(false);
-    const [name, setName] = useState('');
-    const [profileData, setProfileData] = useState({
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
+    const [isEditing, setIsEditing] = useState<string | null>(null);
+    const [isSettingOpen, setIsSettingOpen] = useState<boolean>(false);
+    const [name, setName] = useState<string>('');
+    const [profileData, setProfileData] = useState<{
+        status: string;
+        spot: string;
+        belong: string;
+        phone: string;
+        wire: string;
+        location: string;
+    }>({
         status: "",
         spot: "",
         belong: "",
@@ -20,9 +28,8 @@ const index = () => {
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                if (workspaceId !== null) {
+                if (workspaceId) {
                     const Profiles = await fetchingProfile(workspaceId);
-
                     setProfileData(Profiles);
                     setName(Profiles.nick);
                 }
@@ -33,28 +40,29 @@ const index = () => {
         fetchProfileData();
     }, [workspaceId]);
 
-    const startEditing = (field: any) => {
+    const startEditing = (field: string) => {
         setIsEditing(field);
     };
 
-    const saveProfileData = async (field: any, value: string) => {
+    const saveProfileData = async (field: keyof typeof profileData, value: string) => {
         try {
-            await SeugiCustomAxios.patch(`/profile/${workspaceId}`,
-                {
+            if (workspaceId) {
+                await SeugiCustomAxios.patch(`/profile/${workspaceId}`, {
                     status: field === "status" ? value : profileData.status,
                     spot: field === "spot" ? value : profileData.spot,
                     belong: field === "belong" ? value : profileData.belong,
                     phone: field === "phone" ? value : profileData.phone,
                     wire: field === "wire" ? value : profileData.wire,
                     location: field === "location" ? value : profileData.location,
-                },);
+                });
 
-            setProfileData(prevData => ({
-                ...prevData,
-                [field]: value
-            }));
+                setProfileData(prevData => ({
+                    ...prevData,
+                    [field]: value
+                }));
 
-            setIsEditing(null);
+                setIsEditing(null);
+            }
         } catch (error) {
             console.error('프로필 저장 실패', error);
         }
@@ -104,7 +112,7 @@ const index = () => {
         cancelEditing,
         toggleSetting,
         handleNameChange
-    }
-}
+    };
+};
 
-export default index
+export default index;

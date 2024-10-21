@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import { WorkspaceName } from '@/Api/workspace';
+import Cookies from 'js-cookie';
 
 const index = () => {
-    const [workspaceName, setWorkspaceName] = useState("");
-    const [showChangeschool, setShowChangeschool] = useState(false);
+    const [workspaceName, setWorkspaceName] = useState<string>('');
+    const [showChangeschool, setShowChangeschool] = useState<boolean>(false);
     const ChangeSchoolRef = useRef<HTMLDivElement>(null);
-    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
+
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             const target = e.target as Node | null;
@@ -29,16 +31,17 @@ const index = () => {
     }, [showChangeschool]);
 
     const getWorkspaceName = async () => {
-        if (workspaceId !== null) {
+        if (workspaceId) { 
             const workspaceNms = await WorkspaceName(workspaceId);
-
             setWorkspaceName(workspaceNms.workspaceName);
+        } else {
+            console.error('워크스페이스 ID가 없습니다.');
         }
     };
 
     useEffect(() => {
         getWorkspaceName();
-    }, []);
+    }, [workspaceId]);
 
     const handleOnClicked = () => {
         setShowChangeschool(!showChangeschool);
@@ -50,7 +53,7 @@ const index = () => {
         ChangeSchoolRef,
         getWorkspaceName,
         handleOnClicked,
-    }
+    };
 }
 
-export default index
+export default index;

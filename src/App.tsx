@@ -5,6 +5,7 @@ import { UserContextProvider } from './Contexts/userContext';
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 import { appleAuthHelpers, useScript } from 'react-apple-signin-auth';
+import Cookies from 'js-cookie';
 
 const VAPID_PUBLIC = import.meta.env.VITE_VAPID_PUBLIC as string;
 
@@ -55,7 +56,7 @@ function App() {
         // FCM 토큰 요청
         getToken(messaging, { vapidKey: VAPID_PUBLIC }).then((currentToken) => {
           if (currentToken) {
-            window.localStorage.setItem('fcmToken', currentToken);
+            Cookies.set('fcmToken', currentToken);
             console.log('FCM Token:', currentToken);
           } else {
             console.log('No registration token available.');

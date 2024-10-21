@@ -4,7 +4,6 @@ import ArrowImg from "@/Assets/image/home/arrow.svg";
 import NoSchedule from '@/Assets/image/home/NoSchedule.svg';
 import * as S from '@/Components/Home/DailySchedule/DailySchedule.style';
 import { SeugiColor } from '@/Design/color/SeugiColor';
-import { getTimeTable } from "@/Api/Home";
 
 interface TimetableItem {
     id: number;
@@ -21,22 +20,8 @@ interface Props {
 }
 
 const DailySchedule = ({ timetable = [] }: Props) => {
-    // const workspaceId = window.localStorage.getItem('workspaceId');
-    // const [timetable, setTimetable] = useState<TimetableItem[]>([]);
     const [currentPeriod, setCurrentPeriod] = useState<number | null>(null);
     const [allPeriodsOver, setAllPeriodsOver] = useState<boolean>(false);
-
-    // const handleGetTimeTable = async () => {
-    //     try {
-    //         if (workspaceId !== null) {
-    //             const timetableres = await getTimeTable(workspaceId);
-    //             setTimetable(timetableres);
-    //         }
-
-    //     } catch (error) {
-    //         console.error("Failed to load timetable:", error);
-    //     }
-    // };
 
     const getCurrentPeriod = () => {
         const now = new Date();

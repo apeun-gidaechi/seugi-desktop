@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '@/Constants/paths';
 import { getMyWorkspaces } from '@/Api/workspace';
+import Cookies from 'js-cookie';
 
 const index = () => {
     const navigate = useNavigate();
-    const token = window.localStorage.getItem('accessToken');
+    const token = Cookies.get('accessToken');
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';

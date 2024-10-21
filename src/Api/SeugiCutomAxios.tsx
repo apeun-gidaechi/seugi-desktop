@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import Cookies from 'js-cookie';
 // import config from '@/constants/config/config.json';
 
 
@@ -29,26 +30,7 @@ export const clearAccessToken = () => {
   reqInterceptor = null;
 };
 
-
-const prevToken = window.localStorage.getItem("accessToken");
-if (prevToken !== null) {
+const prevToken = Cookies.get("accessToken");
+if (prevToken !== undefined && prevToken !== null) {
   setAccessToken(prevToken);
 }
-
-// SeugiCustomAxios.interceptors.response.use(
-//   function (res) {
-//     return res;
-//   },
-//   function (error) {
-//     if (error.response && error.response.status) {
-//       switch (error.response.status) {
-//         case 401:
-//           window.location.href = '/login';
-//           break;
-//         default:
-//           return Promise.reject(error);
-//       }
-//     }
-//     return Promise.reject(error);
-//   },
-// );

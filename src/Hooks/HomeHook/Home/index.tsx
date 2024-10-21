@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import { handleUserRole } from '@/Util/Role/WhatisYourRole';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '@/Constants/paths';
+import Cookies from 'js-cookie';
 
 const index = () => {
-    const token = window.localStorage.getItem("accessToken");
+    const token = Cookies.get("accessToken");
     const navigate = useNavigate();
-    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
     
     useEffect(() => {
         document.body.style.overflow = "hidden";
@@ -15,11 +16,14 @@ const index = () => {
         };
     }, []);
 
-    if (workspaceId !== null) {
-        handleUserRole(workspaceId);
-    } else {
-        console.error('워크스페이스가 없어요');
-    }
+    useEffect(() => {
+        if (workspaceId) {
+            handleUserRole(workspaceId);
+        } else {
+            console.error('워크스페이스가 없어요');
+        }
+    }, [workspaceId]);
+
     const handleCreate = () => {
         navigate(paths.createschool);
     }

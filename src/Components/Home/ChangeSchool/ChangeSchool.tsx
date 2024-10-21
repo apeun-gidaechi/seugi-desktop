@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as S from "./ChangeSchool.style";
 import Arrow from "@/Assets/image/home/arrow.svg";
-import { getMyWaitingWorkspace, getMyWorkspaces } from "@/Api/workspace";
 import { paths } from "@/Constants/paths";
+import Cookies from "js-cookie";
 
 interface workspaceItem {
   workspaceId: string;
@@ -30,9 +30,6 @@ interface Props {
 }
 
 const Changeschool = ({ onClose, workspaces = [], pendingWorkspaces= [] }: Props) => {
-  // const [subscribedSchools, setSubSchools] = useState<any[]>([]);
-  // const [pendingSchools, setPenSchools] = useState<any[]>([]);
-
   const navigate = useNavigate();
 
   const goCreateSchool = () => {
@@ -43,27 +40,10 @@ const Changeschool = ({ onClose, workspaces = [], pendingWorkspaces= [] }: Props
     navigate(paths.schoolcode);
   };
 
-  // const setSubscribedSchools = async () => {
-  //   const workspaces = await getMyWorkspaces();
-
-  //   setSubSchools(workspaces);
-  // };
-
-  // const setPendingSchools = async () => {
-  //   const pending = await getMyWaitingWorkspace();
-
-  //   setPenSchools(pending);
-  // };
-
   const handleArrowClick = (workspaceId: string) => {
-    window.localStorage.setItem("workspaceId", workspaceId);
+    Cookies.set("workspaceId", workspaceId);
     window.location.reload();
   };
-
-  // useEffect(() => {
-  //   setSubscribedSchools();
-  //   setPendingSchools();
-  // }, []);
 
   return (
     <div onClick={onClose}>

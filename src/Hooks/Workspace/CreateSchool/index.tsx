@@ -4,10 +4,11 @@ import { clearAccessToken, SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import createSchoolImg from '@/Assets/image/join-school/createshoolimg.svg';
 import { getMyWorkspaces } from '@/Api/workspace';
 import { paths } from '@/Constants/paths';
+import Cookies from 'js-cookie';
 
 const index = () => {
     const navigate = useNavigate();
-    const token = window.localStorage.getItem("accessToken");
+    const token = Cookies.get("accessToken");
     const [workspaceName, setWorkspaceName] = useState<string>('');
     const [workspaceImageUrl, setWorkspaceImageUrl] = useState<string | null>(null);
 

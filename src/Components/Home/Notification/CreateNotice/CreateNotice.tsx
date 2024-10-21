@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as S from '@/Components/Home/Notification/CreateNotice/CreateNotice.style';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import { fetchingNotice } from '@/Api/Home';
+import Cookies from 'js-cookie';
 
 interface CreateNoticeProps {
     onClose: () => void;
@@ -12,19 +13,21 @@ interface CreateNoticeProps {
 const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, mutateNotifications }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
 
     const fetchNotice = async () => {
         if (notificationId) {
             console.log(notificationId);
             try {
-                if (workspaceId !== null) {
+                if (workspaceId) {
                     const fetching = await fetchingNotice(workspaceId);
                     const notice = fetching.find((item: any) => item.id === notificationId);
                     if (notice) {
                         setTitle(notice.title);
                         setContent(notice.content);
                     }
+                } else {
+                    console.error('Workspace ID is undefined');
                 }
             } catch (error) {
                 console.error("Error fetching notice:", error);
@@ -45,7 +48,7 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, mu
                     content,
                     id: notificationId
                 });
-
+                
             } else {
                 // 새 공지 작성 API 호출
                 await SeugiCustomAxios.post(`/notification`, {

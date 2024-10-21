@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import * as S from "@/Components/Home/Subscribed/Home.style";
-
 import Schools from '@/Components/Home/Schools/Schools';
 import Meal from "@/Components/Home/Meal/Meal";
 import CatSeugi from "@/Components/Home/CatSeugi/CatSeugi";
@@ -21,9 +20,9 @@ const Home = () => {
   const day = String(today.getDate()).padStart(2, '0');
   const date = `${year}-${month}-${day}`;
 
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState<number>(0);
   const currentWorkspaceId = Cookies.get('workspaceId') ?? '';
-  const [workspaceId, setWorkspaceId] = useState(currentWorkspaceId);
+  const [workspaceId, setWorkspaceId] = useState<string>(currentWorkspaceId);
 
   const { data: workspaces } = useSWR('workspaces', getMyWorkspaces);
   const { data: pendingWorkspaces } = useSWR('pendingWorkspaces', getMyWaitingWorkspace);
@@ -31,7 +30,7 @@ const Home = () => {
   const { data: notifications, mutate: mutateNotifications } = useSWR([workspaceId, page], (args) => getNotification(...args));
   const { data: menu } = useSWR([workspaceId, date], (args) => getMenus(...args));
   const { data: schedule } = useSWR([workspaceId, month], (args) => getSchedules(...args));
-  
+
   return (
     <S.HomeMain>
       <S.HomeTitle>홈</S.HomeTitle>
@@ -42,7 +41,7 @@ const Home = () => {
           <S.HomeWrapper1DownContainer>
             <Notification notifications={notifications} mutateNotifications={mutateNotifications} />
             <S.RightContainer>
-              <Calendar schedules={schedule}/>
+              <Calendar schedules={schedule} />
               <CatSeugi />
             </S.RightContainer>
           </S.HomeWrapper1DownContainer>

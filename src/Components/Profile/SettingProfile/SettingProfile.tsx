@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
-
 import * as S from '@/Components/Profile/SettingProfile/SettingProfile.style';
 import Correction from '@/Components/Profile/Correction/Correction';
 
@@ -9,16 +8,16 @@ import CorrectionImg from '@/Assets/image/profile/CorrectionImg.svg';
 import Arrow from '@/Assets/image/profile/arrow.svg';
 import Divider from '@/Assets/image/profile/ProflieDivider.svg';
 import { fetchingProfile } from '@/Api/profile';
-
+import Cookies from 'js-cookie';
 
 interface SettingProfileProps {
     onClose: () => void;
     onNameChange: (newName: string) => void;
 }
 
-const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
-    const workspaceId = typeof window !== 'undefined' ? window.localStorage.getItem('workspaceId') : null;
-    const token = window.localStorage.getItem('accessToken');
+const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
+    const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
+    const token = Cookies.get('accessToken');
     const [name, setName] = useState('');
     const [isEditing, setIsEditing] = useState(false);
 
@@ -29,10 +28,11 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                if (workspaceId !== null) {
+                if (workspaceId) {
                     const profileRes = await fetchingProfile(workspaceId);
-
                     setName(profileRes.nick);
+                } else {
+                    console.error('Workspace ID is undefined');
                 }
             } catch (error) {
                 console.error('프로필 데이터를 가져오는데 실패했습니다.', error);
@@ -42,7 +42,7 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
     }, [workspaceId, token]);
 
     const handleLogout = async () => {
-        const fcmToken = window.localStorage.getItem('fcmToken');
+        const fcmToken = Cookies.get('fcmToken') || "";
 
         if (!workspaceId) {
             console.error('워크스페이스가 없습니다.');
@@ -53,20 +53,23 @@ const SettingProfile: React.FC<SettingProfileProps> = ({ onNameChange }) => {
             await SeugiCustomAxios.post(`/member/logout`, {
                 fcmToken
             });
-            window.localStorage.setItem('lastworkspace', workspaceId);
-            window.localStorage.removeItem('accessToken');
-            window.localStorage.removeItem('workspaceId');
+            Cookies.set('lastworkspace', workspaceId);
+            Cookies.remove('accessToken');
+            Cookies.remove('workspaceId');
             window.location.href = '/login';
         } catch (err) {
             console.error(err);
         }
     };
 
-
     const handleSave = async (newName: string) => {
         try {
-            await SeugiCustomAxios.patch(`/profile/${workspaceId}`, { nick: newName });
+            if (!workspaceId) {
+                console.error('Workspace ID is undefined');
+                return;
+            }
 
+            await SeugiCustomAxios.patch(`/profile/${workspaceId}`, { nick: newName });
             setName(newName);
             setIsEditing(false);
             onNameChange(newName);
