@@ -28,12 +28,12 @@ const Avatar: React.FC<AvatarProps> = ({ size = 'medium' }) => {
     };
 
     fetchProfileImage(); 
-    const intervalId = setInterval(fetchProfileImage, 1000);
+    const intervalId = setInterval(fetchProfileImage, 10000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, []); 
+  }, [userProfileImage]); 
 
   return (
     <>
