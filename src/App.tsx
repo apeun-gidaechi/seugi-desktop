@@ -57,7 +57,6 @@ function App() {
         getToken(messaging, { vapidKey: VAPID_PUBLIC }).then((currentToken) => {
           if (currentToken) {
             Cookies.set('fcmToken', currentToken);
-            console.log('FCM Token:', currentToken);
           } else {
             console.log('No registration token available.');
           }
