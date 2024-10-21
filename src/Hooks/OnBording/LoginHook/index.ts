@@ -50,7 +50,9 @@ const index = () => {
             navigate(paths.home);
         } catch (error) {
             console.log("Error fetching workspace:", error);
-            setAlertMessage("워크스페이스 정보를 가져오는 중 오류가 발생했습니다.");
+            setAlertMessage("워크스페이스 정보를 가져오는 중 오류가 발생했습니다. 새로 고침 후 다시 시도해 주세요.");
+            Cookies.remove('accessToken');
+            Cookies.remove('refreshToken');
             setShowAlert(true);
         }
     };

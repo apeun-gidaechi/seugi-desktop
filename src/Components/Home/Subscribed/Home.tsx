@@ -31,7 +31,7 @@ const Home = () => {
   const { data: notifications, mutate: mutateNotifications } = useSWR([workspaceId, page], (args) => getNotification(...args));
   const { data: menu } = useSWR([workspaceId, date], (args) => getMenus(...args));
   const { data: schedule } = useSWR([workspaceId, month], (args) => getSchedules(...args));
-  
+
   return (
     <S.HomeMain>
       <S.HomeTitle>홈</S.HomeTitle>
@@ -42,7 +42,7 @@ const Home = () => {
           <S.HomeWrapper1DownContainer>
             <Notification notifications={notifications} mutateNotifications={mutateNotifications} />
             <S.RightContainer>
-              <Calendar schedules={schedule}/>
+              <Calendar schedules={schedule} />
               <CatSeugi />
             </S.RightContainer>
           </S.HomeWrapper1DownContainer>
