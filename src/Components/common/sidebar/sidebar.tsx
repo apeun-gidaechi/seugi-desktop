@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
 import * as S from "@/Components/Chat/ChatSideBar/index.style";
 import SearchIcon from "@/Assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/Assets/image/chat-components/Avatar.svg";
@@ -7,6 +8,7 @@ import TitleText from "@/Components/common/TitleText/index";
 import CreateRoomBtn from "@/Assets/image/sidebar/add_fill.svg";
 import useChatSidebar from "@/Hooks/Common/Sidebar/useChatSidebar";
 import CreateRoomPlus from "@/Components/Chat/CreateRoomPlus/createRoomPlus";
+import Cookies from "js-cookie"; // 쿠키에서 토큰 가져오기 위한 라이브러리
 
 interface SidebarProps {
   onSelectChatRoom: (room: string) => void;
@@ -16,10 +18,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const location = useLocation();
   const [isCreateRoomVisible, setCreateRoomVisible] = useState(false);
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
-
-  // 개인 채팅방과 그룹 채팅방을 각각 상태로 관리
   const [personalChatRooms, setPersonalChatRooms] = useState<string[]>([]);
   const [groupChatRooms, setGroupChatRooms] = useState<string[]>([]);
+  const [workspaceId, setWorkspaceId] = useState<string | null>(null); // 워크스페이스 ID 관리
 
   const { searchText, setSearchText, handleSearch, handleChatRoomClick } = useChatSidebar(
     onSelectChatRoom,
@@ -36,17 +37,10 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
     setCreateRoomVisible(false);
   };
 
-  // 방이 생성되면 그룹 채팅방에 추가
   const handleCreateRoom = (roomInfo: { roomId: string; roomName: string }) => {
     if (roomInfo.roomName) {
-      console.log(`Creating room: ${roomInfo.roomName}`);
-      
-      // 새로 생성된 그룹 채팅방을 groupChatRooms에 추가
       setGroupChatRooms((prevRooms) => [...prevRooms, roomInfo.roomName]);
-
       handleCloseCreateRoom();
-    } else {
-      console.log("Room name is empty");
     }
   };
 
@@ -55,7 +49,37 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
     handleChatRoomClick(room);
   };
 
-  // 개인 채팅방과 그룹 채팅방을 합쳐서 렌더링
+  // 개인 채팅방 검색 API 호출 (토큰 포함)
+  const fetchPersonalChatRooms = async (workspaceId: string) => {
+    try {
+      const accessToken = Cookies.get("accessToken"); // 쿠키에서 토큰 가져오기
+
+      if (!accessToken) {
+        console.error("Access token not found. Please log in again.");
+        return;
+      }
+
+      const response = await SeugiCustomAxios.get(`/chat/personal/search?workspace=${workspaceId}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // 토큰을 헤더에 추가
+        },
+      });
+
+      const rooms = response.data.map((room: any) => room.chatName); // 방 이름으로 배열 변환
+      setPersonalChatRooms(rooms);
+    } catch (error) {
+      console.error("Error fetching personal chat rooms:", error);
+    }
+  };
+
+  // 컴포넌트 마운트 시 개인 채팅방 목록 가져오기
+  useEffect(() => {
+    if (workspaceId) {
+      fetchPersonalChatRooms(workspaceId);
+    }
+  }, [workspaceId]);
+
+  // 방이 생성되면 그룹 채팅방에 추가
   const combinedChatRooms = [...personalChatRooms, ...groupChatRooms];
 
   return (
@@ -95,8 +119,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
                   key={index}
                   onClick={() => handleChatRoomSelect(room)}
                   style={{
-                    backgroundColor:
-                      selectedChatRoom === room ? "#F5FBFF" : "transparent",
+                    backgroundColor: selectedChatRoom === room ? "#F5FBFF" : "transparent",
                   }}
                 >
                   <S.ChatRoomAvatarWrap>
