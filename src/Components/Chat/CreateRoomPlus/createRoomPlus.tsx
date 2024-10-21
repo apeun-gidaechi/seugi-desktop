@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios, { AxiosInstance } from 'axios';
 import useMembers from '@/Hooks/Common/Sidebar/useMembers'; 
 import * as S from './createRoomPlus.style'; 
+import Cookies from 'js-cookie'; // js-cookie 추가
 
 import AvatarImg from '@/Assets/image/chat-components/Avatar.svg';
 import NonClicked from '@/Assets/image/chat-components/nonClick.svg';
@@ -24,15 +25,15 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
   const [workspaceId, setWorkspaceId] = useState<string | null>(null); // workspaceId 상태 추가
 
   useEffect(() => {
-    const token = window.localStorage.getItem("accessToken");
+    const token = Cookies.get("accessToken") || null; // 쿠키에서 accessToken 가져오기, 없으면 null로 설정
     setAccessToken(token);
 
-    // 로컬 스토리지에서 workspaceId 가져오기
-    const storedWorkspaceId = window.localStorage.getItem("workspaceId");
+    // 쿠키에서 workspaceId 가져오기
+    const storedWorkspaceId = Cookies.get("workspaceId") || null; // 쿠키에서 workspaceId 가져오기, 없으면 null로 설정
     setWorkspaceId(storedWorkspaceId); // workspaceId 상태 설정
   }, []);
 
-  // workspaceId가 null인 경우의 처리
+  // 나머지 코드는 변경 없이 그대로 유지합니다.
   const {
     searchTerm,
     handleSearchChange,
@@ -84,7 +85,7 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
           if (error.response?.status === 401) {
             alert('Session expired. Please login again.');
             setAccessToken(null); 
-            window.localStorage.removeItem("accessToken"); 
+            Cookies.remove("accessToken"); // 쿠키에서 accessToken 제거
             return;
           }
           console.error(`An error occurred: ${error.message}`);
