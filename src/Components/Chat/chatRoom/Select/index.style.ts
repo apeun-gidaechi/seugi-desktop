@@ -54,3 +54,29 @@ export const SelectChatRoomMessage = styled.div`
     line-height: 130%; /* 36.4px */
     padding: 20px; 
 `;
+
+export const CurrentData = styled.div`
+    color: var(--Gray-Gray600, #787878);
+
+    /* Body2 */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 18.2px */
+`
+
+export const CurrentDataWrap = styled.div`
+    display: flex;
+    padding: var(--Corner-Extra-small, 8px) 16px;
+    justify-content: center;
+    align-items: center;
+    gap: var(--Corner-Small, 10px);
+
+    border-radius: 24px;
+    background: var(--Gray-Gray100, #F4F5F9);
+`
+
+export const CurrentDataContainer = styled.div`
+    padding: 24px;
+`

@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import * as S from './index.style'
+import * as S from './index.style';
 
 import SelectChatRoom from '@/Assets/image/chat/sadErrorImg.svg';
 import SendMessage from '@/Components/common/sendMessage/sendMessage';
-// import Sidebar from '../../sidebar/sidebar';
-// import MessageBox from "@/Components/MessageBox/messageBox";
 import useChatMessages from '@/Hooks/Common/SendMessage/useChatMessages';
 
 interface SelectedChatRoomProps {
@@ -13,15 +11,27 @@ interface SelectedChatRoomProps {
   currentUser: string;
 }
 
-
 const SelectedChatRoom: React.FC<SelectedChatRoomProps> = ({ room, currentUser }) => {
-  const { receivedMessages } = useChatMessages(room, currentUser); // Move receivedMessages here
+  const { receivedMessages } = useChatMessages(room, currentUser);
+
+  // 현재 날짜를 원하는 형식으로 포맷팅하는 함수
+  const formatDate = (date: Date) => {
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+    return date.toLocaleDateString('ko-KR', options);
+  };
+
+  // 현재 날짜를 가져오기
+  const currentDate = formatDate(new Date());
 
   return (
     <S.AllWrapContainer>
       <S.ContainerWrapper>
         <S.Container>
-
+          <S.CurrentDataContainer> 
+            <S.CurrentDataWrap>
+              <S.CurrentData>{currentDate}</S.CurrentData>
+            </S.CurrentDataWrap>
+          </S.CurrentDataContainer>
         </S.Container>
       </S.ContainerWrapper>
       <div>
@@ -31,4 +41,4 @@ const SelectedChatRoom: React.FC<SelectedChatRoomProps> = ({ room, currentUser }
   );
 };
 
-export default SelectedChatRoom
+export default SelectedChatRoom;
