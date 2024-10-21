@@ -94,8 +94,6 @@ export const NotificationContentAuthor = styled.div`
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
-
-  width:26vw;
 `;
 
 export const NotificationContentAuthorSpan = styled.span`
@@ -248,6 +246,7 @@ export const Item = styled.div`
 `;
 
 export const NotificationActionButton = styled.button`
+    right:0;
     cursor: pointer;
 
     background:none;
@@ -255,6 +254,7 @@ export const NotificationActionButton = styled.button`
 `;
 
 export const NotificationActionButtonimg = styled.img`
+  
 `
 
 export const EditedLabel = styled.span`

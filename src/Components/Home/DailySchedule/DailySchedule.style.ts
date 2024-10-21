@@ -48,6 +48,7 @@ export const Item = styled.div`
 
 export const HomeWrapper1UpContainer = styled.div`
   display: flex;
+  flex-wrap:wrap;
   padding: 12px 12px 16px 12px;
   flex-direction: column;
   align-items: flex-start;
