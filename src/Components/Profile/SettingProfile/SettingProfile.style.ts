@@ -42,6 +42,8 @@ export const ProfileImgContainer = styled.div`
 export const ProfileImg = styled.img`
     width: 64px;
     height: 64px;
+    border-radius: 30%;
+    cursor:pointer;
 `
 
 export const NameBox = styled.div`
@@ -128,6 +130,24 @@ export const RText = styled.span`
 export const Divider = styled.img`
 `
 
+export const Label = styled.label`
+    position:relative;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+`
+
+ 
+
+export const PlusButton = styled.img`
+    position:absolute;
+    right:0;
+    bottom:0;
+    z-index:995;
+`
+
 export const ProfileImgButton = styled.button`
     width:64px;
     height:64px;
@@ -137,4 +157,17 @@ export const ProfileImgButton = styled.button`
     border:none;
 
     cursor: pointer;
+    z-index: 995;
+`
+
+export const Input = styled.input`
+    z-index:999;
+`
+
+export const ProfileAvacter = styled.img`
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index:990;
 `

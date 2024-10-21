@@ -1,11 +1,13 @@
 import { fetchingProfile } from '@/Api/profile';
 import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
 import React, { useState, useEffect, useRef } from 'react';
+import { getMyInfos } from '@/Api/profile';
 import Cookies from 'js-cookie';
 
 const index = () => {
     const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
     const [isEditing, setIsEditing] = useState<string | null>(null);
+    const [picture, setPicture] = useState('');
     const [isSettingOpen, setIsSettingOpen] = useState<boolean>(false);
     const [name, setName] = useState<string>('');
     const [profileData, setProfileData] = useState<{
@@ -101,6 +103,15 @@ const index = () => {
     const handleNameChange = (newName: string) => {
         setName(newName);
     };
+
+    const handleImageChange = async () => {
+        try {
+            const res = await getMyInfos();
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
 
     return {
         name,
