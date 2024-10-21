@@ -169,18 +169,18 @@ const index = () => {
         },
     });
 
-    const handleAppleLogin = async (e: any) => {
-        e.preventDefault();
+        const handleAppleLogin = async (e: any) => {
+            e.preventDefault();
 
-        appleAuthHelpers.signIn({
-            authOptions: {
-                clientId: 'com.seugi.services',
-                scope: "email name",
-                redirectURI: 'https://www.seugi.com',
-                usePopup: true
-            },
-        });
-
+            appleAuthHelpers.signIn({
+                authOptions: {
+                    clientId: 'com.seugi.services',
+                    scope: "email name",
+                    redirectURI: 'https://www.seugi.com',
+                    usePopup: true
+                },
+            });
+        };
         useEffect(() => {
             const handleSuccess = async (response: any) => {
                 const code = response.authorization.code;
@@ -217,7 +217,7 @@ const index = () => {
                 document.removeEventListener('AppleIDSignInOnFailure', handleFailure);
             };
         }, []);
-    };
+    
     return {
         email,
         password,
