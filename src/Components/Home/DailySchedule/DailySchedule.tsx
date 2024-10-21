@@ -76,9 +76,9 @@ const DailySchedule = ({ timetable = [] }: Props) => {
                     <S.BookLogo src={HomeBookImg} />
                     <S.DailyScheduleTitle>오늘의 시간표</S.DailyScheduleTitle>
                 </S.ScheduleTitleDiv>
-                <S.ArrowLButton>
+                {/* <S.ArrowLButton>
                     <S.ArrowLogo src={ArrowImg} />
-                </S.ArrowLButton>
+                </S.ArrowLButton> */}
             </S.ScheduleTitleBox>
 
             <S.ScheduleDivBox>

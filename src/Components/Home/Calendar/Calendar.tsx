@@ -51,9 +51,9 @@ const Calendar = ({ schedules = [] }: Props) => {
                     <S.CalendarLogo src={CalendarImg} />
                     <S.ScheduleTitle>다가오는 일정</S.ScheduleTitle>
                 </S.SoonScheduleTitle>
-                <S.ArrowLButton>
+                {/* <S.ArrowLButton>
                     <S.SArrowLogo src={ArrowImg} />
-                </S.ArrowLButton>
+                </S.ArrowLButton> */}
             </S.SoonScheduleBox>
             {schedules.length > 0 ? (
                 <S.Box>
