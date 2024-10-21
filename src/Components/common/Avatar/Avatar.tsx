@@ -8,7 +8,7 @@ interface AvatarProps {
   size?: keyof typeof profileSize;
 }
 
-const Avatar = ({ size = 'medium' }:AvatarProps) => {
+const Avatar: React.FC<AvatarProps> = ({ size = 'medium' }) => {
   const [userProfileImage, setProfileImage] = useState(DefaultProfileImage);
 
   useEffect(() => {
@@ -19,14 +19,21 @@ const Avatar = ({ size = 'medium' }:AvatarProps) => {
 
         if (fetchedImage) {
           setProfileImage(fetchedImage);
+        } else {
+          setProfileImage(DefaultProfileImage);
         }
       } catch (error) {
         console.error('프로필 이미지 가져오기 오류:', error);
       }
     };
 
-    fetchProfileImage();
-  }, [1000]);
+    fetchProfileImage(); 
+    const intervalId = setInterval(fetchProfileImage, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []); 
 
   return (
     <>

@@ -180,44 +180,44 @@ const index = () => {
                 usePopup: true
             },
         });
+    }
+    useEffect(() => {
+        const handleSuccess = async (response: any) => {
+            const code = response.authorization.code;
+            const name = response.user?.name;
+            try {
+                const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
+                    code,
+                    token: fcmToken,
+                    platform: "WEB",
+                    name: name
+                });
 
-        useEffect(() => {
-            const handleSuccess = async (response: any) => {
-                const code = response.authorization.code;
-                const name = response.user?.name;
-                try {
-                    const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
-                        code,
-                        token: fcmToken,
-                        platform: "WEB",
-                        name: name
-                    });
+                const { accessToken, refreshToken } = token.data.data;
 
-                    const { accessToken, refreshToken } = token.data.data;
+                Cookies.set("accessToken", accessToken);
+                Cookies.set("refreshToken", refreshToken);
+                manageWorkspace();
+            } catch (error) {
+                console.error("애플 로그인 처리 중 오류:", error);
+            }
+        };
 
-                    Cookies.set("accessToken", accessToken);
-                    Cookies.set("refreshToken", refreshToken);
-                    manageWorkspace();
-                } catch (error) {
-                    console.error("애플 로그인 처리 중 오류:", error);
-                }
-            };
+        const handleFailure = (error: any) => {
+            console.error("Apple login error: ", error);
+            setAlertMessage("애플 로그인 중 오류가 발생했습니다. 다시 시도해주세요.");
+            setShowAlert(true);
+        };
 
-            const handleFailure = (error: any) => {
-                console.error("Apple login error: ", error);
-                setAlertMessage("애플 로그인 중 오류가 발생했습니다. 다시 시도해주세요.");
-                setShowAlert(true);
-            };
+        document.addEventListener('AppleIDSignInOnSuccess', handleSuccess);
+        document.addEventListener('AppleIDSignInOnFailure', handleFailure);
 
-            document.addEventListener('AppleIDSignInOnSuccess', handleSuccess);
-            document.addEventListener('AppleIDSignInOnFailure', handleFailure);
+        return () => {
+            document.removeEventListener('AppleIDSignInOnSuccess', handleSuccess);
+            document.removeEventListener('AppleIDSignInOnFailure', handleFailure);
+        };
+    }, []);
 
-            return () => {
-                document.removeEventListener('AppleIDSignInOnSuccess', handleSuccess);
-                document.removeEventListener('AppleIDSignInOnFailure', handleFailure);
-            };
-        }, []);
-    };
     return {
         email,
         password,
