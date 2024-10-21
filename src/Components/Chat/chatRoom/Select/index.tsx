@@ -2,9 +2,15 @@ import React from 'react';
 
 import * as S from './index.style';
 
-import SelectChatRoom from '@/Assets/image/chat/sadErrorImg.svg';
 import SendMessage from '@/Components/common/sendMessage/sendMessage';
 import useChatMessages from '@/Hooks/Common/SendMessage/useChatMessages';
+
+interface Message {
+  message: string;
+  time: string;
+  sender: string;
+  type: string;
+}
 
 interface SelectedChatRoomProps {
   room: string;
@@ -36,6 +42,12 @@ const SelectedChatRoom: React.FC<SelectedChatRoomProps> = ({ room, currentUser }
       </S.ContainerWrapper>
       <div>
         <SendMessage chatRoom={room} currentUser={currentUser} />
+        {receivedMessages.map((message: Message, index: number) => (
+          <S.MessageWrapper key={index}>
+            <S.Message>{message.message}</S.Message>
+            <S.Time>{message.time}</S.Time>
+          </S.MessageWrapper>
+        ))}
       </div>
     </S.AllWrapContainer>
   );
