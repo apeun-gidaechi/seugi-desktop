@@ -184,7 +184,10 @@ const index = () => {
         useEffect(() => {
             const handleSuccess = async (response: any) => {
                 const code = response.authorization.code;
+                console.log(code);
                 const name = response.user?.name;
+                console.log(name);
+                console.log(fcmToken);
                 try {
                     const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
                         code,
