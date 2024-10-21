@@ -37,11 +37,16 @@ interface Props {
 const Notification = ({ notifications = [], mutateNotifications }: Props) => {
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
-        const year = String(date.getFullYear()).slice(2);
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}${month}${day}`;
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+
+        // 요일 배열
+        const daysOfWeek = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+        const dayOfWeek = daysOfWeek[date.getDay()];
+
+        return `${month}월 ${day}일 ${dayOfWeek}`;
     };
+
     const user = useUserContext();
     const [isEmojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
     const [activeNotificationId, setActiveNotificationId] = useState<number | null>(null);
