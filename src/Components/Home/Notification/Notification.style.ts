@@ -122,6 +122,10 @@ export const NotificationContentDescription = styled.span`
 
 export const NotificationEmojiBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
+
+  max-height: 80px; 
+  overflow-x: auto;
 
   flex-wrap: wrap; 
   gap: 5px;
