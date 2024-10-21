@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
 export const AllWrapContainer = styled.div`
-    /* margin: 70px 0 64px 452px; */
     margin: 80px 0 64px 0;
     position: absolute;
     padding: 20px 32px 0 0;
-    /* width: calc(100% - 452px); */
     width: 100%;
     height: calc(100vh - 200px); 
 `;
@@ -30,27 +28,52 @@ export const Container = styled.div`
     max-height: 650px; 
 `;
 
-export const SelectChatRoomImgWrap = styled.div`
+export const CurrentData = styled.div`
+    color: var(--Gray-Gray600, #787878);
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 130%;
+`;
+
+export const CurrentDataWrap = styled.div`
     display: flex;
-    height: 100%; 
+    padding: 8px 16px;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    gap: 10px;
+    border-radius: 24px;
+    background: var(--Gray-Gray100, #F4F5F9);
 `;
 
-export const SelectChatRoomImg = styled.img`
-    width: 4rem;
-    height: auto;
+export const CurrentDataContainer = styled.div`
+    padding: 24px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 10px;
+    width: 100%;
 `;
 
-export const SelectChatRoomMessage = styled.div`
-    color: #000;
+export const MessageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 8px; 
+`;
 
-    /* Title1 */
-    font-family: Pretendard;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 130%; /* 36.4px */
-    padding: 20px; 
+export const Message = styled.div`
+  background-color: #e0e0e0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-width: 60%;
+  word-wrap: break-word;
+  font-size: 14px;
+`;
+
+export const Time = styled.div`
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+  align-self: flex-end; /* 시간을 오른쪽 정렬 */
 `;

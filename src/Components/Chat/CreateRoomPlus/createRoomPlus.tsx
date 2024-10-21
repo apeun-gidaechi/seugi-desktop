@@ -1,92 +1,91 @@
-import React, { useState, ChangeEvent } from 'react';
-import axios, { AxiosError } from 'axios';
+import React, { useEffect, useState } from 'react';
+import axios, { AxiosInstance } from 'axios';
+import useMembers from '@/Hooks/Common/Sidebar/useMembers'; 
 import * as S from './createRoomPlus.style'; 
+import Cookies from 'js-cookie'; // js-cookie 추가
 
 import AvatarImg from '@/Assets/image/chat-components/Avatar.svg';
 import NonClicked from '@/Assets/image/chat-components/nonClick.svg';
 import Clicked from '@/Assets/image/chat-components/clicked.svg';
 import SearchIcon from '@/Assets/image/sidebar/Findicon.svg';
 
-interface Member {
-  id: number;
-  name: string;
-  department: string;
-}
-
 interface CreateRoomPlusProps {
   onClose: () => void;
-  onCreateRoom: (roomName: string) => void;
+  onCreateRoom: (roomInfo: { roomId: string; roomName: string }) => void;
 }
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
+
+export const SeugiCustomAxios: AxiosInstance = axios.create({
+  baseURL: SERVER_URL,
+});
+
 const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }) => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [searchResult, setSearchResult] = useState<Member[]>([]);
-  const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [workspaceId, setWorkspaceId] = useState<string | null>(null); // workspaceId 상태 추가
 
-  const dummyData: Member[] = [
-    { id: 1, name: '박재욱', department: '2-1' },
-    { id: 2, name: '박병준', department: '2-1' },
-    { id: 3, name: '이슬아', department: '2-4' },
-    { id: 4, name: '배채희', department: '2-4' },
-    { id: 5, name: '양예성', department: '2-1' },
-    { id: 6, name: '한준혁', department: '2-3' },
-  ];
+  useEffect(() => {
+    const token = Cookies.get("accessToken") || null; // 쿠키에서 accessToken 가져오기, 없으면 null로 설정
+    setAccessToken(token);
 
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    if (value === '') {
-      setSearchResult([]);
-    } else {
-      const result = dummyData.filter(
-        (item) =>
-          item.name.toLowerCase().includes(value.toLowerCase()) ||
-          item.department.toLowerCase().includes(value.toLowerCase())
-      );
-      setSearchResult(result);
-    }
-  };
+    // 쿠키에서 workspaceId 가져오기
+    const storedWorkspaceId = Cookies.get("workspaceId") || null; // 쿠키에서 workspaceId 가져오기, 없으면 null로 설정
+    setWorkspaceId(storedWorkspaceId); // workspaceId 상태 설정
+  }, []);
 
-  const handleMemberClick = (id: number) => {
-    setSelectedMembers((prev) =>
-      prev.includes(id) ? prev.filter((memberId) => memberId !== id) : [...prev, id]
-    );
-  };
+  // 나머지 코드는 변경 없이 그대로 유지합니다.
+  const {
+    searchTerm,
+    handleSearchChange,
+    handleMemberClick,
+    combinedResults,
+    selectedMembers,
+  } = useMembers(workspaceId ?? '', accessToken); // 기본값으로 빈 문자열 사용
 
   const handleContinueClick = async () => {
     if (selectedMembers.length > 1) {
       try {
+        const selectedMemberNames = combinedResults
+          .filter((member) => selectedMembers.includes(member.id))
+          .map((member) => member.name);
+        
+        const roomName = `${selectedMemberNames.join(', ')}`;
+  
         const requestData = {
-          workspaceId: "669e339593e10f4f59f8c583",
+          workspaceId: workspaceId,
           joinUsers: Array.from(selectedMembers),
-          roomName: `Group Chat (${selectedMembers.length} members)`,
+          roomName: roomName,
           chatRoomImg: "",
         };
-
-        const response = await axios.post('https://api.seugi.com/chat/group/create', requestData, {
+  
+        const response = await SeugiCustomAxios.post('/chat/group/create', requestData, {
           headers: {
             'Content-Type': 'application/json',
-            "Authorization": `Bearer ${accessToken}`,
+            "Authorization": accessToken,
           },
         });
-
-        if (response.status === 401) {
-          alert('Session expired. Please login again.');
-          setAccessToken(null); // Clear the token
-          return;
+  
+        if (response.status === 200) {
+          const result = response.data;
+          console.log("Room created successfully:", result);
+          onCreateRoom(result);
+  
+          const chatRoomInfo = {
+            roomId: result.data.roomId,
+            roomName: requestData.roomName
+          };
+  
+          onCreateRoom(chatRoomInfo);
+          onClose();
+        } else {
+          console.error(`Error creating room: ${response.data}`);
         }
-
-        const result = response.data;
-
-        console.log("Room created successfully:", result);
-        onCreateRoom(result);
-        onClose();
       } catch (error) {
         if (axios.isAxiosError(error)) {
           if (error.response?.status === 401) {
             alert('Session expired. Please login again.');
-            setAccessToken(null); // Clear the token
+            setAccessToken(null); 
+            Cookies.remove("accessToken"); // 쿠키에서 accessToken 제거
             return;
           }
           console.error(`An error occurred: ${error.message}`);
@@ -101,11 +100,6 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
     }
   };
 
-  const combinedResults = [
-    ...selectedMembers.map((id) => dummyData.find((item) => item.id === id)!).filter(Boolean),
-    ...searchResult.filter((item) => !selectedMembers.includes(item.id)),
-  ];
-
   return (
     <S.CreateRoomPlusBox>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -117,15 +111,15 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
           type="text"
           placeholder="이름, 소속 등을 입력해 주세요"
           value={searchTerm}
-          onChange={handleSearchChange}
+          onChange={(e) => handleSearchChange(e.target.value)}
         />
-        <S.SearchIconImg src={SearchIcon}/>
+        <S.SearchIconImg src={SearchIcon} alt="Search" />
       </S.InviteMemberWrap>
       <S.ScrollableMemberList>
         {combinedResults.map((item) => (
           <S.PlusMemberClick key={item.id} onClick={() => handleMemberClick(item.id)}>
             <S.AvatarProfileWrap>
-              <S.AvatarProfile src={AvatarImg} />
+              <S.AvatarProfile src={AvatarImg} alt={`${item.name}'s Avatar`} />
             </S.AvatarProfileWrap>
             <S.InviterName>{item.name}</S.InviterName>
             <S.PlusButtonCheck>
