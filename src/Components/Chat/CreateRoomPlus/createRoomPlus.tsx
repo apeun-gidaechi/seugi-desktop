@@ -21,30 +21,33 @@ export const SeugiCustomAxios: AxiosInstance = axios.create({
 
 const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const workspaceId = "669e339593e10f4f59f8c583"; 
+  const [workspaceId, setWorkspaceId] = useState<string | null>(null); // workspaceId 상태 추가
 
   useEffect(() => {
     const token = window.localStorage.getItem("accessToken");
     setAccessToken(token);
+
+    // 로컬 스토리지에서 workspaceId 가져오기
+    const storedWorkspaceId = window.localStorage.getItem("workspaceId");
+    setWorkspaceId(storedWorkspaceId); // workspaceId 상태 설정
   }, []);
 
+  // workspaceId가 null인 경우의 처리
   const {
     searchTerm,
     handleSearchChange,
     handleMemberClick,
     combinedResults,
     selectedMembers,
-  } = useMembers(workspaceId, accessToken); // 훅 사용
+  } = useMembers(workspaceId ?? '', accessToken); // 기본값으로 빈 문자열 사용
 
   const handleContinueClick = async () => {
     if (selectedMembers.length > 1) {
       try {
-        // 선택된 멤버들의 이름을 가져옴
         const selectedMemberNames = combinedResults
           .filter((member) => selectedMembers.includes(member.id))
           .map((member) => member.name);
         
-        // 멤버 이름을 기반으로 채팅방 이름 생성
         const roomName = `${selectedMemberNames.join(', ')}`;
   
         const requestData = {
@@ -66,13 +69,12 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
           console.log("Room created successfully:", result);
           onCreateRoom(result);
   
-          // 채팅방 ID와 이름을 함께 전달
           const chatRoomInfo = {
-            roomId: result.data.roomId,   // 서버에서 반환된 채팅방 ID
-            roomName: requestData.roomName // 생성 시 지정한 채팅방 이름
+            roomId: result.data.roomId,
+            roomName: requestData.roomName
           };
   
-          onCreateRoom(chatRoomInfo); // ID와 이름 모두 전달
+          onCreateRoom(chatRoomInfo);
           onClose();
         } else {
           console.error(`Error creating room: ${response.data}`);
@@ -108,7 +110,7 @@ const CreateRoomPlus: React.FC<CreateRoomPlusProps> = ({ onClose, onCreateRoom }
           type="text"
           placeholder="이름, 소속 등을 입력해 주세요"
           value={searchTerm}
-          onChange={(e) => handleSearchChange(e.target.value)} // 변경된 부분
+          onChange={(e) => handleSearchChange(e.target.value)}
         />
         <S.SearchIconImg src={SearchIcon} alt="Search" />
       </S.InviteMemberWrap>
