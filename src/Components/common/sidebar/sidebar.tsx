@@ -8,7 +8,7 @@ import TitleText from "@/Components/common/TitleText/index";
 import CreateRoomBtn from "@/Assets/image/sidebar/add_fill.svg";
 import useChatSidebar from "@/Hooks/Common/Sidebar/useChatSidebar";
 import CreateRoomPlus from "@/Components/Chat/CreateRoomPlus/createRoomPlus";
-import Cookies from "js-cookie"; // 쿠키에서 토큰 가져오기 위한 라이브러리
+import Cookies from "js-cookie"; 
 
 interface SidebarProps {
   onSelectChatRoom: (room: string) => void;
@@ -20,7 +20,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
   const [personalChatRooms, setPersonalChatRooms] = useState<string[]>([]);
   const [groupChatRooms, setGroupChatRooms] = useState<string[]>([]);
-  const [workspaceId, setWorkspaceId] = useState<string | null>(null); // 워크스페이스 ID 관리
+  const [workspaceId, setWorkspaceId] = useState<string | null>(null);
 
   const { searchText, setSearchText, handleSearch, handleChatRoomClick } = useChatSidebar(
     onSelectChatRoom,
@@ -49,37 +49,51 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
     handleChatRoomClick(room);
   };
 
-  // 개인 채팅방 검색 API 호출 (토큰 포함)
   const fetchPersonalChatRooms = async (workspaceId: string) => {
     try {
-      const accessToken = Cookies.get("accessToken"); // 쿠키에서 토큰 가져오기
-
+      const accessToken = Cookies.get("accessToken");
+  
       if (!accessToken) {
         console.error("Access token not found. Please log in again.");
         return;
       }
-
+  
       const response = await SeugiCustomAxios.get(`/chat/personal/search?workspace=${workspaceId}`, {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // 토큰을 헤더에 추가
+          Authorization: accessToken,
         },
       });
-
-      const rooms = response.data.map((room: any) => room.chatName); // 방 이름으로 배열 변환
+  
+      // API 응답의 data를 출력
+      const data = response.data;
+      console.log("API response data:", data); // 전체 data 출력
+  
+      // data의 타입을 확인하여 필요한 방 이름을 추출
+      let rooms: string[] = [];
+      
+      // data의 구조를 기반으로 방 이름을 가져옴
+      if (data && Array.isArray(data.data)) {
+        rooms = data.data.map((room: { chatName: string }) => room.chatName); // data.data에서 방 이름을 가져옴
+      } else {
+        console.error("Unexpected data format:", data);
+      }
+  
+      console.log("Fetched personal chat rooms:", rooms); // 방 이름으로 변환된 데이터 출력
       setPersonalChatRooms(rooms);
     } catch (error) {
       console.error("Error fetching personal chat rooms:", error);
     }
   };
 
-  // 컴포넌트 마운트 시 개인 채팅방 목록 가져오기
   useEffect(() => {
-    if (workspaceId) {
-      fetchPersonalChatRooms(workspaceId);
-    }
-  }, [workspaceId]);
+    const storedWorkspaceId = Cookies.get("workspaceId") || null;
+    setWorkspaceId(storedWorkspaceId); 
 
-  // 방이 생성되면 그룹 채팅방에 추가
+    if (storedWorkspaceId) {
+      fetchPersonalChatRooms(storedWorkspaceId);
+    }
+  }, []); 
+
   const combinedChatRooms = [...personalChatRooms, ...groupChatRooms];
 
   return (
