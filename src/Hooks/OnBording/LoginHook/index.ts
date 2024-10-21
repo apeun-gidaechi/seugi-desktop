@@ -128,9 +128,19 @@ const index = () => {
             Cookies.set("refreshToken", newRefreshToken);
         } catch (error) {
             console.error("리프레시 토큰 요청 중 오류:", error);
-            // 추가적인 에러 처리 (예: 로그아웃)
+            Cookies.remove('accessToken');
+            Cookies.remove('refreshToken');
+            window.location.href = '/login';
         }
     };
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            refreshAccessToken();
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+    }, []);
 
     const handleGoogleLogin = useGoogleLogin({
         flow: "auth-code",
@@ -181,11 +191,13 @@ const index = () => {
             },
         });
     }
+
     useEffect(() => {
         const handleSuccess = async (response: any) => {
             const code = response.authorization.code;
             const name = response.user?.name;
             try {
+
                 const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
                     code,
                     token: fcmToken,
@@ -216,7 +228,7 @@ const index = () => {
             document.removeEventListener('AppleIDSignInOnSuccess', handleSuccess);
             document.removeEventListener('AppleIDSignInOnFailure', handleFailure);
         };
-    }, []);
+    }, [handleAppleLogin]);
 
     return {
         email,
