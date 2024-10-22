@@ -109,9 +109,17 @@ const index = () => {
         setUser(MyInfos);
     }
 
+    const scopes = [
+        "email",
+        "profile",
+        "https://www.googleapis.com/auth/classroom.courses.readonly",
+        "https://www.googleapis.com/auth/classroom.courework.me.readonly",
+        "https://www.googleapis.com/auth/classroom.courework.students.readonly",
+    ];
+
     const handleGoogleLogin = useGoogleLogin({
         flow: "auth-code",
-        scope: "email profile",
+        scope: scopes.join(" "),
         onSuccess: async ({ code }) => {
             try {
                 const res = await axios.post(
