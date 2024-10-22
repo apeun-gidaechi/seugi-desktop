@@ -113,8 +113,8 @@ const index = () => {
         "email",
         "profile",
         "https://www.googleapis.com/auth/classroom.courses.readonly",
-        "https://www.googleapis.com/auth/classroom.courework.me.readonly",
-        "https://www.googleapis.com/auth/classroom.courework.students.readonly",
+        "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
+        "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
     ];
 
     const handleGoogleLogin = useGoogleLogin({

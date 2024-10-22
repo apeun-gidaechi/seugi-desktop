@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react"; 
 import HomeBookImg from "@/Assets/image/home/homebook.svg";
 import ArrowImg from "@/Assets/image/home/arrow.svg";
 import NoSchedule from '@/Assets/image/home/NoSchedule.svg';
 import * as S from '@/Components/Home/DailySchedule/DailySchedule.style';
 import { SeugiColor } from '@/Design/color/SeugiColor';
 import MyCalendar from "@/Components/DetailTimetable/DetailTimeTable";
+import PlusButtonImg from '@/Assets/image/home/plusbutton.svg';
+import CreateTimetable from "@/Components/DetailTimetable/CreateTimetable/CreateTimetable";
+import { format } from 'date-fns';
 
 interface TimetableItem {
     id: number;
@@ -24,6 +27,10 @@ const DailySchedule = ({ timetable = [] }: Props) => {
     const [currentPeriod, setCurrentPeriod] = useState<number | null>(null);
     const [allPeriodsOver, setAllPeriodsOver] = useState<boolean>(false);
     const [showCalendar, setShowCalendar] = useState<boolean>(false);
+    const [isCreateTimetableOpen, setIsCreateTimetableOpen] = useState(false);
+
+    const calendarRef = useRef<HTMLDivElement | null>(null); 
+    const dialogRef = useRef<HTMLDivElement | null>(null);
 
     const getCurrentPeriod = () => {
         const now = new Date();
@@ -72,8 +79,46 @@ const DailySchedule = ({ timetable = [] }: Props) => {
     }, [timetable]);
 
     const onClickCalendar = () => {
-        setShowCalendar(prev => !prev); 
+        setShowCalendar(prev => !prev);
+        if (isCreateTimetableOpen) {
+            closeCreateTimetable();
+        }
     };
+
+    const todayDate = format(new Date(), 'yyyy-MM-dd');
+
+    const openCreateTimetable = () => {
+        setIsCreateTimetableOpen(true);
+        if (showCalendar) {
+            setShowCalendar(false);
+        }
+    };
+
+    const closeCreateTimetable = () => {
+        setIsCreateTimetableOpen(false);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            const target = e.target as Node;
+
+            if (dialogRef.current && !dialogRef.current.contains(target) && !(target && (target as Element).closest('.CreateTimeTable'))) {
+                closeCreateTimetable();
+            }
+
+            if (calendarRef.current && !calendarRef.current.contains(target) && !(target && (target as Element).closest('.Calendar'))) {
+                setShowCalendar(false);
+            }
+        };
+
+        if (isCreateTimetableOpen || showCalendar) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isCreateTimetableOpen, showCalendar]);
 
     return (
         <S.HomeWrapper1UpContainer>
@@ -82,12 +127,26 @@ const DailySchedule = ({ timetable = [] }: Props) => {
                     <S.BookLogo src={HomeBookImg} />
                     <S.DailyScheduleTitle>오늘의 시간표</S.DailyScheduleTitle>
                 </S.ScheduleTitleDiv>
-                <S.ArrowLButton onClick={onClickCalendar}>
-                    <S.ArrowLogo src={ArrowImg} />
-                </S.ArrowLButton>
+                <S.ButtonDiv>
+                    <S.CreateTimeTableButton onClick={openCreateTimetable} className="CreateTimeTable">
+                        <S.CreateTimeTableButtonImg src={PlusButtonImg} />
+                    </S.CreateTimeTableButton>
+                    <S.ArrowLButton onClick={onClickCalendar} className="Calendar"> 
+                        <S.ArrowLogo src={ArrowImg} />
+                    </S.ArrowLButton>
+                </S.ButtonDiv>
             </S.ScheduleTitleBox>
 
-            {showCalendar && <MyCalendar />}
+            {showCalendar && (
+                <div ref={calendarRef}>
+                    <MyCalendar />
+                </div>
+            )}
+            {isCreateTimetableOpen && (
+                <div ref={dialogRef}>
+                    <CreateTimetable date={todayDate} onClose={closeCreateTimetable} />
+                </div>
+            )}
 
             <S.ScheduleDivBox>
                 {timetable.length > 0 ? (

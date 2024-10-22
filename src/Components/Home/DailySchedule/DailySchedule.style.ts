@@ -47,6 +47,7 @@ export const Item = styled.div`
 `;
 
 export const HomeWrapper1UpContainer = styled.div`
+  position:relative;
   display: flex;
   flex-wrap:wrap;
   padding: 12px 12px 16px 12px;
@@ -165,4 +166,20 @@ export const NoScheduleDiv = styled.div`
 
 export const NoScheduleImg = styled.img`
   margin-bottom:4px;
+`
+
+export const ButtonDiv = styled.div`
+  display:flex;
+  justify-content:center;
+`
+export const CreateTimeTableButton = styled.button`
+  display:flex;
+  border:none;
+  background:none;
+  cursor: pointer;
+
+  margin-right:4px;
+`
+
+export const CreateTimeTableButtonImg = styled.img`
 `
