@@ -138,3 +138,4 @@ export const ChatRoomAvatar = styled.img`
 export const ChatRoomAvatarWrap = styled.div`
   padding-right: 16px;
 `;
+

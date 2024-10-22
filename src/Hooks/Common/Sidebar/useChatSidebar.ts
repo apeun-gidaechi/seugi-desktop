@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance } from "axios";
 import Cookies from "js-cookie";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
+// Axios 인스턴스 생성
 export const SeugiCustomAxios: AxiosInstance = axios.create({
   baseURL: SERVER_URL,
 });
 
+// useChatSidebar 훅 정의
 const useChatSidebar = (
-  onSelectChatRoom: (room: string) => void, 
+  onSelectChatRoom: (room: string) => void,
   pathname: string,
   setPersonalChatRooms: (rooms: string[]) => void,
   setGroupChatRooms: (rooms: string[]) => void
@@ -22,20 +24,38 @@ const useChatSidebar = (
     fetchChatRooms();
   }, [pathname]);
 
+  // 채팅방 목록 가져오는 함수
   const fetchChatRooms = async () => {
     try {
-      const response = await SeugiCustomAxios.get('/chat/rooms');
-      const rooms = response.data;
+      const storedWorkspaceId = Cookies.get("workspaceId") || null; // 쿠키에서 workspaceId 가져오기
+      const accessToken = Cookies.get("accessToken"); // 쿠키에서 accessToken 가져오기
 
-      // 경로에 따라 개인 또는 단체 채팅방만 필터링하고 각각의 setter로 설정
+      if (!accessToken) {
+        console.error("Access token not found. Please log in again.");
+        return;
+      }
+
+      // 경로에 따라 개인 또는 그룹 채팅방 검색
       if (pathname === "/chat") {
-        const filteredRooms = rooms.filter((room: any) => room.type === "personal");
-        updatePersonalChatRooms(filteredRooms);
-        setPersonalChatRooms(filteredRooms); // 상태 덮어쓰기
+        const response = await SeugiCustomAxios.get(`/chat/personal/search?workspace=${storedWorkspaceId}`, {
+          headers: {
+            Authorization: accessToken, // Authorization 헤더에 Bearer 토큰 추가
+          },
+        });
+        
+        const personalRooms = response.data; // 개인 채팅방 데이터
+        updatePersonalChatRooms(personalRooms);
+        setPersonalChatRooms(personalRooms);
       } else if (pathname === "/groupchat") {
-        const filteredRooms = rooms.filter((room: any) => room.type === "group");
-        updateGroupChatRooms(filteredRooms);
-        setGroupChatRooms(filteredRooms); // 상태 덮어쓰기
+        const response = await SeugiCustomAxios.get(`/chat/group/search?workspace=${storedWorkspaceId}`, {
+          headers: {
+            Authorization: accessToken, // Authorization 헤더에 Bearer 토큰 추가
+          },
+        });
+
+        const groupRooms = response.data; // 그룹 채팅방 데이터
+        updateGroupChatRooms(groupRooms);
+        setGroupChatRooms(groupRooms);
       }
     } catch (error) {
       console.error("Error fetching chat rooms:", error);
@@ -44,9 +64,7 @@ const useChatSidebar = (
 
   const handleSearch = async () => {
     if (searchText.trim() !== "") {
-      // personalChatRooms와 groupChatRooms 상태값을 결합하여 검색
       const combinedRooms = [...personalChatRooms, ...groupChatRooms];
-      
       const roomFound = combinedRooms.includes(searchText);
 
       if (roomFound) {
@@ -69,7 +87,7 @@ const useChatSidebar = (
       }
 
       const requestData = {
-        workspaceId: "669e339593e10f4f59f8c583", 
+        workspaceId: "669e339593e10f4f59f8c583", // 워크스페이스 ID
         roomName: roomName,
         joinUsers: [10],
         chatRoomImg: "",
@@ -77,12 +95,12 @@ const useChatSidebar = (
 
       const response = await SeugiCustomAxios.post('/chat/personal/create', requestData, {
         headers: {
-          'Authorization': accessToken,
+          Authorization: `Bearer ${accessToken}`, // Authorization 헤더에 Bearer 토큰 추가
         },
       });
 
       if (response.status === 200) {
-        const newRoomList = [...personalChatRooms, roomName]; // 기존 상태에 새로운 방 추가
+        const newRoomList = [...personalChatRooms, roomName]; // 새로운 방 추가
         updatePersonalChatRooms(newRoomList); // 업데이트된 상태 저장
         setPersonalChatRooms(newRoomList); // 덮어쓰기
         handleChatRoomClick(roomName);
