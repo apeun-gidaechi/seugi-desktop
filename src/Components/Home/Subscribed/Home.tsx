@@ -11,7 +11,7 @@ import Assignment from "../Assignment/Assignment";
 import RegisterSchool from "@/Components/Home/Subscribed/RegisterSchool/RegisterSchool";
 import useSWR from "swr";
 import { getMyWorkspaces, getMyWaitingWorkspace } from "@/Api/workspace";
-import { getNotification, getTimeTable, getMenus, getSchedules } from "@/Api/Home";
+import { getNotification, getTimeTable, getMenus, getSchedules, getTasks, getClassroomTasks } from "@/Api/Home";
 import Cookies from "js-cookie";
 
 const Home = () => {
@@ -31,6 +31,8 @@ const Home = () => {
   const { data: notifications, mutate: mutateNotifications } = useSWR([workspaceId, page], (args) => getNotification(...args));
   const { data: menu } = useSWR([workspaceId, date], (args) => getMenus(...args));
   const { data: schedule } = useSWR([workspaceId, month], (args) => getSchedules(...args));
+  const { data: tasks } = useSWR([workspaceId], (args) => getTasks(...args));
+  const { data: classroomTasks } = useSWR('classroomTasks', getClassroomTasks);
 
   return (
     <S.HomeMain>
@@ -51,7 +53,7 @@ const Home = () => {
         <S.HomeWrapper2>
           <Schools workspaces={workspaces} pendingWorkspaces={pendingWorkspaces} />
           <Meal todayMenu={menu} />
-          <Assignment />
+          <Assignment tasks={tasks} classroomTasks={classroomTasks} />
         </S.HomeWrapper2>
       </S.ComponentsBox>
 
