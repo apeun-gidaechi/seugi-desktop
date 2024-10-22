@@ -19,7 +19,7 @@ const index = () => {
         return () => {
             document.body.style.overflow = "auto";
         };
-    }, []);
+    }, []); 
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -117,6 +117,14 @@ const index = () => {
         "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
     ];
 
+    const scopes = [
+        "email",
+        "profile",
+        "https://www.googleapis.com/auth/classroom.courses.readonly",
+        "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
+        "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
+    ];
+
     const handleGoogleLogin = useGoogleLogin({
         flow: "auth-code",
         scope: scopes.join(" "),
@@ -154,32 +162,33 @@ const index = () => {
         },
     });
 
-    const handleAppleLogin = async (e: any) => {
-        e.preventDefault();
+        const handleAppleLogin = async (e: any) => {
+            e.preventDefault();
 
-        appleAuthHelpers.signIn({
-            authOptions: {
-                clientId: 'com.seugi.services',
-                scope: "email name",
-                redirectURI: 'https://www.seugi.com',
-                usePopup: true
-            },
-        });
-    }
-
-    useEffect(() => {
-        const handleSuccess = async (response: any) => {
-            const code = response.authorization.code;
-            const name = response.user?.name;
-            try {
-                const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
-                    code,
-                    token: fcmToken,
-                    platform: "WEB",
-                    name: name
-                });
-
-                const { accessToken, refreshToken } = token.data.data;
+            appleAuthHelpers.signIn({
+                authOptions: {
+                    clientId: 'com.seugi.services',
+                    scope: "email name",
+                    redirectURI: 'https://www.seugi.com',
+                    usePopup: true
+                },
+            });
+        };
+        useEffect(() => {
+            const handleSuccess = async (response: any) => {
+                console.log("1");
+                const code = response.detail.authorization.code;
+                const name = response.user?.name;
+                console.log(response);
+                try {
+                    const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
+                        code,
+                        token: fcmToken,
+                        platform: "WEB",
+                        name: name
+                    });
+                    console.log(token)
+                    const { accessToken, refreshToken } = token.data.data
 
                 Cookies.set("accessToken", accessToken);
                 Cookies.set("refreshToken", refreshToken);

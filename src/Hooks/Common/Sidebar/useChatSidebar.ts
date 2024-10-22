@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios, { AxiosInstance } from 'axios';
 import Cookies from "js-cookie";
 
@@ -8,13 +8,46 @@ export const SeugiCustomAxios: AxiosInstance = axios.create({
   baseURL: SERVER_URL,
 });
 
-const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
+const useChatSidebar = (
+  onSelectChatRoom: (room: string) => void, 
+  pathname: string,
+  setPersonalChatRooms: (rooms: string[]) => void,
+  setGroupChatRooms: (rooms: string[]) => void
+) => {
   const [searchText, setSearchText] = useState("");
-  const [chatRooms, setChatRooms] = useState<string[]>([]);
+  const [personalChatRooms, updatePersonalChatRooms] = useState<string[]>([]); // 개인 채팅방 상태
+  const [groupChatRooms, updateGroupChatRooms] = useState<string[]>([]); // 그룹 채팅방 상태
+
+  useEffect(() => {
+    fetchChatRooms();
+  }, [pathname]);
+
+  const fetchChatRooms = async () => {
+    try {
+      const response = await SeugiCustomAxios.get('/chat/rooms');
+      const rooms = response.data;
+
+      // 경로에 따라 개인 또는 단체 채팅방만 필터링하고 각각의 setter로 설정
+      if (pathname === "/chat") {
+        const filteredRooms = rooms.filter((room: any) => room.type === "personal");
+        updatePersonalChatRooms(filteredRooms);
+        setPersonalChatRooms(filteredRooms); // 상태 덮어쓰기
+      } else if (pathname === "/groupchat") {
+        const filteredRooms = rooms.filter((room: any) => room.type === "group");
+        updateGroupChatRooms(filteredRooms);
+        setGroupChatRooms(filteredRooms); // 상태 덮어쓰기
+      }
+    } catch (error) {
+      console.error("Error fetching chat rooms:", error);
+    }
+  };
 
   const handleSearch = async () => {
     if (searchText.trim() !== "") {
-      const roomFound = chatRooms.includes(searchText);
+      // personalChatRooms와 groupChatRooms 상태값을 결합하여 검색
+      const combinedRooms = [...personalChatRooms, ...groupChatRooms];
+      
+      const roomFound = combinedRooms.includes(searchText);
 
       if (roomFound) {
         handleChatRoomClick(searchText);
@@ -49,7 +82,9 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
       });
 
       if (response.status === 200) {
-        addChatRoom(roomName);
+        const newRoomList = [...personalChatRooms, roomName]; // 기존 상태에 새로운 방 추가
+        updatePersonalChatRooms(newRoomList); // 업데이트된 상태 저장
+        setPersonalChatRooms(newRoomList); // 덮어쓰기
         handleChatRoomClick(roomName);
       } else {
         console.error(`Error creating room: ${response.data}`);
@@ -59,25 +94,13 @@ const useChatSidebar = (onSelectChatRoom: (room: string) => void) => {
     }
   };
 
-  const addChatRoom = (roomName: string) => {
-    console.log(`Adding chat room: ${roomName}`);
-    setChatRooms((prevRooms) => {
-      if (!prevRooms.includes(roomName)) {
-        return [...prevRooms, roomName];
-      }
-      return prevRooms;
-    });
-  };
-
   const handleChatRoomClick = (roomName: string) => {
     onSelectChatRoom(roomName);
-    console.log(`Clicked on chat room: ${roomName}`);
   };
 
   return {
     searchText,
     setSearchText,
-    chatRooms,
     handleSearch,
     handleChatRoomClick,
   };

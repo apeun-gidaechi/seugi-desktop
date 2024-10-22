@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import * as S from "@/Components/Chat/ChatSideBar/index.style";
 import SearchIcon from "@/Assets/image/chat-components/Search.svg";
 import AvatarProfile from "@/Assets/image/chat-components/Avatar.svg";
-import Navbar from "@/Components/common/Navbar/Navbar";
 import TitleText from "@/Components/common/TitleText/index";
 import CreateRoomBtn from "@/Assets/image/sidebar/add_fill.svg";
 import useChatSidebar from "@/Hooks/Common/Sidebar/useChatSidebar";
@@ -15,34 +14,55 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const location = useLocation();
-  const { searchText, setSearchText, chatRooms, handleSearch, handleChatRoomClick } = useChatSidebar(onSelectChatRoom);
   const [isCreateRoomVisible, setCreateRoomVisible] = useState(false);
-  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null); // 현재 선택된 방의 상태
+  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
+
+  // 개인 채팅방과 그룹 채팅방을 각각 상태로 관리
+  const [personalChatRooms, setPersonalChatRooms] = useState<string[]>([]);
+  const [groupChatRooms, setGroupChatRooms] = useState<string[]>([]);
+
+  const { searchText, setSearchText, handleSearch, handleChatRoomClick } = useChatSidebar(
+    onSelectChatRoom,
+    location.pathname,
+    setPersonalChatRooms,
+    setGroupChatRooms
+  );
 
   const handleCreateRoomClick = () => {
-    setCreateRoomVisible(prevState => !prevState);
+    setCreateRoomVisible((prevState) => !prevState);
   };
 
   const handleCloseCreateRoom = () => {
     setCreateRoomVisible(false);
   };
 
-  const handleCreateRoom = (roomName: string) => {
-    console.log(`Creating room: ${roomName}`);
-    handleCloseCreateRoom();
+  // 방이 생성되면 그룹 채팅방에 추가
+  const handleCreateRoom = (roomInfo: { roomId: string; roomName: string }) => {
+    if (roomInfo.roomName) {
+      console.log(`Creating room: ${roomInfo.roomName}`);
+      
+      // 새로 생성된 그룹 채팅방을 groupChatRooms에 추가
+      setGroupChatRooms((prevRooms) => [...prevRooms, roomInfo.roomName]);
+
+      handleCloseCreateRoom();
+    } else {
+      console.log("Room name is empty");
+    }
   };
 
   const handleChatRoomSelect = (room: string) => {
-    setSelectedChatRoom(room); // 선택된 방 업데이트
-    handleChatRoomClick(room); // 기존 클릭 핸들러 호출
+    setSelectedChatRoom(room);
+    handleChatRoomClick(room);
   };
+
+  // 개인 채팅방과 그룹 채팅방을 합쳐서 렌더링
+  const combinedChatRooms = [...personalChatRooms, ...groupChatRooms];
 
   return (
     <>
       <S.ChatingPage>
-        {/* <Navbar /> */}
         <S.SideBarChat>
-          <div style={{ marginLeft: '1.5%' }}>
+          <div style={{ marginLeft: "1.5%" }}>
             <TitleText />
           </div>
           <S.SideFinder>
@@ -59,7 +79,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
             />
             <S.IconWrapper>
               <S.SearchIcon src={SearchIcon} onClick={handleSearch} />
-              {location.pathname === '/groupchat' && (
+              {location.pathname === "/groupchat" && (
                 <S.PlusButtonImg
                   src={CreateRoomBtn}
                   alt="Create Room"
@@ -70,12 +90,13 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
           </S.SideFinder>
           <S.ChatRoomsWrap>
             <S.ChatRoomList>
-              {chatRooms.map((room, index) => (
+              {combinedChatRooms.map((room, index) => (
                 <S.ChatRoom
                   key={index}
-                  onClick={() => handleChatRoomSelect(room)} // 클릭 시 방 선택
+                  onClick={() => handleChatRoomSelect(room)}
                   style={{
-                    backgroundColor: selectedChatRoom === room ? '#F5FBFF' : 'transparent', 
+                    backgroundColor:
+                      selectedChatRoom === room ? "#F5FBFF" : "transparent",
                   }}
                 >
                   <S.ChatRoomAvatarWrap>
