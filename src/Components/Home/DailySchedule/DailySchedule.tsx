@@ -4,6 +4,7 @@ import ArrowImg from "@/Assets/image/home/arrow.svg";
 import NoSchedule from '@/Assets/image/home/NoSchedule.svg';
 import * as S from '@/Components/Home/DailySchedule/DailySchedule.style';
 import { SeugiColor } from '@/Design/color/SeugiColor';
+import MyCalendar from "@/Components/DetailTimetable/DetailTimeTable";
 
 interface TimetableItem {
     id: number;
@@ -22,6 +23,7 @@ interface Props {
 const DailySchedule = ({ timetable = [] }: Props) => {
     const [currentPeriod, setCurrentPeriod] = useState<number | null>(null);
     const [allPeriodsOver, setAllPeriodsOver] = useState<boolean>(false);
+    const [showCalendar, setShowCalendar] = useState<boolean>(false);
 
     const getCurrentPeriod = () => {
         const now = new Date();
@@ -69,6 +71,10 @@ const DailySchedule = ({ timetable = [] }: Props) => {
         return () => clearInterval(interval);
     }, [timetable]);
 
+    const onClickCalendar = () => {
+        setShowCalendar(prev => !prev); 
+    };
+
     return (
         <S.HomeWrapper1UpContainer>
             <S.ScheduleTitleBox>
@@ -76,10 +82,12 @@ const DailySchedule = ({ timetable = [] }: Props) => {
                     <S.BookLogo src={HomeBookImg} />
                     <S.DailyScheduleTitle>오늘의 시간표</S.DailyScheduleTitle>
                 </S.ScheduleTitleDiv>
-                {/* <S.ArrowLButton>
+                <S.ArrowLButton onClick={onClickCalendar}>
                     <S.ArrowLogo src={ArrowImg} />
-                </S.ArrowLButton> */}
+                </S.ArrowLButton>
             </S.ScheduleTitleBox>
+
+            {showCalendar && <MyCalendar />}
 
             <S.ScheduleDivBox>
                 {timetable.length > 0 ? (

@@ -4,19 +4,18 @@ import { addDays, format } from 'date-fns';
 import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 import Cookies from 'js-cookie';
 
-// 각 과목의 타입 정의
 interface TimetableData {
   period: number;
   day: string;
   subject: string;
 }
 
-const Timetable: React.FC = () => {
+const DetailTimetable = () => {
   const workspaceId = Cookies.get("workspaceId");
   const [currentWeekStart, setCurrentWeekStart] = useState<Date>(new Date());
   const [timetableData, setTimetableData] = useState<(TimetableData | null)[][]>([]);
-  const [selectedSubject, setSelectedSubject] = useState<TimetableData | null>(null); // 클릭한 과목 상태
-  const [isCreating, setIsCreating] = useState<boolean>(false); // 시간표 생성 상태
+  const [selectedSubject, setSelectedSubject] = useState<TimetableData | null>(null);
+  const [isCreating, setIsCreating] = useState<boolean>(false); 
 
   const days = ['월', '화', '수', '목', '금'];
   const periods = [1, 2, 3, 4, 5, 6, 7];
@@ -133,4 +132,4 @@ const Timetable: React.FC = () => {
   );
 };
 
-export default Timetable;
+export default DetailTimetable;
