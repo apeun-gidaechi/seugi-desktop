@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import * as S from "@/Components/Home/Assignment/Assignment.style";
 import AssignmentImg from "@/Assets/image/home/checkAssignment.svg";
+import { getTasks, getClassroomTasks } from "@/Api/Home";
+import Emoji from "@/Assets/image/home/emoji.svg"
 
 interface Task {
   id: number;
@@ -18,55 +21,100 @@ interface ClassroomTask {
   dueDate: Date | null;
 }
 
-interface Props {
-  tasks: Task[];
-  classroomTasks: ClassroomTask[];
-}
+const Assignment = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [classroomTasks, setClassroomTasks] = useState<ClassroomTask[]>([]);
 
-const Assignment = ({ tasks = [], classroomTasks = [] }: Props) => {
+  const fetchData = async () => {
+    const workspaceId = Cookies.get("workspaceId");
+    if (workspaceId) {
+      const fetchedTasks = await getTasks(workspaceId);
+      const fetchedClassroomTasks = await getClassroomTasks();
+      setTasks(fetchedTasks);
+      setClassroomTasks(fetchedClassroomTasks);
+    } else {
+      console.error("Workspace ID is not defined");
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const handleClassroomTaskClick = (link: string) => {
-    window.open(link, "_blank");
+    if (link) {
+      window.open(link, "_blank");
+    } else {
+      console.error("No link available for this task.");
+    }
+  };
+
+  const calculateDaysLeft = (dueDate: Date | null) => {
+    if (!dueDate) return "기한 없음"; 
+  
+    const today = new Date();
+    const diffTime = new Date(dueDate).getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+    if (diffDays > 0) {
+      return `D-${diffDays}`;
+    } else if (diffDays === 0) {
+      return "D-Day";
+    } else {
+      return `D+${Math.abs(diffDays)}`;
+    }
   };
 
   return (
     <S.AssignmentMain>
       <S.AssignmentTitleBox>
         <S.AssignmentImg src={AssignmentImg} />
-        <S.AssignmentTitleText>과제</S.AssignmentTitleText>
-        <S.PostAssignment>과제를 제출해주세요</S.PostAssignment>
+        <S.AssignmentTitleText>다가오는 과제</S.AssignmentTitleText>
       </S.AssignmentTitleBox>
-      <S.AssignmentBox>
-        <h1>Regular Tasks</h1>
-        <ul>
-          {tasks.map((task: Task) => (
-            <li key={task.id}>
-              <h2>{task.title}</h2>
-              <p>{task.description || "No description available"}</p>
-              <p>
-                {task.dueDate
-                  ? new Date(task.dueDate).toLocaleString()
-                  : "No due date"}
-              </p>
-            </li>
-          ))}
-        </ul>
 
-        <h1>Classroom Tasks</h1>
+      <S.AssignmentBox>
+        <h1>구글 클래스룸 과제</h1>
         <ul>
-          {classroomTasks.map((task: ClassroomTask) => (
-            <li
-              key={task.id}
-              onClick={() => handleClassroomTaskClick(task.link)}
-            >
-              <h2>{task.title}</h2>
-              <p>{task.description || "No description available"}</p>
-              <p>
-                {task.dueDate
-                  ? new Date(task.dueDate).toLocaleString()
-                  : "No due date"}
-              </p>
-            </li>
-          ))}
+          {classroomTasks.length > 0 ? (
+            classroomTasks.map((task) => (
+              <S.AssignmentButton key={task.id} onClick={() => handleClassroomTaskClick(task.link)}>
+                <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
+                <S.AssignmentDescription>
+                  {task.description ? task.description : "설명 없음"}
+                </S.AssignmentDescription>
+                <S.AssignmentDateBox>
+                  <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
+                  <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>
+                </S.AssignmentDateBox>
+              </S.AssignmentButton>
+            ))
+          ) : (
+            <S.NoTask>등록된 과제가 없습니다.</S.NoTask>
+          )}
+        </ul>
+      </S.AssignmentBox>
+
+      <S.AssignmentBox>
+        <h1>일반 과제</h1>
+        <ul>
+          {tasks.length > 0 ? (
+            tasks.map((task) => (
+              <S.AssignmentButton key={task.id}>
+                <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
+                <S.AssignmentDescription>
+                  {task.description ? task.description : "설명 없음"}
+                </S.AssignmentDescription>
+                <S.AssignmentDateBox>
+                  <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
+                  <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>
+                </S.AssignmentDateBox>
+              </S.AssignmentButton>
+            ))
+          ) : (
+            <S.NoTaskWrap>
+              <S.NoTask>등록된 과제가 없습니다.</S.NoTask>
+            </S.NoTaskWrap>
+          )}
         </ul>
       </S.AssignmentBox>
     </S.AssignmentMain>

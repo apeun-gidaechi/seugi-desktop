@@ -45,7 +45,7 @@ const Home = () => {
             <Notification notifications={notifications} mutateNotifications={mutateNotifications} />
             <S.RightContainer>
               <Calendar schedules={schedule} />
-              <CatSeugi />
+              <Assignment tasks={tasks} classroomTasks={classroomTasks} />
             </S.RightContainer>
           </S.HomeWrapper1DownContainer>
         </S.HomeWrapper1>
@@ -53,7 +53,7 @@ const Home = () => {
         <S.HomeWrapper2>
           <Schools workspaces={workspaces} pendingWorkspaces={pendingWorkspaces} />
           <Meal todayMenu={menu} />
-          <Assignment tasks={tasks} classroomTasks={classroomTasks} />
+          <CatSeugi />
         </S.HomeWrapper2>
       </S.ComponentsBox>
 
