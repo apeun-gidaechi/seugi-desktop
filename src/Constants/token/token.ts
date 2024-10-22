@@ -1,8 +1,4 @@
 import Cookies from "js-cookie";
-import {
-    ACCESS_TOKEN_KEY,
-    REFRESH_TOKEN_KEY,
-} from "@/Constants/token/token.constants";
 
 class Token {
     public getToken(key: string): string | undefined {
@@ -14,8 +10,8 @@ class Token {
     }
 
     public clearToken() {
-        Cookies.remove(ACCESS_TOKEN_KEY);
-        Cookies.remove(REFRESH_TOKEN_KEY);
+        Cookies.remove("accessToken");
+        Cookies.remove("refreshToken");
     }
 }
 

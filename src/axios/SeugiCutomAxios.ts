@@ -1,13 +1,12 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { ACCESS_TOKEN_KEY, REQUEST_TOKEN_KEY } from "@/Constants/token/token.constants";
-import token from "@/Constants/token/token";
 import ResponseHandler from "./ResponseHandler";
 import requestHandler from "./RequestHandler";
+import Cookies from "js-cookie";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
 const createAxiosInstance = (config?: AxiosRequestConfig) => {
-  const ACCESS_TOKEN = token.getToken(ACCESS_TOKEN_KEY);
+  const ACCESS_TOKEN = Cookies.get('accessToken');
   const baseConfig: AxiosRequestConfig = {
     headers: {
       Authorization: `${ACCESS_TOKEN}`
@@ -22,12 +21,12 @@ const createAxiosInstance = (config?: AxiosRequestConfig) => {
 export const SeugiCustomAxios = createAxiosInstance({
   baseURL: SERVER_URL,
   headers: {
-    [REQUEST_TOKEN_KEY]: `${token.getToken(ACCESS_TOKEN_KEY)}`,
+    "Authorization": `${Cookies.get("accessToken")}`,
   },
 });
 
-export const alimoV1AxiosSetAccessToken = (newToken: string) => {
-  SeugiCustomAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = `${newToken}`;
+export const SeugiV1AxiosSetAccessToken = (newToken: string) => {
+  SeugiCustomAxios.defaults.headers.common['Authorization'] = `${newToken}`;
 };
 
 SeugiCustomAxios.interceptors.request.use(requestHandler as any, (response) => response);

@@ -1,12 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import {
-    ACCESS_TOKEN_KEY,
-    REFRESH_TOKEN_KEY,
-    REQUEST_TOKEN_KEY,
-} from "@/Constants/token/token.constants";
-// import tokenRepository from "src/repository/token/token.repository";
 import token from "@/Constants/token/token";
 import { SeugiCustomAxios } from "@/axios/SeugiCutomAxios";
+import Cookies from "js-cookie";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
@@ -28,8 +23,8 @@ const errorResponseHandler = async (error: AxiosError) => {
             config: originalRequest,
             response: { status },
         } = error;
-        const usingAccessToken = token.getToken(ACCESS_TOKEN_KEY);
-        const usingRefreshToken = token.getToken(REFRESH_TOKEN_KEY);
+        const usingAccessToken = Cookies.get("accessToken");
+        const usingRefreshToken = Cookies.get("refreshToken");
 
         if (
             usingAccessToken !== undefined &&
@@ -40,41 +35,29 @@ const errorResponseHandler = async (error: AxiosError) => {
                 isRefreshing = true;
 
                 try {
-                    //일단 오류 해결을 위한 코드
-                    const data = await axios.post(`${SERVER_URL}/member/refresh`, {
-                        refreshToken: usingRefreshToken,
-                    })
-                    const newAccessToken = data.data.data.accessToken;
+                    const res = await axios.get(`${SERVER_URL}/member/`, {
+                        params: {
+                            refreshToken: usingRefreshToken,
+                        },
+                    });
+                    const newAccessToken = res.data.data.accessToken;
 
-                    // const { data: newAccessToken } =
-                    //   await tokenRepository.getRefreshToken({
-                    //     refreshToken: usingRefreshToken,
-                    //   });
-                    // alimoV1Axios.defaults.headers.common[
-                    //   REQUEST_TOKEN_KEY
-                    // ] = `Bearer ${newAccessToken}`;
-                    // console.log(newAccessToken);
+                    Cookies.set("accessToken", newAccessToken);
 
-                    token.setToken(ACCESS_TOKEN_KEY, newAccessToken);
-
-                    //리프레쉬 작업을 마침
                     isRefreshing = false;
-                    //새로 받은 accessToken을 기반으로 이때까지 밀려있던 요청을 모두 처리
                     onTokenRefreshed(newAccessToken);
                 } catch (error) {
-                    //리프레쉬 하다가 오류난거면 리프레쉬도 만료된 것이므로 다시 로그인
                     token.clearToken();
                     window.location.href = "/login";
                 }
             }
 
-            //어떤 요청이 리프레쉬 작업중이라면 여기로 와서 그 후에 요청된 다른 API Promise를 refreshSubscribers에 넣어줌
             return new Promise((resolve, reject) => {
                 addRefreshSubscriber((accessToken: string) => {
                     if (originalRequest) {
                         originalRequest.headers![
-                            REQUEST_TOKEN_KEY
-                        ] = `Bearer ${accessToken}`;
+                            "Authorization"
+                        ] = `${accessToken}`;
                         resolve(SeugiCustomAxios(originalRequest));
                     } else {
                         reject("originalRequest is undefined");
