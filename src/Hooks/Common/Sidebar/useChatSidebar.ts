@@ -35,23 +35,27 @@ const useChatSidebar = (
         return;
       }
 
-      const response = await SeugiCustomAxios.get(`/chat/personal/search?workspace=${storedWorkspaceId}`, {
-        headers: {
-          Authorization: accessToken, // Authorization 헤더에 Bearer 토큰 추가
-        },
-      });
-      
-      const rooms = response.data;
-
-      // 경로에 따라 개인 또는 그룹 채팅방을 필터링
+      // 경로에 따라 개인 또는 그룹 채팅방 검색
       if (pathname === "/chat") {
-        const filteredRooms = rooms.filter((room: any) => room.type === "personal");
-        updatePersonalChatRooms(filteredRooms);
-        setPersonalChatRooms(filteredRooms);
+        const response = await SeugiCustomAxios.get(`/chat/personal/search?workspace=${storedWorkspaceId}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, // Authorization 헤더에 Bearer 토큰 추가
+          },
+        });
+        
+        const personalRooms = response.data; // 개인 채팅방 데이터
+        updatePersonalChatRooms(personalRooms);
+        setPersonalChatRooms(personalRooms);
       } else if (pathname === "/groupchat") {
-        const filteredRooms = rooms.filter((room: any) => room.type === "group");
-        updateGroupChatRooms(filteredRooms);
-        setGroupChatRooms(filteredRooms);
+        const response = await SeugiCustomAxios.get(`/chat/group/search?workspace=${storedWorkspaceId}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, // Authorization 헤더에 Bearer 토큰 추가
+          },
+        });
+
+        const groupRooms = response.data; // 그룹 채팅방 데이터
+        updateGroupChatRooms(groupRooms);
+        setGroupChatRooms(groupRooms);
       }
     } catch (error) {
       console.error("Error fetching chat rooms:", error);

@@ -8,7 +8,7 @@ import TitleText from "@/Components/common/TitleText/index";
 import CreateRoomBtn from "@/Assets/image/sidebar/add_fill.svg";
 import useChatSidebar from "@/Hooks/Common/Sidebar/useChatSidebar";
 import CreateRoomPlus from "@/Components/Chat/CreateRoomPlus/createRoomPlus";
-import Cookies from "js-cookie"; 
+import Cookies from "js-cookie";
 
 interface SidebarProps {
   onSelectChatRoom: (room: string) => void;
@@ -52,49 +52,77 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const fetchPersonalChatRooms = async (workspaceId: string) => {
     try {
       const accessToken = Cookies.get("accessToken");
-  
+
       if (!accessToken) {
         console.error("Access token not found. Please log in again.");
         return;
       }
-  
+
       const response = await SeugiCustomAxios.get(`/chat/personal/search?workspace=${workspaceId}`, {
         headers: {
           Authorization: accessToken,
         },
       });
-  
-      // API 응답의 data를 출력
+
       const data = response.data;
-      console.log("API response data:", data); // 전체 data 출력
-  
-      // data의 타입을 확인하여 필요한 방 이름을 추출
       let rooms: string[] = [];
-      
-      // data의 구조를 기반으로 방 이름을 가져옴
+
       if (data && Array.isArray(data.data)) {
-        rooms = data.data.map((room: { chatName: string }) => room.chatName); // data.data에서 방 이름을 가져옴
+        rooms = data.data.map((room: { chatName: string }) => room.chatName);
       } else {
         console.error("Unexpected data format:", data);
       }
-  
-      console.log("Fetched personal chat rooms:", rooms); // 방 이름으로 변환된 데이터 출력
+
       setPersonalChatRooms(rooms);
     } catch (error) {
       console.error("Error fetching personal chat rooms:", error);
     }
   };
 
+  const fetchGroupChatRooms = async (workspaceId: string) => {
+    try {
+      const accessToken = Cookies.get("accessToken");
+
+      if (!accessToken) {
+        console.error("Access token not found. Please log in again.");
+        return;
+      }
+
+      const response = await SeugiCustomAxios.get(`/chat/group/search?workspace=${workspaceId}`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      });
+
+      const data = response.data;
+      let rooms: string[] = [];
+
+      if (data && Array.isArray(data.data)) {
+        rooms = data.data.map((room: { chatName: string }) => room.chatName);
+      } else {
+        console.error("Unexpected data format:", data);
+      }
+
+      setGroupChatRooms(rooms);
+    } catch (error) {
+      console.error("Error fetching group chat rooms:", error);
+    }
+  };
+
   useEffect(() => {
     const storedWorkspaceId = Cookies.get("workspaceId") || null;
-    setWorkspaceId(storedWorkspaceId); 
+    setWorkspaceId(storedWorkspaceId);
 
     if (storedWorkspaceId) {
-      fetchPersonalChatRooms(storedWorkspaceId);
+      if (location.pathname === "/chat") {
+        fetchPersonalChatRooms(storedWorkspaceId);
+      } else if (location.pathname === "/groupchat") {
+        fetchGroupChatRooms(storedWorkspaceId);
+      }
     }
-  }, []); 
+  }, [location.pathname]);
 
-  const combinedChatRooms = [...personalChatRooms, ...groupChatRooms];
+  const chatRoomsToDisplay = location.pathname === "/groupchat" ? groupChatRooms : personalChatRooms;
 
   return (
     <>
@@ -128,7 +156,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
           </S.SideFinder>
           <S.ChatRoomsWrap>
             <S.ChatRoomList>
-              {combinedChatRooms.map((room, index) => (
+              {chatRoomsToDisplay.map((room, index) => (
                 <S.ChatRoom
                   key={index}
                   onClick={() => handleChatRoomSelect(room)}
