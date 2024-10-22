@@ -14,6 +14,10 @@ const PopOver = () => {
         setActiveComponent('delete');
     };
 
+    const handleCancel = () => {
+        setActiveComponent(null);  
+    };
+
     return (
         <S.PopUpDiv>
             <S.Button onClick={handleModifyClick}>
@@ -24,7 +28,7 @@ const PopOver = () => {
             </S.Button>
 
             {activeComponent === 'modify' && <ModifyTimetable />}
-            {activeComponent === 'delete' && <DeleteTimetable />}
+            {activeComponent === 'delete' && <DeleteTimetable onCancel={handleCancel} />}
         </S.PopUpDiv>
     );
 }
