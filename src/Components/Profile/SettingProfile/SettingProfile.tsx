@@ -9,7 +9,7 @@ import Arrow from '@/Assets/image/profile/arrow.svg';
 import Divider from '@/Assets/image/profile/ProflieDivider.svg';
 import { fetchingProfile, getMyInfos } from '@/Api/profile';
 import Cookies from 'js-cookie';
-import Avatar from "@/components/common/Avatar/Avatar";
+import Avatar from "@/Components/common/Avatar/Avatar";
 
 interface SettingProfileProps {
     onClose: () => void;

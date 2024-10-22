@@ -7,7 +7,7 @@ import SettingImg from '@/Assets/image/profile/profilesetting_fill.svg';
 import CorrectionImg from '@/Assets/image/profile/CorrectionImg.svg';
 import ProfileDivider from '@/Assets/image/profile/ProflieDivider.svg';
 import Divider from '@/Assets/image/profile/Divider.svg';
-import Avatar from "@/components/common/Avatar/Avatar";
+import Avatar from "@/Components/common/Avatar/Avatar";
 import useProfile from '@/Hooks/Profile/index';
 
 const Profile = () => {

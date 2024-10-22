@@ -11,7 +11,7 @@ import SelectChats from "@/Assets/image/sidebar/selectgroup.svg";
 import Profile from "@/Components/Profile/Profile";
 import React, { useEffect, useRef, useState } from "react";
 import { paths } from '@/Constants/paths';
-import Avatar from "@/components/common/Avatar/Avatar";
+import Avatar from "@/Components/common/Avatar/Avatar";
 
 type SelectedButton = "home" | "chat" | "chats" | null;
 
