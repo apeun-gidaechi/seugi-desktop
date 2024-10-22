@@ -15,6 +15,10 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { paths } from '@/Constants/paths';
 import Shell from './Shell/Shell';
+import PopOver from './DetailTimetable/PopOver/PopOver';
+import ModifyTimetable from './DetailTimetable/ModifyTimetable/ModifyTimetable';
+import CreateTimeTable from './DetailTimetable/CreateTimetable/CreateTimetable';
+import DeleteTimeTable from './DetailTimetable/DeleteTimetable/DeleteTimetable';
 
 const Router = () => {
   return (
@@ -34,7 +38,12 @@ const Router = () => {
           <Route path={paths.chat} element={<Chat />} />
           <Route path={paths.groupchat} element={<Groupchat />} />
         </Route>
+        <Route path='popover' element={<PopOver />} />
+        <Route path='modifytimetable' element={<ModifyTimetable />} />
+        <Route path='createtimetable' element={<CreateTimeTable />} />
+        <Route path='deletetimetable' element={<DeleteTimeTable />} />
       </Routes>
+
     </BrowserRouter>
   );
 };

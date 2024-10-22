@@ -164,7 +164,6 @@ const index = () => {
             const code = response.authorization.code;
             const name = response.user?.name;
             try {
-
                 const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
                     code,
                     token: fcmToken,
