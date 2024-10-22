@@ -1,36 +1,23 @@
 import styled from "styled-components";
 
-export const ChatContainer = styled.div`
-  background: var(--Primary-Primary050, #F8FCFF);
+export const Container = styled.div`
     display: flex;
+    gap: 20px;
     flex-direction: column;
+    width: 100%;
     height: 100vh;
-    justify-content: space-between;
-    position: relative;
-    width: 100vw;
+    background: #F8FCFF;
+    padding: 64px 32px !important;
 `;
 
 export const ChatWrapper = styled.div`
-  background: var(--Primary-Primary050, #F8FCFF);
-  position: relative;
-
-  display: flex;
-  width: 100vw;
+    display: flex;
+    width: 100%;
+    height: calc(100% - 64px);
+    gap: 20px;
 `;
 
-export const ChatContent = styled.div`
-  position: relative;
-  top: -20px;
-  width: 100%; 
-  height: calc(100vh - 20px);
+export const TitleWrapper = styled.div`
+    display: flex;
+    align-content: space-between;
 `;
-
-export const ButtonWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-`;
-
-export const ChatRoomWrap = styled.div`
-  margin-top: 15px;
-`

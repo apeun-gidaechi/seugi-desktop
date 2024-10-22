@@ -1,13 +1,8 @@
 import styled from "styled-components";
 
 export const AllWrapContainer = styled.div`
-    /* margin: 70px 0 64px 452px; */
-    margin: 70px 0 64px 0;
-    position: absolute;
-    padding: 20px 32px 0 0;
-    /* width: calc(100% - 452px); */
     width: 100%;
-    height: calc(100vh - 100px); 
+    height: 100%;
 `;
 
 export const ContainerWrapper = styled.div`
@@ -16,7 +11,7 @@ export const ContainerWrapper = styled.div`
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    height: 100%; 
+    height: 100%;
 `;
 
 export const Container = styled.div`
@@ -26,8 +21,7 @@ export const Container = styled.div`
     border-radius: 12px;
     background: var(--Sub-White, #FFF);
     width: 100%;
-    height: calc(100% - 40px); 
-    max-height: 650px; 
+    height: 100%;
 `;
 
 export const SelectChatRoomImgWrap = styled.div`

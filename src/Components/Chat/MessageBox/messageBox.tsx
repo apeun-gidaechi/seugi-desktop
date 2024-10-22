@@ -1,13 +1,13 @@
 import React from 'react';
 import * as S from "./messageBox.style";
+import {Message} from "@/Hooks/Common/SendMessage/useChatMessages";
 
 interface MessageBoxProps {
-  message: string;
-  time: string;
+  message: Message;
 }
 
-const MessageBox: React.FC<MessageBoxProps> = ({ message, time }) => {
-  const date = new Date(time);
+const MessageBox: React.FC<MessageBoxProps> = ({ message }) => {
+  const date = new Date(message.timestamp ?? "");
 
   const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -15,7 +15,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ message, time }) => {
     <S.messageContainer>
       <S.messageTime>{formattedTime}</S.messageTime>
       <S.messageBox className="message-box">
-        {message}
+        {message.message}
       </S.messageBox>
     </S.messageContainer>
   );

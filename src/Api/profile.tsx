@@ -1,4 +1,4 @@
-import { SeugiCustomAxios } from "../axios/SeugiCutomAxios";
+import { SeugiCustomAxios } from "@/axios/SeugiCutomAxios";
 
 export const fetchingProfile = async (workspaceId: string) => {
     const res = await SeugiCustomAxios.get(`/profile/me?workspaceId=${workspaceId}`);

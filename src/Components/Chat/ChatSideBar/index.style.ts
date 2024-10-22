@@ -1,28 +1,18 @@
 import styled from "styled-components";
+import {SeugiFont} from "@/Design/text/SeugiFont";
 
 export const SideBarChat = styled.div`
   display: flex;
   flex-direction: column;
   width: 452px;
   height: 100%;
+  gap: 20px;
   /* margin-left: 80px; */
-  overflow-y: auto;
+  overflow-y: hidden;
 
   @media (max-width: 768px) {
     width: 100%;
     margin-left: 0;
-  }
-  padding: 64px 20px 64px 32px;
-`;
-
-export const ChatingPage = styled.div`
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    height: auto;
   }
 `;
 
@@ -34,9 +24,8 @@ export const SideFinder = styled.div`
   padding: 12px;
   align-items: center;
   background: var(--Sub-White, #FFF);
-  margin-top: 20px;
   border-radius: 12px;
-  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.04);
 
   @media (max-width: 768px) {
     width: calc(100% - 24px);
@@ -91,42 +80,37 @@ export const PlusButtonImg = styled.img`
 `;
 
 export const ChatRoomsWrap = styled.div`
-  margin-top: 20px;
-  display: flex;
-  width: 100%;
-  padding: 8px;
-  flex-direction: column;
-  flex: 1 0 0;
-  border-radius: 12px;
-  background: #FFF;
-  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+    display: flex;
+    width: 100%;
+    padding: 8px;
+    flex-direction: column;
+    border-radius: 12px;
+    background: #FFF;
+    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.04);
+    overflow-y: hidden;
 `;
 
 export const ChatRoomList = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: scroll;
 `;
 
 export const ChatRoom = styled.div`
-  display: flex;
-  height: 72px;
-  align-items: center;
-  cursor: pointer;
-  color: var(--Black, #000);
-  font-family: Pretendard;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 130%;
-  padding: 4px 16px;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: left;
+    display: flex;
+    min-height: 72px;
+    align-items: center;
+    cursor: pointer;
+    color: var(--Black, #000);
 
-  &:active{
-    background-color: red;
-  }
+    ${SeugiFont.subtitle.subtitle2}
+    padding: 4px 16px;
+    width: 100%;
+
+    &:active {
+        background-color: red;
+    }
 `;
 
 export const ChatRoomAvatar = styled.img`

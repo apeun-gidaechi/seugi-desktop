@@ -8,7 +8,7 @@ export const SideBarChat = styled.div`
   padding: 8px 0px;
   background: #FFF; 
   /* margin-left: 80px; */
-  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.04);
   overflow-y: auto;
 
   @media (max-width: 768px) {

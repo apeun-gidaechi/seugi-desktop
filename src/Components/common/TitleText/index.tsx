@@ -12,7 +12,7 @@ const TitleText = () => {
       title = '홈';
       break;
     case '/chat':
-      title = '개인채팅';
+      title = '개인 채팅';
       break;
     case '/groupchat':
       title = '단체채팅';

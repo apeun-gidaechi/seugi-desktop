@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Title = styled.div`
-    margin-left: 1.5%;
+    //margin-left: 1.5%;
 
     position: relative;
 
