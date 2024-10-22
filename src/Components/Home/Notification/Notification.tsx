@@ -7,7 +7,7 @@ import NoNotification from '@/Assets/image/home/NoNotification.svg';
 import NotificationImg from "@/Assets/image/home/notification.svg";
 import CorrectionImg from '@/Assets/image/home/Correction.svg';
 import AddEmoji from '@/Components/Home/Notification/Emoji/emojipicker';
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 import { EmojiClickData } from 'emoji-picker-react';
 import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNotice';
 import ChangeNotice from './ChangeNotice/ChangeNotice';
@@ -156,14 +156,14 @@ const Notification = ({ notifications = [], mutateNotifications }: Props) => {
 
                 if (!isEmojiIncluded) {
                     return {
-                        ...notification, 
+                        ...notification,
                         emoji: notification.emoji.concat({
                             emoji: emoji.emoji,
                             userList: [user.id],
                         }),
                     };
                 } else {
-                    const existingEmojiIndex = notification.emoji.findIndex(it => it.emoji === emoji.emoji); 
+                    const existingEmojiIndex = notification.emoji.findIndex(it => it.emoji === emoji.emoji);
                     const existingEmoji = notification.emoji[existingEmojiIndex];
 
                     if (existingEmoji.userList.includes(user.id)) {
@@ -183,8 +183,8 @@ const Notification = ({ notifications = [], mutateNotifications }: Props) => {
                         ...notification,
                         emoji: [
                             ...notification.emoji.slice(0, existingEmojiIndex),
-                            existingEmoji, 
-                            ...notification.emoji.slice(existingEmojiIndex + 1), 
+                            existingEmoji,
+                            ...notification.emoji.slice(existingEmojiIndex + 1),
                         ],
                     };
                 }
@@ -198,7 +198,7 @@ const Notification = ({ notifications = [], mutateNotifications }: Props) => {
             mutateNotifications(updatedNotifications);
         } catch (error) {
             console.error(error);
-            mutateNotifications(notifications); 
+            mutateNotifications(notifications);
         }
     }
 

@@ -1,4 +1,4 @@
-import { SeugiCustomAxios } from "./SeugiCutomAxios";
+import { SeugiCustomAxios } from "../axios/SeugiCutomAxios";
 
 export const getMyWorkspaces = async () => {
     const res = await SeugiCustomAxios.get(`/workspace/`);
@@ -15,7 +15,7 @@ export const WorkspaceName = async (workspaceId: string) => {
     return res.data.data;
 }
 
-export const getWorkspaceInfo = async (verificationCode:string) => {
+export const getWorkspaceInfo = async (verificationCode: string) => {
     const res = await SeugiCustomAxios.get(`/workspace/search/${verificationCode}`);
     return res.data.data;
 }

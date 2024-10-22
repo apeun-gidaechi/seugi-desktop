@@ -1,4 +1,4 @@
-import { SeugiCustomAxios } from "./SeugiCutomAxios";
+import { SeugiCustomAxios } from "../axios/SeugiCutomAxios";
 
 export const getTimeTable = async (workspaceId: string) => {
     const res = await SeugiCustomAxios.get(`/timetable/day?workspaceId=${workspaceId}`);

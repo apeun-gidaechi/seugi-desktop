@@ -1,5 +1,5 @@
 import { fetchingProfile } from '@/Api/profile';
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 import React, { useState, useEffect, useRef } from 'react';
 import { getMyInfos } from '@/Api/profile';
 import Cookies from 'js-cookie';

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setAccessToken } from '@/Api/SeugiCutomAxios';
 import { useUserDispatchContext } from '@/Contexts/userContext';
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -76,10 +75,8 @@ const index = () => {
             if (res.status !== 200) {
                 return;
             }
-
             const { accessToken, refreshToken } = res.data.data;
 
-            setAccessToken(accessToken);
             Cookies.set("accessToken", accessToken);
             Cookies.set("refreshToken", refreshToken);
 
@@ -111,36 +108,6 @@ const index = () => {
         const MyInfos = await getMyInfos();
         setUser(MyInfos);
     }
-
-    const refreshAccessToken = async () => {
-        const refreshToken = Cookies.get("refreshToken");
-        if (!refreshToken) {
-            console.log("리프레시 토큰이 없습니다.");
-            return;
-        }
-
-        try {
-            const response = await axios.post(`${SERVER_URL}/auth/refresh?token=${refreshToken}`);
-
-            const { accessToken, refreshToken: newRefreshToken } = response.data.data;
-            setAccessToken(accessToken);
-            Cookies.set("accessToken", accessToken);
-            Cookies.set("refreshToken", newRefreshToken);
-        } catch (error) {
-            console.error("리프레시 토큰 요청 중 오류:", error);
-            Cookies.remove('accessToken');
-            Cookies.remove('refreshToken');
-            window.location.href = '/login';
-        }
-    };
-
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            refreshAccessToken();
-        }, 1000);
-
-        return () => clearInterval(intervalId);
-    }, []);
 
     const handleGoogleLogin = useGoogleLogin({
         flow: "auth-code",

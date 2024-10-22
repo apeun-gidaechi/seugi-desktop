@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './Avatar.style';
 import DefaultProfileImage from "@/Assets/image/profile/Avatar.svg";
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 import { profileSize } from './Avatar.style';
 
 interface AvatarProps {
   size?: keyof typeof profileSize;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ size = 'medium' }) => {
+const Avatar = ({ size = 'medium' }: AvatarProps) => {
   const [userProfileImage, setProfileImage] = useState(DefaultProfileImage);
 
   useEffect(() => {
@@ -27,13 +27,13 @@ const Avatar: React.FC<AvatarProps> = ({ size = 'medium' }) => {
       }
     };
 
-    fetchProfileImage(); 
+    fetchProfileImage();
     const intervalId = setInterval(fetchProfileImage, 10000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [userProfileImage]); 
+  }, [userProfileImage]);
 
   return (
     <>
