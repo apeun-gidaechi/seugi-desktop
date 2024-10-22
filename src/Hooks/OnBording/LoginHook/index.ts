@@ -185,19 +185,17 @@ const index = () => {
             const handleSuccess = async (response: any) => {
                 console.log("1");
                 const code = response.authorization.code;
-                console.log(code);
                 const name = response.user?.name;
-                console.log(name);
-                console.log(fcmToken);
+                console.log(response);
                 try {
-                    const res = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
+                    const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
                         code,
                         token: fcmToken,
                         platform: "WEB",
                         name: name
                     });
-                    console.log(res)
-                    const { accessToken, refreshToken } = res.data.data;
+                    console.log(token)
+                    const { accessToken, refreshToken } = token.data.data;
 
                     Cookies.set("accessToken", accessToken);
                     Cookies.set("refreshToken", refreshToken);
