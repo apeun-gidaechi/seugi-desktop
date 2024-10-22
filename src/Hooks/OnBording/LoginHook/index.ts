@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setAccessToken } from '@/Api/SeugiCutomAxios';
 import { useUserDispatchContext } from '@/Contexts/userContext';
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -76,10 +75,8 @@ const index = () => {
             if (res.status !== 200) {
                 return;
             }
-
             const { accessToken, refreshToken } = res.data.data;
 
-            setAccessToken(accessToken);
             Cookies.set("accessToken", accessToken);
             Cookies.set("refreshToken", refreshToken);
 
@@ -112,25 +109,13 @@ const index = () => {
         setUser(MyInfos);
     }
 
-    const refreshAccessToken = async () => {
-        const refreshToken = Cookies.get("refreshToken");
-        if (!refreshToken) {
-            console.log("리프레시 토큰이 없습니다.");
-            return;
-        }
-
-        try {
-            const response = await axios.post(`${SERVER_URL}/auth/refresh?token=${refreshToken}`);
-
-            const { accessToken, refreshToken: newRefreshToken } = response.data.data;
-            setAccessToken(accessToken);
-            Cookies.set("accessToken", accessToken);
-            Cookies.set("refreshToken", newRefreshToken);
-        } catch (error) {
-            console.error("리프레시 토큰 요청 중 오류:", error);
-            // 추가적인 에러 처리 (예: 로그아웃)
-        }
-    };
+    const scopes = [
+        "email",
+        "profile",
+        "https://www.googleapis.com/auth/classroom.courses.readonly",
+        "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
+        "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
+    ];
 
     const scopes = [
         "email",
@@ -203,31 +188,31 @@ const index = () => {
                         name: name
                     });
                     console.log(token)
-                    const { accessToken, refreshToken } = token.data.data;
+                    const { accessToken, refreshToken } = token.data.data
 
-                    Cookies.set("accessToken", accessToken);
-                    Cookies.set("refreshToken", refreshToken);
-                    manageWorkspace();
-                } catch (error) {
-                    console.error("애플 로그인 처리 중 오류:", error);
-                }
-            };
+                Cookies.set("accessToken", accessToken);
+                Cookies.set("refreshToken", refreshToken);
+                manageWorkspace();
+            } catch (error) {
+                console.error("애플 로그인 처리 중 오류:", error);
+            }
+        };
 
-            const handleFailure = (error: any) => {
-                console.error("Apple login error: ", error);
-                setAlertMessage("애플 로그인 중 오류가 발생했습니다. 다시 시도해주세요.");
-                setShowAlert(true);
-            };
+        const handleFailure = (error: any) => {
+            console.error("Apple login error: ", error);
+            setAlertMessage("애플 로그인 중 오류가 발생했습니다. 다시 시도해주세요.");
+            setShowAlert(true);
+        };
 
-            document.addEventListener('AppleIDSignInOnSuccess', handleSuccess);
-            document.addEventListener('AppleIDSignInOnFailure', handleFailure);
+        document.addEventListener('AppleIDSignInOnSuccess', handleSuccess);
+        document.addEventListener('AppleIDSignInOnFailure', handleFailure);
 
-            return () => {
-                document.removeEventListener('AppleIDSignInOnSuccess', handleSuccess);
-                document.removeEventListener('AppleIDSignInOnFailure', handleFailure);
-            };
-        }, []);
-    
+        return () => {
+            document.removeEventListener('AppleIDSignInOnSuccess', handleSuccess);
+            document.removeEventListener('AppleIDSignInOnFailure', handleFailure);
+        };
+    }, [handleAppleLogin]);
+
     return {
         email,
         password,

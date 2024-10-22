@@ -4,11 +4,10 @@ import Correction from '@/Components/Profile/Correction/Correction';
 import SettingProfile from '@/Components/Profile/SettingProfile/SettingProfile';
 
 import SettingImg from '@/Assets/image/profile/profilesetting_fill.svg';
-import ProfileImg from '@/Assets/image/profile/proflie.svg';
 import CorrectionImg from '@/Assets/image/profile/CorrectionImg.svg';
 import ProfileDivider from '@/Assets/image/profile/ProflieDivider.svg';
 import Divider from '@/Assets/image/profile/Divider.svg';
-
+import Avatar from "@/components/common/Avatar/Avatar";
 import useProfile from '@/Hooks/Profile/index';
 
 const Profile = () => {
@@ -19,7 +18,7 @@ const Profile = () => {
             <S.MyProfileDialog>
                 <S.MyinfoDiv>
                     <S.MyProfileDiv>
-                        <S.ProfileImg src={ProfileImg} />
+                        <Avatar size="small" />
                         <S.ProfileName>{Profile.name}</S.ProfileName>
                     </S.MyProfileDiv>
                     <S.SettingButton onClick={Profile.toggleSetting} className='SettingButton'>

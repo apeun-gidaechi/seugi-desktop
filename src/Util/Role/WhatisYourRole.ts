@@ -1,5 +1,5 @@
 import { fetchingProfile } from "@/Api/profile";
-import { SeugiCustomAxios } from "@/Api/SeugiCutomAxios";
+import { SeugiCustomAxios } from "@/axios/SeugiCutomAxios";
 
 enum Role {
     Teacher = "TEACHER",

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as S from '@/Components/Home/Notification/ChangeNotice/ChangeNotice.style';
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 import AlertContainer from '@/Components/Alert/Alert';
 import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNotice';
 import { fetchingNotice } from '@/Api/Home';

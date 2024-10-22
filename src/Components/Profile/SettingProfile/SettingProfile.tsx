@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 import * as S from '@/Components/Profile/SettingProfile/SettingProfile.style';
 import Correction from '@/Components/Profile/Correction/Correction';
-
-import ProfileImg from '@/Assets/image/profile/settingprofile.svg';
+import PlusButtonImg from '@/Assets/image/profile/add_fill.svg'
+import ProfileImg from '@/Assets/image/profile/Avatar.svg';
 import CorrectionImg from '@/Assets/image/profile/CorrectionImg.svg';
 import Arrow from '@/Assets/image/profile/arrow.svg';
 import Divider from '@/Assets/image/profile/ProflieDivider.svg';
-import { fetchingProfile } from '@/Api/profile';
+import { fetchingProfile, getMyInfos } from '@/Api/profile';
 import Cookies from 'js-cookie';
+import Avatar from "@/components/common/Avatar/Avatar";
 
 interface SettingProfileProps {
     onClose: () => void;
@@ -19,6 +20,8 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
     const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
     const token = Cookies.get('accessToken');
     const [name, setName] = useState('');
+    const [birth, setBirth] = useState('');
+    const [profileImage, setProfileImage] = useState(ProfileImg);
     const [isEditing, setIsEditing] = useState(false);
 
     const startEditing = (field: any) => {
@@ -31,6 +34,8 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
                 if (workspaceId) {
                     const profileRes = await fetchingProfile(workspaceId);
                     setName(profileRes.nick);
+                    setBirth(profileRes.birth || birth);
+                    setProfileImage(profileRes.profileImage || ProfileImg); // 프로필 이미지 반영
                 } else {
                     console.error('Workspace ID is undefined');
                 }
@@ -40,6 +45,67 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
         };
         fetchProfileData();
     }, [workspaceId, token]);
+
+    useEffect(() => {
+        const getMyInfomations = async () => {
+            try {
+                if (workspaceId) {
+                    const profileRes = await getMyInfos();
+                    setName(profileRes.nick);
+                    setBirth(profileRes.birth || birth);
+                    setProfileImage(profileRes.profileImage || ProfileImg);
+                } else {
+                    console.error('Workspace ID is undefined');
+                }
+            } catch (error) {
+                console.error('프로필 데이터를 가져오는데 실패했습니다.', error);
+            }
+        };
+        getMyInfomations();
+    }, [workspaceId, token]);
+
+    const imgToUrl = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+            const formData = new FormData();
+            formData.append('type', 'IMG');
+            formData.append('file', files[0]);
+
+            try {
+                const res = await SeugiCustomAxios.post(`/file/upload/IMG`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+                const newImageUrl = res.data.data.url;
+                setProfileImage(newImageUrl);
+
+                await handleImageChange(newImageUrl);
+            } catch (err) {
+                console.error('Error uploading image:', err);
+            }
+        } else {
+            console.error('No file selected or file input is empty');
+        }
+    };
+
+    const handleImageChange = async (newImageUrl: string) => {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('birth', "");
+        formData.append('picture', newImageUrl);
+
+        try {
+            const res = await SeugiCustomAxios.patch(`/member/edit`, formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log('Image uploaded successfully', res.data);
+        } catch (error) {
+            console.error('이미지 업로드 실패', error);
+        }
+    };
 
     const handleLogout = async () => {
         const fcmToken = Cookies.get('fcmToken') || "";
@@ -110,7 +176,17 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
                     <S.ProfileContainer>
                         <S.ProfileImgContainer>
                             <S.ProfileImgButton>
-                                <S.ProfileImg src={ProfileImg} />
+                                <S.Input
+                                    type="file"
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                    onChange={imgToUrl}
+                                    id="profile-image-input"
+                                />
+                                <S.Label htmlFor="profile-image-input">
+                                    <Avatar size="large" />
+                                    <S.PlusButton src={PlusButtonImg} />
+                                </S.Label>
                             </S.ProfileImgButton>
                         </S.ProfileImgContainer>
                         <S.ProfileNameContainer>
