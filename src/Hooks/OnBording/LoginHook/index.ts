@@ -190,14 +190,14 @@ const index = () => {
                 console.log(name);
                 console.log(fcmToken);
                 try {
-                    const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
+                    const res = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
                         code,
                         token: fcmToken,
                         platform: "WEB",
                         name: name
                     });
-
-                    const { accessToken, refreshToken } = token.data.data;
+                    console.log(res)
+                    const { accessToken, refreshToken } = res.data.data;
 
                     Cookies.set("accessToken", accessToken);
                     Cookies.set("refreshToken", refreshToken);
