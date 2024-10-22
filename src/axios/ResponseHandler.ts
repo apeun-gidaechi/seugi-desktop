@@ -26,24 +26,30 @@ const errorResponseHandler = async (error: AxiosError) => {
         const usingAccessToken = Cookies.get("accessToken");
         const usingRefreshToken = Cookies.get("refreshToken");
 
-        if (
-            usingAccessToken !== undefined &&
-            usingRefreshToken !== undefined &&
-            status === 401
-        ) {
+        // 액세스 토큰이 undefined라면 리프레시 토큰이 존재하는지 확인
+        if (!usingAccessToken) {
+            if (!usingRefreshToken) {
+                // 리프레시 토큰이 없으므로 로그인 페이지로 리디렉션
+                token.clearToken();
+                window.location.href = "/login";
+                return Promise.reject("No refresh token available, redirecting to login.");
+            }
+        }
+
+        if (usingRefreshToken && (status === 401 || !usingAccessToken)) {
             if (!isRefreshing) {
                 isRefreshing = true;
 
                 try {
-                    const res = await axios.get(`${SERVER_URL}/member/`, {
+                    const res = await axios.get(`${SERVER_URL}/member/refresh`, {
                         params: {
-                            refreshToken: usingRefreshToken,
+                            token: usingRefreshToken,
                         },
                     });
-                    const newAccessToken = res.data.data.accessToken;
+                    console.log(res.data.data);
+                    const newAccessToken = res.data.data;
 
                     Cookies.set("accessToken", newAccessToken);
-
                     isRefreshing = false;
                     onTokenRefreshed(newAccessToken);
                 } catch (error) {
@@ -55,9 +61,7 @@ const errorResponseHandler = async (error: AxiosError) => {
             return new Promise((resolve, reject) => {
                 addRefreshSubscriber((accessToken: string) => {
                     if (originalRequest) {
-                        originalRequest.headers![
-                            "Authorization"
-                        ] = `${accessToken}`;
+                        originalRequest.headers!["Authorization"] = `${accessToken}`;
                         resolve(SeugiCustomAxios(originalRequest));
                     } else {
                         reject("originalRequest is undefined");
@@ -69,5 +73,6 @@ const errorResponseHandler = async (error: AxiosError) => {
 
     return Promise.reject(error);
 };
+
 
 export default errorResponseHandler;
