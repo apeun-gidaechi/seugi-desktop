@@ -39,7 +39,7 @@ const useChatSidebar = (
       if (pathname === "/chat") {
         const response = await SeugiCustomAxios.get(`/chat/personal/search?workspace=${storedWorkspaceId}`, {
           headers: {
-            Authorization: `Bearer ${accessToken}`, // Authorization 헤더에 Bearer 토큰 추가
+            Authorization: accessToken, // Authorization 헤더에 Bearer 토큰 추가
           },
         });
         
@@ -49,7 +49,7 @@ const useChatSidebar = (
       } else if (pathname === "/groupchat") {
         const response = await SeugiCustomAxios.get(`/chat/group/search?workspace=${storedWorkspaceId}`, {
           headers: {
-            Authorization: `Bearer ${accessToken}`, // Authorization 헤더에 Bearer 토큰 추가
+            Authorization: accessToken, // Authorization 헤더에 Bearer 토큰 추가
           },
         });
 

@@ -21,6 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
   const [personalChatRooms, setPersonalChatRooms] = useState<string[]>([]);
   const [groupChatRooms, setGroupChatRooms] = useState<string[]>([]);
   const [workspaceId, setWorkspaceId] = useState<string | null>(null);
+  const [lastTimestamps, setLastTimestamps] = useState<{ [roomId: string]: number }>({}); // 각 방의 최신 메시지 시간 저장
 
   const { searchText, setSearchText, handleSearch, handleChatRoomClick } = useChatSidebar(
     onSelectChatRoom,
@@ -44,11 +45,67 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
     }
   };
 
-  const handleChatRoomSelect = (room: string) => {
+  // 채팅방 선택 시 호출되는 함수
+  const handleChatRoomSelect = async (room: string) => {
     setSelectedChatRoom(room);
     handleChatRoomClick(room);
+
+    const roomId = room; // 실제 roomId를 얻어야 함
+
+    if (roomId) {
+      // 해당 채팅방의 최신 메시지를 가져오기 위한 함수 호출
+      await fetchNewMessages(roomId);
+    }
   };
 
+  // timestamp를 기반으로 최신 메시지를 가져오는 함수
+  // timestamp를 기반으로 최신 메시지를 가져오는 함수
+const fetchNewMessages = async (roomId: string) => {
+  try {
+      const accessToken = Cookies.get("accessToken");
+      if (!accessToken) {
+          console.error("Access token not found. Please log in again.");
+          return;
+      }
+
+      // 해당 roomId의 마지막 메시지 timestamp 가져오기
+      const lastTimestamp = lastTimestamps[roomId];
+      console.log("dd:",roomId);
+      
+      // 메시지 가져오기 API 호출
+      const url = lastTimestamp 
+          ? `message/search/${roomId}?timestamp=${lastTimestamp}` 
+          : `message/search/${roomId}`;
+
+      const response = await SeugiCustomAxios.get(url, {
+          headers: {
+              Authorization: accessToken,
+          },
+      });
+
+      const data = response.data;
+
+      if (data && Array.isArray(data.messages)) {
+          // 메시지 처리
+          console.log(`New messages for room ${roomId}:`, data.messages);
+
+          // 마지막 메시지의 timestamp 저장
+          if (data.messages.length > 0) {
+              const lastMessageTimestamp = data.messages[data.messages.length - 1].timestamp;
+              setLastTimestamps((prev) => ({
+                  ...prev,
+                  [roomId]: lastMessageTimestamp,
+              }));
+          }
+      } else {
+          console.error("Unexpected data format:", data);
+      }
+  } catch (error) {
+      console.error("Error fetching new messages:", error);
+  }
+};
+
+  // 개인 채팅방 목록 가져오기
   const fetchPersonalChatRooms = async (workspaceId: string) => {
     try {
       const accessToken = Cookies.get("accessToken");
@@ -79,6 +136,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
     }
   };
 
+  // 그룹 채팅방 목록 가져오기
   const fetchGroupChatRooms = async (workspaceId: string) => {
     try {
       const accessToken = Cookies.get("accessToken");
@@ -122,7 +180,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelectChatRoom }) => {
     }
   }, [location.pathname]);
 
-  const chatRoomsToDisplay = location.pathname === "/groupchat" ? groupChatRooms : personalChatRooms;
+  const chatRoomsToDisplay = location.pathname === "/groupchat" 
+    ? Array.isArray(groupChatRooms) ? groupChatRooms : [] 
+    : Array.isArray(personalChatRooms) ? personalChatRooms : [];
 
   return (
     <>
