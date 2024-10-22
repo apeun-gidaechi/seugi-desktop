@@ -183,6 +183,7 @@ const index = () => {
         };
         useEffect(() => {
             const handleSuccess = async (response: any) => {
+                console.log("1");
                 const code = response.authorization.code;
                 console.log(code);
                 const name = response.user?.name;
