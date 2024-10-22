@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { clearAccessToken, SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 import createSchoolImg from '@/Assets/image/join-school/createshoolimg.svg';
 import { getMyWorkspaces } from '@/Api/workspace';
 import { paths } from '@/Constants/paths';
@@ -34,7 +34,6 @@ const index = () => {
         } catch (error) {
             if (isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
-                    clearAccessToken();
                     navigate(paths.login);
                 } else {
                     console.error('Error sending code:', error.response?.data);
@@ -65,7 +64,6 @@ const index = () => {
         } catch (error) {
             if (isAxiosError(error)) {
                 if (error.response && error.response.status === 401) {
-                    clearAccessToken();
                     navigate(paths.login);
                 } else {
                     console.error('Error uploading image:', error.response?.data);

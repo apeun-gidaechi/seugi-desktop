@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios, { AxiosInstance } from 'axios';
 import useMembers from '@/Hooks/Common/Sidebar/useMembers'; 
 import * as S from './createRoomPlus.style'; 
-import Cookies from 'js-cookie'; // js-cookie 추가
+import Cookies from 'js-cookie'; 
 
 import AvatarImg from '@/Assets/image/chat-components/Avatar.svg';
 import NonClicked from '@/Assets/image/chat-components/nonClick.svg';

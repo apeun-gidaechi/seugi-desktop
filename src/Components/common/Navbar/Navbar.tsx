@@ -11,6 +11,7 @@ import SelectChats from "@/Assets/image/sidebar/selectgroup.svg";
 import Profile from "@/Components/Profile/Profile";
 import React, { useEffect, useRef, useState } from "react";
 import { paths } from '@/Constants/paths';
+import Avatar from "@/Components/common/Avatar/Avatar";
 
 type SelectedButton = "home" | "chat" | "chats" | null;
 
@@ -116,7 +117,7 @@ const Navbar = () => {
         </S.SideBarButton>
         <S.SideAvatarImgWrap>
           <S.SideAvatarButton onClick={handleAvatarClick} className="avactar">
-            <S.SideAvatarImg src={AvatarImg} />
+            <Avatar size="medium" />
           </S.SideAvatarButton>
         </S.SideAvatarImgWrap>
       </S.SideBarMenu>

@@ -1,4 +1,4 @@
-import { SeugiCustomAxios } from "./SeugiCutomAxios";
+import { SeugiCustomAxios } from "../axios/SeugiCutomAxios";
 
 export const getTimeTable = async (workspaceId: string) => {
   const res = await SeugiCustomAxios.get(
@@ -43,3 +43,4 @@ export const getClassroomTasks = async () => {
   const res = await SeugiCustomAxios.get(`/task/classroom`);
   return res.data.data;
 };
+

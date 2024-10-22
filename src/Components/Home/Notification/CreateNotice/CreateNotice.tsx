@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '@/Components/Home/Notification/CreateNotice/CreateNotice.style';
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 import { fetchingNotice } from '@/Api/Home';
 import Cookies from 'js-cookie';
 
@@ -48,7 +48,7 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, mu
                     content,
                     id: notificationId
                 });
-                
+
             } else {
                 // 새 공지 작성 API 호출
                 await SeugiCustomAxios.post(`/notification`, {

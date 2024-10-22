@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router';
-import { SeugiCustomAxios } from '@/Api/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 import { paths } from '@/Constants/paths';
 import Cookies from 'js-cookie';
 
