@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, PathRouteProps, useNavigate } from 'react-router-dom';
 import { paths } from '@/Constants/paths';
-import { clearAccessToken, SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
+import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 
 interface Props extends PathRouteProps {
 }
