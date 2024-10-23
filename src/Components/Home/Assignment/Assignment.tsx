@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import * as S from "@/Components/Home/Assignment/Assignment.style";
-import AssignmentImg from "@/Assets/image/home/checkAssignment.svg";
+import AssignmentImg from "@/Assets/image/home/assignment.svg";
 import { getTasks, getClassroomTasks } from "@/Api/Home";
 import Emoji from "@/Assets/image/home/emoji.svg";
 
