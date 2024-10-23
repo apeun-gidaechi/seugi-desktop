@@ -80,5 +80,6 @@ export const RightContainer = styled.div`
   align-items: flex-start;
   gap: 20px;
   flex: 1 0 0;
+  width: 100px;
 `;
 
