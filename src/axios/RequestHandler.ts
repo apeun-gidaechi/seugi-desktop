@@ -5,7 +5,7 @@ const requestHandler = (config: AxiosRequestConfig): AxiosRequestConfig => {
     const refreshToken = Cookies.get("refreshToken");
     if (refreshToken === undefined) {
         console.log("RequestHandler refreshToken :",refreshToken);
-        alert("세션 만료")
+        // alert("세션 만료")
         window.location.href = "/login";
         return config;
     }
