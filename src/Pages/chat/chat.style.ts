@@ -15,7 +15,7 @@ export const ChatWrapper = styled.div`
     width: 100%;
     height: calc(100% - 64px);
     gap: 20px;
-`;
+`;  
 
 export const TitleWrapper = styled.div`
     display: flex;

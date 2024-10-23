@@ -32,4 +32,4 @@ const SendMessage: React.FC<SendMessageProps> = (
   );
 };
 
-export default SendMessage;
+export default SendMessage;   

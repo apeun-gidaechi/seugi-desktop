@@ -12,7 +12,7 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 // });
 
 // useChatSidebar 훅 정의
-const useChat = () => {
+const useChat = () => {  
   const location = useLocation();
   const pathname = location.pathname;
 

@@ -12,7 +12,7 @@ export const Container = styled.div`
 
 export const ChatWrapper = styled.div`
     display: flex;
-    width: 100%;
+    width: 100%;   
     height: calc(100% - 64px);
     gap: 20px;
 `;

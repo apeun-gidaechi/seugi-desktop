@@ -15,4 +15,4 @@ export const Title = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 130%;
-`
+`  

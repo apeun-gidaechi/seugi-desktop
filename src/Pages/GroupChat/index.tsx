@@ -11,7 +11,7 @@ import TitleText from "@/Components/common/TitleText";
 
 const GroupChat = () => {
   const currentUser = "ㅠㅠ"; // 하드코딩 수정예정
-  const {
+  const {  
     selectedRoom,
     selectedChatRooms,
     handleChatRoomClick

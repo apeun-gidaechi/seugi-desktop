@@ -17,7 +17,7 @@ const Chat = () => {
     handleChatRoomClick
   } = useChat();
 
-  useEffect(() => {
+  useEffect(() => {    
     socketService.connect();
   }, []);
 

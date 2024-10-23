@@ -20,7 +20,7 @@ const TitleText = () => {
     default:
       title = '';
       break;
-  }
+  }  
 
   return (
     <S.Title>{title}</S.Title>

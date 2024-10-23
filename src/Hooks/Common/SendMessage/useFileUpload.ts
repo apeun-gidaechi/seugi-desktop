@@ -12,7 +12,7 @@ export interface FileResult {
   url: string;
   name: string;
   byte?: number;
-}
+}   
 
 export type FileCompletion = (result: FileResult, type: FileType) => void
 

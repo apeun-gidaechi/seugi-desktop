@@ -14,5 +14,5 @@ const Spacer = (
     <S.Container $customStyle={$customStyle}/>
   );
 };
-
+  
 export default Spacer;

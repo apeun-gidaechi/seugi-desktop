@@ -10,7 +10,7 @@ interface UserInfo {
   name: string;
   picture: string;
 }
-
+ 
 export interface ChatRoom {
   id: string;
   workspaceId: string;

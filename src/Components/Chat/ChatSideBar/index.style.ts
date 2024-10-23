@@ -11,7 +11,7 @@ export const SideBarChat = styled.div`
   overflow-y: hidden;
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 100%;     
     margin-left: 0;
   }
 `;

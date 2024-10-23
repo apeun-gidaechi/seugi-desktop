@@ -8,7 +8,7 @@ export const messageContainer = styled.div`
 `;
 
 export const messageBox = styled.div`
-    display: flex;
+    display: flex;   
     padding: 12px;
     align-items: flex-start;
     gap: 10px;

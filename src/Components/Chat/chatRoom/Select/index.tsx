@@ -25,7 +25,7 @@ const SelectedChatRoom: React.FC<SelectedChatRoomProps> = ({room, currentUser}) 
   // 현재 날짜를 원하는 형식으로 포맷팅하는 함수
   // const formatDate = (date: Date) => {
   //   const options: Intl.DateTimeFormatOptions = {year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'};
-  //   return date.toLocaleDateString('ko-KR', options);
+  //   return date.toLo caleDateString('ko-KR', options);
   // };
   //
   // // 현재 날짜를 가져오기

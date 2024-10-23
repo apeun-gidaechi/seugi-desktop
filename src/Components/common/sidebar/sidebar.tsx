@@ -15,7 +15,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = (
   {
-    chatRooms,
+    chatRooms,   
     selectedRooms,
     handleChatRoomClick
   }: SidebarProps

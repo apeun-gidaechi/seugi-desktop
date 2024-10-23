@@ -14,7 +14,7 @@ export const socketService = {
     
     socket = Stomp.client('wss://api.seugi.com/stomp/chat');
 
-    socket.connect({
+    socket.connect({   
       'Authorization': Cookies.get("accessToken")
     }, (frame) => {
       console.log('소켓 연결됨');

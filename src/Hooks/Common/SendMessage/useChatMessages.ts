@@ -14,7 +14,7 @@ export type MessageType =
   | 'TRANFER_ADMIN'
   | 'SUB'
   | 'UNSUB'
-  | 'DELETE_MESSAGE'
+  | 'DELETE_MESSAGE'   
   | 'ADD_EMOJI'
   | 'REMOVE_EMOJI'
   | 'BOT'

@@ -6,4 +6,4 @@ export const Container = styled.div<{
     ${props => props.$customStyle};
     display: flex;
     flex: 1;
-`;
+`; 
