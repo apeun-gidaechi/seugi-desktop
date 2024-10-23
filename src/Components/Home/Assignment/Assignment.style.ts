@@ -13,7 +13,7 @@ export const AssignmentMain = styled.div`
   align-self: stretch;
 `;
 
-export const AssignmentTitleBox = styled.div`
+export const AssignmentTitleBox = styled.div`  
   display: flex;
   align-items: center;
   gap: 8px;

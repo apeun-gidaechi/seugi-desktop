@@ -10,7 +10,7 @@ const requestHandler = (config: AxiosRequestConfig): AxiosRequestConfig => {
         return config;
     }
 
-    config.headers = {
+    config.headers = {    
         ...config.headers,
         "Content-Type": "application/json",
         "Authorization": `${Cookies.get("accessToken")}`,

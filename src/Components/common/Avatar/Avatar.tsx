@@ -10,7 +10,7 @@ interface AvatarProps {
 
 const Avatar = ({size = 'medium'}: AvatarProps) => {
   const [userProfileImage, setProfileImage] = useState(DefaultProfileImage);
-
+  
   useEffect(() => {
     const fetchProfileImage = async () => {
       try {

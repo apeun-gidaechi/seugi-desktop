@@ -15,7 +15,7 @@ import Avatar from "@/Components/common/Avatar/Avatar";
 type SelectedButton = "home" | "chat" | "chats" | null;
 
 const Navbar = () => {
-
+    
   const [selected, setSelected] = useState<SelectedButton>(null);
   const [chatRooms, setChatRooms] = useState<string[]>([]);
   const navigate = useNavigate();

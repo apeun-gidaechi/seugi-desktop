@@ -11,7 +11,7 @@ let refreshSubscribers: ((accessToken: string) => void)[] = [];
 
 const onTokenRefreshed = (accessToken: string) => {
     refreshSubscribers.forEach((callback) => callback(accessToken));
-    refreshSubscribers = [];
+    refreshSubscribers = [];  
 };
 
 const addRefreshSubscriber = (callback: (accessToken: string) => void) => {
