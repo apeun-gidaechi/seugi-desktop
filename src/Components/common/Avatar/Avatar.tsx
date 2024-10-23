@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import * as S from './Avatar.style';
 import DefaultProfileImage from "@/Assets/image/profile/Avatar.svg";
-import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
-import { profileSize } from './Avatar.style';
+import {profileSize} from './Avatar.style';
+import {getMyInfos} from "@/Api/profile";
 
 interface AvatarProps {
   size?: keyof typeof profileSize;
 }
 
-const Avatar = ({ size = 'medium' }: AvatarProps) => {
+const Avatar = ({size = 'medium'}: AvatarProps) => {
   const [userProfileImage, setProfileImage] = useState(DefaultProfileImage);
 
   useEffect(() => {
     const fetchProfileImage = async () => {
       try {
-        const res = await SeugiCustomAxios.get(`/member/myInfo`);
-        const fetchedImage = res.data.data.picture;
+        const res = await getMyInfos();
+        const fetchedImage = res.picture;
 
         if (fetchedImage) {
           setProfileImage(fetchedImage);
@@ -28,16 +28,16 @@ const Avatar = ({ size = 'medium' }: AvatarProps) => {
     };
 
     fetchProfileImage();
-    const intervalId = setInterval(fetchProfileImage, 10000);
+    // const intervalId = setInterval(fetchProfileImage, 10000);
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [userProfileImage]);
+    // return () => {
+    //   clearInterval(intervalId);
+    // };
+  }, []);
 
   return (
     <>
-      <S.ProfileImage src={userProfileImage} size={size} />
+      <S.ProfileImage src={userProfileImage} size={size}/>
     </>
   );
 };

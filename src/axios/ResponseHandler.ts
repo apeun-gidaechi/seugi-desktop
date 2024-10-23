@@ -7,10 +7,11 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
 //리프레쉬 작업중인지 아닌지를 구분하는 변수
 let isRefreshing = false;
-const refreshSubscribers: ((accessToken: string) => void)[] = [];
+let refreshSubscribers: ((accessToken: string) => void)[] = [];
 
 const onTokenRefreshed = (accessToken: string) => {
-    refreshSubscribers.map((callback) => callback(accessToken));
+    refreshSubscribers.forEach((callback) => callback(accessToken));
+    refreshSubscribers = [];
 };
 
 const addRefreshSubscriber = (callback: (accessToken: string) => void) => {

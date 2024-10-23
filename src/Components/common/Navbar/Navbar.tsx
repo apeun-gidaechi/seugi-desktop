@@ -4,7 +4,6 @@ import * as S from "@/Components/common/Navbar/Navbar.style";
 import Home from "@/Assets/image/sidebar/home.svg";
 import Chat from "@/Assets/image/sidebar/chat.svg";
 import Chats from "@/Assets/image/sidebar/chats.svg";
-import AvatarImg from "@/Assets/image/chat-components/Avatar.svg";
 import SelectHome from "@/Assets/image/sidebar/slecthome.svg";
 import SelectChat from "@/Assets/image/sidebar/selectchat.svg";
 import SelectChats from "@/Assets/image/sidebar/selectgroup.svg";
@@ -19,7 +18,6 @@ const Navbar = () => {
 
   const [selected, setSelected] = useState<SelectedButton>(null);
   const [chatRooms, setChatRooms] = useState<string[]>([]);
-  const [selectedChatRoom, setSelectedChatRoom] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
   const profileRef = useRef<HTMLDivElement>(null);
