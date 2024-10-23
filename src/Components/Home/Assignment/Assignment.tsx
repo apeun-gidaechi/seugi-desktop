@@ -36,8 +36,26 @@ const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = []
       const fetchedTasks = await getTasks(workspaceId);
       const fetchedClassroomTasks = await getClassroomTasks();
 
-      setLocalTasks(Array.isArray(fetchedTasks) ? fetchedTasks : []);
-      setLocalClassroomTasks(Array.isArray(fetchedClassroomTasks) ? fetchedClassroomTasks : []);
+      const today = new Date();
+
+      const validTasks = Array.isArray(fetchedTasks)
+        ? fetchedTasks.filter(task => task.dueDate && new Date(task.dueDate) >= today)
+        : [];
+
+      const noDueDateTasks = Array.isArray(fetchedTasks)
+        ? fetchedTasks.filter(task => !task.dueDate)
+        : [];
+
+      const validClassroomTasks = Array.isArray(fetchedClassroomTasks)
+        ? fetchedClassroomTasks.filter(task => task.dueDate && new Date(task.dueDate) >= today)
+        : [];
+
+      const noDueDateClassroomTasks = Array.isArray(fetchedClassroomTasks)
+        ? fetchedClassroomTasks.filter(task => !task.dueDate)
+        : [];
+
+      setLocalTasks([...validTasks, ...noDueDateTasks]);
+      setLocalClassroomTasks([...validClassroomTasks, ...noDueDateClassroomTasks]);
     } else {
       console.error("Workspace ID is not defined");
     }
@@ -56,7 +74,7 @@ const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = []
   };
 
   const calculateDaysLeft = (dueDate: Date | null) => {
-    if (!dueDate) return "기한 없음";
+    if (!dueDate) return null;
 
     const today = new Date();
     const diffTime = new Date(dueDate).getTime() - today.getTime();
@@ -81,46 +99,60 @@ const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = []
       <S.AssignmentBox>
         <h1>구글 클래스룸 과제</h1>
         <ul>
-          {localClassroomTasks.length > 0 ? (
-            localClassroomTasks.map((task) => (
-              <S.AssignmentButton key={task.id} onClick={() => handleClassroomTaskClick(task.link)}>
-                <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
-                <S.AssignmentDescription>
-                  {task.description ? task.description : "설명 없음"}
-                </S.AssignmentDescription>
-                <S.AssignmentDateBox>
-                  <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
-                  <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>
-                </S.AssignmentDateBox>
-              </S.AssignmentButton>
-            ))
-          ) : (
-            <S.NoTask>등록된 과제가 없습니다.</S.NoTask>
-          )}
+          {localClassroomTasks.filter(task => task.dueDate).map((task) => (
+            <S.AssignmentButton key={task.id} onClick={() => handleClassroomTaskClick(task.link)}>
+              <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
+              <S.AssignmentDescription>
+                {task.description ? task.description : "설명 없음"}
+              </S.AssignmentDescription>
+              <S.AssignmentDateBox>
+                <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
+                <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>
+              </S.AssignmentDateBox>
+            </S.AssignmentButton>
+          ))}
+
+          {localClassroomTasks.filter(task => !task.dueDate).map((task) => (
+            <S.AssignmentButton key={task.id} onClick={() => handleClassroomTaskClick(task.link)}>
+              <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
+              <S.AssignmentDescription>
+                {task.description ? task.description : "설명 없음"}
+              </S.AssignmentDescription>
+              <S.AssignmentDateBox>
+                <p>기한 없음</p>
+              </S.AssignmentDateBox>
+            </S.AssignmentButton>
+          ))}
         </ul>
       </S.AssignmentBox>
 
       <S.AssignmentBox>
         <h1>일반 과제</h1>
         <ul>
-          {localTasks.length > 0 ? (
-            localTasks.map((task) => (
-              <S.AssignmentButton key={task.id}>
-                <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
-                <S.AssignmentDescription>
-                  {task.description ? task.description : "설명 없음"}
-                </S.AssignmentDescription>
-                <S.AssignmentDateBox>
-                  <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
-                  <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>
-                </S.AssignmentDateBox>
-              </S.AssignmentButton>
-            ))
-          ) : (
-            <S.NoTaskWrap>
-              <S.NoTask>등록된 과제가 없습니다.</S.NoTask>
-            </S.NoTaskWrap>
-          )}
+          {localTasks.filter(task => task.dueDate).map((task) => (
+            <S.AssignmentButton key={task.id}>
+              <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
+              <S.AssignmentDescription>
+                {task.description ? task.description : "설명 없음"}
+              </S.AssignmentDescription>
+              <S.AssignmentDateBox>
+                <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
+                <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>
+              </S.AssignmentDateBox>
+            </S.AssignmentButton>
+          ))}
+
+          {localTasks.filter(task => !task.dueDate).map((task) => (
+            <S.AssignmentButton key={task.id}>
+              <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
+              <S.AssignmentDescription>
+                {task.description ? task.description : "설명 없음"}
+              </S.AssignmentDescription>
+              <S.AssignmentDateBox>
+                <p>기한 없음</p>
+              </S.AssignmentDateBox>
+            </S.AssignmentButton>
+          ))}
         </ul>
       </S.AssignmentBox>
     </S.AssignmentMain>
