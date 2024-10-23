@@ -74,7 +74,7 @@ const Login = () => {
             <LoginButton text="로그인" onClick={Login.handleLogin} />
             <S.Body1>
               계정이 없으시다면?{" "}
-              <S.Gosignup href="http://localhost:5173/emailsignup">
+              <S.Gosignup href="https://www.seugi.com/emailsignup">
                 가입하기
               </S.Gosignup>{" "}
             </S.Body1>

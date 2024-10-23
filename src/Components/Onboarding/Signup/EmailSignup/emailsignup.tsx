@@ -100,7 +100,7 @@ const emailsignup = () => {
                 <S.ButtonContainer>
                     <Button onClick={signUp.handleSignup} />
                     <S.EmailCheck>
-                        <S.Haveemail href='http://localhost:5173/login'>이미 계정이 있으신가요?</S.Haveemail>
+                        <S.Haveemail href='https://www.seugi.com/login'>이미 계정이 있으신가요?</S.Haveemail>
                     </S.EmailCheck>
                 </S.ButtonContainer>
             </S.EmailFirstWrap>
