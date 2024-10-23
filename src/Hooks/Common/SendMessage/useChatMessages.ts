@@ -42,11 +42,15 @@ const useChatMessages = (selectedRoom: ChatRoom, currentUser: string) => {
 
   useEffect(() => {
     console.log('useChatMessages.useEffect called');
-    socketService.subscribeToMessages(selectedRoom.id, (message) => {
-      console.log(`useChatMessages.subscribeToMessages: new message - ${message}`);
-      const newMessage = JSON.parse(message);
-      setReceivedMessages((prevMessages) => [...prevMessages, newMessage]);
-    });
+
+    setTimeout(() => {
+      socketService.subscribeToMessages(selectedRoom.id, (message) => {
+        console.log(`useChatMessages.subscribeToMessages: new message - ${message}`);
+        const newMessage = JSON.parse(message);
+        setReceivedMessages((prevMessages) => [...prevMessages, newMessage]);
+      });
+      
+    }, 1500); // connection 지연 시간
 
     fetchNewMessages();
 
@@ -108,7 +112,7 @@ const useChatMessages = (selectedRoom: ChatRoom, currentUser: string) => {
   };
 
   return {
-    receivedMessages, 
+    receivedMessages,
     sendMessage
   };
 };
