@@ -9,7 +9,8 @@ export const AssignmentMain = styled.div`
   padding: 12px 12px 16px;
   background: ${SeugiColor.White};
   border-radius: 12px;
-  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.04);
+  align-self: stretch;
 `;
 
 export const AssignmentTitleBox = styled.div`
