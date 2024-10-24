@@ -119,7 +119,6 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
             await SeugiCustomAxios.post(`/member/logout`, {
                 fcmToken
             });
-            Cookies.set('lastworkspace', workspaceId);
             Cookies.remove('accessToken');
             Cookies.remove('workspaceId');
             window.location.href = '/login';

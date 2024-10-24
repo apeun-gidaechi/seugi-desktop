@@ -19,7 +19,7 @@ const index = () => {
         return () => {
             document.body.style.overflow = "auto";
         };
-    }, []); 
+    }, []);
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -30,7 +30,6 @@ const index = () => {
 
     const manageWorkspace = async () => {
         try {
-            const lastWorkspace = Cookies.get("lastworkspace");
             const checkWorkspaces = await getMyWorkspaces();
 
             if (!checkWorkspaces || checkWorkspaces.length === 0) {
@@ -39,13 +38,7 @@ const index = () => {
                 return;
             }
 
-            if (lastWorkspace) {
-                Cookies.set("workspaceId", lastWorkspace);
-            } else {
-                Cookies.set("workspaceId", checkWorkspaces[0].workspaceId);
-            }
-
-            Cookies.remove('lastworkspace');
+            Cookies.set("workspaceId", checkWorkspaces[0].workspaceId);
             navigate(paths.home);
         } catch (error) {
             console.log("Error fetching workspace:", error);
@@ -154,33 +147,33 @@ const index = () => {
         },
     });
 
-        const handleAppleLogin = async (e: any) => {
-            e.preventDefault();
+    const handleAppleLogin = async (e: any) => {
+        e.preventDefault();
 
-            appleAuthHelpers.signIn({
-                authOptions: {
-                    clientId: 'com.seugi.services',
-                    scope: "email name",
-                    redirectURI: 'https://www.seugi.com',
-                    usePopup: true
-                },
-            });
-        };
-        useEffect(() => {
-            const handleSuccess = async (response: any) => {
-                console.log("1");
-                const code = response.detail.authorization.code;
-                const name = response.user?.name;
-                console.log(response);
-                try {
-                    const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
-                        code,
-                        token: fcmToken,
-                        platform: "WEB",
-                        name: name
-                    });
-                    console.log(token)
-                    const { accessToken, refreshToken } = token.data.data
+        appleAuthHelpers.signIn({
+            authOptions: {
+                clientId: 'com.seugi.services',
+                scope: "email name",
+                redirectURI: 'https://www.seugi.com',
+                usePopup: true
+            },
+        });
+    };
+    useEffect(() => {
+        const handleSuccess = async (response: any) => {
+            console.log("1");
+            const code = response.detail.authorization.code;
+            const name = response.user?.name;
+            console.log(response);
+            try {
+                const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
+                    code,
+                    token: fcmToken,
+                    platform: "WEB",
+                    name: name
+                });
+                console.log(token)
+                const { accessToken, refreshToken } = token.data.data
 
                 Cookies.set("accessToken", accessToken);
                 Cookies.set("refreshToken", refreshToken);
