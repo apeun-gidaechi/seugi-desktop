@@ -120,6 +120,7 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
                 fcmToken
             });
             Cookies.remove('accessToken');
+            Cookies.remove('refreshToken');
             Cookies.remove('workspaceId');
             window.location.href = '/login';
         } catch (err) {
