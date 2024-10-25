@@ -22,8 +22,8 @@ interface ClassroomTask {
 }
 
 interface AssignmentProps {
-  tasks?: Task[]; 
-  classroomTasks?: ClassroomTask[]; 
+  tasks?: Task[];
+  classroomTasks?: ClassroomTask[];
 }
 
 const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = [] }) => {
@@ -99,27 +99,14 @@ const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = []
       <S.AssignmentBox>
         <h1>구글 클래스룸 과제</h1>
         <ul>
-          {localClassroomTasks.filter(task => task.dueDate).map((task) => (
+          {localClassroomTasks.map((task) => (
             <S.AssignmentButton key={task.id} onClick={() => handleClassroomTaskClick(task.link)}>
               <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
               <S.AssignmentDescription>
                 {task.description ? task.description : "설명 없음"}
               </S.AssignmentDescription>
               <S.AssignmentDateBox>
-                <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
-                <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>
-              </S.AssignmentDateBox>
-            </S.AssignmentButton>
-          ))}
-
-          {localClassroomTasks.filter(task => !task.dueDate).map((task) => (
-            <S.AssignmentButton key={task.id} onClick={() => handleClassroomTaskClick(task.link)}>
-              <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
-              <S.AssignmentDescription>
-                {task.description ? task.description : "설명 없음"}
-              </S.AssignmentDescription>
-              <S.AssignmentDateBox>
-                <p>기한 없음</p>
+                <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : '기한 없음'}</p>
               </S.AssignmentDateBox>
             </S.AssignmentButton>
           ))}
@@ -129,7 +116,7 @@ const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = []
       <S.AssignmentBox>
         <h1>일반 과제</h1>
         <ul>
-          {localTasks.filter(task => task.dueDate).map((task) => (
+          {localTasks.map((task) => (
             <S.AssignmentButton key={task.id}>
               <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
               <S.AssignmentDescription>
@@ -138,18 +125,6 @@ const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = []
               <S.AssignmentDateBox>
                 <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
                 <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>
-              </S.AssignmentDateBox>
-            </S.AssignmentButton>
-          ))}
-
-          {localTasks.filter(task => !task.dueDate).map((task) => (
-            <S.AssignmentButton key={task.id}>
-              <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
-              <S.AssignmentDescription>
-                {task.description ? task.description : "설명 없음"}
-              </S.AssignmentDescription>
-              <S.AssignmentDateBox>
-                <p>기한 없음</p>
               </S.AssignmentDateBox>
             </S.AssignmentButton>
           ))}
