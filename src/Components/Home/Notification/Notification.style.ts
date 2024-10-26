@@ -70,7 +70,7 @@ export const NotificationBox = styled.div`
   gap: 8px;
   align-self: stretch;
   max-height: 500px; 
-  overflow-y: auto; 
+  overflow-y: hidden; 
   padding-right: 10px;
 `;
 
@@ -123,9 +123,8 @@ export const NotificationEmojiBox = styled.div`
   flex-wrap: wrap;
 
   max-height: 80px; 
-  overflow-x: auto;
+  overflow-x: hidden;
 
-  flex-wrap: wrap; 
   gap: 5px;
   flex-direction: row;
 `;
