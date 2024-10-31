@@ -159,12 +159,11 @@ const index = () => {
             },
         });
     };
+
     useEffect(() => {
         const handleSuccess = async (response: any) => {
-            console.log("1");
             const code = response.detail.authorization.code;
             const name = response.user?.name;
-            console.log(response);
             try {
                 const token = await axios.post(`${SERVER_URL}/oauth/apple/authenticate`, {
                     code,
