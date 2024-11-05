@@ -1,4 +1,8 @@
-// src/types/profile.ts
+import { useState, useEffect, useRef } from 'react';
+import Cookies from 'js-cookie';
+import { fetchingProfile, getMyInfos } from '@/Api/profile';
+import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
+
 export type ProfileField = 'status' | 'spot' | 'belong' | 'phone' | 'wire' | 'location';
 
 export interface ProfileData {
@@ -11,16 +15,9 @@ export interface ProfileData {
     nick?: string;
 }
 
-// src/hooks/Profile/index.ts
-import { useState, useEffect, useRef } from 'react';
-import Cookies from 'js-cookie';
-import { fetchingProfile, getMyInfos } from '@/Api/profile';
-import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
-
 const useProfile = () => {
     const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
     const [isEditing, setIsEditing] = useState<ProfileField | null>(null);
-    const [picture, setPicture] = useState('');
     const [isSettingOpen, setIsSettingOpen] = useState<boolean>(false);
     const [name, setName] = useState<string>('');
     const [profileData, setProfileData] = useState<ProfileData>({
@@ -52,7 +49,7 @@ const useProfile = () => {
         setIsEditing(field);
     };
 
-    const saveProfileData = async (field: ProfileField, value: string) => {
+    const saveProfileData = async (field: any, value: string) => {
         try {
             if (!workspaceId) return;
 
