@@ -58,19 +58,17 @@ SeugiCustomAxios.interceptors.response.use(
         if (!isRefreshing) {
           isRefreshing = true;
           try {
-            const response = await axios.get(`${SERVER_URL}/member/refresh`, {
+            const res = await axios.get(`${SERVER_URL}/member/refresh`, {
               params: { token: refreshToken.replace("Bearer ", "") }
             });
-            const newAccessToken = response.data.data;
+            const newAccessToken = res.data.data;
             Cookies.set('accessToken', newAccessToken);
             SeugiV1AxiosSetAccessToken(newAccessToken);
 
-            // Retry failed requests with new access token
             refreshSubscribers.forEach(callback => callback(newAccessToken));
             refreshSubscribers = [];
             isRefreshing = false;
 
-            // Ensure error.config is defined before using it
             if (error.config) {
               error.config.headers['Authorization'] = `${newAccessToken}`;
               return axios(error.config);
@@ -81,7 +79,6 @@ SeugiCustomAxios.interceptors.response.use(
           }
         }
 
-        // If already refreshing, queue the request
         return new Promise((resolve) => {
           refreshSubscribers.push((newToken: string) => {
             if (error.config) {
@@ -92,17 +89,15 @@ SeugiCustomAxios.interceptors.response.use(
         });
       }
 
-      // Handle other cases where access token exists
       if (accessToken && refreshToken) {
         try {
-          const response = await axios.get(`${SERVER_URL}/member/refresh`, {
+          const res = await axios.get(`${SERVER_URL}/member/refresh`, {
             params: { token: refreshToken.replace("Bearer ", "") }
           });
-          const newAccessToken = response.data.data;
+          const newAccessToken = res.data.data;
           Cookies.set('accessToken', newAccessToken);
           SeugiV1AxiosSetAccessToken(newAccessToken);
 
-          // Ensure error.config is defined before using it
           if (error.config) {
             error.config.headers['Authorization'] = `${newAccessToken}`;
             return axios(error.config);
@@ -121,10 +116,5 @@ SeugiCustomAxios.interceptors.request.use(
   RequestHandler,
   (error) => Promise.reject(error)
 );
-
-// 401 때 Retry하는 로직 필요함
-// -> 토큰이 둘 다 없을 때, 액세스토큰은 없는데 리프레시만 있을 때, 액세스토큰이 있는데도 실패할 때
-// 
+ 
 // Refresh 토큰만 httpOnly 쿠키에 저장 (급한 건 아님)
-// 
-// todo : refresh 한번만 하게 막아
