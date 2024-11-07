@@ -10,6 +10,7 @@ import Divider from '@/Assets/image/profile/ProflieDivider.svg';
 import { fetchingProfile, getMyInfos } from '@/Api/profile';
 import Cookies from 'js-cookie';
 import Avatar from "@/Components/common/Avatar/Avatar";
+import { paths } from '@/Constants/paths';
 
 interface SettingProfileProps {
     onClose: () => void;
@@ -122,7 +123,7 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
             Cookies.remove('accessToken');
             Cookies.remove('refreshToken');
             Cookies.remove('workspaceId');
-            window.location.href = '/login';
+            window.location.href = paths.login;
         } catch (err) {
             console.error(err);
         }
@@ -145,10 +146,11 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
     };
 
     const handleSecession = async () => {
+        window.confirm('정말 삭제하시겠습니까? 삭제하면 되돌릴 수 없습니다.');
         try {
             await SeugiCustomAxios.delete(`/member/remove`);
             localStorage.clear();
-            window.location.href = '/login';
+            window.location.href = paths.login;
         } catch (error) {
             console.error(error);
         }
