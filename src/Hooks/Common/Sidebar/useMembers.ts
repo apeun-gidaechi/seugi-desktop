@@ -7,6 +7,24 @@ interface Member {
   department: string;
 }
 
+interface RetrieveMemberResponse {
+  member: {
+    id: number;
+    nick: string;
+    spot: string;
+    belong: string;
+    phone: string;
+    wire: string;
+    location: string;
+    permission: string;
+    schGrade: number;
+    schClass: number;
+    schNumber: number;
+  };
+  workspaceId: string;
+  status: string;
+}
+
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
 export const SeugiCustomAxios: AxiosInstance = axios.create({
@@ -38,10 +56,10 @@ const useMembers = (workspaceId: string, accessToken: string | null) => {
           },
         });
 
-        const members: Member[] = (response.data.data || []).map((m: any) => ({
+        const members: Member[] = (response.data.data || []).map((m: RetrieveMemberResponse) => ({
           id: m.member.id,
-          name: m.nick,
-          department: m.belong || "",
+          name: m.member.nick,
+          department: m.member.belong || "",
         }));
 
         setSearchResult(members.filter(
