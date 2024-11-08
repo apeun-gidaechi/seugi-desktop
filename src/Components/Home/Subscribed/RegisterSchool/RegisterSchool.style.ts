@@ -62,7 +62,7 @@ export const NewSchoolButton = styled.button`
     gap: 10px;
     flex: 1 0 0;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Gray100};
 
     border:none;
@@ -84,7 +84,7 @@ export const JoinSchoolButton = styled.button`
     gap: 10px;
     flex: 1 0 0;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Primary500};
 
     border:none;

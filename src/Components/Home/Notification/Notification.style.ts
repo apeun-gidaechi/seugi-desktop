@@ -8,7 +8,7 @@ export const LeftContainer = styled.div`
   justify-content:center;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Corner-Small, 10px);
+  gap: 10px;
   flex: 1 0 0;
 
   border-radius: 12px;

@@ -37,7 +37,7 @@ export const CorrectionTitleDiv = styled.div`
     padding-left: 4px;
     justify-content: center;
     align-items: flex-start;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
 `
 
 export const CorrectionTitle = styled.span`
@@ -55,7 +55,7 @@ export const InputDiv = styled.div`
     justify-content: space-between;
     width: 100%; 
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
     box-sizing: border-box; 
@@ -97,7 +97,7 @@ export const SaveButton = styled.button`
     align-items: center;
     gap: 10px;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Primary500};
 
     border:none;

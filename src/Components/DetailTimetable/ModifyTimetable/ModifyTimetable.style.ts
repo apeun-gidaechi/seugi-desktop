@@ -33,12 +33,12 @@ export const CompleteButton = styled.button`
     border:none;
     display: flex;
     height: 36px;
-    padding: var(--Large, 12px);
+    padding: 12px;
     justify-content: center;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Primary500};
 
     cursor: pointer;
@@ -51,12 +51,12 @@ export const subtitle = styled.span`
 
 export const InputDiv = styled.div`
     display: flex;
-    padding: var(--Corner-Medium, 12px);
+    padding: 12px;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 `

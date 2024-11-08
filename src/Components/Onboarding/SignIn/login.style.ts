@@ -53,7 +53,7 @@ export const SeugiImg = styled.object`
     height: 32px;
     flex-shrink: 0;
 
-    fill: var(--Gradient-Primary, linear-gradient(180deg, #1C8DF4 0%, #21B6E5 100%));
+    fill: linear-gradient(180deg, #1C8DF4 0%, #21B6E5 100%);
 `;
 
 export const Title2 = styled.span`
@@ -116,7 +116,7 @@ export const Loginbtn = styled.button`
     gap: 10px;
     align-self: stretch;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Primary500};
     border:none;
     color: ${SeugiColor.White};
@@ -203,7 +203,7 @@ export const InputContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%; 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 `;

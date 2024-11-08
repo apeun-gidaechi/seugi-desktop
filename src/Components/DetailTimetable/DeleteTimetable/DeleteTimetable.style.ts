@@ -5,10 +5,10 @@ import styled from "styled-components";
 export const DeleteDiv = styled.div`
     display: flex;
     width: 360px;
-    padding: var(--Corner-Large, 18px);
+    padding: 18px;
     flex-direction: column;
     align-items: center;
-    gap: var(--Corner-Large, 18px);
+    gap: 18px;
     border-radius: 16px;
     background: ${SeugiColor.White};
 
@@ -20,7 +20,7 @@ export const TitleDiv = styled.div`
     padding: 4px;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--Corner-Extra-small, 8px);
+    gap: 8px;
     align-self: stretch;
 `
 
@@ -32,7 +32,7 @@ export const Title = styled.span`
 export const ButtonDiv = styled.div`
     display: flex;
     align-items: flex-start;
-    gap: var(--Corner-Extra-small, 8px);
+    gap: 8px;
     align-self: stretch;
 `
 
@@ -40,12 +40,12 @@ export const CancleButton = styled.button`
     border:none;
     display: flex;
     height: 54px;
-    padding: var(--Corner-Medium, 12px) 65px;
+    padding: 12px 65px;
     justify-content: center;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
     flex: 1 0 0;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Gray100};
     cursor: pointer;
 `
@@ -60,12 +60,12 @@ export const DeleteButton = styled.button`
     border:none;
     display: flex;
     height: 54px;
-    padding: var(--Corner-Medium, 12px) 65px;
+    padding: 12px 65px;
     justify-content: center;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
     flex: 1 0 0;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Primary500};
     cursor: pointer;
 `

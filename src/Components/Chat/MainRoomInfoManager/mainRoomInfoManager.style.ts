@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/Design/color/SeugiColor";
+import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";
 
 interface OutChatRoomProps {
@@ -24,13 +26,9 @@ export const MainRoomInfoBox = styled.div`
 
 export const NotificationSet = styled.button<NotificationSetProps>`
     color: ${(props) =>
-        props.pressed ? "var(--Gray-Gray600, #787878)" : "var(--Sub-Black, #000)"};
-    /* Subtitle2 */
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+        props.pressed ? `${SeugiColor.Gray600}` : `${SeugiColor.Black}`};
+
+    ${SeugiFont.subtitle.subtitle2};
 
     padding: 8px 0px;
     text-align: left;
@@ -39,15 +37,9 @@ export const NotificationSet = styled.button<NotificationSetProps>`
 `;
 
 export const OutChatRoom = styled.button<OutChatRoomProps>`
-    color: ${(props) =>
-        props.pressed ? "var(--Red-Red500, #C20000)" : "var(--Red-Red500, #F90707)"};
+    color: ${SeugiColor.Red500};
 
-    /* Subtitle2 */
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 
     padding: 8px 0px;
 

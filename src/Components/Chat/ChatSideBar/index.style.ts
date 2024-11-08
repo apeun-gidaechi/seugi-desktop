@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {SeugiFont} from "@/Design/text/SeugiFont";
+import { SeugiColor } from "@/Design/color/SeugiColor";
 
 export const SideBarChat = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ export const SideFinder = styled.div`
   width: 100%;
   padding: 12px;
   align-items: center;
-  background: var(--Sub-White, #FFF);
+  background: ${SeugiColor.White};
   border-radius: 12px;
   box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.04);
 
@@ -38,11 +39,10 @@ export const FindChatingRoom = styled.input`
   flex: 1;
   /* padding: 0 40px; */
   /* margin-left: 12px; */
-  color: var(--Gray-Gray500, #AAA);
-  font-family: Pretendard;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 130%;
+  color: ${SeugiColor.Gray500};
+
+  ${SeugiFont.subtitle.subtitle2};
+
   outline: none;
   border: none;
   background: none;
@@ -102,7 +102,7 @@ export const ChatRoom = styled.div`
     min-height: 72px;
     align-items: center;
     cursor: pointer;
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
     ${SeugiFont.subtitle.subtitle2}
     padding: 4px 16px;

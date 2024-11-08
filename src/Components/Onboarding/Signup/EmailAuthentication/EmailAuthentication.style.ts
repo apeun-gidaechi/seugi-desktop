@@ -134,7 +134,7 @@ export const CodeTextInput = styled.input`
     align-items: center;
     flex: 1 0 0;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
     ${SeugiFont.subtitle.subtitle2};
@@ -144,11 +144,11 @@ export const CodeTextInput = styled.input`
 export const CodeSpan = styled.button`
     display: flex;
     height: 36px;
-    padding: var(--Large, 12px);
+    padding: 12px;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Primary500};
     border:none;
 

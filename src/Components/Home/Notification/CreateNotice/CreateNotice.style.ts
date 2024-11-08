@@ -53,12 +53,12 @@ export const Title = styled.span`
 export const TitleButton = styled.button`
     display: flex;
     height: 36px;
-    padding: var(--Large, 12px);
+    padding: 12px;
     justify-content: center;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
 
     border:none;
     background:none;
@@ -85,7 +85,7 @@ export const TitleInputField = styled.input`
     gap: 121px;
     align-self: stretch;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 
@@ -108,7 +108,7 @@ export const ContentInputField = styled.textarea`
     gap: 121px;
     align-self: stretch;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 

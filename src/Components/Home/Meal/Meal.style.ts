@@ -93,7 +93,7 @@ export const CalorieDiv = styled.div`
   display: flex;
   padding: 4px 8px;
   align-items: flex-start;
-  gap: var(--Corner-Small, 10px);
+  gap: 10px;
 
   border-radius: 34px;
   background: ${SeugiColor.Primary500};

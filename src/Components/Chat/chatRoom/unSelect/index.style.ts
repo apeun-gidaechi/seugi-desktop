@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/Design/color/SeugiColor";
+import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";
 
 export const AllWrapContainer = styled.div`
@@ -19,7 +21,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     border-radius: 12px;
-    background: var(--Sub-White, #FFF);
+    background: ${SeugiColor.White};
     width: 100%;
     height: 100%;
 `;
@@ -40,11 +42,6 @@ export const SelectChatRoomImg = styled.img`
 export const SelectChatRoomMessage = styled.div`
     color: #000;
 
-    /* Title1 */
-    font-family: Pretendard;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 130%; /* 36.4px */
+    ${SeugiFont.title.title1};
     padding: 20px; 
 `;

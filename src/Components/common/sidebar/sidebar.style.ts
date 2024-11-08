@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/Design/color/SeugiColor";
+import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";
 
 export const SideBarChat = styled.div`
@@ -53,12 +55,8 @@ export const FindChatingRoom = styled.input`
   width: 208px;
   margin-left: 16px;
   outline: none;
-  color: var(--Gray-Gray500, #AAA);
-  font-family: 'Pretendard-Regular', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%;
+  color: ${SeugiColor.Gray500};
+  ${SeugiFont.subtitle.subtitle2};
   &:focus {
     color: black; 
   }
@@ -114,14 +112,9 @@ export const ChatRoom = styled.div`
   align-self: stretch;
   cursor: pointer;
 
-  color: var(--Black, #000);
+  color: ${SeugiColor.Black};
 
-  /* Subtitle2 */
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  ${SeugiFont.subtitle.subtitle2};
 `;
 
 export const ChatRoomAvatar = styled.img`

@@ -72,11 +72,11 @@ export const BtnContainer = styled.div`
 export const Button = styled.button`
   display: flex;
   height: 36px;
-  padding: var(--Large, 12px);
+  padding: 12px;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border-radius: var(--Large, 12px);
+  border-radius: 12px;
   background: rgba(0, 0, 0, 0.00);
 
   color: ${SeugiColor.Primary500};

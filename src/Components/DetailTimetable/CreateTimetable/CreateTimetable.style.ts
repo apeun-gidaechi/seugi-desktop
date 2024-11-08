@@ -33,11 +33,11 @@ export const TitleSpan = styled.span`
 export const CompleteButton = styled.span`
     display: flex;
     height: 36px;
-    padding: var(--Large, 12px);
+    padding: 12px;
     justify-content: center;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
-    border-radius: var(--Large, 12px);
+    gap: 10px;
+    border-radius: 12px;
     background:${SeugiColor.Primary500};
 
     color:${SeugiColor.White};
@@ -47,12 +47,12 @@ export const CompleteButton = styled.span`
 
 export const InputDiv = styled.div`
     display: flex;
-    padding: var(--Corner-Medium, 12px);
+    padding: 12px;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 `
@@ -87,9 +87,9 @@ export const CancleButton = styled.button`
     background:none;
     justify-content: center;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
     flex: 1 0 0;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     cursor: pointer;
 `
 
@@ -99,17 +99,17 @@ export const ButtonImg = styled.img`
 export const ButtonDiv = styled.div`
     display: flex;
     align-items: flex-start;
-    gap: var(--Corner-Extra-small, 8px);
+    gap: 8px;
 `
 
 export const DropDown = styled.div`
     display: flex;
     width: 128px;
-    padding: var(--Corner-Medium, 12px);
+    padding: 12px;
     justify-content: space-between;
     align-items: center;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 `
@@ -139,11 +139,11 @@ export const TimeSpan = styled.span`
 
 export const DateDiv = styled.div`
     display: flex;
-    padding: var(--Corner-Medium, 12px);
+    padding: 12px;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 `
@@ -178,9 +178,9 @@ export const CalendarButton = styled.button`
     background:none;
     justify-content: center;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
     flex: 1 0 0;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     cursor: pointer;
 `
 

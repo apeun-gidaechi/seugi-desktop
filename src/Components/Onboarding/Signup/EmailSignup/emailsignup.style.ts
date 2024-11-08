@@ -102,7 +102,7 @@ export const Continuebtn = styled.button`
     gap: 10px;
     align-self: stretch;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Primary500};
 `;
 
@@ -145,7 +145,7 @@ export const InputContainer = styled.div<{ error?: boolean }>`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${({ error }) => (error ? 'red' : SeugiColor.Gray300)};
     background: ${SeugiColor.White};
     

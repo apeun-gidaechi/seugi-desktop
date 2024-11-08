@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/Design/color/SeugiColor";
+import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";
 
 export const ChatContainer = styled.div`
@@ -41,7 +43,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     border-radius: 12px;
-    background: var(--Sub-White, #FFF);
+    background: ${SeugiColor.White};
     width: 100%;
     height: 100%; 
     //max-height: 650px;
@@ -49,11 +51,8 @@ export const Container = styled.div`
 `;
 
 export const CurrentData = styled.div`
-    color: var(--Gray-Gray600, #787878);
-    font-family: Pretendard;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 130%;
+    color: ${SeugiColor.Gray600};
+    ${SeugiFont.body.body2};
 `;
 
 export const CurrentDataWrap = styled.div`
@@ -63,7 +62,7 @@ export const CurrentDataWrap = styled.div`
     align-items: center;
     gap: 10px;
     border-radius: 24px;
-    background: var(--Gray-Gray100, #F4F5F9);
+    background: ${SeugiColor.Gray100};
 `;
 
 export const CurrentDataContainer = styled.div`
@@ -106,7 +105,7 @@ export const SendMessageWrap = styled.div`
     justify-content: space-between;
     align-items: center;
     border-radius: 12px;
-    background: var(--Sub-White, #FFF);
+    background: ${SeugiColor.White};
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
     width: 100%;
 `;
@@ -126,12 +125,9 @@ export const PlusMessageFile = styled.img`
 
 export const SendMessageInput = styled.input`
     flex: 1;
-    font-family: 'Pretendard-Regular', sans-serif;
-    color: var(--Gray-Gray500, #AAA);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%;
+    color: ${SeugiColor.Gray500};
+    ${SeugiFont.subtitle.subtitle1};
+
     border: none;
     background: none;
     outline: none;
@@ -180,7 +176,7 @@ export const DropdownItem = styled.button`
     display: flex;
     padding: 8px 0px;
     align-items: flex-start;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
 
     align-self: stretch;
     background: none;
@@ -191,14 +187,9 @@ export const DropdownItem = styled.button`
     display: flex;
     align-items: center;
 
-    color: var(--Sub-Black, #000);
+    color: ${SeugiColor.Black};
 
-    /* Subtitle2 */
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.05);

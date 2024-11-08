@@ -12,7 +12,7 @@ export const CalendarDiv = styled.div`
     align-items: center;
 
     border-radius: 16px;
-    background: var(--Sub-White, #FFF);
+    background: ${SeugiColor.White};
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 
@@ -24,8 +24,8 @@ export const TimetableContainer = styled.div`
     grid-template-rows: repeat(8, 1fr); 
     display: grid;
 
-    border-radius: var(--Corner-Medium, 12px);
-    background: var(--Sub-White, #FFF);
+    border-radius: 12px;
+    background: ${SeugiColor.White};
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
 
@@ -54,7 +54,7 @@ export const TimeHeaderCell = styled.div`
 `
 
 export const TimeCell = styled.div`
-  background-color: #fff;
+  background-color: ${SeugiColor.White};
   border: 1px solid #ddd;
   text-align: center;
   padding: 10px;
@@ -62,13 +62,13 @@ export const TimeCell = styled.div`
 
 export const HeaderControls = styled.div`
     display: flex;
-    padding: var(--Corner-Medium, 12px);
+    padding: 12px;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
 
-    border-radius: var(--Corner-Medium, 12px);
-    background: var(--Sub-White, #FFF);
+    border-radius: 12px;
+    background: ${SeugiColor.White};
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 

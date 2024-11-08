@@ -36,7 +36,7 @@ export const SeugiFont = Object.freeze({
             fontFamily: "Pretendard",
             fontSize: "20px",
             fontStyle: "normal",
-            fontWeight: 700,
+            fontWeight: 600,
             lineHeight: "130%",
 
         },

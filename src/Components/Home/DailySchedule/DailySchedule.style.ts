@@ -53,7 +53,7 @@ export const HomeWrapper1UpContainer = styled.div`
   padding: 12px 12px 16px 12px;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Corner-Small, 10px);
+  gap: 10px;
   align-self: stretch;
 
   border-radius: 12px;

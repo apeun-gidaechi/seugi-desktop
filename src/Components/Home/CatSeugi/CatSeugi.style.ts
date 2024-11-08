@@ -45,7 +45,7 @@ export const CatSeugi = styled.div`
   align-self: stretch;
 
   border-radius: 99px;
-  border: 1.5px solid var(--Gradient-Primary, #1C8DF4);
+  border: 1.5px solid #1C8DF4;
   background: ${SeugiColor.White};
 `;
 

@@ -1,7 +1,8 @@
+import { SeugiColor } from "@/Design/color/SeugiColor";
 import styled from "styled-components";
 
 export const ChatingBackground = styled.div`
-    background: var(--Primary-Primary050, #F8FCFF);
+    background: ${SeugiColor.Primary050};
     display: flex; 
     flex-direction: column; 
     height: 100vh;
