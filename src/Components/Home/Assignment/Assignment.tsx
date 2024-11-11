@@ -106,7 +106,7 @@ const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = []
                 {task.description ? task.description : "설명 없음"}
               </S.AssignmentDescription>
               <S.AssignmentDateBox>
-                <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : '기한 없음'}</p>
+                <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
               </S.AssignmentDateBox>
             </S.AssignmentButton>
           ))}
@@ -124,7 +124,7 @@ const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = []
               </S.AssignmentDescription>
               <S.AssignmentDateBox>
                 <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
-                <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>
+                {task.dueDate && <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>}
               </S.AssignmentDateBox>
             </S.AssignmentButton>
           ))}
