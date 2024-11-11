@@ -1,8 +1,20 @@
 import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components'; 
 
+export const Modal = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+
+    background: rgba(0, 0, 0, 0.30);
+    
+    z-index: 999;
+
+    top: 0;
+    left: 0;
+`
 export const EditProfile = styled.div`
     display: flex;
     width: 360px;
@@ -12,7 +24,15 @@ export const EditProfile = styled.div`
     align-items: center;
     gap: 32px;
 
-    margin-bottom:9.8rem;
+    border-radius: 16px;
+
+    position: absolute;
+    left: 34rem;
+    top: 18rem;
+
+    background: ${SeugiColor.White};
+
+    z-index:999;
 `
 
 export const CorrectionDiv = styled.div`

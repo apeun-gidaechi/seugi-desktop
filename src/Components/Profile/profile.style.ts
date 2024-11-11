@@ -1,12 +1,11 @@
 import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components'; 
 
 export const MyProfileDialog = styled.div`
     position:absolute;
 
-    z-index:999;
+    z-index: 990;
 
     bottom:3rem;
     left: 3rem;
