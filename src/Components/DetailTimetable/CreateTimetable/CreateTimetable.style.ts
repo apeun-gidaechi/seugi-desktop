@@ -2,6 +2,19 @@ import { SeugiColor } from "@/Design/color/SeugiColor"
 import { SeugiFont } from "@/Design/text/SeugiFont"
 import styled from "styled-components"
 
+export const CreateMain = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    position:fixed;
+
+    background: rgba(0, 0, 0, 0.30);
+    
+    z-index:998;
+
+    top: 0;
+    left: 0;
+`
 export const CreateDiv = styled.div`
     position:absolute;
     display: inline-flex;
@@ -13,7 +26,14 @@ export const CreateDiv = styled.div`
     background: ${SeugiColor.White};
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-    right:0%;
+
+    z-index:999;
+
+    display: flex;
+
+    left: 32rem;
+    top: 14rem;
+
     z-index:999;
 `
 

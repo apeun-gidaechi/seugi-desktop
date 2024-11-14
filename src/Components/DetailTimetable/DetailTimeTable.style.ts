@@ -2,11 +2,24 @@ import { SeugiColor } from '@/Design/color/SeugiColor';
 import { SeugiFont } from '@/Design/text/SeugiFont';
 import styled from 'styled-components';
 
+export const CalendarMain = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    position:fixed;
+
+    background: rgba(0, 0, 0, 0.30);
+    
+    z-index:998;
+
+    top: 0;
+    left: 0;
+`
 export const CalendarDiv = styled.div`
-    position:absolute;
     display: flex;
+    position:absolute;
     width: 360px;
-    height: 410px;
+    height: 450px;
     padding: 16px;
     flex-direction: column;
     align-items: center;
@@ -16,7 +29,14 @@ export const CalendarDiv = styled.div`
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 
+    z-index: 999;
+
+    left: 35rem;
+    top: 14rem;
+
     z-index:999;
+
+    gap: 12px;
 `
 
 export const TimetableContainer = styled.div`
