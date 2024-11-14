@@ -36,7 +36,7 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
                     const profileRes = await fetchingProfile(workspaceId);
                     setName(profileRes.nick);
                     setBirth(profileRes.birth || birth);
-                    setProfileImage(profileRes.profileImage || ProfileImg); // 프로필 이미지 반영
+                    setProfileImage(profileRes.profileImage || ProfileImg); 
                 } else {
                     console.error('Workspace ID is undefined');
                 }
@@ -45,24 +45,6 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
             }
         };
         fetchProfileData();
-    }, [workspaceId, token]);
-
-    useEffect(() => {
-        const getMyInfomations = async () => {
-            try {
-                if (workspaceId) {
-                    const profileRes = await getMyInfos();
-                    setName(profileRes.nick);
-                    setBirth(profileRes.birth || birth);
-                    setProfileImage(profileRes.profileImage || ProfileImg);
-                } else {
-                    console.error('Workspace ID is undefined');
-                }
-            } catch (error) {
-                console.error('프로필 데이터를 가져오는데 실패했습니다.', error);
-            }
-        };
-        getMyInfomations();
     }, [workspaceId, token]);
 
     const imgToUrl = async (e: React.ChangeEvent<HTMLInputElement>) => {
