@@ -26,7 +26,7 @@ interface AssignmentProps {
   classroomTasks?: ClassroomTask[];
 }
 
-const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = [] }) => {
+const Assignment = ({ tasks = [], classroomTasks = [] }: AssignmentProps) => {
   const [localTasks, setLocalTasks] = useState<Task[]>(tasks);
   const [localClassroomTasks, setLocalClassroomTasks] = useState<ClassroomTask[]>(classroomTasks);
 
@@ -37,19 +37,15 @@ const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = []
       const fetchedClassroomTasks = await getClassroomTasks();
 
       const today = new Date();
-
       const validTasks = Array.isArray(fetchedTasks)
         ? fetchedTasks.filter(task => task.dueDate && new Date(task.dueDate) >= today)
         : [];
-
       const noDueDateTasks = Array.isArray(fetchedTasks)
         ? fetchedTasks.filter(task => !task.dueDate)
         : [];
-
       const validClassroomTasks = Array.isArray(fetchedClassroomTasks)
         ? fetchedClassroomTasks.filter(task => task.dueDate && new Date(task.dueDate) >= today)
         : [];
-
       const noDueDateClassroomTasks = Array.isArray(fetchedClassroomTasks)
         ? fetchedClassroomTasks.filter(task => !task.dueDate)
         : [];
@@ -96,39 +92,51 @@ const Assignment: React.FC<AssignmentProps> = ({ tasks = [], classroomTasks = []
         <S.AssignmentTitleText>다가오는 과제</S.AssignmentTitleText>
       </S.AssignmentTitleBox>
 
-      <S.AssignmentBox>
+      <S.AssignmentBox hasTasks={localClassroomTasks.length > 0}>
         <h1>구글 클래스룸 과제</h1>
-        <ul>
-          {localClassroomTasks.map((task) => (
-            <S.AssignmentButton key={task.id} onClick={() => handleClassroomTaskClick(task.link)}>
-              <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
-              <S.AssignmentDescription>
-                {task.description ? task.description : "설명 없음"}
-              </S.AssignmentDescription>
-              <S.AssignmentDateBox>
-                <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : '기한 없음'}</p>
-              </S.AssignmentDateBox>
-            </S.AssignmentButton>
-          ))}
-        </ul>
+        {localClassroomTasks.length > 0 ? (
+          <ul>
+            {localClassroomTasks.map((task) => (
+              <S.AssignmentButton key={task.id} onClick={() => handleClassroomTaskClick(task.link)}>
+                <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
+                <S.AssignmentDescription>
+                  {task.description ? task.description : "설명 없음"}
+                </S.AssignmentDescription>
+                <S.AssignmentDateBox>
+                  <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : '기한 없음'}</p>
+                </S.AssignmentDateBox>
+              </S.AssignmentButton>
+            ))}
+          </ul>
+        ) : (
+          <S.NoTaskWrap>
+            <S.NoTask>과제가 없습니다</S.NoTask>
+          </S.NoTaskWrap>
+        )}
       </S.AssignmentBox>
 
-      <S.AssignmentBox>
+      <S.AssignmentBox hasTasks={localTasks.length > 0}>
         <h1>일반 과제</h1>
-        <ul>
-          {localTasks.map((task) => (
-            <S.AssignmentButton key={task.id}>
-              <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
-              <S.AssignmentDescription>
-                {task.description ? task.description : "설명 없음"}
-              </S.AssignmentDescription>
-              <S.AssignmentDateBox>
-                <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
-                <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>
-              </S.AssignmentDateBox>
-            </S.AssignmentButton>
-          ))}
-        </ul>
+        {localTasks.length > 0 ? (
+          <ul>
+            {localTasks.map((task) => (
+              <S.AssignmentButton key={task.id}>
+                <S.AssignmentButtonText>{task.title}</S.AssignmentButtonText>
+                <S.AssignmentDescription>
+                  {task.description ? task.description : "설명 없음"}
+                </S.AssignmentDescription>
+                <S.AssignmentDateBox>
+                  <p>{task.dueDate ? new Date(task.dueDate).toLocaleString() : "기한 없음"}</p>
+                  <S.DaysLeft>{calculateDaysLeft(task.dueDate)}</S.DaysLeft>
+                </S.AssignmentDateBox>
+              </S.AssignmentButton>
+            ))}
+          </ul>
+        ) : (
+          <S.NoTaskWrap>
+            <S.NoTask>과제가 없습니다</S.NoTask>
+          </S.NoTaskWrap>
+        )}
       </S.AssignmentBox>
     </S.AssignmentMain>
   );
