@@ -35,7 +35,6 @@ const Router = () => {
           <Route path={paths.groupchat} element={<Groupchat />} />
         </Route>
       </Routes>
-
     </BrowserRouter>
   );
 };
