@@ -56,7 +56,9 @@ export const Box = styled.div<{ isclicked: boolean }>`
     padding: 12px 124px 11px 16px;
     align-items: center;
 
-    background-color: ${({ isclicked }) => isclicked ? "#4f810d" : "fff"};
+    background-color: ${({ isclicked }) => isclicked ? `${SeugiColor.Primary100}` : "fff"};
+    border-radius: ${({ isclicked }) => isclicked ? `4px` : "0"};
+
 `
 
 export const SettingImg = styled.img`
