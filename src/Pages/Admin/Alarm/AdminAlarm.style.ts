@@ -46,21 +46,73 @@ export const Right = styled.div`
 `
 
 export const OutSchoolDiv = styled.div`
-    width: 50vw;
+    width:52vw;
     display: flex;
-    padding: 16px 20px;
+    height: 56px;
+    padding: 12px 20px;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
-    
-    cursor: pointer;
 `
 
 export const OutSchool = styled.span`
-    color: ${SeugiColor.Red500};
+    color: ${SeugiColor.Black};
 
-    ${SeugiFont.subtitle.subtitle2};
+    ${SeugiFont.subtitle.subtitle2}
 `
 
 export const RightImg = styled.img`
 `
+
+export const ToggleSwitch = styled.label`
+  position: relative;
+  display: inline-block;
+  width: 51px;
+  height: 31px;
+`;
+
+export const ToggleSlider = styled.span`
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${SeugiColor.Gray200};
+  -webkit-transition: .5s;
+  transition: .5s;
+  border-radius: 34px;
+
+  &:before {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 25px;
+    left: 2px;
+    bottom: 3px;
+    background-color: ${SeugiColor.White};
+    -webkit-transition: .5s;
+    transition: .5s;
+    border-radius: 50%;
+  }
+`;
+
+export const CheckBox = styled.input`
+  opacity: 0;
+  width: 0;
+  height: 0;
+
+  &:checked + ${ToggleSlider} {
+    background-color: ${SeugiColor.Primary500};
+  }
+
+  &:focus + ${ToggleSlider} {
+    box-shadow: 0 0 2px #2196F3;
+  }
+
+  &:checked + ${ToggleSlider}:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+`;

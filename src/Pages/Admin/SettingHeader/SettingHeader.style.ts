@@ -3,7 +3,7 @@ import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";
 
 export const SettingHeader = styled.div`
-    width: 1200px;
+    width: 800px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
