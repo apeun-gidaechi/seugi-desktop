@@ -15,6 +15,10 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { paths } from '@/Constants/paths';
 import Shell from './Shell/Shell';
+import AdminGeneral from '@/Pages/Admin/General/AdminGeneral';
+import AdminAlarm from '@/Pages/Admin/Alarm/AdminAlarm';
+import ManageMember from '@/Pages/Admin/ManageMember/ManageMember';
+import InviteMember from '@/Pages/Admin/InviteMember/InviteMember';
 
 const Router = () => {
   return (
@@ -29,6 +33,10 @@ const Router = () => {
         <Route path={paths.selectschool} element={<SelectSchool />} />
         <Route path={paths.createschool} element={<CreateSchool />} />
         <Route path={paths.waitingjoin} element={<WaitingJoin />} />
+        <Route path={paths.admingeneral} element={<AdminGeneral />} />
+        <Route path={paths.adminalarm} element={<AdminAlarm />} />
+        <Route path={paths.managemember} element={<ManageMember />} />
+        <Route path={paths.invitemember} element={<InviteMember />} />
         <Route path="/" element={<Shell />}>
           <Route path={paths.home} element={<Home />} />
           <Route path={paths.chat} element={<Chat />} />
