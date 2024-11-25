@@ -50,11 +50,13 @@ export const ImgBox = styled.div`
     align-items: center;
 `
 
-export const Box = styled.div`
+export const Box = styled.div<{ isclicked: boolean }>`
     display: flex;
     width: 200px;
     padding: 12px 124px 11px 16px;
     align-items: center;
+
+    background-color: ${({ isclicked }) => isclicked ? "#4f810d" : "fff"};
 `
 
 export const SettingImg = styled.img`
