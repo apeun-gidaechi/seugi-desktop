@@ -20,7 +20,7 @@ export const SchoolTitleBox = styled.div`
   display: flex;
   padding: 4px;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
   align-self: stretch;
 `;
 
@@ -79,4 +79,26 @@ export const NoSchoolMessage = styled.span`
   color:${SeugiColor.Gray700};
 
   ${SeugiFont.subtitle.subtitle2};
+`
+
+export const ArrowLButton = styled.button`
+  background: none;
+  border: none;
+
+  cursor: pointer;
+`;
+
+export const ArrowLogo = styled.img`
+  position: relative;
+`;
+
+export const ButtonDiv = styled.div`
+  display:flex;
+  justify-content:center;
+`
+
+export const SchoolTitleDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `

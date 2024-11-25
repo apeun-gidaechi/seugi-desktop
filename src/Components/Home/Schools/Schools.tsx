@@ -2,8 +2,10 @@ import React from 'react';
 import SchoolImg from "@/Assets/image/home/school.svg";
 import * as S from '@/Components/Home/Schools/Schools.style';
 import Changeschool from '@/Components/Home/ChangeSchool/ChangeSchool';
-
+import ArrowImg from "@/Assets/image/home/arrow.svg";
 import useSchools from '@/Hooks/HomeHook/Schools/index';
+import { useNavigate } from 'react-router-dom';
+import { paths } from '@/Constants/paths';
 
 interface workspaceItem {
     workspaceId: string;
@@ -30,6 +32,11 @@ interface Props {
 
 const Schools = ({ workspaces, pendingWorkspaces }: Props) => {
     const { ...Schools } = useSchools();
+    const navigate = useNavigate();
+
+    const handleSetting = () => {
+        navigate(paths.admingeneral);
+    }
 
     return (
         <S.UpContainer>
@@ -43,8 +50,15 @@ const Schools = ({ workspaces, pendingWorkspaces }: Props) => {
                 </div>
             )}
             <S.SchoolTitleBox>
-                <S.SchoolImg src={SchoolImg} />
-                <S.MySchooliTitle>내 학교</S.MySchooliTitle>
+                <S.SchoolTitleDiv>
+                    <S.SchoolImg src={SchoolImg} />
+                    <S.MySchooliTitle>내 학교</S.MySchooliTitle>
+                </S.SchoolTitleDiv>
+                <S.ButtonDiv>
+                    <S.ArrowLButton onClick={handleSetting} className="Calendar">
+                        <S.ArrowLogo src={ArrowImg} />
+                    </S.ArrowLButton>
+                </S.ButtonDiv>
             </S.SchoolTitleBox>
             {workspaces && workspaces.length > 0 ? (
                 <>
