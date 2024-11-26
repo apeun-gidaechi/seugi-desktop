@@ -101,8 +101,6 @@ export const Option = styled.div<{ isSelected: boolean }>`
 `;
 
 export const MemberContent = styled.div`
-    margin-top: 20px;
-    font-size: 18px;
     text-align: center;
     color: ${SeugiColor.Black};
 
@@ -141,3 +139,25 @@ export const SearchInput = styled.input`
         ${SeugiFont.subtitle.subtitle2};
     }
 `
+
+export const ProfileImage = styled.img`
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 10px; 
+`;
+
+export const MemberContentDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 20px;
+`
+
+export const PermissionIcon = styled.img`
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+`;
