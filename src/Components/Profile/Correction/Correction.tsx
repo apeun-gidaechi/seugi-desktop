@@ -40,7 +40,7 @@ const Correction = ({ value, content, onSave, onCancel }: CorrectionProps) => {
   };
 
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
   };
 
   return (

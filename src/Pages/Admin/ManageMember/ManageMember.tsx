@@ -8,6 +8,8 @@ import Cookies from 'js-cookie';
 import Avatar from '@/Assets/image/adminsetting/Avatar.svg';
 import MiddleAdminIcon from '@/Assets/image/adminsetting/middleAdmin.svg';
 import AdminIcon from '@/Assets/image/adminsetting/adminIcon.svg';
+import Dot from '@/Assets/image/adminsetting/Dot.svg'
+import Dialog from '@/Pages/Admin/ManageMember/Dialog/Dialog'
 
 type Permission = 'ADMIN' | 'MIDDLEADMIN' | 'TEACHER';
 
@@ -16,6 +18,8 @@ const AdminGeneral = () => {
     const [selectedOption, setSelectedOption] = useState<'teacher' | 'student'>('teacher');
     const [teachers, setTeachers] = useState<{ name: string, picture: string, permission: Permission }[]>([]); // 선생님 목록 상태
     const [students, setStudents] = useState<{ name: string, picture: string, permission: Permission }[]>([]); // 학생 목록 상태
+    const [dialogVisible, setDialogVisible] = useState(false);
+    const [selectedMember, setSelectedMember] = useState<{ name: string, picture: string, permission: Permission } | null>(null); // Selected member for dialog
     const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 추가
 
     // 옵션 변경 핸들러
@@ -122,6 +126,18 @@ const AdminGeneral = () => {
         }
     };
 
+    // Function to open dialog and set selected member
+    const openDialog = (member: { name: string, picture: string, permission: Permission }) => {
+        setSelectedMember(member);
+        setDialogVisible(true);
+    };
+
+    // Function to close dialog
+    const closeDialog = () => {
+        setDialogVisible(false);
+        setSelectedMember(null);
+    };
+
     return (
         <S.AdminGeneralMain>
             <Setting />
@@ -161,12 +177,17 @@ const AdminGeneral = () => {
                             filteredTeachers.length > 0 ? (
                                 filteredTeachers.map((teacher, index) => (
                                     <S.MemberContentDiv key={index} >
-                                        <S.ProfileImage
-                                            src={teacher.picture}
-                                            alt={teacher.name}
-                                        />
-                                        <S.MemberContent>{teacher.name}</S.MemberContent>
-                                        {getPermissionIcon(teacher.permission)}
+                                        <S.UserInfo>
+                                            <S.ProfileImage
+                                                src={teacher.picture}
+                                                alt={teacher.name}
+                                            />
+                                            <S.MemberContent>{teacher.name}</S.MemberContent>
+                                            {getPermissionIcon(teacher.permission)}
+                                        </S.UserInfo>
+                                        <S.DotButton onClick={() => openDialog(teacher)}>
+                                            <S.DotIcon src={Dot} alt="More options" />
+                                        </S.DotButton>
                                     </S.MemberContentDiv>
                                 ))
                             ) : (
@@ -182,6 +203,9 @@ const AdminGeneral = () => {
                                         />
                                         <S.MemberContent>{student.name}</S.MemberContent>
                                         {getPermissionIcon(student.permission)}
+                                        <S.DotButton onClick={() => openDialog(student)}>
+                                            <S.DotIcon src={Dot} alt="More options" />
+                                        </S.DotButton>
                                     </S.MemberContentDiv>
                                 ))
                             ) : (
@@ -192,6 +216,9 @@ const AdminGeneral = () => {
                 </S.SettingContainer>
             </S.SettingMain>
             <S.Right />
+            {dialogVisible && selectedMember && (
+                <Dialog onCancel={closeDialog}/>
+            )}
         </S.AdminGeneralMain>
     );
 };

@@ -148,11 +148,11 @@ export const ProfileImage = styled.img`
 `;
 
 export const MemberContentDiv = styled.div`
+    width: 50vw;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-
+    justify-content: space-between;
     margin-top: 20px;
 `
 
@@ -161,3 +161,19 @@ export const PermissionIcon = styled.img`
     height: 20px;
     margin-left: 8px;
 `;
+
+export const DotButton = styled.button`
+    border: none;
+    background: none;
+
+    cursor: pointer;
+`
+
+export const DotIcon = styled.img`
+    right: 0;
+`
+
+export const UserInfo = styled.div`
+    display: flex;
+    flex-direction: row;
+`
