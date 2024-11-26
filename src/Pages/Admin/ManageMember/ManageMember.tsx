@@ -197,12 +197,14 @@ const AdminGeneral = () => {
                             filteredStudents.length > 0 ? (
                                 filteredStudents.map((student, index) => (
                                     <S.MemberContentDiv key={index} >
-                                        <S.ProfileImage
-                                            src={student.picture}
-                                            alt={student.name}
-                                        />
-                                        <S.MemberContent>{student.name}</S.MemberContent>
-                                        {getPermissionIcon(student.permission)}
+                                        <S.UserInfo>
+                                            <S.ProfileImage
+                                                src={student.picture}
+                                                alt={student.name}
+                                            />
+                                            <S.MemberContent>{student.name}</S.MemberContent>
+                                            {getPermissionIcon(student.permission)}
+                                        </S.UserInfo>
                                         <S.DotButton onClick={() => openDialog(student)}>
                                             <S.DotIcon src={Dot} alt="More options" />
                                         </S.DotButton>
@@ -217,7 +219,7 @@ const AdminGeneral = () => {
             </S.SettingMain>
             <S.Right />
             {dialogVisible && selectedMember && (
-                <Dialog onCancel={closeDialog}/>
+                <Dialog onCancel={closeDialog} />
             )}
         </S.AdminGeneralMain>
     );
