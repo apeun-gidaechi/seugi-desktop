@@ -16,10 +16,15 @@ type Permission = 'ADMIN' | 'MIDDLEADMIN' | 'TEACHER';
 const AdminGeneral = () => {
     const workspaceId = Cookies.get('workspaceId');
     const [selectedOption, setSelectedOption] = useState<'teacher' | 'student'>('teacher');
-    const [teachers, setTeachers] = useState<{ name: string, picture: string, permission: Permission }[]>([]); // 선생님 목록 상태
-    const [students, setStudents] = useState<{ name: string, picture: string, permission: Permission }[]>([]); // 학생 목록 상태
+    const [students, setStudents] = useState<{ id: string; name: string; picture: string; permission: Permission }[]>([]);
+    const [teachers, setTeachers] = useState<{ id: string; name: string; picture: string; permission: Permission }[]>([]);
     const [dialogVisible, setDialogVisible] = useState(false);
-    const [selectedMember, setSelectedMember] = useState<{ name: string, picture: string, permission: Permission } | null>(null); // Selected member for dialog
+    const [selectedMember, setSelectedMember] = useState<{
+        id: string;
+        name: string;
+        picture: string;
+        permission: Permission;
+    } | null>(null);
     const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 추가
 
     // 옵션 변경 핸들러
@@ -36,16 +41,17 @@ const AdminGeneral = () => {
             });
 
             const allMembers = res.data.data; // 응답 데이터
-            const studentsList: { name: string, picture: string, permission: Permission }[] = [];
-            const teachersList: { name: string, picture: string, permission: Permission }[] = [];
+            const studentsList: { id: string, name: string, picture: string, permission: Permission }[] = [];
+            const teachersList: { id: string, name: string, picture: string, permission: Permission }[] = [];
 
             // students 데이터를 studentsList로 추출
             Object.keys(allMembers.students).forEach((key) => {
                 allMembers.students[key].forEach((student: any) => {
                     studentsList.push({
-                        name: student.member.name, // 학생 이름
-                        picture: student.member.picture || Avatar, // 학생 프로필 이미지, 없으면 기본 이미지 사용
-                        permission: allMembers.students[key][0].member.permission // 학생 권한
+                        id: student.member.id, // 멤버 ID 추가
+                        name: student.member.name,
+                        picture: student.member.picture || Avatar,
+                        permission: allMembers.students[key][0].member.permission,
                     });
                 });
             });
@@ -54,9 +60,10 @@ const AdminGeneral = () => {
             Object.keys(allMembers.teachers).forEach((key) => {
                 allMembers.teachers[key].forEach((teacher: any) => {
                     teachersList.push({
-                        name: teacher.member.name, // 선생님 이름
-                        picture: teacher.member.picture || Avatar, // 선생님 프로필 이미지, 없으면 기본 이미지 사용
-                        permission: allMembers.teachers[key][0].permission // 선생님 권한
+                        id: teacher.member.id, // 멤버 ID 추가
+                        name: teacher.member.name,
+                        picture: teacher.member.picture || Avatar,
+                        permission: allMembers.teachers[key][0].permission,
                     });
                 });
             });
@@ -65,9 +72,10 @@ const AdminGeneral = () => {
             Object.keys(allMembers.middleAdmin).forEach((key) => {
                 allMembers.middleAdmin[key].forEach((middleAdmin: any) => {
                     teachersList.push({
-                        name: middleAdmin.member.name, // 중간 어드민 이름
-                        picture: middleAdmin.member.picture || Avatar, // 중간 어드민 프로필 이미지
-                        permission: allMembers.middleAdmin[key][0].permission // 권한
+                        id: middleAdmin.member.id, // 멤버 ID 추가
+                        name: middleAdmin.member.name,
+                        picture: middleAdmin.member.picture || Avatar,
+                        permission: allMembers.middleAdmin[key][0].permission,
                     });
                 });
             });
@@ -75,9 +83,10 @@ const AdminGeneral = () => {
             Object.keys(allMembers.admin).forEach((key) => {
                 allMembers.admin[key].forEach((admin: any) => {
                     teachersList.push({
-                        name: admin.member.name, // 어드민 이름
-                        picture: admin.member.picture || Avatar, // 어드민 프로필 이미지
-                        permission: allMembers.admin[key][0].permission // 권한
+                        id: admin.member.id, // 멤버 ID 추가
+                        name: admin.member.name,
+                        picture: admin.member.picture || Avatar,
+                        permission: allMembers.admin[key][0].permission,
                     });
                 });
             });
@@ -126,13 +135,16 @@ const AdminGeneral = () => {
         }
     };
 
-    // Function to open dialog and set selected member
-    const openDialog = (member: { name: string, picture: string, permission: Permission }) => {
-        setSelectedMember(member);
-        setDialogVisible(true);
+    const openDialog = (member: {
+        id: string;
+        name: string;
+        picture: string;
+        permission: Permission;
+    }) => {
+        setSelectedMember(member); // 멤버 정보 저장
+        setDialogVisible(true); // Dialog 열기
     };
 
-    // Function to close dialog
     const closeDialog = () => {
         setDialogVisible(false);
         setSelectedMember(null);
@@ -219,7 +231,10 @@ const AdminGeneral = () => {
             </S.SettingMain>
             <S.Right />
             {dialogVisible && selectedMember && (
-                <Dialog onCancel={closeDialog} />
+                <Dialog 
+                    onCancel={closeDialog} 
+                    memberId={selectedMember.id}
+                />
             )}
         </S.AdminGeneralMain>
     );
