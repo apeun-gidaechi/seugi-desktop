@@ -101,6 +101,7 @@ export const Option = styled.div<{ isSelected: boolean }>`
 `;
 
 export const MemberContent = styled.div`
+    margin-top: 4px;
     text-align: center;
     color: ${SeugiColor.Black};
 
@@ -159,6 +160,7 @@ export const MemberContentDiv = styled.div`
 export const PermissionIcon = styled.img`
     width: 20px;
     height: 20px;
+    margin-top: 5px;
     margin-left: 8px;
 `;
 
