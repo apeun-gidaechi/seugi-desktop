@@ -46,7 +46,6 @@ SeugiCustomAxios.interceptors.response.use(
     const refreshToken = Cookies.get('refreshToken');
     const accessToken = Cookies.get('accessToken');
 
-    // 401 오류가 발생한 경우 처리
     if (error.response?.status === 401) {
       if (!accessToken && !refreshToken) {
         window.location.href = paths.login;
@@ -90,21 +89,9 @@ SeugiCustomAxios.interceptors.response.use(
       }
 
       if (accessToken && refreshToken) {
-        try {
-          const res = await axios.get(`${SERVER_URL}/member/refresh`, {
-            params: { token: refreshToken.replace("Bearer ", "") }
-          });
-          const newAccessToken = res.data.data;
-          Cookies.set('accessToken', newAccessToken);
-          SeugiV1AxiosSetAccessToken(newAccessToken);
-
-          if (error.config) {
-            error.config.headers['Authorization'] = `${newAccessToken}`;
-            return axios(error.config);
-          }
-        } catch (refreshError) {
-          return Promise.reject(refreshError);
-        }
+        window.location.href = paths.login;
+        alert('세션이 만료되었습니다.');
+        return Promise.reject(error);
       }
     }
 
