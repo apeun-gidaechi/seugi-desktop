@@ -124,10 +124,10 @@ export const ToggleContainer = styled.div`
     padding: 0 5px;
 `;
 
-export const ToggleButton = styled.div<{ selectedOption: 'teacher' | 'student' }>`
+export const ToggleButton = styled.div<{ selectedOption: 'TEACHER' | 'STUDENT' }>`
     position: absolute;
     top: 2px;
-    left: ${({ selectedOption }) => (selectedOption === 'teacher' ? '5px' : 'calc(50% + 2px)')};
+    left: ${({ selectedOption }) => (selectedOption === 'TEACHER' ? '5px' : 'calc(50% + 2px)')};
     width: calc(50% - 7px);
     height: 40px;
     background: white;
@@ -181,9 +181,8 @@ export const CancelButton = styled.button`
     border: none;
 `
 
-
 export const MemberContent = styled.div`
-    margin-top: 20px;
+    margin-top: 4px;
     font-size: 18px;
     text-align: center;
     color: ${SeugiColor.Black};
@@ -209,4 +208,49 @@ export const MemberDiv = styled.div`
     flex-direction: column;
     align-items: flex-start;
     align-self: stretch;
+`
+
+export const UserInfo = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-left: 12px;
+`
+
+export const DotButton = styled.button`
+    border: none;
+    background: none;
+
+    cursor: pointer;
+`
+
+export const DotIcon = styled.img`
+    right: 0;
+`
+
+export const MemberContentDiv = styled.div`
+    width: 50vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    cursor: pointer;
+`
+
+export const ProfileImage = styled.img`
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 10px; 
+`;
+
+export const Checkbox = styled.button`
+    cursor: pointer;
+
+    border: none;
+    background: none;
+`
+
+export const CheckImg = styled.img`
 `
