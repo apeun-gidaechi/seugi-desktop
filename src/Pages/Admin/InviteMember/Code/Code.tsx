@@ -12,6 +12,7 @@ const Code = ({ workspaceCode, onClose }: CodeProps) => {
         try {
             await navigator.clipboard.writeText(workspaceCode);
             alert('초대코드가 복사되었습니다!');
+            onClose();
         } catch (error) {
             console.error('복사 실패:', error);
             alert('복사에 실패했습니다. 다시 시도해주세요.');
