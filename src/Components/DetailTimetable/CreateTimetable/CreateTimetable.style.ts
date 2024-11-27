@@ -14,6 +14,10 @@ export const CreateMain = styled.div`
 
     top: 0;
     left: 0;
+
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
 `
 export const CreateDiv = styled.div`
     position:absolute;
@@ -30,9 +34,6 @@ export const CreateDiv = styled.div`
     z-index:999;
 
     display: flex;
-
-    left: 32rem;
-    top: 14rem;
 
     z-index:999;
 `

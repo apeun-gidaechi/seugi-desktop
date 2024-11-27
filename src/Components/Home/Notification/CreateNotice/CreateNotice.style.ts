@@ -8,6 +8,10 @@ export const NoticeMain = styled.div`
 
     position:fixed;
 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+
     background: rgba(0, 0, 0, 0.30);
     
     z-index:998;
@@ -18,8 +22,6 @@ export const NoticeMain = styled.div`
 
 export const CreateNoticeContainer = styled.div`
     position: absolute;
-    left: 30rem;
-    top: 14rem;
 
     display: flex;
     width: 640px;

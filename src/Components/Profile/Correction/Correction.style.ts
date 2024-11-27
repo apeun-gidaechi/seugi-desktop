@@ -14,6 +14,10 @@ export const Modal = styled.div`
 
     top: 0;
     left: 0;
+
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
 `
 export const EditProfile = styled.div`
     display: flex;
@@ -27,8 +31,6 @@ export const EditProfile = styled.div`
     border-radius: 16px;
 
     position: absolute;
-    left: 34rem;
-    top: 18rem;
 
     background: ${SeugiColor.White};
 

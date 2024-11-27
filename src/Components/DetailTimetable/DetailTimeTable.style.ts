@@ -14,6 +14,10 @@ export const CalendarMain = styled.div`
 
     top: 0;
     left: 0;
+
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
 `
 export const CalendarDiv = styled.div`
     display: flex;
@@ -30,9 +34,6 @@ export const CalendarDiv = styled.div`
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 
     z-index: 999;
-
-    left: 35rem;
-    top: 14rem;
 
     z-index:999;
 

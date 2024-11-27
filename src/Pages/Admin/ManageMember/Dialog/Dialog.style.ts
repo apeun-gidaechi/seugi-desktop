@@ -14,6 +14,10 @@ export const DialogMain = styled.div`
 
     top: 0;
     left: 0;
+
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
 `
 
 export const Dialog = styled.div`
@@ -28,8 +32,6 @@ export const Dialog = styled.div`
     background: ${SeugiColor.White};
 
     position: absolute;
-    left: 40rem;
-    top: 23rem;
 
     z-index: 999;
 `
@@ -47,6 +49,8 @@ export const ComponentsDiv = styled.div`
     align-items: flex-start;
     gap: 10px;
     align-self: stretch;
+
+    cursor: pointer;
 `
 
 export const Span = styled.span`
