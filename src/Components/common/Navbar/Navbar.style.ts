@@ -114,3 +114,9 @@ export const SideAvatarButton = styled.button`
 
     z-index:999;
 `
+
+export const SettingButton = styled.button`
+   background: none;
+   border: none;
+   
+`
