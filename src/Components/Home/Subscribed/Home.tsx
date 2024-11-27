@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "@/Components/Home/Subscribed/Home.style";
 
 import Schools from '@/Components/Home/Schools/Schools';
@@ -13,6 +13,7 @@ import useSWR from "swr";
 import { getMyWorkspaces, getMyWaitingWorkspace } from "@/Api/workspace";
 import { getNotification, getTimeTable, getMenus, getSchedules, getTasks, getClassroomTasks } from "@/Api/Home";
 import Cookies from "js-cookie";
+import { handleUserRole } from "@/Util/Role/WhatisYourRole";
 
 const Home = () => {
   const today = new Date();
@@ -24,6 +25,16 @@ const Home = () => {
   const [page, setPage] = useState(0);
   const currentWorkspaceId = Cookies.get('workspaceId') ?? '';
   const [workspaceId, setWorkspaceId] = useState(currentWorkspaceId);
+
+  const [userRole, setUserRole] = useState<string | undefined>(Cookies.get('userRole'));
+
+  useEffect(() => {
+    if (workspaceId) {
+      handleUserRole(workspaceId).then(role => {
+        setUserRole(role); // userRole을 상태로 저장
+      });
+    }
+  }, [workspaceId]);
 
   const { data: workspaces } = useSWR('workspaces', getMyWorkspaces);
   const { data: pendingWorkspaces } = useSWR('pendingWorkspaces', getMyWaitingWorkspace);

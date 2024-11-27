@@ -1,5 +1,5 @@
-import { fetchingProfile } from "@/Api/profile";
 import { SeugiCustomAxios } from "@/axios/SeugiCutomAxios";
+import Cookies from "js-cookie";
 
 enum Role {
     Teacher = "TEACHER",
@@ -14,16 +14,14 @@ interface User {
 
 const fetchUser = async (workspaceId: string): Promise<User | undefined> => {
     try {
-        const res = await fetchingProfile(workspaceId);
-
+        const res = await SeugiCustomAxios.get(`/profile/me?workspaceId=${workspaceId}`);
         const data = res.data.data.permission;
-        console.log(data);
+        
         const user: User = {
             role: data as Role
         };
 
-        window.localStorage.setItem('Role', user.role);
-
+        Cookies.set('userRole', user.role); 
         return user;
     } catch (error) {
         console.error("Error fetching user data:", error);
@@ -46,7 +44,9 @@ export const handleUserRole = async (workspaceId: string) => {
         } else {
             console.log("정체가 무엇입니까");
         }
+        return user.role;  
     } else {
         console.log("사용자 정보를 가져오지 못했습니다.");
+        return undefined; 
     }
 };
