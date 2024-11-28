@@ -2,6 +2,23 @@ import { SeugiColor } from "@/Design/color/SeugiColor"
 import { SeugiFont } from "@/Design/text/SeugiFont"
 import styled from "styled-components"
 
+export const CreateMain = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    position:fixed;
+
+    background: rgba(0, 0, 0, 0.30);
+    
+    z-index:998;
+
+    top: 0;
+    left: 0;
+
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+`
 export const CreateDiv = styled.div`
     position:absolute;
     display: inline-flex;
@@ -13,7 +30,11 @@ export const CreateDiv = styled.div`
     background: ${SeugiColor.White};
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-    right:0%;
+
+    z-index:999;
+
+    display: flex;
+
     z-index:999;
 `
 
@@ -33,11 +54,11 @@ export const TitleSpan = styled.span`
 export const CompleteButton = styled.span`
     display: flex;
     height: 36px;
-    padding: var(--Large, 12px);
+    padding: 12px;
     justify-content: center;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
-    border-radius: var(--Large, 12px);
+    gap: 10px;
+    border-radius: 12px;
     background:${SeugiColor.Primary500};
 
     color:${SeugiColor.White};
@@ -47,12 +68,12 @@ export const CompleteButton = styled.span`
 
 export const InputDiv = styled.div`
     display: flex;
-    padding: var(--Corner-Medium, 12px);
+    padding: 12px;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 `
@@ -87,9 +108,9 @@ export const CancleButton = styled.button`
     background:none;
     justify-content: center;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
     flex: 1 0 0;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     cursor: pointer;
 `
 
@@ -99,17 +120,17 @@ export const ButtonImg = styled.img`
 export const ButtonDiv = styled.div`
     display: flex;
     align-items: flex-start;
-    gap: var(--Corner-Extra-small, 8px);
+    gap: 8px;
 `
 
 export const DropDown = styled.div`
     display: flex;
     width: 128px;
-    padding: var(--Corner-Medium, 12px);
+    padding: 12px;
     justify-content: space-between;
     align-items: center;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 `
@@ -139,11 +160,11 @@ export const TimeSpan = styled.span`
 
 export const DateDiv = styled.div`
     display: flex;
-    padding: var(--Corner-Medium, 12px);
+    padding: 12px;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 `
@@ -178,9 +199,9 @@ export const CalendarButton = styled.button`
     background:none;
     justify-content: center;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
     flex: 1 0 0;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     cursor: pointer;
 `
 

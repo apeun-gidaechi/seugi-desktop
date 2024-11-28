@@ -66,7 +66,7 @@ export const InputCode = styled.input`
     flex: 1 0 0;
     text-align:center;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 

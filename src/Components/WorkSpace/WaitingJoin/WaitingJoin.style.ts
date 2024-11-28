@@ -1,6 +1,6 @@
 import { SeugiFont } from '@/Design/text/SeugiFont';
 import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components'; 
+import { createGlobalStyle } from 'styled-components';
 
 export const WaitingAcceptanceFrame = styled.div`
     display: flex;
@@ -40,7 +40,7 @@ export const SchoolImg = styled.img`
 `
 
 export const SchoolName = styled.span`
-    color: var(--white-black-black-000, #101112);
+    color: #101112;
     text-align: center;
 
     ${SeugiFont.subtitle.subtitle1}

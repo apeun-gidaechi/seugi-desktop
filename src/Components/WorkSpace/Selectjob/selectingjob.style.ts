@@ -54,7 +54,7 @@ export const PickJob = styled.button`
     color: ${SeugiColor.Primary700};
     cursor: pointer;
     position: relative; 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.Primary050};
 `;
@@ -120,7 +120,7 @@ export const Button = styled.button`
     align-self: stretch;
 
     border:none;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Primary500};
 
     color: ${SeugiColor.White};

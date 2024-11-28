@@ -136,12 +136,12 @@ export const WaitingJoin = styled.span`
 export const JoinSchool = styled.button`
   display: flex;
   height: 36px;
-  padding: var(--Large, 12px);
+  padding: 12px;
   justify-content: center;
   align-items: center;
   gap: 10px;
 
-  border-radius: var(--Large, 12px);
+  border-radius: 12px;
 
   border: none;
   background-color:none;
@@ -156,12 +156,12 @@ export const JoinSchool = styled.button`
 export const CreateSchool = styled.button`
   display: flex;
   height: 36px;
-  padding: var(--Large, 12px);
+  padding: 12px;
   justify-content: center;
   align-items: center;
   gap: 10px;
 
-  border-radius: var(--Large, 12px);
+  border-radius: 12px;
 
   border: none;
   background-color:none;

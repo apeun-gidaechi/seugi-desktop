@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { SeugiColor } from "@/Design/color/SeugiColor";
+import { SeugiFont } from "@/Design/text/SeugiFont";
 
 export const CreateRoomPlusBox = styled.div`
     display: flex;
@@ -19,13 +21,9 @@ export const CreateRoomPlusBox = styled.div`
 `;
 
 export const ChatRoomName = styled.div`
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 26px */
+    ${SeugiFont.subtitle.subtitle1};
 
     flex: 1;
     padding: 4px;
@@ -34,7 +32,7 @@ export const ChatRoomName = styled.div`
 export const ChatRoomButton = styled.button`
     display: flex;
     height: 36px;
-    padding: var(--Large, 12px);
+    padding: 12px;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -42,8 +40,8 @@ export const ChatRoomButton = styled.button`
     border: none;
     color: #fff;
 
-    border-radius: var(--Large, 12px);
-    background: var(--Primary-Primary500, #1D93F3);
+    border-radius: 12px;
+    background: ${SeugiColor.Primary500};
     margin-bottom: 12px;
 `;
 
@@ -51,23 +49,18 @@ export const InviteMemberWrap = styled.div`
     width: 395px;
     height: 44px;
 
-    border-radius: var(--Large, 12px);
-    border: 1px solid var(--Gray-Gray300, #E6E6E6);
-    background: var(--Sub-White, #FFF);
+    border-radius: 12px;
+    border: 1px solid ${SeugiColor.Gray300};
+    background: ${SeugiColor.White};
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     ::placeholder{
-        color: var(--Gray-Gray500, #AAA);
+        color: ${SeugiColor.Gray500};
 
-        /* Subtitle2 */
-        font-family: Pretendard;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 130%; /* 20.8px */
+        ${SeugiFont.subtitle.subtitle2};
     }
 `;
 
@@ -84,13 +77,8 @@ export const InviteMemberFlex = styled.div`
 `;
 
 export const InviteMember = styled.input`
-    font-family: 'Pretendard-Regular', sans-serif;
-
-    color: var(--Gray-Gray500, #AAA);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    color: ${SeugiColor.Gray500};
+    ${SeugiFont.subtitle.subtitle2};
 
     /* padding: 14px; */
      /* margin-left: 2px;*/
@@ -130,13 +118,9 @@ export const AvatarProfile = styled.img`
 `;
 
 export const InviterName = styled.div`
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 
     display: flex;
     align-items: center;

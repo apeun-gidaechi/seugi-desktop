@@ -32,7 +32,7 @@ const CreateSchool = () => {
                             <S.Subtitle>학교 이름 <S.RedStar>*</S.RedStar></S.Subtitle>
                         </S.SubtitleContainer>
                         <TextField
-                            style={{ border: "1px solid var(--Gray-Gray300, #E6E6E6)" }}
+                            style={{ border: "1px solid #E6E6E6)" }}
                             placeholder='학교 이름을 입력해주세요'
                             value={CreateSchool.workspaceName}
                             onChange={(e) => CreateSchool.setWorkspaceName(e.target.value)}

@@ -8,7 +8,7 @@ export const LeftContainer = styled.div`
   justify-content:center;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Corner-Small, 10px);
+  gap: 10px;
   flex: 1 0 0;
 
   border-radius: 12px;
@@ -69,8 +69,8 @@ export const NotificationBox = styled.div`
   align-items: center;
   gap: 8px;
   align-self: stretch;
-  max-height: 500px; 
-  overflow-y: hidden; 
+  max-height: 500px;
+  overflow-y: auto; 
   padding-right: 10px;
 `;
 
@@ -121,12 +121,9 @@ export const NotificationContentDescription = styled.span`
 export const NotificationEmojiBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-
-  max-height: 80px; 
-  overflow-x: hidden;
-
   gap: 5px;
   flex-direction: row;
+  overflow-y: hidden;
 `;
 
 export const NotificationAddEmojiButton = styled.button`

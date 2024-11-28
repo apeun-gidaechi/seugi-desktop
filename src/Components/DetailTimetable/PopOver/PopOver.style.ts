@@ -8,19 +8,19 @@ export const PopUpDiv = styled.div`
     padding: 16px;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--Corner-Extra-small, 8px);
+    gap: 8px;
 
     border-radius: 16px;
-    background: #FFF;
+    background: ${SeugiColor.White};
 
     box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.08);
 `
 
 export const Button = styled.button`
     display: flex;
-    padding: var(--Corner-Extra-small, 8px) 0px;
+    padding: 8px 0;
     align-items: flex-start;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
     align-self: stretch;
 
     border:none;

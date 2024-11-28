@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 
+interface AssignmentBoxProps {
+  hasTasks: boolean;
+}
+
 export const AssignmentMain = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,11 +35,11 @@ export const AssignmentTitleText = styled.span`
   ${SeugiFont.subtitle.subtitle2};
 `;
 
-export const AssignmentBox = styled.div`
+export const AssignmentBox = styled.div<AssignmentBoxProps>`
   display: flex;
   flex-direction: column;
   align-self: stretch;
-  height: 300px; 
+  height: ${({ hasTasks }) => (hasTasks ? "300px" : "100px")};
   overflow-y: auto;
   padding-right: 8px; 
 
@@ -52,6 +56,7 @@ export const AssignmentBox = styled.div`
     margin: 0;
   }
 `;
+
 
 export const AssignmentButton = styled.li`
   display: flex;

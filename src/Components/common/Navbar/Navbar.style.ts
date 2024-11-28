@@ -12,7 +12,7 @@ export const SideBarMenu = styled.div`
   align-items: center;
   background: #FFF;
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
-  z-index: 997;
+  z-index: 989;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -113,4 +113,10 @@ export const SideAvatarButton = styled.button`
     cursor: pointer;
 
     z-index:999;
+`
+
+export const SettingButton = styled.button`
+   background: none;
+   border: none;
+   
 `

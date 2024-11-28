@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import * as S from './PopOver.style';
-import ModifyTimetable from '@/Components/DetailTimetable/ModifyTimetable/ModifyTimetable';
-import DeleteTimetable from '@/components/DetailTimetable/DeleteTimetable/DeleteTimetable';
+import ModifyTimetable from "@/Components/DetailTimetable/ModifyTimetable/ModifyTimetable";
+import DeleteTimetable from '@/Components/DetailTimetable/DeleteTimetable/DeleteTimetable';
 
-const PopOver = () => {
+const PopOver = ({ onClose }: { onClose: () => void }) => {
     const [activeComponent, setActiveComponent] = useState<string | null>(null);
 
     const handleModifyClick = () => {
@@ -15,7 +15,8 @@ const PopOver = () => {
     };
 
     const handleCancel = () => {
-        setActiveComponent(null);  
+        setActiveComponent(null);
+        onClose(); 
     };
 
     return (
@@ -31,6 +32,6 @@ const PopOver = () => {
             {activeComponent === 'delete' && <DeleteTimetable onCancel={handleCancel} />}
         </S.PopUpDiv>
     );
-}
+};
 
 export default PopOver;

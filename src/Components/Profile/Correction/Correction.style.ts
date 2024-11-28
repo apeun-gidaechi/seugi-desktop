@@ -1,8 +1,24 @@
 import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components'; 
 
+export const Modal = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+
+    background: rgba(0, 0, 0, 0.30);
+    
+    z-index: 999;
+
+    top: 0;
+    left: 0;
+
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+`
 export const EditProfile = styled.div`
     display: flex;
     width: 360px;
@@ -12,7 +28,13 @@ export const EditProfile = styled.div`
     align-items: center;
     gap: 32px;
 
-    margin-bottom:9.8rem;
+    border-radius: 16px;
+
+    position: absolute;
+
+    background: ${SeugiColor.White};
+
+    z-index:999;
 `
 
 export const CorrectionDiv = styled.div`
@@ -37,7 +59,7 @@ export const CorrectionTitleDiv = styled.div`
     padding-left: 4px;
     justify-content: center;
     align-items: flex-start;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
 `
 
 export const CorrectionTitle = styled.span`
@@ -55,7 +77,7 @@ export const InputDiv = styled.div`
     justify-content: space-between;
     width: 100%; 
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
     box-sizing: border-box; 
@@ -97,7 +119,7 @@ export const SaveButton = styled.button`
     align-items: center;
     gap: 10px;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Primary500};
 
     border:none;

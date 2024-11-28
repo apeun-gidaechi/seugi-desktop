@@ -2,21 +2,42 @@ import { SeugiColor } from '@/Design/color/SeugiColor';
 import { SeugiFont } from '@/Design/text/SeugiFont';
 import styled from 'styled-components';
 
+export const CalendarMain = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    position:fixed;
+
+    background: rgba(0, 0, 0, 0.30);
+    
+    z-index:998;
+
+    top: 0;
+    left: 0;
+
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+`
 export const CalendarDiv = styled.div`
-    position:absolute;
     display: flex;
+    position:absolute;
     width: 360px;
-    height: 410px;
+    height: 450px;
     padding: 16px;
     flex-direction: column;
     align-items: center;
 
     border-radius: 16px;
-    background: var(--Sub-White, #FFF);
+    background: ${SeugiColor.White};
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 
+    z-index: 999;
+
     z-index:999;
+
+    gap: 12px;
 `
 
 export const TimetableContainer = styled.div`
@@ -24,8 +45,8 @@ export const TimetableContainer = styled.div`
     grid-template-rows: repeat(8, 1fr); 
     display: grid;
 
-    border-radius: var(--Corner-Medium, 12px);
-    background: var(--Sub-White, #FFF);
+    border-radius: 12px;
+    background: ${SeugiColor.White};
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 `;
 
@@ -54,7 +75,7 @@ export const TimeHeaderCell = styled.div`
 `
 
 export const TimeCell = styled.div`
-  background-color: #fff;
+  background-color: ${SeugiColor.White};
   border: 1px solid #ddd;
   text-align: center;
   padding: 10px;
@@ -62,13 +83,13 @@ export const TimeCell = styled.div`
 
 export const HeaderControls = styled.div`
     display: flex;
-    padding: var(--Corner-Medium, 12px);
+    padding: 12px;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
 
-    border-radius: var(--Corner-Medium, 12px);
-    background: var(--Sub-White, #FFF);
+    border-radius: 12px;
+    background: ${SeugiColor.White};
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 

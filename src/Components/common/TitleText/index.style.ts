@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/Design/color/SeugiColor";
+import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";
 
 export const Title = styled.div`
@@ -8,11 +10,7 @@ export const Title = styled.div`
     width: 100%;
     height: 100%;
 
-    color: var(--Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: "Pretendard-Regular", sans-serif;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 130%;
+    ${SeugiFont.title.title1};
 `  

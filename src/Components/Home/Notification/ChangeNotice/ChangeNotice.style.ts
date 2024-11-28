@@ -25,7 +25,7 @@ export const ButtonContainer = styled.button`
     display: flex;
     padding: 8px 0px;
     align-items: flex-start;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
     align-self: stretch;
 
     cursor: pointer;

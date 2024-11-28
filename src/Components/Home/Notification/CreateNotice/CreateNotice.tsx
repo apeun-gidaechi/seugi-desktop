@@ -10,7 +10,7 @@ interface CreateNoticeProps {
     mutateNotifications: () => void;
 }
 
-const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, mutateNotifications }) => {
+const CreateNotice = ({ onClose, notificationId, mutateNotifications }: CreateNoticeProps) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
@@ -48,7 +48,6 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, mu
                     content,
                     id: notificationId
                 });
-
             } else {
                 // 새 공지 작성 API 호출
                 await SeugiCustomAxios.post(`/notification`, {
@@ -64,9 +63,13 @@ const CreateNotice: React.FC<CreateNoticeProps> = ({ onClose, notificationId, mu
         }
     };
 
+    const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+    };
+
     return (
-        <S.NoticeMain>
-            <S.CreateNoticeContainer>
+        <S.NoticeMain onClick={onClose}>
+            <S.CreateNoticeContainer onClick={handleModalClick}> 
                 <S.TitleContainer>
                     <S.Title>{notificationId ? '공지 수정' : '새 공지 작성'}</S.Title>
                     <S.TitleButton onClick={handlePostNotice}>

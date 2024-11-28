@@ -7,6 +7,7 @@ import Chats from "@/Assets/image/sidebar/chats.svg";
 import SelectHome from "@/Assets/image/sidebar/slecthome.svg";
 import SelectChat from "@/Assets/image/sidebar/selectchat.svg";
 import SelectChats from "@/Assets/image/sidebar/selectgroup.svg";
+import SettingImg from '@/Assets/image/profile/profilesetting_fill.svg';
 import Profile from "@/Components/Profile/Profile";
 import React, { useEffect, useRef, useState } from "react";
 import { paths } from '@/Constants/paths';
@@ -92,6 +93,10 @@ const Navbar = () => {
     };
   }, [isProfileVisible]);
 
+  const handleClickSetting = () => {
+    navigate(paths.admingeneral);
+  }
+
   return (
     <div>
       <S.SideBarMenu>
@@ -113,6 +118,11 @@ const Navbar = () => {
         >
           <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
         </S.SideBarButton>
+        <S.SettingButton
+          onClick={handleClickSetting}
+        >
+          <S.SideBarImage src={SettingImg} />
+        </S.SettingButton>
         <S.SideAvatarImgWrap>
           <S.SideAvatarButton onClick={handleAvatarClick} className="avactar">
             <Avatar size="medium" />

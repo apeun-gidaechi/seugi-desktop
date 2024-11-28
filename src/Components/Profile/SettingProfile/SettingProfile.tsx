@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 import * as S from '@/Components/Profile/SettingProfile/SettingProfile.style';
 import Correction from '@/Components/Profile/Correction/Correction';
-import PlusButtonImg from '@/Assets/image/profile/add_fill.svg'
+import PlusButtonImg from '@/Assets/image/profile/add_fill.svg';
 import ProfileImg from '@/Assets/image/profile/Avatar.svg';
 import CorrectionImg from '@/Assets/image/profile/CorrectionImg.svg';
 import Arrow from '@/Assets/image/profile/arrow.svg';
@@ -10,6 +10,7 @@ import Divider from '@/Assets/image/profile/ProflieDivider.svg';
 import { fetchingProfile, getMyInfos } from '@/Api/profile';
 import Cookies from 'js-cookie';
 import Avatar from "@/Components/common/Avatar/Avatar";
+import { paths } from '@/Constants/paths';
 
 interface SettingProfileProps {
     onClose: () => void;
@@ -35,7 +36,7 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
                     const profileRes = await fetchingProfile(workspaceId);
                     setName(profileRes.nick);
                     setBirth(profileRes.birth || birth);
-                    setProfileImage(profileRes.profileImage || ProfileImg); // 프로필 이미지 반영
+                    setProfileImage(profileRes.profileImage || ProfileImg); 
                 } else {
                     console.error('Workspace ID is undefined');
                 }
@@ -44,24 +45,6 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
             }
         };
         fetchProfileData();
-    }, [workspaceId, token]);
-
-    useEffect(() => {
-        const getMyInfomations = async () => {
-            try {
-                if (workspaceId) {
-                    const profileRes = await getMyInfos();
-                    setName(profileRes.nick);
-                    setBirth(profileRes.birth || birth);
-                    setProfileImage(profileRes.profileImage || ProfileImg);
-                } else {
-                    console.error('Workspace ID is undefined');
-                }
-            } catch (error) {
-                console.error('프로필 데이터를 가져오는데 실패했습니다.', error);
-            }
-        };
-        getMyInfomations();
     }, [workspaceId, token]);
 
     const imgToUrl = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,13 +99,11 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
         }
 
         try {
-            await SeugiCustomAxios.post(`/member/logout`, {
-                fcmToken
-            });
+            await SeugiCustomAxios.post(`/member/logout`, { fcmToken });
             Cookies.remove('accessToken');
             Cookies.remove('refreshToken');
             Cookies.remove('workspaceId');
-            window.location.href = '/login';
+            window.location.href = paths.login;
         } catch (err) {
             console.error(err);
         }
@@ -145,10 +126,11 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
     };
 
     const handleSecession = async () => {
+        window.confirm('정말 삭제하시겠습니까? 삭제하면 되돌릴 수 없습니다.');
         try {
             await SeugiCustomAxios.delete(`/member/remove`);
             localStorage.clear();
-            window.location.href = '/login';
+            window.location.href = paths.login;
         } catch (error) {
             console.error(error);
         }
@@ -164,68 +146,67 @@ const SettingProfile = ({ onClose, onNameChange }: SettingProfileProps) => {
 
     return (
         <S.SettingProfile>
-            {isEditing ? (
+            <>
+                <S.ProfileContainer>
+                    <S.ProfileImgContainer>
+                        <S.ProfileImgButton>
+                            <S.Input
+                                type="file"
+                                accept="image/*"
+                                style={{ display: 'none' }}
+                                onChange={imgToUrl}
+                                id="profile-image-input"
+                            />
+                            <S.Label htmlFor="profile-image-input">
+                                <Avatar size="large" />
+                                <S.PlusButton src={PlusButtonImg} />
+                            </S.Label>
+                        </S.ProfileImgButton>
+                    </S.ProfileImgContainer>
+                    <S.ProfileNameContainer>
+                        <S.NameBox>
+                            <S.Name>{name}</S.Name>
+                            <S.CorrectionButton onClick={() => startEditing('nick')}>
+                                <S.CorrectionButtonImg src={CorrectionImg} />
+                            </S.CorrectionButton>
+                        </S.NameBox>
+                    </S.ProfileNameContainer>
+                </S.ProfileContainer>
+                <S.TextContainer>
+                    <S.ListItem onClick={handleLogout}>
+                        <S.Text> 로그아웃 </S.Text>
+                        <S.ArrowButton>
+                            <S.ArrowButtonImg src={Arrow} />
+                        </S.ArrowButton>
+                    </S.ListItem>
+                    <S.ListItem onClick={handleSecession}>
+                        <S.RText> 회원탈퇴 </S.RText>
+                        <S.ArrowButton>
+                            <S.ArrowButtonImg src={Arrow} />
+                        </S.ArrowButton>
+                    </S.ListItem>
+                    <S.Divider src={Divider} />
+                    <S.ListItem onClick={handlePrivacyPolicy}>
+                        <S.Text> 개인정보 처리 방침 </S.Text>
+                        <S.ArrowButton>
+                            <S.ArrowButtonImg src={Arrow} />
+                        </S.ArrowButton>
+                    </S.ListItem>
+                    <S.ListItem onClick={handleServiceOperation}>
+                        <S.Text> 서비스 운영 정책 </S.Text>
+                        <S.ArrowButton>
+                            <S.ArrowButtonImg src={Arrow} />
+                        </S.ArrowButton>
+                    </S.ListItem>
+                </S.TextContainer>
+            </>
+            {isEditing && (
                 <Correction
                     value="nick"
                     content={name}
                     onSave={handleSave}
                     onCancel={() => setIsEditing(false)}
                 />
-            ) : (
-                <>
-                    <S.ProfileContainer>
-                        <S.ProfileImgContainer>
-                            <S.ProfileImgButton>
-                                <S.Input
-                                    type="file"
-                                    accept="image/*"
-                                    style={{ display: 'none' }}
-                                    onChange={imgToUrl}
-                                    id="profile-image-input"
-                                />
-                                <S.Label htmlFor="profile-image-input">
-                                    <Avatar size="large" />
-                                    <S.PlusButton src={PlusButtonImg} />
-                                </S.Label>
-                            </S.ProfileImgButton>
-                        </S.ProfileImgContainer>
-                        <S.ProfileNameContainer>
-                            <S.NameBox>
-                                <S.Name>{name}</S.Name>
-                                <S.CorrectionButton onClick={() => startEditing('nick')}>
-                                    <S.CorrectionButtonImg src={CorrectionImg} />
-                                </S.CorrectionButton>
-                            </S.NameBox>
-                        </S.ProfileNameContainer>
-                    </S.ProfileContainer>
-                    <S.TextContainer>
-                        <S.ListItem onClick={handleLogout}>
-                            <S.Text> 로그아웃 </S.Text>
-                            <S.ArrowButton>
-                                <S.ArrowButtonImg src={Arrow} />
-                            </S.ArrowButton>
-                        </S.ListItem>
-                        <S.ListItem onClick={handleSecession}>
-                            <S.RText> 회원탈퇴 </S.RText>
-                            <S.ArrowButton>
-                                <S.ArrowButtonImg src={Arrow} />
-                            </S.ArrowButton>
-                        </S.ListItem>
-                        <S.Divider src={Divider} />
-                        <S.ListItem onClick={handlePrivacyPolicy}>
-                            <S.Text> 개인정보 처리 방침 </S.Text>
-                            <S.ArrowButton>
-                                <S.ArrowButtonImg src={Arrow} />
-                            </S.ArrowButton>
-                        </S.ListItem>
-                        <S.ListItem onClick={handleServiceOperation}>
-                            <S.Text> 서비스 운영 정책 </S.Text>
-                            <S.ArrowButton>
-                                <S.ArrowButtonImg src={Arrow} />
-                            </S.ArrowButton>
-                        </S.ListItem>
-                    </S.TextContainer>
-                </>
             )}
         </S.SettingProfile>
     );

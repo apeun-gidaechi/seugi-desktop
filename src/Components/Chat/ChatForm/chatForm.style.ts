@@ -1,3 +1,5 @@
+import { SeugiColor } from "@/Design/color/SeugiColor";
+import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components"; 
 import { createGlobalStyle } from 'styled-components'; 
 
@@ -16,13 +18,9 @@ export const ChatRoomForm = styled.div`
 `
 
 export const FileUpload = styled.div`
-    color: var(--Sub-Black, #000);
+    color: ${SeugiColor.Black};
 
-    font-family: 'Pretendard-Regular', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 20.8px */
+    ${SeugiFont.subtitle.subtitle2};
 
     display: flex;
     justify-content: center;

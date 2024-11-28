@@ -13,7 +13,7 @@ export const Continuebtn = styled.button`
     align-self: stretch;
 
     border:none;
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     background: ${SeugiColor.Primary500};
 
     color: ${SeugiColor.White};

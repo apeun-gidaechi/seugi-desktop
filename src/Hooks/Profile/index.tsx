@@ -1,23 +1,26 @@
-import { fetchingProfile } from '@/Api/profile';
-import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
-import React, { useState, useEffect, useRef } from 'react';
-import { getMyInfos } from '@/Api/profile';
+import { useState, useEffect, useRef } from 'react';
 import Cookies from 'js-cookie';
+import { fetchingProfile, getMyInfos } from '@/Api/profile';
+import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 
-const index = () => {
+export type ProfileField = 'status' | 'spot' | 'belong' | 'phone' | 'wire' | 'location';
+
+export interface ProfileData {
+    status: string;
+    spot: string;
+    belong: string;
+    phone: string;
+    wire: string;
+    location: string;
+    nick?: string;
+}
+
+const useProfile = () => {
     const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
-    const [isEditing, setIsEditing] = useState<string | null>(null);
-    const [picture, setPicture] = useState('');
+    const [isEditing, setIsEditing] = useState<ProfileField | null>(null);
     const [isSettingOpen, setIsSettingOpen] = useState<boolean>(false);
     const [name, setName] = useState<string>('');
-    const [profileData, setProfileData] = useState<{
-        status: string;
-        spot: string;
-        belong: string;
-        phone: string;
-        wire: string;
-        location: string;
-    }>({
+    const [profileData, setProfileData] = useState<ProfileData>({
         status: "",
         spot: "",
         belong: "",
@@ -31,9 +34,9 @@ const index = () => {
         const fetchProfileData = async () => {
             try {
                 if (workspaceId) {
-                    const Profiles = await fetchingProfile(workspaceId);
-                    setProfileData(Profiles);
-                    setName(Profiles.nick);
+                    const profiles = await fetchingProfile(workspaceId);
+                    setProfileData(profiles);
+                    setName(profiles.nick || '');
                 }
             } catch (error) {
                 console.error('Failed to fetch profile data.', error);
@@ -42,29 +45,23 @@ const index = () => {
         fetchProfileData();
     }, [workspaceId]);
 
-    const startEditing = (field: string) => {
+    const startEditing = (field: ProfileField) => {
         setIsEditing(field);
     };
 
-    const saveProfileData = async (field: keyof typeof profileData, value: string) => {
+    const saveProfileData = async (field: any, value: string) => {
         try {
-            if (workspaceId) {
-                await SeugiCustomAxios.patch(`/profile/${workspaceId}`, {
-                    status: field === "status" ? value : profileData.status,
-                    spot: field === "spot" ? value : profileData.spot,
-                    belong: field === "belong" ? value : profileData.belong,
-                    phone: field === "phone" ? value : profileData.phone,
-                    wire: field === "wire" ? value : profileData.wire,
-                    location: field === "location" ? value : profileData.location,
-                });
+            if (!workspaceId) return;
 
-                setProfileData(prevData => ({
-                    ...prevData,
-                    [field]: value
-                }));
+            const updatedData = {
+                ...profileData,
+                [field]: value
+            };
 
-                setIsEditing(null);
-            }
+            await SeugiCustomAxios.patch(`/profile/${workspaceId}`, updatedData);
+
+            setProfileData(updatedData);
+            setIsEditing(null);
         } catch (error) {
             console.error('프로필 저장 실패', error);
         }
@@ -75,7 +72,7 @@ const index = () => {
     };
 
     const toggleSetting = () => {
-        setIsSettingOpen(prevState => !prevState);
+        setIsSettingOpen(prev => !prev);
     };
 
     useEffect(() => {
@@ -110,8 +107,7 @@ const index = () => {
         } catch (err) {
             console.error(err);
         }
-    }
-
+    };
 
     return {
         name,
@@ -122,8 +118,9 @@ const index = () => {
         saveProfileData,
         cancelEditing,
         toggleSetting,
-        handleNameChange
+        handleNameChange,
+        dialogRef
     };
 };
 
-export default index;
+export default useProfile;

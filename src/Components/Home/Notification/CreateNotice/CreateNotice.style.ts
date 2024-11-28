@@ -8,6 +8,10 @@ export const NoticeMain = styled.div`
 
     position:fixed;
 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+
     background: rgba(0, 0, 0, 0.30);
     
     z-index:998;
@@ -18,8 +22,6 @@ export const NoticeMain = styled.div`
 
 export const CreateNoticeContainer = styled.div`
     position: absolute;
-    left: 30rem;
-    top: 14rem;
 
     display: flex;
     width: 640px;
@@ -53,12 +55,12 @@ export const Title = styled.span`
 export const TitleButton = styled.button`
     display: flex;
     height: 36px;
-    padding: var(--Large, 12px);
+    padding: 12px;
     justify-content: center;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
 
     border:none;
     background:none;
@@ -85,7 +87,7 @@ export const TitleInputField = styled.input`
     gap: 121px;
     align-self: stretch;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 
@@ -108,7 +110,7 @@ export const ContentInputField = styled.textarea`
     gap: 121px;
     align-self: stretch;
 
-    border-radius: var(--Large, 12px);
+    border-radius: 12px;
     border: 1px solid ${SeugiColor.Gray300};
     background: ${SeugiColor.White};
 

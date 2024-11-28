@@ -1,7 +1,6 @@
 import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from '@/Design/text/SeugiFont';
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components';
 
 export const SettingProfile = styled.div`
     position:absolute;
@@ -21,7 +20,7 @@ export const SettingProfile = styled.div`
 
     box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.04);
 
-    z-index: 999;
+    z-index: 990;
 `
 
 export const ProfileContainer = styled.div`

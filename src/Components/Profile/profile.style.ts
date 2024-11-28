@@ -1,12 +1,11 @@
 import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components'; 
 
 export const MyProfileDialog = styled.div`
     position:absolute;
 
-    z-index:999;
+    z-index: 990;
 
     bottom:3rem;
     left: 3rem;
@@ -35,14 +34,14 @@ export const MyinfoDiv = styled.div`
 export const MyProfileDiv = styled.div`
     display: flex;
     align-items: center;
-    gap: var(--Corner-Small, 10px);
+    gap: 10px;
 `
 
 export const ProfileImg = styled.img`
     width: 32px;
     height: 32px;
 
-    border-radius: var(--Infinity, 100000000px);
+    border-radius: 100000000px;
 `
 
 export const ProfileName = styled.span`
