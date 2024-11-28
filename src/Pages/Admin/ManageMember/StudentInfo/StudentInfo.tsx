@@ -27,12 +27,6 @@ const StudentInfo = ({ onClose, memberId, permission }: StudentInfoProps) => {
             return;
         }
 
-        if (permission !== 'STUDENT') {
-            alert('학생만 수정할 수 있습니다.');
-            onClose();
-            return;
-        }
-
         const gradeInt = parseInt(grade.replace('학년', ''));
         const classNumInt = parseInt(classNum.replace('반', ''));
         const numberInt = parseInt(number.replace('번', ''));
