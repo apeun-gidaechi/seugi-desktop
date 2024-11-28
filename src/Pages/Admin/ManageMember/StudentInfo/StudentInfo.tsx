@@ -66,7 +66,6 @@ const StudentInfo = ({ onClose, memberId, permission }: StudentInfoProps) => {
                     <S.Title>학생 정보 수정</S.Title>
                     <S.Button
                         onClick={handlePatchMember}
-                        disabled={permission !== 'STUDENT'}
                     >
                         수정
                     </S.Button>
@@ -78,7 +77,6 @@ const StudentInfo = ({ onClose, memberId, permission }: StudentInfoProps) => {
                             options={gradeOptions}
                             value={grade}
                             onChange={setGrade}
-                            disabled={permission !== 'STUDENT'}
                         />
                     </S.Frame>
                     <S.Frame>
@@ -87,7 +85,6 @@ const StudentInfo = ({ onClose, memberId, permission }: StudentInfoProps) => {
                             options={classOptions}
                             value={classNum}
                             onChange={setClassNum}
-                            disabled={permission !== 'STUDENT'} 
                         />
                     </S.Frame>
                     <S.Frame>
@@ -96,7 +93,6 @@ const StudentInfo = ({ onClose, memberId, permission }: StudentInfoProps) => {
                             options={numberOptions}
                             value={number}
                             onChange={setNumber}
-                            disabled={permission !== 'STUDENT'}
                         />
                     </S.Frame>
                 </S.StudentInfoContainer>
