@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"; 
+import React, { useState, useEffect, useRef } from "react";
 import HomeBookImg from "@/Assets/image/home/homebook.svg";
 import ArrowImg from "@/Assets/image/home/arrow.svg";
 import NoSchedule from '@/Assets/image/home/NoSchedule.svg';
@@ -28,8 +28,9 @@ const DailySchedule = ({ timetable = [] }: Props) => {
     const [allPeriodsOver, setAllPeriodsOver] = useState<boolean>(false);
     const [showCalendar, setShowCalendar] = useState<boolean>(false);
     const [isCreateTimetableOpen, setIsCreateTimetableOpen] = useState(false);
+    const role = window.localStorage.getItem('role');
 
-    const calendarRef = useRef<HTMLDivElement | null>(null); 
+    const calendarRef = useRef<HTMLDivElement | null>(null);
     const dialogRef = useRef<HTMLDivElement | null>(null);
 
     const getCurrentPeriod = () => {
@@ -48,19 +49,27 @@ const DailySchedule = ({ timetable = [] }: Props) => {
 
         for (let i = 0; i < timetable.length; i++) {
             const periodStart = new Date(startTime.getTime() + i * (periodDuration + breakDuration));
+            const periodEnd = new Date(periodStart.getTime() + periodDuration);
+            const breakEnd = new Date(periodEnd.getTime() + breakDuration);
 
+            // 점심시간 예외 처리
             if (periodStart >= lunchStart && periodStart < lunchEnd) {
                 periodStart.setTime(lunchEnd.getTime());
             }
+            if (periodEnd >= lunchStart && periodEnd < lunchEnd) {
+                periodEnd.setTime(lunchEnd.getTime());
+                breakEnd.setTime(periodEnd.getTime() + breakDuration);
+            }
 
-            const periodEnd = new Date(periodStart.getTime() + periodDuration);
-            lastPeriodEnd = periodEnd;
+            lastPeriodEnd = breakEnd;
 
-            if (now >= periodStart && now < periodEnd) {
+            // 현재 시간이 수업 시간 또는 쉬는 시간 범위 내에 있는 경우
+            if ((now >= periodStart && now < periodEnd) || (now >= periodEnd && now < breakEnd)) {
                 return i + 1;
             }
         }
 
+        // 모든 수업과 쉬는 시간이 지난 경우
         if (lastPeriodEnd && now > lastPeriodEnd) {
             setAllPeriodsOver(true);
         } else {
@@ -88,14 +97,22 @@ const DailySchedule = ({ timetable = [] }: Props) => {
     const todayDate = format(new Date(), 'yyyy-MM-dd');
 
     const openCreateTimetable = () => {
-        setIsCreateTimetableOpen(true);
-        if (showCalendar) {
-            setShowCalendar(false);
+        if (role == 'STUDENT') {
+           alert('학생은 작업할 수 없습니다.')
+        } else {
+            setIsCreateTimetableOpen(true);
+            if (showCalendar) {
+                setShowCalendar(false);
+            }
         }
     };
 
     const closeCreateTimetable = () => {
         setIsCreateTimetableOpen(false);
+    };
+
+    const closeCalendar = () => {
+        setShowCalendar(false);
     };
 
     useEffect(() => {
@@ -107,7 +124,7 @@ const DailySchedule = ({ timetable = [] }: Props) => {
             }
 
             if (calendarRef.current && !calendarRef.current.contains(target) && !(target && (target as Element).closest('.Calendar'))) {
-                setShowCalendar(false);
+                closeCalendar();
             }
         };
 
@@ -131,7 +148,7 @@ const DailySchedule = ({ timetable = [] }: Props) => {
                     <S.CreateTimeTableButton onClick={openCreateTimetable} className="CreateTimeTable">
                         <S.CreateTimeTableButtonImg src={PlusButtonImg} />
                     </S.CreateTimeTableButton>
-                    <S.ArrowLButton onClick={onClickCalendar} className="Calendar"> 
+                    <S.ArrowLButton onClick={onClickCalendar} className="Calendar">
                         <S.ArrowLogo src={ArrowImg} />
                     </S.ArrowLButton>
                 </S.ButtonDiv>
@@ -139,7 +156,7 @@ const DailySchedule = ({ timetable = [] }: Props) => {
 
             {showCalendar && (
                 <div ref={calendarRef}>
-                    <MyCalendar />
+                    <MyCalendar onClose={closeCalendar} />
                 </div>
             )}
             {isCreateTimetableOpen && (
