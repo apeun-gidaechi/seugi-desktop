@@ -11,7 +11,7 @@ import AdminIcon from '@/Assets/image/adminsetting/adminIcon.svg';
 import Dot from '@/Assets/image/adminsetting/Dot.svg'
 import Dialog from '@/Pages/Admin/ManageMember/Dialog/Dialog'
 
-type Permission = 'ADMIN' | 'MIDDLEADMIN' | 'TEACHER';
+type Permission = 'ADMIN' | 'MIDDLEADMIN' | 'TEACHER' | 'STUDENT';
 
 const AdminGeneral = () => {
     const workspaceId = Cookies.get('workspaceId');
@@ -25,9 +25,8 @@ const AdminGeneral = () => {
         picture: string;
         permission: Permission;
     } | null>(null);
-    const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 추가
+    const [searchQuery, setSearchQuery] = useState('');
 
-    // 옵션 변경 핸들러
     const handleOptionChange = (option: 'teacher' | 'student') => {
         setSelectedOption(option);
     };
@@ -40,15 +39,14 @@ const AdminGeneral = () => {
                 },
             });
 
-            const allMembers = res.data.data; // 응답 데이터
+            const allMembers = res.data.data; 
             const studentsList: { id: string, name: string, picture: string, permission: Permission }[] = [];
             const teachersList: { id: string, name: string, picture: string, permission: Permission }[] = [];
 
-            // students 데이터를 studentsList로 추출
             Object.keys(allMembers.students).forEach((key) => {
                 allMembers.students[key].forEach((student: any) => {
                     studentsList.push({
-                        id: student.member.id, // 멤버 ID 추가
+                        id: student.member.id,
                         name: student.member.name,
                         picture: student.member.picture || Avatar,
                         permission: allMembers.students[key][0].member.permission,
@@ -56,11 +54,10 @@ const AdminGeneral = () => {
                 });
             });
 
-            // teachers 데이터를 teachersList로 추출
             Object.keys(allMembers.teachers).forEach((key) => {
                 allMembers.teachers[key].forEach((teacher: any) => {
                     teachersList.push({
-                        id: teacher.member.id, // 멤버 ID 추가
+                        id: teacher.member.id,
                         name: teacher.member.name,
                         picture: teacher.member.picture || Avatar,
                         permission: allMembers.teachers[key][0].permission,
@@ -68,11 +65,10 @@ const AdminGeneral = () => {
                 });
             });
 
-            // middleAdmin과 admin 데이터를 teachersList에 추가
             Object.keys(allMembers.middleAdmin).forEach((key) => {
                 allMembers.middleAdmin[key].forEach((middleAdmin: any) => {
                     teachersList.push({
-                        id: middleAdmin.member.id, // 멤버 ID 추가
+                        id: middleAdmin.member.id,
                         name: middleAdmin.member.name,
                         picture: middleAdmin.member.picture || Avatar,
                         permission: allMembers.middleAdmin[key][0].permission,
@@ -83,7 +79,7 @@ const AdminGeneral = () => {
             Object.keys(allMembers.admin).forEach((key) => {
                 allMembers.admin[key].forEach((admin: any) => {
                     teachersList.push({
-                        id: admin.member.id, // 멤버 ID 추가
+                        id: admin.member.id,
                         name: admin.member.name,
                         picture: admin.member.picture || Avatar,
                         permission: allMembers.admin[key][0].permission,
@@ -91,18 +87,17 @@ const AdminGeneral = () => {
                 });
             });
 
-            // teachersList를 permission에 따라 정렬 (ADMIN -> MIDDLEADMIN -> TEACHER)
             teachersList.sort((a, b) => {
                 const permissionOrder: { [key in Permission]: number } = {
                     'ADMIN': 1,
                     'MIDDLEADMIN': 2,
                     'TEACHER': 3,
+                    'STUDENT': 4
                 };
 
                 return permissionOrder[a.permission] - permissionOrder[b.permission];
             });
 
-            // 상태 업데이트
             setStudents(studentsList);
             setTeachers(teachersList);
 
@@ -112,10 +107,9 @@ const AdminGeneral = () => {
     };
 
     useEffect(() => {
-        handleGetMembers(); // 컴포넌트가 마운트될 때 멤버 정보 가져오기
+        handleGetMembers(); 
     }, []);
 
-    // 검색어에 따라 필터링된 멤버 리스트 반환
     const filteredTeachers = teachers.filter((teacher) =>
         teacher.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -124,7 +118,6 @@ const AdminGeneral = () => {
         student.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // permission에 따른 아이콘 선택
     const getPermissionIcon = (permission: Permission) => {
         if (permission === 'ADMIN') {
             return <S.PermissionIcon src={AdminIcon} alt="Admin Icon" />;
@@ -141,8 +134,8 @@ const AdminGeneral = () => {
         picture: string;
         permission: Permission;
     }) => {
-        setSelectedMember(member); // 멤버 정보 저장
-        setDialogVisible(true); // Dialog 열기
+        setSelectedMember(member); 
+        setDialogVisible(true); 
     };
 
     const closeDialog = () => {
@@ -197,9 +190,18 @@ const AdminGeneral = () => {
                                             <S.MemberContent>{teacher.name}</S.MemberContent>
                                             {getPermissionIcon(teacher.permission)}
                                         </S.UserInfo>
-                                        <S.DotButton onClick={() => openDialog(teacher)}>
+                                        <S.DotButton
+                                            onClick={() => {
+                                                if (teacher.permission === 'STUDENT') {
+                                                    alert('이 기능은 사용하실 수 없습니다.');
+                                                    return; 
+                                                }
+                                                openDialog(teacher); 
+                                            }}
+                                        >
                                             <S.DotIcon src={Dot} alt="More options" />
                                         </S.DotButton>
+
                                     </S.MemberContentDiv>
                                 ))
                             ) : (
@@ -217,7 +219,15 @@ const AdminGeneral = () => {
                                             <S.MemberContent>{student.name}</S.MemberContent>
                                             {getPermissionIcon(student.permission)}
                                         </S.UserInfo>
-                                        <S.DotButton onClick={() => openDialog(student)}>
+                                        <S.DotButton
+                                            onClick={() => {
+                                                if (student.permission === 'STUDENT') {
+                                                    alert('이 기능은 사용하실 수 없습니다.'); 
+                                                    return; 
+                                                }
+                                                openDialog(student); 
+                                            }}
+                                        >
                                             <S.DotIcon src={Dot} alt="More options" />
                                         </S.DotButton>
                                     </S.MemberContentDiv>
@@ -234,6 +244,7 @@ const AdminGeneral = () => {
                 <Dialog 
                     onCancel={closeDialog} 
                     memberId={selectedMember.id}
+                    permission={selectedMember.permission}
                 />
             )}
         </S.AdminGeneralMain>

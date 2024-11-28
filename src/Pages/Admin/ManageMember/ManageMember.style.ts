@@ -165,6 +165,7 @@ export const PermissionIcon = styled.img`
 `;
 
 export const DotButton = styled.button`
+    width: 20px;
     border: none;
     background: none;
 
@@ -178,4 +179,5 @@ export const DotIcon = styled.img`
 export const UserInfo = styled.div`
     display: flex;
     flex-direction: row;
+    margin-left: 12px;
 `
