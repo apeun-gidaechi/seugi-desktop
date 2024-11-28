@@ -6,6 +6,23 @@ import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNoti
 import { fetchingNotice } from '@/Api/Home';
 import Cookies from 'js-cookie';
 
+interface NotificationEmoji {
+    emoji: string;
+    description?: string;
+}
+
+interface Notice {
+    id: number;
+    workspaceId: string;
+    userId: number;
+    userName: string;
+    title: string;
+    content: string;
+    emoji: NotificationEmoji[];
+    creationDate: string;
+    lastModifiedDate: string;
+}
+
 interface Props {
     onClose: () => void;
     notificationId: number;
@@ -29,8 +46,8 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutate
         }
 
         try {
-            const NoticeIds = await fetchingNotice(workspaceId);
-            const notification = NoticeIds.find((item: any) => item.id === notificationId);
+            const NoticeIds: Notice[] = await fetchingNotice(workspaceId);
+            const notification = NoticeIds.find((item) => item.id === notificationId);
 
             if (notification) {
                 setCurrentUserId(notification.userId);

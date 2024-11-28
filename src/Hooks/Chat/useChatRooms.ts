@@ -63,7 +63,7 @@
 //         chatRoomImg: "",
 //       };
 //
-//       const response = await axios.post('https://api.seugi.com/chat/personal/create', requestData, {
+//       const response = await axios.post('', requestData, {
 //         headers: {
 //           'Content-Type': 'application/json',
 //           Authorization: `Bearer ${accessToken}`, // Authorization 헤더에 Bearer 토큰 추가
