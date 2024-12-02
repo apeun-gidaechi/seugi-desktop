@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import SelectBar from "@/Assets/image/sidebar/selectsidebar.svg";
 
-export const SideBarMenu = styled.div`
+export const SideBarContainer = styled.div`
   position: relative;
   display: flex;
   width: 80px;
@@ -118,5 +118,5 @@ export const SideAvatarButton = styled.button`
 export const SettingButton = styled.button`
    background: none;
    border: none;
-   
+
 `
