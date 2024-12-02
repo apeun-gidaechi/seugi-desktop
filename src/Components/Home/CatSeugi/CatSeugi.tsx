@@ -3,24 +3,17 @@ import * as S from '@/Components/Home/CatSeugi/CatSeugi.style';
 
 import SearchImg from "@/Assets/image/home/search.svg";
 import SeugiImg from "@/Assets/image/onbording/Start/seugilogo.svg";
+import { useNavigate } from 'react-router-dom';
+import { paths } from '@/Constants/paths';
+import { useSelected } from '@/Hooks/Selected/useSelected';
 
 const CatSeugi = () => {
-    const [inputValue, setInputValue] = useState('');
-    const [showMessage, setShowMessage] = useState(false);
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.target.value);
-    };
+    const { setSelected } = useSelected();
+    const navigate = useNavigate();
 
     const handleButtonClick = () => {
-        if (inputValue.length > 0) {
-            setShowMessage(true);
-            setTimeout(() => {
-                setShowMessage(false);
-            }, 5000);
-        } else {
-            setShowMessage(false);
-        }
+        setSelected("chat");
+        navigate(paths.chat);
     };
 
     return (
@@ -29,21 +22,14 @@ const CatSeugi = () => {
                 <S.SeugiImg src={SeugiImg} />
                 <S.CatSeugiTitle>캣스기</S.CatSeugiTitle>
             </S.SeugiTitleContainer>
-            <S.CatSeugi>
+            <S.CatSeugi onClick={handleButtonClick}>
                 <S.CatSeugiInput
                     placeholder="2학년 4반에서 아무나 한 명 뽑아줘..."
-                    value={inputValue}
-                    onChange={handleInputChange}
                 />
                 <S.SearchButton onClick={handleButtonClick}>
                     <S.SearchImg src={SearchImg} />
                 </S.SearchButton>
             </S.CatSeugi>
-            {showMessage && (
-                <S.MessageContainer>
-                    <S.MessageText>다음교시는 국어입니다</S.MessageText>
-                </S.MessageContainer>
-            )}
             <S.QuestionContainer>
                 <S.LastQuestionBox>
                     <S.LastText>
