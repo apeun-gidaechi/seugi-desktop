@@ -8,13 +8,6 @@ const index = () => {
     const token = Cookies.get("accessToken");
     const navigate = useNavigate();
     const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
-    
-    useEffect(() => {
-        document.body.style.overflow = "hidden";
-        return () => {
-            document.body.style.overflow = "auto";
-        };
-    }, []);
 
     useEffect(() => {
         if (workspaceId) {
