@@ -165,9 +165,7 @@ const AdminGeneral = () => {
                                             {getPermissionIcon(teacher.permission)}
                                         </S.UserInfo>
                                         <S.DotButton
-                                            onClick={() => {
-                                                openDialog(teacher);
-                                            }}
+                                            onClick={() => {openDialog(teacher);}}
                                         >
                                             <S.DotIcon src={Dot} alt="More options" />
                                         </S.DotButton>
@@ -190,9 +188,7 @@ const AdminGeneral = () => {
                                             {getPermissionIcon(student.permission)}
                                         </S.UserInfo>
                                         <S.DotButton
-                                            onClick={() => {
-                                                openDialog(student);
-                                            }}
+                                            onClick={() => {openDialog(student);}}
                                         >
                                             <S.DotIcon src={Dot} alt="More options" />
                                         </S.DotButton>
