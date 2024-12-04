@@ -4,8 +4,6 @@ import * as S from '@/Components/Home/Schools/Schools.style';
 import Changeschool from '@/Components/Home/ChangeSchool/ChangeSchool';
 import ArrowImg from "@/Assets/image/home/arrow.svg";
 import useSchools from '@/Hooks/HomeHook/Schools/index';
-import { useNavigate } from 'react-router-dom';
-import { paths } from '@/Constants/paths';
 
 interface workspaceItem {
     workspaceId: string;
@@ -32,12 +30,6 @@ interface Props {
 
 const Schools = ({ workspaces, pendingWorkspaces }: Props) => {
     const { ...Schools } = useSchools();
-    const navigate = useNavigate();
-
-    const handleSetting = () => {
-        navigate(paths.admingeneral);
-    }
-
     return (
         <S.UpContainer>
             {Schools.showChangeschool && (
@@ -55,9 +47,9 @@ const Schools = ({ workspaces, pendingWorkspaces }: Props) => {
                     <S.MySchooliTitle>내 학교</S.MySchooliTitle>
                 </S.SchoolTitleDiv>
                 <S.ButtonDiv>
-                    <S.ArrowLButton onClick={handleSetting} className="Calendar">
+                    {/* <S.ArrowLButton onClick={Schools.handleOnClicked} className="Calendar">
                         <S.ArrowLogo src={ArrowImg} />
-                    </S.ArrowLButton>
+                    </S.ArrowLButton> */}
                 </S.ButtonDiv>
             </S.SchoolTitleBox>
             {workspaces && workspaces.length > 0 ? (

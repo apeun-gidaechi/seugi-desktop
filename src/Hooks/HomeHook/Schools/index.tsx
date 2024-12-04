@@ -15,7 +15,8 @@ const index = () => {
             if (
                 ChangeSchoolRef.current &&
                 !ChangeSchoolRef.current.contains(target) &&
-                !(target && (target as Element).closest('.ChangeSchool'))
+                !(target && (target as Element).closest('.ChangeSchool')) && 
+                !(target && (target as Element).closest('.Calendar'))
             ) {
                 setShowChangeschool(false);
             }
