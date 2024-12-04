@@ -39,7 +39,7 @@ export const AssignmentBox = styled.div<AssignmentBoxProps>`
   display: flex;
   flex-direction: column;
   align-self: stretch;
-  height: ${({ hasTasks }) => (hasTasks ? "300px" : "100px")};
+  height: ${({ hasTasks }) => (hasTasks ? "150px" : "100px")};
   overflow-y: auto;
   padding-right: 8px; 
 
