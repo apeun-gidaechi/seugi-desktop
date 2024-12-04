@@ -12,7 +12,7 @@ const SelectedContext = createContext<SelectedContextType | undefined>(
 export const SelectedProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
-    const [selected, setSelected] = useState<string | null>(null);
+    const [selected, setSelected] = useState<string | null>('');
 
     return (
         <SelectedContext.Provider value={{ selected, setSelected }}>
