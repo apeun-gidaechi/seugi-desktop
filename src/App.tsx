@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Router from '@/Components/router';
 import './App.css';
 import { UserContextProvider } from './Contexts/userContext';
+import { SelectedProvider } from './Hooks/Selected/useSelected';
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 import { appleAuthHelpers, useScript } from 'react-apple-signin-auth';
@@ -78,9 +79,11 @@ function App() {
   }, []);
 
   return (
-    <UserContextProvider>
-      <Router />
-    </UserContextProvider>
+    <SelectedProvider>
+      <UserContextProvider>
+        <Router />
+      </UserContextProvider>
+    </SelectedProvider>
   );
 }
 

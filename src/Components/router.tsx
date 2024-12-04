@@ -19,7 +19,6 @@ import AdminGeneral from '@/Pages/Admin/General/AdminGeneral';
 import AdminAlarm from '@/Pages/Admin/Alarm/AdminAlarm';
 import ManageMember from '@/Pages/Admin/ManageMember/ManageMember';
 import InviteMember from '@/Pages/Admin/InviteMember/InviteMember';
-import Dialog from '@/Pages/Admin/ManageMember/Dialog/Dialog';
 
 const Router = () => {
   return (

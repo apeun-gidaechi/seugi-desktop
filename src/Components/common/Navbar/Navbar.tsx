@@ -1,43 +1,27 @@
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import * as S from "@/Components/common/Navbar/Navbar.style";
-
+import * as S from "./Navbar.style";
 import Home from "@/Assets/image/sidebar/home.svg";
 import Chat from "@/Assets/image/sidebar/chat.svg";
 import Chats from "@/Assets/image/sidebar/chats.svg";
 import SelectHome from "@/Assets/image/sidebar/slecthome.svg";
 import SelectChat from "@/Assets/image/sidebar/selectchat.svg";
 import SelectChats from "@/Assets/image/sidebar/selectgroup.svg";
-import SettingImg from '@/Assets/image/profile/profilesetting_fill.svg';
-import Profile from "@/Components/Profile/Profile";
-import React, { useEffect, useRef, useState } from "react";
-import { paths } from '@/Constants/paths';
+import SettingImg from "@/Assets/image/profile/profilesetting_fill.svg";
 import Avatar from "@/Components/common/Avatar/Avatar";
-
-type SelectedButton = "home" | "chat" | "chats" | null;
+import Profile from "@/Components/Profile/Profile";
+import { paths } from "@/Constants/paths";
+import { useSelected } from "@/Hooks/Selected/useSelected";
 
 const Navbar = () => {
-    
-  const [selected, setSelected] = useState<SelectedButton>(null);
-  const [chatRooms, setChatRooms] = useState<string[]>([]);
+  const { selected, setSelected } = useSelected();
   const navigate = useNavigate();
-  const location = useLocation();
   const profileRef = useRef<HTMLDivElement>(null);
-  const [isProfileVisible, setIsProfileVisible] = useState(false)
+  const [isProfileVisible, setIsProfileVisible] = useState(false);
 
-  useEffect(() => {
-    // 현재 경로에 따라 selected 상태를 설정
-    const pathMap: { [key: string]: SelectedButton } = {
-      "/": "home",
-      "/chat": "chat",
-      "/groupchat": "chats",
-    };
-
-    const currentPath = location.pathname;
-    setSelected(pathMap[currentPath] || null);
-  }, [location]);
-
-  const handleButtonClick = (button: SelectedButton) => {
-    setSelected(button);
+  const handleButtonClick = (path: string) => {
+    setSelected(path);
+    navigate(path);
   };
 
   const handleAvatarClick = () => {
@@ -45,39 +29,11 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const storedChatRooms = localStorage.getItem("chatRooms");
-    if (storedChatRooms) {
-      setChatRooms(JSON.parse(storedChatRooms));
-    }
-    if (selected) {
-      const pathMap = {
-        home: paths.home,
-        chat: paths.chat,
-        chats: paths.groupchat,
-      };
-      navigate(pathMap[selected]);
-    }
-  }, [selected, navigate]);
-
-  useEffect(() => {
-    const storedChatRooms = localStorage.getItem("chatRooms");
-    if (storedChatRooms) {
-      setChatRooms(JSON.parse(storedChatRooms));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("chatRooms", JSON.stringify(chatRooms));
-  }, [chatRooms]);
-
-  useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as Node | null;
       if (
         profileRef.current &&
-        !profileRef.current.contains(e.target as Node) &&
-        !(target && (target as Element).closest('.avactar')) 
-      ){
+        !profileRef.current.contains(e.target as Node)
+      ) {
         setIsProfileVisible(false);
       }
     };
@@ -95,47 +51,49 @@ const Navbar = () => {
 
   const handleClickSetting = () => {
     navigate(paths.admingeneral);
-  }
+  };
 
   return (
-    <div>
-      <S.SideBarMenu>
-        <S.SideBarButton
-          onClick={() => handleButtonClick("home")}
-          $isSelected={selected === "home"}
+    <S.SideBarContainer>
+      <S.SideBarButton
+        onClick={() => handleButtonClick("")}
+        $isSelected={selected === ""}
+      >
+        <S.SideBarImage src={selected === "" ? SelectHome : Home} />
+      </S.SideBarButton>
+
+      <S.SideBarButton
+        onClick={() => handleButtonClick("chat")}
+        $isSelected={selected === "chat"}
+      >
+        <S.SideBarImage src={selected === "chat" ? SelectChat : Chat} />
+      </S.SideBarButton>
+      <S.SideBarButton
+        onClick={() => handleButtonClick("groupchat")}
+        $isSelected={selected === "groupchat"}
+      >
+        <S.SideBarImage src={selected === "groupchat" ? SelectChats : Chats} />
+      </S.SideBarButton>
+
+      <S.SettingButton onClick={handleClickSetting}>
+        <S.SideBarImage src={SettingImg} />
+      </S.SettingButton>
+
+      <S.SideAvatarImgWrap>
+        <S.SideAvatarButton
+          onClick={handleAvatarClick}
+          className="avatar-button"
         >
-          <S.SideBarImage src={selected === "home" ? SelectHome : Home} />
-        </S.SideBarButton>
-        <S.SideBarButton
-          onClick={() => handleButtonClick("chat")}
-          $isSelected={selected === "chat"}
-        >
-          <S.SideBarImage src={selected === "chat" ? SelectChat : Chat} />
-        </S.SideBarButton>
-        <S.SideBarButton
-          onClick={() => handleButtonClick("chats")}
-          $isSelected={selected === "chats"}
-        >
-          <S.SideBarImage src={selected === "chats" ? SelectChats : Chats} />
-        </S.SideBarButton>
-        <S.SettingButton
-          onClick={handleClickSetting}
-        >
-          <S.SideBarImage src={SettingImg} />
-        </S.SettingButton>
-        <S.SideAvatarImgWrap>
-          <S.SideAvatarButton onClick={handleAvatarClick} className="avactar">
-            <Avatar size="medium" />
-          </S.SideAvatarButton>
-        </S.SideAvatarImgWrap>
-      </S.SideBarMenu>
+          <Avatar size="medium" />
+        </S.SideAvatarButton>
+      </S.SideAvatarImgWrap>
 
       {isProfileVisible && (
         <div ref={profileRef}>
           <Profile />
         </div>
       )}
-    </div>
+    </S.SideBarContainer>
   );
 };
 
