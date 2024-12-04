@@ -147,7 +147,7 @@ const AdminGeneral = () => {
                             <S.SearchInput
                                 placeholder="멤버 검색"
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)} // 검색어 상태 업데이트
+                                onChange={(e) => setSearchQuery(e.target.value)}
                             />
                         </S.SearchMemberDiv>
                     </S.SearchDiv>
@@ -166,10 +166,6 @@ const AdminGeneral = () => {
                                         </S.UserInfo>
                                         <S.DotButton
                                             onClick={() => {
-                                                if (teacher.permission === 'STUDENT') {
-                                                    alert('이 기능은 사용하실 수 없습니다.');
-                                                    return;
-                                                }
                                                 openDialog(teacher);
                                             }}
                                         >
@@ -195,10 +191,6 @@ const AdminGeneral = () => {
                                         </S.UserInfo>
                                         <S.DotButton
                                             onClick={() => {
-                                                if (student.permission === 'STUDENT') {
-                                                    alert('이 기능은 사용하실 수 없습니다.');
-                                                    return;
-                                                }
                                                 openDialog(student);
                                             }}
                                         >
