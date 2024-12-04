@@ -35,8 +35,9 @@ const useProfile = () => {
             try {
                 if (workspaceId) {
                     const profiles = await fetchingProfile(workspaceId);
+                    const MyInfos = await getMyInfos();
                     setProfileData(profiles);
-                    setName(profiles.nick || '');
+                    setName(profiles.nick || MyInfos.name); // 닉이 없으면 이름으로 둘다 있으면 이름(닉)으로 
                 }
             } catch (error) {
                 console.error('Failed to fetch profile data.', error);

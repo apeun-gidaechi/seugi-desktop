@@ -7,5 +7,6 @@ export const fetchingProfile = async (workspaceId: string) => {
 
 export const getMyInfos = async () => {
     const res = await SeugiCustomAxios.get(`/member/myInfo`);
+    console.log(res);
     return res.data.data
 }
