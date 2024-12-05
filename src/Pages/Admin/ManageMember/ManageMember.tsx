@@ -33,58 +33,33 @@ const AdminGeneral = () => {
 
     const handleGetMembers = async () => {
         try {
-            const res = await SeugiCustomAxios.get('/workspace/members/chart', {
+            const res = await SeugiCustomAxios.get('/workspace/members', {
                 params: {
                     workspaceId,
                 },
             });
 
-            const allMembers = res.data.data; 
+            const allMembers = res.data.data;
+
             const studentsList: { id: string, name: string, picture: string, permission: Permission }[] = [];
             const teachersList: { id: string, name: string, picture: string, permission: Permission }[] = [];
 
-            Object.keys(allMembers.students).forEach((key) => {
-                allMembers.students[key].forEach((student: any) => {
-                    studentsList.push({
-                        id: student.member.id,
-                        name: student.member.name,
-                        picture: student.member.picture || Avatar,
-                        permission: allMembers.students[key][0].member.permission,
-                    });
-                });
-            });
+            allMembers.forEach((member: any) => {
+                const { id, name, picture } = member.member;
+                const { permission } = member;
 
-            Object.keys(allMembers.teachers).forEach((key) => {
-                allMembers.teachers[key].forEach((teacher: any) => {
-                    teachersList.push({
-                        id: teacher.member.id,
-                        name: teacher.member.name,
-                        picture: teacher.member.picture || Avatar,
-                        permission: allMembers.teachers[key][0].permission,
-                    });
-                });
-            });
+                const memberData = {
+                    id: String(id),
+                    name,
+                    picture: picture || Avatar,
+                    permission,
+                };
 
-            Object.keys(allMembers.middleAdmin).forEach((key) => {
-                allMembers.middleAdmin[key].forEach((middleAdmin: any) => {
-                    teachersList.push({
-                        id: middleAdmin.member.id,
-                        name: middleAdmin.member.name,
-                        picture: middleAdmin.member.picture || Avatar,
-                        permission: allMembers.middleAdmin[key][0].permission,
-                    });
-                });
-            });
-
-            Object.keys(allMembers.admin).forEach((key) => {
-                allMembers.admin[key].forEach((admin: any) => {
-                    teachersList.push({
-                        id: admin.member.id,
-                        name: admin.member.name,
-                        picture: admin.member.picture || Avatar,
-                        permission: allMembers.admin[key][0].permission,
-                    });
-                });
+                if (permission === 'STUDENT') {
+                    studentsList.push(memberData);
+                } else {
+                    teachersList.push(memberData);
+                }
             });
 
             teachersList.sort((a, b) => {
@@ -92,7 +67,7 @@ const AdminGeneral = () => {
                     'ADMIN': 1,
                     'MIDDLEADMIN': 2,
                     'TEACHER': 3,
-                    'STUDENT': 4
+                    'STUDENT': 4,
                 };
 
                 return permissionOrder[a.permission] - permissionOrder[b.permission];
@@ -100,14 +75,13 @@ const AdminGeneral = () => {
 
             setStudents(studentsList);
             setTeachers(teachersList);
-
         } catch (err) {
             console.error('Error fetching members:', err);
         }
     };
 
     useEffect(() => {
-        handleGetMembers(); 
+        handleGetMembers();
     }, []);
 
     const filteredTeachers = teachers.filter((teacher) =>
@@ -134,8 +108,8 @@ const AdminGeneral = () => {
         picture: string;
         permission: Permission;
     }) => {
-        setSelectedMember(member); 
-        setDialogVisible(true); 
+        setSelectedMember(member);
+        setDialogVisible(true);
     };
 
     const closeDialog = () => {
@@ -173,7 +147,7 @@ const AdminGeneral = () => {
                             <S.SearchInput
                                 placeholder="멤버 검색"
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)} // 검색어 상태 업데이트
+                                onChange={(e) => setSearchQuery(e.target.value)}
                             />
                         </S.SearchMemberDiv>
                     </S.SearchDiv>
@@ -191,13 +165,7 @@ const AdminGeneral = () => {
                                             {getPermissionIcon(teacher.permission)}
                                         </S.UserInfo>
                                         <S.DotButton
-                                            onClick={() => {
-                                                if (teacher.permission === 'STUDENT') {
-                                                    alert('이 기능은 사용하실 수 없습니다.');
-                                                    return; 
-                                                }
-                                                openDialog(teacher); 
-                                            }}
+                                            onClick={() => {openDialog(teacher);}}
                                         >
                                             <S.DotIcon src={Dot} alt="More options" />
                                         </S.DotButton>
@@ -220,13 +188,7 @@ const AdminGeneral = () => {
                                             {getPermissionIcon(student.permission)}
                                         </S.UserInfo>
                                         <S.DotButton
-                                            onClick={() => {
-                                                if (student.permission === 'STUDENT') {
-                                                    alert('이 기능은 사용하실 수 없습니다.'); 
-                                                    return; 
-                                                }
-                                                openDialog(student); 
-                                            }}
+                                            onClick={() => {openDialog(student);}}
                                         >
                                             <S.DotIcon src={Dot} alt="More options" />
                                         </S.DotButton>
@@ -241,8 +203,8 @@ const AdminGeneral = () => {
             </S.SettingMain>
             <S.Right />
             {dialogVisible && selectedMember && (
-                <Dialog 
-                    onCancel={closeDialog} 
+                <Dialog
+                    onCancel={closeDialog}
                     memberId={selectedMember.id}
                     permission={selectedMember.permission}
                 />
