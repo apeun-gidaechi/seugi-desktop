@@ -16,8 +16,13 @@ import { useSelected } from "@/Hooks/Selected/useSelected";
 const Navbar = () => {
   const { selected, setSelected } = useSelected();
   const navigate = useNavigate();
+  const location = useLocation(); 
   const profileRef = useRef<HTMLDivElement>(null);
   const [isProfileVisible, setIsProfileVisible] = useState(false);
+
+  useEffect(() => {
+    setSelected(location.pathname.replace("/", "")); 
+  }, [location.pathname, setSelected]);
 
   const handleButtonClick = (path: string) => {
     setSelected(path);
