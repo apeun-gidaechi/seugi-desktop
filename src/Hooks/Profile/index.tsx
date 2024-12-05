@@ -35,8 +35,14 @@ const useProfile = () => {
             try {
                 if (workspaceId) {
                     const profiles = await fetchingProfile(workspaceId);
+                    const MyInfos = await getMyInfos();
                     setProfileData(profiles);
-                    setName(profiles.nick || '');
+                    if (profiles.nick === '') {
+                        setName(MyInfos.name); 
+                    } else {
+                        setName(`${profiles.nick} (${MyInfos.name})`);
+                    }
+                    
                 }
             } catch (error) {
                 console.error('Failed to fetch profile data.', error);
@@ -99,14 +105,6 @@ const useProfile = () => {
 
     const handleNameChange = (newName: string) => {
         setName(newName);
-    };
-
-    const handleImageChange = async () => {
-        try {
-            const res = await getMyInfos();
-        } catch (err) {
-            console.error(err);
-        }
     };
 
     return {
