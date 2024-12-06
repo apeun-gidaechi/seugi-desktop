@@ -1,8 +1,7 @@
-import React, { useState, ChangeEvent, useEffect } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { SeugiCustomAxios } from '@/axios/SeugiCutomAxios';
 import createSchoolImg from '@/Assets/image/join-school/createshoolimg.svg';
-import { getMyWorkspaces } from '@/Api/workspace';
 import { paths } from '@/Constants/paths';
 import Cookies from 'js-cookie';
 
@@ -28,7 +27,10 @@ const index = () => {
         }
 
         try {
-            await getMyWorkspaces();
+            await SeugiCustomAxios.post(`/workspace/`, {
+                workspaceName,
+                workspaceImageUrl: workspaceImageUrl ?? ''
+            });
             navigate(paths.home);
 
         } catch (error) {
