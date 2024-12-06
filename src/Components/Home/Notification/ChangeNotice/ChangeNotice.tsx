@@ -35,7 +35,7 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutate
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [editMode, setEditMode] = useState<boolean>(false);
     const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
-    const userRole = window.localStorage.getItem('Role');
+    const userRole = Cookies.get('userRole');
 
     const ref = useRef<HTMLDivElement>(null);
 
@@ -62,12 +62,11 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutate
     }, [notificationId]);
 
     const handleDeleteNotice = async () => {
-        if (!(currentUserId === userId || userRole === 'MIDDLE_ADMIN' || userRole === 'ADMIN')) {
-            setShowAlert(true);
-            return;
-        }
-
         try {
+            if (!(currentUserId === userId || userRole === 'MIDDLE_ADMIN' || userRole === 'ADMIN')) {
+                alert('권한이 없습니다');
+                return;
+            }
             await SeugiCustomAxios.delete(`/notification/${workspaceId}/${notificationId}`);
             handleGetNoticeId();
             mutateNotifications();
@@ -75,8 +74,6 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutate
             console.error('Delete Error', error);
         }
     };
-
-    const canDelete = currentUserId === userId || userRole === 'MIDDLE_ADMIN' || userRole === 'ADMIN';
 
     const handleClickOutside = (event: MouseEvent) => {
         const target = event.target as Node | null;
@@ -114,11 +111,9 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutate
                     <S.ButtonContainer>
                         <S.ReportNotice>공지 신고</S.ReportNotice>
                     </S.ButtonContainer>
-                    {canDelete && (
-                        <S.ButtonContainer onClick={handleDeleteNotice}>
-                            <S.DeleteNotice>공지 삭제</S.DeleteNotice>
-                        </S.ButtonContainer>
-                    )}
+                    <S.ButtonContainer onClick={handleDeleteNotice}>
+                        <S.DeleteNotice>공지 삭제</S.DeleteNotice>
+                    </S.ButtonContainer>
                 </S.CorrectionNoticeMain>
             )}
             {showAlert && (

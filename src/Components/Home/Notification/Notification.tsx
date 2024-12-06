@@ -40,7 +40,6 @@ const Notification = ({ notifications = [], mutateNotifications }: Props) => {
         const month = date.getMonth() + 1;
         const day = date.getDate();
 
-        // 요일 배열
         const daysOfWeek = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
         const dayOfWeek = daysOfWeek[date.getDay()];
 
@@ -58,45 +57,8 @@ const Notification = ({ notifications = [], mutateNotifications }: Props) => {
     const itemsPerPage = 20;
     const totalPages = Math.ceil(notifications.length / itemsPerPage);
 
-
     const CreateNoticeRef = useRef<HTMLDivElement>(null);
     const ChangeNoticeRef = useRef<HTMLDivElement>(null);
-
-
-    // const formattedNotifications: FormattedNotificationItem[] = useMemo(() => {
-    //     return notifications
-    //         .toSorted((a, b) => b.id - a.id)
-    //         .map((notification: NotificationItem) => {
-    //             let emojiDisplay: EmojiDisplayItem[] = [];
-    //             notification.emoji.forEach((emoji: EmojiItem) => {
-    //                 const existEmoji = emojiDisplay.find((item) => item.emoji === emoji.emoji);
-    //                 if (existEmoji) {
-    //                     existEmoji.count += 1;
-    //                 } else {
-    //                     emojiDisplay.push({
-    //                         emoji: emoji.emoji,
-    //                         count: 1,
-    //                         liked: false,
-    //                     });
-    //                 }
-    //             });
-    //             emojiDisplay = emojiDisplay.map((emojiItem) => {
-    //                 const selectedEmoji = notification.emoji.find(emoji => emoji.emoji === emojiItem.emoji && user?.id === emoji.userId);
-    //                 if (selectedEmoji) {
-    //                     return {
-    //                         ...emojiItem,
-    //                         liked: true,
-    //                     };
-    //                 }
-    //                 return emojiItem;
-    //             });
-    //             return {
-    //                 ...notification,
-    //                 emojiDisplay,
-    //             };
-    //         });
-    // }, [notifications, user]);
-
 
     useEffect(() => {
         const role = window.localStorage.getItem('Role');
@@ -202,7 +164,6 @@ const Notification = ({ notifications = [], mutateNotifications }: Props) => {
         }
     }
 
-    // 이모지 관련
     const handleEmojiSelect = async (emoji: EmojiClickData) => {
         try {
             if (activeNotificationId === null) {
