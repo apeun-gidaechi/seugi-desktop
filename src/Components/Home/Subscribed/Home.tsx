@@ -6,7 +6,7 @@ import Meal from "@/Components/Home/Meal/Meal";
 import CatSeugi from "@/Components/Home/CatSeugi/CatSeugi";
 import Calendar from "@/Components/Home/Calendar/Calendar";
 import Notification from '@/Components/Home/Notification/Notification';
-import DailySchedule from "@/Components/Home/DailySchedule/DailySchedule";
+import TimeTable from '@/Components/Home/TimeTable/TimeTable';
 import Assignment from "../Assignment/Assignment";
 import RegisterSchool from "@/Components/Home/Subscribed/RegisterSchool/RegisterSchool";
 import useSWR from "swr";
@@ -51,7 +51,7 @@ const Home = () => {
 
       <S.ComponentsBox>
         <S.HomeWrapper1>
-          <DailySchedule timetable={timeTable} />
+          <TimeTable timetable={timeTable} />
           <S.HomeWrapper1DownContainer>
             <Notification notifications={notifications} mutateNotifications={mutateNotifications} />
             <S.RightContainer>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import HomeBookImg from "@/Assets/image/home/homebook.svg";
 import ArrowImg from "@/Assets/image/home/arrow.svg";
 import NoSchedule from '@/Assets/image/home/NoSchedule.svg';
-import * as S from '@/Components/Home/DailySchedule/DailySchedule.style';
+import * as S from './TimeTable.style'
 import { SeugiColor } from '@/Design/color/SeugiColor';
 import MyCalendar from "@/Components/DetailTimetable/DetailTimeTable";
 import PlusButtonImg from '@/Assets/image/home/plusbutton.svg';
