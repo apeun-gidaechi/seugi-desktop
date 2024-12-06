@@ -46,7 +46,7 @@ const Changeschool = ({ onClose, workspaces = [], pendingWorkspaces= [] }: Props
   };
 
   return (
-    <div onClick={onClose}>
+    <S.Modal onClick={onClose}>
       <S.ChangeSchoolMain>
         {workspaces.length === 0 ? (
           <S.NoSubscribedSchools>
@@ -83,7 +83,7 @@ const Changeschool = ({ onClose, workspaces = [], pendingWorkspaces= [] }: Props
           <S.JoinSchool onClick={goJoinSchool}>초대 코드로 가입</S.JoinSchool>
         </S.MoveButton>
       </S.ChangeSchoolMain>
-    </div>
+    </S.Modal>
   );
 };
 

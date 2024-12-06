@@ -2,6 +2,24 @@ import { SeugiColor } from "@/Design/color/SeugiColor";
 import { SeugiFont } from "@/Design/text/SeugiFont";
 import styled from "styled-components";
 
+export const Modal = styled.div`
+  width: 100vw;
+  height: 100vh;
+
+  position: fixed;
+
+  background: rgba(0, 0, 0, 0.30);
+  
+  z-index: 999;
+
+  top: 0;
+  left: 0;
+
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+`
+
 export const ChangeSchoolMain = styled.div`
   position: absolute;
   display: flex;
@@ -12,8 +30,6 @@ export const ChangeSchoolMain = styled.div`
 
   align-items: center;
   gap: 16px;
-  left:70%;
-  top: 17%;
 
   border-radius: 12px;
   background: #fff;
