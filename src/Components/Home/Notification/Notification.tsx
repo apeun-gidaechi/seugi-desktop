@@ -12,6 +12,7 @@ import { EmojiClickData } from 'emoji-picker-react';
 import CreateNotice from '@/Components/Home/Notification/CreateNotice/CreateNotice';
 import ChangeNotice from './ChangeNotice/ChangeNotice';
 import { useUserContext } from '@/Contexts/userContext';
+import Cookies from 'js-cookie';
 
 interface EmojiItem {
     emoji: string;
@@ -50,26 +51,16 @@ const Notification = ({ notifications = [], mutateNotifications }: Props) => {
     const [isEmojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
     const [activeNotificationId, setActiveNotificationId] = useState<number | null>(null);
     const [isCreateNoticeVisible, setCreateNoticeVisible] = useState<boolean>(false);
-    const [userRole, setUserRole] = useState<string | null>(null);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [changeNoticeId, setChangeNoticeId] = useState<number | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const itemsPerPage = 20;
     const totalPages = Math.ceil(notifications.length / itemsPerPage);
-
+    const userRole = Cookies.get('userRole')
     const CreateNoticeRef = useRef<HTMLDivElement>(null);
     const ChangeNoticeRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const role = window.localStorage.getItem('Role');
-        setUserRole(role);
-    }, []);
-
-    useEffect(() => {
-        if (userRole === 'STUDENT') {
-            setShowAlert(true);
-        }
-    }, [userRole]);
+    const isStudent = userRole === 'STUDENT';
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -280,9 +271,13 @@ const Notification = ({ notifications = [], mutateNotifications }: Props) => {
                         <S.NotificationWrapper key={item.id}>
                             <S.NotificationContentAuthor>
                                 <S.NotificationContentAuthorSpan> {item.userName} · {formatDate(item.lastModifiedDate)} </S.NotificationContentAuthorSpan>
-                                <S.NotificationActionButton onClick={() => handleActionButtonClick(item.id)} className='point'>
-                                    <S.NotificationActionButtonimg src={Point} />
-                                </S.NotificationActionButton>
+                                {!isStudent && ( 
+                                    <S.NotificationActionButton
+                                        onClick={() => handleActionButtonClick(item.id)}
+                                        className='point'>
+                                        <S.NotificationActionButtonimg src={Point} />
+                                    </S.NotificationActionButton>
+                                )}
                             </S.NotificationContentAuthor>
                             <S.NotificationContentTitle>
                                 {item.title}

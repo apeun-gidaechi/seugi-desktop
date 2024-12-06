@@ -32,10 +32,8 @@ interface Props {
 
 const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutateNotifications }) => {
     const [currentUserId, setCurrentUserId] = useState<number | undefined>(undefined);
-    const [showAlert, setShowAlert] = useState<boolean>(false);
     const [editMode, setEditMode] = useState<boolean>(false);
     const workspaceId = typeof window !== 'undefined' ? Cookies.get('workspaceId') : null;
-    const userRole = Cookies.get('userRole');
 
     const ref = useRef<HTMLDivElement>(null);
 
@@ -63,10 +61,6 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutate
 
     const handleDeleteNotice = async () => {
         try {
-            if (!(currentUserId === userId || userRole === 'MIDDLE_ADMIN' || userRole === 'ADMIN')) {
-                alert('권한이 없습니다');
-                return;
-            }
             await SeugiCustomAxios.delete(`/notification/${workspaceId}/${notificationId}`);
             handleGetNoticeId();
             mutateNotifications();
@@ -115,15 +109,6 @@ const ChangeNotice: React.FC<Props> = ({ notificationId, userId, onClose, mutate
                         <S.DeleteNotice>공지 삭제</S.DeleteNotice>
                     </S.ButtonContainer>
                 </S.CorrectionNoticeMain>
-            )}
-            {showAlert && (
-                <AlertContainer
-                    titletext="권한이 없습니다"
-                    subtext="이 공지를 삭제할 권한이 없습니다."
-                    buttontext="닫기"
-                    onClose={() => setShowAlert(false)}
-                    position="top-right"
-                />
             )}
         </>
     );
