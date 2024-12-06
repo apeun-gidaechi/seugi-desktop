@@ -31,7 +31,7 @@ const Home = () => {
   useEffect(() => {
     if (workspaceId) {
       handleUserRole(workspaceId).then(role => {
-        setUserRole(role); // userRole을 상태로 저장
+        setUserRole(role); 
       });
     }
   }, [workspaceId]);

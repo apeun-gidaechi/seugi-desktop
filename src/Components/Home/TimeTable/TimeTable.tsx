@@ -8,6 +8,7 @@ import MyCalendar from "@/Components/DetailTimetable/DetailTimeTable";
 import PlusButtonImg from '@/Assets/image/home/plusbutton.svg';
 import CreateTimetable from "@/Components/DetailTimetable/CreateTimetable/CreateTimetable";
 import { format } from 'date-fns';
+import Cookies from "js-cookie";
 
 interface TimetableItem {
     id: number;
@@ -28,7 +29,9 @@ const DailySchedule = ({ timetable = [] }: Props) => {
     const [allPeriodsOver, setAllPeriodsOver] = useState<boolean>(false);
     const [showCalendar, setShowCalendar] = useState<boolean>(false);
     const [isCreateTimetableOpen, setIsCreateTimetableOpen] = useState(false);
-    const role = window.localStorage.getItem('role');
+    const role = Cookies.get('userRole');
+    const isStudent = role === 'STUDENT';
+    console.log(isStudent);
 
     const calendarRef = useRef<HTMLDivElement | null>(null);
     const dialogRef = useRef<HTMLDivElement | null>(null);
@@ -97,14 +100,11 @@ const DailySchedule = ({ timetable = [] }: Props) => {
     const todayDate = format(new Date(), 'yyyy-MM-dd');
 
     const openCreateTimetable = () => {
-        if (role == 'STUDENT') {
-           alert('학생은 작업할 수 없습니다.')
-        } else {
-            setIsCreateTimetableOpen(true);
-            if (showCalendar) {
-                setShowCalendar(false);
-            }
+        setIsCreateTimetableOpen(true);
+        if (showCalendar) {
+            setShowCalendar(false);
         }
+
     };
 
     const closeCreateTimetable = () => {
@@ -145,12 +145,16 @@ const DailySchedule = ({ timetable = [] }: Props) => {
                     <S.DailyScheduleTitle>오늘의 시간표</S.DailyScheduleTitle>
                 </S.ScheduleTitleDiv>
                 <S.ButtonDiv>
-                    <S.CreateTimeTableButton onClick={openCreateTimetable} className="CreateTimeTable">
-                        <S.CreateTimeTableButtonImg src={PlusButtonImg} />
-                    </S.CreateTimeTableButton>
-                    <S.ArrowLButton onClick={onClickCalendar} className="Calendar">
-                        <S.ArrowLogo src={ArrowImg} />
-                    </S.ArrowLButton>
+                    {!isStudent && (
+                        <>
+                            <S.CreateTimeTableButton onClick={openCreateTimetable} className="CreateTimeTable">
+                                <S.CreateTimeTableButtonImg src={PlusButtonImg} />
+                            </S.CreateTimeTableButton>
+                            <S.ArrowLButton onClick={onClickCalendar} className="Calendar">
+                                <S.ArrowLogo src={ArrowImg} />
+                            </S.ArrowLButton>
+                        </>
+                    )}
                 </S.ButtonDiv>
             </S.ScheduleTitleBox>
 
